@@ -1,0 +1,12 @@
+
+\frenchspacing
+
+\frontmatter
+
+\begin{titlingpage}
+\thispagestyle{empty}
+
+\includepdf{Capa7.png}
+\centering 
+
+\end{titlingpage}

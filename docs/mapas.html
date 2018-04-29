@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html  lang="pt-Br">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Software R: curso avançado</title>
+  <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Software R: curso avançado" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://rstub.github.io/bookdown-chapterbib/" />
+  
+  <meta property="og:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  <meta name="github-repo" content="rstub/bookdown-chapterbib" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Software R: curso avançado" />
+  
+  <meta name="twitter:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  
+
+<meta name="author" content="Felipe Micail da Silva Smolski">
+<meta name="author" content="Iara Denise Endruweit Battisti">
+
+
+<meta name="date" content="2018-04-23">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="regressao-logistica.html">
+<link rel="next" href="referencias.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112034801-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-112034801-3');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">UFFS - Cerro Largo</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefácio</a></li>
+<li class="chapter" data-level="" data-path="introducao.html"><a href="introducao.html"><i class="fa fa-check"></i>Introdução</a></li>
+<li class="chapter" data-level="1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html"><i class="fa fa-check"></i><b>1</b> Delineamentos Experimentais</a><ul>
+<li class="chapter" data-level="1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#principios-basicos-da-experimentacao"><i class="fa fa-check"></i><b>1.1</b> Princípios básicos da Experimentação</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#repeticao"><i class="fa fa-check"></i><b>1.1.1</b> Repetição</a></li>
+<li class="chapter" data-level="1.1.2" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#casualizacao"><i class="fa fa-check"></i><b>1.1.2</b> Casualização</a></li>
+<li class="chapter" data-level="1.1.3" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#controle-local"><i class="fa fa-check"></i><b>1.1.3</b> Controle local</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#analise-de-variancia"><i class="fa fa-check"></i><b>1.2</b> Análise de Variância</a></li>
+<li class="chapter" data-level="1.3" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#hipoteses-estatisticas"><i class="fa fa-check"></i><b>1.3</b> Hipóteses estatísticas</a></li>
+<li class="chapter" data-level="1.4" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#delineamento-inteiramente-causalizado-dic"><i class="fa fa-check"></i><b>1.4</b> Delineamento Inteiramente Causalizado (DIC)</a></li>
+<li class="chapter" data-level="1.5" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#delineamento-blocos-casualizados-dbc"><i class="fa fa-check"></i><b>1.5</b> Delineamento Blocos Casualizados (DBC)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analise-fatorial.html"><a href="analise-fatorial.html"><i class="fa fa-check"></i><b>2</b> Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.1" data-path="analise-fatorial.html"><a href="analise-fatorial.html#pressupostos"><i class="fa fa-check"></i><b>2.1</b> Pressupostos</a></li>
+<li class="chapter" data-level="2.2" data-path="analise-fatorial.html"><a href="analise-fatorial.html#estatisticas-associadas-a-analise-fatorial"><i class="fa fa-check"></i><b>2.2</b> Estatísticas Associadas a Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#passos-da-analise-fatorial"><i class="fa fa-check"></i><b>2.3</b> Passos da Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="analise-fatorial.html"><a href="analise-fatorial.html#construcao-da-matriz-de-correlacao"><i class="fa fa-check"></i><b>2.3.1</b> Construção da Matriz de Correlação</a></li>
+<li class="chapter" data-level="2.3.2" data-path="analise-fatorial.html"><a href="analise-fatorial.html#metodo-de-analise-fatorial"><i class="fa fa-check"></i><b>2.3.2</b> Método de Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#determinacao-do-nuumero-de-fatores"><i class="fa fa-check"></i><b>2.3.3</b> Determinação do núumero de fatores</a></li>
+<li class="chapter" data-level="2.3.4" data-path="analise-fatorial.html"><a href="analise-fatorial.html#analise-de-componentes-principais"><i class="fa fa-check"></i><b>2.3.4</b> Análise de Componentes Principais</a></li>
+<li class="chapter" data-level="2.3.5" data-path="analise-fatorial.html"><a href="analise-fatorial.html#matriz-rotada-do-fator"><i class="fa fa-check"></i><b>2.3.5</b> Matriz Rotada do Fator</a></li>
+<li class="chapter" data-level="2.3.6" data-path="analise-fatorial.html"><a href="analise-fatorial.html#autovalores-1"><i class="fa fa-check"></i><b>2.3.6</b> Autovalores</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>3</b> Regressão Múltipla</a><ul>
+<li class="chapter" data-level="3.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>3.1</b> Modelo geral</a></li>
+<li class="chapter" data-level="3.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>3.2</b> Variável dummy</a></li>
+<li class="chapter" data-level="3.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>3.3</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>3.3.1</b> Full model – Modelo completo</a></li>
+<li class="chapter" data-level="3.3.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>3.3.2</b> Procedimento backward</a></li>
+<li class="chapter" data-level="3.3.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>3.3.3</b> Procedimento forward</a></li>
+<li class="chapter" data-level="3.3.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>3.3.4</b> Procedimento stepwise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>4</b> Regressão Logística</a><ul>
+<li class="chapter" data-level="4.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-simples---exemplo-1"><i class="fa fa-check"></i><b>4.1</b> Regressão Logística Simples - Exemplo 1</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>4.1.1</b> Estimando a Razão de Chances</a></li>
+<li class="chapter" data-level="4.1.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>4.1.2</b> Determinando o Intervalo de Confiança</a></li>
+<li class="chapter" data-level="4.1.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>4.1.3</b> Predição de Probabilidades</a></li>
+<li class="chapter" data-level="4.1.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#matriz-de-confusao"><i class="fa fa-check"></i><b>4.1.4</b> Matriz de Confusão</a></li>
+<li class="chapter" data-level="4.1.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#curva-roc"><i class="fa fa-check"></i><b>4.1.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="4.1.6" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>4.1.6</b> O teste Hosmer e Lemeshow</a></li>
+<li class="chapter" data-level="4.1.7" data-path="regressao-logistica.html"><a href="regressao-logistica.html#pseudo-r2"><i class="fa fa-check"></i><b>4.1.7</b> Pseudo R^{2}</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla---exemplo-2"><i class="fa fa-check"></i><b>4.2</b> Regressão Logística Múltipla - Exemplo 2</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#metodo-stepwise"><i class="fa fa-check"></i><b>4.2.1</b> Método Stepwise</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla---exemplo-3"><i class="fa fa-check"></i><b>4.3</b> Regressão Logística Múltipla - exemplo 3</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mapas.html"><a href="mapas.html"><i class="fa fa-check"></i><b>5</b> Mapas</a><ul>
+<li class="chapter" data-level="5.1" data-path="mapas.html"><a href="mapas.html#introducao-aos-shapes"><i class="fa fa-check"></i><b>5.1</b> Introdução aos <em>shapes</em></a></li>
+<li class="chapter" data-level="5.2" data-path="mapas.html"><a href="mapas.html#pacote-tmap"><i class="fa fa-check"></i><b>5.2</b> Pacote tmap</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="mapas.html"><a href="mapas.html#um-mapa-simples"><i class="fa fa-check"></i><b>5.2.1</b> Um mapa simples</a></li>
+<li class="chapter" data-level="5.2.2" data-path="mapas.html"><a href="mapas.html#melhorando-a-visualizacao"><i class="fa fa-check"></i><b>5.2.2</b> Melhorando a visualização</a></li>
+<li class="chapter" data-level="5.2.3" data-path="mapas.html"><a href="mapas.html#opcoes-de-layout"><i class="fa fa-check"></i><b>5.2.3</b> Opções de layout</a></li>
+<li class="chapter" data-level="5.2.4" data-path="mapas.html"><a href="mapas.html#opcoes-de-style"><i class="fa fa-check"></i><b>5.2.4</b> Opções de Style</a></li>
+<li class="chapter" data-level="5.2.5" data-path="mapas.html"><a href="mapas.html#adicionando-dados-ao-mapa"><i class="fa fa-check"></i><b>5.2.5</b> Adicionando dados ao mapa</a></li>
+<li class="chapter" data-level="5.2.6" data-path="mapas.html"><a href="mapas.html#coredes"><i class="fa fa-check"></i><b>5.2.6</b> Coredes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referências</a></li>
+<li class="divider"></li>
+<li><a href="https://smolski.github.io/softwarelivrer/" target="blank">Curso de Extensão</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Software R: curso avançado</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mapas" class="section level1">
+<h1><span class="header-section-number">Capítulo 5</span> Mapas</h1>
+<p>Este capítulo almeja levantar o ferramental básico para a construção de mapas simples no RStudio. Ainda, interessa demonstrar os comandos para a manipulação destes tipos de bases de dados, inclusive possibilitando a junção de indicadores de municípios, regiões e países. Estes dados podem ser advindos de institutos de pesquisas ou mesmo dados criados pelo estudante em suas análises.</p>
+<p>Os pacotes utilizados neste capítulo são: <code>tmap</code>, <code>maptools</code>,
+<code>tmap</code> e <code>rgdal</code>.</p>
+<div id="introducao-aos-shapes" class="section level2">
+<h2><span class="header-section-number">5.1</span> Introdução aos <em>shapes</em></h2>
+<p>Existem vários <em>softwares</em> específicos para a produção de mapas, sejam produtos comerciais ou no formato <em>software</em> livre. A grande vantagem da utilização do R para criação de mapas é a utilização dos <em>shapes</em> disponibilizadas para vários programas.</p>
+<p>Denominam-se <em>shapes</em> os arquivos que contém os elementos gráficos, em formato de ponto, linhas ou polígonos, contendo coordenadas geográficas para um elemento para que possa ser transformado em mapa. O <em>shape</em> é formado por três arquivos principais individuais que armazenam os dados: o arquivo “.shp”, “.shx” e “.dbf”. Além disto, podem ser acompanhados de arquivos “.prj”, o “.sbn” e o “.sbx” <span class="citation">(Semace <a href="#ref-Semace2018">2018</a>)</span>.</p>
+<p>Os <em>shapefiles</em> podem ser obtidos de várias fontes oficiais, como institutos de pesquisa e universidades. A seguir alguns links para <em>download</em>:</p>
+<ul>
+<li>IBGE:
+<a href="ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2016/Brasil/BR/" class="uri">ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2016/Brasil/BR/</a></li>
+</ul>
+<p><a href="https://mapas.ibge.gov.br/bases-e-referenciais/bases-cartograficas/malhas-digitais.html" class="uri">https://mapas.ibge.gov.br/bases-e-referenciais/bases-cartograficas/malhas-digitais.html</a></p>
+<p><a href="http://dados.gov.br/dataset/malha-geometrica-dos-municipios-brasileiros" class="uri">http://dados.gov.br/dataset/malha-geometrica-dos-municipios-brasileiros</a></p>
+<ul>
+<li><p>IPEAGEO: <a href="http://www.ipea.gov.br/ipeageo/malhas.html" class="uri">http://www.ipea.gov.br/ipeageo/malhas.html</a></p></li>
+<li><p>Forest Gis: <a href="http://forest-gis.com/2009/04/base-de-dados-shapefile-do-brasil-todo.html/" class="uri">http://forest-gis.com/2009/04/base-de-dados-shapefile-do-brasil-todo.html/</a></p></li>
+<li><p>FEPAM: <a href="http://www.fepam.rs.gov.br/biblioteca/geo/bases_geo.asp" class="uri">http://www.fepam.rs.gov.br/biblioteca/geo/bases_geo.asp</a></p></li>
+</ul>
+<p>No exemplo abaixo, é utilizado um <em>shape</em> proveniente do IBGE representando os municípios do Estado do Rio Grande do Sul. Ao <em>shape</em> denominado <code>municipios_IBGE</code> será dado o nome de MAPA_RS:</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="kw">require</span>(maptools)</a>
+<a class="sourceLine" id="cb143-2" data-line-number="2"><span class="kw">require</span>(tmap)</a>
+<a class="sourceLine" id="cb143-3" data-line-number="3"><span class="kw">require</span>(rgdal)</a>
+<a class="sourceLine" id="cb143-4" data-line-number="4">MAPA_RS=<span class="kw">readShapeSpatial</span>(<span class="st">&#39;D:/Github/livroravancado/mapas/bases/municipios_IBGE/municipios_IBGE.shp&#39;</span>)</a></code></pre></div>
+<p>Utilizando a função <code>summary</code> podem ser observados os itens que compõe este objeto, em especial a área do município (AREA_1), o seu nome (NOME) o seu código IBGE (Cod_ibge) e o seu nome com acentuação (Label_N):</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="kw">summary</span>(MAPA_RS)</a></code></pre></div>
+<pre><code>## Object of class SpatialPolygonsDataFrame
+## Coordinates:
+##         min      max
+## x -57.64426 -49.6921
+## y -33.75247 -27.0810
+## Is projected: NA 
+## proj4string : [NA]
+## Data attributes:
+##      MSLINK         MAPID        AREA_1          PERIMETRO_    
+##  Min.   :4807   Min.   :99   Min.   :  27.54   Min.   : 29.24  
+##  1st Qu.:4931   1st Qu.:99   1st Qu.: 124.50   1st Qu.: 64.62  
+##  Median :5055   Median :99   Median : 237.02   Median : 92.32  
+##  Mean   :5083   Mean   :99   Mean   : 541.02   Mean   :124.56  
+##  3rd Qu.:5179   3rd Qu.:99   3rd Qu.: 503.48   3rd Qu.:145.61  
+##  Max.   :5823   Max.   :99   Max.   :7803.97   Max.   :584.72  
+##                                                                
+##          NOME          SEDE     LATITUDESE       LONGITUDES    
+##  ACEGUA    :  1   Min.   :1   Min.   :-33.69   Min.   :-57.55  
+##  AGUA SANTA:  1   1st Qu.:1   1st Qu.:-29.61   1st Qu.:-53.50  
+##  AGUDO     :  1   Median :1   Median :-28.98   Median :-52.43  
+##  AJURICABA :  1   Mean   :1   Mean   :-28.96   Mean   :-52.61  
+##  ALECRIM   :  1   3rd Qu.:1   3rd Qu.:-27.99   3rd Qu.:-51.68  
+##  ALEGRETE  :  1   Max.   :1   Max.   :-27.16   Max.   :-49.73  
+##  (Other)   :491                                                
+##    AREA_TOT_G         Cod_ibge             Label_N   
+##  Min.   :  27.54   Min.   :4300034   Aceguá    :  1  
+##  1st Qu.: 124.50   1st Qu.:4306106   Água Santa:  1  
+##  Median : 237.02   Median :4312104   Agudo     :  1  
+##  Mean   : 541.02   Mean   :4311877   Ajuricaba :  1  
+##  3rd Qu.: 503.48   3rd Qu.:4317400   Alecrim   :  1  
+##  Max.   :7803.97   Max.   :4323804   Alegrete  :  1  
+##                                      (Other)   :491</code></pre>
+<p>Note que este objeto pertence a uma classe diferente (SpatialPolygonsDataFrame), indicando que é constituída especialmente de um conjunto de polígonos para a construção de mapas conjuntamente com o carregamento de dados.</p>
+<p>A seguir, a função <code>plot()</code> pode ser utilizada para a plotagem da malha carregada:</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="kw">plot</span>(MAPA_RS)</a></code></pre></div>
+<p><img src="06-Mapas_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Um exercício simples é a filtragem dos dados do <em>shape</em> pelo nome do município, obtendo assim apenas o mapa da(s) unidade(s) escolhida(s):</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1"><span class="kw">plot</span>(MAPA_RS[MAPA_RS<span class="op">$</span>NOME <span class="op">==</span><span class="st">&#39;SANTA ROSA&#39;</span>,], </a>
+<a class="sourceLine" id="cb147-2" data-line-number="2">    <span class="dt">axes=</span><span class="st">&quot;TRUE&quot;</span>,  <span class="dt">main=</span><span class="st">&quot;Mapa do município de Santa Rosa - RS&quot;</span>, <span class="dt">border=</span><span class="kw">gray</span>(<span class="fl">0.5</span>), <span class="dt">lwd=</span>.<span class="dv">5</span>)</a></code></pre></div>
+<p><img src="06-Mapas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="pacote-tmap" class="section level2">
+<h2><span class="header-section-number">5.2</span> Pacote tmap</h2>
+<div id="um-mapa-simples" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Um mapa simples</h3>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1"><span class="kw">require</span>(tmap)</a>
+<a class="sourceLine" id="cb148-2" data-line-number="2"><span class="kw">tm_shape</span>(MAPA_RS)<span class="op">+</span><span class="kw">tm_fill</span>()</a></code></pre></div>
+<p><img src="06-Mapas_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="melhorando-a-visualizacao" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Melhorando a visualização</h3>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1">   <span class="kw">tm_shape</span>(MAPA_RS)<span class="op">+</span></a>
+<a class="sourceLine" id="cb149-2" data-line-number="2"><span class="st">      </span><span class="kw">tm_fill</span>(<span class="st">&quot;AREA_1&quot;</span>, <span class="dt">auto.palette.mapping=</span><span class="ot">FALSE</span>, <span class="dt">title=</span><span class="st">&quot;Area por município KM2&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb149-3" data-line-number="3"><span class="st">      </span><span class="kw">tm_format_World</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb149-4" data-line-number="4"><span class="st">      </span><span class="kw">tm_style_grey</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb149-5" data-line-number="5"><span class="st">      </span><span class="kw">tm_legend</span>(</a>
+<a class="sourceLine" id="cb149-6" data-line-number="6">        <span class="dt">position=</span><span class="kw">c</span>(<span class="st">&quot;left&quot;</span>,<span class="st">&quot;bottom&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb149-7" data-line-number="7"><span class="st">      </span><span class="kw">tm_compass</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb149-8" data-line-number="8"><span class="st">      </span><span class="kw">tm_scale_bar</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb149-9" data-line-number="9"><span class="st">      </span><span class="kw">tm_borders</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>)</a></code></pre></div>
+<p><img src="06-Mapas_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="opcoes-de-layout" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> Opções de layout</h3>
+<p>As opções de <strong>tm_layout</strong>:</p>
+<ul>
+<li>tm_format_World</li>
+<li>tm_format_World_wide<br />
+</li>
+<li>tm_format_Europe</li>
+<li>tm_format_Europe2</li>
+<li>tm_format_Europe_wide</li>
+<li>tm_format_NLD</li>
+<li>tm_format_NLD_wide</li>
+<li>tm_format_NLD_wide</li>
+</ul>
+</div>
+<div id="opcoes-de-style" class="section level3">
+<h3><span class="header-section-number">5.2.4</span> Opções de Style</h3>
+<p>As opções de <strong>tm_style</strong>:</p>
+<ul>
+<li>tm_style_white</li>
+<li>tm_style_gray</li>
+<li>tm_style_natural</li>
+<li>tm_style_grey</li>
+<li>tm_style_cobalt</li>
+<li>tm_style_col_blind</li>
+<li>tm_style_albatross</li>
+<li>tm_style_beaver</li>
+<li>tm_style_bw</li>
+<li>tm_style_classic</li>
+</ul>
+</div>
+<div id="adicionando-dados-ao-mapa" class="section level3">
+<h3><span class="header-section-number">5.2.5</span> Adicionando dados ao mapa</h3>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="co">#Carrega a planilha com as informações</span></a>
+<a class="sourceLine" id="cb150-2" data-line-number="2">RS_<span class="dv">2013</span> &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;D:/Github/livroravancado/mapas/RS_2013.csv&quot;</span>) </a>
+<a class="sourceLine" id="cb150-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb150-4" data-line-number="4"><span class="kw">head</span>(RS_<span class="dv">2013</span>)</a></code></pre></div>
+<pre><code>##           Label_N                     COREDE CD_GEOCMU IDESE_2013 POUPANCA
+## 1     Alto Alegre Alto da Serra do Botucaraí   4300554  0.7973015       NA
+## 2   Barros Cassal Alto da Serra do Botucaraí   4302006  0.6103698  7647609
+## 3   Campos Borges Alto da Serra do Botucaraí   4304101  0.7352055       NA
+## 4        Espumoso Alto da Serra do Botucaraí   4307500  0.7929686 45673907
+## 5 Fontoura Xavier Alto da Serra do Botucaraí   4308300  0.6336514 13985159
+## 6  Gramado Xavier Alto da Serra do Botucaraí   4309159  0.6578416  1119359
+##   OP_CREDITO OBRIGACOES._RECEBIMENTO DEP_A_VISTA_PRIV DEP_A_VISTA_GOV
+## 1         NA                      NA               NA              NA
+## 2   27295139                    5931          2019686         1291827
+## 3         NA                      NA               NA              NA
+## 4  230697134                   66237          5961499         1339496
+## 5   54390691                    4177          1633176          550883
+## 6    2073680                       0           231993          320742
+##   DEP_PRAZO COOP_CRED CEF BANCO_COM N_VINCULOS_EMP DENS_DEM_HABKM2
+## 1        NA        NA  NA        NA            502        15.90284
+## 2    795466        NA  NA         2           1115        17.09519
+## 3        NA        NA  NA        NA            610        15.31040
+## 4  21291570         1   1         3           4856        19.54499
+## 5   4970880        NA  NA         3           1868        18.14505
+## 6         0        NA  NA         1            341        18.64154
+##    IMPOSTOS AREA_KM2 PIB_PERC       PIB POPULACAO
+## 1  2894.464  114.445 30800.00  57164.80      1811
+## 2  5116.998  648.896 12392.47 142240.75     11051
+## 3  4260.816  226.578 21369.18  76052.90      3679
+## 4 45015.841  783.065 35927.37 566574.63     15589
+## 5  4949.119  583.465 12017.46 131531.05     10566
+## 6  1172.871  217.525 14484.65  60372.01      3728</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="co">#Une a base de dados da planilha com o mapa pelo nome do município</span></a>
+<a class="sourceLine" id="cb152-2" data-line-number="2">RS_<span class="dv">2013</span>_MAPA=<span class="kw">merge</span>(MAPA_RS,RS_<span class="dv">2013</span>,<span class="dt">by=</span><span class="st">&quot;Label_N&quot;</span>, <span class="dt">all.x=</span>T) </a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1"><span class="kw">tm_shape</span>(RS_<span class="dv">2013</span>_MAPA) <span class="op">+</span></a>
+<a class="sourceLine" id="cb153-2" data-line-number="2"><span class="st">    </span><span class="kw">tm_polygons</span>(<span class="kw">c</span>(<span class="st">&quot;PIB&quot;</span>, <span class="st">&quot;POPULACAO&quot;</span>), </a>
+<a class="sourceLine" id="cb153-3" data-line-number="3">        <span class="dt">style=</span><span class="kw">c</span>(<span class="st">&quot;kmeans&quot;</span>,<span class="st">&quot;fixed&quot;</span>),</a>
+<a class="sourceLine" id="cb153-4" data-line-number="4">        <span class="dt">palette=</span><span class="kw">list</span>(<span class="st">&quot;Reds&quot;</span>, <span class="st">&quot;Blues&quot;</span>),</a>
+<a class="sourceLine" id="cb153-5" data-line-number="5">        <span class="dt">auto.palette.mapping=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb153-6" data-line-number="6">        <span class="dt">breaks=</span><span class="kw">list</span>(<span class="kw">quantile</span>(RS_<span class="dv">2013</span>_MAPA<span class="op">$</span>POPULACAO),<span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>,<span class="dv">100000</span>,<span class="dv">200000</span>,<span class="ot">Inf</span>)),</a>
+<a class="sourceLine" id="cb153-7" data-line-number="7">        <span class="dt">title=</span><span class="kw">c</span>(<span class="st">&quot;PIB&quot;</span>, <span class="st">&quot;População&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb153-8" data-line-number="8"><span class="kw">tm_format_World</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb153-9" data-line-number="9"><span class="kw">tm_style_grey</span>()</a></code></pre></div>
+<p><img src="06-Mapas_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">tm_shape</span>(RS_<span class="dv">2013</span>_MAPA[RS_<span class="dv">2013</span>_MAPA<span class="op">$</span>COREDE <span class="op">==</span><span class="st">&#39;Sul&#39;</span>,]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb154-2" data-line-number="2"><span class="st">    </span><span class="kw">tm_polygons</span>(<span class="st">&quot;POPULACAO&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Pop&quot;</span>, <span class="dt">style=</span><span class="st">&quot;kmeans&quot;</span>, <span class="dt">text=</span><span class="st">&quot;Label_N&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb154-3" data-line-number="3"><span class="st">    </span><span class="kw">tm_facets</span>(<span class="st">&quot;COREDE&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb154-4" data-line-number="4"><span class="st">    </span><span class="kw">tm_text</span>(<span class="st">&quot;Label_N&quot;</span>,<span class="dt">scale=</span><span class="fl">0.45</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb154-5" data-line-number="5"><span class="kw">tm_style_grey</span>()</a></code></pre></div>
+<p><img src="06-Mapas_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="coredes" class="section level3">
+<h3><span class="header-section-number">5.2.6</span> Coredes</h3>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">Coredes=RS_<span class="dv">2013</span>_MAPA</a></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1">Coredes.agg=<span class="kw">aggregate</span>(Coredes[,<span class="dv">4</span>], <span class="kw">list</span>(Coredes<span class="op">$</span>COREDE), sum)</a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">   <span class="kw">tm_shape</span>(Coredes.agg)<span class="op">+</span></a>
+<a class="sourceLine" id="cb157-2" data-line-number="2"><span class="st">      </span><span class="kw">tm_fill</span>(<span class="st">&quot;AREA_1&quot;</span>, <span class="dt">auto.palette.mapping=</span><span class="ot">FALSE</span>, <span class="dt">title=</span><span class="st">&quot;Area por município KM2&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb157-3" data-line-number="3"><span class="st">      </span><span class="kw">tm_format_World</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb157-4" data-line-number="4"><span class="st">      </span><span class="kw">tm_style_grey</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb157-5" data-line-number="5"><span class="st">      </span><span class="kw">tm_legend</span>(</a>
+<a class="sourceLine" id="cb157-6" data-line-number="6">        <span class="dt">position=</span><span class="kw">c</span>(<span class="st">&quot;left&quot;</span>,<span class="st">&quot;bottom&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb157-7" data-line-number="7"><span class="st">      </span><span class="kw">tm_compass</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb157-8" data-line-number="8"><span class="st">      </span><span class="kw">tm_scale_bar</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb157-9" data-line-number="9"><span class="st">      </span><span class="kw">tm_borders</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb157-10" data-line-number="10"><span class="st">       </span><span class="kw">tm_text</span>(<span class="st">&quot;Group.1&quot;</span>,<span class="dt">scale=</span><span class="fl">0.5</span>)</a></code></pre></div>
+<p><img src="06-Mapas_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+
+
+</div>
+</div>
+</div>
+<h3>Referências</h3>
+<div id="refs" class="references">
+<div id="ref-Semace2018">
+<p>Semace. 2018. «Shape – Definições e Conversão». <a href="http://www.semace.ce.gov.br/2011/06/shape-definicoes-e-conversao/" class="uri">http://www.semace.ce.gov.br/2011/06/shape-definicoes-e-conversao/</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regressao-logistica.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

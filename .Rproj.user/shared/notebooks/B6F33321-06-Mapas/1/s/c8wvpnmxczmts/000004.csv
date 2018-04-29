@@ -1,0 +1,4 @@
+"0","require(maptools)"
+"0","require(tmap)"
+"0","require(rgdal)"
+"0","MAPA_RS=readShapeSpatial('D:/Github/livroravancado/mapas/bases/municipios_IBGE/municipios_IBGE.shp')"
