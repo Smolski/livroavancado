@@ -124,15 +124,16 @@
 }
 
 \setlength{\droptitle}{-2em}
+
   \title{Software R: curso avançado}
-  \pretitle{\vspace{\droptitle}\centering\huge}
+    \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \author{Felipe Micail da Silva Smolski \\ Iara Denise Endruweit Battisti}
-  \preauthor{\centering\large\emph}
+    \author{Felipe Micail da Silva Smolski \\ Iara Denise Endruweit Battisti}
+    \preauthor{\centering\large\emph}
   \postauthor{\par}
-  \predate{\centering\large\emph}
+      \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-04-29}
+    \date{2018-07-29}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -966,8 +967,16 @@ relacionadas às variáveis pesquisadas, utilizando a função
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(readxl)}
+\KeywordTok{require}\NormalTok{(readxl)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## Carregando pacotes exigidos: readxl
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{url <-}\StringTok{ "https://github.com/Smolski/softwarelivrer/raw/master/avancado/creme_dental_exemplo1.xlsx"}
 \NormalTok{destfile <-}\StringTok{ "creme_dental_exemplo1.xlsx"}
 \NormalTok{curl}\OperatorTok{::}\KeywordTok{curl_download}\NormalTok{(url, destfile)}
@@ -1045,9 +1054,13 @@ correlacionar-se com os mesmos fatores.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(corrplot)}
+\KeywordTok{require}\NormalTok{(corrplot)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Carregando pacotes exigidos: corrplot
+\end{verbatim}
 
 \begin{verbatim}
 ## corrplot 0.84 loaded
@@ -1703,12 +1716,12 @@ diferentes gráficos para o diagnóstico do modelo.
 ## # A tibble: 6 x 4
 ##   Nomecientifico            diametro_cm altura_m especie
 ##   <chr>                           <dbl>    <dbl>   <dbl>
-## 1 Sebastiania commersoniana        52.2     15.2      0.
-## 2 Sebastiania commersoniana        95.0     17.3      0.
-## 3 Sebastiania commersoniana        67.3     16.3      0.
-## 4 Sebastiania commersoniana        46.3     14.0      0.
-## 5 Sebastiania commersoniana        64.1     15.0      0.
-## 6 Sebastiania commersoniana       122.      22.0      0.
+## 1 Sebastiania commersoniana        52.2     15.2       0
+## 2 Sebastiania commersoniana        95       17.3       0
+## 3 Sebastiania commersoniana        67.3     16.3       0
+## 4 Sebastiania commersoniana        46.3     14         0
+## 5 Sebastiania commersoniana        64.1     15         0
+## 6 Sebastiania commersoniana       122       22         0
 \end{verbatim}
 
 \begin{Shaded}
@@ -1986,48 +1999,51 @@ Passo 8) Seja F\textsubscript{out} o valor da distribuição F com 1 e
 O modelo de regressão logística é utilizado quando a variável dependente
 é binária, categórica ordenada ou mesmo categórica desordenada (quando
 não há relação hierárquica entre elas). Abaixo exemplificam-se as
-perguntas que levam a estes três tipos de variáveis:
+perguntas que levam a estes três tipos de variáveis.
 
-\begin{table}[!h]
-  \centering
-  \caption{Tipos de variáveis dependentes}
-    \begin{tabular}{|l|}
-    \hline
-    \multicolumn{1}{|c|}{\textbf{Variável dependente binária:}} \\
-    \hline
-    Você votou na última eleição? \\
-    0 - Não \\
-    1 - Sim \\
-    \hline
-    Você prefere transporte público ou dirigir um carro? \\
-    0 - Prefiro Carro \\
-    1 - Prefiro transporte público \\
-    \hline
-    \multicolumn{1}{|c|}{\textbf{Variável dependente categórica ordenada:}} \\
-    \hline
-    Você concorda ou desconcorda com o presidente? \\
-    1 - Discordo \\
-    2 - Neutro \\
-    3 - Concordo \\
-    \hline
-    \multicolumn{1}{|c|}{\textbf{Variável dependente categórica não ordenada:}} \\
-    \hline
-    Se as eleições fossem hoje, em que partido você votaria?\\
-    1 - Democratas \\
-    2 - Qualquer um \\
-    3 - Repulicanos \\
-    \hline
-    \multicolumn{1}{c}{Fonte: Adaptado de @Torres-Reyna2014.}
-    \end{tabular}
-  \label{tipos}
-\end{table}
+\begin{longtable}[]{@{}lll@{}}
+\caption{Tipos de variáveis}\tabularnewline
+\toprule
+\endhead
+\begin{minipage}[t]{0.30\columnwidth}\raggedright
+\textbf{Variável dependente binária:}\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
+Você votou na última eleição?\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
+0 - Não; 1 - Sim\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.30\columnwidth}\raggedright
+\textbf{Variável dependente categórica ordenada:}\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
+Você concorda ou desconcorda com o presidente?\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
+1 - Disconcordo; 2 - Neutro; 3 - Concordo\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.30\columnwidth}\raggedright
+\textbf{Variável dependente categórica não ordenada:}\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
+Se as eleições fossem hoje, em que partido você votaria?\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
+1 - Democratas; 2 - Qualquer um; 3 - Republicanos\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
 
-\%
+Fonte: Adaptado de \textcite{Torres-Reyna2014}.
 
-A regressão logística, portanto, trata os grupos de interesse (variável
-dependente) com valores de 0 e 1, ao passo que sua funcionalidade se
-ocupa de prever a probabilidade de uma observação estar no grupo igual a
-1 (``eventos''), em relação ao grupo igual a zero (``não eventos'').
+Nota-se primeiramente que em sendo somente a variável dependente binária
+(0 e 1), é detectada a presença ou não de determinada característica da
+variável a ser estudada pelo pesquisador. Quando a variável dependente é
+categórica ordenada, há uma hierarquia determinada entre as variáveis
+resposta (neste caso entre Disconcordo, Neutro e Concordo). No terceiro
+exemplo, as variáveis resposta não possuem nenhuma relação de ordem
+entre elas (Democratas, Qualquer um, Republicanos).
+
+A regressão logística a ser estudada neste capítulo será com a variável
+resposta dependente binária, portanto, tratando os grupos de interesse
+(variável dependente) com valores de 0 e 1. Sua funcionalidade se ocupa
+de prever a probabilidade de uma observação estar no grupo igual a 1
+(``eventos''), em relação ao grupo igual a zero (``não eventos'').
 
 Para a estimação dos coeficientes das variáveis independentes, são
 utilizados o valor logit ou a razão de desigualdades
@@ -2043,52 +2059,53 @@ ou
 Logit_i=\left (\frac{prob_{eventos}}{1-prob_{eventos}}  \right )=e^{b_0+b_1X_1+\ldots+b_nX_n}
 \]
 
-Mais detalhes sobre o modelo de regressão logística podem ser
-verificados na seção chamada \textbf{O Modelo de Regressão Logística},
-bem como em \textcite{Hosmer2000} e \textcite{Gujarati2011}.
+Algumas características importantes da regressão logística: a análise é
+semelhante à regressão múltipla; possui testes estatísticos diretos,
+incorporando variáveis métricas e não-métricas, com efeitos
+não-lineares; é menos afetada pela não satisfação da não normalidade dos
+dados (pois o termo de erro da variável discreta segue a distribuição
+binomial) e; foi elaborada para que seja prevista a probabilidade de
+determinado evento ocorrer \autocite{Hair2009}.
 
-\hypertarget{regressao-logistica-simples---exemplo-1}{%
-\section{Regressão Logística Simples - Exemplo
-1}\label{regressao-logistica-simples---exemplo-1}}
+\hypertarget{regressao-logistica-simples}{%
+\section{Regressão Logística
+Simples}\label{regressao-logistica-simples}}
 
 Este primeiro exemplo tratará da regressão logística simples, portanto,
-utilizando somente uma variável independente. Os dados são originados do
-livro de \textcite{Hosmer2000}, tratando-se de uma amostra com 100
-pessoas. A variável dependente é a ocorrência ou não (1 ou 0) de doença
-coronária cardíaca (CHD), associando-se com a idade (AGE) dos
-indivíduos, criando assim um modelo de regressão logística.
+utilizando somente uma variável independente, neste caso numérica. Os
+dados são originados do livro de \textcite{Hosmer2000}, tratando-se de
+uma amostra com 100 pessoas. A variável dependente é a ocorrência ou não
+(1 ou 0) de doença coronária cardíaca (CHD), associando-se com a idade
+(AGE) dos indivíduos, criando assim um modelo de regressão logística.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(readr)}
-\NormalTok{chd <-}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/Smolski/softwarelivrer/master/avancado/cdh.csv"}\NormalTok{,}
-                  \StringTok{";"}\NormalTok{, }\DataTypeTok{escape_double =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{trim_ws =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{require}\NormalTok{(readr)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Parsed with column specification:
-## cols(
-##   AGE = col_integer(),
-##   AGRP = col_integer(),
-##   CHD = col_integer()
-## )
+## Carregando pacotes exigidos: readr
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\NormalTok{chd <-}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/Smolski/softwarelivrer/master/avancado/chd.csv"}\NormalTok{, }
+    \StringTok{";"}\NormalTok{, }\DataTypeTok{escape_double =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{col_types =} \KeywordTok{cols}\NormalTok{(}\DataTypeTok{CHD =} \KeywordTok{col_factor}\NormalTok{(}\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{())), }
+    \DataTypeTok{trim_ws =} \OtherTok{TRUE}\NormalTok{)}
+
 \KeywordTok{summary}\NormalTok{(chd)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##       AGE             AGRP           CHD      
-##  Min.   :20.00   Min.   :1.00   Min.   :0.00  
-##  1st Qu.:34.75   1st Qu.:2.75   1st Qu.:0.00  
-##  Median :44.00   Median :4.00   Median :0.00  
-##  Mean   :44.38   Mean   :4.48   Mean   :0.43  
-##  3rd Qu.:55.00   3rd Qu.:7.00   3rd Qu.:1.00  
-##  Max.   :69.00   Max.   :8.00   Max.   :1.00
+##       AGE             AGRP      CHD   
+##  Min.   :20.00   Min.   :1.00   0:57  
+##  1st Qu.:34.75   1st Qu.:2.75   1:43  
+##  Median :44.00   Median :4.00         
+##  Mean   :44.38   Mean   :4.48         
+##  3rd Qu.:55.00   3rd Qu.:7.00         
+##  Max.   :69.00   Max.   :8.00
 \end{verbatim}
 
 Observa-se na figura abaixo a dispersão dos ``eventos'' da CHD com a
@@ -2096,16 +2113,30 @@ idade (AGE).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{ggplot}\NormalTok{(chd, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{AGE, }\DataTypeTok{y=}\NormalTok{CHD)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{stat_smooth}\NormalTok{(}\DataTypeTok{method=}\StringTok{"glm"}\NormalTok{, }\DataTypeTok{method.args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{family=}\StringTok{"binomial"}\NormalTok{), }\DataTypeTok{se=}\OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{require}\NormalTok{(ggplot2)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{05-RegLogist_files/figure-latex/unnamed-chunk-2-1.pdf}
+\begin{verbatim}
+## Carregando pacotes exigidos: ggplot2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(chd, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{AGE, }\DataTypeTok{y=}\NormalTok{CHD)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{stat_smooth}\NormalTok{(}\DataTypeTok{method=}\StringTok{"glm"}\NormalTok{, }\DataTypeTok{method.args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{family=}\StringTok{"binomial"}\NormalTok{), }\DataTypeTok{se=}\NormalTok{F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Computation failed in `stat_smooth()`:
+## y values must be 0 <= y <= 1
+\end{verbatim}
+
+\includegraphics{05-RegLogist_files/figure-latex/unnamed-chunk-3-1.pdf}
 
 Monta-se então o modelo de regressão logística com a variável dependente
-CHD e a variável independente AGE. Abaixo demonstra-se a descrição da
+CHD e a variável independente AGE. Abaixo é demonstrada a descrição da
 equação utilizando o comando \texttt{summary()} para o modelo m1 com a
 sintaxe básica:
 
@@ -2114,7 +2145,7 @@ sintaxe básica:
 Assim é obtida a função de ligação estimada do modelo:
 
 \[
-\hat g(CHD) =-5,309+0,1109AGE
+\hat g(CHD) = -5,309 +0,1109AGE
 \]
 
 \begin{Shaded}
@@ -2152,7 +2183,7 @@ Assim é obtida a função de ligação estimada do modelo:
 Se observa o intercepto com o valor de -5,309, sendo que para a análise
 aqui proposta da relação entre CHD e AGE não obtém-se um significado
 prático para este resultado. No entanto, a variável de interesse é
-idade, que no modelo de regressão obteve o coeficiente de 0,1109 e pelo
+idade, que no modelo de regressão obteve o coeficiente de 0,1109. Pelo
 fato de ser positivo informa que quando a idade (AGE) se eleva,
 elevam-se as chances de ocorrência de CHD. De igual forma, nota-se que
 há significância estatística a \(p=0,001\) na utilização da variável AGE
@@ -2183,46 +2214,6 @@ as chances da ocorrência de CHD.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{require}\NormalTok{(mfx)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Carregando pacotes exigidos: mfx
-\end{verbatim}
-
-\begin{verbatim}
-## Carregando pacotes exigidos: sandwich
-\end{verbatim}
-
-\begin{verbatim}
-## Carregando pacotes exigidos: lmtest
-\end{verbatim}
-
-\begin{verbatim}
-## Carregando pacotes exigidos: zoo
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Attaching package: 'zoo'
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:base':
-## 
-##     as.Date, as.Date.numeric
-\end{verbatim}
-
-\begin{verbatim}
-## Carregando pacotes exigidos: MASS
-\end{verbatim}
-
-\begin{verbatim}
-## Carregando pacotes exigidos: betareg
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{logitor}\NormalTok{(CHD}\OperatorTok{~}\NormalTok{AGE,}\DataTypeTok{data =}\NormalTok{ chd)}
 \end{Highlighting}
 \end{Shaded}
@@ -2258,10 +2249,6 @@ coeficiente AGE toma o valor de 1,1173, podendo variar de 1,0692 a
 \KeywordTok{exp}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(}\DataTypeTok{OR=}\KeywordTok{coef}\NormalTok{(m1), }\KeywordTok{confint}\NormalTok{(m1)))}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Waiting for profiling to be done...
-\end{verbatim}
 
 \begin{verbatim}
 ##                      OR        2.5 %    97.5 %
@@ -2402,8 +2389,12 @@ VPN=\frac{VN}{VN+FN}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pdata <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(m1, }\DataTypeTok{newdata =}\NormalTok{ chd, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
-\KeywordTok{confusionMatrix}\NormalTok{(}\DataTypeTok{data =} \KeywordTok{as.numeric}\NormalTok{(pdata}\OperatorTok{>}\FloatTok{0.5}\NormalTok{), }\DataTypeTok{reference =}\NormalTok{ chd}\OperatorTok{$}\NormalTok{CHD)}
+\NormalTok{  pdata <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(}
+    \KeywordTok{ifelse}\NormalTok{(}
+      \KeywordTok{predict}\NormalTok{(m1, }\DataTypeTok{newdata =}\NormalTok{ chd, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
+      \OperatorTok{>}\FloatTok{0.5}\NormalTok{,}\StringTok{"1"}\NormalTok{,}\StringTok{"0"}\NormalTok{))}
+
+\KeywordTok{confusionMatrix}\NormalTok{(pdata, chd}\OperatorTok{$}\NormalTok{CHD, }\DataTypeTok{positive=}\StringTok{"1"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2423,18 +2414,29 @@ VPN=\frac{VN}{VN+FN}
 ##                   Kappa : 0.4666          
 ##  Mcnemar's Test P-Value : 0.8445193       
 ##                                           
-##             Sensitivity : 0.7895          
-##             Specificity : 0.6744          
-##          Pos Pred Value : 0.7627          
-##          Neg Pred Value : 0.7073          
-##              Prevalence : 0.5700          
-##          Detection Rate : 0.4500          
-##    Detection Prevalence : 0.5900          
+##             Sensitivity : 0.6744          
+##             Specificity : 0.7895          
+##          Pos Pred Value : 0.7073          
+##          Neg Pred Value : 0.7627          
+##              Prevalence : 0.4300          
+##          Detection Rate : 0.2900          
+##    Detection Prevalence : 0.4100          
 ##       Balanced Accuracy : 0.7319          
 ##                                           
-##        'Positive' Class : 0               
+##        'Positive' Class : 1               
 ## 
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#confusionMatrix(}
+\CommentTok{#  factor(pred, levels = 1:148),}
+\CommentTok{#  factor(testing$Final, levels = 1:148)}
+\CommentTok{#)}
+\CommentTok{#levels(test) <- c("Cancer", "Normal")}
+\CommentTok{#confusionMatrix(final, test)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{curva-roc}{%
 \subsection{Curva ROC}\label{curva-roc}}
@@ -2445,9 +2447,13 @@ através das predições da sensibilidade e da especificidade.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(pROC)}
+\KeywordTok{require}\NormalTok{(pROC)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Carregando pacotes exigidos: pROC
+\end{verbatim}
 
 \begin{verbatim}
 ## Type 'citation("pROC")' for a citation.
@@ -2475,15 +2481,15 @@ através das predições da sensibilidade e da especificidade.
 \begin{itemize}
 \tightlist
 \item
-  1º Passo:
+  Passo 1:
 \end{itemize}
 
-\texttt{library(pROC)\ roc1=plot.roc(chd\$CHD,fitted(m1))}
+\texttt{require(pROC)\ roc1=plot.roc(chd\$CHD,fitted(m1))}
 
 \begin{itemize}
 \tightlist
 \item
-  2º Passo:
+  Passo 2:
 \end{itemize}
 
 \begin{Shaded}
@@ -2500,16 +2506,7 @@ através das predições da sensibilidade e da especificidade.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ResourceSelection)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## ResourceSelection 0.3-2   2017-02-28
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(ResourceSelection)}
 \NormalTok{hl=}\KeywordTok{hoslem.test}\NormalTok{(chd}\OperatorTok{$}\NormalTok{CHD,}\KeywordTok{fitted}\NormalTok{(m1),}\DataTypeTok{g=}\DecValTok{10}\NormalTok{)}
 \NormalTok{hl}
 \end{Highlighting}
@@ -2520,7 +2517,7 @@ através das predições da sensibilidade e da especificidade.
 ##  Hosmer and Lemeshow goodness of fit (GOF) test
 ## 
 ## data:  chd$CHD, fitted(m1)
-## X-squared = 2.2243, df = 8, p-value = 0.9734
+## X-squared = 100, df = 8, p-value < 2.2e-16
 \end{verbatim}
 
 \hypertarget{pseudo-r2}{%
@@ -2528,7 +2525,16 @@ através das predições da sensibilidade e da especificidade.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(modEvA)}
+\KeywordTok{require}\NormalTok{(modEvA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Carregando pacotes exigidos: modEvA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{RsqGLM}\NormalTok{(m1)}
 \end{Highlighting}
 \end{Shaded}
@@ -2550,9 +2556,9 @@ através das predições da sensibilidade e da especificidade.
 ## [1] 0.2725518
 \end{verbatim}
 
-\hypertarget{regressao-logistica-multipla---exemplo-2}{%
-\section{Regressão Logística Múltipla - Exemplo
-2}\label{regressao-logistica-multipla---exemplo-2}}
+\hypertarget{regressao-logistica-multipla}{%
+\section{Regressão Logística
+Múltipla}\label{regressao-logistica-multipla}}
 
 O exemplo abaixo abordado foi extraído de \textcite{Torres-Reyna2014},
 onde observa-se o banco de dados criado chamado \texttt{mydata},
@@ -2565,7 +2571,16 @@ serão\texttt{x1},\texttt{x2}e\texttt{x3}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(foreign)}
+\KeywordTok{require}\NormalTok{(foreign)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Carregando pacotes exigidos: foreign
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{mydata <-}\StringTok{ }\KeywordTok{read.dta}\NormalTok{(}\StringTok{"http://dss.princeton.edu/training/Panel101.dta"}\NormalTok{) }
 \KeywordTok{summary}\NormalTok{(mydata)}
 \end{Highlighting}
@@ -2648,28 +2663,6 @@ do modelo de forma explicativa.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{require}\NormalTok{(stargazer)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Carregando pacotes exigidos: stargazer
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Please cite as:
-\end{verbatim}
-
-\begin{verbatim}
-##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
-\end{verbatim}
-
-\begin{verbatim}
-##  R package version 5.2.1. https://CRAN.R-project.org/package=stargazer
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{stargazer}\NormalTok{(logit, }\DataTypeTok{title=}\StringTok{"Resultados"}\NormalTok{,}\DataTypeTok{type =} \StringTok{"text"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2768,10 +2761,6 @@ abaixo:
 \KeywordTok{exp}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(}\DataTypeTok{OR=}\KeywordTok{coef}\NormalTok{(logit), }\KeywordTok{confint}\NormalTok{(logit)))}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Waiting for profiling to be done...
-\end{verbatim}
 
 \begin{verbatim}
 ##                   OR     2.5 %    97.5 %
@@ -2876,9 +2865,9 @@ importantes ao modelo:
 ## Residual Deviance: 67.33     AIC: 71.33
 \end{verbatim}
 
-\hypertarget{regressao-logistica-multipla---exemplo-3}{%
-\section{Regressão Logística Múltipla - exemplo
-3}\label{regressao-logistica-multipla---exemplo-3}}
+\hypertarget{regressao-logistica-multipla-com-variavel-categorica}{%
+\section{Regressão Logística Múltipla com variável
+categórica}\label{regressao-logistica-multipla-com-variavel-categorica}}
 
 Abaixo segue um exemplo com uma variável dependente categórica:
 
@@ -2897,23 +2886,9 @@ Abaixo segue um exemplo com uma variável dependente categórica:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(readr)}
+\KeywordTok{require}\NormalTok{(readr)}
 \NormalTok{binary <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Parsed with column specification:
-## cols(
-##   admit = col_integer(),
-##   gre = col_integer(),
-##   gpa = col_double(),
-##   rank = col_integer()
-## )
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{binary}\OperatorTok{$}\NormalTok{rank <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(binary}\OperatorTok{$}\NormalTok{rank)}
 \NormalTok{mylogit <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(admit }\OperatorTok{~}\StringTok{ }\NormalTok{gre }\OperatorTok{+}\StringTok{ }\NormalTok{gpa }\OperatorTok{+}\StringTok{ }\NormalTok{rank, }\DataTypeTok{data =}\NormalTok{ binary, }\DataTypeTok{family =} \KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link=}\StringTok{"logit"}\NormalTok{))}
 \end{Highlighting}
@@ -2926,10 +2901,6 @@ Abaixo segue um exemplo com uma variável dependente categórica:
 \end{Shaded}
 
 \begin{verbatim}
-## Waiting for profiling to be done...
-\end{verbatim}
-
-\begin{verbatim}
 ##                    OR       2.5 %    97.5 %
 ## (Intercept) 0.0185001 0.001889165 0.1665354
 ## gre         1.0022670 1.000137602 1.0044457
@@ -2938,349 +2909,6 @@ Abaixo segue um exemplo com uma variável dependente categórica:
 ## rank3       0.2617923 0.131641717 0.5115181
 ## rank4       0.2119375 0.090715546 0.4706961
 \end{verbatim}
-
-\printbibliography[segment=\therefsegment,heading=subbibliography]
-
-\hypertarget{mapas}{%
-\chapter{Mapas}\label{mapas}}
-
-Este capítulo almeja levantar o ferramental básico para a construção de
-mapas simples no RStudio. Ainda, interessa demonstrar os comandos para a
-manipulação destes tipos de bases de dados, inclusive possibilitando a
-junção de indicadores de municípios, regiões e países. Estes dados podem
-ser advindos de institutos de pesquisas ou mesmo dados criados pelo
-estudante em suas análises.
-
-Os pacotes utilizados neste capítulo são: \texttt{tmap},
-\texttt{maptools}, \texttt{tmap} e \texttt{rgdal}.
-
-\hypertarget{introducao-aos-shapes}{%
-\section{\texorpdfstring{Introdução aos
-\emph{shapes}}{Introdução aos shapes}}\label{introducao-aos-shapes}}
-
-Existem vários \emph{softwares} específicos para a produção de mapas,
-sejam produtos comerciais ou no formato \emph{software} livre. A grande
-vantagem da utilização do R para criação de mapas é a utilização dos
-\emph{shapes} disponibilizadas para vários programas.
-
-Denominam-se \emph{shapes} os arquivos que contém os elementos gráficos,
-em formato de ponto, linhas ou polígonos, contendo coordenadas
-geográficas para um elemento para que possa ser transformado em mapa. O
-\emph{shape} é formado por três arquivos principais individuais que
-armazenam os dados: o arquivo ``.shp'', ``.shx'' e ``.dbf''. Além disto,
-podem ser acompanhados de arquivos ``.prj'', o ``.sbn'' e o ``.sbx''
-\autocite{Semace2018}.
-
-Os \emph{shapefiles} podem ser obtidos de várias fontes oficiais, como
-institutos de pesquisa e universidades. A seguir alguns links para
-\emph{download}:
-
-\begin{itemize}
-\tightlist
-\item
-  IBGE:
-  \url{ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2016/Brasil/BR/}
-\end{itemize}
-
-\url{https://mapas.ibge.gov.br/bases-e-referenciais/bases-cartograficas/malhas-digitais.html}
-
-\url{http://dados.gov.br/dataset/malha-geometrica-dos-municipios-brasileiros}
-
-\begin{itemize}
-\item
-  IPEAGEO: \url{http://www.ipea.gov.br/ipeageo/malhas.html}
-\item
-  Forest Gis:
-  \url{http://forest-gis.com/2009/04/base-de-dados-shapefile-do-brasil-todo.html/}
-\item
-  FEPAM: \url{http://www.fepam.rs.gov.br/biblioteca/geo/bases_geo.asp}
-\end{itemize}
-
-No exemplo abaixo, é utilizado um \emph{shape} proveniente do IBGE
-representando os municípios do Estado do Rio Grande do Sul. Ao
-\emph{shape} denominado \texttt{municipios\_IBGE} será dado o nome de
-MAPA\_RS:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{require}\NormalTok{(maptools)}
-\KeywordTok{require}\NormalTok{(tmap)}
-\KeywordTok{require}\NormalTok{(rgdal)}
-\NormalTok{MAPA_RS=}\KeywordTok{readShapeSpatial}\NormalTok{(}\StringTok{'D:/Github/livroravancado/mapas/bases/municipios_IBGE/municipios_IBGE.shp'}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Utilizando a função \texttt{summary} podem ser observados os itens que
-compõe este objeto, em especial a área do município (AREA\_1), o seu
-nome (NOME) o seu código IBGE (Cod\_ibge) e o seu nome com acentuação
-(Label\_N):
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{summary}\NormalTok{(MAPA_RS)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Object of class SpatialPolygonsDataFrame
-## Coordinates:
-##         min      max
-## x -57.64426 -49.6921
-## y -33.75247 -27.0810
-## Is projected: NA 
-## proj4string : [NA]
-## Data attributes:
-##      MSLINK         MAPID        AREA_1          PERIMETRO_    
-##  Min.   :4807   Min.   :99   Min.   :  27.54   Min.   : 29.24  
-##  1st Qu.:4931   1st Qu.:99   1st Qu.: 124.50   1st Qu.: 64.62  
-##  Median :5055   Median :99   Median : 237.02   Median : 92.32  
-##  Mean   :5083   Mean   :99   Mean   : 541.02   Mean   :124.56  
-##  3rd Qu.:5179   3rd Qu.:99   3rd Qu.: 503.48   3rd Qu.:145.61  
-##  Max.   :5823   Max.   :99   Max.   :7803.97   Max.   :584.72  
-##                                                                
-##          NOME          SEDE     LATITUDESE       LONGITUDES    
-##  ACEGUA    :  1   Min.   :1   Min.   :-33.69   Min.   :-57.55  
-##  AGUA SANTA:  1   1st Qu.:1   1st Qu.:-29.61   1st Qu.:-53.50  
-##  AGUDO     :  1   Median :1   Median :-28.98   Median :-52.43  
-##  AJURICABA :  1   Mean   :1   Mean   :-28.96   Mean   :-52.61  
-##  ALECRIM   :  1   3rd Qu.:1   3rd Qu.:-27.99   3rd Qu.:-51.68  
-##  ALEGRETE  :  1   Max.   :1   Max.   :-27.16   Max.   :-49.73  
-##  (Other)   :491                                                
-##    AREA_TOT_G         Cod_ibge             Label_N   
-##  Min.   :  27.54   Min.   :4300034   Aceguá    :  1  
-##  1st Qu.: 124.50   1st Qu.:4306106   Água Santa:  1  
-##  Median : 237.02   Median :4312104   Agudo     :  1  
-##  Mean   : 541.02   Mean   :4311877   Ajuricaba :  1  
-##  3rd Qu.: 503.48   3rd Qu.:4317400   Alecrim   :  1  
-##  Max.   :7803.97   Max.   :4323804   Alegrete  :  1  
-##                                      (Other)   :491
-\end{verbatim}
-
-Note que este objeto pertence a uma classe diferente
-(SpatialPolygonsDataFrame), indicando que é constituída especialmente de
-um conjunto de polígonos para a construção de mapas conjuntamente com o
-carregamento de dados.
-
-A seguir, a função \texttt{plot()} pode ser utilizada para a plotagem da
-malha carregada:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(MAPA_RS)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{06-Mapas_files/figure-latex/unnamed-chunk-3-1.pdf}
-
-Um exercício simples é a filtragem dos dados do \emph{shape} pelo nome
-do município, obtendo assim apenas o mapa da(s) unidade(s) escolhida(s):
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(MAPA_RS[MAPA_RS}\OperatorTok{$}\NormalTok{NOME }\OperatorTok{==}\StringTok{'SANTA ROSA'}\NormalTok{,], }
-    \DataTypeTok{axes=}\StringTok{"TRUE"}\NormalTok{,  }\DataTypeTok{main=}\StringTok{"Mapa do município de Santa Rosa - RS"}\NormalTok{, }\DataTypeTok{border=}\KeywordTok{gray}\NormalTok{(}\FloatTok{0.5}\NormalTok{), }\DataTypeTok{lwd=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{06-Mapas_files/figure-latex/unnamed-chunk-4-1.pdf}
-
-\hypertarget{pacote-tmap}{%
-\section{Pacote tmap}\label{pacote-tmap}}
-
-\hypertarget{um-mapa-simples}{%
-\subsection{Um mapa simples}\label{um-mapa-simples}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{require}\NormalTok{(tmap)}
-\KeywordTok{tm_shape}\NormalTok{(MAPA_RS)}\OperatorTok{+}\KeywordTok{tm_fill}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{06-Mapas_files/figure-latex/unnamed-chunk-5-1.pdf}
-
-\hypertarget{melhorando-a-visualizacao}{%
-\subsection{Melhorando a visualização}\label{melhorando-a-visualizacao}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-   \KeywordTok{tm_shape}\NormalTok{(MAPA_RS)}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_fill}\NormalTok{(}\StringTok{"AREA_1"}\NormalTok{, }\DataTypeTok{auto.palette.mapping=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{title=}\StringTok{"Area por município KM2"}\NormalTok{)}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_format_World}\NormalTok{()}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_style_grey}\NormalTok{()}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_legend}\NormalTok{(}
-        \DataTypeTok{position=}\KeywordTok{c}\NormalTok{(}\StringTok{"left"}\NormalTok{,}\StringTok{"bottom"}\NormalTok{))}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_compass}\NormalTok{()}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_scale_bar}\NormalTok{()}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_borders}\NormalTok{(}\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{06-Mapas_files/figure-latex/unnamed-chunk-6-1.pdf}
-
-\hypertarget{opcoes-de-layout}{%
-\subsection{Opções de layout}\label{opcoes-de-layout}}
-
-As opções de \textbf{tm\_layout}:
-
-\begin{itemize}
-\tightlist
-\item
-  tm\_format\_World
-\item
-  tm\_format\_World\_wide\\
-\item
-  tm\_format\_Europe
-\item
-  tm\_format\_Europe2
-\item
-  tm\_format\_Europe\_wide
-\item
-  tm\_format\_NLD
-\item
-  tm\_format\_NLD\_wide
-\item
-  tm\_format\_NLD\_wide
-\end{itemize}
-
-\hypertarget{opcoes-de-style}{%
-\subsection{Opções de Style}\label{opcoes-de-style}}
-
-As opções de \textbf{tm\_style}:
-
-\begin{itemize}
-\tightlist
-\item
-  tm\_style\_white
-\item
-  tm\_style\_gray
-\item
-  tm\_style\_natural
-\item
-  tm\_style\_grey
-\item
-  tm\_style\_cobalt
-\item
-  tm\_style\_col\_blind
-\item
-  tm\_style\_albatross
-\item
-  tm\_style\_beaver
-\item
-  tm\_style\_bw
-\item
-  tm\_style\_classic
-\end{itemize}
-
-\hypertarget{adicionando-dados-ao-mapa}{%
-\subsection{Adicionando dados ao mapa}\label{adicionando-dados-ao-mapa}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Carrega a planilha com as informações}
-\NormalTok{RS_}\DecValTok{2013}\NormalTok{ <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"D:/Github/livroravancado/mapas/RS_2013.csv"}\NormalTok{) }
-
-\KeywordTok{head}\NormalTok{(RS_}\DecValTok{2013}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##           Label_N                     COREDE CD_GEOCMU IDESE_2013 POUPANCA
-## 1     Alto Alegre Alto da Serra do Botucaraí   4300554  0.7973015       NA
-## 2   Barros Cassal Alto da Serra do Botucaraí   4302006  0.6103698  7647609
-## 3   Campos Borges Alto da Serra do Botucaraí   4304101  0.7352055       NA
-## 4        Espumoso Alto da Serra do Botucaraí   4307500  0.7929686 45673907
-## 5 Fontoura Xavier Alto da Serra do Botucaraí   4308300  0.6336514 13985159
-## 6  Gramado Xavier Alto da Serra do Botucaraí   4309159  0.6578416  1119359
-##   OP_CREDITO OBRIGACOES._RECEBIMENTO DEP_A_VISTA_PRIV DEP_A_VISTA_GOV
-## 1         NA                      NA               NA              NA
-## 2   27295139                    5931          2019686         1291827
-## 3         NA                      NA               NA              NA
-## 4  230697134                   66237          5961499         1339496
-## 5   54390691                    4177          1633176          550883
-## 6    2073680                       0           231993          320742
-##   DEP_PRAZO COOP_CRED CEF BANCO_COM N_VINCULOS_EMP DENS_DEM_HABKM2
-## 1        NA        NA  NA        NA            502        15.90284
-## 2    795466        NA  NA         2           1115        17.09519
-## 3        NA        NA  NA        NA            610        15.31040
-## 4  21291570         1   1         3           4856        19.54499
-## 5   4970880        NA  NA         3           1868        18.14505
-## 6         0        NA  NA         1            341        18.64154
-##    IMPOSTOS AREA_KM2 PIB_PERC       PIB POPULACAO
-## 1  2894.464  114.445 30800.00  57164.80      1811
-## 2  5116.998  648.896 12392.47 142240.75     11051
-## 3  4260.816  226.578 21369.18  76052.90      3679
-## 4 45015.841  783.065 35927.37 566574.63     15589
-## 5  4949.119  583.465 12017.46 131531.05     10566
-## 6  1172.871  217.525 14484.65  60372.01      3728
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Une a base de dados da planilha com o mapa pelo nome do município}
-\NormalTok{RS_}\DecValTok{2013}\NormalTok{_MAPA=}\KeywordTok{merge}\NormalTok{(MAPA_RS,RS_}\DecValTok{2013}\NormalTok{,}\DataTypeTok{by=}\StringTok{"Label_N"}\NormalTok{, }\DataTypeTok{all.x=}\NormalTok{T) }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{tm_shape}\NormalTok{(RS_}\DecValTok{2013}\NormalTok{_MAPA) }\OperatorTok{+}
-\StringTok{    }\KeywordTok{tm_polygons}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"PIB"}\NormalTok{, }\StringTok{"POPULACAO"}\NormalTok{), }
-        \DataTypeTok{style=}\KeywordTok{c}\NormalTok{(}\StringTok{"kmeans"}\NormalTok{,}\StringTok{"fixed"}\NormalTok{),}
-        \DataTypeTok{palette=}\KeywordTok{list}\NormalTok{(}\StringTok{"Reds"}\NormalTok{, }\StringTok{"Blues"}\NormalTok{),}
-        \DataTypeTok{auto.palette.mapping=}\OtherTok{FALSE}\NormalTok{,}
-        \DataTypeTok{breaks=}\KeywordTok{list}\NormalTok{(}\KeywordTok{quantile}\NormalTok{(RS_}\DecValTok{2013}\NormalTok{_MAPA}\OperatorTok{$}\NormalTok{POPULACAO),}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\OtherTok{Inf}\NormalTok{,}\DecValTok{100000}\NormalTok{,}\DecValTok{200000}\NormalTok{,}\OtherTok{Inf}\NormalTok{)),}
-        \DataTypeTok{title=}\KeywordTok{c}\NormalTok{(}\StringTok{"PIB"}\NormalTok{, }\StringTok{"População"}\NormalTok{)) }\OperatorTok{+}
-\KeywordTok{tm_format_World}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\KeywordTok{tm_style_grey}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{06-Mapas_files/figure-latex/unnamed-chunk-9-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{tm_shape}\NormalTok{(RS_}\DecValTok{2013}\NormalTok{_MAPA[RS_}\DecValTok{2013}\NormalTok{_MAPA}\OperatorTok{$}\NormalTok{COREDE }\OperatorTok{==}\StringTok{'Sul'}\NormalTok{,]) }\OperatorTok{+}
-\StringTok{    }\KeywordTok{tm_polygons}\NormalTok{(}\StringTok{"POPULACAO"}\NormalTok{, }\DataTypeTok{title=}\StringTok{"Pop"}\NormalTok{, }\DataTypeTok{style=}\StringTok{"kmeans"}\NormalTok{, }\DataTypeTok{text=}\StringTok{"Label_N"}\NormalTok{) }\OperatorTok{+}
-\StringTok{    }\KeywordTok{tm_facets}\NormalTok{(}\StringTok{"COREDE"}\NormalTok{) }\OperatorTok{+}
-\StringTok{    }\KeywordTok{tm_text}\NormalTok{(}\StringTok{"Label_N"}\NormalTok{,}\DataTypeTok{scale=}\FloatTok{0.45}\NormalTok{)}\OperatorTok{+}
-\KeywordTok{tm_style_grey}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{06-Mapas_files/figure-latex/unnamed-chunk-10-1.pdf}
-
-\hypertarget{coredes}{%
-\subsection{Coredes}\label{coredes}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{Coredes=RS_}\DecValTok{2013}\NormalTok{_MAPA}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{Coredes.agg=}\KeywordTok{aggregate}\NormalTok{(Coredes[,}\DecValTok{4}\NormalTok{], }\KeywordTok{list}\NormalTok{(Coredes}\OperatorTok{$}\NormalTok{COREDE), sum)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-   \KeywordTok{tm_shape}\NormalTok{(Coredes.agg)}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_fill}\NormalTok{(}\StringTok{"AREA_1"}\NormalTok{, }\DataTypeTok{auto.palette.mapping=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{title=}\StringTok{"Area por município KM2"}\NormalTok{)}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_format_World}\NormalTok{()}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_style_grey}\NormalTok{()}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_legend}\NormalTok{(}
-        \DataTypeTok{position=}\KeywordTok{c}\NormalTok{(}\StringTok{"left"}\NormalTok{,}\StringTok{"bottom"}\NormalTok{))}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_compass}\NormalTok{()}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_scale_bar}\NormalTok{()}\OperatorTok{+}
-\StringTok{      }\KeywordTok{tm_borders}\NormalTok{(}\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}\OperatorTok{+}
-\StringTok{       }\KeywordTok{tm_text}\NormalTok{(}\StringTok{"Group.1"}\NormalTok{,}\DataTypeTok{scale=}\FloatTok{0.5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{06-Mapas_files/figure-latex/unnamed-chunk-13-1.pdf}
 
 \printbibliography[segment=\therefsegment,heading=subbibliography]
 

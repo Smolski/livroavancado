@@ -1,0 +1,5 @@
+"0","require(ggplot2)"
+"2","Carregando pacotes exigidos: ggplot2
+"
+"0","ggplot(chd, aes(x=AGE, y=CHD)) + geom_point() + "
+"0","  stat_smooth(method=""glm"", method.args=list(family=""binomial""), se=F)"

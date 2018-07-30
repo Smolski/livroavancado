@@ -1,0 +1,71 @@
+---
+title: "Meu documento"
+author:
+- Felipe^[]
+- Segundo Autor^[]
+date: "8 de março de 2018"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    fig_caption: yes
+  pdf_document:
+    number_sections: yes
+    toc: yes
+    fig_caption: yes
+  word_document:
+    fig_caption: yes
+    fig_height: 3
+    fig_width: 7
+    reference_docx: modelo.docx
+    toc: yes
+bibliography: bibliografia.bib
+fontsize: 12pt
+lang: pt-BR
+csl: associacao-brasileira-de-normas-tecnicas-ipea.csl
++always_allow_html: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message = TRUE,	
+                      warning = TRUE, fig.height=5, fig.width=5)
+
+knitr::opts_knit$get('rmarkdown.pandoc.to')
+```
+
+# Apresentação {-}
+
+A necessidade de flexibilidade e robustez para a análise estatística fez com que fosse criado, na década de 1990, a linguagem de programação R. Capitaneado pelos desenvolvedores Ross Ihaka e Robert Gentleman, dois estatísticos da Universidade de Auckland na Nova Zelândia, o projeto foi uma grande evolução para a análise de dados. A partir de então, a ideia inicial de proporcionar autonomia ao pesquisador, viu na expansão do acesso à internet uma oportunidade para que a pesquisa científica se tornasse cada vez mais colaborativa. Ao mesmo tempo, os códigos e rotinas se tornaram facilmente disponibilizáveis na rede, aumentando a reprodução e replicação dos estudos, práticas estas que podem tornar as análises mais confiáveis.
+
+
+```{r qui5, echo=FALSE, f="Situação do peso de cobaias do estudo antes e após a intervenção",results='asis',message=FALSE, warning=FALSE}
+require(xtable)
+
+Aprovado=c(15,5)
+Desaprovado=c(18,7)
+qui5=rbind(Aprovado,Desaprovado)
+colnames(qui5)[2]='Sobrepeso'
+colnames(qui5)[1]='Adequado'
+
+write.table(qui5, file = "qui5.txt", sep = ",", quote = FALSE, row.names = F)
+```
+
+
+
+
+  ----------------------------------------
+                 **Depois**     
+  -------------  ------------ ------------
+  **Antes**      Aprovado     Desaprovado
+  
+  Aprovado       a            b
+  
+  Desaprovado    c            d    
+  ----------------------------------------
+
+Table: nome da tabela.
+
+
+
+
+

@@ -1,0 +1,91 @@
+---
+title: "Meu documento"
+author: 
+- Felipe^[UFFS]
+- Segundo Autor^[Descrição do currículo.]
+date: "8 de março de 2018"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+  pdf_document:
+    number_sections: yes
+    toc: yes  
+  word_document:
+    reference_docx: modelo.docx
+    fig_caption: yes
+    fig_height: 3
+    fig_width: 7
+    toc: yes    
+lang: pt-BR
+fontsize: 12pt
+csl: associacao-brasileira-de-normas-tecnicas-ipea.csl
+bibliography: bibliografia.bib
++always_allow_html: yes
+---
+
+```{r, include=FALSE}
+
+```
+
+
+
+# Apresentação {-}
+
+  ---------------------------------------------------------------------------------------
+  **Tipos de Variáveis**
+  --------------------------------  ----------------------------  -----------------------
+  **Variável dependente binária:**  Você votou na                 0 - Não
+                                    última eleição?               1 - Sim
+
+  **Variável dependente categórica  Você concorda ou desconcorda  1 - Disconcordo
+  ordenada:**                       com o presidente?             2 - Neutro
+                                                                  3 - Concordo
+
+  **Variável dependente categórica  Se as eleições fossem hoje,   1 - Democratas
+  não ordenada:**                   em que partido você votaria?  2 - Qualquer um
+                                                                  3 - Republicanos
+  ---------------------------------------------------------------------------------------
+
+Table: Tipos de variáveis
+
+||||
+|---|---|---|
+|**Variável dependente binária:**| Você votou na última eleição?|0 - Não; 1 - Sim|
+|**Variável dependente categórica ordenada:**| Você concorda ou desconcorda com o presidente?|1 - Disconcordo; 2 - Neutro; 3 - Concordo|
+|**Variável dependente categórica não ordenada:**|Se as eleições fossem hoje, em que partido você votaria? |  1 - Democratas; 2 - Qualquer um; 3 - Republicanos|
+
+Fonte: Adaptado de @Torres-Reyna2014. 
+
+A necessidade de flexibilidade e robustez para a análise estatística fez com que fosse criado, na década de 1990, a linguagem de programação R. Capitaneado pelos desenvolvedores Ross Ihaka e Robert Gentleman, dois estatísticos da Universidade de Auckland na Nova Zelândia, o projeto foi uma grande evolução para a análise de dados. 
+
+\begin{table}
+\centering
+\caption{}
+\label{table-paramvalues}
+\begin{tabular}{ p{4cm} p{4cm} p{4cm} }
+\hline \\ [-1.5ex]
+colname &amp; colname &amp; colname \\ [1ex]
+\hline \\ [-1.5ex]
+Info & info & info \\ [1ex]
+Info & info & info \\ [1ex]
+Info & info & info \\ [1ex]
+\hline
+\end{tabular}
+\end{table}
+
+A partir de então, a ideia inicial de proporcionar autonomia ao pesquisador, viu na expansão do acesso à internet uma oportunidade para que a pesquisa científica se tornasse cada vez mais colaborativa. Ao mesmo tempo, os códigos e rotinas se tornaram facilmente disponibilizáveis na rede, aumentando a reprodução e replicação dos estudos, práticas estas que podem tornar as análises mais confiáveis.
+
+```{r qui5, echo=FALSE, fig.subcap="Situação do peso de cobaias do estudo antes e após a intervenção"}
+require(kableExtra)
+
+Aprovado=c(15,5)
+Desaprovado=c(18,7)
+qui5=rbind(Aprovado,Desaprovado)
+colnames(qui5)[2]='Sobrepeso'
+colnames(qui5)[1]='Adequado'
+
+knitr::kable(qui5, caption = 'Situação do peso de cobaias do estudo antes e após a intervenção') %>%
+  add_header_above(c("Peso Antes" = 1, "Peso Após" = 2)) %>%
+  footnote(general = " Dados simulados.", general_title ="Fonte:", footnote_as_chunk = T)
+```

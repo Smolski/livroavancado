@@ -84,8 +84,14 @@ Inicialmente podemos explorar algumas estatísticas descritivas relacionadas às
 
 
 ```r
-library(readxl)
+require(readxl)
+```
 
+```
+## Carregando pacotes exigidos: readxl
+```
+
+```r
 url <- "https://github.com/Smolski/softwarelivrer/raw/master/avancado/creme_dental_exemplo1.xlsx"
 destfile <- "creme_dental_exemplo1.xlsx"
 curl::curl_download(url, destfile)
@@ -146,7 +152,11 @@ print(matcor, digits = 2)
 
 
 ```r
-library(corrplot)
+require(corrplot)
+```
+
+```
+## Carregando pacotes exigidos: corrplot
 ```
 
 ```

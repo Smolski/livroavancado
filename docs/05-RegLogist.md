@@ -1,43 +1,23 @@
 # Regressão Logística
 
-O modelo de regressão logística é utilizado quando a variável dependente é binária, categórica ordenada ou mesmo categórica desordenada (quando não há relação hierárquica entre elas). Abaixo exemplificam-se as perguntas que levam a estes três tipos de variáveis:
 
 
-\begin{table}[!h]
-  \centering
-  \caption{Tipos de variáveis dependentes}
-    \begin{tabular}{|l|}
-    \hline
-    \multicolumn{1}{|c|}{\textbf{Variável dependente binária:}} \\
-    \hline
-    Você votou na última eleição? \\
-    0 - Não \\
-    1 - Sim \\
-    \hline
-    Você prefere transporte público ou dirigir um carro? \\
-    0 - Prefiro Carro \\
-    1 - Prefiro transporte público \\
-    \hline
-    \multicolumn{1}{|c|}{\textbf{Variável dependente categórica ordenada:}} \\
-    \hline
-    Você concorda ou desconcorda com o presidente? \\
-    1 - Discordo \\
-    2 - Neutro \\
-    3 - Concordo \\
-    \hline
-    \multicolumn{1}{|c|}{\textbf{Variável dependente categórica não ordenada:}} \\
-    \hline
-    Se as eleições fossem hoje, em que partido você votaria?\\
-    1 - Democratas \\
-    2 - Qualquer um \\
-    3 - Repulicanos \\
-    \hline
-    \multicolumn{1}{c}{Fonte: Adaptado de @Torres-Reyna2014.}
-    \end{tabular}
-  \label{tipos}
-\end{table}%
 
-A regressão logística, portanto, trata os grupos de interesse (variável dependente) com valores de 0 e 1, ao passo que sua funcionalidade se ocupa de prever a probabilidade de uma observação estar no grupo igual a 1 ("eventos"), em relação ao grupo igual a zero ("não eventos").
+O modelo de regressão logística é utilizado quando a variável dependente é binária, categórica ordenada ou mesmo categórica desordenada (quando não há relação hierárquica entre elas). Abaixo exemplificam-se as perguntas que levam a estes três tipos de variáveis. 
+
+Table: Tipos de variáveis
+
+||||
+|---|---|---|
+|**Variável dependente binária:**| Você votou na última eleição?|0 - Não; 1 - Sim|
+|**Variável dependente categórica ordenada:**| Você concorda ou desconcorda com o presidente?|1 - Disconcordo; 2 - Neutro; 3 - Concordo|
+|**Variável dependente categórica não ordenada:**|Se as eleições fossem hoje, em que partido você votaria? |  1 - Democratas; 2 - Qualquer um; 3 - Republicanos|
+
+Fonte: Adaptado de @Torres-Reyna2014.
+
+Nota-se primeiramente que em sendo somente a variável dependente binária (0 e 1), é detectada a presença ou não de determinada característica da variável a ser estudada pelo pesquisador. Quando a variável dependente é categórica ordenada, há uma hierarquia determinada entre as variáveis resposta (neste caso entre Disconcordo, Neutro e Concordo). No terceiro exemplo, as variáveis resposta não possuem nenhuma relação de ordem entre elas (Democratas, Qualquer um, Republicanos). 
+
+A regressão logística a ser estudada neste capítulo será com a variável resposta dependente binária, portanto, tratando os grupos de interesse (variável dependente) com valores de 0 e 1. Sua funcionalidade se ocupa de prever a probabilidade de uma observação estar no grupo igual a 1 ("eventos"), em relação ao grupo igual a zero ("não eventos").
 
 Para a estimação dos coeficientes das variáveis independentes, são utilizados o valor logit ou a razão de desigualdades @Hair2009:
 
@@ -51,40 +31,42 @@ $$
 Logit_i=\left (\frac{prob_{eventos}}{1-prob_{eventos}}  \right )=e^{b_0+b_1X_1+\ldots+b_nX_n}
 $$
 
+Algumas características importantes da regressão logística: a análise é semelhante à regressão múltipla; possui testes estatísticos diretos, incorporando variáveis métricas e não-métricas, com efeitos não-lineares; é menos afetada pela não satisfação da não normalidade dos dados (pois o termo de erro da variável discreta segue a distribuição binomial) e; foi elaborada para que seja prevista a probabilidade de determinado evento ocorrer [@Hair2009].
+
+
+<!--
 Mais detalhes sobre o modelo de regressão logística podem ser verificados na seção chamada **O Modelo de Regressão Logística**, bem como em @Hosmer2000 e @Gujarati2011.
+-->
 
-## Regressão Logística Simples - Exemplo 1
+## Regressão Logística Simples
 
-Este primeiro exemplo tratará da regressão logística simples, portanto, utilizando somente uma variável independente. Os dados são originados do livro de @Hosmer2000, tratando-se de uma amostra com 100 pessoas. A variável dependente é a ocorrência ou não (1 ou 0) de doença coronária cardíaca (CHD), associando-se com a idade (AGE) dos indivíduos, criando assim um modelo de regressão logística.
+Este primeiro exemplo tratará da regressão logística simples, portanto, utilizando somente uma variável independente, neste caso numérica. Os dados são originados do livro de @Hosmer2000, tratando-se de uma amostra com 100 pessoas. A variável dependente é a ocorrência ou não (1 ou 0) de doença coronária cardíaca (CHD), associando-se com a idade (AGE) dos indivíduos, criando assim um modelo de regressão logística.
 
 
 ```r
-library(readr)
-chd <- read_delim("https://raw.githubusercontent.com/Smolski/softwarelivrer/master/avancado/cdh.csv",
-                  ";", escape_double = FALSE, trim_ws = TRUE)
+require(readr)
 ```
 
 ```
-## Parsed with column specification:
-## cols(
-##   AGE = col_integer(),
-##   AGRP = col_integer(),
-##   CHD = col_integer()
-## )
+## Carregando pacotes exigidos: readr
 ```
 
 ```r
+chd <- read_delim("https://raw.githubusercontent.com/Smolski/softwarelivrer/master/avancado/chd.csv", 
+    ";", escape_double = FALSE, col_types = cols(CHD = col_factor(levels = c())), 
+    trim_ws = TRUE)
+
 summary(chd)
 ```
 
 ```
-##       AGE             AGRP           CHD      
-##  Min.   :20.00   Min.   :1.00   Min.   :0.00  
-##  1st Qu.:34.75   1st Qu.:2.75   1st Qu.:0.00  
-##  Median :44.00   Median :4.00   Median :0.00  
-##  Mean   :44.38   Mean   :4.48   Mean   :0.43  
-##  3rd Qu.:55.00   3rd Qu.:7.00   3rd Qu.:1.00  
-##  Max.   :69.00   Max.   :8.00   Max.   :1.00
+##       AGE             AGRP      CHD   
+##  Min.   :20.00   Min.   :1.00   0:57  
+##  1st Qu.:34.75   1st Qu.:2.75   1:43  
+##  Median :44.00   Median :4.00         
+##  Mean   :44.38   Mean   :4.48         
+##  3rd Qu.:55.00   3rd Qu.:7.00         
+##  Max.   :69.00   Max.   :8.00
 ```
 
 Observa-se na figura abaixo a dispersão dos ``eventos'' da CHD com a idade (AGE).
@@ -92,21 +74,33 @@ Observa-se na figura abaixo a dispersão dos ``eventos'' da CHD com a idade (AGE
 
 
 ```r
-library(ggplot2)
-ggplot(chd, aes(x=AGE, y=CHD)) + geom_point() + 
-  stat_smooth(method="glm", method.args=list(family="binomial"), se=FALSE)
+require(ggplot2)
 ```
 
-![](05-RegLogist_files/figure-epub3/unnamed-chunk-2-1.png)<!-- -->
+```
+## Carregando pacotes exigidos: ggplot2
+```
 
-Monta-se então o modelo de regressão logística com a variável dependente CHD e a variável independente AGE. Abaixo demonstra-se a descrição da equação utilizando o comando `summary()` para o modelo m1 com a sintaxe básica:
+```r
+ggplot(chd, aes(x=AGE, y=CHD)) + geom_point() + 
+  stat_smooth(method="glm", method.args=list(family="binomial"), se=F)
+```
+
+```
+## Warning: Computation failed in `stat_smooth()`:
+## y values must be 0 <= y <= 1
+```
+
+![](05-RegLogist_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
+
+Monta-se então o modelo de regressão logística com a variável dependente CHD e a variável independente AGE. Abaixo é demonstrada a descrição da equação utilizando o comando `summary()` para o modelo m1 com a sintaxe básica:
 
 `glm(Y~modelo, family=binomial(link="logit"))` 
 
 Assim é obtida a função de ligação estimada do modelo: 
 
 $$
-\hat g(CHD) =-5,309+0,1109AGE
+\hat g(CHD) = -5,309 +0,1109AGE
 $$
 
 
@@ -141,7 +135,7 @@ summary(m1)
 ## Number of Fisher Scoring iterations: 4
 ```
 
-Se observa o intercepto com o valor de -5,309, sendo que para a análise aqui proposta da relação entre CHD e AGE não obtém-se um significado prático para este resultado. No entanto, a variável de interesse é idade, que no modelo de regressão obteve o coeficiente de 0,1109 e pelo fato de ser positivo informa que quando a idade (AGE) se eleva, elevam-se as chances de ocorrência de CHD. De igual forma, nota-se que há significância estatística a $p=0,001$ na utilização da variável AGE para o modelo, mostrando que possui importância ao modelo de regressão proposto.
+Se observa o intercepto com o valor de -5,309, sendo que para a análise aqui proposta da relação entre CHD e AGE não obtém-se um significado prático para este resultado. No entanto, a variável de interesse é idade, que no modelo de regressão obteve o coeficiente de 0,1109. Pelo fato de ser positivo informa que quando a idade (AGE) se eleva, elevam-se as chances de ocorrência de CHD. De igual forma, nota-se que há significância estatística a $p=0,001$ na utilização da variável AGE para o modelo, mostrando que possui importância ao modelo de regressão proposto.
 
 
 
@@ -155,44 +149,6 @@ Uma maneira prática de se obter a razão de chances no RStudio é utilizando o 
 
 ```r
 require(mfx)
-```
-
-```
-## Carregando pacotes exigidos: mfx
-```
-
-```
-## Carregando pacotes exigidos: sandwich
-```
-
-```
-## Carregando pacotes exigidos: lmtest
-```
-
-```
-## Carregando pacotes exigidos: zoo
-```
-
-```
-## 
-## Attaching package: 'zoo'
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     as.Date, as.Date.numeric
-```
-
-```
-## Carregando pacotes exigidos: MASS
-```
-
-```
-## Carregando pacotes exigidos: betareg
-```
-
-```r
 logitor(CHD~AGE,data = chd)
 ```
 
@@ -218,10 +174,6 @@ De forma prática é possível determinar os intervalos de confiança com o coma
 
 ```r
 exp(cbind(OR=coef(m1), confint(m1)))
-```
-
-```
-## Waiting for profiling to be done...
 ```
 
 ```
@@ -262,7 +214,7 @@ media
 ### Matriz de Confusão
 
 
-Uma maneira prática de qualificar o ajuste do modelo de regressão logística é pela projeção do modelo na tabela de classificação (ou Matriz de Confusão). Para isto, precisa-se criar uma tabela com o resultado da classificação cruzada da variável resposta, de acordo com uma variável dicotômica em que os valores se derivam das probabilidades logísticas estimadas na regressão [@Hosmer2000]. No entanto, é preciso definir uma regra de predição, que dirá se houve acerto ou não da probabilidade estimada com os valores reais, pois as probabilidades variam de 0 a 1 enquanto os valores reais binários possuem valores fixos de 0 ``ou'' 1.
+Uma maneira prática de qualificar o ajuste do modelo de regressão logística é pela projeção do modelo na tabela de classificação (ou Matriz de Confusão). Para isto, precisa-se criar uma tabela com o resultado da classificação cruzada da variável resposta, de acordo com uma variável dicotômica em que os valores se derivam das probabilidades logísticas estimadas na regressão [@Hosmer2000]. No entanto, é preciso definir uma regra de predição, que dirá se houve acerto ou não da probabilidade estimada com os valores reais, pois as probabilidades variam de 0 a 1 enquanto os valores reais binários possuem valores fixos de 0 "ou" 1.
 
 É intuitivo supor que se as probabilidades aproximam-se de 1 o índivíduo estimado pode ser classificado como $\hat Y_i=1$, bem como de forma contrária, se o modelo estimar probabilidades perto de 0, classificá-la como $\hat Y_i=0$. Mas qual nível utilizar? Para resolver este problema, é preciso em primeiro lugar determinar um ponto de corte para classificar a estimação como 0 ou 1. Usualmente na literatura se utiliza o valor de 0,5 mas dependendo do estudo proposto pode não ser limitado a este nível [@Hosmer2000]. 
 
@@ -320,8 +272,12 @@ require(caret)
 ```
 
 ```r
-pdata <- predict(m1, newdata = chd, type = "response")
-confusionMatrix(data = as.numeric(pdata>0.5), reference = chd$CHD)
+  pdata <- as.factor(
+    ifelse(
+      predict(m1, newdata = chd, type = "response")
+      >0.5,"1","0"))
+
+confusionMatrix(pdata, chd$CHD, positive="1")
 ```
 
 ```
@@ -340,18 +296,30 @@ confusionMatrix(data = as.numeric(pdata>0.5), reference = chd$CHD)
 ##                   Kappa : 0.4666          
 ##  Mcnemar's Test P-Value : 0.8445193       
 ##                                           
-##             Sensitivity : 0.7895          
-##             Specificity : 0.6744          
-##          Pos Pred Value : 0.7627          
-##          Neg Pred Value : 0.7073          
-##              Prevalence : 0.5700          
-##          Detection Rate : 0.4500          
-##    Detection Prevalence : 0.5900          
+##             Sensitivity : 0.6744          
+##             Specificity : 0.7895          
+##          Pos Pred Value : 0.7073          
+##          Neg Pred Value : 0.7627          
+##              Prevalence : 0.4300          
+##          Detection Rate : 0.2900          
+##    Detection Prevalence : 0.4100          
 ##       Balanced Accuracy : 0.7319          
 ##                                           
-##        'Positive' Class : 0               
+##        'Positive' Class : 1               
 ## 
 ```
+
+```r
+#confusionMatrix(
+#  factor(pred, levels = 1:148),
+#  factor(testing$Final, levels = 1:148)
+#)
+#levels(test) <- c("Cancer", "Normal")
+#confusionMatrix(final, test)
+```
+
+
+
 
 ### Curva ROC
 
@@ -359,7 +327,11 @@ A Curva ROC (Receiver Operating Characteristic Curve) associada ao modelo logís
 
 
 ```r
-library(pROC)
+require(pROC)
+```
+
+```
+## Carregando pacotes exigidos: pROC
 ```
 
 ```
@@ -385,14 +357,14 @@ roc1=plot.roc(chd$CHD,fitted(m1))
 
 
 
-- 1º Passo:
+- Passo 1:
 
 
-`library(pROC)
+`require(pROC)
 roc1=plot.roc(chd$CHD,fitted(m1))`
 
 
-- 2º Passo:
+- Passo 2:
 
 
 ```r
@@ -408,14 +380,7 @@ grid.col=c("green","red"),max.auc.polygon=TRUE,auc.polygon.col="lightgreen",prin
 
 
 ```r
-library(ResourceSelection)
-```
-
-```
-## ResourceSelection 0.3-2 	 2017-02-28
-```
-
-```r
+require(ResourceSelection)
 hl=hoslem.test(chd$CHD,fitted(m1),g=10)
 hl
 ```
@@ -425,7 +390,7 @@ hl
 ## 	Hosmer and Lemeshow goodness of fit (GOF) test
 ## 
 ## data:  chd$CHD, fitted(m1)
-## X-squared = 2.2243, df = 8, p-value = 0.9734
+## X-squared = 100, df = 8, p-value < 2.2e-16
 ```
 
 ### Pseudo R^{2}
@@ -433,7 +398,14 @@ hl
 
 
 ```r
-library(modEvA)
+require(modEvA)
+```
+
+```
+## Carregando pacotes exigidos: modEvA
+```
+
+```r
 RsqGLM(m1)
 ```
 
@@ -456,7 +428,7 @@ RsqGLM(m1)
 
 
 
-## Regressão Logística Múltipla - Exemplo 2
+## Regressão Logística Múltipla
 
 
 O exemplo abaixo abordado foi extraído de @Torres-Reyna2014, onde observa-se o banco de dados criado chamado `mydata`, possuindo as variáveis`country`,`year`,`y`,`y_bin`,`x1`,`x2`,`x3` e`opinion`. A variável dependente é `y_bin`, da qual foi categorizada entre 0 e 1 conforme a ocorrência de valores negativos em`y`. As variáveis independentes do modelo serão`x1`,`x2`e`x3`.
@@ -465,7 +437,14 @@ O exemplo abaixo abordado foi extraído de @Torres-Reyna2014, onde observa-se o 
 
 
 ```r
-library(foreign)
+require(foreign)
+```
+
+```
+## Carregando pacotes exigidos: foreign
+```
+
+```r
 mydata <- read.dta("http://dss.princeton.edu/training/Panel101.dta") 
 summary(mydata)
 ```
@@ -536,26 +515,6 @@ summary(logit)
 
 ```r
 require(stargazer)
-```
-
-```
-## Carregando pacotes exigidos: stargazer
-```
-
-```
-## 
-## Please cite as:
-```
-
-```
-##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
-```
-
-```
-##  R package version 5.2.1. https://CRAN.R-project.org/package=stargazer
-```
-
-```r
 stargazer(logit, title="Resultados",type = "text")
 ```
 
@@ -636,10 +595,6 @@ O **intervalo de confiança** do modelo pode ser exposto utilizando o comando `c
 
 ```r
 exp(cbind(OR=coef(logit), confint(logit)))
-```
-
-```
-## Waiting for profiling to be done...
 ```
 
 ```
@@ -736,7 +691,7 @@ step(logit, direction = 'both')
 ```
 
 
-## Regressão Logística Múltipla - exemplo 3
+## Regressão Logística Múltipla com variável categórica
 
 
 Abaixo segue um exemplo com uma variável dependente categórica:
@@ -750,21 +705,9 @@ Abaixo segue um exemplo com uma variável dependente categórica:
 
 
 ```r
-library(readr)
+require(readr)
 binary <- read_csv("http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv")
-```
 
-```
-## Parsed with column specification:
-## cols(
-##   admit = col_integer(),
-##   gre = col_integer(),
-##   gpa = col_double(),
-##   rank = col_integer()
-## )
-```
-
-```r
 binary$rank <- factor(binary$rank)
 mylogit <- glm(admit ~ gre + gpa + rank, data = binary, family = binomial(link="logit"))
 ```
@@ -773,10 +716,6 @@ mylogit <- glm(admit ~ gre + gpa + rank, data = binary, family = binomial(link="
 
 ```r
 exp(cbind(OR = coef(mylogit), confint(mylogit)))
-```
-
-```
-## Waiting for profiling to be done...
 ```
 
 ```

@@ -116,12 +116,12 @@ head(arvore2)
 ## # A tibble: 6 x 4
 ##   Nomecientifico            diametro_cm altura_m especie
 ##   <chr>                           <dbl>    <dbl>   <dbl>
-## 1 Sebastiania commersoniana        52.2     15.2      0.
-## 2 Sebastiania commersoniana        95.0     17.3      0.
-## 3 Sebastiania commersoniana        67.3     16.3      0.
-## 4 Sebastiania commersoniana        46.3     14.0      0.
-## 5 Sebastiania commersoniana        64.1     15.0      0.
-## 6 Sebastiania commersoniana       122.      22.0      0.
+## 1 Sebastiania commersoniana        52.2     15.2       0
+## 2 Sebastiania commersoniana        95       17.3       0
+## 3 Sebastiania commersoniana        67.3     16.3       0
+## 4 Sebastiania commersoniana        46.3     14         0
+## 5 Sebastiania commersoniana        64.1     15         0
+## 6 Sebastiania commersoniana       122       22         0
 ```
 
 
