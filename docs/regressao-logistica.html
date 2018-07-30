@@ -214,6 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="regressao-logistica" class="section level1">
 <h1><span class="header-section-number">Capítulo 4</span> Regressão Logística</h1>
+<p>A técnica de regressão logística é uma ferramenta estatística utilizada nas análises preditivas. O interesse em mensurar a probabilidade de um evento ocorrer é extremamente relevante em diversas áreas, como por exemplo em Marketing Propaganda e Internet, na Aplicação da Lei e Detecção de Fraude, na Assistência Médica, com relação aos Riscos Financeiros e Seguros ou mesmo estudando a Força de Trabalho. É imprescindível elevar o conhecimento sobre quais clientes possuem maior propensão à responder o contato de marketing, quais transações serão fraudulentas, quais e-mails são <em>spam</em>, quem efetivamente fará o pagamento de uma obrigação ou mesmo qual criminoso reincidirá (para mais exemplos sobre análise preditiva, ver <span class="citation">Siegel (<a href="#ref-Siegel2017">2017</a>)</span>).</p>
 <p>O modelo de regressão logística é utilizado quando a variável dependente é binária, categórica ordenada ou mesmo categórica desordenada (quando não há relação hierárquica entre elas). Abaixo exemplificam-se as perguntas que levam a estes três tipos de variáveis.</p>
 <table>
 <caption>Tipos de variáveis</caption>
@@ -251,7 +252,7 @@ Logit_i=ln\left (\frac{prob_{eventos}}{1-prob_{eventos}}  \right )=b_0+b_1X_1+\l
 <p><span class="math display">\[
 Logit_i=\left (\frac{prob_{eventos}}{1-prob_{eventos}}  \right )=e^{b_0+b_1X_1+\ldots+b_nX_n}
 \]</span></p>
-<p>Algumas características importantes da regressão logística: a análise é semelhante à regressão linear simples/múltipla (possui a relação entre a variável dependente e a(s) variável(is) independente(s)); possui testes estatísticos diretos, incorporando variáveis métricas e não-métricas, com efeitos não-lineares; é menos afetada pela não satisfação de normalidade dos dados (pois o termo de erro da variável discreta segue a distribuição binomial) e; foi elaborada para que seja prevista a probabilidade de determinado evento ocorrer <span class="citation">(Hair <em>et al.</em>, <a href="#ref-Hair2009">2009</a>)</span>. ESta técnica é utilizada em uma extensa gama de propósitos, como exemplos a detecção de fraudes, determinação de clientes de interesse na área de negócios e até mesmo nos estudos em bioinformática.</p>
+<p>Algumas características importantes da regressão logística: a análise é semelhante à regressão linear simples/múltipla (possui a relação entre a variável dependente e a(s) variável(is) independente(s)); possui testes estatísticos diretos, incorporando variáveis métricas e não-métricas, com efeitos não-lineares; é menos afetada pela não satisfação de normalidade dos dados (pois o termo de erro da variável discreta segue a distribuição binomial) e; foi elaborada para que seja prevista a probabilidade de determinado evento ocorrer <span class="citation">(Hair <em>et al.</em>, <a href="#ref-Hair2009">2009</a>)</span>.</p>
 <!--
 Mais detalhes sobre o modelo de regressão logística podem ser verificados na seção chamada **O Modelo de Regressão Logística**, bem como em @Hosmer2000 e @Gujarati2011.
 -->
@@ -664,6 +665,9 @@ Fonte: Adaptado de <span class="citation">Fawcett (<a href="#ref-Fawcett2006">20
 </div>
 <h3>Referências</h3>
 <div id="refs" class="references">
+<div id="ref-Siegel2017">
+<p>SIEGEL, E. <strong>Análise Preditiva: O poder de prever quem vai clicar, comprar, mentir ou morrer</strong>. Traducao. Rio de Janeiro: Alta Books, 2017. p. 320</p>
+</div>
 <div id="ref-Torres-Reyna2014">
 <p>TORRES-REYNA, O. <strong>Logit, Probit and Multinomial Logit models in R</strong>, 2014. Disponível em: &lt;<a href="http://dss.princeton.edu/training/LogitR101.pdf" class="uri">http://dss.princeton.edu/training/LogitR101.pdf</a>&gt;. Acesso em: 2 out. 2017</p>
 </div>

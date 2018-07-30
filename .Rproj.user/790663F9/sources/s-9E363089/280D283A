@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "2347580336",
     "id" : "280D283A",
-    "lastKnownWriteTime" : 1525012434,
-    "last_content_update" : 1525012434,
+    "lastKnownWriteTime" : 1532919044,
+    "last_content_update" : 1532919044359,
     "path" : "D:/Github/livroavancado/book.bib",
     "project_path" : "book.bib",
     "properties" : {
-        "cursorPosition" : "47,6",
-        "scrollLine" : "39"
+        "cursorPosition" : "0,16",
+        "scrollLine" : "0"
     },
     "relative_order" : 10,
     "source_on_save" : false,
