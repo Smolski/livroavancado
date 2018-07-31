@@ -1,0 +1,4 @@
+"0","require(readr)"
+"0","binary <- read_csv(""http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv"")"
+"0","binary$rank <- factor(binary$rank)"
+"0","mylogit <- glm(admit ~ gre + gpa + rank, data = binary, family = binomial(link=""logit""))"

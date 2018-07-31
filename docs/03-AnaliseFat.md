@@ -167,7 +167,7 @@ require(corrplot)
 corrplot(matcor, method="circle")
 ```
 
-![](03-AnaliseFat_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
+<img src="03-AnaliseFat_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 Na figura acima, as correlações estão em cor azul porque são positivas, com tons mais fortes para as correlações mais altas. 
 <!--
@@ -351,7 +351,7 @@ Abaixo vamos apresentar o `scree-plot`, em formato do gráfico de barras para o 
 screeplot(fit)
 ```
 
-![](03-AnaliseFat_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
+<img src="03-AnaliseFat_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 
 Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma ligeira suavização das alturas nas demais colunas.
@@ -363,7 +363,7 @@ Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma lige
 plot(fit,type="lines")
 ```
 
-![](03-AnaliseFat_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
+<img src="03-AnaliseFat_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 
 ### Análise de Componentes Principais
@@ -521,7 +521,7 @@ os fatores.
 biplot(PCAdentevarimax)
 ```
 
-![](03-AnaliseFat_files/figure-epub3/unnamed-chunk-13-1.png)<!-- -->
+<img src="03-AnaliseFat_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 
 Os valores dos fatores obtidos para os 30 entrevistados encontram-se na matriz de coeficiente de escore do componente mostrada abaixo. Esta ajuda a entender como cada variável se relaciona aos escores dos componentes calculados para cada participante. Para melhor compreensão da análise dos escores dos entrevistados é importante especificar e comentar o significado de cada fator:

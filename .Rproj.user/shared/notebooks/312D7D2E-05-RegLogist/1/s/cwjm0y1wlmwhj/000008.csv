@@ -1,0 +1,12 @@
+"0","#Filtrando a idade dos indivíduos"
+"0","IDADE<-chd[,1]  "
+"0","#Criando campo de predição para cada idade dos indivíduos "
+"0","IDADE$PRED=predict(m1, newdata=IDADE, type=""response"")"
+"0","#Plotando a probabilidade predita pelo modelo"
+"0","require(ggplot2)"
+"0","ggplot(chd, aes(x=AGE, y=as.numeric(CHD))) + "
+"0","  geom_point()+"
+"0","ggplot(IDADE, aes(x=AGE, y=PRED)) + "
+"0","  geom_point()"
+"2","Error: Don't know how to add ggplot(IDADE, aes(x = AGE, y = PRED)) to a plot
+"

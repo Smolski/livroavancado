@@ -9,9 +9,11 @@ if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
 }
 ```
 
-A técnica de regressão logística é uma ferramenta estatística utilizada nas análises preditivas. O interesse em mensurar a probabilidade de um evento ocorrer é extremamente relevante em diversas áreas, como por exemplo em Marketing Propaganda e Internet, na Aplicação da Lei e Detecção de Fraude, na Assistência Médica, com relação aos Riscos Financeiros e Seguros ou mesmo estudando a Força de Trabalho. É imprescindível elevar o conhecimento sobre quais clientes possuem maior propensão à responder o contato de marketing, quais transações serão fraudulentas, quais e-mails são *spam*, quem efetivamente fará o pagamento de uma obrigação ou mesmo qual criminoso reincidirá (para mais exemplos sobre análise preditiva, ver @Siegel2017).
+A técnica de regressão logística é uma ferramenta estatística utilizada nas análises preditivas. O interesse em mensurar a probabilidade de um evento ocorrer é extremamente relevante em diversas áreas, como por exemplo em Marketing, Propaganda e Internet, na Aplicação da Lei e Detecção de Fraude, na Assistência Médica, com relação aos Riscos Financeiros e Seguros ou mesmo estudando a Força de Trabalho. É imprescindível elevar o conhecimento sobre quais clientes possuem maior propensão à responder o contato de marketing, quais transações serão fraudulentas, quais e-mails são *spam*, quem efetivamente fará o pagamento de uma obrigação ou mesmo qual criminoso reincidirá ^[Para mais exemplos como estes sobre análises preditivas, ver @Siegel2017.].
 
-O modelo de regressão logística é utilizado quando a variável dependente é binária, categórica ordenada ou mesmo categórica desordenada (quando não há relação hierárquica entre elas). Abaixo exemplificam-se as perguntas que levam a estes três tipos de variáveis. 
+## O modelo
+
+O modelo de regressão logística é utilizado quando a variável dependente é binária, categórica ordenada ou mesmo categórica desordenada (quando não há relação hierárquica entre elas). Abaixo exemplificam-se algumas perguntas que podem levar a estes três tipos de variáveis. 
 
 Table: Tipos de variáveis
 
@@ -41,6 +43,9 @@ $$
 
 Algumas características importantes da regressão logística: a análise é semelhante à regressão linear simples/múltipla (possui a relação entre a variável dependente e a(s) variável(is) independente(s)); possui testes estatísticos diretos, incorporando variáveis métricas e não-métricas, com efeitos não-lineares; é menos afetada pela não satisfação de normalidade dos dados (pois o termo de erro da variável discreta segue a distribuição binomial) e; foi elaborada para que seja prevista a probabilidade de determinado evento ocorrer [@Hair2009]. 
 
+Para otimizar o tempo do estudante, é recomendada a instalação prévia dos pacotes no RStudio a serem utilizados neste capítulo. Segue abaixo o comando a ser efetuado no console do RStudio:
+
+`install.packages(c("readr","mfx","caret","pRoc","ResourceSelection","modEvA","foreign","stargazer"))`
 
 <!--
 Mais detalhes sobre o modelo de regressão logística podem ser verificados na seção chamada **O Modelo de Regressão Logística**, bem como em @Hosmer2000 e @Gujarati2011.
@@ -52,7 +57,7 @@ Este primeiro exemplo tratará da regressão logística simples, portanto, utili
 
 ```{r }
 require(readr)
-chd <- read_delim("https://raw.githubusercontent.com/Smolski/softwarelivrer/master/avancado/chd.csv", 
+chd <- read_delim("https://goo.gl/uDAAHv", 
     ";", escape_double = FALSE, col_types = cols(CHD = col_factor(levels = c())), 
     trim_ws = TRUE)
 
@@ -60,13 +65,15 @@ summary(chd)
 
 ```
 
-Observa-se na figura abaixo a dispersão dos ``eventos'' da CHD com a idade (AGE).
+Observa-se na figura abaixo a dispersão dos "eventos" e dos "nao-eventos" da CHD relacionando-se com a variável idade (AGE).
 
 
 ```{r}
 require(ggplot2)
-ggplot(chd, aes(x=AGE, y=CHD)) + geom_point() + 
-  stat_smooth(method="glm", method.args=list(family="binomial"), se=F)
+
+ggplot(chd, aes(x=AGE, y=CHD)) + 
+  geom_point() + 
+  stat_smooth(method="glm", method.args=list(family="binomial"), se=FALSE)
 ```
 
 Monta-se então o modelo de regressão logística com a variável dependente CHD e a variável independente AGE. Abaixo é demonstrada a descrição da equação utilizando o comando `summary()` para o modelo m1 com a sintaxe básica:
@@ -86,6 +93,25 @@ summary(m1)
 ```
 
 Se observa o intercepto com o valor de -5,309, sendo que para a análise aqui proposta da relação entre CHD e AGE não obtém-se um significado prático para este resultado. No entanto, a variável de interesse é idade, que no modelo de regressão obteve o coeficiente de 0,1109. Pelo fato de ser positivo informa que quando a idade (AGE) se eleva, elevam-se as chances de ocorrência de CHD. De igual forma, nota-se que há significância estatística a $p=0,001$ na utilização da variável AGE para o modelo, mostrando que possui importância ao modelo de regressão proposto.
+
+Por fim, o modelo é utilizado para construção da predição de todos os valores das idades de todos os indivíduos desta amostra. Para isto, será criada um novo objeto contendo somente a variável dependente do modelo (AGE) e em sequida, é criada nova coluna constando os valores preditos. Assim, pode ser plotado um gráfico completo com todas as probabilidades desta base de dados:
+
+
+```{r, message=FALSE, warning=FALSE}
+# Filtrando a idade dos indivíduos
+IDADE<-chd[,1]  
+
+# Criando campo de predição para cada idade dos indivíduos 
+IDADE$PRED=predict(m1, newdata=IDADE, type="response")
+
+# Plotando a probabilidade predita pelo modelo
+require(ggplot2)
+ggplot(IDADE, aes(x=AGE, y=PRED)) + 
+  geom_point()
+
+```
+
+
 
 
 
@@ -137,7 +163,7 @@ Uma maneira prática de qualificar o ajuste do modelo de regressão logística �
 
 É intuitivo supor que se as probabilidades aproximam-se de 1 o índivíduo estimado pode ser classificado como $\hat Y_i=1$, bem como de forma contrária, se o modelo estimar probabilidades perto de 0, classificá-la como $\hat Y_i=0$. Mas qual nível utilizar? Para resolver este problema, é preciso em primeiro lugar determinar um ponto de corte para classificar a estimação como 0 ou 1. Usualmente na literatura se utiliza o valor de 0,5 mas dependendo do estudo proposto pode não ser limitado a este nível [@Hosmer2000]. 
 
-Após determinado o ponto de corte, é importante avaliar o poder de discriminação do modelo, pelo seu desempenho portanto em classificar os ``eventos'' dos ``não eventos''. Cria-se a Matriz de Confusão (vide Tabela xxx) com as observações de Verdadeiro Positivo (VP), Falso Positivo (FP), Falso Negativo (FN) e Verdadeiro Negativo (VN)  e em seguida determinam-se alguns parâmetros numéricos, a serem descritos abaixo:
+Após determinado o ponto de corte, é importante avaliar o poder de discriminação do modelo, pelo seu desempenho portanto em classificar os "eventos" dos "não eventos". Cria-se a Matriz de Confusão (vide Tabela xxx) com as observações de Verdadeiro Positivo (VP), Falso Positivo (FP), Falso Negativo (FN) e Verdadeiro Negativo (VN)  e em seguida determinam-se alguns parâmetros numéricos, a serem descritos abaixo:
 
 **Precisão**: representa a proporção das predições corretas do modelo sobre o total:
 
@@ -172,6 +198,7 @@ VPN=\frac{VN}{VN+FN}
 $$
 
 ![Matriz de Confusão](matriz.png)
+
 Fonte: Adaptado de @Fawcett2006.
 
 
@@ -186,13 +213,6 @@ require(caret)
 
 confusionMatrix(pdata, chd$CHD, positive="1")
 
-#confusionMatrix(
-#  factor(pred, levels = 1:148),
-#  factor(testing$Final, levels = 1:148)
-#)
-#levels(test) <- c("Cancer", "Normal")
-#confusionMatrix(final, test)
-
 
 ```
 
@@ -203,12 +223,11 @@ confusionMatrix(pdata, chd$CHD, positive="1")
 
 A Curva ROC (Receiver Operating Characteristic Curve) associada ao modelo logístico mensura a capacidade de predição do modelo proposto, através das predições da sensibilidade e da especificidade.
 
-```{r}
+```{r, include=FALSE}
 require(pROC)
 roc1=plot.roc(chd$CHD,fitted(m1))
 
 ```
-
 
 
 - Passo 1:
@@ -221,8 +240,15 @@ roc1=plot.roc(chd$CHD,fitted(m1))`
 - Passo 2:
 
 ```{r}
-plot(roc1,print.auc=TRUE, auc.polygon=TRUE,grud=c(0.1,0.2),
-grid.col=c("green","red"),max.auc.polygon=TRUE,auc.polygon.col="lightgreen",print.thres=TRUE)
+
+plot(roc1,
+     print.auc=TRUE, 
+     auc.polygon=TRUE, 
+     grud=c(0.1,0.2),
+     grid.col=c("green","red"), 
+     max.auc.polygon=TRUE, 
+     auc.polygon.col="lightgreen", 
+     print.thres=TRUE)
 ```
 
 

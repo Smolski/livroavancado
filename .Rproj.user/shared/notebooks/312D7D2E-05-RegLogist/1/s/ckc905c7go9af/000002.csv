@@ -1,5 +1,5 @@
 "0","require(readr)"
-"0","chd <- read_delim(""https://raw.githubusercontent.com/Smolski/softwarelivrer/master/avancado/chd.csv"", "
+"0","chd <- read_delim(""https://goo.gl/uDAAHv"", "
 "0","    "";"", escape_double = FALSE, col_types = cols(CHD = col_factor(levels = c())), "
 "0","    trim_ws = TRUE)"
 "0","summary(chd)"

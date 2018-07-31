@@ -210,7 +210,7 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 plot(diametro_cm,altura_m)
 ```
 
-![](04-RegMult_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
+<img src="04-RegMult_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 ```r
 # Gera o gráfico sem pontos
@@ -223,7 +223,7 @@ abline(coef(modelom)[1], coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3], coef(modelom)[2], col='red')
 ```
 
-![](04-RegMult_files/figure-epub3/unnamed-chunk-4-2.png)<!-- -->
+<img src="04-RegMult_files/figure-html/unnamed-chunk-4-2.png" width="672" />
 
 
 

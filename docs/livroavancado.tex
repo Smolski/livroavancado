@@ -133,7 +133,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-07-29}
+    \date{2018-07-31}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -1999,19 +1999,23 @@ Passo 8) Seja F\textsubscript{out} o valor da distribuição F com 1 e
 A técnica de regressão logística é uma ferramenta estatística utilizada
 nas análises preditivas. O interesse em mensurar a probabilidade de um
 evento ocorrer é extremamente relevante em diversas áreas, como por
-exemplo em Marketing Propaganda e Internet, na Aplicação da Lei e
+exemplo em Marketing, Propaganda e Internet, na Aplicação da Lei e
 Detecção de Fraude, na Assistência Médica, com relação aos Riscos
 Financeiros e Seguros ou mesmo estudando a Força de Trabalho. É
 imprescindível elevar o conhecimento sobre quais clientes possuem maior
 propensão à responder o contato de marketing, quais transações serão
 fraudulentas, quais e-mails são \emph{spam}, quem efetivamente fará o
-pagamento de uma obrigação ou mesmo qual criminoso reincidirá (para mais
-exemplos sobre análise preditiva, ver \textcite{Siegel2017}).
+pagamento de uma obrigação ou mesmo qual criminoso reincidirá \footnote{Para
+  mais exemplos como estes sobre análises preditivas, ver
+  \textcite{Siegel2017}.}.
+
+\hypertarget{o-modelo}{%
+\section{O modelo}\label{o-modelo}}
 
 O modelo de regressão logística é utilizado quando a variável dependente
 é binária, categórica ordenada ou mesmo categórica desordenada (quando
-não há relação hierárquica entre elas). Abaixo exemplificam-se as
-perguntas que levam a estes três tipos de variáveis.
+não há relação hierárquica entre elas). Abaixo exemplificam-se algumas
+perguntas que podem levar a estes três tipos de variáveis.
 
 \begin{longtable}[]{@{}lll@{}}
 \caption{Tipos de variáveis}\tabularnewline
@@ -2084,6 +2088,12 @@ normalidade dos dados (pois o termo de erro da variável discreta segue a
 distribuição binomial) e; foi elaborada para que seja prevista a
 probabilidade de determinado evento ocorrer \autocite{Hair2009}.
 
+Para otimizar o tempo do estudante, é recomendada a instalação prévia
+dos pacotes no RStudio a serem utilizados neste capítulo. Segue abaixo o
+comando a ser efetuado no console do RStudio:
+
+\texttt{install.packages(c("readr","mfx","caret","pRoc","ResourceSelection","modEvA","foreign","stargazer"))}
+
 \hypertarget{regressao-logistica-simples}{%
 \section{Regressão Logística
 Simples}\label{regressao-logistica-simples}}
@@ -2107,7 +2117,7 @@ uma amostra com 100 pessoas. A variável dependente é a ocorrência ou não
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{chd <-}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/Smolski/softwarelivrer/master/avancado/chd.csv"}\NormalTok{, }
+\NormalTok{chd <-}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\StringTok{"https://goo.gl/uDAAHv"}\NormalTok{, }
     \StringTok{";"}\NormalTok{, }\DataTypeTok{escape_double =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{col_types =} \KeywordTok{cols}\NormalTok{(}\DataTypeTok{CHD =} \KeywordTok{col_factor}\NormalTok{(}\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{())), }
     \DataTypeTok{trim_ws =} \OtherTok{TRUE}\NormalTok{)}
 
@@ -2125,8 +2135,8 @@ uma amostra com 100 pessoas. A variável dependente é a ocorrência ou não
 ##  Max.   :69.00   Max.   :8.00
 \end{verbatim}
 
-Observa-se na figura abaixo a dispersão dos ``eventos'' da CHD com a
-idade (AGE).
+Observa-se na figura abaixo a dispersão dos ``eventos'' e dos
+``nao-eventos'' da CHD relacionando-se com a variável idade (AGE).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2140,8 +2150,9 @@ idade (AGE).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(chd, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{AGE, }\DataTypeTok{y=}\NormalTok{CHD)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{stat_smooth}\NormalTok{(}\DataTypeTok{method=}\StringTok{"glm"}\NormalTok{, }\DataTypeTok{method.args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{family=}\StringTok{"binomial"}\NormalTok{), }\DataTypeTok{se=}\NormalTok{F)}
+\KeywordTok{ggplot}\NormalTok{(chd, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{AGE, }\DataTypeTok{y=}\NormalTok{CHD)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{stat_smooth}\NormalTok{(}\DataTypeTok{method=}\StringTok{"glm"}\NormalTok{, }\DataTypeTok{method.args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{family=}\StringTok{"binomial"}\NormalTok{), }\DataTypeTok{se=}\OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2206,6 +2217,30 @@ elevam-se as chances de ocorrência de CHD. De igual forma, nota-se que
 há significância estatística a \(p=0,001\) na utilização da variável AGE
 para o modelo, mostrando que possui importância ao modelo de regressão
 proposto.
+
+Por fim, o modelo é utilizado para construção da predição de todos os
+valores das idades de todos os indivíduos desta amostra. Para isto, será
+criada um novo objeto contendo somente a variável dependente do modelo
+(AGE) e em sequida, é criada nova coluna constando os valores preditos.
+Assim, pode ser plotado um gráfico completo com todas as probabilidades
+desta base de dados:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Filtrando a idade dos indivíduos}
+\NormalTok{IDADE<-chd[,}\DecValTok{1}\NormalTok{]  }
+
+\CommentTok{# Criando campo de predição para cada idade dos indivíduos }
+\NormalTok{IDADE}\OperatorTok{$}\NormalTok{PRED=}\KeywordTok{predict}\NormalTok{(m1, }\DataTypeTok{newdata=}\NormalTok{IDADE, }\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+
+\CommentTok{# Plotando a probabilidade predita pelo modelo}
+\KeywordTok{require}\NormalTok{(ggplot2)}
+\KeywordTok{ggplot}\NormalTok{(IDADE, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{AGE, }\DataTypeTok{y=}\NormalTok{PRED)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-RegLogist_files/figure-latex/unnamed-chunk-5-1.pdf}
 
 \hypertarget{estimando-a-razao-de-chances}{%
 \subsection{Estimando a Razão de
@@ -2338,11 +2373,11 @@ este nível \autocite{Hosmer2000}.
 
 Após determinado o ponto de corte, é importante avaliar o poder de
 discriminação do modelo, pelo seu desempenho portanto em classificar os
-\texttt{eventos\textquotesingle{}\textquotesingle{}\ dos}não eventos''.
-Cria-se a Matriz de Confusão (vide Tabela xxx) com as observações de
-Verdadeiro Positivo (VP), Falso Positivo (FP), Falso Negativo (FN) e
-Verdadeiro Negativo (VN) e em seguida determinam-se alguns parâmetros
-numéricos, a serem descritos abaixo:
+``eventos'' dos ``não eventos''. Cria-se a Matriz de Confusão (vide
+Tabela xxx) com as observações de Verdadeiro Positivo (VP), Falso
+Positivo (FP), Falso Negativo (FN) e Verdadeiro Negativo (VN) e em
+seguida determinam-se alguns parâmetros numéricos, a serem descritos
+abaixo:
 
 \textbf{Precisão}: representa a proporção das predições corretas do
 modelo sobre o total:
@@ -2388,7 +2423,13 @@ como ``não evento'' \(\hat Y=0\):
 VPN=\frac{VN}{VN+FN}
 \]
 
-\includegraphics{matriz.png} Fonte: Adaptado de \textcite{Fawcett2006}.
+\begin{figure}
+\centering
+\includegraphics{matriz.png}
+\caption{Matriz de Confusão}
+\end{figure}
+
+Fonte: Adaptado de \textcite{Fawcett2006}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2444,56 +2485,12 @@ VPN=\frac{VN}{VN+FN}
 ## 
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#confusionMatrix(}
-\CommentTok{#  factor(pred, levels = 1:148),}
-\CommentTok{#  factor(testing$Final, levels = 1:148)}
-\CommentTok{#)}
-\CommentTok{#levels(test) <- c("Cancer", "Normal")}
-\CommentTok{#confusionMatrix(final, test)}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{curva-roc}{%
 \subsection{Curva ROC}\label{curva-roc}}
 
 A Curva ROC (Receiver Operating Characteristic Curve) associada ao
 modelo logístico mensura a capacidade de predição do modelo proposto,
 através das predições da sensibilidade e da especificidade.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{require}\NormalTok{(pROC)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Carregando pacotes exigidos: pROC
-\end{verbatim}
-
-\begin{verbatim}
-## Type 'citation("pROC")' for a citation.
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Attaching package: 'pROC'
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:stats':
-## 
-##     cov, smooth, var
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{roc1=}\KeywordTok{plot.roc}\NormalTok{(chd}\OperatorTok{$}\NormalTok{CHD,}\KeywordTok{fitted}\NormalTok{(m1))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{05-RegLogist_files/figure-latex/unnamed-chunk-9-1.pdf}
 
 \begin{itemize}
 \tightlist
@@ -2511,12 +2508,18 @@ através das predições da sensibilidade e da especificidade.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(roc1,}\DataTypeTok{print.auc=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{auc.polygon=}\OtherTok{TRUE}\NormalTok{,}\DataTypeTok{grud=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{,}\FloatTok{0.2}\NormalTok{),}
-\DataTypeTok{grid.col=}\KeywordTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{),}\DataTypeTok{max.auc.polygon=}\OtherTok{TRUE}\NormalTok{,}\DataTypeTok{auc.polygon.col=}\StringTok{"lightgreen"}\NormalTok{,}\DataTypeTok{print.thres=}\OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(roc1,}
+     \DataTypeTok{print.auc=}\OtherTok{TRUE}\NormalTok{, }
+     \DataTypeTok{auc.polygon=}\OtherTok{TRUE}\NormalTok{, }
+     \DataTypeTok{grud=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{,}\FloatTok{0.2}\NormalTok{),}
+     \DataTypeTok{grid.col=}\KeywordTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{), }
+     \DataTypeTok{max.auc.polygon=}\OtherTok{TRUE}\NormalTok{, }
+     \DataTypeTok{auc.polygon.col=}\StringTok{"lightgreen"}\NormalTok{, }
+     \DataTypeTok{print.thres=}\OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{05-RegLogist_files/figure-latex/unnamed-chunk-10-1.pdf}
+\includegraphics{05-RegLogist_files/figure-latex/unnamed-chunk-11-1.pdf}
 
 \hypertarget{o-teste-hosmer-e-lemeshow}{%
 \subsection{O teste Hosmer e Lemeshow}\label{o-teste-hosmer-e-lemeshow}}

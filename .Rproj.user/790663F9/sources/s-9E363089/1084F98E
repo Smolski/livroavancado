@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1532995755497.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "1084F98E",
+    "lastKnownWriteTime" : 8318763573407860307,
+    "last_content_update" : 1532995755497,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "4DC6CA3E",
+        "caption" : "popbbehv",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=popbbehv&cache_key=4DC6CA3E",
+        "displayedObservations" : 100,
+        "environment" : "",
+        "object" : "popbbehv",
+        "preview" : 0,
+        "totalObservations" : 100,
+        "variables" : 3
+    },
+    "relative_order" : 15,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

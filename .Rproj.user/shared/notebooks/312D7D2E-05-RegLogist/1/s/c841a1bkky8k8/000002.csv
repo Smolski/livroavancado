@@ -1,2 +1,0 @@
-"0","plot(roc1,print.auc=TRUE, auc.polygon=TRUE,grud=c(0.1,0.2),"
-"0","grid.col=c(""green"",""red""),max.auc.polygon=TRUE,auc.polygon.col=""lightgreen"",print.thres=TRUE)"
