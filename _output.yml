@@ -20,3 +20,4 @@ bookdown::pdf_book:
   pandoc_args: [ "--csl", "associacao-brasileira-de-normas-tecnicas-unirio-eipp.csl" ]
 bookdown::epub_book:
   stylesheet: style.css
+  toc: yes
