@@ -1,5 +1,22 @@
 # Delineamentos Experimentais
 
+```{r echo=FALSE}
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+Sys.setenv(RSTUDIO_PDFLATEX = "latexmk")
+options(width = 80, digits = 4,
+        bookdown.clean_book = TRUE)
+knitr::opts_chunk$set(
+  tidy = FALSE, 
+  fig.align = "center", 
+  out.width = '60%',
+  comment = NA,
+  fig.pos = 'h',
+  fig.keep='last'
+  )
+```
+
 A experimentação é uma parte da estatística probabilística que estuda o planejamento, execução, coleta de dados, análise de dados e interpretação dos resultados provenientes de um experimento.
 
 Um experimento é um procedimento planejado com base em uma hipótese, que tem por objetivo provocar fenômenos (tratamentos) de forma controlada, analisando e interpretando os

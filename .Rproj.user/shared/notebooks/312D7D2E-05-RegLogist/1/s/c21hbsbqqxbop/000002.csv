@@ -1,4 +1,9 @@
 "0","require(ggplot2)"
+"2","Carregando pacotes exigidos: ggplot2
+"
+"2","There were 13 warnings (use warnings() to see them)"
+"2","
+"
 "0","ggplot(chd, aes(x=AGE, y=CHD)) + "
 "0","  geom_point() + "
 "0","  stat_smooth(method=""glm"", method.args=list(family=""binomial""), se=FALSE)"

@@ -1,5 +1,7 @@
 # Delineamentos Experimentais
 
+
+
 A experimentação é uma parte da estatística probabilística que estuda o planejamento, execução, coleta de dados, análise de dados e interpretação dos resultados provenientes de um experimento.
 
 Um experimento é um procedimento planejado com base em uma hipótese, que tem por objetivo provocar fenômenos (tratamentos) de forma controlada, analisando e interpretando os
@@ -99,11 +101,11 @@ summary(anova)
 ```
 
 ```
-##             Df Sum Sq Mean Sq F value Pr(>F)  
-## Variedade    3   1414   471.3   3.775 0.0319 *
-## Residuals   16   1997   124.8                 
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+            Df Sum Sq Mean Sq F value Pr(>F)  
+Variedade    3   1414     471    3.78  0.032 *
+Residuals   16   1997     125                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
@@ -122,9 +124,9 @@ attach(DIC)
 ```
 
 ```
-## The following objects are masked from DIC (pos = 3):
-## 
-##     Peso, Repeticao, Variedade
+The following objects are masked from DIC (pos = 3):
+
+    Peso, Repeticao, Variedade
 ```
 
 ```r
@@ -132,20 +134,20 @@ TukeyHSD(anova,as.factor("Variedade"),ordered=TRUE)
 ```
 
 ```
-##   Tukey multiple comparisons of means
-##     95% family-wise confidence level
-##     factor levels have been ordered
-## 
-## Fit: aov(formula = Peso ~ Variedade)
-## 
-## $Variedade
-##     diff        lwr     upr     p adj
-## C-D  6.2 -14.016299 26.4163 0.8163995
-## B-D 12.2  -8.016299 32.4163 0.3429223
-## A-D 22.8   2.583701 43.0163 0.0244592
-## B-C  6.0 -14.216299 26.2163 0.8303280
-## A-C 16.6  -3.616299 36.8163 0.1281553
-## A-B 10.6  -9.616299 30.8163 0.4602137
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+    factor levels have been ordered
+
+Fit: aov(formula = Peso ~ Variedade)
+
+$Variedade
+    diff     lwr   upr  p adj
+C-D  6.2 -14.016 26.42 0.8164
+B-D 12.2  -8.016 32.42 0.3429
+A-D 22.8   2.584 43.02 0.0245
+B-C  6.0 -14.216 26.22 0.8303
+A-C 16.6  -3.616 36.82 0.1282
+A-B 10.6  -9.616 30.82 0.4602
 ```
 
 
@@ -158,33 +160,33 @@ HSD.test(anova,as.factor("Variedade"),console=TRUE)
 ```
 
 ```
-## 
-## Study: anova ~ as.factor("Variedade")
-## 
-## HSD Test for Peso 
-## 
-## Mean Square Error:  124.825 
-## 
-## Variedade,  means
-## 
-##   Peso       std r Min Max
-## A 82.0 10.862780 5  72  98
-## B 71.4 17.096783 5  55  96
-## C 65.4  8.561542 5  58  79
-## D 59.2  3.962323 5  54  65
-## 
-## Alpha: 0.05 ; DF Error: 16 
-## Critical Value of Studentized Range: 4.046093 
-## 
-## Minimun Significant Difference: 20.2163 
-## 
-## Treatments with the same letter are not significantly different.
-## 
-##   Peso groups
-## A 82.0      a
-## B 71.4     ab
-## C 65.4     ab
-## D 59.2      b
+
+Study: anova ~ as.factor("Variedade")
+
+HSD Test for Peso 
+
+Mean Square Error:  124.8 
+
+Variedade,  means
+
+  Peso    std r Min Max
+A 82.0 10.863 5  72  98
+B 71.4 17.097 5  55  96
+C 65.4  8.562 5  58  79
+D 59.2  3.962 5  54  65
+
+Alpha: 0.05 ; DF Error: 16 
+Critical Value of Studentized Range: 4.046 
+
+Minimun Significant Difference: 20.22 
+
+Treatments with the same letter are not significantly different.
+
+  Peso groups
+A 82.0      a
+B 71.4     ab
+C 65.4     ab
+D 59.2      b
 ```
 
 
@@ -201,28 +203,23 @@ attach(DIC)
 ```
 
 ```
-## The following objects are masked from DIC (pos = 4):
-## 
-##     Peso, Repeticao, Variedade
+The following objects are masked from DIC (pos = 4):
+
+    Peso, Repeticao, Variedade
 ```
 
 ```
-## The following objects are masked from DIC (pos = 5):
-## 
-##     Peso, Repeticao, Variedade
+The following objects are masked from DIC (pos = 5):
+
+    Peso, Repeticao, Variedade
 ```
 
 ```r
 boxplot(Peso~Variedade)
-```
-
-![](02-Delinexp_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
-
-```r
 boxplot(Peso~Variedade,xlab="Variedade",ylab="Peso")
 ```
 
-![](02-Delinexp_files/figure-epub3/unnamed-chunk-5-2.png)<!-- -->
+<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-6-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -230,8 +227,8 @@ tapply(Peso,Variedade,mean)
 ```
 
 ```
-##    A    B    C    D 
-## 82.0 71.4 65.4 59.2
+   A    B    C    D 
+82.0 71.4 65.4 59.2 
 ```
 
 ```r
@@ -239,8 +236,8 @@ tapply(Peso,Variedade,sd)
 ```
 
 ```
-##         A         B         C         D 
-## 10.862780 17.096783  8.561542  3.962323
+     A      B      C      D 
+10.863 17.097  8.562  3.962 
 ```
 
 
@@ -252,7 +249,7 @@ plot(ajustados,residuos)
 abline(h=0)
 ```
 
-![](02-Delinexp_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
+<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 
@@ -262,7 +259,7 @@ qqnorm(residuos)
 qqline(residuos)
 ```
 
-![](02-Delinexp_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
+<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 
@@ -294,12 +291,12 @@ summary(anova)
 ```
 
 ```
-##             Df Sum Sq Mean Sq F value  Pr(>F)   
-## Tratamentos  3   25.2     8.4   6.000 0.00973 **
-## Blocos       4    3.2     0.8   0.571 0.68854   
-## Residuals   12   16.8     1.4                   
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+            Df Sum Sq Mean Sq F value Pr(>F)   
+Tratamentos  3   25.2     8.4    6.00 0.0097 **
+Blocos       4    3.2     0.8    0.57 0.6885   
+Residuals   12   16.8     1.4                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
@@ -326,33 +323,33 @@ HSD.test(anova,as.factor("Tratamentos"),console=TRUE)
 ```
 
 ```
-## 
-## Study: anova ~ as.factor("Tratamentos")
-## 
-## HSD Test for Perda 
-## 
-## Mean Square Error:  1.4 
-## 
-## Tratamentos,  means
-## 
-##         Perda       std r Min Max
-## Dieta 1   2.6 0.8944272 5   2   4
-## Dieta 2   5.6 0.8944272 5   5   7
-## Dieta 3   3.2 1.6431677 5   1   5
-## Dieta 4   3.8 0.8366600 5   3   5
-## 
-## Alpha: 0.05 ; DF Error: 12 
-## Critical Value of Studentized Range: 4.19866 
-## 
-## Minimun Significant Difference: 2.221722 
-## 
-## Treatments with the same letter are not significantly different.
-## 
-##         Perda groups
-## Dieta 2   5.6      a
-## Dieta 4   3.8     ab
-## Dieta 3   3.2      b
-## Dieta 1   2.6      b
+
+Study: anova ~ as.factor("Tratamentos")
+
+HSD Test for Perda 
+
+Mean Square Error:  1.4 
+
+Tratamentos,  means
+
+        Perda    std r Min Max
+Dieta 1   2.6 0.8944 5   2   4
+Dieta 2   5.6 0.8944 5   5   7
+Dieta 3   3.2 1.6432 5   1   5
+Dieta 4   3.8 0.8367 5   3   5
+
+Alpha: 0.05 ; DF Error: 12 
+Critical Value of Studentized Range: 4.199 
+
+Minimun Significant Difference: 2.222 
+
+Treatments with the same letter are not significantly different.
+
+        Perda groups
+Dieta 2   5.6      a
+Dieta 4   3.8     ab
+Dieta 3   3.2      b
+Dieta 1   2.6      b
 ```
 
 
@@ -369,14 +366,14 @@ Medidas descritivas com a variável resposta:
 boxplot(Perda~Tratamentos)
 ```
 
-![](02-Delinexp_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
+<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-12-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 ```r
 boxplot(Perda~Tratamentos,xlab="Tratamentos",ylab="Perda")
 ```
 
-![](02-Delinexp_files/figure-epub3/unnamed-chunk-12-1.png)<!-- -->
+<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-13-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 
@@ -385,8 +382,8 @@ tapply(Perda,Tratamentos,mean)
 ```
 
 ```
-## Dieta 1 Dieta 2 Dieta 3 Dieta 4 
-##     2.6     5.6     3.2     3.8
+Dieta 1 Dieta 2 Dieta 3 Dieta 4 
+    2.6     5.6     3.2     3.8 
 ```
 
 ```r
@@ -394,8 +391,8 @@ tapply(Perda,Tratamentos,sd)
 ```
 
 ```
-##   Dieta 1   Dieta 2   Dieta 3   Dieta 4 
-## 0.8944272 0.8944272 1.6431677 0.8366600
+Dieta 1 Dieta 2 Dieta 3 Dieta 4 
+ 0.8944  0.8944  1.6432  0.8367 
 ```
 
 
@@ -406,7 +403,7 @@ plot(ajustado,residuo)
 abline(h=0)
 ```
 
-![](02-Delinexp_files/figure-epub3/unnamed-chunk-14-1.png)<!-- -->
+<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-15-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 
@@ -415,7 +412,7 @@ qqnorm(residuo)
 qqline(residuo)
 ```
 
-![](02-Delinexp_files/figure-epub3/unnamed-chunk-15-1.png)<!-- -->
+<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-16-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 

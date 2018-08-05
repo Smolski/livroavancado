@@ -1,5 +1,22 @@
 # Regressão Logística
 
+```{r echo=FALSE}
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+Sys.setenv(RSTUDIO_PDFLATEX = "latexmk")
+options(width = 80, digits = 4,
+        bookdown.clean_book = TRUE)
+knitr::opts_chunk$set(
+  tidy = FALSE, 
+  fig.align = "center", 
+  out.width = '60%',
+  comment = NA,
+  fig.pos = 'h',
+  fig.keep='last'
+  )
+```
+
 ```{r, echo=FALSE}
 
 packages <- c("caret", "pROC", "ResourceSelection", "modEvA", "foreign", "stargazer", "mfx","readr","ggplot2")
@@ -15,7 +32,7 @@ A técnica de regressão logística é uma ferramenta estatística utilizada nas
 
 O modelo de regressão logística é utilizado quando a variável dependente é binária, categórica ordenada ou mesmo categórica desordenada (quando não há relação hierárquica entre elas). Abaixo exemplificam-se algumas perguntas que podem levar a estes três tipos de variáveis. 
 
-Table: Tipos de variáveis
+Table: (\#tab:logtip)Tipos de variáveis
 
 ||||
 |---|---|---|
@@ -45,7 +62,8 @@ Algumas características importantes da regressão logística: a análise é sem
 
 Para otimizar o tempo do estudante, é recomendada a instalação prévia dos pacotes no RStudio a serem utilizados neste capítulo. Segue abaixo o comando a ser efetuado no console do RStudio:
 
-`install.packages(c("readr","mfx","caret","pRoc","ResourceSelection","modEvA","foreign","stargazer"))`
+`install.packages(c("readr","mfx","caret","pRoc",`
+`"ResourceSelection","modEvA","foreign","stargazer"))`
 
 <!--
 Mais detalhes sobre o modelo de regressão logística podem ser verificados na seção chamada **O Modelo de Regressão Logística**, bem como em @Hosmer2000 e @Gujarati2011.
@@ -68,7 +86,7 @@ summary(chd)
 Observa-se na figura abaixo a dispersão dos "eventos" e dos "nao-eventos" da CHD relacionando-se com a variável idade (AGE).
 
 
-```{r}
+```{r dispev, fig.cap="Dispersão de evendos e não-eventos", message=FALSE, warning=FALSE}
 require(ggplot2)
 
 ggplot(chd, aes(x=AGE, y=CHD)) + 
@@ -97,7 +115,7 @@ Se observa o intercepto com o valor de -5,309, sendo que para a análise aqui pr
 Por fim, o modelo é utilizado para construção da predição de todos os valores das idades de todos os indivíduos desta amostra. Para isto, será criada um novo objeto contendo somente a variável dependente do modelo (AGE) e em sequida, é criada nova coluna constando os valores preditos. Assim, pode ser plotado um gráfico completo com todas as probabilidades desta base de dados:
 
 
-```{r, message=FALSE, warning=FALSE}
+```{r distrpred, message=FALSE, warning=FALSE, fig.cap="Distribuição das probabilidades preditas"}
 # Filtrando a idade dos indivíduos
 IDADE<-chd[,1]  
 
@@ -239,7 +257,7 @@ roc1=plot.roc(chd$CHD,fitted(m1))`
 
 - Passo 2:
 
-```{r}
+```{r roc, fig.cap="Curva Roc", message=FALSE, warning=FALSE}
 
 plot(roc1,
      print.auc=TRUE, 

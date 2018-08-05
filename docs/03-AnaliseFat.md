@@ -1,6 +1,8 @@
 
 # Análise Fatorial
 
+
+
 A análise fatorial é um método estatístico utilizado para descrever a variabilidade entre variáveis observadas e possivelmente correlacionadas em termos de um número potencialmente menor de variáveis não observadas chamadas fatores.
 
 Assim, é possível que as variaçõess de três ou quatro variáveis observadas possam ser explicadas por somente um fator, o que evidencia a utilidade da análise fatorial para descrever um conjunto de dados utilizando para isso apenas alguns fatores.
@@ -88,7 +90,7 @@ require(readxl)
 ```
 
 ```
-## Carregando pacotes exigidos: readxl
+Carregando pacotes exigidos: readxl
 ```
 
 ```r
@@ -102,20 +104,20 @@ summary(creme_dental_exemplo1)
 ```
 
 ```
-##        v1              v2            v3            v4            v5     
-##  Min.   :1.000   Min.   :2.0   Min.   :1.0   Min.   :2.0   Min.   :1.0  
-##  1st Qu.:2.000   1st Qu.:3.0   1st Qu.:2.0   1st Qu.:3.0   1st Qu.:2.0  
-##  Median :4.000   Median :4.0   Median :4.0   Median :4.0   Median :3.5  
-##  Mean   :3.933   Mean   :3.9   Mean   :4.1   Mean   :4.1   Mean   :3.5  
-##  3rd Qu.:6.000   3rd Qu.:5.0   3rd Qu.:6.0   3rd Qu.:5.0   3rd Qu.:5.0  
-##  Max.   :7.000   Max.   :7.0   Max.   :7.0   Max.   :7.0   Max.   :7.0  
-##        v6       
-##  Min.   :2.000  
-##  1st Qu.:3.000  
-##  Median :4.000  
-##  Mean   :4.167  
-##  3rd Qu.:4.750  
-##  Max.   :7.000
+       v1             v2            v3            v4            v5     
+ Min.   :1.00   Min.   :2.0   Min.   :1.0   Min.   :2.0   Min.   :1.0  
+ 1st Qu.:2.00   1st Qu.:3.0   1st Qu.:2.0   1st Qu.:3.0   1st Qu.:2.0  
+ Median :4.00   Median :4.0   Median :4.0   Median :4.0   Median :3.5  
+ Mean   :3.93   Mean   :3.9   Mean   :4.1   Mean   :4.1   Mean   :3.5  
+ 3rd Qu.:6.00   3rd Qu.:5.0   3rd Qu.:6.0   3rd Qu.:5.0   3rd Qu.:5.0  
+ Max.   :7.00   Max.   :7.0   Max.   :7.0   Max.   :7.0   Max.   :7.0  
+       v6      
+ Min.   :2.00  
+ 1st Qu.:3.00  
+ Median :4.00  
+ Mean   :4.17  
+ 3rd Qu.:4.75  
+ Max.   :7.00  
 ```
 
 
@@ -139,13 +141,13 @@ print(matcor, digits = 2)
 ```
 
 ```
-##         v1     v2     v3      v4      v5      v6
-## v1  1.0000 -0.053  0.873 -0.0862 -0.8576  0.0042
-## v2 -0.0532  1.000 -0.155  0.5722  0.0197  0.6405
-## v3  0.8731 -0.155  1.000 -0.2478 -0.7778 -0.0181
-## v4 -0.0862  0.572 -0.248  1.0000 -0.0066  0.6405
-## v5 -0.8576  0.020 -0.778 -0.0066  1.0000 -0.1364
-## v6  0.0042  0.640 -0.018  0.6405 -0.1364  1.0000
+        v1     v2     v3      v4      v5      v6
+v1  1.0000 -0.053  0.873 -0.0862 -0.8576  0.0042
+v2 -0.0532  1.000 -0.155  0.5722  0.0197  0.6405
+v3  0.8731 -0.155  1.000 -0.2478 -0.7778 -0.0181
+v4 -0.0862  0.572 -0.248  1.0000 -0.0066  0.6405
+v5 -0.8576  0.020 -0.778 -0.0066  1.0000 -0.1364
+v6  0.0042  0.640 -0.018  0.6405 -0.1364  1.0000
 ```
 
 
@@ -156,18 +158,18 @@ require(corrplot)
 ```
 
 ```
-## Carregando pacotes exigidos: corrplot
+Carregando pacotes exigidos: corrplot
 ```
 
 ```
-## corrplot 0.84 loaded
+corrplot 0.84 loaded
 ```
 
 ```r
 corrplot(matcor, method="circle")
 ```
 
-![](03-AnaliseFat_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
+<img src="03-AnaliseFat_files/figure-epub3/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;" />
 
 Na figura acima, as correlações estão em cor azul porque são positivas, com tons mais fortes para as correlações mais altas. 
 <!--
@@ -197,7 +199,7 @@ require(psych)
 ```
 
 ```
-## Carregando pacotes exigidos: psych
+Carregando pacotes exigidos: psych
 ```
 
 ```r
@@ -205,18 +207,18 @@ cortest.bartlett(creme_dental_exemplo1)
 ```
 
 ```
-## R was not square, finding R from data
+R was not square, finding R from data
 ```
 
 ```
-## $chisq
-## [1] 111.3138
-## 
-## $p.value
-## [1] 9.017094e-17
-## 
-## $df
-## [1] 15
+$chisq
+[1] 111.3
+
+$p.value
+[1] 9.017e-17
+
+$df
+[1] 15
 ```
 
 Veja que a hipótese nula de que a matriz de correlação da população seja uma matriz identidade é rejeitada pelo teste de esfericidade de Bartlett. A estatística qui-quadrado aproximada
@@ -229,12 +231,12 @@ KMO(creme_dental_exemplo1)
 ```
 
 ```
-## Kaiser-Meyer-Olkin factor adequacy
-## Call: KMO(r = creme_dental_exemplo1)
-## Overall MSA =  0.66
-## MSA for each item = 
-##   v1   v2   v3   v4   v5   v6 
-## 0.62 0.70 0.68 0.64 0.77 0.56
+Kaiser-Meyer-Olkin factor adequacy
+Call: KMO(r = creme_dental_exemplo1)
+Overall MSA =  0.66
+MSA for each item = 
+  v1   v2   v3   v4   v5   v6 
+0.62 0.70 0.68 0.64 0.77 0.56 
 ```
 
 A estatística KMO maior que 0,5 também concorda quanto ao fato de que a análise fatorial pode ser considerada uma técnica apropriada para analisar a matriz de correlação.
@@ -275,14 +277,14 @@ fit
 ```
 
 ```
-## Call:
-## princomp(x = creme_dental_exemplo1, cor = TRUE)
-## 
-## Standard deviations:
-##    Comp.1    Comp.2    Comp.3    Comp.4    Comp.5    Comp.6 
-## 1.6526307 1.4893352 0.6645283 0.5841726 0.4273502 0.2919051 
-## 
-##  6  variables and  30 observations.
+Call:
+princomp(x = creme_dental_exemplo1, cor = TRUE)
+
+Standard deviations:
+Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 
+1.6526 1.4893 0.6645 0.5842 0.4274 0.2919 
+
+ 6  variables and  30 observations.
 ```
 
 ```r
@@ -290,15 +292,11 @@ summary(fit)
 ```
 
 ```
-## Importance of components:
-##                           Comp.1    Comp.2     Comp.3     Comp.4
-## Standard deviation     1.6526307 1.4893352 0.66452834 0.58417262
-## Proportion of Variance 0.4551981 0.3696865 0.07359965 0.05687627
-## Cumulative Proportion  0.4551981 0.8248846 0.89848425 0.95536053
-##                            Comp.5     Comp.6
-## Standard deviation     0.42735024 0.29190514
-## Proportion of Variance 0.03043804 0.01420144
-## Cumulative Proportion  0.98579856 1.00000000
+Importance of components:
+                       Comp.1 Comp.2 Comp.3  Comp.4  Comp.5 Comp.6
+Standard deviation     1.6526 1.4893 0.6645 0.58417 0.42735 0.2919
+Proportion of Variance 0.4552 0.3697 0.0736 0.05688 0.03044 0.0142
+Cumulative Proportion  0.4552 0.8249 0.8985 0.95536 0.98580 1.0000
 ```
 
 
@@ -351,7 +349,7 @@ Abaixo vamos apresentar o `scree-plot`, em formato do gráfico de barras para o 
 screeplot(fit)
 ```
 
-![](03-AnaliseFat_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
+<img src="03-AnaliseFat_files/figure-epub3/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma ligeira suavização das alturas nas demais colunas.
@@ -363,7 +361,7 @@ Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma lige
 plot(fit,type="lines")
 ```
 
-![](03-AnaliseFat_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
+<img src="03-AnaliseFat_files/figure-epub3/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 ### Análise de Componentes Principais
@@ -378,32 +376,32 @@ PCAdente
 ```
 
 ```
-## Principal Components Analysis
-## Call: principal(r = creme_dental_exemplo1, nfactors = 2, rotate = "none", 
-##     n.obs = 30, scores = TRUE)
-## Standardized loadings (pattern matrix) based upon correlation matrix
-##      PC1   PC2   h2    u2 com
-## v1  0.93  0.25 0.93 0.074 1.1
-## v2 -0.30  0.80 0.72 0.277 1.3
-## v3  0.94  0.13 0.89 0.106 1.0
-## v4 -0.34  0.79 0.74 0.261 1.4
-## v5 -0.87 -0.35 0.88 0.122 1.3
-## v6 -0.18  0.87 0.79 0.210 1.1
-## 
-##                        PC1  PC2
-## SS loadings           2.73 2.22
-## Proportion Var        0.46 0.37
-## Cumulative Var        0.46 0.82
-## Proportion Explained  0.55 0.45
-## Cumulative Proportion 0.55 1.00
-## 
-## Mean item complexity =  1.2
-## Test of the hypothesis that 2 components are sufficient.
-## 
-## The root mean square of the residuals (RMSR) is  0.07 
-##  with the empirical chi square  3.94  with prob <  0.41 
-## 
-## Fit based upon off diagonal values = 0.98
+Principal Components Analysis
+Call: principal(r = creme_dental_exemplo1, nfactors = 2, rotate = "none", 
+    n.obs = 30, scores = TRUE)
+Standardized loadings (pattern matrix) based upon correlation matrix
+     PC1   PC2   h2    u2 com
+v1  0.93  0.25 0.93 0.074 1.1
+v2 -0.30  0.80 0.72 0.277 1.3
+v3  0.94  0.13 0.89 0.106 1.0
+v4 -0.34  0.79 0.74 0.261 1.4
+v5 -0.87 -0.35 0.88 0.122 1.3
+v6 -0.18  0.87 0.79 0.210 1.1
+
+                       PC1  PC2
+SS loadings           2.73 2.22
+Proportion Var        0.46 0.37
+Cumulative Var        0.46 0.82
+Proportion Explained  0.55 0.45
+Cumulative Proportion 0.55 1.00
+
+Mean item complexity =  1.2
+Test of the hypothesis that 2 components are sufficient.
+
+The root mean square of the residuals (RMSR) is  0.07 
+ with the empirical chi square  3.94  with prob <  0.41 
+
+Fit based upon off diagonal values = 0.98
 ```
 
 
@@ -431,32 +429,32 @@ PCAdentevarimax
 ```
 
 ```
-## Principal Components Analysis
-## Call: principal(r = creme_dental_exemplo1, nfactors = 2, rotate = "varimax", 
-##     n.obs = 30, scores = TRUE)
-## Standardized loadings (pattern matrix) based upon correlation matrix
-##      RC1   RC2   h2    u2 com
-## v1  0.96 -0.03 0.93 0.074 1.0
-## v2 -0.05  0.85 0.72 0.277 1.0
-## v3  0.93 -0.15 0.89 0.106 1.1
-## v4 -0.09  0.85 0.74 0.261 1.0
-## v5 -0.93 -0.08 0.88 0.122 1.0
-## v6  0.09  0.88 0.79 0.210 1.0
-## 
-##                        RC1  RC2
-## SS loadings           2.69 2.26
-## Proportion Var        0.45 0.38
-## Cumulative Var        0.45 0.82
-## Proportion Explained  0.54 0.46
-## Cumulative Proportion 0.54 1.00
-## 
-## Mean item complexity =  1
-## Test of the hypothesis that 2 components are sufficient.
-## 
-## The root mean square of the residuals (RMSR) is  0.07 
-##  with the empirical chi square  3.94  with prob <  0.41 
-## 
-## Fit based upon off diagonal values = 0.98
+Principal Components Analysis
+Call: principal(r = creme_dental_exemplo1, nfactors = 2, rotate = "varimax", 
+    n.obs = 30, scores = TRUE)
+Standardized loadings (pattern matrix) based upon correlation matrix
+     RC1   RC2   h2    u2 com
+v1  0.96 -0.03 0.93 0.074 1.0
+v2 -0.05  0.85 0.72 0.277 1.0
+v3  0.93 -0.15 0.89 0.106 1.1
+v4 -0.09  0.85 0.74 0.261 1.0
+v5 -0.93 -0.08 0.88 0.122 1.0
+v6  0.09  0.88 0.79 0.210 1.0
+
+                       RC1  RC2
+SS loadings           2.69 2.26
+Proportion Var        0.45 0.38
+Cumulative Var        0.45 0.82
+Proportion Explained  0.54 0.46
+Cumulative Proportion 0.54 1.00
+
+Mean item complexity =  1
+Test of the hypothesis that 2 components are sufficient.
+
+The root mean square of the residuals (RMSR) is  0.07 
+ with the empirical chi square  3.94  with prob <  0.41 
+
+Fit based upon off diagonal values = 0.98
 ```
 
 Veja que na matriz rotada, o Fator 1 apresenta altos coeficientes para as variáveis V1 (prevenção de cáries), V3 (gengivas fortes) e coeficiente negativo para V5 (dentes sadios não é importante). O Fator 2 apresenta forte relação com V2 (clareie os dentes), V4 (hálito puro) e V6 (dentes atraentes).
@@ -482,7 +480,7 @@ PCAdentevarimax$values
 ```
 
 ```
-## [1] 2.73118833 2.21811927 0.44159791 0.34125765 0.18262823 0.08520861
+[1] 2.73119 2.21812 0.44160 0.34126 0.18263 0.08521
 ```
 
 
@@ -496,20 +494,20 @@ PCAdentevarimax$loadings
 ```
 
 ```
-## 
-## Loadings:
-##    RC1    RC2   
-## v1  0.962       
-## v2         0.848
-## v3  0.933 -0.151
-## v4         0.855
-## v5 -0.934       
-## v6         0.885
-## 
-##                  RC1   RC2
-## SS loadings    2.687 2.263
-## Proportion Var 0.448 0.377
-## Cumulative Var 0.448 0.825
+
+Loadings:
+   RC1    RC2   
+v1  0.962       
+v2         0.848
+v3  0.933 -0.151
+v4         0.855
+v5 -0.934       
+v6         0.885
+
+                 RC1   RC2
+SS loadings    2.687 2.263
+Proportion Var 0.448 0.377
+Cumulative Var 0.448 0.825
 ```
 
 
@@ -521,7 +519,7 @@ os fatores.
 biplot(PCAdentevarimax)
 ```
 
-![](03-AnaliseFat_files/figure-epub3/unnamed-chunk-13-1.png)<!-- -->
+<img src="03-AnaliseFat_files/figure-epub3/unnamed-chunk-14-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 Os valores dos fatores obtidos para os 30 entrevistados encontram-se na matriz de coeficiente de escore do componente mostrada abaixo. Esta ajuda a entender como cada variável se relaciona aos escores dos componentes calculados para cada participante. Para melhor compreensão da análise dos escores dos entrevistados é importante especificar e comentar o significado de cada fator:

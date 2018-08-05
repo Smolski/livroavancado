@@ -421,11 +421,11 @@ quadro da análise de uma são vez associando os dois comandos.
 \end{Shaded}
 
 \begin{verbatim}
-##             Df Sum Sq Mean Sq F value Pr(>F)  
-## Variedade    3   1414   471.3   3.775 0.0319 *
-## Residuals   16   1997   124.8                 
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+            Df Sum Sq Mean Sq F value Pr(>F)  
+Variedade    3   1414     471    3.78  0.032 *
+Residuals   16   1997     125                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 
 Hipóteses estatísticas:
@@ -452,9 +452,9 @@ Para saber quais as médias que diferem, utilizamos o teste de Tukey.
 \end{Shaded}
 
 \begin{verbatim}
-## The following objects are masked from DIC (pos = 3):
-## 
-##     Peso, Repeticao, Variedade
+The following objects are masked from DIC (pos = 3):
+
+    Peso, Repeticao, Variedade
 \end{verbatim}
 
 \begin{Shaded}
@@ -464,20 +464,20 @@ Para saber quais as médias que diferem, utilizamos o teste de Tukey.
 \end{Shaded}
 
 \begin{verbatim}
-##   Tukey multiple comparisons of means
-##     95% family-wise confidence level
-##     factor levels have been ordered
-## 
-## Fit: aov(formula = Peso ~ Variedade)
-## 
-## $Variedade
-##     diff        lwr     upr     p adj
-## C-D  6.2 -14.016299 26.4163 0.8163995
-## B-D 12.2  -8.016299 32.4163 0.3429223
-## A-D 22.8   2.583701 43.0163 0.0244592
-## B-C  6.0 -14.216299 26.2163 0.8303280
-## A-C 16.6  -3.616299 36.8163 0.1281553
-## A-B 10.6  -9.616299 30.8163 0.4602137
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+    factor levels have been ordered
+
+Fit: aov(formula = Peso ~ Variedade)
+
+$Variedade
+    diff     lwr   upr  p adj
+C-D  6.2 -14.016 26.42 0.8164
+B-D 12.2  -8.016 32.42 0.3429
+A-D 22.8   2.584 43.02 0.0245
+B-C  6.0 -14.216 26.22 0.8303
+A-C 16.6  -3.616 36.82 0.1282
+A-B 10.6  -9.616 30.82 0.4602
 \end{verbatim}
 
 Para que o RStudio apresente uma tabela com as médias e letras indicando
@@ -492,33 +492,33 @@ quais as médias que diferiram, devemos instalar o pacote
 \end{Shaded}
 
 \begin{verbatim}
-## 
-## Study: anova ~ as.factor("Variedade")
-## 
-## HSD Test for Peso 
-## 
-## Mean Square Error:  124.825 
-## 
-## Variedade,  means
-## 
-##   Peso       std r Min Max
-## A 82.0 10.862780 5  72  98
-## B 71.4 17.096783 5  55  96
-## C 65.4  8.561542 5  58  79
-## D 59.2  3.962323 5  54  65
-## 
-## Alpha: 0.05 ; DF Error: 16 
-## Critical Value of Studentized Range: 4.046093 
-## 
-## Minimun Significant Difference: 20.2163 
-## 
-## Treatments with the same letter are not significantly different.
-## 
-##   Peso groups
-## A 82.0      a
-## B 71.4     ab
-## C 65.4     ab
-## D 59.2      b
+
+Study: anova ~ as.factor("Variedade")
+
+HSD Test for Peso 
+
+Mean Square Error:  124.8 
+
+Variedade,  means
+
+  Peso    std r Min Max
+A 82.0 10.863 5  72  98
+B 71.4 17.097 5  55  96
+C 65.4  8.562 5  58  79
+D 59.2  3.962 5  54  65
+
+Alpha: 0.05 ; DF Error: 16 
+Critical Value of Studentized Range: 4.046 
+
+Minimun Significant Difference: 20.22 
+
+Treatments with the same letter are not significantly different.
+
+  Peso groups
+A 82.0      a
+B 71.4     ab
+C 65.4     ab
+D 59.2      b
 \end{verbatim}
 
 *Médias dos tratamentos não seguidas por mesma letra diferem pelo teste
@@ -537,32 +537,25 @@ As variedades B e C apresentaram peso médio dos frutos intermediário.
 \end{Shaded}
 
 \begin{verbatim}
-## The following objects are masked from DIC (pos = 4):
-## 
-##     Peso, Repeticao, Variedade
+The following objects are masked from DIC (pos = 4):
+
+    Peso, Repeticao, Variedade
 \end{verbatim}
 
 \begin{verbatim}
-## The following objects are masked from DIC (pos = 5):
-## 
-##     Peso, Repeticao, Variedade
+The following objects are masked from DIC (pos = 5):
+
+    Peso, Repeticao, Variedade
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{boxplot}\NormalTok{(Peso}\OperatorTok{~}\NormalTok{Variedade)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{02-Delinexp_files/figure-latex/unnamed-chunk-5-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{boxplot}\NormalTok{(Peso}\OperatorTok{~}\NormalTok{Variedade,}\DataTypeTok{xlab=}\StringTok{"Variedade"}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{"Peso"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-Delinexp_files/figure-latex/unnamed-chunk-5-2.pdf}
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-6-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -571,8 +564,8 @@ As variedades B e C apresentaram peso médio dos frutos intermediário.
 \end{Shaded}
 
 \begin{verbatim}
-##    A    B    C    D 
-## 82.0 71.4 65.4 59.2
+   A    B    C    D 
+82.0 71.4 65.4 59.2 
 \end{verbatim}
 
 \begin{Shaded}
@@ -582,8 +575,8 @@ As variedades B e C apresentaram peso médio dos frutos intermediário.
 \end{Shaded}
 
 \begin{verbatim}
-##         A         B         C         D 
-## 10.862780 17.096783  8.561542  3.962323
+     A      B      C      D 
+10.863 17.097  8.562  3.962 
 \end{verbatim}
 
 \begin{Shaded}
@@ -595,7 +588,7 @@ As variedades B e C apresentaram peso médio dos frutos intermediário.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-Delinexp_files/figure-latex/unnamed-chunk-7-1.pdf}
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-8-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -604,7 +597,7 @@ As variedades B e C apresentaram peso médio dos frutos intermediário.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-Delinexp_files/figure-latex/unnamed-chunk-8-1.pdf}
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-9-1} \end{center}
 
 \hypertarget{delineamento-blocos-casualizados-dbc}{%
 \section{Delineamento Blocos Casualizados
@@ -647,12 +640,12 @@ Importar no RStudio:
 \end{Shaded}
 
 \begin{verbatim}
-##             Df Sum Sq Mean Sq F value  Pr(>F)   
-## Tratamentos  3   25.2     8.4   6.000 0.00973 **
-## Blocos       4    3.2     0.8   0.571 0.68854   
-## Residuals   12   16.8     1.4                   
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+            Df Sum Sq Mean Sq F value Pr(>F)   
+Tratamentos  3   25.2     8.4    6.00 0.0097 **
+Blocos       4    3.2     0.8    0.57 0.6885   
+Residuals   12   16.8     1.4                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 
 Hipóteses estatísticas:
@@ -689,33 +682,33 @@ que a variância entre os blocos não é significativa.
 \end{Shaded}
 
 \begin{verbatim}
-## 
-## Study: anova ~ as.factor("Tratamentos")
-## 
-## HSD Test for Perda 
-## 
-## Mean Square Error:  1.4 
-## 
-## Tratamentos,  means
-## 
-##         Perda       std r Min Max
-## Dieta 1   2.6 0.8944272 5   2   4
-## Dieta 2   5.6 0.8944272 5   5   7
-## Dieta 3   3.2 1.6431677 5   1   5
-## Dieta 4   3.8 0.8366600 5   3   5
-## 
-## Alpha: 0.05 ; DF Error: 12 
-## Critical Value of Studentized Range: 4.19866 
-## 
-## Minimun Significant Difference: 2.221722 
-## 
-## Treatments with the same letter are not significantly different.
-## 
-##         Perda groups
-## Dieta 2   5.6      a
-## Dieta 4   3.8     ab
-## Dieta 3   3.2      b
-## Dieta 1   2.6      b
+
+Study: anova ~ as.factor("Tratamentos")
+
+HSD Test for Perda 
+
+Mean Square Error:  1.4 
+
+Tratamentos,  means
+
+        Perda    std r Min Max
+Dieta 1   2.6 0.8944 5   2   4
+Dieta 2   5.6 0.8944 5   5   7
+Dieta 3   3.2 1.6432 5   1   5
+Dieta 4   3.8 0.8367 5   3   5
+
+Alpha: 0.05 ; DF Error: 12 
+Critical Value of Studentized Range: 4.199 
+
+Minimun Significant Difference: 2.222 
+
+Treatments with the same letter are not significantly different.
+
+        Perda groups
+Dieta 2   5.6      a
+Dieta 4   3.8     ab
+Dieta 3   3.2      b
+Dieta 1   2.6      b
 \end{verbatim}
 
 Médias dos tratamentos não seguidas por mesma letra diferem pelo teste
@@ -733,7 +726,7 @@ Medidas descritivas com a variável resposta:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-Delinexp_files/figure-latex/unnamed-chunk-11-1.pdf}
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-12-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -741,7 +734,7 @@ Medidas descritivas com a variável resposta:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-Delinexp_files/figure-latex/unnamed-chunk-12-1.pdf}
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-13-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -750,8 +743,8 @@ Medidas descritivas com a variável resposta:
 \end{Shaded}
 
 \begin{verbatim}
-## Dieta 1 Dieta 2 Dieta 3 Dieta 4 
-##     2.6     5.6     3.2     3.8
+Dieta 1 Dieta 2 Dieta 3 Dieta 4 
+    2.6     5.6     3.2     3.8 
 \end{verbatim}
 
 \begin{Shaded}
@@ -761,8 +754,8 @@ Medidas descritivas com a variável resposta:
 \end{Shaded}
 
 \begin{verbatim}
-##   Dieta 1   Dieta 2   Dieta 3   Dieta 4 
-## 0.8944272 0.8944272 1.6431677 0.8366600
+Dieta 1 Dieta 2 Dieta 3 Dieta 4 
+ 0.8944  0.8944  1.6432  0.8367 
 \end{verbatim}
 
 \begin{Shaded}
@@ -774,7 +767,7 @@ Medidas descritivas com a variável resposta:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-Delinexp_files/figure-latex/unnamed-chunk-14-1.pdf}
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-15-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -783,7 +776,7 @@ Medidas descritivas com a variável resposta:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-Delinexp_files/figure-latex/unnamed-chunk-15-1.pdf}
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-16-1} \end{center}
 
 \hypertarget{analise-fatorial}{%
 \chapter{Análise Fatorial}\label{analise-fatorial}}
@@ -964,7 +957,7 @@ relacionadas às variáveis pesquisadas, utilizando a função
 \end{Shaded}
 
 \begin{verbatim}
-## Carregando pacotes exigidos: readxl
+Carregando pacotes exigidos: readxl
 \end{verbatim}
 
 \begin{Shaded}
@@ -980,20 +973,20 @@ relacionadas às variáveis pesquisadas, utilizando a função
 \end{Shaded}
 
 \begin{verbatim}
-##        v1              v2            v3            v4            v5     
-##  Min.   :1.000   Min.   :2.0   Min.   :1.0   Min.   :2.0   Min.   :1.0  
-##  1st Qu.:2.000   1st Qu.:3.0   1st Qu.:2.0   1st Qu.:3.0   1st Qu.:2.0  
-##  Median :4.000   Median :4.0   Median :4.0   Median :4.0   Median :3.5  
-##  Mean   :3.933   Mean   :3.9   Mean   :4.1   Mean   :4.1   Mean   :3.5  
-##  3rd Qu.:6.000   3rd Qu.:5.0   3rd Qu.:6.0   3rd Qu.:5.0   3rd Qu.:5.0  
-##  Max.   :7.000   Max.   :7.0   Max.   :7.0   Max.   :7.0   Max.   :7.0  
-##        v6       
-##  Min.   :2.000  
-##  1st Qu.:3.000  
-##  Median :4.000  
-##  Mean   :4.167  
-##  3rd Qu.:4.750  
-##  Max.   :7.000
+       v1             v2            v3            v4            v5     
+ Min.   :1.00   Min.   :2.0   Min.   :1.0   Min.   :2.0   Min.   :1.0  
+ 1st Qu.:2.00   1st Qu.:3.0   1st Qu.:2.0   1st Qu.:3.0   1st Qu.:2.0  
+ Median :4.00   Median :4.0   Median :4.0   Median :4.0   Median :3.5  
+ Mean   :3.93   Mean   :3.9   Mean   :4.1   Mean   :4.1   Mean   :3.5  
+ 3rd Qu.:6.00   3rd Qu.:5.0   3rd Qu.:6.0   3rd Qu.:5.0   3rd Qu.:5.0  
+ Max.   :7.00   Max.   :7.0   Max.   :7.0   Max.   :7.0   Max.   :7.0  
+       v6      
+ Min.   :2.00  
+ 1st Qu.:3.00  
+ Median :4.00  
+ Mean   :4.17  
+ 3rd Qu.:4.75  
+ Max.   :7.00  
 \end{verbatim}
 
 \hypertarget{passos-da-analise-fatorial}{%
@@ -1035,13 +1028,13 @@ correlacionar-se com os mesmos fatores.
 \end{Shaded}
 
 \begin{verbatim}
-##         v1     v2     v3      v4      v5      v6
-## v1  1.0000 -0.053  0.873 -0.0862 -0.8576  0.0042
-## v2 -0.0532  1.000 -0.155  0.5722  0.0197  0.6405
-## v3  0.8731 -0.155  1.000 -0.2478 -0.7778 -0.0181
-## v4 -0.0862  0.572 -0.248  1.0000 -0.0066  0.6405
-## v5 -0.8576  0.020 -0.778 -0.0066  1.0000 -0.1364
-## v6  0.0042  0.640 -0.018  0.6405 -0.1364  1.0000
+        v1     v2     v3      v4      v5      v6
+v1  1.0000 -0.053  0.873 -0.0862 -0.8576  0.0042
+v2 -0.0532  1.000 -0.155  0.5722  0.0197  0.6405
+v3  0.8731 -0.155  1.000 -0.2478 -0.7778 -0.0181
+v4 -0.0862  0.572 -0.248  1.0000 -0.0066  0.6405
+v5 -0.8576  0.020 -0.778 -0.0066  1.0000 -0.1364
+v6  0.0042  0.640 -0.018  0.6405 -0.1364  1.0000
 \end{verbatim}
 
 \begin{Shaded}
@@ -1051,11 +1044,11 @@ correlacionar-se com os mesmos fatores.
 \end{Shaded}
 
 \begin{verbatim}
-## Carregando pacotes exigidos: corrplot
+Carregando pacotes exigidos: corrplot
 \end{verbatim}
 
 \begin{verbatim}
-## corrplot 0.84 loaded
+corrplot 0.84 loaded
 \end{verbatim}
 
 \begin{Shaded}
@@ -1064,7 +1057,7 @@ correlacionar-se com os mesmos fatores.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{03-AnaliseFat_files/figure-latex/unnamed-chunk-3-1.pdf}
+\begin{center}\includegraphics[width=0.6\linewidth]{03-AnaliseFat_files/figure-latex/unnamed-chunk-4-1} \end{center}
 
 Na figura acima, as correlações estão em cor azul porque são positivas,
 com tons mais fortes para as correlações mais altas.
@@ -1097,7 +1090,7 @@ seja as variáveis são correlacionadas na população.
 \end{Shaded}
 
 \begin{verbatim}
-## Carregando pacotes exigidos: psych
+Carregando pacotes exigidos: psych
 \end{verbatim}
 
 \begin{Shaded}
@@ -1107,18 +1100,18 @@ seja as variáveis são correlacionadas na população.
 \end{Shaded}
 
 \begin{verbatim}
-## R was not square, finding R from data
+R was not square, finding R from data
 \end{verbatim}
 
 \begin{verbatim}
-## $chisq
-## [1] 111.3138
-## 
-## $p.value
-## [1] 9.017094e-17
-## 
-## $df
-## [1] 15
+$chisq
+[1] 111.3
+
+$p.value
+[1] 9.017e-17
+
+$df
+[1] 15
 \end{verbatim}
 
 Veja que a hipótese nula de que a matriz de correlação da população seja
@@ -1133,12 +1126,12 @@ de liberdade, significativa ao nível de 0,05.
 \end{Shaded}
 
 \begin{verbatim}
-## Kaiser-Meyer-Olkin factor adequacy
-## Call: KMO(r = creme_dental_exemplo1)
-## Overall MSA =  0.66
-## MSA for each item = 
-##   v1   v2   v3   v4   v5   v6 
-## 0.62 0.70 0.68 0.64 0.77 0.56
+Kaiser-Meyer-Olkin factor adequacy
+Call: KMO(r = creme_dental_exemplo1)
+Overall MSA =  0.66
+MSA for each item = 
+  v1   v2   v3   v4   v5   v6 
+0.62 0.70 0.68 0.64 0.77 0.56 
 \end{verbatim}
 
 A estatística KMO maior que 0,5 também concorda quanto ao fato de que a
@@ -1205,14 +1198,14 @@ de covariância.
 \end{Shaded}
 
 \begin{verbatim}
-## Call:
-## princomp(x = creme_dental_exemplo1, cor = TRUE)
-## 
-## Standard deviations:
-##    Comp.1    Comp.2    Comp.3    Comp.4    Comp.5    Comp.6 
-## 1.6526307 1.4893352 0.6645283 0.5841726 0.4273502 0.2919051 
-## 
-##  6  variables and  30 observations.
+Call:
+princomp(x = creme_dental_exemplo1, cor = TRUE)
+
+Standard deviations:
+Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 
+1.6526 1.4893 0.6645 0.5842 0.4274 0.2919 
+
+ 6  variables and  30 observations.
 \end{verbatim}
 
 \begin{Shaded}
@@ -1222,15 +1215,11 @@ de covariância.
 \end{Shaded}
 
 \begin{verbatim}
-## Importance of components:
-##                           Comp.1    Comp.2     Comp.3     Comp.4
-## Standard deviation     1.6526307 1.4893352 0.66452834 0.58417262
-## Proportion of Variance 0.4551981 0.3696865 0.07359965 0.05687627
-## Cumulative Proportion  0.4551981 0.8248846 0.89848425 0.95536053
-##                            Comp.5     Comp.6
-## Standard deviation     0.42735024 0.29190514
-## Proportion of Variance 0.03043804 0.01420144
-## Cumulative Proportion  0.98579856 1.00000000
+Importance of components:
+                       Comp.1 Comp.2 Comp.3  Comp.4  Comp.5 Comp.6
+Standard deviation     1.6526 1.4893 0.6645 0.58417 0.42735 0.2919
+Proportion of Variance 0.4552 0.3697 0.0736 0.05688 0.03044 0.0142
+Cumulative Proportion  0.4552 0.8249 0.8985 0.95536 0.98580 1.0000
 \end{verbatim}
 
 A função \texttt{summary(fit)} mostra a aplicação da análise de
@@ -1293,7 +1282,7 @@ barras para o nosso exemplo
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{03-AnaliseFat_files/figure-latex/unnamed-chunk-7-1.pdf}
+\begin{center}\includegraphics[width=0.6\linewidth]{03-AnaliseFat_files/figure-latex/unnamed-chunk-8-1} \end{center}
 
 Note que as duas primeiras componentes, aparecem em destaque, ocorrendo
 uma ligeira suavização das alturas nas demais colunas.
@@ -1304,7 +1293,7 @@ uma ligeira suavização das alturas nas demais colunas.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{03-AnaliseFat_files/figure-latex/unnamed-chunk-8-1.pdf}
+\begin{center}\includegraphics[width=0.6\linewidth]{03-AnaliseFat_files/figure-latex/unnamed-chunk-9-1} \end{center}
 
 \hypertarget{analise-de-componentes-principais}{%
 \subsection{Análise de Componentes
@@ -1321,32 +1310,32 @@ Rodando a Análise de Componentes Principais no R, temos:
 \end{Shaded}
 
 \begin{verbatim}
-## Principal Components Analysis
-## Call: principal(r = creme_dental_exemplo1, nfactors = 2, rotate = "none", 
-##     n.obs = 30, scores = TRUE)
-## Standardized loadings (pattern matrix) based upon correlation matrix
-##      PC1   PC2   h2    u2 com
-## v1  0.93  0.25 0.93 0.074 1.1
-## v2 -0.30  0.80 0.72 0.277 1.3
-## v3  0.94  0.13 0.89 0.106 1.0
-## v4 -0.34  0.79 0.74 0.261 1.4
-## v5 -0.87 -0.35 0.88 0.122 1.3
-## v6 -0.18  0.87 0.79 0.210 1.1
-## 
-##                        PC1  PC2
-## SS loadings           2.73 2.22
-## Proportion Var        0.46 0.37
-## Cumulative Var        0.46 0.82
-## Proportion Explained  0.55 0.45
-## Cumulative Proportion 0.55 1.00
-## 
-## Mean item complexity =  1.2
-## Test of the hypothesis that 2 components are sufficient.
-## 
-## The root mean square of the residuals (RMSR) is  0.07 
-##  with the empirical chi square  3.94  with prob <  0.41 
-## 
-## Fit based upon off diagonal values = 0.98
+Principal Components Analysis
+Call: principal(r = creme_dental_exemplo1, nfactors = 2, rotate = "none", 
+    n.obs = 30, scores = TRUE)
+Standardized loadings (pattern matrix) based upon correlation matrix
+     PC1   PC2   h2    u2 com
+v1  0.93  0.25 0.93 0.074 1.1
+v2 -0.30  0.80 0.72 0.277 1.3
+v3  0.94  0.13 0.89 0.106 1.0
+v4 -0.34  0.79 0.74 0.261 1.4
+v5 -0.87 -0.35 0.88 0.122 1.3
+v6 -0.18  0.87 0.79 0.210 1.1
+
+                       PC1  PC2
+SS loadings           2.73 2.22
+Proportion Var        0.46 0.37
+Cumulative Var        0.46 0.82
+Proportion Explained  0.55 0.45
+Cumulative Proportion 0.55 1.00
+
+Mean item complexity =  1.2
+Test of the hypothesis that 2 components are sufficient.
+
+The root mean square of the residuals (RMSR) is  0.07 
+ with the empirical chi square  3.94  with prob <  0.41 
+
+Fit based upon off diagonal values = 0.98
 \end{verbatim}
 
 A matriz de fatores acima, resultante da análise de componentes
@@ -1393,32 +1382,32 @@ os eixos em ângulo reto e os fatores são correlacionados (MALHOTRA,
 \end{Shaded}
 
 \begin{verbatim}
-## Principal Components Analysis
-## Call: principal(r = creme_dental_exemplo1, nfactors = 2, rotate = "varimax", 
-##     n.obs = 30, scores = TRUE)
-## Standardized loadings (pattern matrix) based upon correlation matrix
-##      RC1   RC2   h2    u2 com
-## v1  0.96 -0.03 0.93 0.074 1.0
-## v2 -0.05  0.85 0.72 0.277 1.0
-## v3  0.93 -0.15 0.89 0.106 1.1
-## v4 -0.09  0.85 0.74 0.261 1.0
-## v5 -0.93 -0.08 0.88 0.122 1.0
-## v6  0.09  0.88 0.79 0.210 1.0
-## 
-##                        RC1  RC2
-## SS loadings           2.69 2.26
-## Proportion Var        0.45 0.38
-## Cumulative Var        0.45 0.82
-## Proportion Explained  0.54 0.46
-## Cumulative Proportion 0.54 1.00
-## 
-## Mean item complexity =  1
-## Test of the hypothesis that 2 components are sufficient.
-## 
-## The root mean square of the residuals (RMSR) is  0.07 
-##  with the empirical chi square  3.94  with prob <  0.41 
-## 
-## Fit based upon off diagonal values = 0.98
+Principal Components Analysis
+Call: principal(r = creme_dental_exemplo1, nfactors = 2, rotate = "varimax", 
+    n.obs = 30, scores = TRUE)
+Standardized loadings (pattern matrix) based upon correlation matrix
+     RC1   RC2   h2    u2 com
+v1  0.96 -0.03 0.93 0.074 1.0
+v2 -0.05  0.85 0.72 0.277 1.0
+v3  0.93 -0.15 0.89 0.106 1.1
+v4 -0.09  0.85 0.74 0.261 1.0
+v5 -0.93 -0.08 0.88 0.122 1.0
+v6  0.09  0.88 0.79 0.210 1.0
+
+                       RC1  RC2
+SS loadings           2.69 2.26
+Proportion Var        0.45 0.38
+Cumulative Var        0.45 0.82
+Proportion Explained  0.54 0.46
+Cumulative Proportion 0.54 1.00
+
+Mean item complexity =  1
+Test of the hypothesis that 2 components are sufficient.
+
+The root mean square of the residuals (RMSR) is  0.07 
+ with the empirical chi square  3.94  with prob <  0.41 
+
+Fit based upon off diagonal values = 0.98
 \end{verbatim}
 
 Veja que na matriz rotada, o Fator 1 apresenta altos coeficientes para
@@ -1451,7 +1440,7 @@ Para acessar os eingenvalues (autovalores):
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2.73118833 2.21811927 0.44159791 0.34125765 0.18262823 0.08520861
+[1] 2.73119 2.21812 0.44160 0.34126 0.18263 0.08521
 \end{verbatim}
 
 Confirmando, temos autovalores acima de 1, nos dois primeiros casos.
@@ -1465,20 +1454,20 @@ Para visualizar melhor a contribuição de cada variável (peso):
 \end{Shaded}
 
 \begin{verbatim}
-## 
-## Loadings:
-##    RC1    RC2   
-## v1  0.962       
-## v2         0.848
-## v3  0.933 -0.151
-## v4         0.855
-## v5 -0.934       
-## v6         0.885
-## 
-##                  RC1   RC2
-## SS loadings    2.687 2.263
-## Proportion Var 0.448 0.377
-## Cumulative Var 0.448 0.825
+
+Loadings:
+   RC1    RC2   
+v1  0.962       
+v2         0.848
+v3  0.933 -0.151
+v4         0.855
+v5 -0.934       
+v6         0.885
+
+                 RC1   RC2
+SS loadings    2.687 2.263
+Proportion Var 0.448 0.377
+Cumulative Var 0.448 0.825
 \end{verbatim}
 
 Recurso importante na interpretação dos fatores, o gráfico das
@@ -1493,7 +1482,7 @@ eixos, estão relacionadas a ambos os fatores.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{03-AnaliseFat_files/figure-latex/unnamed-chunk-13-1.pdf}
+\begin{center}\includegraphics[width=0.6\linewidth]{03-AnaliseFat_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 Os valores dos fatores obtidos para os 30 entrevistados encontram-se na
 matriz de coeficiente de escore do componente mostrada abaixo. Esta
@@ -1703,15 +1692,15 @@ diferentes gráficos para o diagnóstico do modelo.
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 4
-##   Nomecientifico            diametro_cm altura_m especie
-##   <chr>                           <dbl>    <dbl>   <dbl>
-## 1 Sebastiania commersoniana        52.2     15.2       0
-## 2 Sebastiania commersoniana        95       17.3       0
-## 3 Sebastiania commersoniana        67.3     16.3       0
-## 4 Sebastiania commersoniana        46.3     14         0
-## 5 Sebastiania commersoniana        64.1     15         0
-## 6 Sebastiania commersoniana       122       22         0
+# A tibble: 6 x 4
+  Nomecientifico            diametro_cm altura_m especie
+  <chr>                           <dbl>    <dbl>   <dbl>
+1 Sebastiania commersoniana        52.2     15.2       0
+2 Sebastiania commersoniana        95       17.3       0
+3 Sebastiania commersoniana        67.3     16.3       0
+4 Sebastiania commersoniana        46.3     14         0
+5 Sebastiania commersoniana        64.1     15         0
+6 Sebastiania commersoniana       122       22         0
 \end{verbatim}
 
 \begin{Shaded}
@@ -1722,13 +1711,13 @@ diferentes gráficos para o diagnóstico do modelo.
 \end{Shaded}
 
 \begin{verbatim}
-## 
-## Call:
-## lm(formula = altura_m ~ diametro_cm + especie)
-## 
-## Coefficients:
-## (Intercept)  diametro_cm      especie  
-##    12.69592      0.05713     -1.62517
+
+Call:
+lm(formula = altura_m ~ diametro_cm + especie)
+
+Coefficients:
+(Intercept)  diametro_cm      especie  
+    12.6959       0.0571      -1.6252  
 \end{verbatim}
 
 Modelo: \[
@@ -1749,25 +1738,25 @@ múltipla:
 \end{Shaded}
 
 \begin{verbatim}
-## 
-## Call:
-## lm(formula = altura_m ~ diametro_cm + especie)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.2688 -0.7663 -0.1236  0.8132  2.8727 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 12.69592    0.38639  32.857  < 2e-16 ***
-## diametro_cm  0.05713    0.00445  12.837  < 2e-16 ***
-## especie     -1.62517    0.24459  -6.644 1.52e-09 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 1.185 on 102 degrees of freedom
-## Multiple R-squared:  0.6995, Adjusted R-squared:  0.6937 
-## F-statistic: 118.7 on 2 and 102 DF,  p-value: < 2.2e-16
+
+Call:
+lm(formula = altura_m ~ diametro_cm + especie)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-3.269 -0.766 -0.124  0.813  2.873 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 12.69592    0.38639   32.86  < 2e-16 ***
+diametro_cm  0.05713    0.00445   12.84  < 2e-16 ***
+especie     -1.62517    0.24459   -6.64  1.5e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.19 on 102 degrees of freedom
+Multiple R-squared:   0.7,  Adjusted R-squared:  0.694 
+F-statistic:  119 on 2 and 102 DF,  p-value: <2e-16
 \end{verbatim}
 
 Verificar a significância do modelo completo.
@@ -1817,13 +1806,6 @@ extrair os coeficientes de interesse.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{plot}\NormalTok{(diametro_cm,altura_m)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{04-RegMult_files/figure-latex/unnamed-chunk-4-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{# Gera o gráfico sem pontos}
 \KeywordTok{plot}\NormalTok{(diametro_cm,altura_m,}\DataTypeTok{type=}\StringTok{'n'}\NormalTok{) }
 \CommentTok{# Acrescenta os pontos}
@@ -1835,7 +1817,7 @@ extrair os coeficientes de interesse.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{04-RegMult_files/figure-latex/unnamed-chunk-4-2.pdf}
+\begin{center}\includegraphics[width=0.6\linewidth]{04-RegMult_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 \hypertarget{metodos-selecao-de-variaveis-na-regressao-multipla}{%
 \section{Métodos seleção de variáveis na regressão
@@ -2006,7 +1988,7 @@ não há relação hierárquica entre elas). Abaixo exemplificam-se algumas
 perguntas que podem levar a estes três tipos de variáveis.
 
 \begin{longtable}[]{@{}lll@{}}
-\caption{Tipos de variáveis}\tabularnewline
+\caption{\label{tab:logtip}Tipos de variáveis}\tabularnewline
 \toprule
 \endhead
 \begin{minipage}[t]{0.30\columnwidth}\raggedright
@@ -2082,7 +2064,8 @@ Para otimizar o tempo do estudante, é recomendada a instalação prévia
 dos pacotes no RStudio a serem utilizados neste capítulo. Segue abaixo o
 comando a ser efetuado no console do RStudio:
 
-\texttt{install.packages(c("readr","mfx","caret","pRoc","ResourceSelection","modEvA","foreign","stargazer"))}
+\texttt{install.packages(c("readr","mfx","caret","pRoc",}
+\texttt{"ResourceSelection","modEvA","foreign","stargazer"))}
 
 \hypertarget{regressao-logistica-simples}{%
 \section{Regressão Logística
@@ -2103,7 +2086,7 @@ indivíduos, criando assim um modelo de regressão logística.
 \end{Shaded}
 
 \begin{verbatim}
-## Carregando pacotes exigidos: readr
+Carregando pacotes exigidos: readr
 \end{verbatim}
 
 \begin{Shaded}
@@ -2117,13 +2100,13 @@ indivíduos, criando assim um modelo de regressão logística.
 \end{Shaded}
 
 \begin{verbatim}
-##       AGE             AGRP      CHD   
-##  Min.   :20.00   Min.   :1.00   0:57  
-##  1st Qu.:34.75   1st Qu.:2.75   1:43  
-##  Median :44.00   Median :4.00         
-##  Mean   :44.38   Mean   :4.48         
-##  3rd Qu.:55.00   3rd Qu.:7.00         
-##  Max.   :69.00   Max.   :8.00
+      AGE            AGRP      CHD   
+ Min.   :20.0   Min.   :1.00   0:57  
+ 1st Qu.:34.8   1st Qu.:2.75   1:43  
+ Median :44.0   Median :4.00         
+ Mean   :44.4   Mean   :4.48         
+ 3rd Qu.:55.0   3rd Qu.:7.00         
+ Max.   :69.0   Max.   :8.00         
 \end{verbatim}
 
 Observa-se na figura abaixo a dispersão dos ``eventos'' e dos
@@ -2132,27 +2115,21 @@ Observa-se na figura abaixo a dispersão dos ``eventos'' e dos
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{require}\NormalTok{(ggplot2)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Carregando pacotes exigidos: ggplot2
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(chd, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{AGE, }\DataTypeTok{y=}\NormalTok{CHD)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{stat_smooth}\NormalTok{(}\DataTypeTok{method=}\StringTok{"glm"}\NormalTok{, }\DataTypeTok{method.args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{family=}\StringTok{"binomial"}\NormalTok{), }\DataTypeTok{se=}\OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## Warning: Computation failed in `stat_smooth()`:
-## y values must be 0 <= y <= 1
-\end{verbatim}
+\begin{figure}[h]
 
-\includegraphics{05-RegLogist_files/figure-latex/unnamed-chunk-3-1.pdf}
+{\centering \includegraphics[width=0.6\linewidth]{05-RegLogist_files/figure-latex/dispev-1} 
+
+}
+
+\caption{Dispersão de evendos e não-eventos}\label{fig:dispev}
+\end{figure}
 
 Monta-se então o modelo de regressão logística com a variável dependente
 CHD e a variável independente AGE. Abaixo é demonstrada a descrição da
@@ -2175,28 +2152,28 @@ Assim é obtida a função de ligação estimada do modelo:
 \end{Shaded}
 
 \begin{verbatim}
-## 
-## Call:
-## glm(formula = CHD ~ AGE, family = binomial(link = "logit"), data = chd)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.9718  -0.8456  -0.4576   0.8253   2.2859  
-## 
-## Coefficients:
-##             Estimate Std. Error z value Pr(>|z|)    
-## (Intercept) -5.30945    1.13365  -4.683 2.82e-06 ***
-## AGE          0.11092    0.02406   4.610 4.02e-06 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 136.66  on 99  degrees of freedom
-## Residual deviance: 107.35  on 98  degrees of freedom
-## AIC: 111.35
-## 
-## Number of Fisher Scoring iterations: 4
+
+Call:
+glm(formula = CHD ~ AGE, family = binomial(link = "logit"), data = chd)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-1.972  -0.846  -0.458   0.825   2.286  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -5.3095     1.1337   -4.68  2.8e-06 ***
+AGE           0.1109     0.0241    4.61  4.0e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 136.66  on 99  degrees of freedom
+Residual deviance: 107.35  on 98  degrees of freedom
+AIC: 111.4
+
+Number of Fisher Scoring iterations: 4
 \end{verbatim}
 
 Se observa o intercepto com o valor de -5,309, sendo que para a análise
@@ -2231,7 +2208,14 @@ desta base de dados:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{05-RegLogist_files/figure-latex/unnamed-chunk-5-1.pdf}
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.6\linewidth]{05-RegLogist_files/figure-latex/distrpred-1} 
+
+}
+
+\caption{Distribuição das probabilidades preditas}\label{fig:distrpred}
+\end{figure}
 
 \hypertarget{estimando-a-razao-de-chances}{%
 \subsection{Estimando a Razão de
@@ -2262,14 +2246,14 @@ as chances da ocorrência de CHD.
 \end{Shaded}
 
 \begin{verbatim}
-## Call:
-## logitor(formula = CHD ~ AGE, data = chd)
-## 
-## Odds Ratio:
-##     OddsRatio Std. Err.      z     P>|z|    
-## AGE  1.117307  0.026882 4.6102 4.022e-06 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Call:
+logitor(formula = CHD ~ AGE, data = chd)
+
+Odds Ratio:
+    OddsRatio Std. Err.    z P>|z|    
+AGE    1.1173    0.0269 4.61 4e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 
 \hypertarget{determinando-o-intervalo-de-confianca}{%
@@ -2294,9 +2278,9 @@ coeficiente AGE toma o valor de 1,1173, podendo variar de 1,0692 a
 \end{Shaded}
 
 \begin{verbatim}
-##                      OR        2.5 %    97.5 %
-## (Intercept) 0.004944629 0.0004412621 0.0389236
-## AGE         1.117306795 1.0692223156 1.1758681
+                  OR     2.5 %  97.5 %
+(Intercept) 0.004945 0.0004413 0.03892
+AGE         1.117307 1.0692223 1.17587
 \end{verbatim}
 
 \hypertarget{predicao-de-probabilidades}{%
@@ -2323,8 +2307,8 @@ das diferentes probabilidades entre as diversas idades (variável AGE).
 \end{Shaded}
 
 \begin{verbatim}
-##     AGE
-## 1 44.38
+    AGE
+1 44.38
 \end{verbatim}
 
 \begin{Shaded}
@@ -2335,8 +2319,8 @@ das diferentes probabilidades entre as diversas idades (variável AGE).
 \end{Shaded}
 
 \begin{verbatim}
-##     AGE pred.prob
-## 1 44.38 0.4044944
+    AGE pred.prob
+1 44.38    0.4045
 \end{verbatim}
 
 \hypertarget{matriz-de-confusao}{%
@@ -2430,11 +2414,11 @@ Fonte: Adaptado de FAWCETT (\protect\hyperlink{ref-Fawcett2006}{2006}).
 \end{Shaded}
 
 \begin{verbatim}
-## Carregando pacotes exigidos: caret
+Carregando pacotes exigidos: caret
 \end{verbatim}
 
 \begin{verbatim}
-## Carregando pacotes exigidos: lattice
+Carregando pacotes exigidos: lattice
 \end{verbatim}
 
 \begin{Shaded}
@@ -2449,32 +2433,32 @@ Fonte: Adaptado de FAWCETT (\protect\hyperlink{ref-Fawcett2006}{2006}).
 \end{Shaded}
 
 \begin{verbatim}
-## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction  0  1
-##          0 45 14
-##          1 12 29
-##                                           
-##                Accuracy : 0.74            
-##                  95% CI : (0.6427, 0.8226)
-##     No Information Rate : 0.57            
-##     P-Value [Acc > NIR] : 0.0003187       
-##                                           
-##                   Kappa : 0.4666          
-##  Mcnemar's Test P-Value : 0.8445193       
-##                                           
-##             Sensitivity : 0.6744          
-##             Specificity : 0.7895          
-##          Pos Pred Value : 0.7073          
-##          Neg Pred Value : 0.7627          
-##              Prevalence : 0.4300          
-##          Detection Rate : 0.2900          
-##    Detection Prevalence : 0.4100          
-##       Balanced Accuracy : 0.7319          
-##                                           
-##        'Positive' Class : 1               
-## 
+Confusion Matrix and Statistics
+
+          Reference
+Prediction  0  1
+         0 45 14
+         1 12 29
+                                        
+               Accuracy : 0.74          
+                 95% CI : (0.643, 0.823)
+    No Information Rate : 0.57          
+    P-Value [Acc > NIR] : 0.000319      
+                                        
+                  Kappa : 0.467         
+ Mcnemar's Test P-Value : 0.844519      
+                                        
+            Sensitivity : 0.674         
+            Specificity : 0.789         
+         Pos Pred Value : 0.707         
+         Neg Pred Value : 0.763         
+             Prevalence : 0.430         
+         Detection Rate : 0.290         
+   Detection Prevalence : 0.410         
+      Balanced Accuracy : 0.732         
+                                        
+       'Positive' Class : 1             
+                                        
 \end{verbatim}
 
 \hypertarget{curva-roc}{%
@@ -2511,7 +2495,14 @@ através das predições da sensibilidade e da especificidade.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{05-RegLogist_files/figure-latex/unnamed-chunk-11-1.pdf}
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.6\linewidth]{05-RegLogist_files/figure-latex/roc-1} 
+
+}
+
+\caption{Curva Roc}\label{fig:roc}
+\end{figure}
 
 \hypertarget{o-teste-hosmer-e-lemeshow}{%
 \subsection{O teste Hosmer e Lemeshow}\label{o-teste-hosmer-e-lemeshow}}
@@ -2525,11 +2516,11 @@ através das predições da sensibilidade e da especificidade.
 \end{Shaded}
 
 \begin{verbatim}
-## 
-##  Hosmer and Lemeshow goodness of fit (GOF) test
-## 
-## data:  chd$CHD, fitted(m1)
-## X-squared = 100, df = 8, p-value < 2.2e-16
+
+    Hosmer and Lemeshow goodness of fit (GOF) test
+
+data:  chd$CHD, fitted(m1)
+X-squared = 100, df = 8, p-value <2e-16
 \end{verbatim}
 
 \hypertarget{pseudo-r2}{%
@@ -2542,7 +2533,7 @@ através das predições da sensibilidade e da especificidade.
 \end{Shaded}
 
 \begin{verbatim}
-## Carregando pacotes exigidos: modEvA
+Carregando pacotes exigidos: modEvA
 \end{verbatim}
 
 \begin{Shaded}
@@ -2552,20 +2543,20 @@ através das predições da sensibilidade e da especificidade.
 \end{Shaded}
 
 \begin{verbatim}
-## $CoxSnell
-## [1] 0.2540516
-## 
-## $Nagelkerke
-## [1] 0.3409928
-## 
-## $McFadden
-## [1] 0.2144684
-## 
-## $Tjur
-## [1] 0.2705749
-## 
-## $sqPearson
-## [1] 0.2725518
+$CoxSnell
+[1] 0.2541
+
+$Nagelkerke
+[1] 0.341
+
+$McFadden
+[1] 0.2145
+
+$Tjur
+[1] 0.2706
+
+$sqPearson
+[1] 0.2726
 \end{verbatim}
 
 \hypertarget{regressao-logistica-multipla}{%
@@ -2588,7 +2579,7 @@ serão\texttt{x1},\texttt{x2}e\texttt{x3}.
 \end{Shaded}
 
 \begin{verbatim}
-## Carregando pacotes exigidos: foreign
+Carregando pacotes exigidos: foreign
 \end{verbatim}
 
 \begin{Shaded}
@@ -2599,22 +2590,22 @@ serão\texttt{x1},\texttt{x2}e\texttt{x3}.
 \end{Shaded}
 
 \begin{verbatim}
-##  country      year            y                  y_bin    
-##  A:10    Min.   :1990   Min.   :-7.863e+09   Min.   :0.0  
-##  B:10    1st Qu.:1992   1st Qu.: 2.466e+08   1st Qu.:1.0  
-##  C:10    Median :1994   Median : 1.898e+09   Median :1.0  
-##  D:10    Mean   :1994   Mean   : 1.845e+09   Mean   :0.8  
-##  E:10    3rd Qu.:1997   3rd Qu.: 3.372e+09   3rd Qu.:1.0  
-##  F:10    Max.   :1999   Max.   : 8.941e+09   Max.   :1.0  
-##  G:10                                                     
-##        x1                x2                x3                opinion  
-##  Min.   :-0.5676   Min.   :-1.6218   Min.   :-1.16539   Str agree:20  
-##  1st Qu.: 0.3290   1st Qu.:-1.2156   1st Qu.:-0.07931   Agree    :15  
-##  Median : 0.6413   Median :-0.4621   Median : 0.51419   Disag    :19  
-##  Mean   : 0.6480   Mean   : 0.1339   Mean   : 0.76185   Str disag:16  
-##  3rd Qu.: 1.0958   3rd Qu.: 1.6078   3rd Qu.: 1.15486                 
-##  Max.   : 1.4464   Max.   : 2.5303   Max.   : 7.16892                 
-## 
+ country      year            y                 y_bin           x1        
+ A:10    Min.   :1990   Min.   :-7.86e+09   Min.   :0.0   Min.   :-0.568  
+ B:10    1st Qu.:1992   1st Qu.: 2.47e+08   1st Qu.:1.0   1st Qu.: 0.329  
+ C:10    Median :1994   Median : 1.90e+09   Median :1.0   Median : 0.641  
+ D:10    Mean   :1994   Mean   : 1.85e+09   Mean   :0.8   Mean   : 0.648  
+ E:10    3rd Qu.:1997   3rd Qu.: 3.37e+09   3rd Qu.:1.0   3rd Qu.: 1.096  
+ F:10    Max.   :1999   Max.   : 8.94e+09   Max.   :1.0   Max.   : 1.446  
+ G:10                                                                     
+       x2               x3              opinion  
+ Min.   :-1.622   Min.   :-1.165   Str agree:20  
+ 1st Qu.:-1.216   1st Qu.:-0.079   Agree    :15  
+ Median :-0.462   Median : 0.514   Disag    :19  
+ Mean   : 0.134   Mean   : 0.762   Str disag:16  
+ 3rd Qu.: 1.608   3rd Qu.: 1.155                 
+ Max.   : 2.530   Max.   : 7.169                 
+                                                 
 \end{verbatim}
 
 Utiliza-se uma função para Modelos Lineares Generalizados (glm - em
@@ -2645,31 +2636,31 @@ do modelo de forma explicativa.
 \end{Shaded}
 
 \begin{verbatim}
-## 
-## Call:
-## glm(formula = y_bin ~ x1 + x2 + x3, family = binomial(link = "logit"), 
-##     data = mydata)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.0277   0.2347   0.5542   0.7016   1.0839  
-## 
-## Coefficients:
-##             Estimate Std. Error z value Pr(>|z|)  
-## (Intercept)   0.4262     0.6390   0.667   0.5048  
-## x1            0.8618     0.7840   1.099   0.2717  
-## x2            0.3665     0.3082   1.189   0.2343  
-## x3            0.7512     0.4548   1.652   0.0986 .
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 70.056  on 69  degrees of freedom
-## Residual deviance: 65.512  on 66  degrees of freedom
-## AIC: 73.512
-## 
-## Number of Fisher Scoring iterations: 5
+
+Call:
+glm(formula = y_bin ~ x1 + x2 + x3, family = binomial(link = "logit"), 
+    data = mydata)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-2.028   0.235   0.554   0.702   1.084  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)  
+(Intercept)    0.426      0.639    0.67    0.505  
+x1             0.862      0.784    1.10    0.272  
+x2             0.367      0.308    1.19    0.234  
+x3             0.751      0.455    1.65    0.099 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 70.056  on 69  degrees of freedom
+Residual deviance: 65.512  on 66  degrees of freedom
+AIC: 73.51
+
+Number of Fisher Scoring iterations: 5
 \end{verbatim}
 
 \begin{Shaded}
@@ -2680,31 +2671,31 @@ do modelo de forma explicativa.
 \end{Shaded}
 
 \begin{verbatim}
-## 
-## Resultados
-## =============================================
-##                       Dependent variable:    
-##                   ---------------------------
-##                              y_bin           
-## ---------------------------------------------
-## x1                           0.862           
-##                             (0.784)          
-##                                              
-## x2                           0.367           
-##                             (0.308)          
-##                                              
-## x3                          0.751*           
-##                             (0.455)          
-##                                              
-## Constant                     0.426           
-##                             (0.639)          
-##                                              
-## ---------------------------------------------
-## Observations                  70             
-## Log Likelihood              -32.756          
-## Akaike Inf. Crit.           73.512           
-## =============================================
-## Note:             *p<0.1; **p<0.05; ***p<0.01
+
+Resultados
+=============================================
+                      Dependent variable:    
+                  ---------------------------
+                             y_bin           
+---------------------------------------------
+x1                           0.862           
+                            (0.784)          
+                                             
+x2                           0.367           
+                            (0.308)          
+                                             
+x3                          0.751*           
+                            (0.455)          
+                                             
+Constant                     0.426           
+                            (0.639)          
+                                             
+---------------------------------------------
+Observations                  70             
+Log Likelihood              -32.760          
+Akaike Inf. Crit.           73.510           
+=============================================
+Note:             *p<0.1; **p<0.05; ***p<0.01
 \end{verbatim}
 
 A razão de chances (OR - odds ratio em inglês) estimada no modelo terá
@@ -2722,16 +2713,16 @@ automatizada
 \end{Shaded}
 
 \begin{verbatim}
-## Call:
-## logitor(formula = y_bin ~ x1 + x2 + x3, data = mydata)
-## 
-## Odds Ratio:
-##    OddsRatio Std. Err.      z   P>|z|  
-## x1   2.36735   1.85600 1.0992 0.27168  
-## x2   1.44273   0.44459 1.1894 0.23427  
-## x3   2.11957   0.96405 1.6516 0.09861 .
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Call:
+logitor(formula = y_bin ~ x1 + x2 + x3, data = mydata)
+
+Odds Ratio:
+   OddsRatio Std. Err.    z P>|z|  
+x1     2.367     1.856 1.10 0.272  
+x2     1.443     0.445 1.19 0.234  
+x3     2.120     0.964 1.65 0.099 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 
 O resultado acima evidencia que para uma alteração em 1 (uma) unidade em
@@ -2760,8 +2751,8 @@ a zero), ou seja, as chances aumentam em 44,30\%.
 \end{Shaded}
 
 \begin{verbatim}
-## (Intercept)          x1          x2          x3 
-##    1.531417    2.367352    1.442727    2.119566
+(Intercept)          x1          x2          x3 
+      1.531       2.367       1.443       2.120 
 \end{verbatim}
 
 O \textbf{intervalo de confiança} do modelo pode ser exposto utilizando
@@ -2775,11 +2766,11 @@ abaixo:
 \end{Shaded}
 
 \begin{verbatim}
-##                   OR     2.5 %    97.5 %
-## (Intercept) 1.531417 0.4387468  5.625299
-## x1          2.367352 0.5129380 11.674641
-## x2          1.442727 0.8041221  2.737965
-## x3          2.119566 1.0038973  5.718637
+               OR  2.5 % 97.5 %
+(Intercept) 1.531 0.4387  5.625
+x1          2.367 0.5129 11.675
+x2          1.443 0.8041  2.738
+x3          2.120 1.0039  5.719
 \end{verbatim}
 
 A partir do modelo logístico, podemos realizar \textbf{predições das
@@ -2798,8 +2789,8 @@ data.frame com os valores médios, como segue:
 \end{Shaded}
 
 \begin{verbatim}
-##          x1        x2       x3
-## 1 0.6480006 0.1338694 0.761851
+     x1     x2     x3
+1 0.648 0.1339 0.7619
 \end{verbatim}
 
 Utiliza-se o comando \texttt{predict()} para predição do modelo, como
@@ -2818,8 +2809,8 @@ valores médios das variáveis independentes, obtêm-se a probabilidade de
 \end{Shaded}
 
 \begin{verbatim}
-##          x1        x2       x3 pred.prob
-## 1 0.6480006 0.1338694 0.761851 0.8328555
+     x1     x2     x3 pred.prob
+1 0.648 0.1339 0.7619    0.8329
 \end{verbatim}
 
 \hypertarget{metodo-stepwise}{%
@@ -2835,46 +2826,46 @@ importantes ao modelo:
 \end{Shaded}
 
 \begin{verbatim}
-## Start:  AIC=73.51
-## y_bin ~ x1 + x2 + x3
-## 
-##        Df Deviance    AIC
-## - x1    1   66.736 72.736
-## - x2    1   66.996 72.996
-## <none>      65.512 73.512
-## - x3    1   69.402 75.402
-## 
-## Step:  AIC=72.74
-## y_bin ~ x2 + x3
-## 
-##        Df Deviance    AIC
-## - x2    1   67.330 71.330
-## <none>      66.736 72.736
-## + x1    1   65.512 73.512
-## - x3    1   70.032 74.032
-## 
-## Step:  AIC=71.33
-## y_bin ~ x3
-## 
-##        Df Deviance    AIC
-## <none>      67.330 71.330
-## - x3    1   70.056 72.056
-## + x2    1   66.736 72.736
-## + x1    1   66.996 72.996
+Start:  AIC=73.51
+y_bin ~ x1 + x2 + x3
+
+       Df Deviance  AIC
+- x1    1     66.7 72.7
+- x2    1     67.0 73.0
+<none>        65.5 73.5
+- x3    1     69.4 75.4
+
+Step:  AIC=72.74
+y_bin ~ x2 + x3
+
+       Df Deviance  AIC
+- x2    1     67.3 71.3
+<none>        66.7 72.7
++ x1    1     65.5 73.5
+- x3    1     70.0 74.0
+
+Step:  AIC=71.33
+y_bin ~ x3
+
+       Df Deviance  AIC
+<none>        67.3 71.3
+- x3    1     70.1 72.1
++ x2    1     66.7 72.7
++ x1    1     67.0 73.0
 \end{verbatim}
 
 \begin{verbatim}
-## 
-## Call:  glm(formula = y_bin ~ x3, family = binomial(link = "logit"), 
-##     data = mydata)
-## 
-## Coefficients:
-## (Intercept)           x3  
-##      1.1339       0.4866  
-## 
-## Degrees of Freedom: 69 Total (i.e. Null);  68 Residual
-## Null Deviance:       70.06 
-## Residual Deviance: 67.33     AIC: 71.33
+
+Call:  glm(formula = y_bin ~ x3, family = binomial(link = "logit"), 
+    data = mydata)
+
+Coefficients:
+(Intercept)           x3  
+      1.134        0.487  
+
+Degrees of Freedom: 69 Total (i.e. Null);  68 Residual
+Null Deviance:      70.1 
+Residual Deviance: 67.3     AIC: 71.3
 \end{verbatim}
 
 \hypertarget{regressao-logistica-multipla-com-variavel-categorica}{%
@@ -2913,13 +2904,13 @@ Abaixo segue um exemplo com uma variável dependente categórica:
 \end{Shaded}
 
 \begin{verbatim}
-##                    OR       2.5 %    97.5 %
-## (Intercept) 0.0185001 0.001889165 0.1665354
-## gre         1.0022670 1.000137602 1.0044457
-## gpa         2.2345448 1.173858216 4.3238349
-## rank2       0.5089310 0.272289674 0.9448343
-## rank3       0.2617923 0.131641717 0.5115181
-## rank4       0.2119375 0.090715546 0.4706961
+                OR    2.5 % 97.5 %
+(Intercept) 0.0185 0.001889 0.1665
+gre         1.0023 1.000138 1.0044
+gpa         2.2345 1.173858 4.3238
+rank2       0.5089 0.272290 0.9448
+rank3       0.2618 0.131642 0.5115
+rank4       0.2119 0.090716 0.4707
 \end{verbatim}
 
 \hypertarget{refs}{}

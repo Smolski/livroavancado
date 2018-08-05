@@ -1,5 +1,7 @@
 # Regressão Múltipla
 
+
+
 ## Modelo geral
 
 Um modelo de regressão múltipla é expresso como:
@@ -113,15 +115,15 @@ head(arvore2)
 ```
 
 ```
-## # A tibble: 6 x 4
-##   Nomecientifico            diametro_cm altura_m especie
-##   <chr>                           <dbl>    <dbl>   <dbl>
-## 1 Sebastiania commersoniana        52.2     15.2       0
-## 2 Sebastiania commersoniana        95       17.3       0
-## 3 Sebastiania commersoniana        67.3     16.3       0
-## 4 Sebastiania commersoniana        46.3     14         0
-## 5 Sebastiania commersoniana        64.1     15         0
-## 6 Sebastiania commersoniana       122       22         0
+# A tibble: 6 x 4
+  Nomecientifico            diametro_cm altura_m especie
+  <chr>                           <dbl>    <dbl>   <dbl>
+1 Sebastiania commersoniana        52.2     15.2       0
+2 Sebastiania commersoniana        95       17.3       0
+3 Sebastiania commersoniana        67.3     16.3       0
+4 Sebastiania commersoniana        46.3     14         0
+5 Sebastiania commersoniana        64.1     15         0
+6 Sebastiania commersoniana       122       22         0
 ```
 
 
@@ -131,13 +133,13 @@ modelom
 ```
 
 ```
-## 
-## Call:
-## lm(formula = altura_m ~ diametro_cm + especie)
-## 
-## Coefficients:
-## (Intercept)  diametro_cm      especie  
-##    12.69592      0.05713     -1.62517
+
+Call:
+lm(formula = altura_m ~ diametro_cm + especie)
+
+Coefficients:
+(Intercept)  diametro_cm      especie  
+    12.6959       0.0571      -1.6252  
 ```
 
 Modelo:
@@ -158,25 +160,25 @@ summary(modelom)
 ```
 
 ```
-## 
-## Call:
-## lm(formula = altura_m ~ diametro_cm + especie)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.2688 -0.7663 -0.1236  0.8132  2.8727 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 12.69592    0.38639  32.857  < 2e-16 ***
-## diametro_cm  0.05713    0.00445  12.837  < 2e-16 ***
-## especie     -1.62517    0.24459  -6.644 1.52e-09 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 1.185 on 102 degrees of freedom
-## Multiple R-squared:  0.6995,	Adjusted R-squared:  0.6937 
-## F-statistic: 118.7 on 2 and 102 DF,  p-value: < 2.2e-16
+
+Call:
+lm(formula = altura_m ~ diametro_cm + especie)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-3.269 -0.766 -0.124  0.813  2.873 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 12.69592    0.38639   32.86  < 2e-16 ***
+diametro_cm  0.05713    0.00445   12.84  < 2e-16 ***
+especie     -1.62517    0.24459   -6.64  1.5e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.19 on 102 degrees of freedom
+Multiple R-squared:   0.7,	Adjusted R-squared:  0.694 
+F-statistic:  119 on 2 and 102 DF,  p-value: <2e-16
 ```
 
 
@@ -208,11 +210,6 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 
 ```r
 plot(diametro_cm,altura_m)
-```
-
-![](04-RegMult_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
-
-```r
 # Gera o gráfico sem pontos
 plot(diametro_cm,altura_m,type='n') 
 # Acrescenta os pontos
@@ -223,7 +220,7 @@ abline(coef(modelom)[1], coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3], coef(modelom)[2], col='red')
 ```
 
-![](04-RegMult_files/figure-epub3/unnamed-chunk-4-2.png)<!-- -->
+<img src="04-RegMult_files/figure-epub3/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 

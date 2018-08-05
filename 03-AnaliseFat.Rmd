@@ -1,6 +1,23 @@
 
 # Análise Fatorial
 
+```{r echo=FALSE}
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+Sys.setenv(RSTUDIO_PDFLATEX = "latexmk")
+options(width = 80, digits = 4,
+        bookdown.clean_book = TRUE)
+knitr::opts_chunk$set(
+  tidy = FALSE, 
+  fig.align = "center", 
+  out.width = '60%',
+  comment = NA,
+  fig.pos = 'h',
+  fig.keep='last'
+  )
+```
+
 A análise fatorial é um método estatístico utilizado para descrever a variabilidade entre variáveis observadas e possivelmente correlacionadas em termos de um número potencialmente menor de variáveis não observadas chamadas fatores.
 
 Assim, é possível que as variaçõess de três ou quatro variáveis observadas possam ser explicadas por somente um fator, o que evidencia a utilidade da análise fatorial para descrever um conjunto de dados utilizando para isso apenas alguns fatores.
