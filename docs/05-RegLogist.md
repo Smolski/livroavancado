@@ -98,7 +98,7 @@ ggplot(chd, aes(x=AGE, y=CHD)) +
 ## y values must be 0 <= y <= 1
 ```
 
-<img src="05-RegLogist_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+![](05-RegLogist_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
 
 Monta-se então o modelo de regressão logística com a variável dependente CHD e a variável independente AGE. Abaixo é demonstrada a descrição da equação utilizando o comando `summary()` para o modelo m1 com a sintaxe básica:
 
@@ -161,7 +161,7 @@ ggplot(IDADE, aes(x=AGE, y=PRED)) +
   geom_point()
 ```
 
-<img src="05-RegLogist_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](05-RegLogist_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
 
 
 
@@ -369,7 +369,7 @@ plot(roc1,
      print.thres=TRUE)
 ```
 
-<img src="05-RegLogist_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](05-RegLogist_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
 
 
 ### O teste Hosmer e Lemeshow
@@ -726,5 +726,6 @@ exp(cbind(OR = coef(mylogit), confint(mylogit)))
 ```
 
 
-
+<!--
 \printbibliography[segment=\therefsegment,heading=subbibliography]
+-->

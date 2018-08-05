@@ -216,13 +216,13 @@ attach(DIC)
 boxplot(Peso~Variedade)
 ```
 
-<img src="02-Delinexp_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](02-Delinexp_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
 
 ```r
 boxplot(Peso~Variedade,xlab="Variedade",ylab="Peso")
 ```
 
-<img src="02-Delinexp_files/figure-html/unnamed-chunk-5-2.png" width="672" />
+![](02-Delinexp_files/figure-epub3/unnamed-chunk-5-2.png)<!-- -->
 
 
 ```r
@@ -252,7 +252,7 @@ plot(ajustados,residuos)
 abline(h=0)
 ```
 
-<img src="02-Delinexp_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](02-Delinexp_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
 
 
 
@@ -262,7 +262,7 @@ qqnorm(residuos)
 qqline(residuos)
 ```
 
-<img src="02-Delinexp_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+![](02-Delinexp_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
 
 
 
@@ -369,14 +369,14 @@ Medidas descritivas com a variável resposta:
 boxplot(Perda~Tratamentos)
 ```
 
-<img src="02-Delinexp_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](02-Delinexp_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
 
 
 ```r
 boxplot(Perda~Tratamentos,xlab="Tratamentos",ylab="Perda")
 ```
 
-<img src="02-Delinexp_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+![](02-Delinexp_files/figure-epub3/unnamed-chunk-12-1.png)<!-- -->
 
 
 
@@ -406,7 +406,7 @@ plot(ajustado,residuo)
 abline(h=0)
 ```
 
-<img src="02-Delinexp_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+![](02-Delinexp_files/figure-epub3/unnamed-chunk-14-1.png)<!-- -->
 
 
 
@@ -415,7 +415,7 @@ qqnorm(residuo)
 qqline(residuo)
 ```
 
-<img src="02-Delinexp_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+![](02-Delinexp_files/figure-epub3/unnamed-chunk-15-1.png)<!-- -->
 
 
 
@@ -435,6 +435,7 @@ qqline(residuo)
 
 
 
-
+<!--
 \printbibliography[segment=\therefsegment,heading=subbibliography]
+-->
 

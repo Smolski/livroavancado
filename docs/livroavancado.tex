@@ -35,10 +35,6 @@
   \usepackage{polyglossia}
   \setmainlanguage[]{brazil}
 \fi
-\usepackage[style=authoryear]{biblatex}
-\ExecuteBibliographyOptions{refsegment=chapter}
-\addbibresource{book.bib}
-\addbibresource{packages.bib}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -133,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-07-31}
+    \date{2018-08-04}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -198,8 +194,6 @@ Algumas sugestões a incluir:
 \hypertarget{introducao}{%
 \chapter*{Introdução}\label{introducao}}
 \addcontentsline{toc}{chapter}{Introdução}
-
-\printbibliography[segment=\therefsegment,heading=subbibliography]
 
 \hypertarget{delineamentos-experimentais}{%
 \chapter{Delineamentos
@@ -790,8 +784,6 @@ Medidas descritivas com a variável resposta:
 \end{Shaded}
 
 \includegraphics{02-Delinexp_files/figure-latex/unnamed-chunk-15-1.pdf}
-
-\printbibliography[segment=\therefsegment,heading=subbibliography]
 
 \hypertarget{analise-fatorial}{%
 \chapter{Análise Fatorial}\label{analise-fatorial}}
@@ -1533,8 +1525,6 @@ Destacando-se os entrevistados de interesse, verifica-se:
 
 \includegraphics{anfat2.png}
 
-\printbibliography[segment=\therefsegment,heading=subbibliography]
-
 \hypertarget{regressao-multipla}{%
 \chapter{Regressão Múltipla}\label{regressao-multipla}}
 
@@ -1991,8 +1981,6 @@ Passo 8) Seja F\textsubscript{out} o valor da distribuição F com 1 e
 \caption{Modelagem estatística}
 \end{figure}
 
-\printbibliography[segment=\therefsegment,heading=subbibliography]
-
 \hypertarget{regressao-logistica}{%
 \chapter{Regressão Logística}\label{regressao-logistica}}
 
@@ -2005,9 +1993,9 @@ Financeiros e Seguros ou mesmo estudando a Força de Trabalho. É
 imprescindível elevar o conhecimento sobre quais clientes possuem maior
 propensão à responder o contato de marketing, quais transações serão
 fraudulentas, quais e-mails são \emph{spam}, quem efetivamente fará o
-pagamento de uma obrigação ou mesmo qual criminoso reincidirá \footnote{Para
-  mais exemplos como estes sobre análises preditivas, ver
-  \textcite{Siegel2017}.}.
+pagamento de uma obrigação ou mesmo qual criminoso reincidirá.\footnote{Para
+  mais exemplos como estes sobre análises preditivas, ver SIEGEL
+  (\protect\hyperlink{ref-Siegel2017}{2017}).}
 
 \hypertarget{o-modelo}{%
 \section{O modelo}\label{o-modelo}}
@@ -2045,7 +2033,8 @@ Se as eleições fossem hoje, em que partido você votaria?\strut
 \bottomrule
 \end{longtable}
 
-Fonte: Adaptado de \textcite{Torres-Reyna2014}.
+Fonte: Adaptado de TORRES-REYNA
+(\protect\hyperlink{ref-Torres-Reyna2014}{2014}).
 
 Nota-se primeiramente que em sendo somente a variável dependente
 \textbf{binária} (0 e 1), é detectada a presença ou não de determinada
@@ -2066,8 +2055,8 @@ de prever a probabilidade de uma observação estar no grupo igual a 1
 (``eventos''), em relação ao grupo igual a zero (``não eventos'').
 
 Para a estimação dos coeficientes das variáveis independentes, são
-utilizados o valor logit ou a razão de desigualdades
-\autocite{Hair2009}:
+utilizados o valor logit ou a razão de desigualdades (HAIR et al.,
+\protect\hyperlink{ref-Hair2009}{2009}):
 
 \[
 Logit_i=ln\left (\frac{prob_{eventos}}{1-prob_{eventos}}  \right )=b_0+b_1X_1+\ldots+b_nX_n
@@ -2086,7 +2075,8 @@ estatísticos diretos, incorporando variáveis métricas e não-métricas,
 com efeitos não-lineares; é menos afetada pela não satisfação de
 normalidade dos dados (pois o termo de erro da variável discreta segue a
 distribuição binomial) e; foi elaborada para que seja prevista a
-probabilidade de determinado evento ocorrer \autocite{Hair2009}.
+probabilidade de determinado evento ocorrer (HAIR et al.,
+\protect\hyperlink{ref-Hair2009}{2009}).
 
 Para otimizar o tempo do estudante, é recomendada a instalação prévia
 dos pacotes no RStudio a serem utilizados neste capítulo. Segue abaixo o
@@ -2100,10 +2090,11 @@ Simples}\label{regressao-logistica-simples}}
 
 Este primeiro exemplo tratará da regressão logística simples, portanto,
 utilizando somente uma variável independente, neste caso numérica. Os
-dados são originados do livro de \textcite{Hosmer2000}, tratando-se de
-uma amostra com 100 pessoas. A variável dependente é a ocorrência ou não
-(1 ou 0) de doença coronária cardíaca (CHD), associando-se com a idade
-(AGE) dos indivíduos, criando assim um modelo de regressão logística.
+dados são originados do livro de HOSMER; LEMESCHOW
+(\protect\hyperlink{ref-Hosmer2000}{2000}), tratando-se de uma amostra
+com 100 pessoas. A variável dependente é a ocorrência ou não (1 ou 0) de
+doença coronária cardíaca (CHD), associando-se com a idade (AGE) dos
+indivíduos, criando assim um modelo de regressão logística.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2356,11 +2347,11 @@ logística é pela projeção do modelo na tabela de classificação (ou
 Matriz de Confusão). Para isto, precisa-se criar uma tabela com o
 resultado da classificação cruzada da variável resposta, de acordo com
 uma variável dicotômica em que os valores se derivam das probabilidades
-logísticas estimadas na regressão \autocite{Hosmer2000}. No entanto, é
-preciso definir uma regra de predição, que dirá se houve acerto ou não
-da probabilidade estimada com os valores reais, pois as probabilidades
-variam de 0 a 1 enquanto os valores reais binários possuem valores fixos
-de 0 ``ou'' 1.
+logísticas estimadas na regressão (HOSMER; LEMESCHOW,
+\protect\hyperlink{ref-Hosmer2000}{2000}). No entanto, é preciso definir
+uma regra de predição, que dirá se houve acerto ou não da probabilidade
+estimada com os valores reais, pois as probabilidades variam de 0 a 1
+enquanto os valores reais binários possuem valores fixos de 0 ``ou'' 1.
 
 É intuitivo supor que se as probabilidades aproximam-se de 1 o índivíduo
 estimado pode ser classificado como \(\hat Y_i=1\), bem como de forma
@@ -2369,7 +2360,8 @@ como \(\hat Y_i=0\). Mas qual nível utilizar? Para resolver este
 problema, é preciso em primeiro lugar determinar um ponto de corte para
 classificar a estimação como 0 ou 1. Usualmente na literatura se utiliza
 o valor de 0,5 mas dependendo do estudo proposto pode não ser limitado a
-este nível \autocite{Hosmer2000}.
+este nível (HOSMER; LEMESCHOW,
+\protect\hyperlink{ref-Hosmer2000}{2000}).
 
 Após determinado o ponto de corte, é importante avaliar o poder de
 discriminação do modelo, pelo seu desempenho portanto em classificar os
@@ -2429,7 +2421,7 @@ VPN=\frac{VN}{VN+FN}
 \caption{Matriz de Confusão}
 \end{figure}
 
-Fonte: Adaptado de \textcite{Fawcett2006}.
+Fonte: Adaptado de FAWCETT (\protect\hyperlink{ref-Fawcett2006}{2006}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2580,9 +2572,9 @@ através das predições da sensibilidade e da especificidade.
 \section{Regressão Logística
 Múltipla}\label{regressao-logistica-multipla}}
 
-O exemplo abaixo abordado foi extraído de \textcite{Torres-Reyna2014},
-onde observa-se o banco de dados criado chamado \texttt{mydata},
-possuindo as
+O exemplo abaixo abordado foi extraído de TORRES-REYNA
+(\protect\hyperlink{ref-Torres-Reyna2014}{2014}), onde observa-se o
+banco de dados criado chamado \texttt{mydata}, possuindo as
 variáveis\texttt{country},\texttt{year},\texttt{y},\texttt{y\_bin},\texttt{x1},\texttt{x2},\texttt{x3}
 e\texttt{opinion}. A variável dependente é \texttt{y\_bin}, da qual foi
 categorizada entre 0 e 1 conforme a ocorrência de valores negativos
@@ -2930,9 +2922,24 @@ Abaixo segue um exemplo com uma variável dependente categórica:
 ## rank4       0.2119375 0.090715546 0.4706961
 \end{verbatim}
 
-\printbibliography[segment=\therefsegment,heading=subbibliography]
+\hypertarget{refs}{}
+\leavevmode\hypertarget{ref-Fawcett2006}{}%
+FAWCETT, T. \textbf{An introduction to ROC analysis}. \emph{Pattern
+Recognition Letters}, {[}s.l.{]}, 2006.
 
-\printbibliography
+\leavevmode\hypertarget{ref-Hair2009}{}%
+HAIR, J. F. et al. \textbf{Análise Multivariada de Dados}. São Paulo:
+Bookman, 2009.
+
+\leavevmode\hypertarget{ref-Hosmer2000}{}%
+HOSMER, D. W.; LEMESCHOW, S. \textbf{Applied Logistic Regression}. New
+York: Wiley, 2000.
+
+\leavevmode\hypertarget{ref-Siegel2017}{}%
+SIEGEL, E. \textbf{Análise Preditiva: O poder de prever quem vai clicar,
+comprar, mentir ou morrer}. Rio de Janeiro: Alta Books, 2017.
+
+\leavevmode\hypertarget{ref-Torres-Reyna2014}{}%
 
 
 \end{document}

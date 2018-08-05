@@ -3,19 +3,18 @@ title: "Software R: curso avançado"
 author: 
 - Felipe Micail da Silva Smolski
 - Iara Denise Endruweit Battisti
-date: "2018-07-31"
+date: "2018-08-04"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: authoryear
-biblatexoptions: [refsegment=chapter]
 link-citations: yes
 github-repo: rstub/bookdown-chapterbib
 url: 'http\://rstub.github.io/bookdown-chapterbib/'
 description: "Curso avançado de análise estatística com R da UFFS Cerro Largo - RS"
 fontsize: 12pt
 lang: pt-Br
-csl: associacao-brasileira-de-normas-tecnicas-ipea.csl
+always_allow_html: yes
 ---
 
 

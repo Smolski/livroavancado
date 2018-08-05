@@ -1,8 +1,0 @@
-book_filename: "livroavancado"
-chapter_name: "Capítulo "
-repo: https://github.com/rstub/bookdown-chapterbib
-output_dir: docs
-rmd_files: ["index.Rmd", "01-Introduction.Rmd", "02-Delinexp.Rmd", "03-AnaliseFat.Rmd", "04-RegMult.Rmd","05-RegLogist.Rmd","99-References.Rmd"]
-clean: [packages.bib, bookdown.bbl]
-delete_merged_file: TRUE
-new_session: yes
