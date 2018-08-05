@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2290578768",
+    "hash" : "0",
     "id" : "5ACB5107",
-    "lastKnownWriteTime" : 1533420481,
-    "last_content_update" : 1533420481022,
+    "lastKnownWriteTime" : 1533439078,
+    "last_content_update" : 1533439078865,
     "path" : "D:/Github/livroavancado/_bookdown.yml",
     "project_path" : "_bookdown.yml",
     "properties" : {
-        "cursorPosition" : "4,0",
+        "cursorPosition" : "10,18",
         "scrollLine" : "0"
     },
     "relative_order" : 5,

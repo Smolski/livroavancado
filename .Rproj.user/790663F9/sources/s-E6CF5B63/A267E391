@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1961706314",
+    "hash" : "0",
     "id" : "A267E391",
-    "lastKnownWriteTime" : 1533420393,
-    "last_content_update" : 1533420393039,
+    "lastKnownWriteTime" : 1533438645,
+    "last_content_update" : 1533438645138,
     "path" : "D:/Github/livroavancado/index.Rmd",
     "project_path" : "index.Rmd",
     "properties" : {
-        "cursorPosition" : "15,11",
-        "scrollLine" : "10"
+        "cursorPosition" : "22,11",
+        "scrollLine" : "29"
     },
     "relative_order" : 1,
     "source_on_save" : false,

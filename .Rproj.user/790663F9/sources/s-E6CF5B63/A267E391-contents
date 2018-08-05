@@ -15,6 +15,7 @@ description: "Curso avançado de análise estatística com R da UFFS Cerro Largo
 fontsize: 12pt
 lang: pt-Br
 always_allow_html: yes
+classoption: oneside
 ---
 
 ```{r echo=FALSE}
@@ -28,7 +29,9 @@ knitr::opts_chunk$set(
   tidy = FALSE, 
   fig.align = "center", 
   out.width = '60%',
-  comment = NA
+  comment = NA,
+  fig.pos = 'H',
+  fig.keep='last'
   )
 ```
 
@@ -56,9 +59,4 @@ Algumas sugestões a incluir:
 
 
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+
