@@ -24,6 +24,8 @@ Nota-se primeiramente que em sendo somente a variável dependente **binária** (
 
 A regressão logística a ser estudada neste capítulo será com a variável resposta dependente binária, portanto, tratando os grupos de interesse (variável dependente) com valores de 0 e 1. Sua funcionalidade se ocupa de prever a probabilidade de uma observação estar no grupo igual a 1 ("eventos"), em relação ao grupo igual a zero ("não eventos").
 
+A previsão da variável dependente depende dos coeficientes logísticos e das variáveis independentes escolhidas ao modelo, lembrando que os valores sempre estarão entre 0 e 1. Convenciona-se que valores de probabilidade acima de 0,50 sejam classificados como pertencendo ao grupo de "eventos", o que pode distinguir a os resultados pretidos e avaliando a precisão preditiva. Utiliza-se a razão de desigualdades - a razão entre as probabilidades dos dois resultados ou eventos: Prob$_{i}/$(1-Prob$_{i}$).
+
 Para a estimação dos coeficientes das variáveis independentes, são utilizados o valor logit ou a razão de desigualdades [@Hair2009]:
 
 $$
@@ -38,9 +40,23 @@ $$
 
 Algumas características importantes da regressão logística: a análise é semelhante à regressão linear simples/múltipla (possui a relação entre a variável dependente e a(s) variável(is) independente(s)); possui testes estatísticos diretos, incorporando variáveis métricas e não-métricas, com efeitos não-lineares; é menos afetada pela não satisfação de normalidade dos dados (pois o termo de erro da variável discreta segue a distribuição binomial) e; foi elaborada para que seja prevista a probabilidade de determinado evento ocorrer [@Hair2009]. 
 
+A regressão logística utiliza a **curva logística** para assim representar a relação entre a variável dependente e as independentes. Os valores previstos portanto permanecem entre 0 e 1, sendo definidos pelos coeficientes estimados. A Figura \@ref(fig:curvalog)a demonstra a relação da curva logistica geral, enquanto a Figura \@ref(fig:curvalog)b mostra uma relação pobremente ajustada dos dados reais e a Figura \@ref(fig:curvalog)c demonstra um bom ajustena relação entre as variáveis. 
+
+
+<div class="figure" style="text-align: center">
+<img src="curvalog.png" alt="Curva logística" width="60%" />
+<p class="caption">(\#fig:curvalog)Curva logística</p>
+</div>
+Fonte: Adaptado de @Hair2009.
+
+A estimação dos coeficientes da regressão logística, ao contrário da regressão múltipla que utiliza o método dos mínimos quadrados, é efetuada pelo uso da **máxima verossimilhança**. Esta, por sua vez, busca maximizar a probabilidade de que um evento ocorra. A qualidade do ajuste do modelo é avaliada pelo "pseudo" R$^2$ e pelo exame da precisão preditiva (matriz de confusão).
+
+
+
 Para otimizar o tempo do estudante, é recomendada a instalação prévia dos pacotes no RStudio a serem utilizados neste capítulo. Segue abaixo o comando a ser efetuado no console do RStudio:
 
 `install.packages(c("readr","mfx","caret","pRoc",`
+
 `"ResourceSelection","modEvA","foreign","stargazer"))`
 
 <!--
@@ -101,8 +117,14 @@ Monta-se então o modelo de regressão logística com a variável dependente CHD
 
 Assim é obtida a função de ligação estimada do modelo: 
 
+<!--
 $$
 \hat g(CHD) = -5,309 +0,1109AGE
+$$
+-->
+
+$$
+ln\left (\frac{prob_{CHD}}{1-prob_{CHD}}  \right ) = - 5,309 + 0,1109AGE
 $$
 
 
@@ -278,10 +300,25 @@ $$
 VPN=\frac{VN}{VN+FN}
 $$
 
-![Matriz de Confusão](matriz.png)
+Table: (\#tab:matriz)Matriz de confusão.
+
+  --------------------------------------------------------------
+                                  **Valor Observado**
+  ------------------  ----------  ------------------- ------------
+                                  $Y=1$               $Y=0$
+  
+  **Valor Estimado**  $\hat Y$=1  VP                  FP
+  
+                      $\hat Y$=0  FN                  VN
+  ------------------  ------------------------------------------
 
 Fonte: Adaptado de @Fawcett2006.
 
+
+
+<!--
+![Matriz de Confusão](matriz.png)
+-->
 
 
 
@@ -301,7 +338,9 @@ Carregando pacotes exigidos: lattice
 ```r
   pdata <- as.factor(
     ifelse(
-      predict(m1, newdata = chd, type = "response")
+      predict(m1, 
+              newdata = chd, 
+              type = "response")
       >0.5,"1","0"))
 
 confusionMatrix(pdata, chd$CHD, positive="1")
@@ -391,7 +430,7 @@ data:  chd$CHD, fitted(m1)
 X-squared = 100, df = 8, p-value <2e-16
 ```
 
-### Pseudo R^{2}
+### Pseudo R$^2$
 
 
 
@@ -465,6 +504,8 @@ summary(mydata)
  Max.   : 2.530   Max.   : 7.169                 
                                                  
 ```
+
+
 
 Utiliza-se uma função para Modelos Lineares Generalizados (glm - em inglês Generalized Linear Models), determinando a variável dependente (y_bin), as variáveis independentes `(x1+x2+x3)`, a base de dados a ser utilizada `(data=mydata)` e a família dos modelos `(family = binomial(link="logit"))`.
 
@@ -573,7 +614,6 @@ O resultado acima evidencia que para uma alteração em 1 (uma) unidade em x3, a
 Como visto, para cada variação unitária em x3 o log das chances varia 0,7512. É possível estimar, portanto, a alteração das chances em função das médias dos valores de cada variável x1 e x2, e utilizar como exemplo os valores de 1, 2 e 3  para x3, para assim alcançar os preditores do log das chances nesta simulação, como segue abaixo:
 
 
-
 Para facilitar a interpretação do modelo, se torna mais fácil depois de transformado a sua exponenciação dos coeficientes logísticos utilizando o comando `exp(coef(logit))`. Desta forma, para cada incremento unitário em x2 e mantendo as demais variáveis constantes, conclui-se que é 1,443 vezes provável que y seja igual a 1 em oposição a não ser (igual a zero), ou seja, as chances aumentam em 44,30\%.
 
 
@@ -602,8 +642,6 @@ x1          2.367 0.5129 11.675
 x2          1.443 0.8041  2.738
 x3          2.120 1.0039  5.719
 ```
-
-
 
 
 A partir do modelo logístico, podemos realizar **predições das probabilidades** de se encontrar o resultado y=1 conforme visto acima. Para isto, como exercício utilizaremos as médias das observações de cada variável independente do modelo. Em primeiro lugar deve ser criado um data.frame com os valores médios, como segue:
@@ -692,7 +730,7 @@ Residual Deviance: 67.3 	AIC: 71.3
 ## Regressão Logística Múltipla com variável categórica
 
 
-Abaixo segue um exemplo com uma variável dependente categórica:
+Agora segue um exemplo de regressão logística utilizando uma variável dependente categórica juntamente com variáveis numéricas. Trata-se de uma base de dados em que o interesse é descobrir a probabilidade de um aluno ser admitido no vestibular com base no ranqueamento de escola em que estudou no ensino médio, bem como nas notas do aluno nas provas do Gpa (Grade Point Average - uma nota de performance dos alunos nos Estados Unidos) e do Gre (Graduate Record Examinations - exame padrão que qualifica o estudante para o ensino superior nos Estados Unidos). Seguem as variáveis.
 
 
 - **admin**: Variável dependente = 0 (não admitido) e 1 (admitido)
@@ -703,13 +741,62 @@ Abaixo segue um exemplo com uma variável dependente categórica:
 
 
 ```r
+# Carregando o arquivo
 require(readr)
-binary <- read_csv("http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv")
+binary <- read.csv("http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv")
 
+# Transformando a variável rank em categórica
 binary$rank <- factor(binary$rank)
-mylogit <- glm(admit ~ gre + gpa + rank, data = binary, family = binomial(link="logit"))
+
+# Determinando a regressão
+mylogit <- glm(admit ~ gre + gpa + rank, data = binary, 
+               family = binomial(link="logit"))
+
+# Resultado
+summary(mylogit)
 ```
 
+```
+
+Call:
+glm(formula = admit ~ gre + gpa + rank, family = binomial(link = "logit"), 
+    data = binary)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-1.627  -0.866  -0.639   1.149   2.079  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -3.98998    1.13995   -3.50  0.00047 ***
+gre          0.00226    0.00109    2.07  0.03847 *  
+gpa          0.80404    0.33182    2.42  0.01539 *  
+rank2       -0.67544    0.31649   -2.13  0.03283 *  
+rank3       -1.34020    0.34531   -3.88  0.00010 ***
+rank4       -1.55146    0.41783   -3.71  0.00020 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 499.98  on 399  degrees of freedom
+Residual deviance: 458.52  on 394  degrees of freedom
+AIC: 470.5
+
+Number of Fisher Scoring iterations: 4
+```
+
+
+Observa-se que os parâmetros da regressão logística proposta utilizando todas as variáveis foram assim determinados:
+
+
+$$
+ln\left (\frac{prob_{admit}}{1-prob_{admit}}  \right ) = 
+-3,98998 + 0.00226gre + 0,80404gpa -0,67544rank2 -1,34020rank3 -1,55146rank4
+$$
+
+
+Determinam-se os coeficientes exponenciados (as razões de chance) para cada variável do modelo, bem como seus intervalos de confiança:
 
 
 ```r
@@ -726,7 +813,171 @@ rank3       0.2618 0.131642 0.5115
 rank4       0.2119 0.090716 0.4707
 ```
 
+A leitura dos resultados, para as variáveis numéricas continua sendo a mesma. Com relação ao resultado para a variável **gre**, para cada aumento unitário nesta variável, mantendo-se as demais constantes, elevam-se em 0,23\% ((1,0023-1)\*100) as chances de que o aluno seja aprovado no vestibular. Já para a cada variação unitária na variável **gpa**, aumentam em 123,45\% ((2,2345-1)*100). 
+Dito de outra forma, para cada elevação em **gpa** aumentam 2,2345 vezes as chances em ser aprovado no vestibular. Tais resultados vão de encontro ao conceito teórico de que quanto melhor a nota do aluno em exame prévios maiores as chances de este aluno passar no vestibular.
+
+Outra questão é sobre o *ranking* das escolas que os alunos estudaram. Será que aqueles que estudaram em escolas melhores ranqueadas possuem mais chances de passar no vestibular? A variável **rank** traz esta análise, sendo que como é uma variável categórica (pois retoma as categorias de 1 a 4), as comparações das chances de que o aluno passe no vestibular são comparadas com a escola de *ranking* 1. 
+
+Desta forma, em sendo o aluno proveniente de uma escola de *ranking* 2, diminuem-se as chances em 49,11\% ((0,5089-1)$*$100) de que o aluno passe no vestibular. Já para os alunos que estudaramem uma escola de *ranking* 3 tem 73,82\% ((0,2618-1)\*100) menos chances de passar no vestibular. 
+Pioram ainda mais as chances de passar no vestibular daqueles alunos que estudaram em uma escola de *ranking* 4: diminuem-se em 78,81\% as chances de que estes aluno passe no vestibular, mantidas as demais veriáveis.
+
+
+**Predição das probabilidades**: a partir da equação de regressão logística auferida neste exemplo, qual é a probabilidade de que um aluno que tirou nota no **gre** de 700, no **gpa** de 3,67 e estudou em uma escola de *ranking* 1 passe no vestibular?
+Nota-se que a probabilidade de que este aluno passe no vestibular é de 63,32\%. Segue a predição para estas variáveis:
+
+
+```r
+pred=data.frame(gre=700,
+                gpa=3.67,
+                rank=factor(1)
+                )
+pred$prob=predict(mylogit, newdata=pred, type="response")
+pred
+```
+
+```
+  gre  gpa rank   prob
+1 700 3.67    1 0.6332
+```
+
+Comparando com um aluno que tirou as mesmas notas no **gre** e **gpa**, mas que estudou em uma escola *ranking* 4:
+
+
+```r
+pred=data.frame(gre=700,
+                gpa=3.67,
+                rank=factor(4)
+                )
+pred$prob=predict(mylogit, newdata=pred, type="response")
+pred
+```
+
+```
+  gre  gpa rank   prob
+1 700 3.67    4 0.2679
+```
+
+
+
+Agora será efetuada a predição comparando-se os *rankings* das escolas. No exemplo abaixo, é criada uma base de dados com as notas médias dos alunos nas variáveis **gre** e **gpa**, intercalando com todos os *rankings* das escolas onde estudaram. Após criar a tabela, esta é unida com as colunas de predição dos valores da equação. São renomeadas as variáveis de *fit* para *prob* e *se.fit* para *se.prob*, no primeiro caso pois obteiveram-se as probabilidades de cada caso e no segundo caso incluiu-se o erro padrão (*se: standart error*) desta probabilidade. Com este erro padrão calculou-se os limites inferior (*LL: low level*) e superior (*UL: upper level *) no intervalo de confiança de 95\%.
+
+
+
+
+```r
+# Criação da tabela
+novosdados=with(binary,
+                data.frame(gre=mean(gre),
+                           gpa=mean(gpa),
+                           rank=factor(1:4)))
+
+# Incluindo a predição dos valores
+novosdados=cbind(novosdados,predict(mylogit, 
+                                    newdata=novosdados,
+                                    type="response",
+                                    se.fit=TRUE))
+# Renomeando as variáveis
+names(novosdados)[names(novosdados)=='fit']="prob"
+names(novosdados)[names(novosdados)=='se.fit']="se.prob"
+
+# Estimando os intervalos de confiança
+
+novosdados$LL=novosdados$prob-1.96*novosdados$se.prob
+novosdados$UL=novosdados$prob+1.96*novosdados$se.prob
+
+# Vizualização dos dados
+novosdados
+```
+
+```
+    gre  gpa rank   prob se.prob residual.scale      LL     UL
+1 587.7 3.39    1 0.5166 0.06632              1 0.38662 0.6466
+2 587.7 3.39    2 0.3523 0.03978              1 0.27431 0.4303
+3 587.7 3.39    3 0.2186 0.03825              1 0.14364 0.2936
+4 587.7 3.39    4 0.1847 0.04864              1 0.08934 0.2800
+```
+
+
+
+```r
+require(ggplot2)
+ggplot(novosdados, aes(x=rank,y=prob))+
+  geom_errorbar(aes(ymin=LL, ymax=UL), width=0.2,lty=1,lwd=1,col="red")+
+  geom_point(shape=18, size=5, fill="black")+
+  scale_x_discrete(limits=c("1","2","3","4"))+
+  labs(title="Probabilidades preditas", x="Ranking",y="Pr(y=1)")
+```
+
+<img src="05-RegLogist_files/figure-epub3/unnamed-chunk-26-1.png" width="60%" style="display: block; margin: auto;" />
+
+
+
+
 
 <!--
 \printbibliography[segment=\therefsegment,heading=subbibliography]
 -->
+
+## Exemplos de trabalhos que utilizaram regressão logística
+
+- **Uso da regressão logística na estimação da probabilidade de reincidência de jovens infratoras**. <http://bdm.unb.br/bitstream/10483/13133/1/2015_FelipeGomesRibeiro.pdf>
+
+- **Técnicas de Regressão Logística aplicada à Análise Ambiental**
+<http://www.uel.br/revistas/uel/index.php/geografia/article/download/6878/9676>
+
+- **Reincidência penal: uma análise a partir da e"conomia do crime" para subsidiar decisões judiciais.** <http://177.101.17.124/index.php/sociais/article/download/6029/4134>
+
+
+## Exercícios
+<!--
+
+reinc=sample(x = c(1, 0), size = 500, replace = TRUE)
+raca=sample(x = c("branca", "outro"), size = 500, replace = TRUE)
+idade=sample(x = 18:80, size = 500, replace = TRUE)
+sexo=sample(x = c("M", "F"), size = 500, replace = TRUE)
+crime=sample(x = c("transito", "drogas","roubo","outros"), size = 500, replace = TRUE)
+temporeclusao=sample(x = 1:10, size = 500, replace = TRUE)
+condicionalcrime=data.frame(reinc,raca,idade,sexo,crime,temporeclusao)
+View(condicionalcrime)
+summary(condicionalcrime)
+glm(reinc~., data=condicionalcrime)
+summary(glm(reinc~., data=condicionalcrime))
+step(glm(reinc~., data=condicionalcrime),direction = 'both')
+-->
+
+**1.** O Titanic foi um famoso navio britânico construído a partir de março de 1909 e lançado ao mar em maio de 1911. Em sua viagem inaugural em 10 de abril de 1912, cujo objetivo era partir de Southampton para Nova Iorque passando pela França e Irlanda, colidiu com um iceberg às 23h40min do dia 14 de abril. Baixe os dados do acidente em 
+<https://vincentarelbundock.github.io/Rdatasets/csv/COUNT/titanic.csv>. Esta base de dados possui as seguintes informações:
+
+- **survived**: informa se o tripulante sobreviveu ou não ("yes", "no");
+- **class**: representa a classe em que viajavam os tripulantes ("1st class", "2nd class" e "3rd class").
+- **age**: variável que separa entre as crianças ("child") e adultos ("adults")
+- **sex**: fator com o sexo do tripulante ("women", "man")
+
+**1.1.** Importe os dados para um objeto denominado *titanic* (lembre-se de determinar que as variávei sejam fatores). 
+
+**1.2** Crie uma nova a variável *sobreviveu* a partir de *survived* com fatores binários 0 e 1 (1 para os sobreviventes).
+
+**1.3**  Crie um modelo de regressão logística para descobrir a probabilidade de sobrevivência dos tripulantes (variável dependente `sobreviveu`) em relação às variáveis `class`, `age`, `sex`. Utilize o comando `summary` com o modelo. Declare a significância estatística das variáveis.
+
+**1.4** Com base na resposta anterior, disserte sobre a direção do sinal do *log* da probabilidade de sobrevivência com relação à cada variável independente do modelo. Quem estava na primeira classe tinha maiores chances de sobrevivência, ou na terceira? Adultos ou crianças tinham melhores chances de sobreviver, homens ou mulheres?
+
+**1.5** Transforme os coeficientes encontrados em Razão de Chances (OR - Odds Ratio), bem como verifique os intervalos de confiança.
+
+
+**1.6** Com base na resposta anterior, disserte sobre a razão das chances (OR) de cada variável independente do modelo.
+
+**1.7** Efetue a predição da probabilidade de sobrevivência de uma tripulante do sexo feminino, adulta e que viajava na primeira classe do navio.
+
+
+**1.8** Efetue a predição da probabilidade de sobrevivência de um tripulante do sexo masculino, adulto e que viajava na terceira classe do navio.
+
+
+**1.9** Crie a matriz de confusão e a Curva ROC para o modelo, avaliando seus dados.
+
+**1.10** Efetue o teste de Hosmer e Lemeschow para o modelo.
+
+**1.11** Encontre as medidas de pseudo R$^2$.
+
+**1.12** Utilize o método **Stepwise** (*direction='both'*) no modelo completo e avalie se as variáveis devem permanecer no modelo ou alguma deve sair.
+
+

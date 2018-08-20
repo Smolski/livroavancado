@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1534651775351.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B33782FA",
+    "lastKnownWriteTime" : 0,
+    "last_content_update" : 1534651775351,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "C9CD95D9",
+        "caption" : "condicionalcrime",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=condicionalcrime&cache_key=C9CD95D9",
+        "displayedObservations" : "500",
+        "environment" : "",
+        "object" : "condicionalcrime",
+        "preview" : "0",
+        "totalObservations" : "500",
+        "variables" : "6"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

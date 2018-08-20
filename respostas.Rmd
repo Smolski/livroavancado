@@ -1,0 +1,138 @@
+---
+title: "Titanic"
+author: "Felipe"
+date: "19 de agosto de 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Resposta Exercício Titanic
+
+**1.** O Titanic foi um famoso navio britânico construído a partir de março de 1909 e lançado ao mar em maio de 1911. Em sua viagem inaugural em 10 de abril de 1912, cujo objetivo era partir de Southampton para Nova Iorque passando pela França e Irlanda, colidiu com um iceberg às 23h40min do dia 14 de abril. Baixe os dados do acidente em 
+<https://vincentarelbundock.github.io/Rdatasets/csv/COUNT/titanic.csv>. Esta base de dados possui as seguintes informações:
+
+*survived*: informa se o tripulante sobreviveu ou não ("yes", "no");
+
+*class*: representa a classe em que viajavam os tripulantes ("1st class", "2nd class" e "3rd class").
+
+*age*: variável que separa entre as crianças ("child") e adultos ("adults")
+
+*sex*: fator com o sexo do tripulante ("women", "man")
+
+**1.1.** Importe os dados para um objeto denominado *titanic* (lembre-se de determinar que as variávei sejam fatores). 
+
+
+```{r}
+library(readr)
+titanic <- read_csv("https://vincentarelbundock.github.io/Rdatasets/csv/COUNT/titanic.csv")
+titanic$class=as.factor(titanic$class)
+titanic$age=as.factor(titanic$age)
+titanic$sex=as.factor(titanic$sex)
+head(titanic)
+```
+
+
+**1.2** Crie uma nova a variável *sobreviveu* a partir de *survived* com fatores binários 0 e 1 (1 para os sobreviventes).
+
+```{r}
+titanic$sobreviveu=ifelse(titanic$survived=='yes',1,0)
+head(titanic)
+summary(titanic)
+```
+
+
+**1.3**  Crie um modelo de regressão logística para descobrir a probabilidade de sobrevivência dos tripulantes (variável dependente `sobreviveu`) em relação às variáveis `class`, `age`, `sex`. Utilize o comando `summary` com o modelo. Declare a significância estatística das variáveis.
+
+```{r}
+titlog=glm(sobreviveu~class+age+sex, data=titanic, family = binomial(link="logit"))
+summary(titlog)
+```
+
+**1.4** Com base na resposta anterior, disserte sobre a direção do sinal do *log* da probabilidade de sobrevivência com relação à cada variável independente do modelo. Quem estava na primeira classe tinha maiores chances de sobrevivência, ou na terceira? Adultos ou crianças tinham melhores chances de sobreviver, homens ou mulheres?
+
+**1.5** Transforme os coeficientes encontrados em Razão de Chances (OR - Odds Ratio), bem como verifique os intervalos de confiança.
+
+```{r}
+exp(cbind(OR=coef(titlog), confint(titlog)))
+```
+
+**1.6** Com base na resposta anterior, disserte sobre a razão das chances (OR) de cada variável independente do modelo.
+
+**1.7** Efetue a predição da probabilidade de sobrevivência de uma tripulante do sexo feminino, adulta e que viajava na primeira classe do navio.
+
+
+```{r}
+predtit=data.frame(sex="women",
+                age="adults",
+                class="1st class"
+                )
+predtit$prob=predict(titlog, newdata=predtit, type="response")
+predtit
+```
+
+**1.8** Efetue a predição da probabilidade de sobrevivência de um tripulante do sexo masculino, adulto e que viajava na terceira classe do navio.
+
+```{r}
+predtit2=data.frame(sex="man",
+                age="adults",
+                class="3rd class"
+                )
+predtit2$prob=predict(titlog, newdata=predtit2, type="response")
+predtit2
+```
+
+**1.9** Crie a matriz de confusão e a Curva ROC para o modelo, avaliando seus dados.
+
+
+```{r}
+require(caret)
+titmat=as.factor(ifelse(
+  predict(titlog, 
+          newdata=titanic, 
+          type="response")
+  >0.5,"1","0"))
+
+confusionMatrix(titmat, as.factor(titanic$sobreviveu), positive="1")
+
+```
+
+
+```{r}
+require(pROC)
+roctit=plot.roc(titanic$sobreviveu, fitted(titlog))
+plot(roctit,
+     print.auc=TRUE,
+     auc.polygon=TRUE,
+     grud=c(0.1,0.2),
+     grid.col=c("green", "red"),
+     max.auc.polygon=TRUE,
+     auc.polygon.col="lightgreen",
+     print.thres=TRUE)
+```
+
+**1.10** Efetue o teste de Hosmer e Lemeschow para o modelo.
+
+```{r}
+require(ResourceSelection)
+hjtit=hoslem.test(titanic$sobreviveu, fitted(titlog), g=10)
+hjtit
+```
+**1.11** Encontre as medidas de pseudo R$^2$.
+
+```{r}
+require(modEvA)
+RsqGLM(titlog)
+```
+
+**1.12** Utilize o método **Stepwise** (*direction='both'*) no modelo completo e avalie se as variáveis devem permanecer no modelo ou alguma deve sair.
+
+```{r}
+step(titlog, direction = 'both')
+```
+
+
+
+

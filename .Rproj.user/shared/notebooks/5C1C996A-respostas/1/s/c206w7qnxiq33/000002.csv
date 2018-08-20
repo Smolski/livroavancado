@@ -1,0 +1,6 @@
+"0","predtit2=data.frame(sex=""man"","
+"0","                age=""adults"","
+"0","                class=""3rd class"""
+"0","                )"
+"0","predtit2$prob=predict(titlog, newdata=predtit2, type=""response"")"
+"0","predtit2"

@@ -3,7 +3,7 @@ title: "Software R: curso avançado"
 author: 
 - Felipe Micail da Silva Smolski
 - Iara Denise Endruweit Battisti
-date: "2018-08-05"
+date: "2018-08-19"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -31,6 +31,7 @@ Esta é a estrutura provisória de capítulos do **Curso Avançado em Estatísti
 - Regressão Múltipla
 - Regressão Logística
 
+<!--
 Algumas sugestões a incluir:
 
 - Produção de Mapas
@@ -41,6 +42,7 @@ Algumas sugestões a incluir:
 
 
 ![](Capa1.png)
+-->
 
 
 

@@ -1,0 +1,4 @@
+"0","packages <- c(""caret"", ""pROC"", ""ResourceSelection"", ""modEvA"", ""foreign"", ""stargazer"", ""mfx"",""readr"",""ggplot2"")"
+"0","if (length(setdiff(packages, rownames(installed.packages()))) > 0) {"
+"0","    install.packages(setdiff(packages, rownames(installed.packages())))  "
+"0","}"

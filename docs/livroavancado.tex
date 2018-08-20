@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-08-05}
+    \date{2018-08-19}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -142,7 +142,7 @@
 \usepackage{color}				% Controle das cores
 \usepackage{graphicx}
 
-\setlength{\parskip}{1em}
+%\setlength{\parskip}{1em}
 \renewcommand{\baselinestretch}{1.0}
 \setlength{\parindent}{1.25cm}
 \selectlanguage{brazil}
@@ -172,24 +172,6 @@ Estatística com R da UFFS}:
 \item
   Regressão Logística
 \end{itemize}
-
-Algumas sugestões a incluir:
-
-\begin{itemize}
-\tightlist
-\item
-  Produção de Mapas
-\item
-  Análise de Clusters
-\item
-  Manipulação de bases de dados
-\item
-  Análise de redes
-\item
-  O que mais?
-\end{itemize}
-
-\includegraphics{Capa1.png}
 
 \hypertarget{introducao}{%
 \chapter*{Introdução}\label{introducao}}
@@ -2036,6 +2018,15 @@ resposta dependente binária, portanto, tratando os grupos de interesse
 de prever a probabilidade de uma observação estar no grupo igual a 1
 (``eventos''), em relação ao grupo igual a zero (``não eventos'').
 
+A previsão da variável dependente depende dos coeficientes logísticos e
+das variáveis independentes escolhidas ao modelo, lembrando que os
+valores sempre estarão entre 0 e 1. Convenciona-se que valores de
+probabilidade acima de 0,50 sejam classificados como pertencendo ao
+grupo de ``eventos'', o que pode distinguir a os resultados pretidos e
+avaliando a precisão preditiva. Utiliza-se a razão de desigualdades - a
+razão entre as probabilidades dos dois resultados ou eventos:
+Prob\(_{i}/\)(1-Prob\(_{i}\)).
+
 Para a estimação dos coeficientes das variáveis independentes, são
 utilizados o valor logit ou a razão de desigualdades (HAIR et al.,
 \protect\hyperlink{ref-Hair2009}{2009}):
@@ -2060,11 +2051,39 @@ distribuição binomial) e; foi elaborada para que seja prevista a
 probabilidade de determinado evento ocorrer (HAIR et al.,
 \protect\hyperlink{ref-Hair2009}{2009}).
 
+A regressão logística utiliza a \textbf{curva logística} para assim
+representar a relação entre a variável dependente e as independentes. Os
+valores previstos portanto permanecem entre 0 e 1, sendo definidos pelos
+coeficientes estimados. A Figura \ref{fig:curvalog}a demonstra a relação
+da curva logistica geral, enquanto a Figura \ref{fig:curvalog}b mostra
+uma relação pobremente ajustada dos dados reais e a Figura
+\ref{fig:curvalog}c demonstra um bom ajustena relação entre as
+variáveis.
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.6\linewidth]{curvalog} 
+
+}
+
+\caption{Curva logística}\label{fig:curvalog}
+\end{figure}
+
+Fonte: Adaptado de HAIR et al. (\protect\hyperlink{ref-Hair2009}{2009}).
+
+A estimação dos coeficientes da regressão logística, ao contrário da
+regressão múltipla que utiliza o método dos mínimos quadrados, é
+efetuada pelo uso da \textbf{máxima verossimilhança}. Esta, por sua vez,
+busca maximizar a probabilidade de que um evento ocorra. A qualidade do
+ajuste do modelo é avaliada pelo ``pseudo'' R\(^2\) e pelo exame da
+precisão preditiva (matriz de confusão).
+
 Para otimizar o tempo do estudante, é recomendada a instalação prévia
 dos pacotes no RStudio a serem utilizados neste capítulo. Segue abaixo o
 comando a ser efetuado no console do RStudio:
 
 \texttt{install.packages(c("readr","mfx","caret","pRoc",}
+
 \texttt{"ResourceSelection","modEvA","foreign","stargazer"))}
 
 \hypertarget{regressao-logistica-simples}{%
@@ -2141,7 +2160,7 @@ sintaxe básica:
 Assim é obtida a função de ligação estimada do modelo:
 
 \[
-\hat g(CHD) = -5,309 +0,1109AGE
+ln\left (\frac{prob_{CHD}}{1-prob_{CHD}}  \right ) = - 5,309 + 0,1109AGE
 \]
 
 \begin{Shaded}
@@ -2399,11 +2418,61 @@ como ``não evento'' \(\hat Y=0\):
 VPN=\frac{VN}{VN+FN}
 \]
 
-\begin{figure}
-\centering
-\includegraphics{matriz.png}
-\caption{Matriz de Confusão}
-\end{figure}
+\begin{longtable}[]{@{}llll@{}}
+\caption{\label{tab:matriz}Matriz de confusão.}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.25\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[b]{0.25\columnwidth}\raggedright
+\textbf{Valor Observado}\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
+\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.25\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[b]{0.25\columnwidth}\raggedright
+\textbf{Valor Observado}\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
+\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.25\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+\(Y=1\)\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+\(Y=0\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright
+\textbf{Valor Estimado}\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+\(\hat Y\)=1\strut
+\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+VP\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+FP\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.25\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+\(\hat Y\)=0\strut
+\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+FN\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+VN\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
 
 Fonte: Adaptado de FAWCETT (\protect\hyperlink{ref-Fawcett2006}{2006}).
 
@@ -2425,7 +2494,9 @@ Carregando pacotes exigidos: lattice
 \begin{Highlighting}[]
 \NormalTok{  pdata <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(}
     \KeywordTok{ifelse}\NormalTok{(}
-      \KeywordTok{predict}\NormalTok{(m1, }\DataTypeTok{newdata =}\NormalTok{ chd, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
+      \KeywordTok{predict}\NormalTok{(m1, }
+              \DataTypeTok{newdata =}\NormalTok{ chd, }
+              \DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
       \OperatorTok{>}\FloatTok{0.5}\NormalTok{,}\StringTok{"1"}\NormalTok{,}\StringTok{"0"}\NormalTok{))}
 
 \KeywordTok{confusionMatrix}\NormalTok{(pdata, chd}\OperatorTok{$}\NormalTok{CHD, }\DataTypeTok{positive=}\StringTok{"1"}\NormalTok{)}
@@ -2524,7 +2595,8 @@ X-squared = 100, df = 8, p-value <2e-16
 \end{verbatim}
 
 \hypertarget{pseudo-r2}{%
-\subsection{Pseudo R\^{}\{2\}}\label{pseudo-r2}}
+\subsection{\texorpdfstring{Pseudo
+R\(^2\)}{Pseudo R\^{}2}}\label{pseudo-r2}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2872,7 +2944,15 @@ Residual Deviance: 67.3     AIC: 71.3
 \section{Regressão Logística Múltipla com variável
 categórica}\label{regressao-logistica-multipla-com-variavel-categorica}}
 
-Abaixo segue um exemplo com uma variável dependente categórica:
+Agora segue um exemplo de regressão logística utilizando uma variável
+dependente categórica juntamente com variáveis numéricas. Trata-se de
+uma base de dados em que o interesse é descobrir a probabilidade de um
+aluno ser admitido no vestibular com base no ranqueamento de escola em
+que estudou no ensino médio, bem como nas notas do aluno nas provas do
+Gpa (Grade Point Average - uma nota de performance dos alunos nos
+Estados Unidos) e do Gre (Graduate Record Examinations - exame padrão
+que qualifica o estudante para o ensino superior nos Estados Unidos).
+Seguem as variáveis.
 
 \begin{itemize}
 \tightlist
@@ -2889,13 +2969,62 @@ Abaixo segue um exemplo com uma variável dependente categórica:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Carregando o arquivo}
 \KeywordTok{require}\NormalTok{(readr)}
-\NormalTok{binary <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv"}\NormalTok{)}
+\NormalTok{binary <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv"}\NormalTok{)}
 
+\CommentTok{# Transformando a variável rank em categórica}
 \NormalTok{binary}\OperatorTok{$}\NormalTok{rank <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(binary}\OperatorTok{$}\NormalTok{rank)}
-\NormalTok{mylogit <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(admit }\OperatorTok{~}\StringTok{ }\NormalTok{gre }\OperatorTok{+}\StringTok{ }\NormalTok{gpa }\OperatorTok{+}\StringTok{ }\NormalTok{rank, }\DataTypeTok{data =}\NormalTok{ binary, }\DataTypeTok{family =} \KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link=}\StringTok{"logit"}\NormalTok{))}
+
+\CommentTok{# Determinando a regressão}
+\NormalTok{mylogit <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(admit }\OperatorTok{~}\StringTok{ }\NormalTok{gre }\OperatorTok{+}\StringTok{ }\NormalTok{gpa }\OperatorTok{+}\StringTok{ }\NormalTok{rank, }\DataTypeTok{data =}\NormalTok{ binary, }
+               \DataTypeTok{family =} \KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link=}\StringTok{"logit"}\NormalTok{))}
+
+\CommentTok{# Resultado}
+\KeywordTok{summary}\NormalTok{(mylogit)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+
+Call:
+glm(formula = admit ~ gre + gpa + rank, family = binomial(link = "logit"), 
+    data = binary)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-1.627  -0.866  -0.639   1.149   2.079  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -3.98998    1.13995   -3.50  0.00047 ***
+gre          0.00226    0.00109    2.07  0.03847 *  
+gpa          0.80404    0.33182    2.42  0.01539 *  
+rank2       -0.67544    0.31649   -2.13  0.03283 *  
+rank3       -1.34020    0.34531   -3.88  0.00010 ***
+rank4       -1.55146    0.41783   -3.71  0.00020 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 499.98  on 399  degrees of freedom
+Residual deviance: 458.52  on 394  degrees of freedom
+AIC: 470.5
+
+Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+Observa-se que os parâmetros da regressão logística proposta utilizando
+todas as variáveis foram assim determinados:
+
+\[
+ln\left (\frac{prob_{admit}}{1-prob_{admit}}  \right ) = 
+-3,98998 + 0.00226gre + 0,80404gpa -0,67544rank2 -1,34020rank3 -1,55146rank4
+\]
+
+Determinam-se os coeficientes exponenciados (as razões de chance) para
+cada variável do modelo, bem como seus intervalos de confiança:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2912,6 +3041,226 @@ rank2       0.5089 0.272290 0.9448
 rank3       0.2618 0.131642 0.5115
 rank4       0.2119 0.090716 0.4707
 \end{verbatim}
+
+A leitura dos resultados, para as variáveis numéricas continua sendo a
+mesma. Com relação ao resultado para a variável \textbf{gre}, para cada
+aumento unitário nesta variável, mantendo-se as demais constantes,
+elevam-se em 0,23\% ((1,0023-1)*100) as chances de que o aluno seja
+aprovado no vestibular. Já para a cada variação unitária na variável
+\textbf{gpa}, aumentam em 123,45\% ((2,2345-1)*100). Dito de outra
+forma, para cada elevação em \textbf{gpa} aumentam 2,2345 vezes as
+chances em ser aprovado no vestibular. Tais resultados vão de encontro
+ao conceito teórico de que quanto melhor a nota do aluno em exame
+prévios maiores as chances de este aluno passar no vestibular.
+
+Outra questão é sobre o \emph{ranking} das escolas que os alunos
+estudaram. Será que aqueles que estudaram em escolas melhores ranqueadas
+possuem mais chances de passar no vestibular? A variável \textbf{rank}
+traz esta análise, sendo que como é uma variável categórica (pois retoma
+as categorias de 1 a 4), as comparações das chances de que o aluno passe
+no vestibular são comparadas com a escola de \emph{ranking} 1.
+
+Desta forma, em sendo o aluno proveniente de uma escola de
+\emph{ranking} 2, diminuem-se as chances em 49,11\%
+((0,5089-1)\$\emph{\$100) de que o aluno passe no vestibular. Já para os
+alunos que estudaramem uma escola de }ranking* 3 tem 73,82\%
+((0,2618-1)*100) menos chances de passar no vestibular. Pioram ainda
+mais as chances de passar no vestibular daqueles alunos que estudaram em
+uma escola de \emph{ranking} 4: diminuem-se em 78,81\% as chances de que
+estes aluno passe no vestibular, mantidas as demais veriáveis.
+
+\textbf{Predição das probabilidades}: a partir da equação de regressão
+logística auferida neste exemplo, qual é a probabilidade de que um aluno
+que tirou nota no \textbf{gre} de 700, no \textbf{gpa} de 3,67 e estudou
+em uma escola de \emph{ranking} 1 passe no vestibular? Nota-se que a
+probabilidade de que este aluno passe no vestibular é de 63,32\%. Segue
+a predição para estas variáveis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred=}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{gre=}\DecValTok{700}\NormalTok{,}
+                \DataTypeTok{gpa=}\FloatTok{3.67}\NormalTok{,}
+                \DataTypeTok{rank=}\KeywordTok{factor}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{                )}
+\NormalTok{pred}\OperatorTok{$}\NormalTok{prob=}\KeywordTok{predict}\NormalTok{(mylogit, }\DataTypeTok{newdata=}\NormalTok{pred, }\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{pred}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  gre  gpa rank   prob
+1 700 3.67    1 0.6332
+\end{verbatim}
+
+Comparando com um aluno que tirou as mesmas notas no \textbf{gre} e
+\textbf{gpa}, mas que estudou em uma escola \emph{ranking} 4:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred=}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{gre=}\DecValTok{700}\NormalTok{,}
+                \DataTypeTok{gpa=}\FloatTok{3.67}\NormalTok{,}
+                \DataTypeTok{rank=}\KeywordTok{factor}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\NormalTok{                )}
+\NormalTok{pred}\OperatorTok{$}\NormalTok{prob=}\KeywordTok{predict}\NormalTok{(mylogit, }\DataTypeTok{newdata=}\NormalTok{pred, }\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{pred}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  gre  gpa rank   prob
+1 700 3.67    4 0.2679
+\end{verbatim}
+
+Agora será efetuada a predição comparando-se os \emph{rankings} das
+escolas. No exemplo abaixo, é criada uma base de dados com as notas
+médias dos alunos nas variáveis \textbf{gre} e \textbf{gpa},
+intercalando com todos os \emph{rankings} das escolas onde estudaram.
+Após criar a tabela, esta é unida com as colunas de predição dos valores
+da equação. São renomeadas as variáveis de \emph{fit} para \emph{prob} e
+\emph{se.fit} para \emph{se.prob}, no primeiro caso pois obteiveram-se
+as probabilidades de cada caso e no segundo caso incluiu-se o erro
+padrão (\emph{se: standart error}) desta probabilidade. Com este erro
+padrão calculou-se os limites inferior (\emph{LL: low level}) e superior
+(\emph{UL: upper level }) no intervalo de confiança de 95\%.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Criação da tabela}
+\NormalTok{novosdados=}\KeywordTok{with}\NormalTok{(binary,}
+                \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{gre=}\KeywordTok{mean}\NormalTok{(gre),}
+                           \DataTypeTok{gpa=}\KeywordTok{mean}\NormalTok{(gpa),}
+                           \DataTypeTok{rank=}\KeywordTok{factor}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{)))}
+
+\CommentTok{# Incluindo a predição dos valores}
+\NormalTok{novosdados=}\KeywordTok{cbind}\NormalTok{(novosdados,}\KeywordTok{predict}\NormalTok{(mylogit, }
+                                    \DataTypeTok{newdata=}\NormalTok{novosdados,}
+                                    \DataTypeTok{type=}\StringTok{"response"}\NormalTok{,}
+                                    \DataTypeTok{se.fit=}\OtherTok{TRUE}\NormalTok{))}
+\CommentTok{# Renomeando as variáveis}
+\KeywordTok{names}\NormalTok{(novosdados)[}\KeywordTok{names}\NormalTok{(novosdados)}\OperatorTok{==}\StringTok{'fit'}\NormalTok{]=}\StringTok{"prob"}
+\KeywordTok{names}\NormalTok{(novosdados)[}\KeywordTok{names}\NormalTok{(novosdados)}\OperatorTok{==}\StringTok{'se.fit'}\NormalTok{]=}\StringTok{"se.prob"}
+
+\CommentTok{# Estimando os intervalos de confiança}
+
+\NormalTok{novosdados}\OperatorTok{$}\NormalTok{LL=novosdados}\OperatorTok{$}\NormalTok{prob}\FloatTok{-1.96}\OperatorTok{*}\NormalTok{novosdados}\OperatorTok{$}\NormalTok{se.prob}
+\NormalTok{novosdados}\OperatorTok{$}\NormalTok{UL=novosdados}\OperatorTok{$}\NormalTok{prob}\FloatTok{+1.96}\OperatorTok{*}\NormalTok{novosdados}\OperatorTok{$}\NormalTok{se.prob}
+
+\CommentTok{# Vizualização dos dados}
+\NormalTok{novosdados}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    gre  gpa rank   prob se.prob residual.scale      LL     UL
+1 587.7 3.39    1 0.5166 0.06632              1 0.38662 0.6466
+2 587.7 3.39    2 0.3523 0.03978              1 0.27431 0.4303
+3 587.7 3.39    3 0.2186 0.03825              1 0.14364 0.2936
+4 587.7 3.39    4 0.1847 0.04864              1 0.08934 0.2800
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(ggplot2)}
+\KeywordTok{ggplot}\NormalTok{(novosdados, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{rank,}\DataTypeTok{y=}\NormalTok{prob))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_errorbar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{ymin=}\NormalTok{LL, }\DataTypeTok{ymax=}\NormalTok{UL), }\DataTypeTok{width=}\FloatTok{0.2}\NormalTok{,}\DataTypeTok{lty=}\DecValTok{1}\NormalTok{,}\DataTypeTok{lwd=}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{shape=}\DecValTok{18}\NormalTok{, }\DataTypeTok{size=}\DecValTok{5}\NormalTok{, }\DataTypeTok{fill=}\StringTok{"black"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_discrete}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{,}\StringTok{"2"}\NormalTok{,}\StringTok{"3"}\NormalTok{,}\StringTok{"4"}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Probabilidades preditas"}\NormalTok{, }\DataTypeTok{x=}\StringTok{"Ranking"}\NormalTok{,}\DataTypeTok{y=}\StringTok{"Pr(y=1)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{05-RegLogist_files/figure-latex/unnamed-chunk-26-1} \end{center}
+
+\hypertarget{exemplos-de-trabalhos-que-utilizaram-regressao-logistica}{%
+\section{Exemplos de trabalhos que utilizaram regressão
+logística}\label{exemplos-de-trabalhos-que-utilizaram-regressao-logistica}}
+
+\begin{itemize}
+\item
+  \textbf{Uso da regressão logística na estimação da probabilidade de
+  reincidência de jovens infratoras}.
+  \url{http://bdm.unb.br/bitstream/10483/13133/1/2015_FelipeGomesRibeiro.pdf}
+\item
+  \textbf{Técnicas de Regressão Logística aplicada à Análise Ambiental}
+  \url{http://www.uel.br/revistas/uel/index.php/geografia/article/download/6878/9676}
+\item
+  \textbf{Reincidência penal: uma análise a partir da e``conomia do
+  crime'' para subsidiar decisões judiciais.}
+  \url{http://177.101.17.124/index.php/sociais/article/download/6029/4134}
+\end{itemize}
+
+\hypertarget{exercicios}{%
+\section{Exercícios}\label{exercicios}}
+
+\textbf{1.} O Titanic foi um famoso navio britânico construído a partir
+de março de 1909 e lançado ao mar em maio de 1911. Em sua viagem
+inaugural em 10 de abril de 1912, cujo objetivo era partir de
+Southampton para Nova Iorque passando pela França e Irlanda, colidiu com
+um iceberg às 23h40min do dia 14 de abril. Baixe os dados do acidente em
+\url{https://vincentarelbundock.github.io/Rdatasets/csv/COUNT/titanic.csv}.
+Esta base de dados possui as seguintes informações:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{survived}: informa se o tripulante sobreviveu ou não (``yes'',
+  ``no'');
+\item
+  \textbf{class}: representa a classe em que viajavam os tripulantes
+  (``1st class'', ``2nd class'' e ``3rd class'').
+\item
+  \textbf{age}: variável que separa entre as crianças (``child'') e
+  adultos (``adults'')
+\item
+  \textbf{sex}: fator com o sexo do tripulante (``women'', ``man'')
+\end{itemize}
+
+\textbf{1.1.} Importe os dados para um objeto denominado \emph{titanic}
+(lembre-se de determinar que as variávei sejam fatores).
+
+\textbf{1.2} Crie uma nova a variável \emph{sobreviveu} a partir de
+\emph{survived} com fatores binários 0 e 1 (1 para os sobreviventes).
+
+\textbf{1.3} Crie um modelo de regressão logística para descobrir a
+probabilidade de sobrevivência dos tripulantes (variável dependente
+\texttt{sobreviveu}) em relação às variáveis \texttt{class},
+\texttt{age}, \texttt{sex}. Utilize o comando \texttt{summary} com o
+modelo. Declare a significância estatística das variáveis.
+
+\textbf{1.4} Com base na resposta anterior, disserte sobre a direção do
+sinal do \emph{log} da probabilidade de sobrevivência com relação à cada
+variável independente do modelo. Quem estava na primeira classe tinha
+maiores chances de sobrevivência, ou na terceira? Adultos ou crianças
+tinham melhores chances de sobreviver, homens ou mulheres?
+
+\textbf{1.5} Transforme os coeficientes encontrados em Razão de Chances
+(OR - Odds Ratio), bem como verifique os intervalos de confiança.
+
+\textbf{1.6} Com base na resposta anterior, disserte sobre a razão das
+chances (OR) de cada variável independente do modelo.
+
+\textbf{1.7} Efetue a predição da probabilidade de sobrevivência de uma
+tripulante do sexo feminino, adulta e que viajava na primeira classe do
+navio.
+
+\textbf{1.8} Efetue a predição da probabilidade de sobrevivência de um
+tripulante do sexo masculino, adulto e que viajava na terceira classe do
+navio.
+
+\textbf{1.9} Crie a matriz de confusão e a Curva ROC para o modelo,
+avaliando seus dados.
+
+\textbf{1.10} Efetue o teste de Hosmer e Lemeschow para o modelo.
+
+\textbf{1.11} Encontre as medidas de pseudo R\(^2\).
+
+\textbf{1.12} Utilize o método \textbf{Stepwise}
+(\emph{direction=`both'}) no modelo completo e avalie se as variáveis
+devem permanecer no modelo ou alguma deve sair.
+
+\hypertarget{referencias}{%
+\chapter*{Referências}\label{referencias}}
+\addcontentsline{toc}{chapter}{Referências}
 
 \hypertarget{refs}{}
 \leavevmode\hypertarget{ref-Fawcett2006}{}%
