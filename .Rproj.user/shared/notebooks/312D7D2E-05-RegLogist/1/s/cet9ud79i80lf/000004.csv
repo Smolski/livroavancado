@@ -1,0 +1,2 @@
+"0","require(pROC)"
+"0","roc1=plot.roc(chd$CHD,fitted(m1))"

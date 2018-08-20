@@ -1,0 +1,2 @@
+"0","media$pred.prob = predict(m1, newdata=media, type=""response"")"
+"0","media"

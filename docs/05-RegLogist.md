@@ -49,7 +49,7 @@ A regressão logística utiliza a **curva logística** para assim representar a 
 </div>
 Fonte: Adaptado de @Hair2009.
 
-A estimação dos coeficientes da regressão logística, ao contrário da regressão múltipla que utiliza o método dos mínimos quadrados, é efetuada pelo uso da **máxima verossimilhança**. Esta, por sua vez, busca maximizar a probabilidade de que um evento ocorra. A qualidade do ajuste do modelo é avaliada pelo "pseudo" R$^2$ e pelo exame da precisão preditiva (matriz de confusão).
+A estimação dos coeficientes da regressão logística, ao contrário da regressão múltipla que utiliza o método dos mínimos quadrados, é efetuada pelo uso da **máxima verossimilhança**. Esta, por sua vez, busca encontrar as estimativas mais prováveis dos coeficientes e maximizar a probabilidade de que um evento ocorra. A qualidade do ajuste do modelo é avaliada pelo "pseudo" R$^2$ e pelo exame da precisão preditiva (matriz de confusão).
 
 
 
@@ -304,7 +304,7 @@ Table: (\#tab:matriz)Matriz de confusão.
 
   --------------------------------------------------------------
                                   **Valor Observado**
-  ------------------  ----------  ------------------- ------------
+  ------------------  ----------  ------------------- ----------
                                   $Y=1$               $Y=0$
   
   **Valor Estimado**  $\hat Y$=1  VP                  FP
@@ -375,7 +375,7 @@ Prediction  0  1
                                         
 ```
 
-
+A matriz de confusão retoma uma excelente acurácia total do modelo em 74\%, sendo que o modelo consegue acertos de 70,7\% na predição de valores positivos ou dos "eventos" (29/41) e 76,3\% na predição de valores negativos ou os "não eventos" (45/59).
 
 
 ### Curva ROC
@@ -738,6 +738,8 @@ Agora segue um exemplo de regressão logística utilizando uma variável depende
 - **Gre**: Variável independente = exames prévios do candidato.
 - **Gpa**: Variável independente = exames prévios do candidato.
 
+Abaixo seguem os resultados do modelo, partindo-se do carregamento dos dados. É observado que as variáveis **gre** e **gpa** obtiveram significância estatística em 10\%, bem como rank2, já rank3 e rank4 obtiveram `p=0,001`. A variância do modelo nulo
+ficou em 499,98 e com a inclusão das variáveis ao modelo baixou para 458,52, o que mostra que contribuíram para explicação da variável dependente.
 
 
 ```r
@@ -786,8 +788,58 @@ AIC: 470.5
 Number of Fisher Scoring iterations: 4
 ```
 
+Utilizando o teste de análise de variância `anova` pode-se observar a variância com o modelo nulo (500) e à medida que as variáveis explicativas foram sendo incluídas, estas reduziram a variância do modelo para 459, contribuindo para o modelo.
 
-Observa-se que os parâmetros da regressão logística proposta utilizando todas as variáveis foram assim determinados:
+
+
+```r
+anova(mylogit, test = "Chisq")
+```
+
+```
+Analysis of Deviance Table
+
+Model: binomial, link: logit
+
+Response: admit
+
+Terms added sequentially (first to last)
+
+     Df Deviance Resid. Df Resid. Dev Pr(>Chi)    
+NULL                   399        500             
+gre   1    13.92       398        486  0.00019 ***
+gpa   1     5.71       397        480  0.01685 *  
+rank  3    21.83       394        459  7.1e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+Caso seja interessante comparar diversos modelos de regressão com variáveis explicativas distintas, estes podem ser comparados no teste de variância `anova`. Utilizando a função `update` pode ser criada uma nova regressão com base na regressão anterior (`mylogit`) e é excluído do modelo a variável `gre` para exemplificar. Após, é efetuado novamente o teste `anova`, agora comparando os dois modelos, como segue abaixo. Evidencia-se que a exclusão da variável `gre` causou elevaçãod a variância do modelo para 463, piorando portanto a capacidade do modelo pois espera-se sempre reduções na sua variância.
+
+
+```r
+# Criação de novo modelo com base no anterior
+mylogit2=update(mylogit,~. - gre)
+# 
+anova(mylogit,mylogit2, test = "Chisq")
+```
+
+```
+Analysis of Deviance Table
+
+Model 1: admit ~ gre + gpa + rank
+Model 2: admit ~ gpa + rank
+  Resid. Df Resid. Dev Df Deviance Pr(>Chi)  
+1       394        459                       
+2       395        463 -1    -4.36    0.037 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+
+
+Voltando ao modelo determinado anteriormente (`mylogit`), observa-se que os parâmetros da regressão logística proposta utilizando todas as variáveis foram assim determinados:
 
 
 $$
@@ -908,7 +960,7 @@ ggplot(novosdados, aes(x=rank,y=prob))+
   labs(title="Probabilidades preditas", x="Ranking",y="Pr(y=1)")
 ```
 
-<img src="05-RegLogist_files/figure-epub3/unnamed-chunk-26-1.png" width="60%" style="display: block; margin: auto;" />
+<img src="05-RegLogist_files/figure-epub3/unnamed-chunk-28-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 

@@ -2074,9 +2074,10 @@ Fonte: Adaptado de HAIR et al. (\protect\hyperlink{ref-Hair2009}{2009}).
 A estimação dos coeficientes da regressão logística, ao contrário da
 regressão múltipla que utiliza o método dos mínimos quadrados, é
 efetuada pelo uso da \textbf{máxima verossimilhança}. Esta, por sua vez,
-busca maximizar a probabilidade de que um evento ocorra. A qualidade do
-ajuste do modelo é avaliada pelo ``pseudo'' R\(^2\) e pelo exame da
-precisão preditiva (matriz de confusão).
+busca encontrar as estimativas mais prováveis dos coeficientes e
+maximizar a probabilidade de que um evento ocorra. A qualidade do ajuste
+do modelo é avaliada pelo ``pseudo'' R\(^2\) e pelo exame da precisão
+preditiva (matriz de confusão).
 
 Para otimizar o tempo do estudante, é recomendada a instalação prévia
 dos pacotes no RStudio a serem utilizados neste capítulo. Segue abaixo o
@@ -2427,7 +2428,7 @@ VPN=\frac{VN}{VN+FN}
 \strut
 \end{minipage} & \begin{minipage}[b]{0.25\columnwidth}\raggedright
 \textbf{Valor Observado}\strut
-\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright
 \strut
 \end{minipage}\tabularnewline
 \midrule
@@ -2439,7 +2440,7 @@ VPN=\frac{VN}{VN+FN}
 \strut
 \end{minipage} & \begin{minipage}[b]{0.25\columnwidth}\raggedright
 \textbf{Valor Observado}\strut
-\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright
 \strut
 \end{minipage}\tabularnewline
 \midrule
@@ -2450,7 +2451,7 @@ VPN=\frac{VN}{VN+FN}
 \strut
 \end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
 \(Y=1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
 \(Y=0\)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.25\columnwidth}\raggedright
@@ -2459,7 +2460,7 @@ VPN=\frac{VN}{VN+FN}
 \(\hat Y\)=1\strut
 \end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
 VP\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
 FP\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.25\columnwidth}\raggedright
@@ -2468,7 +2469,7 @@ FP\strut
 \(\hat Y\)=0\strut
 \end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
 FN\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
 VN\strut
 \end{minipage}\tabularnewline
 \bottomrule
@@ -2531,6 +2532,11 @@ Prediction  0  1
        'Positive' Class : 1             
                                         
 \end{verbatim}
+
+A matriz de confusão retoma uma excelente acurácia total do modelo em
+74\%, sendo que o modelo consegue acertos de 70,7\% na predição de
+valores positivos ou dos ``eventos'' (29/41) e 76,3\% na predição de
+valores negativos ou os ``não eventos'' (45/59).
 
 \hypertarget{curva-roc}{%
 \subsection{Curva ROC}\label{curva-roc}}
@@ -2967,6 +2973,13 @@ Seguem as variáveis.
   \textbf{Gpa}: Variável independente = exames prévios do candidato.
 \end{itemize}
 
+Abaixo seguem os resultados do modelo, partindo-se do carregamento dos
+dados. É observado que as variáveis \textbf{gre} e \textbf{gpa}
+obtiveram significância estatística em 10\%, bem como rank2, já rank3 e
+rank4 obtiveram \texttt{p=0,001}. A variância do modelo nulo ficou em
+499,98 e com a inclusão das variáveis ao modelo baixou para 458,52, o
+que mostra que contribuíram para explicação da variável dependente.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Carregando o arquivo}
@@ -3015,7 +3028,69 @@ AIC: 470.5
 Number of Fisher Scoring iterations: 4
 \end{verbatim}
 
-Observa-se que os parâmetros da regressão logística proposta utilizando
+Utilizando o teste de análise de variância \texttt{anova} pode-se
+observar a variância com o modelo nulo (500) e à medida que as variáveis
+explicativas foram sendo incluídas, estas reduziram a variância do
+modelo para 459, contribuindo para o modelo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anova}\NormalTok{(mylogit, }\DataTypeTok{test =} \StringTok{"Chisq"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Analysis of Deviance Table
+
+Model: binomial, link: logit
+
+Response: admit
+
+Terms added sequentially (first to last)
+
+     Df Deviance Resid. Df Resid. Dev Pr(>Chi)    
+NULL                   399        500             
+gre   1    13.92       398        486  0.00019 ***
+gpa   1     5.71       397        480  0.01685 *  
+rank  3    21.83       394        459  7.1e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+Caso seja interessante comparar diversos modelos de regressão com
+variáveis explicativas distintas, estes podem ser comparados no teste de
+variância \texttt{anova}. Utilizando a função \texttt{update} pode ser
+criada uma nova regressão com base na regressão anterior
+(\texttt{mylogit}) e é excluído do modelo a variável \texttt{gre} para
+exemplificar. Após, é efetuado novamente o teste \texttt{anova}, agora
+comparando os dois modelos, como segue abaixo. Evidencia-se que a
+exclusão da variável \texttt{gre} causou elevaçãod a variância do modelo
+para 463, piorando portanto a capacidade do modelo pois espera-se sempre
+reduções na sua variância.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Criação de novo modelo com base no anterior}
+\NormalTok{mylogit2=}\KeywordTok{update}\NormalTok{(mylogit,}\OperatorTok{~}\NormalTok{. }\OperatorTok{-}\StringTok{ }\NormalTok{gre)}
+\CommentTok{# }
+\KeywordTok{anova}\NormalTok{(mylogit,mylogit2, }\DataTypeTok{test =} \StringTok{"Chisq"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Analysis of Deviance Table
+
+Model 1: admit ~ gre + gpa + rank
+Model 2: admit ~ gpa + rank
+  Resid. Df Resid. Dev Df Deviance Pr(>Chi)  
+1       394        459                       
+2       395        463 -1    -4.36    0.037 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+Voltando ao modelo determinado anteriormente (\texttt{mylogit}),
+observa-se que os parâmetros da regressão logística proposta utilizando
 todas as variáveis foram assim determinados:
 
 \[
@@ -3169,7 +3244,7 @@ padrão calculou-se os limites inferior (\emph{LL: low level}) e superior
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{05-RegLogist_files/figure-latex/unnamed-chunk-26-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{05-RegLogist_files/figure-latex/unnamed-chunk-28-1} \end{center}
 
 \hypertarget{exemplos-de-trabalhos-que-utilizaram-regressao-logistica}{%
 \section{Exemplos de trabalhos que utilizaram regressão

@@ -267,7 +267,7 @@ Figura 4.1: Curva logística
 </p>
 </div>
 <p>Fonte: Adaptado de <span class="citation">Hair et al. (<a href="#ref-Hair2009">2009</a>)</span>.</p>
-<p>A estimação dos coeficientes da regressão logística, ao contrário da regressão múltipla que utiliza o método dos mínimos quadrados, é efetuada pelo uso da <strong>máxima verossimilhança</strong>. Esta, por sua vez, busca maximizar a probabilidade de que um evento ocorra. A qualidade do ajuste do modelo é avaliada pelo “pseudo” R<span class="math inline">\(^2\)</span> e pelo exame da precisão preditiva (matriz de confusão).</p>
+<p>A estimação dos coeficientes da regressão logística, ao contrário da regressão múltipla que utiliza o método dos mínimos quadrados, é efetuada pelo uso da <strong>máxima verossimilhança</strong>. Esta, por sua vez, busca encontrar as estimativas mais prováveis dos coeficientes e maximizar a probabilidade de que um evento ocorra. A qualidade do ajuste do modelo é avaliada pelo “pseudo” R<span class="math inline">\(^2\)</span> e pelo exame da precisão preditiva (matriz de confusão).</p>
 <p>Para otimizar o tempo do estudante, é recomendada a instalação prévia dos pacotes no RStudio a serem utilizados neste capítulo. Segue abaixo o comando a ser efetuado no console do RStudio:</p>
 <p><code>install.packages(c(&quot;readr&quot;,&quot;mfx&quot;,&quot;caret&quot;,&quot;pRoc&quot;,</code></p>
 <p><code>&quot;ResourceSelection&quot;,&quot;modEvA&quot;,&quot;foreign&quot;,&quot;stargazer&quot;))</code></p>
@@ -419,13 +419,13 @@ VPP=\frac{VPP}{VN+FP}
 <p><span class="math display">\[
 VPN=\frac{VN}{VN+FN}
 \]</span></p>
-<table style="width:89%;">
+<table style="width:86%;">
 <caption><span id="tab:matriz">Tabela 4.2: </span>Matriz de confusão.</caption>
 <colgroup>
 <col width="27%" />
 <col width="16%" />
 <col width="27%" />
-<col width="16%" />
+<col width="13%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -497,6 +497,7 @@ Prediction  0  1
                                         
        &#39;Positive&#39; Class : 1             
                                         </code></pre>
+<p>A matriz de confusão retoma uma excelente acurácia total do modelo em 74%, sendo que o modelo consegue acertos de 70,7% na predição de valores positivos ou dos “eventos” (29/41) e 76,3% na predição de valores negativos ou os “não eventos” (45/59).</p>
 </div>
 <div id="curva-roc" class="section level3">
 <h3><span class="header-section-number">4.2.5</span> Curva ROC</h3>
@@ -727,6 +728,8 @@ Residual Deviance: 67.3     AIC: 71.3</code></pre>
 <li><strong>Gre</strong>: Variável independente = exames prévios do candidato.</li>
 <li><strong>Gpa</strong>: Variável independente = exames prévios do candidato.</li>
 </ul>
+<p>Abaixo seguem os resultados do modelo, partindo-se do carregamento dos dados. É observado que as variáveis <strong>gre</strong> e <strong>gpa</strong> obtiveram significância estatística em 10%, bem como rank2, já rank3 e rank4 obtiveram <code>p=0,001</code>. A variância do modelo nulo
+ficou em 499,98 e com a inclusão das variáveis ao modelo baixou para 458,52, o que mostra que contribuíram para explicação da variável dependente.</p>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="co"># Carregando o arquivo</span></a>
 <a class="sourceLine" id="cb120-2" data-line-number="2"><span class="kw">require</span>(readr)</a>
 <a class="sourceLine" id="cb120-3" data-line-number="3">binary &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv&quot;</span>)</a>
@@ -767,13 +770,44 @@ Residual deviance: 458.52  on 394  degrees of freedom
 AIC: 470.5
 
 Number of Fisher Scoring iterations: 4</code></pre>
-<p>Observa-se que os parâmetros da regressão logística proposta utilizando todas as variáveis foram assim determinados:</p>
+<p>Utilizando o teste de análise de variância <code>anova</code> pode-se observar a variância com o modelo nulo (500) e à medida que as variáveis explicativas foram sendo incluídas, estas reduziram a variância do modelo para 459, contribuindo para o modelo.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="kw">anova</span>(mylogit, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
+<pre><code>Analysis of Deviance Table
+
+Model: binomial, link: logit
+
+Response: admit
+
+Terms added sequentially (first to last)
+
+     Df Deviance Resid. Df Resid. Dev Pr(&gt;Chi)    
+NULL                   399        500             
+gre   1    13.92       398        486  0.00019 ***
+gpa   1     5.71       397        480  0.01685 *  
+rank  3    21.83       394        459  7.1e-05 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Caso seja interessante comparar diversos modelos de regressão com variáveis explicativas distintas, estes podem ser comparados no teste de variância <code>anova</code>. Utilizando a função <code>update</code> pode ser criada uma nova regressão com base na regressão anterior (<code>mylogit</code>) e é excluído do modelo a variável <code>gre</code> para exemplificar. Após, é efetuado novamente o teste <code>anova</code>, agora comparando os dois modelos, como segue abaixo. Evidencia-se que a exclusão da variável <code>gre</code> causou elevaçãod a variância do modelo para 463, piorando portanto a capacidade do modelo pois espera-se sempre reduções na sua variância.</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="co"># Criação de novo modelo com base no anterior</span></a>
+<a class="sourceLine" id="cb124-2" data-line-number="2">mylogit2=<span class="kw">update</span>(mylogit,<span class="op">~</span>. <span class="op">-</span><span class="st"> </span>gre)</a>
+<a class="sourceLine" id="cb124-3" data-line-number="3"><span class="co"># </span></a>
+<a class="sourceLine" id="cb124-4" data-line-number="4"><span class="kw">anova</span>(mylogit,mylogit2, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
+<pre><code>Analysis of Deviance Table
+
+Model 1: admit ~ gre + gpa + rank
+Model 2: admit ~ gpa + rank
+  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)  
+1       394        459                       
+2       395        463 -1    -4.36    0.037 *
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Voltando ao modelo determinado anteriormente (<code>mylogit</code>), observa-se que os parâmetros da regressão logística proposta utilizando todas as variáveis foram assim determinados:</p>
 <p><span class="math display">\[
 ln\left (\frac{prob_{admit}}{1-prob_{admit}}  \right ) = 
 -3,98998 + 0.00226gre + 0,80404gpa -0,67544rank2 -1,34020rank3 -1,55146rank4
 \]</span></p>
 <p>Determinam-se os coeficientes exponenciados (as razões de chance) para cada variável do modelo, bem como seus intervalos de confiança:</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR =</span> <span class="kw">coef</span>(mylogit), <span class="kw">confint</span>(mylogit)))</a></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR =</span> <span class="kw">coef</span>(mylogit), <span class="kw">confint</span>(mylogit)))</a></code></pre></div>
 <pre><code>                OR    2.5 % 97.5 %
 (Intercept) 0.0185 0.001889 0.1665
 gre         1.0023 1.000138 1.0044
@@ -788,58 +822,58 @@ Dito de outra forma, para cada elevação em <strong>gpa</strong> aumentam 2,234
 Pioram ainda mais as chances de passar no vestibular daqueles alunos que estudaram em uma escola de <em>ranking</em> 4: diminuem-se em 78,81% as chances de que estes aluno passe no vestibular, mantidas as demais veriáveis.</p>
 <p><strong>Predição das probabilidades</strong>: a partir da equação de regressão logística auferida neste exemplo, qual é a probabilidade de que um aluno que tirou nota no <strong>gre</strong> de 700, no <strong>gpa</strong> de 3,67 e estudou em uma escola de <em>ranking</em> 1 passe no vestibular?
 Nota-se que a probabilidade de que este aluno passe no vestibular é de 63,32%. Segue a predição para estas variáveis:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">pred=<span class="kw">data.frame</span>(<span class="dt">gre=</span><span class="dv">700</span>,</a>
-<a class="sourceLine" id="cb124-2" data-line-number="2">                <span class="dt">gpa=</span><span class="fl">3.67</span>,</a>
-<a class="sourceLine" id="cb124-3" data-line-number="3">                <span class="dt">rank=</span><span class="kw">factor</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb124-4" data-line-number="4">                )</a>
-<a class="sourceLine" id="cb124-5" data-line-number="5">pred<span class="op">$</span>prob=<span class="kw">predict</span>(mylogit, <span class="dt">newdata=</span>pred, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb124-6" data-line-number="6">pred</a></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">pred=<span class="kw">data.frame</span>(<span class="dt">gre=</span><span class="dv">700</span>,</a>
+<a class="sourceLine" id="cb128-2" data-line-number="2">                <span class="dt">gpa=</span><span class="fl">3.67</span>,</a>
+<a class="sourceLine" id="cb128-3" data-line-number="3">                <span class="dt">rank=</span><span class="kw">factor</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb128-4" data-line-number="4">                )</a>
+<a class="sourceLine" id="cb128-5" data-line-number="5">pred<span class="op">$</span>prob=<span class="kw">predict</span>(mylogit, <span class="dt">newdata=</span>pred, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb128-6" data-line-number="6">pred</a></code></pre></div>
 <pre><code>  gre  gpa rank   prob
 1 700 3.67    1 0.6332</code></pre>
 <p>Comparando com um aluno que tirou as mesmas notas no <strong>gre</strong> e <strong>gpa</strong>, mas que estudou em uma escola <em>ranking</em> 4:</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">pred=<span class="kw">data.frame</span>(<span class="dt">gre=</span><span class="dv">700</span>,</a>
-<a class="sourceLine" id="cb126-2" data-line-number="2">                <span class="dt">gpa=</span><span class="fl">3.67</span>,</a>
-<a class="sourceLine" id="cb126-3" data-line-number="3">                <span class="dt">rank=</span><span class="kw">factor</span>(<span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb126-4" data-line-number="4">                )</a>
-<a class="sourceLine" id="cb126-5" data-line-number="5">pred<span class="op">$</span>prob=<span class="kw">predict</span>(mylogit, <span class="dt">newdata=</span>pred, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb126-6" data-line-number="6">pred</a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">pred=<span class="kw">data.frame</span>(<span class="dt">gre=</span><span class="dv">700</span>,</a>
+<a class="sourceLine" id="cb130-2" data-line-number="2">                <span class="dt">gpa=</span><span class="fl">3.67</span>,</a>
+<a class="sourceLine" id="cb130-3" data-line-number="3">                <span class="dt">rank=</span><span class="kw">factor</span>(<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb130-4" data-line-number="4">                )</a>
+<a class="sourceLine" id="cb130-5" data-line-number="5">pred<span class="op">$</span>prob=<span class="kw">predict</span>(mylogit, <span class="dt">newdata=</span>pred, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb130-6" data-line-number="6">pred</a></code></pre></div>
 <pre><code>  gre  gpa rank   prob
 1 700 3.67    4 0.2679</code></pre>
 <p>Agora será efetuada a predição comparando-se os <em>rankings</em> das escolas. No exemplo abaixo, é criada uma base de dados com as notas médias dos alunos nas variáveis <strong>gre</strong> e <strong>gpa</strong>, intercalando com todos os <em>rankings</em> das escolas onde estudaram. Após criar a tabela, esta é unida com as colunas de predição dos valores da equação. São renomeadas as variáveis de <em>fit</em> para <em>prob</em> e <em>se.fit</em> para <em>se.prob</em>, no primeiro caso pois obteiveram-se as probabilidades de cada caso e no segundo caso incluiu-se o erro padrão (<em>se: standart error</em>) desta probabilidade. Com este erro padrão calculou-se os limites inferior (<em>LL: low level</em>) e superior (<em>UL: upper level </em>) no intervalo de confiança de 95%.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="co"># Criação da tabela</span></a>
-<a class="sourceLine" id="cb128-2" data-line-number="2">novosdados=<span class="kw">with</span>(binary,</a>
-<a class="sourceLine" id="cb128-3" data-line-number="3">                <span class="kw">data.frame</span>(<span class="dt">gre=</span><span class="kw">mean</span>(gre),</a>
-<a class="sourceLine" id="cb128-4" data-line-number="4">                           <span class="dt">gpa=</span><span class="kw">mean</span>(gpa),</a>
-<a class="sourceLine" id="cb128-5" data-line-number="5">                           <span class="dt">rank=</span><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)))</a>
-<a class="sourceLine" id="cb128-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb128-7" data-line-number="7"><span class="co"># Incluindo a predição dos valores</span></a>
-<a class="sourceLine" id="cb128-8" data-line-number="8">novosdados=<span class="kw">cbind</span>(novosdados,<span class="kw">predict</span>(mylogit, </a>
-<a class="sourceLine" id="cb128-9" data-line-number="9">                                    <span class="dt">newdata=</span>novosdados,</a>
-<a class="sourceLine" id="cb128-10" data-line-number="10">                                    <span class="dt">type=</span><span class="st">&quot;response&quot;</span>,</a>
-<a class="sourceLine" id="cb128-11" data-line-number="11">                                    <span class="dt">se.fit=</span><span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb128-12" data-line-number="12"><span class="co"># Renomeando as variáveis</span></a>
-<a class="sourceLine" id="cb128-13" data-line-number="13"><span class="kw">names</span>(novosdados)[<span class="kw">names</span>(novosdados)<span class="op">==</span><span class="st">&#39;fit&#39;</span>]=<span class="st">&quot;prob&quot;</span></a>
-<a class="sourceLine" id="cb128-14" data-line-number="14"><span class="kw">names</span>(novosdados)[<span class="kw">names</span>(novosdados)<span class="op">==</span><span class="st">&#39;se.fit&#39;</span>]=<span class="st">&quot;se.prob&quot;</span></a>
-<a class="sourceLine" id="cb128-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb128-16" data-line-number="16"><span class="co"># Estimando os intervalos de confiança</span></a>
-<a class="sourceLine" id="cb128-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb128-18" data-line-number="18">novosdados<span class="op">$</span>LL=novosdados<span class="op">$</span>prob<span class="fl">-1.96</span><span class="op">*</span>novosdados<span class="op">$</span>se.prob</a>
-<a class="sourceLine" id="cb128-19" data-line-number="19">novosdados<span class="op">$</span>UL=novosdados<span class="op">$</span>prob<span class="fl">+1.96</span><span class="op">*</span>novosdados<span class="op">$</span>se.prob</a>
-<a class="sourceLine" id="cb128-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb128-21" data-line-number="21"><span class="co"># Vizualização dos dados</span></a>
-<a class="sourceLine" id="cb128-22" data-line-number="22">novosdados</a></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1"><span class="co"># Criação da tabela</span></a>
+<a class="sourceLine" id="cb132-2" data-line-number="2">novosdados=<span class="kw">with</span>(binary,</a>
+<a class="sourceLine" id="cb132-3" data-line-number="3">                <span class="kw">data.frame</span>(<span class="dt">gre=</span><span class="kw">mean</span>(gre),</a>
+<a class="sourceLine" id="cb132-4" data-line-number="4">                           <span class="dt">gpa=</span><span class="kw">mean</span>(gpa),</a>
+<a class="sourceLine" id="cb132-5" data-line-number="5">                           <span class="dt">rank=</span><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)))</a>
+<a class="sourceLine" id="cb132-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb132-7" data-line-number="7"><span class="co"># Incluindo a predição dos valores</span></a>
+<a class="sourceLine" id="cb132-8" data-line-number="8">novosdados=<span class="kw">cbind</span>(novosdados,<span class="kw">predict</span>(mylogit, </a>
+<a class="sourceLine" id="cb132-9" data-line-number="9">                                    <span class="dt">newdata=</span>novosdados,</a>
+<a class="sourceLine" id="cb132-10" data-line-number="10">                                    <span class="dt">type=</span><span class="st">&quot;response&quot;</span>,</a>
+<a class="sourceLine" id="cb132-11" data-line-number="11">                                    <span class="dt">se.fit=</span><span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb132-12" data-line-number="12"><span class="co"># Renomeando as variáveis</span></a>
+<a class="sourceLine" id="cb132-13" data-line-number="13"><span class="kw">names</span>(novosdados)[<span class="kw">names</span>(novosdados)<span class="op">==</span><span class="st">&#39;fit&#39;</span>]=<span class="st">&quot;prob&quot;</span></a>
+<a class="sourceLine" id="cb132-14" data-line-number="14"><span class="kw">names</span>(novosdados)[<span class="kw">names</span>(novosdados)<span class="op">==</span><span class="st">&#39;se.fit&#39;</span>]=<span class="st">&quot;se.prob&quot;</span></a>
+<a class="sourceLine" id="cb132-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb132-16" data-line-number="16"><span class="co"># Estimando os intervalos de confiança</span></a>
+<a class="sourceLine" id="cb132-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb132-18" data-line-number="18">novosdados<span class="op">$</span>LL=novosdados<span class="op">$</span>prob<span class="fl">-1.96</span><span class="op">*</span>novosdados<span class="op">$</span>se.prob</a>
+<a class="sourceLine" id="cb132-19" data-line-number="19">novosdados<span class="op">$</span>UL=novosdados<span class="op">$</span>prob<span class="fl">+1.96</span><span class="op">*</span>novosdados<span class="op">$</span>se.prob</a>
+<a class="sourceLine" id="cb132-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb132-21" data-line-number="21"><span class="co"># Vizualização dos dados</span></a>
+<a class="sourceLine" id="cb132-22" data-line-number="22">novosdados</a></code></pre></div>
 <pre><code>    gre  gpa rank   prob se.prob residual.scale      LL     UL
 1 587.7 3.39    1 0.5166 0.06632              1 0.38662 0.6466
 2 587.7 3.39    2 0.3523 0.03978              1 0.27431 0.4303
 3 587.7 3.39    3 0.2186 0.03825              1 0.14364 0.2936
 4 587.7 3.39    4 0.1847 0.04864              1 0.08934 0.2800</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="kw">require</span>(ggplot2)</a>
-<a class="sourceLine" id="cb130-2" data-line-number="2"><span class="kw">ggplot</span>(novosdados, <span class="kw">aes</span>(<span class="dt">x=</span>rank,<span class="dt">y=</span>prob))<span class="op">+</span></a>
-<a class="sourceLine" id="cb130-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>LL, <span class="dt">ymax=</span>UL), <span class="dt">width=</span><span class="fl">0.2</span>,<span class="dt">lty=</span><span class="dv">1</span>,<span class="dt">lwd=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb130-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">18</span>, <span class="dt">size=</span><span class="dv">5</span>, <span class="dt">fill=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb130-5" data-line-number="5"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;4&quot;</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb130-6" data-line-number="6"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Probabilidades preditas&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Ranking&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Pr(y=1)&quot;</span>)</a></code></pre></div>
-<p><img src="05-RegLogist_files/figure-html/unnamed-chunk-26-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="kw">require</span>(ggplot2)</a>
+<a class="sourceLine" id="cb134-2" data-line-number="2"><span class="kw">ggplot</span>(novosdados, <span class="kw">aes</span>(<span class="dt">x=</span>rank,<span class="dt">y=</span>prob))<span class="op">+</span></a>
+<a class="sourceLine" id="cb134-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>LL, <span class="dt">ymax=</span>UL), <span class="dt">width=</span><span class="fl">0.2</span>,<span class="dt">lty=</span><span class="dv">1</span>,<span class="dt">lwd=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb134-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">18</span>, <span class="dt">size=</span><span class="dv">5</span>, <span class="dt">fill=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb134-5" data-line-number="5"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;4&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb134-6" data-line-number="6"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Probabilidades preditas&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Ranking&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Pr(y=1)&quot;</span>)</a></code></pre></div>
+<p><img src="05-RegLogist_files/figure-html/unnamed-chunk-28-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <!--
 \printbibliography[segment=\therefsegment,heading=subbibliography]
 -->
