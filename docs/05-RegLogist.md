@@ -44,7 +44,7 @@ A regressão logística utiliza a **curva logística** para assim representar a 
 
 
 <div class="figure" style="text-align: center">
-<img src="curvalog.png" alt="Curva logística" width="60%" />
+<img src="curvalog.png" alt="Curva logística" width="90%" />
 <p class="caption">(\#fig:curvalog)Curva logística</p>
 </div>
 Fonte: Adaptado de @Hair2009.
@@ -107,7 +107,7 @@ ggplot(chd, aes(x=AGE, y=CHD)) +
 ```
 
 <div class="figure" style="text-align: center">
-<img src="05-RegLogist_files/figure-epub3/dispev-1.png" alt="Dispersão de evendos e não-eventos" width="60%" />
+<img src="05-RegLogist_files/figure-epub3/dispev-1.png" alt="Dispersão de evendos e não-eventos" width="90%" />
 <p class="caption">(\#fig:dispev)Dispersão de evendos e não-eventos</p>
 </div>
 
@@ -179,7 +179,7 @@ ggplot(IDADE, aes(x=AGE, y=PRED)) +
 ```
 
 <div class="figure" style="text-align: center">
-<img src="05-RegLogist_files/figure-epub3/distrpred-1.png" alt="Distribuição das probabilidades preditas" width="60%" />
+<img src="05-RegLogist_files/figure-epub3/distrpred-1.png" alt="Distribuição das probabilidades preditas" width="90%" />
 <p class="caption">(\#fig:distrpred)Distribuição das probabilidades preditas</p>
 </div>
 
@@ -380,7 +380,22 @@ A matriz de confusão retoma uma excelente acurácia total do modelo em 74\%, se
 
 ### Curva ROC
 
-A Curva ROC (Receiver Operating Characteristic Curve) associada ao modelo logístico mensura a capacidade de predição do modelo proposto, através das predições da sensibilidade e da especificidade.
+A Curva ROC (Receiver Operating Characteristic Curve) associada ao modelo logístico mensura a capacidade de predição do modelo proposto, através das predições da sensibilidade e da especificidade. Segundo @Fawcett2006 esta técnica serve para visualizar, organizar e classificar o modelo com base na performance preditiva. 
+
+A curva ROC é produzida bi-dimensionalmente como mostra a Figura \@ref(fig:curvaroc)a, pela obtenção da relação entre a taxa dos verdadeiros positivos do modelo e da taxa dos falsos positivos preditos. Desta forma, o ponto inferior esquerdo (0,0) significa que não é predita uma classificação positiva; no canto oposto do gráfico (1,1) classifica os resultados incondicionalmente positivos e; o ponto (0,1) representa uma excelente classificação. Quanto mais ao noroeste do gráfico o ponto estiver melhor, assim sendo o ponto B da Figura \@ref(fig:curvaroc)a classifica melhor os resultados que o ponto C.
+
+<div class="figure" style="text-align: center">
+<img src="curvaroc.png" alt="Curva ROC" width="90%" />
+<p class="caption">(\#fig:curvaroc)Curva ROC</p>
+</div>
+Fonte: Adaptado de @Fawcett2006.
+
+A Figura \@ref(fig:curvaroc)b mostra a formação da curva ROC para um teste com 20 instâncias, uma amostra pequena servindo portanto de exemplificação da sua criação. Para isto, o modelo de regressão logística é rodado randômicamente e a predição resultante é comparada com o valor real da variável dependente. O ponto de corte padrão, como visto anteriormente, é o valor de 0,5: acima deste valor, a predição é classificada como 1 e, abaixo dele 0. Na Figura \@ref(fig:curvaroc)b, a primeira predição foi 0,9 e a segunda 0,8 sendo que como estão mais perto do eixo X do gráfico, representam predições acertadas. Já para predições que não foram acertadas (como no exemplo as predições 0,7 e 0,54 por exemplo) a curva caminha para a direita. A lógica se mantém até o final da elaboração da curva.
+
+Já na Figura \@ref(fig:curvaroc)c é demonstrada a elaboração do conceito da Área sobre a Curva ROC (AUC - Area Under the ROC Curve), que objetiva comparar os classificadores a partir da parformance da curva em um único valor escalar [@Fawcett2006]. Este indicador representa a probabilidade de que o classificador efetue predições randômicas na instância positiva melhor do que na instância negativa.
+O indicador AUC sempre terá seu valor entre 0 e 1, sendo que quanto maior, melhor e nunca um classificador realístico deve estar abaixo de 0,5. @Hosmer2000 sugere a utilização de AUC acima de 0,7 como aceitável. Como exemplo, a Figura \@ref(fig:curvaroc)c mostra que a curva ROC B tem uma melhor capacidade preditiva que a curva A.
+
+Seguem os passos para elaboração da curva ROC.
 
 
 
@@ -407,12 +422,14 @@ plot(roc1,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="05-RegLogist_files/figure-epub3/roc-1.png" alt="Curva Roc" width="60%" />
+<img src="05-RegLogist_files/figure-epub3/roc-1.png" alt="Curva Roc" width="90%" />
 <p class="caption">(\#fig:roc)Curva Roc</p>
 </div>
 
 
 ### O teste Hosmer e Lemeshow
+
+O teste de Hosmer e Lemeshow é utilizado para demonstrar a qualidade do ajuste do modelo, ou seja, se o modelo pode explicar os dados observados. Para este teste, os dados são divididos de acordo com as probabilidades previstas em 10 grupos. A hipótese nula H${_0}$ do qui-quadrado (`p=0,05`) deste teste é a de que as proporções observadas e esperadas são as mesmas ao longo da amostra. Abaixo segue a estrutura do teste, sendo que o modelo apresenta dificuldade de ajuste em função de que rejeita a hipótese nula a *p=0,05*.
 
 
 
@@ -429,6 +446,8 @@ hl
 data:  chd$CHD, fitted(m1)
 X-squared = 100, df = 8, p-value <2e-16
 ```
+
+
 
 ### Pseudo R$^2$
 
@@ -726,6 +745,41 @@ Null Deviance:	    70.1
 Residual Deviance: 67.3 	AIC: 71.3
 ```
 
+### VIF - Variance Inflation Factor
+
+Os problemas de multicolinearedade nos modelos de regressão, ou seja, as relações entre as variáveis do modelo, podem prejudicar a capacidade preditiva do mesmo. Para resolver esta questão, utiliza-se o teste do fator de inflaçãod a variância (VIF - Variance Inflation Factor). 
+
+
+
+```r
+require(faraway)
+```
+
+```
+Carregando pacotes exigidos: faraway
+```
+
+```
+
+Attaching package: 'faraway'
+```
+
+```
+The following object is masked from 'package:lattice':
+
+    melanoma
+```
+
+```r
+vif(logit)
+```
+
+```
+    x1     x2     x3 
+ 9.292 12.318 29.860 
+```
+
+
 
 ## Regressão Logística Múltipla com variável categórica
 
@@ -960,7 +1014,7 @@ ggplot(novosdados, aes(x=rank,y=prob))+
   labs(title="Probabilidades preditas", x="Ranking",y="Pr(y=1)")
 ```
 
-<img src="05-RegLogist_files/figure-epub3/unnamed-chunk-28-1.png" width="60%" style="display: block; margin: auto;" />
+<img src="05-RegLogist_files/figure-epub3/unnamed-chunk-28-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 

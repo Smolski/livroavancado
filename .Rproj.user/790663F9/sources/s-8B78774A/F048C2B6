@@ -5,16 +5,16 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "4115579928",
     "id" : "F048C2B6",
-    "lastKnownWriteTime" : 1534733216,
-    "last_content_update" : 1534733216967,
+    "lastKnownWriteTime" : 1534820545,
+    "last_content_update" : 1534820545265,
     "path" : "D:/Github/livroavancado/05-RegLogist.Rmd",
     "project_path" : "05-RegLogist.Rmd",
     "properties" : {
-        "cursorPosition" : "462,349",
+        "cursorPosition" : "335,0",
         "docOutlineVisible" : "1",
-        "scrollLine" : "461"
+        "scrollLine" : "331"
     },
     "relative_order" : 8,
     "source_on_save" : false,

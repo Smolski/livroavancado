@@ -1,0 +1,23 @@
+"0","require(faraway)"
+"2","Carregando pacotes exigidos: faraway
+"
+"2","
+Attaching package: ‘faraway’
+
+"
+"2","The following object is masked from ‘package:lattice’:
+
+    melanoma
+
+"
+"0","vif(logit)"
+"1","    x1 "
+"1","    x2 "
+"1","    x3 "
+"1","
+"
+"1"," 9.292 "
+"1","12.318 "
+"1","29.860 "
+"1","
+"

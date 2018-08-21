@@ -10,7 +10,7 @@ options(width = 80, digits = 4,
 knitr::opts_chunk$set(
   tidy = FALSE, 
   fig.align = "center", 
-  out.width = '60%',
+  out.width = '90%',
   comment = NA,
   fig.pos = 'h',
   fig.keep='last'
@@ -277,9 +277,23 @@ A matriz de confusão retoma uma excelente acurácia total do modelo em 74\%, se
 
 ### Curva ROC
 
-A Curva ROC (Receiver Operating Characteristic Curve) associada ao modelo logístico mensura a capacidade de predição do modelo proposto, através das predições da sensibilidade e da especificidade.
+A Curva ROC (Receiver Operating Characteristic Curve) associada ao modelo logístico mensura a capacidade de predição do modelo proposto, através das predições da sensibilidade e da especificidade. Segundo @Fawcett2006 esta técnica serve para visualizar, organizar e classificar o modelo com base na performance preditiva. 
 
-```{r, include=FALSE}
+A curva ROC é produzida bi-dimensionalmente como mostra a Figura \@ref(fig:curvaroc)a, pela obtenção da relação entre a taxa dos verdadeiros positivos do modelo e da taxa dos falsos positivos preditos. Desta forma, o ponto inferior esquerdo (0,0) significa que não é predita uma classificação positiva; no canto oposto do gráfico (1,1) classifica os resultados incondicionalmente positivos e; o ponto (0,1) representa uma excelente classificação. Quanto mais ao noroeste do gráfico o ponto estiver melhor, assim sendo o ponto B da Figura \@ref(fig:curvaroc)a classifica melhor os resultados que o ponto C.
+
+```{r curvaroc, echo=FALSE, fig.cap='Curva ROC'}
+knitr::include_graphics("curvaroc.png")
+```
+Fonte: Adaptado de @Fawcett2006.
+
+A Figura \@ref(fig:curvaroc)b mostra a formação da curva ROC para um teste com 20 instâncias, uma amostra pequena servindo portanto de exemplificação da sua criação. Para isto, o modelo de regressão logística é rodado randômicamente e a predição resultante é comparada com o valor real da variável dependente. O ponto de corte padrão, como visto anteriormente, é o valor de 0,5: acima deste valor, a predição é classificada como 1 e, abaixo dele 0. Na Figura \@ref(fig:curvaroc)b, a primeira predição foi 0,9 e a segunda 0,8 sendo que como estão mais perto do eixo X do gráfico, representam predições acertadas. Já para predições que não foram acertadas (como no exemplo as predições 0,7 e 0,54 por exemplo) a curva caminha para a direita. A lógica se mantém até o final da elaboração da curva.
+
+Já na Figura \@ref(fig:curvaroc)c é demonstrada a elaboração do conceito da Área sobre a Curva ROC (AUC - Area Under the ROC Curve), que objetiva comparar os classificadores a partir da parformance da curva em um único valor escalar [@Fawcett2006]. Este indicador representa a probabilidade de que o classificador efetue predições randômicas na instância positiva melhor do que na instância negativa.
+O indicador AUC sempre terá seu valor entre 0 e 1, sendo que quanto maior, melhor e nunca um classificador realístico deve estar abaixo de 0,5. @Hosmer2000 sugere a utilização de AUC acima de 0,7 como aceitável. Como exemplo, a Figura \@ref(fig:curvaroc)c mostra que a curva ROC B tem uma melhor capacidade preditiva que a curva A.
+
+Seguem os passos para elaboração da curva ROC.
+
+```{r curvaroc2, include=FALSE}
 require(pROC)
 roc1=plot.roc(chd$CHD,fitted(m1))
 
@@ -310,12 +324,16 @@ plot(roc1,
 
 ### O teste Hosmer e Lemeshow
 
+O teste de Hosmer e Lemeshow é utilizado para demonstrar a qualidade do ajuste do modelo, ou seja, se o modelo pode explicar os dados observados. Para este teste, os dados são divididos de acordo com as probabilidades previstas em 10 grupos. A hipótese nula H${_0}$ do qui-quadrado (`p=0,05`) deste teste é a de que as proporções observadas e esperadas são as mesmas ao longo da amostra. Abaixo segue a estrutura do teste, sendo que o modelo apresenta dificuldade de ajuste em função de que rejeita a hipótese nula a *p=0,05*.
+
 
 ```{r, message=FALSE, warning=FALSE}
 require(ResourceSelection)
 hl=hoslem.test(chd$CHD,fitted(m1),g=10)
 hl
 ```
+
+
 
 ### Pseudo R$^2$
 
@@ -420,6 +438,17 @@ O método Stepwise auxilia o pesquisador em selecionar as variáveis importantes
 ```{r, message=FALSE, warning=FALSE}
 step(logit, direction = 'both')
 ```
+
+### VIF - Variance Inflation Factor
+
+Os problemas de multicolinearedade nos modelos de regressão, ou seja, as relações entre as variáveis do modelo, podem prejudicar a capacidade preditiva do mesmo. Para resolver esta questão, utiliza-se o teste do fator de inflaçãod a variância (VIF - Variance Inflation Factor). 
+
+
+```{r}
+require(faraway)
+vif(logit)
+```
+
 
 
 ## Regressão Logística Múltipla com variável categórica
