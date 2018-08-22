@@ -219,7 +219,9 @@ boxplot(Peso~Variedade)
 boxplot(Peso~Variedade,xlab="Variedade",ylab="Peso")
 ```
 
-<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-6-1.png" width="60%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-6-1} \end{center}
 
 
 ```r
@@ -249,7 +251,9 @@ plot(ajustados,residuos)
 abline(h=0)
 ```
 
-<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-8-1} \end{center}
 
 
 
@@ -259,7 +263,9 @@ qqnorm(residuos)
 qqline(residuos)
 ```
 
-<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-9-1} \end{center}
 
 
 
@@ -366,14 +372,18 @@ Medidas descritivas com a variável resposta:
 boxplot(Perda~Tratamentos)
 ```
 
-<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-12-1.png" width="60%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-12-1} \end{center}
 
 
 ```r
 boxplot(Perda~Tratamentos,xlab="Tratamentos",ylab="Perda")
 ```
 
-<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-13-1.png" width="60%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-13-1} \end{center}
 
 
 
@@ -403,7 +413,9 @@ plot(ajustado,residuo)
 abline(h=0)
 ```
 
-<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-15-1.png" width="60%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-15-1} \end{center}
 
 
 
@@ -412,7 +424,9 @@ qqnorm(residuo)
 qqline(residuo)
 ```
 
-<img src="02-Delinexp_files/figure-epub3/unnamed-chunk-16-1.png" width="60%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-16-1} \end{center}
 
 
 

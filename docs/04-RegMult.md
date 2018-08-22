@@ -220,7 +220,9 @@ abline(coef(modelom)[1], coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3], coef(modelom)[2], col='red')
 ```
 
-<img src="04-RegMult_files/figure-epub3/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.6\linewidth]{04-RegMult_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 
 

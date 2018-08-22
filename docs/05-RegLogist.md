@@ -24,7 +24,7 @@ Nota-se primeiramente que em sendo somente a variável dependente **binária** (
 
 A regressão logística a ser estudada neste capítulo será com a variável resposta dependente binária, portanto, tratando os grupos de interesse (variável dependente) com valores de 0 e 1. Sua funcionalidade se ocupa de prever a probabilidade de uma observação estar no grupo igual a 1 ("eventos"), em relação ao grupo igual a zero ("não eventos").
 
-A previsão da variável dependente depende dos coeficientes logísticos e das variáveis independentes escolhidas ao modelo, lembrando que os valores sempre estarão entre 0 e 1. Convenciona-se que valores de probabilidade acima de 0,50 sejam classificados como pertencendo ao grupo de "eventos", o que pode distinguir a os resultados pretidos e avaliando a precisão preditiva. Utiliza-se a razão de desigualdades - a razão entre as probabilidades dos dois resultados ou eventos: Prob$_{i}/$(1-Prob$_{i}$).
+A previsão da variável dependente depende dos coeficientes logísticos e das variáveis independentes escolhidas ao modelo, lembrando que os valores sempre estarão entre 0 e 1. Convenciona-se que valores de probabilidade acima de 0,50 sejam classificados como pertencendo ao grupo de "eventos", o que pode distinguir a os resultados preditos e avaliando a precisão preditiva. Utiliza-se a razão de desigualdades - a razão entre as probabilidades dos dois resultados ou eventos: Prob$_{i}/$(1-Prob$_{i}$).
 
 Para a estimação dos coeficientes das variáveis independentes, são utilizados o valor logit ou a razão de desigualdades [@Hair2009]:
 
@@ -40,16 +40,22 @@ $$
 
 Algumas características importantes da regressão logística: a análise é semelhante à regressão linear simples/múltipla (possui a relação entre a variável dependente e a(s) variável(is) independente(s)); possui testes estatísticos diretos, incorporando variáveis métricas e não-métricas, com efeitos não-lineares; é menos afetada pela não satisfação de normalidade dos dados (pois o termo de erro da variável discreta segue a distribuição binomial) e; foi elaborada para que seja prevista a probabilidade de determinado evento ocorrer [@Hair2009]. 
 
-A regressão logística utiliza a **curva logística** para assim representar a relação entre a variável dependente e as independentes. Os valores previstos portanto permanecem entre 0 e 1, sendo definidos pelos coeficientes estimados. A Figura \@ref(fig:curvalog)a demonstra a relação da curva logistica geral, enquanto a Figura \@ref(fig:curvalog)b mostra uma relação pobremente ajustada dos dados reais e a Figura \@ref(fig:curvalog)c demonstra um bom ajustena relação entre as variáveis. 
+A regressão logística utiliza a **curva logística** para assim representar a relação entre a variável dependente e as independentes. Os valores previstos portanto permanecem entre 0 e 1, sendo definidos pelos coeficientes estimados. A Figura \@ref(fig:curvalog)a demonstra a relação da curva logistica geral, enquanto a Figura \@ref(fig:curvalog)b mostra uma relação pobremente ajustada dos dados reais e a Figura \@ref(fig:curvalog)c demonstra um bom ajuste na relação entre as variáveis. 
 
 
-<div class="figure" style="text-align: center">
-<img src="curvalog.png" alt="Curva logística" width="90%" />
-<p class="caption">(\#fig:curvalog)Curva logística</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.9\linewidth]{curvalog} 
+
+}
+
+\caption{Curva logística}(\#fig:curvalog)
+\end{figure}
 Fonte: Adaptado de @Hair2009.
 
 A estimação dos coeficientes da regressão logística, ao contrário da regressão múltipla que utiliza o método dos mínimos quadrados, é efetuada pelo uso da **máxima verossimilhança**. Esta, por sua vez, busca encontrar as estimativas mais prováveis dos coeficientes e maximizar a probabilidade de que um evento ocorra. A qualidade do ajuste do modelo é avaliada pelo "pseudo" R$^2$ e pelo exame da precisão preditiva (matriz de confusão).
+
+O valor de verossimilhança é parecido com o procedimento das somas dos quadrados da regressão múltipla, estimando o quão bem o procedimento de máxima verossimilhança se ajusta ao modelo. O ajuste da estimação do modelo dá-se pelo valor -2 vezes o logaritmo da verossimilhança (-2LL), sendo que quando menor este valor, melhor o modelo [@Hair2009].
 
 
 
@@ -106,10 +112,14 @@ ggplot(chd, aes(x=AGE, y=CHD)) +
   stat_smooth(method="glm", method.args=list(family="binomial"), se=FALSE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="05-RegLogist_files/figure-epub3/dispev-1.png" alt="Dispersão de evendos e não-eventos" width="90%" />
-<p class="caption">(\#fig:dispev)Dispersão de evendos e não-eventos</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.9\linewidth]{05-RegLogist_files/figure-latex/dispev-1} 
+
+}
+
+\caption{Dispersão de evendos e não-eventos}(\#fig:dispev)
+\end{figure}
 
 Monta-se então o modelo de regressão logística com a variável dependente CHD e a variável independente AGE. Abaixo é demonstrada a descrição da equação utilizando o comando `summary()` para o modelo m1 com a sintaxe básica:
 
@@ -178,10 +188,14 @@ ggplot(IDADE, aes(x=AGE, y=PRED)) +
   geom_point()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="05-RegLogist_files/figure-epub3/distrpred-1.png" alt="Distribuição das probabilidades preditas" width="90%" />
-<p class="caption">(\#fig:distrpred)Distribuição das probabilidades preditas</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.9\linewidth]{05-RegLogist_files/figure-latex/distrpred-1} 
+
+}
+
+\caption{Distribuição das probabilidades preditas}(\#fig:distrpred)
+\end{figure}
 
 
 
@@ -232,7 +246,7 @@ AGE         1.117307 1.0692223 1.17587
 
 ### Predição de Probabilidades
 
-A partir dos coneficientes do modelo de regressão logística é possível, portanto, efetuar a predição da variável categórica CHD, ou seja, saber a chance de ocorrer CHD com relação à uma determinada idade (AGE). No exemplo abaixo, primeiramente utilizamos a idade média das observações (44,38 anos), criando assim um novo data.frame chamadio media. Para utilizar o valor da idade média na função de regressão obtida ($m1$), utiliza-se a função `predict()`, de acordo com  valor da média encontrada (data.frame media). O resultado mostra que para a idade média da amostra, 44,38 anos, há uma probabilidade de 40,44\% na ocorrência da doença CHD. Esta ferramenta permite também a comparação pelo pesquisador das diferentes probabilidades entre as diversas idades (variável AGE).
+A partir dos coeficientes do modelo de regressão logística é possível, portanto, efetuar a predição da variável categórica CHD, ou seja, saber a chance de ocorrer CHD com relação à uma determinada idade (AGE). No exemplo abaixo, primeiramente utilizamos a idade média das observações (44,38 anos), criando assim um novo data.frame chamado media. Para utilizar o valor da idade média na função de regressão obtida ($m1$), utiliza-se a função `predict()`, de acordo com  valor da média encontrada (data.frame media). O resultado mostra que para a idade média da amostra, 44,38 anos, há uma probabilidade de 40,44\% na ocorrência da doença CHD. Esta ferramenta permite também a comparação pelo pesquisador das diferentes probabilidades entre as diversas idades (variável AGE).
 
 
 
@@ -264,9 +278,9 @@ media
 
 Uma maneira prática de qualificar o ajuste do modelo de regressão logística é pela projeção do modelo na tabela de classificação (ou Matriz de Confusão). Para isto, precisa-se criar uma tabela com o resultado da classificação cruzada da variável resposta, de acordo com uma variável dicotômica em que os valores se derivam das probabilidades logísticas estimadas na regressão [@Hosmer2000]. No entanto, é preciso definir uma regra de predição, que dirá se houve acerto ou não da probabilidade estimada com os valores reais, pois as probabilidades variam de 0 a 1 enquanto os valores reais binários possuem valores fixos de 0 "ou" 1.
 
-É intuitivo supor que se as probabilidades aproximam-se de 1 o índivíduo estimado pode ser classificado como $\hat Y_i=1$, bem como de forma contrária, se o modelo estimar probabilidades perto de 0, classificá-la como $\hat Y_i=0$. Mas qual nível utilizar? Para resolver este problema, é preciso em primeiro lugar determinar um ponto de corte para classificar a estimação como 0 ou 1. Usualmente na literatura se utiliza o valor de 0,5 mas dependendo do estudo proposto pode não ser limitado a este nível [@Hosmer2000]. 
+É intuitivo supor que se as probabilidades aproximam-se de 1 o indivíduo estimado pode ser classificado como $\hat Y_i=1$, bem como de forma contrária, se o modelo estimar probabilidades perto de 0, classificá-la como $\hat Y_i=0$. Mas qual nível utilizar? Para resolver este problema, é preciso em primeiro lugar determinar um ponto de corte para classificar a estimação como 0 ou 1. Usualmente na literatura se utiliza o valor de 0,5 mas dependendo do estudo proposto pode não ser limitado a este nível [@Hosmer2000]. 
 
-Após determinado o ponto de corte, é importante avaliar o poder de discriminação do modelo, pelo seu desempenho portanto em classificar os "eventos" dos "não eventos". Cria-se a Matriz de Confusão (vide Tabela xxx) com as observações de Verdadeiro Positivo (VP), Falso Positivo (FP), Falso Negativo (FN) e Verdadeiro Negativo (VN)  e em seguida determinam-se alguns parâmetros numéricos, a serem descritos abaixo:
+Após determinado o ponto de corte, é importante avaliar o poder de discriminação do modelo, pelo seu desempenho portanto em classificar os "eventos" dos "não eventos". Cria-se a Matriz de Confusão (vide Tabela \@ref(tab:matriz)) com as observações de Verdadeiro Positivo (VP), Falso Positivo (FP), Falso Negativo (FN) e Verdadeiro Negativo (VN)  e em seguida determinam-se alguns parâmetros numéricos, a serem descritos abaixo:
 
 **Precisão**: representa a proporção das predições corretas do modelo sobre o total:
 
@@ -276,7 +290,7 @@ $$
 
 onde $P$ representa o total de "eventos" positivos (Y=1) e N é o total de "não eventos" (Y=0, ou negativo).
 
-**Sensibilidade**: representa a proportação de verdadeiros positivos, ou seja, a capacidade do modelo em avaliar o evento como $\hat Y=1$ (estimado) dado que ele é evento real $Y=1$:
+**Sensibilidade**: representa a proporção de verdadeiros positivos, ou seja, a capacidade do modelo em avaliar o evento como $\hat Y=1$ (estimado) dado que ele é evento real $Y=1$:
 
 $$
 SENS=\frac{VP}{FN}
@@ -384,13 +398,17 @@ A Curva ROC (Receiver Operating Characteristic Curve) associada ao modelo logís
 
 A curva ROC é produzida bi-dimensionalmente como mostra a Figura \@ref(fig:curvaroc)a, pela obtenção da relação entre a taxa dos verdadeiros positivos do modelo e da taxa dos falsos positivos preditos. Desta forma, o ponto inferior esquerdo (0,0) significa que não é predita uma classificação positiva; no canto oposto do gráfico (1,1) classifica os resultados incondicionalmente positivos e; o ponto (0,1) representa uma excelente classificação. Quanto mais ao noroeste do gráfico o ponto estiver melhor, assim sendo o ponto B da Figura \@ref(fig:curvaroc)a classifica melhor os resultados que o ponto C.
 
-<div class="figure" style="text-align: center">
-<img src="curvaroc.png" alt="Curva ROC" width="90%" />
-<p class="caption">(\#fig:curvaroc)Curva ROC</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.9\linewidth]{curvaroc} 
+
+}
+
+\caption{Curva ROC}(\#fig:curvaroc)
+\end{figure}
 Fonte: Adaptado de @Fawcett2006.
 
-A Figura \@ref(fig:curvaroc)b mostra a formação da curva ROC para um teste com 20 instâncias, uma amostra pequena servindo portanto de exemplificação da sua criação. Para isto, o modelo de regressão logística é rodado randômicamente e a predição resultante é comparada com o valor real da variável dependente. O ponto de corte padrão, como visto anteriormente, é o valor de 0,5: acima deste valor, a predição é classificada como 1 e, abaixo dele 0. Na Figura \@ref(fig:curvaroc)b, a primeira predição foi 0,9 e a segunda 0,8 sendo que como estão mais perto do eixo X do gráfico, representam predições acertadas. Já para predições que não foram acertadas (como no exemplo as predições 0,7 e 0,54 por exemplo) a curva caminha para a direita. A lógica se mantém até o final da elaboração da curva.
+A Figura \@ref(fig:curvaroc)b mostra a formação da curva ROC para um teste com 20 instâncias, uma amostra pequena servindo portanto de exemplificação da sua criação. Para isto, o modelo de regressão logística é rodado randomicamente e a predição resultante é comparada com o valor real da variável dependente. O ponto de corte padrão, como visto anteriormente, é o valor de 0,5: acima deste valor, a predição é classificada como 1 e, abaixo dele 0. Na Figura \@ref(fig:curvaroc)b, a primeira predição foi 0,9 e a segunda 0,8 sendo que como estão mais perto do eixo X do gráfico, representam predições acertadas. Já para predições que não foram acertadas (como no exemplo as predições 0,7 e 0,54 por exemplo) a curva caminha para a direita. A lógica se mantém até o final da elaboração da curva.
 
 Já na Figura \@ref(fig:curvaroc)c é demonstrada a elaboração do conceito da Área sobre a Curva ROC (AUC - Area Under the ROC Curve), que objetiva comparar os classificadores a partir da parformance da curva em um único valor escalar [@Fawcett2006]. Este indicador representa a probabilidade de que o classificador efetue predições randômicas na instância positiva melhor do que na instância negativa.
 O indicador AUC sempre terá seu valor entre 0 e 1, sendo que quanto maior, melhor e nunca um classificador realístico deve estar abaixo de 0,5. @Hosmer2000 sugere a utilização de AUC acima de 0,7 como aceitável. Como exemplo, a Figura \@ref(fig:curvaroc)c mostra que a curva ROC B tem uma melhor capacidade preditiva que a curva A.
@@ -421,15 +439,21 @@ plot(roc1,
      print.thres=TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="05-RegLogist_files/figure-epub3/roc-1.png" alt="Curva Roc" width="90%" />
-<p class="caption">(\#fig:roc)Curva Roc</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.9\linewidth]{05-RegLogist_files/figure-latex/roc-1} 
+
+}
+
+\caption{Curva Roc}(\#fig:roc)
+\end{figure}
 
 
 ### O teste Hosmer e Lemeshow
 
-O teste de Hosmer e Lemeshow é utilizado para demonstrar a qualidade do ajuste do modelo, ou seja, se o modelo pode explicar os dados observados. Para este teste, os dados são divididos de acordo com as probabilidades previstas em 10 grupos. A hipótese nula H${_0}$ do qui-quadrado (`p=0,05`) deste teste é a de que as proporções observadas e esperadas são as mesmas ao longo da amostra. Abaixo segue a estrutura do teste, sendo que o modelo apresenta dificuldade de ajuste em função de que rejeita a hipótese nula a *p=0,05*.
+O teste de Hosmer e Lemeshow é utilizado para demonstrar a qualidade do ajuste do modelo, ou seja, se o modelo pode explicar os dados observados. Para este teste, os dados são divididos de acordo com as probabilidades previstas em 10 grupos iguais, sendo que os números previstos e os reais são comparados com a estatística do qui-quadrado. @Hair2009 sugerem um tamanho de amostra de pelo menos 50 casos para a realização deste teste.
+
+A hipótese nula H${_0}$ do qui-quadrado (`p=0,05`) deste teste é a de que as proporções observadas e esperadas são as mesmas ao longo da amostra. Abaixo segue a estrutura do teste, sendo que o modelo apresenta dificuldade de ajuste em função de que rejeita a hipótese nula a *p=0,05*.
 
 
 
@@ -451,17 +475,17 @@ X-squared = 100, df = 8, p-value <2e-16
 
 ### Pseudo R$^2$
 
+Semelhante ao coeficiente de determinação R${^2}$ da regressão múltipla, a medida de pseudo R${^2}$ representam o ajuste geral do modelo proposto. Sua interpretação, portanto, é semelhante à regressão múltipla. Abaixo segue o cálculo do pseudo R${^2}$:
+
+$$
+R{^2}_{LOGIT} = \frac{-2LL_{nulo}-(-2LL_{modelo})}{-2LL_{nulo}}
+$$
+Lembrando que o valor -2LL representa -2 vezes o logaritmo do valor de verossimilhança, onde a verossimilhança do modelo nulo é comparado com o modelo completo. Abaixo mostra-se o código para calcular os indicadores, sendo que constam as medidas de pseudo R${^2}$ estipuladas por Cox e Snell, Nagelkerke e McFadden.
+
 
 
 ```r
 require(modEvA)
-```
-
-```
-Carregando pacotes exigidos: modEvA
-```
-
-```r
 RsqGLM(m1)
 ```
 
@@ -481,6 +505,7 @@ $Tjur
 $sqPearson
 [1] 0.2726
 ```
+
 
 
 
@@ -694,8 +719,12 @@ allmean
 
 ### Método Stepwise
 
-O método Stepwise auxilia o pesquisador em selecionar as variáveis importantes ao modelo:
+O método Stepwise auxilia o pesquisador em selecionar as variáveis importantes ao modelo, sendo que podem ser utilizadas nas direções "both", "backward", "forward". Este método, por sua vez, utiliza o Critério de Informação de Akaike (AIC - Akaike Information Criterion) na combinação das variáveis dos diversos modelos simulados para selecionar o modelo mais ajustado. Quanto menor o AIC, melhor o ajuste do modelo. O AIC é calculado da seguitne forma:
 
+$$
+AIC = -2log(L_{p})+2[(p+1)+1]
+$$
+onde $L_{p}$ é a função de máxima verossimilhança e $p$ é o número de variáveis explicativas do modelo. Segue o código para execução no console:
 
 
 ```r
@@ -747,30 +776,13 @@ Residual Deviance: 67.3 	AIC: 71.3
 
 ### VIF - Variance Inflation Factor
 
-Os problemas de multicolinearedade nos modelos de regressão, ou seja, as relações entre as variáveis do modelo, podem prejudicar a capacidade preditiva do mesmo. Para resolver esta questão, utiliza-se o teste do fator de inflaçãod a variância (VIF - Variance Inflation Factor). 
+Os problemas de multicolinearedade nos modelos de regressão, ou seja, as relações entre as variáveis do modelo, podem prejudicar a capacidade preditiva do mesmo. Nas palavras de @Hair2009 [p. 191], "multicolinearidade cria variância “compartilhada” entre variáveis, diminuindo assim a capacidade de prever a medida dependente, bem como averiguar os papéis relativos de cada variável independente".
+Para resolver esta questão, utiliza-se o teste do fator de inflação da variância (VIF - Variance Inflation Factor), índice o qual não deve ficar abaixo de 10 para representar baixo problema de multicolinearidade segundo @Rawlings1998.
 
 
 
 ```r
 require(faraway)
-```
-
-```
-Carregando pacotes exigidos: faraway
-```
-
-```
-
-Attaching package: 'faraway'
-```
-
-```
-The following object is masked from 'package:lattice':
-
-    melanoma
-```
-
-```r
 vif(logit)
 ```
 
@@ -778,7 +790,6 @@ vif(logit)
     x1     x2     x3 
  9.292 12.318 29.860 
 ```
-
 
 
 ## Regressão Logística Múltipla com variável categórica
@@ -1014,7 +1025,9 @@ ggplot(novosdados, aes(x=rank,y=prob))+
   labs(title="Probabilidades preditas", x="Ranking",y="Pr(y=1)")
 ```
 
-<img src="05-RegLogist_files/figure-epub3/unnamed-chunk-28-1.png" width="90%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.9\linewidth]{05-RegLogist_files/figure-latex/unnamed-chunk-28-1} \end{center}
 
 
 
@@ -1023,7 +1036,7 @@ ggplot(novosdados, aes(x=rank,y=prob))+
 <!--
 \printbibliography[segment=\therefsegment,heading=subbibliography]
 -->
-
+<!--
 ## Exemplos de trabalhos que utilizaram regressão logística
 
 - **Uso da regressão logística na estimação da probabilidade de reincidência de jovens infratoras**. <http://bdm.unb.br/bitstream/10483/13133/1/2015_FelipeGomesRibeiro.pdf>
@@ -1032,7 +1045,7 @@ ggplot(novosdados, aes(x=rank,y=prob))+
 <http://www.uel.br/revistas/uel/index.php/geografia/article/download/6878/9676>
 
 - **Reincidência penal: uma análise a partir da e"conomia do crime" para subsidiar decisões judiciais.** <http://177.101.17.124/index.php/sociais/article/download/6029/4134>
-
+-->
 
 ## Exercícios
 <!--
