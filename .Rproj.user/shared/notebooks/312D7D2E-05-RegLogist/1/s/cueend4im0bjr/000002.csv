@@ -1,0 +1,4 @@
+"0","allmean = data.frame(x1=mean(mydata$x1),"
+"0","                     x2=mean(mydata$x2),"
+"0","                     x3=mean(mydata$x3))"
+"0","allmean"

@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-08-21}
+    \date{2018-08-30}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -2226,11 +2226,11 @@ desta base de dados:
 \NormalTok{IDADE<-chd[,}\DecValTok{1}\NormalTok{]  }
 
 \CommentTok{# Criando campo de predição para cada idade dos indivíduos }
-\NormalTok{IDADE}\OperatorTok{$}\NormalTok{PRED=}\KeywordTok{predict}\NormalTok{(m1, }\DataTypeTok{newdata=}\NormalTok{IDADE, }\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{chd}\OperatorTok{$}\NormalTok{PRED=}\KeywordTok{predict}\NormalTok{(m1, }\DataTypeTok{newdata=}\NormalTok{IDADE, }\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
 
 \CommentTok{# Plotando a probabilidade predita pelo modelo}
 \KeywordTok{require}\NormalTok{(ggplot2)}
-\KeywordTok{ggplot}\NormalTok{(IDADE, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{AGE, }\DataTypeTok{y=}\NormalTok{PRED)) }\OperatorTok{+}\StringTok{ }
+\KeywordTok{ggplot}\NormalTok{(chd, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{AGE, }\DataTypeTok{y=}\NormalTok{PRED)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -2500,14 +2500,14 @@ Carregando pacotes exigidos: lattice
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{  pdata <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(}
+\NormalTok{chd}\OperatorTok{$}\NormalTok{pdata <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(}
     \KeywordTok{ifelse}\NormalTok{(}
-      \KeywordTok{predict}\NormalTok{(m1, }
-              \DataTypeTok{newdata =}\NormalTok{ chd, }
-              \DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
-      \OperatorTok{>}\FloatTok{0.5}\NormalTok{,}\StringTok{"1"}\NormalTok{,}\StringTok{"0"}\NormalTok{))}
+        \KeywordTok{predict}\NormalTok{(m1, }
+                \DataTypeTok{newdata =}\NormalTok{ chd, }
+                \DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
+        \OperatorTok{>}\FloatTok{0.5}\NormalTok{,}\StringTok{"1"}\NormalTok{,}\StringTok{"0"}\NormalTok{))}
 
-\KeywordTok{confusionMatrix}\NormalTok{(pdata, chd}\OperatorTok{$}\NormalTok{CHD, }\DataTypeTok{positive=}\StringTok{"1"}\NormalTok{)}
+\KeywordTok{confusionMatrix}\NormalTok{(chd}\OperatorTok{$}\NormalTok{pdata, chd}\OperatorTok{$}\NormalTok{CHD, }\DataTypeTok{positive=}\StringTok{"1"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2611,7 +2611,9 @@ Seguem os passos para elaboração da curva ROC.
   Passo 1:
 \end{itemize}
 
-\texttt{require(pROC)\ roc1=plot.roc(chd\$CHD,fitted(m1))}
+\texttt{require(pROC)}
+
+\texttt{roc1=plot.roc(chd\$CHD,fitted(m1))}
 
 \begin{itemize}
 \tightlist

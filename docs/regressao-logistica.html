@@ -26,7 +26,7 @@
 <meta name="author" content="Iara Denise Endruweit Battisti">
 
 
-<meta name="date" content="2018-08-21">
+<meta name="date" content="2018-08-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -346,11 +346,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <a class="sourceLine" id="cb78-2" data-line-number="2">IDADE&lt;-chd[,<span class="dv">1</span>]  </a>
 <a class="sourceLine" id="cb78-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb78-4" data-line-number="4"><span class="co"># Criando campo de predição para cada idade dos indivíduos </span></a>
-<a class="sourceLine" id="cb78-5" data-line-number="5">IDADE<span class="op">$</span>PRED=<span class="kw">predict</span>(m1, <span class="dt">newdata=</span>IDADE, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb78-5" data-line-number="5">chd<span class="op">$</span>PRED=<span class="kw">predict</span>(m1, <span class="dt">newdata=</span>IDADE, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
 <a class="sourceLine" id="cb78-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb78-7" data-line-number="7"><span class="co"># Plotando a probabilidade predita pelo modelo</span></a>
 <a class="sourceLine" id="cb78-8" data-line-number="8"><span class="kw">require</span>(ggplot2)</a>
-<a class="sourceLine" id="cb78-9" data-line-number="9"><span class="kw">ggplot</span>(IDADE, <span class="kw">aes</span>(<span class="dt">x=</span>AGE, <span class="dt">y=</span>PRED)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb78-9" data-line-number="9"><span class="kw">ggplot</span>(chd, <span class="kw">aes</span>(<span class="dt">x=</span>AGE, <span class="dt">y=</span>PRED)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb78-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:distrpred"></span>
 <img src="05-RegLogist_files/figure-html/distrpred-1.png" alt="Distribuição das probabilidades preditas" width="90%" />
@@ -464,14 +464,14 @@ VPN=\frac{VN}{VN+FN}
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="kw">require</span>(caret)</a></code></pre></div>
 <pre><code>Carregando pacotes exigidos: caret</code></pre>
 <pre><code>Carregando pacotes exigidos: lattice</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">  pdata &lt;-<span class="st"> </span><span class="kw">as.factor</span>(</a>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">chd<span class="op">$</span>pdata &lt;-<span class="st"> </span><span class="kw">as.factor</span>(</a>
 <a class="sourceLine" id="cb90-2" data-line-number="2">    <span class="kw">ifelse</span>(</a>
-<a class="sourceLine" id="cb90-3" data-line-number="3">      <span class="kw">predict</span>(m1, </a>
-<a class="sourceLine" id="cb90-4" data-line-number="4">              <span class="dt">newdata =</span> chd, </a>
-<a class="sourceLine" id="cb90-5" data-line-number="5">              <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb90-6" data-line-number="6">      <span class="op">&gt;</span><span class="fl">0.5</span>,<span class="st">&quot;1&quot;</span>,<span class="st">&quot;0&quot;</span>))</a>
+<a class="sourceLine" id="cb90-3" data-line-number="3">        <span class="kw">predict</span>(m1, </a>
+<a class="sourceLine" id="cb90-4" data-line-number="4">                <span class="dt">newdata =</span> chd, </a>
+<a class="sourceLine" id="cb90-5" data-line-number="5">                <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb90-6" data-line-number="6">        <span class="op">&gt;</span><span class="fl">0.5</span>,<span class="st">&quot;1&quot;</span>,<span class="st">&quot;0&quot;</span>))</a>
 <a class="sourceLine" id="cb90-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb90-8" data-line-number="8"><span class="kw">confusionMatrix</span>(pdata, chd<span class="op">$</span>CHD, <span class="dt">positive=</span><span class="st">&quot;1&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb90-8" data-line-number="8"><span class="kw">confusionMatrix</span>(chd<span class="op">$</span>pdata, chd<span class="op">$</span>CHD, <span class="dt">positive=</span><span class="st">&quot;1&quot;</span>)</a></code></pre></div>
 <pre><code>Confusion Matrix and Statistics
 
           Reference
@@ -518,7 +518,8 @@ O indicador AUC sempre terá seu valor entre 0 e 1, sendo que quanto maior, melh
 <ul>
 <li>Passo 1:</li>
 </ul>
-<p><code>require(pROC) roc1=plot.roc(chd$CHD,fitted(m1))</code></p>
+<p><code>require(pROC)</code></p>
+<p><code>roc1=plot.roc(chd$CHD,fitted(m1))</code></p>
 <ul>
 <li>Passo 2:</li>
 </ul>

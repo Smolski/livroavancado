@@ -1,4 +1,6 @@
 "0","require(readr)"
+"2","Carregando pacotes exigidos: readr
+"
 "0","chd <- read_delim(""https://goo.gl/uDAAHv"", "
 "0","    "";"", escape_double = FALSE, col_types = cols(CHD = col_factor(levels = c())), "
 "0","    trim_ws = TRUE)"

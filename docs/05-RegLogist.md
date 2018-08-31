@@ -180,11 +180,11 @@ Por fim, o modelo é utilizado para construção da predição de todos os valor
 IDADE<-chd[,1]  
 
 # Criando campo de predição para cada idade dos indivíduos 
-IDADE$PRED=predict(m1, newdata=IDADE, type="response")
+chd$PRED=predict(m1, newdata=IDADE, type="response")
 
 # Plotando a probabilidade predita pelo modelo
 require(ggplot2)
-ggplot(IDADE, aes(x=AGE, y=PRED)) + 
+ggplot(chd, aes(x=AGE, y=PRED)) + 
   geom_point()
 ```
 
@@ -350,14 +350,14 @@ Carregando pacotes exigidos: lattice
 ```
 
 ```r
-  pdata <- as.factor(
+chd$pdata <- as.factor(
     ifelse(
-      predict(m1, 
-              newdata = chd, 
-              type = "response")
-      >0.5,"1","0"))
+        predict(m1, 
+                newdata = chd, 
+                type = "response")
+        >0.5,"1","0"))
 
-confusionMatrix(pdata, chd$CHD, positive="1")
+confusionMatrix(chd$pdata, chd$CHD, positive="1")
 ```
 
 ```
@@ -421,8 +421,9 @@ Seguem os passos para elaboração da curva ROC.
 - Passo 1:
 
 
-`require(pROC)
-roc1=plot.roc(chd$CHD,fitted(m1))`
+`require(pROC)`
+
+`roc1=plot.roc(chd$CHD,fitted(m1))`
 
 
 - Passo 2:

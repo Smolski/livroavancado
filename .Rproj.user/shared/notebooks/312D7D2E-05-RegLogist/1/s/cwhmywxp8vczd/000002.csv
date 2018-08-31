@@ -1,0 +1,6 @@
+"0","require(ggplot2)"
+"0","ggplot(novosdados, aes(x=rank,y=prob))+"
+"0","  geom_errorbar(aes(ymin=LL, ymax=UL), width=0.2,lty=1,lwd=1,col=""red"")+"
+"0","  geom_point(shape=18, size=5, fill=""black"")+"
+"0","  scale_x_discrete(limits=c(""1"",""2"",""3"",""4""))+"
+"0","  labs(title=""Probabilidades preditas"", x=""Ranking"",y=""Pr(y=1)"")"

@@ -1,0 +1,6 @@
+"0","pred=data.frame(gre=700,"
+"0","                gpa=3.67,"
+"0","                rank=factor(1)"
+"0","                )"
+"0","pred$prob=predict(mylogit, newdata=pred, type=""response"")"
+"0","pred"
