@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-08-30}
+    \date{2018-09-19}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -1801,6 +1801,94 @@ extrair os coeficientes de interesse.
 
 \begin{center}\includegraphics[width=0.6\linewidth]{04-RegMult_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
+\hypertarget{interacao-entre-variaveis-preditoras}{%
+\section{Interação entre variáveis
+preditoras}\label{interacao-entre-variaveis-preditoras}}
+
+Quando suspeita-se que os coeficientes de inclinação podem variar entre
+as categorias da variável preditora então aconselha-se testar a
+interação entre as duas variáveis. No software R utiliza-se `:' para
+indicar a interação entre as duas variáveis. Se a interação for
+significativa (P\textless{}0,05), então conclui-se que os coeficientes
+de inclinação diferem entre si.
+
+O modelo de regressão múltipla apresentando anteriormente pressupõe que
+a inclinação da reta de regressão é igual para os dois grupos
+considerados, espécie Syphoneugena reitzii e espécie Sebastiania
+commersoniana espécie. Se existem motivos para acreditar que a
+inclinação pode variar de um grupo para o outro, pode-se acrescentar um
+termo de interação (interação entre variáveis) (Kaszubowski, 2016).
+
+A interação, neste caso, nada mais é do que o acréscimo de uma nova
+variável preditora ao modelo. Essa nova variável preditora é o produto
+das duas variáveis que já constam no modelo. Para acrescentar um termo
+de interação no R, basta utilizar dois pontos `:' entre o nome das duas
+variáveis para as quais se deseja criar o termo de interação.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelom=}\KeywordTok{lm}\NormalTok{(}\StringTok{`}\DataTypeTok{altura_m}\StringTok{`}\OperatorTok{~}\StringTok{`}\DataTypeTok{diametro_cm}\StringTok{`}\OperatorTok{+}\NormalTok{especie}\OperatorTok{+}\StringTok{`}\DataTypeTok{diametro_cm}\StringTok{`}\OperatorTok{:}\NormalTok{especie, }\DataTypeTok{data =}\NormalTok{ arvore2)}
+\NormalTok{modelom}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = altura_m ~ diametro_cm + especie + diametro_cm:especie, 
+    data = arvore2)
+
+Coefficients:
+        (Intercept)          diametro_cm              especie  
+            11.5480               0.0714               0.7863  
+diametro_cm:especie  
+            -0.0316  
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(modelom)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = altura_m ~ diametro_cm + especie + diametro_cm:especie, 
+    data = arvore2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.2460 -0.8545  0.0632  0.7552  2.5561 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(>|t|)    
+(Intercept)         11.54805    0.47544   24.29  < 2e-16 ***
+diametro_cm          0.07137    0.00566   12.62  < 2e-16 ***
+especie              0.78630    0.68304    1.15  0.25237    
+diametro_cm:especie -0.03158    0.00842   -3.75  0.00029 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.12 on 101 degrees of freedom
+Multiple R-squared:  0.736, Adjusted R-squared:  0.728 
+F-statistic:   94 on 3 and 101 DF,  p-value: <2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(diametro_cm,altura_m,}\DataTypeTok{type=}\StringTok{'n'}\NormalTok{)}
+
+\KeywordTok{points}\NormalTok{(diametro_cm[especie}\OperatorTok{==}\DecValTok{0}\NormalTok{],altura_m[especie}\OperatorTok{==}\DecValTok{0}\NormalTok{],}\DataTypeTok{col=}\StringTok{'blue'}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(diametro_cm[especie}\OperatorTok{==}\DecValTok{1}\NormalTok{],altura_m[especie}\OperatorTok{==}\DecValTok{1}\NormalTok{],}\DataTypeTok{col=}\StringTok{'red'}\NormalTok{)}
+
+\KeywordTok{abline}\NormalTok{(}\KeywordTok{coef}\NormalTok{(modelom)[}\DecValTok{1}\NormalTok{],}\KeywordTok{coef}\NormalTok{(modelom)[}\DecValTok{2}\NormalTok{], }\DataTypeTok{col=}\StringTok{'blue'}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\KeywordTok{coef}\NormalTok{(modelom)[}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\KeywordTok{coef}\NormalTok{(modelom)[}\DecValTok{3}\NormalTok{],}\KeywordTok{coef}\NormalTok{(modelom)[}\DecValTok{2}\NormalTok{]}\OperatorTok{+}\KeywordTok{coef}\NormalTok{(modelom)[}\DecValTok{4}\NormalTok{], }\DataTypeTok{col=}\StringTok{'red'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{04-RegMult_files/figure-latex/unnamed-chunk-8-1} \end{center}
+
 \hypertarget{metodos-selecao-de-variaveis-na-regressao-multipla}{%
 \section{Métodos seleção de variáveis na regressão
 múltipla}\label{metodos-selecao-de-variaveis-na-regressao-multipla}}
@@ -1857,7 +1945,7 @@ Passo 4) Seja F\textsubscript{out} o valor da distribuição F com 1 e
 
 Inclui uma variável de cada vez, se p \(\leq\) 20\%, entra no modelo.
 Este método não testa a permanência da variável (entrou no modelo não
-sai mais) (Riboldi, 2005).
+sai mais) RIBOLDI (\protect\hyperlink{ref-Riboldi2005}{2005}).
 
 Passo 1) Ajustar o modelo reduzido de m variáveis e obter
 \(SQR^{c}_{eg}\);
@@ -1944,6 +2032,63 @@ Passo 8) Seja F\textsubscript{out} o valor da distribuição F com 1 e
 \includegraphics{regress1.png}
 \caption{Modelagem estatística}
 \end{figure}
+
+Fonte: RIBOLDI (\protect\hyperlink{ref-Riboldi2005}{2005})
+
+\hypertarget{roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado}{%
+\section{Roteiro para o diagnóstico do modelo de regressão múltipla
+ajustado}\label{roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado}}
+
+Identificação de observações destoantes para Y
+
+\begin{itemize}
+\tightlist
+\item
+  Resíduo studentizado externamente -- r\_student (studentized residual
+  with currente observation deleted)
+\item
+  Resíduo studentizado internamente -- student (studentized residual)
+\item
+  Identificação de observações destoantes com base nos resíduos --
+  residual
+\end{itemize}
+
+Identificação de observações destoantes para X
+
+\begin{itemize}
+\tightlist
+\item
+  Matriz H
+\item
+  Alavanca (Leverage = )
+\end{itemize}
+
+Identificação de casos de influência
+
+\begin{itemize}
+\tightlist
+\item
+  DFFITS (standard influence of observation on predict values)
+\item
+  Distância de Cook (\_cookd)
+\item
+  DFBetas
+\end{itemize}
+
+Verificação da existência de multicolinearidade (correlação entre os
+X's)
+
+\begin{itemize}
+\tightlist
+\item
+  Matriz de correlação das variáveis
+\item
+  Análise de estrutura k (condition index)
+\item
+  Fator de inflação de variância -- VIF (variance inflation)
+\item
+  Teste de Durbin-Watson pra atutocorrelação
+\end{itemize}
 
 \hypertarget{regressao-logistica}{%
 \chapter{Regressão Logística}\label{regressao-logistica}}
@@ -3454,6 +3599,10 @@ York: Wiley, 2000.
 \leavevmode\hypertarget{ref-Rawlings1998}{}%
 RAWLINGS, J. O.; PANTULA, S. G.; DICKEY, D. A. \textbf{Applied
 Regression Analysis: A Research Tool}. New York: Springer, 1998.
+
+\leavevmode\hypertarget{ref-Riboldi2005}{}%
+RIBOLDI, J. \textbf{Modelos Lineares: notas de aula}. UFRGS: Programa de
+Pós-Graduação em Epidemiologia. Faculdade de Medicina, 2005.
 
 \leavevmode\hypertarget{ref-Siegel2017}{}%
 SIEGEL, E. \textbf{Análise Preditiva: O poder de prever quem vai clicar,

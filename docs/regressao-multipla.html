@@ -26,7 +26,7 @@
 <meta name="author" content="Iara Denise Endruweit Battisti">
 
 
-<meta name="date" content="2018-08-30">
+<meta name="date" content="2018-09-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -169,12 +169,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>3</b> Regressão Múltipla</a><ul>
 <li class="chapter" data-level="3.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>3.1</b> Modelo geral</a></li>
 <li class="chapter" data-level="3.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>3.2</b> Variável dummy</a></li>
-<li class="chapter" data-level="3.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>3.3</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>3.3.1</b> Full model – Modelo completo</a></li>
-<li class="chapter" data-level="3.3.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>3.3.2</b> Procedimento backward</a></li>
-<li class="chapter" data-level="3.3.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>3.3.3</b> Procedimento forward</a></li>
-<li class="chapter" data-level="3.3.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>3.3.4</b> Procedimento stepwise</a></li>
+<li class="chapter" data-level="3.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>3.3</b> Interação entre variáveis preditoras</a></li>
+<li class="chapter" data-level="3.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>3.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>3.4.1</b> Full model – Modelo completo</a></li>
+<li class="chapter" data-level="3.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>3.4.2</b> Procedimento backward</a></li>
+<li class="chapter" data-level="3.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>3.4.3</b> Procedimento forward</a></li>
+<li class="chapter" data-level="3.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>3.4.4</b> Procedimento stepwise</a></li>
 </ul></li>
+<li class="chapter" data-level="3.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>3.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>4</b> Regressão Logística</a><ul>
 <li class="chapter" data-level="4.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-modelo"><i class="fa fa-check"></i><b>4.1</b> O modelo</a></li>
@@ -375,10 +377,58 @@ Em seguida, os pontos são acrescentados separadamente, com a função points, a
 <a class="sourceLine" id="cb70-9" data-line-number="9"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">3</span>], <span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a></code></pre></div>
 <p><img src="04-RegMult_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /></p>
 </div>
+<div id="interacao-entre-variaveis-preditoras" class="section level2">
+<h2><span class="header-section-number">3.3</span> Interação entre variáveis preditoras</h2>
+<p>Quando suspeita-se que os coeficientes de inclinação podem variar entre as categorias da variável preditora então aconselha-se testar a interação entre as duas variáveis. No software R utiliza-se ‘:’ para indicar a interação entre as duas variáveis. Se a interação for significativa (P&lt;0,05), então conclui-se que os coeficientes de inclinação diferem entre si.</p>
+<p>O modelo de regressão múltipla apresentando anteriormente pressupõe que a inclinação da reta de regressão é igual para os dois grupos considerados, espécie Syphoneugena reitzii e espécie Sebastiania commersoniana espécie. Se existem motivos para acreditar que a inclinação pode variar de um grupo para o outro, pode-se acrescentar um termo de interação (interação entre variáveis) (Kaszubowski, 2016).</p>
+<p>A interação, neste caso, nada mais é do que o acréscimo de uma nova variável preditora ao modelo. Essa nova variável preditora é o produto das duas variáveis que já constam no modelo. Para acrescentar um termo de interação no R, basta utilizar dois pontos ‘:’ entre o nome das duas variáveis para as quais se deseja criar o termo de interação.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">modelom=<span class="kw">lm</span>(<span class="st">`</span><span class="dt">altura_m</span><span class="st">`</span><span class="op">~</span><span class="st">`</span><span class="dt">diametro_cm</span><span class="st">`</span><span class="op">+</span>especie<span class="op">+</span><span class="st">`</span><span class="dt">diametro_cm</span><span class="st">`</span><span class="op">:</span>especie, <span class="dt">data =</span> arvore2)</a>
+<a class="sourceLine" id="cb71-2" data-line-number="2">modelom</a></code></pre></div>
+<pre><code>
+Call:
+lm(formula = altura_m ~ diametro_cm + especie + diametro_cm:especie, 
+    data = arvore2)
+
+Coefficients:
+        (Intercept)          diametro_cm              especie  
+            11.5480               0.0714               0.7863  
+diametro_cm:especie  
+            -0.0316  </code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">summary</span>(modelom)</a></code></pre></div>
+<pre><code>
+Call:
+lm(formula = altura_m ~ diametro_cm + especie + diametro_cm:especie, 
+    data = arvore2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.2460 -0.8545  0.0632  0.7552  2.5561 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         11.54805    0.47544   24.29  &lt; 2e-16 ***
+diametro_cm          0.07137    0.00566   12.62  &lt; 2e-16 ***
+especie              0.78630    0.68304    1.15  0.25237    
+diametro_cm:especie -0.03158    0.00842   -3.75  0.00029 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1.12 on 101 degrees of freedom
+Multiple R-squared:  0.736, Adjusted R-squared:  0.728 
+F-statistic:   94 on 3 and 101 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw">plot</span>(diametro_cm,altura_m,<span class="dt">type=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb75-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb75-3" data-line-number="3"><span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">0</span>],altura_m[especie<span class="op">==</span><span class="dv">0</span>],<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb75-4" data-line-number="4"><span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">1</span>],altura_m[especie<span class="op">==</span><span class="dv">1</span>],<span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a>
+<a class="sourceLine" id="cb75-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb75-6" data-line-number="6"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>],<span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb75-7" data-line-number="7"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">3</span>],<span class="kw">coef</span>(modelom)[<span class="dv">2</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">4</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a></code></pre></div>
+<p><img src="04-RegMult_files/figure-html/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;" /></p>
+</div>
 <div id="metodos-selecao-de-variaveis-na-regressao-multipla" class="section level2">
-<h2><span class="header-section-number">3.3</span> Métodos seleção de variáveis na regressão múltipla</h2>
+<h2><span class="header-section-number">3.4</span> Métodos seleção de variáveis na regressão múltipla</h2>
 <div id="full-model-modelo-completo" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> Full model – Modelo completo</h3>
+<h3><span class="header-section-number">3.4.1</span> Full model – Modelo completo</h3>
 <p>Sintaxe no software R para um modelo de regressão múltipla com três variáveis preditivas:</p>
 <p><code>regressao=lm(y~x1+x2+x3)</code></p>
 <p><code>summary(regressao)</code></p>
@@ -386,7 +436,7 @@ Em seguida, os pontos são acrescentados separadamente, com a função points, a
 <p><code>regressao=step(lm(y~x1+x2+x3),direction = 'método')</code></p>
 </div>
 <div id="procedimento-backward" class="section level3">
-<h3><span class="header-section-number">3.3.2</span> Procedimento backward</h3>
+<h3><span class="header-section-number">3.4.2</span> Procedimento backward</h3>
 <p>Considera todas as variáveis inicialmente, testando posteriormente, a permanência de cada uma no modelo. Se p <span class="math inline">\(\leq\)</span> 15%, permanece no modelo (saiu do modelo não entra mais) (Riboldi, 2005).</p>
 <p>Passo 1) Ajustar o modelo completo de m variáveis e obter <span class="math inline">\(SQR^{c}_{eg}\)</span> e <span class="math inline">\(\sigma^{2}\)</span>;</p>
 <p>Passo 2) Para cada uma das m variáveis do modelo completo do passo 1, considerar o modelo reduzido – retirando esta variável
@@ -400,9 +450,8 @@ eliminação da variável cuja estatística é igual a F<sub>min</sub>.</p></li>
 </ul>
 </div>
 <div id="procedimento-forward" class="section level3">
-<h3><span class="header-section-number">3.3.3</span> Procedimento forward</h3>
-<p>Inclui uma variável de cada vez, se p <span class="math inline">\(\leq\)</span> 20%, entra no modelo. Este método não testa a permanência da variável (entrou no
-modelo não sai mais) (Riboldi, 2005).</p>
+<h3><span class="header-section-number">3.4.3</span> Procedimento forward</h3>
+<p>Inclui uma variável de cada vez, se p <span class="math inline">\(\leq\)</span> 20%, entra no modelo. Este método não testa a permanência da variável (entrou no modelo não sai mais) <span class="citation">Riboldi (<a href="#ref-Riboldi2005">2005</a>)</span>.</p>
 <p>Passo 1) Ajustar o modelo reduzido de m variáveis e obter <span class="math inline">\(SQR^{c}_{eg}\)</span>;</p>
 <p>Passo 2) Para cada variável não pertencente ao modelo do passo 1, considerar o modelo completo com adição desta variável
 extra e calcular <span class="math inline">\(SQR^{r}_{eg}\)</span> e <span class="math inline">\(\sigma^{2}\)</span> para obter o valor da estatística (slide 26);</p>
@@ -415,7 +464,7 @@ da variável cuja estatística é igual a F<sub>max</sub>.</p></li>
 </ul>
 </div>
 <div id="procedimento-stepwise" class="section level3">
-<h3><span class="header-section-number">3.3.4</span> Procedimento stepwise</h3>
+<h3><span class="header-section-number">3.4.4</span> Procedimento stepwise</h3>
 <p>Inclui as variáveis passo-a-passo e testa a permanência (as variáveis podem entrar e sair do modelo) (Riboldi, 2005).</p>
 <p>Passo 1) Ajustar o modelo reduzido de m variáveis e obter <span class="math inline">\(SQR^{r}_{eg}\)</span>;</p>
 <p>Passo 2) Para cada variável não pertencente ao modelo do passo 1, considerar o modelo completo - com adição desta variável
@@ -442,11 +491,45 @@ reduzido com (k-1) variáveis.</p></li>
 <img src="regress1.png" alt="Modelagem estatística" />
 <p class="caption">Modelagem estatística</p>
 </div>
+<p>Fonte: <span class="citation">Riboldi (<a href="#ref-Riboldi2005">2005</a>)</span></p>
+</div>
+</div>
+<div id="roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado" class="section level2">
+<h2><span class="header-section-number">3.5</span> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</h2>
+<p>Identificação de observações destoantes para Y</p>
+<ul>
+<li>Resíduo studentizado externamente – r_student (studentized residual with currente observation deleted)</li>
+<li>Resíduo studentizado internamente – student (studentized residual)</li>
+<li>Identificação de observações destoantes com base nos resíduos – residual</li>
+</ul>
+<p>Identificação de observações destoantes para X</p>
+<ul>
+<li>Matriz H</li>
+<li>Alavanca (Leverage = )</li>
+</ul>
+<p>Identificação de casos de influência</p>
+<ul>
+<li>DFFITS (standard influence of observation on predict values)</li>
+<li>Distância de Cook (_cookd)</li>
+<li>DFBetas</li>
+</ul>
+<p>Verificação da existência de multicolinearidade (correlação entre os X’s)</p>
+<ul>
+<li>Matriz de correlação das variáveis</li>
+<li>Análise de estrutura k (condition index)</li>
+<li>Fator de inflação de variância – VIF (variance inflation)</li>
+<li>Teste de Durbin-Watson pra atutocorrelação</li>
+</ul>
 <!--
 \printbibliography[segment=\therefsegment,heading=subbibliography]
 -->
 
 </div>
+</div>
+<h3>Referências</h3>
+<div id="refs" class="references">
+<div id="ref-Riboldi2005">
+<p>Riboldi, J. 2005. <em>Modelos Lineares: notas de aula</em>. UFRGS: Programa de Pós-Graduação em Epidemiologia. Faculdade de Medicina.</p>
 </div>
 </div>
             </section>

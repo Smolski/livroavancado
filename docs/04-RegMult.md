@@ -225,6 +225,83 @@ abline(coef(modelom)[1]+coef(modelom)[3], coef(modelom)[2], col='red')
 \begin{center}\includegraphics[width=0.6\linewidth]{04-RegMult_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 
+## Interação entre variáveis preditoras
+
+Quando suspeita-se que os coeficientes de inclinação podem variar entre as categorias da variável preditora então aconselha-se testar a interação entre as duas variáveis. No software R utiliza-se ‘:’ para indicar a interação entre as duas variáveis. Se a interação for significativa (P<0,05), então conclui-se que os coeficientes de inclinação diferem entre si.
+
+O modelo de regressão múltipla apresentando anteriormente pressupõe que a inclinação da reta de regressão é igual para os dois grupos considerados, espécie Syphoneugena reitzii e espécie Sebastiania commersoniana espécie. Se existem motivos para acreditar que a inclinação pode variar de um grupo para o outro, pode-se acrescentar um termo de interação (interação entre variáveis) (Kaszubowski, 2016).
+
+A interação, neste caso, nada mais é do que o acréscimo de uma nova variável preditora ao modelo. Essa nova variável preditora é o produto das duas variáveis que já constam no modelo. Para acrescentar um termo de interação no R, basta utilizar dois pontos ‘:’ entre o nome das duas variáveis para as quais se deseja criar o termo de interação.
+
+
+```r
+modelom=lm(`altura_m`~`diametro_cm`+especie+`diametro_cm`:especie, data = arvore2)
+modelom
+```
+
+```
+
+Call:
+lm(formula = altura_m ~ diametro_cm + especie + diametro_cm:especie, 
+    data = arvore2)
+
+Coefficients:
+        (Intercept)          diametro_cm              especie  
+            11.5480               0.0714               0.7863  
+diametro_cm:especie  
+            -0.0316  
+```
+
+
+
+
+```r
+summary(modelom)
+```
+
+```
+
+Call:
+lm(formula = altura_m ~ diametro_cm + especie + diametro_cm:especie, 
+    data = arvore2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.2460 -0.8545  0.0632  0.7552  2.5561 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(>|t|)    
+(Intercept)         11.54805    0.47544   24.29  < 2e-16 ***
+diametro_cm          0.07137    0.00566   12.62  < 2e-16 ***
+especie              0.78630    0.68304    1.15  0.25237    
+diametro_cm:especie -0.03158    0.00842   -3.75  0.00029 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.12 on 101 degrees of freedom
+Multiple R-squared:  0.736,	Adjusted R-squared:  0.728 
+F-statistic:   94 on 3 and 101 DF,  p-value: <2e-16
+```
+
+
+
+
+```r
+plot(diametro_cm,altura_m,type='n')
+
+points(diametro_cm[especie==0],altura_m[especie==0],col='blue')
+points(diametro_cm[especie==1],altura_m[especie==1],col='red')
+
+abline(coef(modelom)[1],coef(modelom)[2], col='blue')
+abline(coef(modelom)[1]+coef(modelom)[3],coef(modelom)[2]+coef(modelom)[4], col='red')
+```
+
+
+
+\begin{center}\includegraphics[width=0.6\linewidth]{04-RegMult_files/figure-latex/unnamed-chunk-8-1} \end{center}
+
+
+
 
 ## Métodos seleção de variáveis na regressão múltipla
 
@@ -264,8 +341,7 @@ eliminação da variável cuja estatística é igual a F~min~.
 
 ### Procedimento forward
 
-Inclui uma variável de cada vez, se p $\leq$ 20%, entra no modelo. Este método não testa a permanência da variável (entrou no
-modelo não sai mais) (Riboldi, 2005).
+Inclui uma variável de cada vez, se p $\leq$ 20%, entra no modelo. Este método não testa a permanência da variável (entrou no modelo não sai mais) @Riboldi2005.
 
 Passo 1) Ajustar o modelo reduzido de m variáveis e obter $SQR^{c}_{eg}$;
 
@@ -316,6 +392,36 @@ reduzido com (k-1) variáveis.
 
 
 ![Modelagem estatística](regress1.png)
+
+Fonte: @Riboldi2005
+
+## Roteiro para o diagnóstico do modelo de regressão múltipla ajustado
+
+Identificação de observações destoantes para Y
+
+- Resíduo studentizado externamente – r_student (studentized residual with currente observation deleted)
+- Resíduo studentizado internamente – student (studentized residual)
+- Identificação de observações destoantes com base nos resíduos – residual
+
+Identificação de observações destoantes para X
+
+- Matriz H
+- Alavanca (Leverage =  )
+
+Identificação de casos de influência
+
+- DFFITS (standard influence of observation on predict values)
+- Distância de Cook (_cookd)
+- DFBetas
+	
+Verificação da existência de multicolinearidade (correlação entre os X’s)
+
+- Matriz de correlação das variáveis
+- Análise de estrutura k (condition index)
+- Fator de inflação de variância – VIF (variance inflation)
+- Teste de Durbin-Watson pra atutocorrelação
+
+
 
 <!--
 \printbibliography[segment=\therefsegment,heading=subbibliography]

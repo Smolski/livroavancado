@@ -3,7 +3,7 @@ title: "Software R: curso avançado"
 author: 
 - Felipe Micail da Silva Smolski
 - Iara Denise Endruweit Battisti
-date: "2018-08-30"
+date: "2018-09-19"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]

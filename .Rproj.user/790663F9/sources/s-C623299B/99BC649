@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1537325932488.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4088079418",
+    "id" : "99BC649",
+    "lastKnownWriteTime" : 1537327390,
+    "last_content_update" : 1537327390020,
+    "path" : "D:/Github/livroavancado/04-RegMult.Rmd",
+    "project_path" : "04-RegMult.Rmd",
+    "properties" : {
+        "cursorPosition" : "314,19",
+        "docOutlineVisible" : "1",
+        "scrollLine" : "313"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
