@@ -1,0 +1,244 @@
+# Regressão de Poisson
+
+```{r echo=FALSE}
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+Sys.setenv(RSTUDIO_PDFLATEX = "latexmk")
+options(width = 80, digits = 4,
+        bookdown.clean_book = TRUE)
+knitr::opts_chunk$set(
+  tidy = FALSE, 
+  fig.align = "center", 
+  out.width = '90%',
+  comment = NA,
+  fig.pos = 'h',
+  fig.keep='last'
+  )
+```
+
+```{r, echo=FALSE}
+
+packages <- c("caret", "pROC", "ResourceSelection", "modEvA", "foreign", "stargazer", "mfx","readr","ggplot2")
+
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+    install.packages(setdiff(packages, rownames(installed.packages())))  
+}
+```
+
+O modelo de Regressão de Poisson é aquele mais adequado quando os dados das variáveis dependentes são contáveis. Em muitos casos é de interesse do pesquisador modelar e estimar tais episódios. O número de alunos matriculados, a quantidade de visitantes de um parque, o número de multas efetuadas em determinado ano, o número de produtos registrados em determinado ano, etc. Em todos estes casos, a variável resposta é discreta e assume um número finito de valores.
+
+## O modelo
+
+A distribuição de *Poisson* é dada por [@Gujarati2011]:
+
+$$
+f(Y_i) = \frac{\mu^{Y}e^{-\mu}}{Y!}
+$$
+sendo $Y=0,1,2,...$ e $f(Y)$ é a probabilidade de $Y$ assumir valores inteiros não negativos e $Y!$ (fatorial de Y) representa $Y! = Y \times (Y-1) \times (Y-2) \times 2 \times 1$. Ainda:
+
+$$
+E(Y) = \mu
+$$
+$$
+var(Y) = \mu
+$$
+
+A distribuição de Poisson tem a variância igual à sua média. O modelo de regressão de Poisson, portanto, é dado por:
+
+$$
+Y_i = E(Y_i) +\mu_i = \mu_i + u_i
+$$
+assim os $Y$ se distribuem independentemente como variáveis de Poisson aleatórias com média $\mu_i$ para cada indivíduo [@Gujarati2011] expresso:
+
+$$
+\mu_i = E(Y_i) = \beta_{i} + \beta _{2} X_{2i} + \beta_{3} X_{3i} + \dots + \beta_{k} X_{ki}
+$$
+
+onde X são as variáveis que podem afetar o valor médio. Para que a equação seja estimada, representa-se o modelo:
+
+$$
+Y_i = \frac{\mu^{Y}e^{-\mu}}{Y!} + u_i
+$$
+
+Assim, o modelo de regressão resultante não será linear nos parâmetros. 
+
+
+
+## Estimando os parâmetros do modelo
+
+No exemplo abaixo consta uma base de dados que será denominada `caranguejo`, derivada de @penn2018. Este estudo buscou investigar os fatores que afetam a quantidade de caranguejos machos (satélites) residindo perto dos caranguejos fêmeas. As variáveis explicativas: 
+
+- **(Sa)** número de satélites (variável dependente);
+- **(C)** cor do caranguejo fêmea;
+- **(S)** condição da coluna;
+- **(Wt)** peso;
+- **(W)** largura da carapaça.
+
+Seguem os procedimentos para importação da base de dados do exemplo:
+
+```{r, message=FALSE, warning=FALSE}
+library(readr)
+caranguejo <- read_table2("https://goo.gl/Wvvnrf", 
+    col_names = FALSE)
+colnames(caranguejo)=c("Obs","C","S","W","Wt","Sa")
+summary(caranguejo)
+```
+
+Abaixo o histograma da distribuição do número de satélites (variável dependente) da base de dados:
+
+```{r}
+hist(caranguejo$Sa)
+```
+
+Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
+
+```{r}
+plot(caranguejo$W,caranguejo$Sa)
+```
+
+Para criação da regressão de Poisson utiliza-se a função já conhecida `glm()`, sendo que em `family` é determinado o tipo de análise desejada ("poisson"):
+
+```{r, warning=FALSE}
+regpoisson=glm(Sa~W, family="poisson", data=caranguejo)
+summary(regpoisson)
+```
+
+O modelo estimado:
+
+$$
+log(\hat\mu {/t}) = -3.30476 + 0,16405 W_i
+$$
+ou
+
+$$
+E(Y)= e^{-3.30476} + e^{0,16405 W_i}
+$$
+
+A leitura do resultado da regressão em geral se assemelha com os modelos de regressão linear e múltipla. Os resultados mostram que a largura da carapaça (W) tem relação positiva com o número de satélites (Sa) em volta do caranguejo fêmea, possuindo significância estatística a $p=0,001$. 
+
+A interpretação do parâmetro $0,16405W_i$:
+
+
+- **(a)** como o parâmetro $\beta_1$ é positivo, há uma relação positiva entre oa largura da carapaça (W) e o número de satélites (sa) esperados.
+
+- **(b)** exp(0,16405) = 1,178273. Logo, para cada elevação unitária na largura da carapaça (W) dos caranguejos, eleva-se em 1,178273 vezes o número de satélites (Sa).
+
+- **(c)** O parâmetro de dispersão para esta equação é tido como 1. Caso for muito superior a 1 há vestígios de superdisposição no modelo.
+
+Abaixo a análise de variância.  
+
+```{r, message=FALSE, warning=FALSE}
+anova(regpoisson, test="Chisq")
+```
+
+Abaixo são incluídos os valores preditos `regpoisson$fitted.values` juntamente com os dados originais.
+
+```{r}
+print=data.frame(caranguejo, pred=(regpoisson$fitted.values))
+head(print)
+```
+
+É possível comparar a distribuição dos valores preditos decorrentes da utilização do modelo de regressão de Poisson com a amostra inicial da base de dados analisada:
+
+```{r, fig.cap="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)"}
+plot(caranguejo$W,caranguejo$Sa)
+points(regpoisson$fitted.values,col='red', type = "l")
+```
+
+
+
+No entanto, é possível melhorar a precisão do modelo de regressão utilizado, uma vez que os dados iniciais apresentam os casos individuais da amostra de cada caranguejo observado com suas respectivas características das variáveis independentes. Uma forma é agrupar os dados em intervalos da variável independente, contando os o número de casos (variável dependente) em cada intervalo. 
+
+Foram determinados 8 intervalos ("Intervalo") conforme o tamanho da carapaça dos caranguejos. Contou-se o número de casos (variável "numcasos") de caranguejos em cada intervalo de tamanho da carapaça; o camanho médio da carapaça ("width") em cada intervalo e; o número total de satélites ("satotal") esperados em cada intervalo:
+
+
+
+```{r}
+Intervalo=c("<23,25", "23,25-24,25","24,25-25,25","25,25-26,25","26,25-27,25","27,25-28,25","28,25-29,25",">29,25")
+attach(caranguejo)
+numcasos=list(length(subset(W, W <23.25)),
+              length(subset(W, W >23.25 & W <24.25)),
+              length(subset(W, W >24.25 & W <25.25)),
+              length(subset(W, W >25.25 & W <26.25)),
+              length(subset(W, W >26.25 & W <27.25)),
+              length(subset(W, W >27.25 & W <28.25)),
+              length(subset(W, W >28.25 & W <29.25)),
+              length(subset(W, W >29.25)))
+width=list(mean(subset(W, W <23.25)),
+              mean(subset(W, W >23.25 & W <24.25)),
+              mean(subset(W, W >24.25 & W <25.25)),
+              mean(subset(W, W >25.25 & W <26.25)),
+              mean(subset(W, W >26.25 & W <27.25)),
+              mean(subset(W, W >27.25 & W <28.25)),
+              mean(subset(W, W >28.25 & W <29.25)),
+              mean(subset(W, W >29.25)))
+satotal=list(sum(subset(Sa, W <23.25)),
+              sum(subset(Sa, W >23.25 & W <24.25)),
+              sum(subset(Sa, W >24.25 & W <25.25)),
+              sum(subset(Sa, W >25.25 & W <26.25)),
+              sum(subset(Sa, W >26.25 & W <27.25)),
+              sum(subset(Sa, W >27.25 & W <28.25)),
+              sum(subset(Sa, W >28.25 & W <29.25)),
+              sum(subset(Sa, W >29.25)))
+numcasos <- data.frame(matrix(unlist(numcasos), nrow=8, byrow=T),stringsAsFactors=FALSE)
+width <- data.frame(matrix(unlist(width), nrow=8, byrow=T),stringsAsFactors=FALSE)
+satotal <- data.frame(matrix(unlist(satotal), nrow=8, byrow=T),stringsAsFactors=FALSE)
+novosdados=data.frame(Intervalo,numcasos,round(width,2),satotal)
+names(novosdados)=c("Intervalo","numcasos","width","satotal")
+novosdados
+```
+
+Segue a especificação deste novo modelo agrupado. Segundo @penn2018, utiliou-se o componente de ajuste da equação (`offset`) como o logarítmo do número de casos ("lcases"), como "o valor de ajuste 't' no modelo que representa o espaço fixo, neste caso o grupo (caranguejos com largura similar)". O resultado da nova regressão se mostra melhor ajustado, com redução do índice AIC:
+
+```{r}
+# Log do Número de Casos
+lcases=log(numcasos) 
+# Incluir a varíavel anterior no objeto novosdados
+novosdados=data.frame(novosdados,lcases) 
+names(novosdados)[5]="lcases"
+model=glm(satotal~width, offset=lcases, family="poisson", data=novosdados)
+summary(model)
+```
+
+A fórmula para esta nova regressão:
+
+$$
+log(\hat\mu/t)=-3.535 + 0,1727 width_i + log(t)
+$$
+Desta forma:
+
+- **(a)** em conformidade com a equação anterior, o número esperado de satélites (satotal) cresce de acordo com o tamanho médio da carapaça dos caranguejos (width), pois o coeficiente é positivo.
+- **(b)** como exp(0,1727)=1,188509, espera-se que para cada alteração unitária no tamanho médio da carapaça dos caranguejos (width) eleve-se em 1,188509 vezes o número esperado de satélites (satotal).
+
+Abaixo a análise de variância:
+
+```{r, message=FALSE}
+anova(model, test="Chisq")
+```
+
+
+
+Abaixo demonstra-se a plotagem dos valores originais e preditos com a regressão de Poisson:
+
+```{r, fig.cap="Valores observados e preditos"}
+plot(novosdados$satotal, pch="o", col="blue", xlab="Width (grupos)", ylab="Número de satélites")
+points(model$fitted.values, pch="p", col="red")
+legend(6,30,c("obs","pred"), pch=c("o","p"), col=c("blue","red"))
+```
+Fonte: Adaptado de @penn2018.
+
+
+```{r, include=TRUE}
+novosdados$pred=model$fitted.values
+head(novosdados)
+```
+
+Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dados da regressão de Poisson:
+
+- Análise de resíudos;
+- Análise de pontos influentes;
+- Análise de variância;
+- Indicador AIC;
+- Análise de superdispersão do modelo (quando Var(Y) > E(Y)). Neste caso, pode ocorrer por três motivos: a) função de ligação inadequada: talvez outras funções além da logarítimica se ajustem melhor; b) não inclusão de variáveis relevantes ao modelo; c) excessos de zeros. 
+

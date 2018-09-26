@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-09-19}
+    \date{2018-09-25}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -146,6 +146,8 @@
 \renewcommand{\baselinestretch}{1.0}
 \setlength{\parindent}{1.25cm}
 \selectlanguage{brazil}
+
+\usepackage{float}
 
 \begin{document}
 \maketitle
@@ -171,6 +173,8 @@ Estatística com R da UFFS}:
   Regressão Múltipla
 \item
   Regressão Logística
+\item
+  Regressão de Poisson
 \end{itemize}
 
 \hypertarget{introducao}{%
@@ -361,11 +365,13 @@ e D). Para tanto, instalou um experimento no delineamento inteiramente
 casualizado, utilizando 5 repetições por variedade. Os resultados, peso
 médio do fruto, estão apresentados a seguir:
 
-\begin{figure}
-\centering
-\includegraphics{delimexp0.png}
-\caption{Variedades de pera separadas por grupos em faixas de peso e
-repetição}
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{delimexp0} 
+
+}
+
+\caption{Variedades de pera separadas por grupos em faixas de peso e repetição}\label{fig:unnamed-chunk-2}
 \end{figure}
 
 Existe diferença significativa entre as variedades de pera, considerando
@@ -533,11 +539,18 @@ The following objects are masked from DIC (pos = 5):
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{boxplot}\NormalTok{(Peso}\OperatorTok{~}\NormalTok{Variedade)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-7-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{boxplot}\NormalTok{(Peso}\OperatorTok{~}\NormalTok{Variedade,}\DataTypeTok{xlab=}\StringTok{"Variedade"}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{"Peso"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-6-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-7-2} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -570,7 +583,7 @@ The following objects are masked from DIC (pos = 5):
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-8-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-9-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -579,7 +592,7 @@ The following objects are masked from DIC (pos = 5):
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-9-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-10-1} \end{center}
 
 \hypertarget{delineamento-blocos-casualizados-dbc}{%
 \section{Delineamento Blocos Casualizados
@@ -596,10 +609,13 @@ ela notou que entre essas 20 pessoas existem 5 grupos de faixas iniciais
 de peso. Então, para aumentar a eficácia do teste ela separou os 20
 indivíduos em 5 grupos de faixas de peso.
 
-\begin{figure}
-\centering
-\includegraphics{delimexp1.png}
-\caption{Indivíduos separados por grupos em faixas de peso}
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{delimexp1} 
+
+}
+
+\caption{Indivíduos separados por grupos em faixas de peso}\label{fig:unnamed-chunk-11}
 \end{figure}
 
 Criar o arquivo acima em planilha eletrônica. Nomear como DBC e salvar
@@ -708,7 +724,7 @@ Medidas descritivas com a variável resposta:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -716,7 +732,7 @@ Medidas descritivas com a variável resposta:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-13-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-15-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -749,7 +765,7 @@ Dieta 1 Dieta 2 Dieta 3 Dieta 4
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-15-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-17-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -758,7 +774,7 @@ Dieta 1 Dieta 2 Dieta 3 Dieta 4
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{02-Delinexp_files/figure-latex/unnamed-chunk-16-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-18-1} \end{center}
 
 \hypertarget{analise-fatorial}{%
 \chapter{Análise Fatorial}\label{analise-fatorial}}
@@ -778,7 +794,14 @@ discriminante, onde uma das variáveis é identificada como a variável
 dependente, examina-se todo o conjunto de relações interdependentes
 entre variáveis.
 
-\includegraphics{anfat1.png}
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{anfat1} 
+
+}
+
+\caption{Processo de análise de variáveis}\label{fig:unnamed-chunk-19}
+\end{figure}
 
 A análise fatorial aborda o problema de analisar a estrutura das
 inter-relações (correlações) entre um grande número de variáveis
@@ -935,15 +958,7 @@ relacionadas às variáveis pesquisadas, utilizando a função
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{require}\NormalTok{(readxl)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-Carregando pacotes exigidos: readxl
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{url <-}\StringTok{ "https://github.com/Smolski/softwarelivrer/raw/master/avancado/creme_dental_exemplo1.xlsx"}
 \NormalTok{destfile <-}\StringTok{ "creme_dental_exemplo1.xlsx"}
 \NormalTok{curl}\OperatorTok{::}\KeywordTok{curl_download}\NormalTok{(url, destfile)}
@@ -1039,7 +1054,7 @@ corrplot 0.84 loaded
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{03-AnaliseFat_files/figure-latex/unnamed-chunk-4-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
 Na figura acima, as correlações estão em cor azul porque são positivas,
 com tons mais fortes para as correlações mais altas.
@@ -1264,7 +1279,7 @@ barras para o nosso exemplo
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{03-AnaliseFat_files/figure-latex/unnamed-chunk-8-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-26-1} \end{center}
 
 Note que as duas primeiras componentes, aparecem em destaque, ocorrendo
 uma ligeira suavização das alturas nas demais colunas.
@@ -1275,7 +1290,7 @@ uma ligeira suavização das alturas nas demais colunas.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{03-AnaliseFat_files/figure-latex/unnamed-chunk-9-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-27-1} \end{center}
 
 \hypertarget{analise-de-componentes-principais}{%
 \subsection{Análise de Componentes
@@ -1464,7 +1479,7 @@ eixos, estão relacionadas a ambos os fatores.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{03-AnaliseFat_files/figure-latex/unnamed-chunk-14-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-32-1} \end{center}
 
 Os valores dos fatores obtidos para os 30 entrevistados encontram-se na
 matriz de coeficiente de escore do componente mostrada abaixo. Esta
@@ -1494,7 +1509,14 @@ dentes, hálito puro e boa aparência dos dentes.
 
 Destacando-se os entrevistados de interesse, verifica-se:
 
-\includegraphics{anfat2.png}
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{anfat2} 
+
+}
+
+\caption{Principais resultados}\label{fig:unnamed-chunk-34}
+\end{figure}
 
 \hypertarget{regressao-multipla}{%
 \chapter{Regressão Múltipla}\label{regressao-multipla}}
@@ -1788,6 +1810,13 @@ extrair os coeficientes de interesse.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{plot}\NormalTok{(diametro_cm,altura_m)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-38-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{# Gera o gráfico sem pontos}
 \KeywordTok{plot}\NormalTok{(diametro_cm,altura_m,}\DataTypeTok{type=}\StringTok{'n'}\NormalTok{) }
 \CommentTok{# Acrescenta os pontos}
@@ -1799,7 +1828,7 @@ extrair os coeficientes de interesse.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{04-RegMult_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-38-2} \end{center}
 
 \hypertarget{interacao-entre-variaveis-preditoras}{%
 \section{Interação entre variáveis
@@ -1887,7 +1916,7 @@ F-statistic:   94 on 3 and 101 DF,  p-value: <2e-16
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{04-RegMult_files/figure-latex/unnamed-chunk-8-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-41-1} \end{center}
 
 \hypertarget{metodos-selecao-de-variaveis-na-regressao-multipla}{%
 \section{Métodos seleção de variáveis na regressão
@@ -2027,10 +2056,13 @@ Passo 8) Seja F\textsubscript{out} o valor da distribuição F com 1 e
   com (k-1) variáveis.
 \end{itemize}
 
-\begin{figure}
-\centering
-\includegraphics{regress1.png}
-\caption{Modelagem estatística}
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{regress1} 
+
+}
+
+\caption{Modelagem estatística}\label{fig:unnamed-chunk-42}
 \end{figure}
 
 Fonte: RIBOLDI (\protect\hyperlink{ref-Riboldi2005}{2005})
@@ -2205,9 +2237,9 @@ uma relação pobremente ajustada dos dados reais e a Figura
 \ref{fig:curvalog}c demonstra um bom ajuste na relação entre as
 variáveis.
 
-\begin{figure}[h]
+\begin{figure}[H]
 
-{\centering \includegraphics[width=0.9\linewidth]{curvalog} 
+{\centering \includegraphics[width=0.8\linewidth]{curvalog} 
 
 }
 
@@ -2294,9 +2326,9 @@ Observa-se na figura abaixo a dispersão dos ``eventos'' e dos
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[h]
+\begin{figure}[H]
 
-{\centering \includegraphics[width=0.9\linewidth]{05-RegLogist_files/figure-latex/dispev-1} 
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/dispev-1} 
 
 }
 
@@ -2380,9 +2412,9 @@ desta base de dados:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[h]
+\begin{figure}[H]
 
-{\centering \includegraphics[width=0.9\linewidth]{05-RegLogist_files/figure-latex/distrpred-1} 
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/distrpred-1} 
 
 }
 
@@ -2710,9 +2742,9 @@ uma excelente classificação. Quanto mais ao noroeste do gráfico o ponto
 estiver melhor, assim sendo o ponto B da Figura \ref{fig:curvaroc}a
 classifica melhor os resultados que o ponto C.
 
-\begin{figure}[h]
+\begin{figure}[H]
 
-{\centering \includegraphics[width=0.9\linewidth]{curvaroc} 
+{\centering \includegraphics[width=0.8\linewidth]{curvaroc} 
 
 }
 
@@ -2779,9 +2811,9 @@ Seguem os passos para elaboração da curva ROC.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[h]
+\begin{figure}[H]
 
-{\centering \includegraphics[width=0.9\linewidth]{05-RegLogist_files/figure-latex/roc-1} 
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/roc-1} 
 
 }
 
@@ -2877,38 +2909,36 @@ serão\texttt{x1},\texttt{x2}e\texttt{x3}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{require}\NormalTok{(foreign)}
+\KeywordTok{require}\NormalTok{(haven)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-Carregando pacotes exigidos: foreign
+Carregando pacotes exigidos: haven
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mydata <-}\StringTok{ }\KeywordTok{read.dta}\NormalTok{(}\StringTok{"http://dss.princeton.edu/training/Panel101.dta"}\NormalTok{) }
+\NormalTok{mydata <-}\StringTok{ }\KeywordTok{read_dta}\NormalTok{(}\StringTok{"http://dss.princeton.edu/training/Panel101.dta"}\NormalTok{) }
 \KeywordTok{summary}\NormalTok{(mydata)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
- country      year            y                 y_bin           x1        
- A:10    Min.   :1990   Min.   :-7.86e+09   Min.   :0.0   Min.   :-0.568  
- B:10    1st Qu.:1992   1st Qu.: 2.47e+08   1st Qu.:1.0   1st Qu.: 0.329  
- C:10    Median :1994   Median : 1.90e+09   Median :1.0   Median : 0.641  
- D:10    Mean   :1994   Mean   : 1.85e+09   Mean   :0.8   Mean   : 0.648  
- E:10    3rd Qu.:1997   3rd Qu.: 3.37e+09   3rd Qu.:1.0   3rd Qu.: 1.096  
- F:10    Max.   :1999   Max.   : 8.94e+09   Max.   :1.0   Max.   : 1.446  
- G:10                                                                     
-       x2               x3              opinion  
- Min.   :-1.622   Min.   :-1.165   Str agree:20  
- 1st Qu.:-1.216   1st Qu.:-0.079   Agree    :15  
- Median :-0.462   Median : 0.514   Disag    :19  
- Mean   : 0.134   Mean   : 0.762   Str disag:16  
- 3rd Qu.: 1.608   3rd Qu.: 1.155                 
- Max.   : 2.530   Max.   : 7.169                 
-                                                 
+    country       year            y                 y_bin           x1        
+ Min.   :1   Min.   :1990   Min.   :-7.86e+09   Min.   :0.0   Min.   :-0.568  
+ 1st Qu.:2   1st Qu.:1992   1st Qu.: 2.47e+08   1st Qu.:1.0   1st Qu.: 0.329  
+ Median :4   Median :1994   Median : 1.90e+09   Median :1.0   Median : 0.641  
+ Mean   :4   Mean   :1994   Mean   : 1.85e+09   Mean   :0.8   Mean   : 0.648  
+ 3rd Qu.:6   3rd Qu.:1997   3rd Qu.: 3.37e+09   3rd Qu.:1.0   3rd Qu.: 1.096  
+ Max.   :7   Max.   :1999   Max.   : 8.94e+09   Max.   :1.0   Max.   : 1.446  
+       x2               x3            opinion    
+ Min.   :-1.622   Min.   :-1.165   Min.   :1.00  
+ 1st Qu.:-1.216   1st Qu.:-0.079   1st Qu.:1.00  
+ Median :-0.462   Median : 0.514   Median :2.50  
+ Mean   : 0.134   Mean   : 0.762   Mean   :2.44  
+ 3rd Qu.: 1.608   3rd Qu.: 1.155   3rd Qu.:3.00  
+ Max.   : 2.530   Max.   : 7.169   Max.   :4.00  
 \end{verbatim}
 
 Utiliza-se uma função para Modelos Lineares Generalizados (glm - em
@@ -3248,7 +3278,7 @@ que mostra que contribuíram para explicação da variável dependente.
 \begin{Highlighting}[]
 \CommentTok{# Carregando o arquivo}
 \KeywordTok{require}\NormalTok{(readr)}
-\NormalTok{binary <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv"}\NormalTok{)}
+\NormalTok{binary <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv"}\NormalTok{)}
 
 \CommentTok{# Transformando a variável rank em categórica}
 \NormalTok{binary}\OperatorTok{$}\NormalTok{rank <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(binary}\OperatorTok{$}\NormalTok{rank)}
@@ -3358,7 +3388,7 @@ observa-se que os parâmetros da regressão logística proposta utilizando
 todas as variáveis foram assim determinados:
 
 \[
-ln\left (\frac{prob_{admit}}{1-prob_{admit}}  \right ) = 
+ln(P=Y) = 
 -3,98998 + 0.00226gre + 0,80404gpa -0,67544rank2 -1,34020rank3 -1,55146rank4
 \]
 
@@ -3508,7 +3538,7 @@ padrão calculou-se os limites inferior (\emph{LL: low level}) e superior
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.9\linewidth]{05-RegLogist_files/figure-latex/unnamed-chunk-28-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-69-1} \end{center}
 
 \hypertarget{exercicios}{%
 \section{Exercícios}\label{exercicios}}
@@ -3579,6 +3609,590 @@ avaliando seus dados.
 (\emph{direction=`both'}) no modelo completo e avalie se as variáveis
 devem permanecer no modelo ou alguma deve sair.
 
+\hypertarget{regressao-de-poisson}{%
+\chapter{Regressão de Poisson}\label{regressao-de-poisson}}
+
+O modelo de Regressão de Poisson é aquele mais adequado quando os dados
+das variáveis dependentes são contáveis. Em muitos casos é de interesse
+do pesquisador modelar e estimar tais episódios. O número de alunos
+matriculados, a quantidade de visitantes de um parque, o número de
+multas efetuadas em determinado ano, o número de produtos registrados em
+determinado ano, etc. Em todos estes casos, a variável resposta é
+discreta e assume um número finito de valores.
+
+\hypertarget{o-modelo-1}{%
+\section{O modelo}\label{o-modelo-1}}
+
+A distribuição de \emph{Poisson} é dada por (GUJARATI; PORTER,
+\protect\hyperlink{ref-Gujarati2011}{2011}):
+
+\[
+f(Y_i) = \frac{\mu^{Y}e^{-\mu}}{Y!}
+\] sendo \(Y=0,1,2,...\) e \(f(Y)\) é a probabilidade de \(Y\) assumir
+valores inteiros não negativos e \(Y!\) (fatorial de Y) representa
+\(Y! = Y \times (Y-1) \times (Y-2) \times 2 \times 1\). Ainda:
+
+\[
+E(Y) = \mu
+\] \[
+var(Y) = \mu
+\]
+
+A distribuição de Poisson tem a variância igual à sua média. O modelo de
+regressão de Poisson, portanto, é dado por:
+
+\[
+Y_i = E(Y_i) +\mu_i = \mu_i + u_i
+\] assim os \(Y\) se distribuem independentemente como variáveis de
+Poisson aleatórias com média \(\mu_i\) para cada indivíduo (GUJARATI;
+PORTER, \protect\hyperlink{ref-Gujarati2011}{2011}) expresso:
+
+\[
+\mu_i = E(Y_i) = \beta_{i} + \beta _{2} X_{2i} + \beta_{3} X_{3i} + \dots + \beta_{k} X_{ki}
+\]
+
+onde X são as variáveis que podem afetar o valor médio. Para que a
+equação seja estimada, representa-se o modelo:
+
+\[
+Y_i = \frac{\mu^{Y}e^{-\mu}}{Y!} + u_i
+\]
+
+Assim, o modelo de regressão resultante não será linear nos parâmetros.
+
+\hypertarget{estimando-os-parametros-do-modelo}{%
+\section{Estimando os parâmetros do
+modelo}\label{estimando-os-parametros-do-modelo}}
+
+No exemplo abaixo consta uma base de dados que será denominada
+\texttt{caranguejo}, derivada de PENNSTATE
+(\protect\hyperlink{ref-penn2018}{2018}). Este estudo buscou investigar
+os fatores que afetam a quantidade de caranguejos machos (satélites)
+residindo perto dos caranguejos fêmeas. As variáveis explicativas:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{(Sa)} número de satélites (variável dependente);
+\item
+  \textbf{(C)} cor do caranguejo fêmea;
+\item
+  \textbf{(S)} condição da coluna;
+\item
+  \textbf{(Wt)} peso;
+\item
+  \textbf{(W)} largura da carapaça.
+\end{itemize}
+
+Seguem os procedimentos para importação da base de dados do exemplo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\NormalTok{caranguejo <-}\StringTok{ }\KeywordTok{read_table2}\NormalTok{(}\StringTok{"https://goo.gl/Wvvnrf"}\NormalTok{, }
+    \DataTypeTok{col_names =} \OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(caranguejo)=}\KeywordTok{c}\NormalTok{(}\StringTok{"Obs"}\NormalTok{,}\StringTok{"C"}\NormalTok{,}\StringTok{"S"}\NormalTok{,}\StringTok{"W"}\NormalTok{,}\StringTok{"Wt"}\NormalTok{,}\StringTok{"Sa"}\NormalTok{)}
+\KeywordTok{summary}\NormalTok{(caranguejo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Obs            C              S              W              Wt      
+ Min.   :  1   Min.   :1.00   Min.   :1.00   Min.   :21.0   Min.   :1.20  
+ 1st Qu.: 44   1st Qu.:2.00   1st Qu.:2.00   1st Qu.:24.9   1st Qu.:2.00  
+ Median : 87   Median :2.00   Median :3.00   Median :26.1   Median :2.35  
+ Mean   : 87   Mean   :2.44   Mean   :2.49   Mean   :26.3   Mean   :2.44  
+ 3rd Qu.:130   3rd Qu.:3.00   3rd Qu.:3.00   3rd Qu.:27.7   3rd Qu.:2.85  
+ Max.   :173   Max.   :4.00   Max.   :3.00   Max.   :33.5   Max.   :5.20  
+       Sa       
+ Min.   : 0.00  
+ 1st Qu.: 0.00  
+ Median : 2.00  
+ Mean   : 2.92  
+ 3rd Qu.: 5.00  
+ Max.   :15.00  
+\end{verbatim}
+
+Abaixo o histograma da distribuição do número de satélites (variável
+dependente) da base de dados:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{hist}\NormalTok{(caranguejo}\OperatorTok{$}\NormalTok{Sa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-72-1} \end{center}
+
+Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(caranguejo}\OperatorTok{$}\NormalTok{W,caranguejo}\OperatorTok{$}\NormalTok{Sa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-73-1} \end{center}
+
+Para criação da regressão de Poisson utiliza-se a função já conhecida
+\texttt{glm()}, sendo que em \texttt{family} é determinado o tipo de
+análise desejada (``poisson''):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{regpoisson=}\KeywordTok{glm}\NormalTok{(Sa}\OperatorTok{~}\NormalTok{W, }\DataTypeTok{family=}\StringTok{"poisson"}\NormalTok{, }\DataTypeTok{data=}\NormalTok{caranguejo)}
+\KeywordTok{summary}\NormalTok{(regpoisson)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+glm(formula = Sa ~ W, family = "poisson", data = caranguejo)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-2.853  -1.988  -0.493   1.097   4.922  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)   -3.305      0.542   -6.09  1.1e-09 ***
+W              0.164      0.020    8.22  < 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 632.79  on 172  degrees of freedom
+Residual deviance: 567.88  on 171  degrees of freedom
+AIC: 927.2
+
+Number of Fisher Scoring iterations: 6
+\end{verbatim}
+
+O modelo estimado:
+
+\[
+log(\hat\mu {/t}) = -3.30476 + 0,16405 W_i
+\] ou
+
+\[
+E(Y)= e^{-3.30476} + e^{0,16405 W_i}
+\]
+
+A leitura do resultado da regressão em geral se assemelha com os modelos
+de regressão linear e múltipla. Os resultados mostram que a largura da
+carapaça (W) tem relação positiva com o número de satélites (Sa) em
+volta do caranguejo fêmea, possuindo significância estatística a
+\(p=0,001\).
+
+A interpretação do parâmetro \(0,16405W_i\):
+
+\begin{itemize}
+\item
+  \textbf{(a)} como o parâmetro \(\beta_1\) é positivo, há uma relação
+  positiva entre oa largura da carapaça (W) e o número de satélites (sa)
+  esperados.
+\item
+  \textbf{(b)} exp(0,16405) = 1,178273. Logo, para cada elevação
+  unitária na largura da carapaça (W) dos caranguejos, eleva-se em
+  1,178273 vezes o número de satélites (Sa).
+\end{itemize}
+
+Teste de dispersão:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(AER)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Carregando pacotes exigidos: AER
+\end{verbatim}
+
+\begin{verbatim}
+Carregando pacotes exigidos: car
+\end{verbatim}
+
+\begin{verbatim}
+Carregando pacotes exigidos: carData
+\end{verbatim}
+
+\begin{verbatim}
+
+Attaching package: 'car'
+\end{verbatim}
+
+\begin{verbatim}
+The following objects are masked from 'package:faraway':
+
+    logit, vif
+\end{verbatim}
+
+\begin{verbatim}
+The following object is masked from 'package:psych':
+
+    logit
+\end{verbatim}
+
+\begin{verbatim}
+Carregando pacotes exigidos: survival
+\end{verbatim}
+
+\begin{verbatim}
+
+Attaching package: 'survival'
+\end{verbatim}
+
+\begin{verbatim}
+The following objects are masked from 'package:faraway':
+
+    rats, solder
+\end{verbatim}
+
+\begin{verbatim}
+The following object is masked from 'package:caret':
+
+    cluster
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dispersiontest}\NormalTok{(regpoisson)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Overdispersion test
+
+data:  regpoisson
+z = 5.6, p-value = 1e-08
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+     3.157 
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{(c)} O parâmetro de super-dispersão para esta equação é maior
+  que 1. Sempre que for muito superior a 1 há vestígios de
+  super-disposição no modelo.
+\end{itemize}
+
+Abaixo a análise de variância.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anova}\NormalTok{(regpoisson, }\DataTypeTok{test=}\StringTok{"Chisq"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Analysis of Deviance Table
+
+Model: poisson, link: log
+
+Response: Sa
+
+Terms added sequentially (first to last)
+
+     Df Deviance Resid. Df Resid. Dev Pr(>Chi)    
+NULL                   172        633             
+W     1     64.9       171        568  7.8e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+Abaixo são incluídos os valores preditos
+\texttt{regpoisson\$fitted.values} juntamente com os dados originais.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{print=}\KeywordTok{data.frame}\NormalTok{(caranguejo, }\DataTypeTok{pred=}\NormalTok{(regpoisson}\OperatorTok{$}\NormalTok{fitted.values))}
+\KeywordTok{head}\NormalTok{(print)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  Obs C S    W   Wt Sa  pred
+1   1 2 3 28.3 3.05  8 3.810
+2   2 3 3 26.0 2.60  4 2.613
+3   3 3 3 25.6 2.15  0 2.447
+4   4 4 2 21.0 1.85  0 1.150
+5   5 2 3 29.0 3.00  1 4.274
+6   6 1 2 25.0 2.30  3 2.217
+\end{verbatim}
+
+É possível comparar a distribuição dos valores preditos decorrentes da
+utilização do modelo de regressão de Poisson com a amostra inicial da
+base de dados analisada:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(caranguejo}\OperatorTok{$}\NormalTok{W,caranguejo}\OperatorTok{$}\NormalTok{Sa)}
+\KeywordTok{points}\NormalTok{(regpoisson}\OperatorTok{$}\NormalTok{fitted.values,}\DataTypeTok{col=}\StringTok{'red'}\NormalTok{, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-78-1} 
+
+}
+
+\caption{Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)}\label{fig:unnamed-chunk-78}
+\end{figure}
+
+No entanto, é possível melhorar a precisão do modelo de regressão
+utilizado, uma vez que os dados iniciais apresentam os casos individuais
+da amostra de cada caranguejo observado com suas respectivas
+características das variáveis independentes. Uma forma é agrupar os
+dados em intervalos da variável independente, contando os o número de
+casos (variável dependente) em cada intervalo.
+
+Foram determinados 8 intervalos (``Intervalo'') conforme o tamanho da
+carapaça dos caranguejos. Contou-se o número de casos (variável
+``numcasos'') de caranguejos em cada intervalo de tamanho da carapaça; o
+camanho médio da carapaça (``width'') em cada intervalo e; o número
+total de satélites (``satotal'') esperados em cada intervalo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Intervalo=}\KeywordTok{c}\NormalTok{(}\StringTok{"<23,25"}\NormalTok{, }\StringTok{"23,25-24,25"}\NormalTok{,}\StringTok{"24,25-25,25"}\NormalTok{,}\StringTok{"25,25-26,25"}\NormalTok{,}
+            \StringTok{"26,25-27,25"}\NormalTok{,}\StringTok{"27,25-28,25"}\NormalTok{,}\StringTok{"28,25-29,25"}\NormalTok{,}\StringTok{">29,25"}\NormalTok{)}
+\KeywordTok{attach}\NormalTok{(caranguejo)}
+\NormalTok{numcasos=}\KeywordTok{list}\NormalTok{(}\KeywordTok{length}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{<}\FloatTok{23.25}\NormalTok{)),}
+              \KeywordTok{length}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{23.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{24.25}\NormalTok{)),}
+              \KeywordTok{length}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{24.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{25.25}\NormalTok{)),}
+              \KeywordTok{length}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{25.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{26.25}\NormalTok{)),}
+              \KeywordTok{length}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{26.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{27.25}\NormalTok{)),}
+              \KeywordTok{length}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{27.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{28.25}\NormalTok{)),}
+              \KeywordTok{length}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{28.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{29.25}\NormalTok{)),}
+              \KeywordTok{length}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{29.25}\NormalTok{)))}
+\NormalTok{width=}\KeywordTok{list}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{<}\FloatTok{23.25}\NormalTok{)),}
+              \KeywordTok{mean}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{23.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{24.25}\NormalTok{)),}
+              \KeywordTok{mean}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{24.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{25.25}\NormalTok{)),}
+              \KeywordTok{mean}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{25.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{26.25}\NormalTok{)),}
+              \KeywordTok{mean}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{26.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{27.25}\NormalTok{)),}
+              \KeywordTok{mean}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{27.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{28.25}\NormalTok{)),}
+              \KeywordTok{mean}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{28.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{29.25}\NormalTok{)),}
+              \KeywordTok{mean}\NormalTok{(}\KeywordTok{subset}\NormalTok{(W, W }\OperatorTok{>}\FloatTok{29.25}\NormalTok{)))}
+\NormalTok{satotal=}\KeywordTok{list}\NormalTok{(}\KeywordTok{sum}\NormalTok{(}\KeywordTok{subset}\NormalTok{(Sa, W }\OperatorTok{<}\FloatTok{23.25}\NormalTok{)),}
+              \KeywordTok{sum}\NormalTok{(}\KeywordTok{subset}\NormalTok{(Sa, W }\OperatorTok{>}\FloatTok{23.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{24.25}\NormalTok{)),}
+              \KeywordTok{sum}\NormalTok{(}\KeywordTok{subset}\NormalTok{(Sa, W }\OperatorTok{>}\FloatTok{24.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{25.25}\NormalTok{)),}
+              \KeywordTok{sum}\NormalTok{(}\KeywordTok{subset}\NormalTok{(Sa, W }\OperatorTok{>}\FloatTok{25.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{26.25}\NormalTok{)),}
+              \KeywordTok{sum}\NormalTok{(}\KeywordTok{subset}\NormalTok{(Sa, W }\OperatorTok{>}\FloatTok{26.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{27.25}\NormalTok{)),}
+              \KeywordTok{sum}\NormalTok{(}\KeywordTok{subset}\NormalTok{(Sa, W }\OperatorTok{>}\FloatTok{27.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{28.25}\NormalTok{)),}
+              \KeywordTok{sum}\NormalTok{(}\KeywordTok{subset}\NormalTok{(Sa, W }\OperatorTok{>}\FloatTok{28.25} \OperatorTok{&}\StringTok{ }\NormalTok{W }\OperatorTok{<}\FloatTok{29.25}\NormalTok{)),}
+              \KeywordTok{sum}\NormalTok{(}\KeywordTok{subset}\NormalTok{(Sa, W }\OperatorTok{>}\FloatTok{29.25}\NormalTok{)))}
+\NormalTok{numcasos <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(numcasos), }\DataTypeTok{nrow=}\DecValTok{8}\NormalTok{, }\DataTypeTok{byrow=}\NormalTok{T),}
+                       \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+\NormalTok{width <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(width), }\DataTypeTok{nrow=}\DecValTok{8}\NormalTok{, }\DataTypeTok{byrow=}\NormalTok{T),}
+                    \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+\NormalTok{satotal <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(satotal), }\DataTypeTok{nrow=}\DecValTok{8}\NormalTok{, }\DataTypeTok{byrow=}\NormalTok{T),}
+                      \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+
+\NormalTok{novosdados=}\KeywordTok{data.frame}\NormalTok{(Intervalo,numcasos,}\KeywordTok{round}\NormalTok{(width,}\DecValTok{2}\NormalTok{),satotal)}
+
+\KeywordTok{names}\NormalTok{(novosdados)=}\KeywordTok{c}\NormalTok{(}\StringTok{"Intervalo"}\NormalTok{,}\StringTok{"numcasos"}\NormalTok{,}\StringTok{"width"}\NormalTok{,}\StringTok{"satotal"}\NormalTok{)}
+\NormalTok{novosdados}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    Intervalo numcasos width satotal
+1      <23,25       14 22.69      14
+2 23,25-24,25       14 23.84      20
+3 24,25-25,25       28 24.77      67
+4 25,25-26,25       39 25.84     105
+5 26,25-27,25       22 26.79      63
+6 27,25-28,25       24 27.74      93
+7 28,25-29,25       18 28.67      71
+8      >29,25       14 30.41      72
+\end{verbatim}
+
+Segue a especificação deste novo modelo agrupado. Segundo PENNSTATE
+(\protect\hyperlink{ref-penn2018}{2018}), utiliou-se o componente de
+ajuste da equação (\texttt{offset}) como o logarítmo do número de casos
+(``lcases''), como ``o valor de ajuste `t' no modelo que representa o
+espaço fixo, neste caso o grupo (caranguejos com largura similar)''. O
+resultado da nova regressão se mostra melhor ajustado, com redução do
+índice AIC:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Log do Número de Casos}
+\NormalTok{lcases=}\KeywordTok{log}\NormalTok{(numcasos) }
+\CommentTok{# Incluir a varíavel anterior no objeto novosdados}
+\NormalTok{novosdados=}\KeywordTok{data.frame}\NormalTok{(novosdados,lcases) }
+\KeywordTok{names}\NormalTok{(novosdados)[}\DecValTok{5}\NormalTok{]=}\StringTok{"lcases"}
+\NormalTok{model=}\KeywordTok{glm}\NormalTok{(satotal}\OperatorTok{~}\NormalTok{width, }\DataTypeTok{offset=}\NormalTok{lcases, }\DataTypeTok{family=}\StringTok{"poisson"}\NormalTok{, }\DataTypeTok{data=}\NormalTok{novosdados)}
+\KeywordTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+glm(formula = satotal ~ width, family = "poisson", data = novosdados, 
+    offset = lcases)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-1.533  -0.773  -0.345   0.712   1.039  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -3.5355     0.5760   -6.14  8.4e-10 ***
+width         0.1727     0.0212    8.13  4.1e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 72.3772  on 7  degrees of freedom
+Residual deviance:  6.5168  on 6  degrees of freedom
+AIC: 56.96
+
+Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+A fórmula para esta nova regressão:
+
+\[
+log(\hat\mu/t)=-3.535 + 0,1727 width_i + log(t)
+\] Desta forma:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{(a)} em conformidade com a equação anterior, o número esperado
+  de satélites (satotal) cresce de acordo com o tamanho médio da
+  carapaça dos caranguejos (width), pois o coeficiente é positivo.
+\item
+  \textbf{(b)} como exp(0,1727)=1,188509, espera-se que para cada
+  alteração unitária no tamanho médio da carapaça dos caranguejos
+  (width) eleve-se em 1,188509 vezes o número esperado de satélites
+  (satotal).
+\end{itemize}
+
+Teste de super-dispersão:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(AER)}
+\KeywordTok{dispersiontest}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Overdispersion test
+
+data:  model
+z = -0.66, p-value = 0.7
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+    0.8273 
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{(c)} o tesde de superdispersão aprovou a hipótese nula
+  (\(p>0,05\)) de que não há problemas de super-dispersão no modelo.
+\end{itemize}
+
+Abaixo a análise de variância:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anova}\NormalTok{(model, }\DataTypeTok{test=}\StringTok{"Chisq"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Analysis of Deviance Table
+
+Model: poisson, link: log
+
+Response: satotal
+
+Terms added sequentially (first to last)
+
+      Df Deviance Resid. Df Resid. Dev Pr(>Chi)    
+NULL                      7       72.4             
+width  1     65.9         6        6.5  4.8e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+Abaixo demonstra-se a plotagem dos valores originais e preditos com a
+regressão de Poisson:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(novosdados}\OperatorTok{$}\NormalTok{satotal, }\DataTypeTok{pch=}\StringTok{"o"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Width (grupos)"}\NormalTok{,}
+     \DataTypeTok{ylab=}\StringTok{"Número de satélites"}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(model}\OperatorTok{$}\NormalTok{fitted.values, }\DataTypeTok{pch=}\StringTok{"p"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{30}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\StringTok{"obs"}\NormalTok{,}\StringTok{"pred"}\NormalTok{), }\DataTypeTok{pch=}\KeywordTok{c}\NormalTok{(}\StringTok{"o"}\NormalTok{,}\StringTok{"p"}\NormalTok{), }\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-83-1} 
+
+}
+
+\caption{Valores observados e preditos}\label{fig:unnamed-chunk-83}
+\end{figure}
+
+Fonte: Adaptado de PENNSTATE (\protect\hyperlink{ref-penn2018}{2018}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{novosdados}\OperatorTok{$}\NormalTok{pred=model}\OperatorTok{$}\NormalTok{fitted.values}
+\KeywordTok{head}\NormalTok{(novosdados)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    Intervalo numcasos width satotal lcases  pred
+1      <23,25       14 22.69      14  2.639 20.54
+2 23,25-24,25       14 23.84      20  2.639 25.06
+3 24,25-25,25       28 24.77      67  3.332 58.85
+4 25,25-26,25       39 25.84     105  3.664 98.61
+5 26,25-27,25       22 26.79      63  3.091 65.54
+6 27,25-28,25       24 27.74      93  3.178 84.25
+\end{verbatim}
+
+Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste
+dos dados da regressão de Poisson:
+
+\begin{itemize}
+\tightlist
+\item
+  Análise de resíudos;
+\item
+  Análise de pontos influentes;
+\item
+  Análise de variância;
+\item
+  Indicador AIC;
+\item
+  Análise de super-dispersão do modelo (quando Var(Y) \textgreater{}
+  E(Y)). Neste caso, pode ocorrer por três motivos: a) função de ligação
+  inadequada: talvez outras funções além da logarítimica se ajustem
+  melhor; b) não inclusão de variáveis relevantes ao modelo; c) excessos
+  de zeros.
+\end{itemize}
+
 \hypertarget{referencias}{%
 \chapter*{Referências}\label{referencias}}
 \addcontentsline{toc}{chapter}{Referências}
@@ -3588,6 +4202,10 @@ devem permanecer no modelo ou alguma deve sair.
 FAWCETT, T. \textbf{An introduction to ROC analysis}. \emph{Pattern
 Recognition Letters}, {[}s.l.{]}, 2006.
 
+\leavevmode\hypertarget{ref-Gujarati2011}{}%
+GUJARATI, D. N.; PORTER, D. C. \textbf{Econometria básica}. New York: Mc
+Graw Hill, 2011.
+
 \leavevmode\hypertarget{ref-Hair2009}{}%
 HAIR, J. F. et al. \textbf{Análise Multivariada de Dados}. São Paulo:
 Bookman, 2009.
@@ -3595,6 +4213,8 @@ Bookman, 2009.
 \leavevmode\hypertarget{ref-Hosmer2000}{}%
 HOSMER, D. W.; LEMESCHOW, S. \textbf{Applied Logistic Regression}. New
 York: Wiley, 2000.
+
+\leavevmode\hypertarget{ref-penn2018}{}%
 
 \leavevmode\hypertarget{ref-Rawlings1998}{}%
 RAWLINGS, J. O.; PANTULA, S. G.; DICKEY, D. A. \textbf{Applied

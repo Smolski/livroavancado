@@ -26,7 +26,7 @@
 <meta name="author" content="Iara Denise Endruweit Battisti">
 
 
-<meta name="date" content="2018-09-19">
+<meta name="date" content="2018-09-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -196,6 +196,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>4.4</b> Regressão Logística Múltipla com variável categórica</a></li>
 <li class="chapter" data-level="4.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#exercicios"><i class="fa fa-check"></i><b>4.5</b> Exercícios</a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>5</b> Regressão de Poisson</a><ul>
+<li class="chapter" data-level="5.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>5.1</b> O modelo</a></li>
+<li class="chapter" data-level="5.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>5.2</b> Estimando os parâmetros do modelo</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referências</a></li>
 <li class="divider"></li>
 <li><a href="https://smolski.github.io/softwarelivrer/" target="blank">Curso de Extensão</a></li>
@@ -297,13 +301,13 @@ em função do diâmetro. Veja essa relação no diagrama de dispersão. Interpr
 <li><p>Ajuste um segundo modelo de regressão linear simples para predizer a altura das árvores em função da espécie. Veja essa relação no diagrama de dispersão. Interprete os resultados.</p></li>
 <li><p>Ajuste um terceiro modelo de regressão múltipla para predizer a altura das árvores em função do diâmetro e da espécie. Interprete os resultados.</p></li>
 </ol>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">library</span>(readxl)</a>
-<a class="sourceLine" id="cb64-2" data-line-number="2">url &lt;-<span class="st"> &quot;https://github.com/Smolski/softwarelivrer/raw/master/avancado/arvore2.xlsx&quot;</span></a>
-<a class="sourceLine" id="cb64-3" data-line-number="3">destfile &lt;-<span class="st"> &quot;arvore2.xlsx&quot;</span></a>
-<a class="sourceLine" id="cb64-4" data-line-number="4">curl<span class="op">::</span><span class="kw">curl_download</span>(url, destfile)</a>
-<a class="sourceLine" id="cb64-5" data-line-number="5">arvore2 &lt;-<span class="st"> </span><span class="kw">read_excel</span>(destfile)</a>
-<a class="sourceLine" id="cb64-6" data-line-number="6"><span class="kw">attach</span>(arvore2)</a>
-<a class="sourceLine" id="cb64-7" data-line-number="7"><span class="kw">head</span>(arvore2)</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">library</span>(readxl)</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2">url &lt;-<span class="st"> &quot;https://github.com/Smolski/softwarelivrer/raw/master/avancado/arvore2.xlsx&quot;</span></a>
+<a class="sourceLine" id="cb63-3" data-line-number="3">destfile &lt;-<span class="st"> &quot;arvore2.xlsx&quot;</span></a>
+<a class="sourceLine" id="cb63-4" data-line-number="4">curl<span class="op">::</span><span class="kw">curl_download</span>(url, destfile)</a>
+<a class="sourceLine" id="cb63-5" data-line-number="5">arvore2 &lt;-<span class="st"> </span><span class="kw">read_excel</span>(destfile)</a>
+<a class="sourceLine" id="cb63-6" data-line-number="6"><span class="kw">attach</span>(arvore2)</a>
+<a class="sourceLine" id="cb63-7" data-line-number="7"><span class="kw">head</span>(arvore2)</a></code></pre></div>
 <pre><code># A tibble: 6 x 4
   Nomecientifico            diametro_cm altura_m especie
   &lt;chr&gt;                           &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
@@ -313,8 +317,8 @@ em função do diâmetro. Veja essa relação no diagrama de dispersão. Interpr
 4 Sebastiania commersoniana        46.3     14         0
 5 Sebastiania commersoniana        64.1     15         0
 6 Sebastiania commersoniana       122       22         0</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">modelom=<span class="kw">lm</span>(altura_m<span class="op">~</span>diametro_cm<span class="op">+</span>especie) </a>
-<a class="sourceLine" id="cb66-2" data-line-number="2">modelom</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">modelom=<span class="kw">lm</span>(altura_m<span class="op">~</span>diametro_cm<span class="op">+</span>especie) </a>
+<a class="sourceLine" id="cb65-2" data-line-number="2">modelom</a></code></pre></div>
 <pre><code>
 Call:
 lm(formula = altura_m ~ diametro_cm + especie)
@@ -331,7 +335,7 @@ Ou</p>
 \text{Altura} = 12,328 + 0,0576\text{diâmetro} – 1,423\text{espécie}
 \]</span></p>
 <p>Verificando a significância de cada coeficiente do modelo de regressão múltipla:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">summary</span>(modelom)</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">summary</span>(modelom)</a></code></pre></div>
 <pre><code>
 Call:
 lm(formula = altura_m ~ diametro_cm + especie)
@@ -366,16 +370,17 @@ F-statistic:  119 on 2 and 102 DF,  p-value: &lt;2e-16</code></pre>
 <p>Primeiro, os pontos são plotados. O argumento <code>type='n'</code> indica que não é para acrescentar nenhum ponto ao gráfico.
 Em seguida, os pontos são acrescentados separadamente, com a função points, a qual acrescenta pontos ao gráfico, sendo que o colchetes <code>[espécie==0]</code> seleciona somente os casos desejados.</p>
 <p>Por fim, acrescentamos as retas de regressão para cada resposta a variável independente espécie. Usamos a função <code>coef</code> para extrair os coeficientes de interesse.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">plot</span>(diametro_cm,altura_m)</a>
-<a class="sourceLine" id="cb70-2" data-line-number="2"><span class="co"># Gera o gráfico sem pontos</span></a>
-<a class="sourceLine" id="cb70-3" data-line-number="3"><span class="kw">plot</span>(diametro_cm,altura_m,<span class="dt">type=</span><span class="st">&#39;n&#39;</span>) </a>
-<a class="sourceLine" id="cb70-4" data-line-number="4"><span class="co"># Acrescenta os pontos</span></a>
-<a class="sourceLine" id="cb70-5" data-line-number="5"><span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">0</span>],altura_m[especie<span class="op">==</span><span class="dv">0</span>],<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
-<a class="sourceLine" id="cb70-6" data-line-number="6"><span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">1</span>],altura_m[especie<span class="op">==</span><span class="dv">1</span>],<span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a>
-<a class="sourceLine" id="cb70-7" data-line-number="7"><span class="co"># Acrescenta as linhas</span></a>
-<a class="sourceLine" id="cb70-8" data-line-number="8"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>], <span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
-<a class="sourceLine" id="cb70-9" data-line-number="9"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">3</span>], <span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a></code></pre></div>
-<p><img src="04-RegMult_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">plot</span>(diametro_cm,altura_m)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="co"># Gera o gráfico sem pontos</span></a>
+<a class="sourceLine" id="cb70-2" data-line-number="2"><span class="kw">plot</span>(diametro_cm,altura_m,<span class="dt">type=</span><span class="st">&#39;n&#39;</span>) </a>
+<a class="sourceLine" id="cb70-3" data-line-number="3"><span class="co"># Acrescenta os pontos</span></a>
+<a class="sourceLine" id="cb70-4" data-line-number="4"><span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">0</span>],altura_m[especie<span class="op">==</span><span class="dv">0</span>],<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb70-5" data-line-number="5"><span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">1</span>],altura_m[especie<span class="op">==</span><span class="dv">1</span>],<span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a>
+<a class="sourceLine" id="cb70-6" data-line-number="6"><span class="co"># Acrescenta as linhas</span></a>
+<a class="sourceLine" id="cb70-7" data-line-number="7"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>], <span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb70-8" data-line-number="8"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">3</span>], <span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-38-2.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="interacao-entre-variaveis-preditoras" class="section level2">
 <h2><span class="header-section-number">3.3</span> Interação entre variáveis preditoras</h2>
@@ -423,7 +428,7 @@ F-statistic:   94 on 3 and 101 DF,  p-value: &lt;2e-16</code></pre>
 <a class="sourceLine" id="cb75-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb75-6" data-line-number="6"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>],<span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
 <a class="sourceLine" id="cb75-7" data-line-number="7"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">3</span>],<span class="kw">coef</span>(modelom)[<span class="dv">2</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">4</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a></code></pre></div>
-<p><img src="04-RegMult_files/figure-html/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="metodos-selecao-de-variaveis-na-regressao-multipla" class="section level2">
 <h2><span class="header-section-number">3.4</span> Métodos seleção de variáveis na regressão múltipla</h2>
@@ -487,9 +492,11 @@ variáveis ou encerrar o processo de no passo 4 nenhuma variável tiver sido ane
 <li><p>Se Fmin &lt; Fout: eliminar a variável cuja estatística é igual a Fmin e voltar ao passo 1 iniciando nova etapa com modelo
 reduzido com (k-1) variáveis.</p></li>
 </ul>
-<div class="figure">
-<img src="regress1.png" alt="Modelagem estatística" />
-<p class="caption">Modelagem estatística</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-42"></span>
+<img src="regress1.png" alt="Modelagem estatística" width="80%" />
+<p class="caption">
+Figura 3.1: Modelagem estatística
+</p>
 </div>
 <p>Fonte: <span class="citation">Riboldi (<a href="#ref-Riboldi2005">2005</a>)</span></p>
 </div>
@@ -523,7 +530,6 @@ reduzido com (k-1) variáveis.</p></li>
 <!--
 \printbibliography[segment=\therefsegment,heading=subbibliography]
 -->
-
 </div>
 </div>
 <h3>Referências</h3>

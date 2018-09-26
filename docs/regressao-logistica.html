@@ -26,7 +26,7 @@
 <meta name="author" content="Iara Denise Endruweit Battisti">
 
 
-<meta name="date" content="2018-09-19">
+<meta name="date" content="2018-09-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,7 +34,7 @@
   
   
 <link rel="prev" href="regressao-multipla.html">
-<link rel="next" href="referencias.html">
+<link rel="next" href="regressao-de-poisson.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -196,6 +196,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>4.4</b> Regressão Logística Múltipla com variável categórica</a></li>
 <li class="chapter" data-level="4.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#exercicios"><i class="fa fa-check"></i><b>4.5</b> Exercícios</a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>5</b> Regressão de Poisson</a><ul>
+<li class="chapter" data-level="5.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>5.1</b> O modelo</a></li>
+<li class="chapter" data-level="5.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>5.2</b> Estimando os parâmetros do modelo</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referências</a></li>
 <li class="divider"></li>
 <li><a href="https://smolski.github.io/softwarelivrer/" target="blank">Curso de Extensão</a></li>
@@ -263,7 +267,7 @@ Logit_i=\left (\frac{prob_{eventos}}{1-prob_{eventos}}  \right )=e^{b_0+b_1X_1+\
 <p>Algumas características importantes da regressão logística: a análise é semelhante à regressão linear simples/múltipla (possui a relação entre a variável dependente e a(s) variável(is) independente(s)); possui testes estatísticos diretos, incorporando variáveis métricas e não-métricas, com efeitos não-lineares; é menos afetada pela não satisfação de normalidade dos dados (pois o termo de erro da variável discreta segue a distribuição binomial) e; foi elaborada para que seja prevista a probabilidade de determinado evento ocorrer <span class="citation">(Hair et al. <a href="#ref-Hair2009">2009</a>)</span>.</p>
 <p>A regressão logística utiliza a <strong>curva logística</strong> para assim representar a relação entre a variável dependente e as independentes. Os valores previstos portanto permanecem entre 0 e 1, sendo definidos pelos coeficientes estimados. A Figura <a href="regressao-logistica.html#fig:curvalog">4.1</a>a demonstra a relação da curva logistica geral, enquanto a Figura <a href="regressao-logistica.html#fig:curvalog">4.1</a>b mostra uma relação pobremente ajustada dos dados reais e a Figura <a href="regressao-logistica.html#fig:curvalog">4.1</a>c demonstra um bom ajuste na relação entre as variáveis.</p>
 <div class="figure" style="text-align: center"><span id="fig:curvalog"></span>
-<img src="curvalog.png" alt="Curva logística" width="90%" />
+<img src="curvalog.png" alt="Curva logística" width="80%" />
 <p class="caption">
 Figura 4.1: Curva logística
 </p>
@@ -302,7 +306,7 @@ Mais detalhes sobre o modelo de regressão logística podem ser verificados na s
 <a class="sourceLine" id="cb80-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb80-5" data-line-number="5"><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">method.args=</span><span class="kw">list</span>(<span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>), <span class="dt">se=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:dispev"></span>
-<img src="05-RegLogist_files/figure-html/dispev-1.png" alt="Dispersão de evendos e não-eventos" width="90%" />
+<img src="index_files/figure-html/dispev-1.png" alt="Dispersão de evendos e não-eventos" width="80%" />
 <p class="caption">
 Figura 4.2: Dispersão de evendos e não-eventos
 </p>
@@ -355,7 +359,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <a class="sourceLine" id="cb83-9" data-line-number="9"><span class="kw">ggplot</span>(chd, <span class="kw">aes</span>(<span class="dt">x=</span>AGE, <span class="dt">y=</span>PRED)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb83-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:distrpred"></span>
-<img src="05-RegLogist_files/figure-html/distrpred-1.png" alt="Distribuição das probabilidades preditas" width="90%" />
+<img src="index_files/figure-html/distrpred-1.png" alt="Distribuição das probabilidades preditas" width="80%" />
 <p class="caption">
 Figura 4.3: Distribuição das probabilidades preditas
 </p>
@@ -507,7 +511,7 @@ Prediction  0  1
 <p>A Curva ROC (Receiver Operating Characteristic Curve) associada ao modelo logístico mensura a capacidade de predição do modelo proposto, através das predições da sensibilidade e da especificidade. Segundo <span class="citation">Fawcett (<a href="#ref-Fawcett2006">2006</a>)</span> esta técnica serve para visualizar, organizar e classificar o modelo com base na performance preditiva.</p>
 <p>A curva ROC é produzida bi-dimensionalmente como mostra a Figura <a href="regressao-logistica.html#fig:curvaroc">4.4</a>a, pela obtenção da relação entre a taxa dos verdadeiros positivos do modelo e da taxa dos falsos positivos preditos. Desta forma, o ponto inferior esquerdo (0,0) significa que não é predita uma classificação positiva; no canto oposto do gráfico (1,1) classifica os resultados incondicionalmente positivos e; o ponto (0,1) representa uma excelente classificação. Quanto mais ao noroeste do gráfico o ponto estiver melhor, assim sendo o ponto B da Figura <a href="regressao-logistica.html#fig:curvaroc">4.4</a>a classifica melhor os resultados que o ponto C.</p>
 <div class="figure" style="text-align: center"><span id="fig:curvaroc"></span>
-<img src="curvaroc.png" alt="Curva ROC" width="90%" />
+<img src="curvaroc.png" alt="Curva ROC" width="80%" />
 <p class="caption">
 Figura 4.4: Curva ROC
 </p>
@@ -534,7 +538,7 @@ O indicador AUC sempre terá seu valor entre 0 e 1, sendo que quanto maior, melh
 <a class="sourceLine" id="cb97-7" data-line-number="7">     <span class="dt">auc.polygon.col=</span><span class="st">&quot;lightgreen&quot;</span>, </a>
 <a class="sourceLine" id="cb97-8" data-line-number="8">     <span class="dt">print.thres=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:roc"></span>
-<img src="05-RegLogist_files/figure-html/roc-1.png" alt="Curva Roc" width="90%" />
+<img src="index_files/figure-html/roc-1.png" alt="Curva Roc" width="80%" />
 <p class="caption">
 Figura 4.5: Curva Roc
 </p>
@@ -581,26 +585,24 @@ $sqPearson
 <div id="regressao-logistica-multipla" class="section level2">
 <h2><span class="header-section-number">4.3</span> Regressão Logística Múltipla</h2>
 <p>O exemplo abaixo abordado foi extraído de <span class="citation">Torres-Reyna (<a href="#ref-Torres-Reyna2014">2014</a>)</span>, onde observa-se o banco de dados criado chamado <code>mydata</code>, possuindo as variáveis<code>country</code>,<code>year</code>,<code>y</code>,<code>y_bin</code>,<code>x1</code>,<code>x2</code>,<code>x3</code> e<code>opinion</code>. A variável dependente é <code>y_bin</code>, da qual foi categorizada entre 0 e 1 conforme a ocorrência de valores negativos em<code>y</code>. As variáveis independentes do modelo serão<code>x1</code>,<code>x2</code>e<code>x3</code>.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">require</span>(foreign)</a></code></pre></div>
-<pre><code>Carregando pacotes exigidos: foreign</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">mydata &lt;-<span class="st"> </span><span class="kw">read.dta</span>(<span class="st">&quot;http://dss.princeton.edu/training/Panel101.dta&quot;</span>) </a>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">require</span>(haven)</a></code></pre></div>
+<pre><code>Carregando pacotes exigidos: haven</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">mydata &lt;-<span class="st"> </span><span class="kw">read_dta</span>(<span class="st">&quot;http://dss.princeton.edu/training/Panel101.dta&quot;</span>) </a>
 <a class="sourceLine" id="cb104-2" data-line-number="2"><span class="kw">summary</span>(mydata)</a></code></pre></div>
-<pre><code> country      year            y                 y_bin           x1        
- A:10    Min.   :1990   Min.   :-7.86e+09   Min.   :0.0   Min.   :-0.568  
- B:10    1st Qu.:1992   1st Qu.: 2.47e+08   1st Qu.:1.0   1st Qu.: 0.329  
- C:10    Median :1994   Median : 1.90e+09   Median :1.0   Median : 0.641  
- D:10    Mean   :1994   Mean   : 1.85e+09   Mean   :0.8   Mean   : 0.648  
- E:10    3rd Qu.:1997   3rd Qu.: 3.37e+09   3rd Qu.:1.0   3rd Qu.: 1.096  
- F:10    Max.   :1999   Max.   : 8.94e+09   Max.   :1.0   Max.   : 1.446  
- G:10                                                                     
-       x2               x3              opinion  
- Min.   :-1.622   Min.   :-1.165   Str agree:20  
- 1st Qu.:-1.216   1st Qu.:-0.079   Agree    :15  
- Median :-0.462   Median : 0.514   Disag    :19  
- Mean   : 0.134   Mean   : 0.762   Str disag:16  
- 3rd Qu.: 1.608   3rd Qu.: 1.155                 
- Max.   : 2.530   Max.   : 7.169                 
-                                                 </code></pre>
+<pre><code>    country       year            y                 y_bin           x1        
+ Min.   :1   Min.   :1990   Min.   :-7.86e+09   Min.   :0.0   Min.   :-0.568  
+ 1st Qu.:2   1st Qu.:1992   1st Qu.: 2.47e+08   1st Qu.:1.0   1st Qu.: 0.329  
+ Median :4   Median :1994   Median : 1.90e+09   Median :1.0   Median : 0.641  
+ Mean   :4   Mean   :1994   Mean   : 1.85e+09   Mean   :0.8   Mean   : 0.648  
+ 3rd Qu.:6   3rd Qu.:1997   3rd Qu.: 3.37e+09   3rd Qu.:1.0   3rd Qu.: 1.096  
+ Max.   :7   Max.   :1999   Max.   : 8.94e+09   Max.   :1.0   Max.   : 1.446  
+       x2               x3            opinion    
+ Min.   :-1.622   Min.   :-1.165   Min.   :1.00  
+ 1st Qu.:-1.216   1st Qu.:-0.079   1st Qu.:1.00  
+ Median :-0.462   Median : 0.514   Median :2.50  
+ Mean   : 0.134   Mean   : 0.762   Mean   :2.44  
+ 3rd Qu.: 1.608   3rd Qu.: 1.155   3rd Qu.:3.00  
+ Max.   : 2.530   Max.   : 7.169   Max.   :4.00  </code></pre>
 <p>Utiliza-se uma função para Modelos Lineares Generalizados (glm - em inglês Generalized Linear Models), determinando a variável dependente (y_bin), as variáveis independentes <code>(x1+x2+x3)</code>, a base de dados a ser utilizada <code>(data=mydata)</code> e a família dos modelos <code>(family = binomial(link=&quot;logit&quot;))</code>.</p>
 <p>Abaixo os resultados da estimação do modelo utilizando o comando <code>summary</code>. Observa-se que os valores <code>estimados</code> mostram os coeficientes em formato logarítmo de chances. Assim, quando x3 eleva-se em 1 (uma) unidade, o log das chances esperado para x3 altera-se em 0,7512. Neste ponto, observa-se que as três variáveis independentes possuem efeitos positivos para determinação das chances do preditor ser igual a 1, caso contrário constariam com sinal negativo. A coluna <span class="math inline">\(Pr(&gt;|z|)\)</span> traz os p-valores das variáveis indicando o teste da hipótese nula. Como resultado a variável x3 revelou significância estatística a 10% ($&lt;$0,10), no entanto o valor usual para considerá-la estatísticamente significante é 5% (0,05). Para fins de explanação do modelo, neste trabalho, serão efetuadas as demais análises do modelo de forma explicativa.</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1">logit=<span class="kw">glm</span>(y_bin<span class="op">~</span>x1<span class="op">+</span>x2<span class="op">+</span>x3, <span class="dt">data=</span>mydata, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))</a>
@@ -767,7 +769,7 @@ Para resolver esta questão, utiliza-se o teste do fator de inflação da variâ
 ficou em 499,98 e com a inclusão das variáveis ao modelo baixou para 458,52, o que mostra que contribuíram para explicação da variável dependente.</p>
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="co"># Carregando o arquivo</span></a>
 <a class="sourceLine" id="cb125-2" data-line-number="2"><span class="kw">require</span>(readr)</a>
-<a class="sourceLine" id="cb125-3" data-line-number="3">binary &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb125-3" data-line-number="3">binary &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv&quot;</span>)</a>
 <a class="sourceLine" id="cb125-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb125-5" data-line-number="5"><span class="co"># Transformando a variável rank em categórica</span></a>
 <a class="sourceLine" id="cb125-6" data-line-number="6">binary<span class="op">$</span>rank &lt;-<span class="st"> </span><span class="kw">factor</span>(binary<span class="op">$</span>rank)</a>
@@ -838,7 +840,7 @@ Model 2: admit ~ gpa + rank
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Voltando ao modelo determinado anteriormente (<code>mylogit</code>), observa-se que os parâmetros da regressão logística proposta utilizando todas as variáveis foram assim determinados:</p>
 <p><span class="math display">\[
-ln\left (\frac{prob_{admit}}{1-prob_{admit}}  \right ) = 
+ln(P=Y) = 
 -3,98998 + 0.00226gre + 0,80404gpa -0,67544rank2 -1,34020rank3 -1,55146rank4
 \]</span></p>
 <p>Determinam-se os coeficientes exponenciados (as razões de chance) para cada variável do modelo, bem como seus intervalos de confiança:</p>
@@ -908,7 +910,7 @@ Nota-se que a probabilidade de que este aluno passe no vestibular é de 63,32%. 
 <a class="sourceLine" id="cb139-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">18</span>, <span class="dt">size=</span><span class="dv">5</span>, <span class="dt">fill=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></a>
 <a class="sourceLine" id="cb139-5" data-line-number="5"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;4&quot;</span>))<span class="op">+</span></a>
 <a class="sourceLine" id="cb139-6" data-line-number="6"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Probabilidades preditas&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Ranking&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Pr(y=1)&quot;</span>)</a></code></pre></div>
-<p><img src="05-RegLogist_files/figure-html/unnamed-chunk-28-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-69-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <!--
 \printbibliography[segment=\therefsegment,heading=subbibliography]
 -->
@@ -960,10 +962,6 @@ step(glm(reinc~., data=condicionalcrime),direction = 'both')
 <p><strong>1.10</strong> Efetue o teste de Hosmer e Lemeschow para o modelo.</p>
 <p><strong>1.11</strong> Encontre as medidas de pseudo R<span class="math inline">\(^2\)</span>.</p>
 <p><strong>1.12</strong> Utilize o método <strong>Stepwise</strong> (<em>direction=‘both’</em>) no modelo completo e avalie se as variáveis devem permanecer no modelo ou alguma deve sair.</p>
-
-<!--
-# Referências {-}
--->
 </div>
 </div>
 <h3>Referências</h3>
@@ -996,7 +994,7 @@ step(glm(reinc~., data=condicionalcrime),direction = 'both')
         </div>
       </div>
 <a href="regressao-multipla.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="regressao-de-poisson.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

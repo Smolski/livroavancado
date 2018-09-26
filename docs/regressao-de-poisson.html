@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html  lang="pt-Br">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Software R: curso avançado</title>
+  <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Software R: curso avançado" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://rstub.github.io/bookdown-chapterbib/" />
+  
+  <meta property="og:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  <meta name="github-repo" content="rstub/bookdown-chapterbib" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Software R: curso avançado" />
+  
+  <meta name="twitter:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  
+
+<meta name="author" content="Felipe Micail da Silva Smolski">
+<meta name="author" content="Iara Denise Endruweit Battisti">
+
+
+<meta name="date" content="2018-09-25">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="regressao-logistica.html">
+<link rel="next" href="referencias.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112034801-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-112034801-3');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">UFFS - Cerro Largo</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefácio</a></li>
+<li class="chapter" data-level="" data-path="introducao.html"><a href="introducao.html"><i class="fa fa-check"></i>Introdução</a></li>
+<li class="chapter" data-level="1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html"><i class="fa fa-check"></i><b>1</b> Delineamentos Experimentais</a><ul>
+<li class="chapter" data-level="1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#principios-basicos-da-experimentacao"><i class="fa fa-check"></i><b>1.1</b> Princípios básicos da Experimentação</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#repeticao"><i class="fa fa-check"></i><b>1.1.1</b> Repetição</a></li>
+<li class="chapter" data-level="1.1.2" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#casualizacao"><i class="fa fa-check"></i><b>1.1.2</b> Casualização</a></li>
+<li class="chapter" data-level="1.1.3" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#controle-local"><i class="fa fa-check"></i><b>1.1.3</b> Controle local</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#analise-de-variancia"><i class="fa fa-check"></i><b>1.2</b> Análise de Variância</a></li>
+<li class="chapter" data-level="1.3" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#hipoteses-estatisticas"><i class="fa fa-check"></i><b>1.3</b> Hipóteses estatísticas</a></li>
+<li class="chapter" data-level="1.4" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#delineamento-inteiramente-causalizado-dic"><i class="fa fa-check"></i><b>1.4</b> Delineamento Inteiramente Causalizado (DIC)</a></li>
+<li class="chapter" data-level="1.5" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#delineamento-blocos-casualizados-dbc"><i class="fa fa-check"></i><b>1.5</b> Delineamento Blocos Casualizados (DBC)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analise-fatorial.html"><a href="analise-fatorial.html"><i class="fa fa-check"></i><b>2</b> Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.1" data-path="analise-fatorial.html"><a href="analise-fatorial.html#pressupostos"><i class="fa fa-check"></i><b>2.1</b> Pressupostos</a></li>
+<li class="chapter" data-level="2.2" data-path="analise-fatorial.html"><a href="analise-fatorial.html#estatisticas-associadas-a-analise-fatorial"><i class="fa fa-check"></i><b>2.2</b> Estatísticas Associadas a Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#passos-da-analise-fatorial"><i class="fa fa-check"></i><b>2.3</b> Passos da Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="analise-fatorial.html"><a href="analise-fatorial.html#construcao-da-matriz-de-correlacao"><i class="fa fa-check"></i><b>2.3.1</b> Construção da Matriz de Correlação</a></li>
+<li class="chapter" data-level="2.3.2" data-path="analise-fatorial.html"><a href="analise-fatorial.html#metodo-de-analise-fatorial"><i class="fa fa-check"></i><b>2.3.2</b> Método de Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#determinacao-do-nuumero-de-fatores"><i class="fa fa-check"></i><b>2.3.3</b> Determinação do núumero de fatores</a></li>
+<li class="chapter" data-level="2.3.4" data-path="analise-fatorial.html"><a href="analise-fatorial.html#analise-de-componentes-principais"><i class="fa fa-check"></i><b>2.3.4</b> Análise de Componentes Principais</a></li>
+<li class="chapter" data-level="2.3.5" data-path="analise-fatorial.html"><a href="analise-fatorial.html#matriz-rotada-do-fator"><i class="fa fa-check"></i><b>2.3.5</b> Matriz Rotada do Fator</a></li>
+<li class="chapter" data-level="2.3.6" data-path="analise-fatorial.html"><a href="analise-fatorial.html#autovalores-1"><i class="fa fa-check"></i><b>2.3.6</b> Autovalores</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>3</b> Regressão Múltipla</a><ul>
+<li class="chapter" data-level="3.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>3.1</b> Modelo geral</a></li>
+<li class="chapter" data-level="3.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>3.2</b> Variável dummy</a></li>
+<li class="chapter" data-level="3.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>3.3</b> Interação entre variáveis preditoras</a></li>
+<li class="chapter" data-level="3.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>3.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>3.4.1</b> Full model – Modelo completo</a></li>
+<li class="chapter" data-level="3.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>3.4.2</b> Procedimento backward</a></li>
+<li class="chapter" data-level="3.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>3.4.3</b> Procedimento forward</a></li>
+<li class="chapter" data-level="3.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>3.4.4</b> Procedimento stepwise</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>3.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>4</b> Regressão Logística</a><ul>
+<li class="chapter" data-level="4.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-modelo"><i class="fa fa-check"></i><b>4.1</b> O modelo</a></li>
+<li class="chapter" data-level="4.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>4.2</b> Regressão Logística Simples</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>4.2.1</b> Estimando a Razão de Chances</a></li>
+<li class="chapter" data-level="4.2.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>4.2.2</b> Determinando o Intervalo de Confiança</a></li>
+<li class="chapter" data-level="4.2.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>4.2.3</b> Predição de Probabilidades</a></li>
+<li class="chapter" data-level="4.2.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#matriz-de-confusao"><i class="fa fa-check"></i><b>4.2.4</b> Matriz de Confusão</a></li>
+<li class="chapter" data-level="4.2.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#curva-roc"><i class="fa fa-check"></i><b>4.2.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="4.2.6" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>4.2.6</b> O teste Hosmer e Lemeshow</a></li>
+<li class="chapter" data-level="4.2.7" data-path="regressao-logistica.html"><a href="regressao-logistica.html#pseudo-r2"><i class="fa fa-check"></i><b>4.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>4.3</b> Regressão Logística Múltipla</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#metodo-stepwise"><i class="fa fa-check"></i><b>4.3.1</b> Método Stepwise</a></li>
+<li class="chapter" data-level="4.3.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>4.3.2</b> VIF - Variance Inflation Factor</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>4.4</b> Regressão Logística Múltipla com variável categórica</a></li>
+<li class="chapter" data-level="4.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#exercicios"><i class="fa fa-check"></i><b>4.5</b> Exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>5</b> Regressão de Poisson</a><ul>
+<li class="chapter" data-level="5.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>5.1</b> O modelo</a></li>
+<li class="chapter" data-level="5.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>5.2</b> Estimando os parâmetros do modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referências</a></li>
+<li class="divider"></li>
+<li><a href="https://smolski.github.io/softwarelivrer/" target="blank">Curso de Extensão</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Software R: curso avançado</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regressao-de-poisson" class="section level1">
+<h1><span class="header-section-number">Capítulo 5</span> Regressão de Poisson</h1>
+<p>O modelo de Regressão de Poisson é aquele mais adequado quando os dados das variáveis dependentes são contáveis. Em muitos casos é de interesse do pesquisador modelar e estimar tais episódios. O número de alunos matriculados, a quantidade de visitantes de um parque, o número de multas efetuadas em determinado ano, o número de produtos registrados em determinado ano, etc. Em todos estes casos, a variável resposta é discreta e assume um número finito de valores.</p>
+<div id="o-modelo-1" class="section level2">
+<h2><span class="header-section-number">5.1</span> O modelo</h2>
+<p>A distribuição de <em>Poisson</em> é dada por <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>:</p>
+<p><span class="math display">\[
+f(Y_i) = \frac{\mu^{Y}e^{-\mu}}{Y!}
+\]</span>
+sendo <span class="math inline">\(Y=0,1,2,...\)</span> e <span class="math inline">\(f(Y)\)</span> é a probabilidade de <span class="math inline">\(Y\)</span> assumir valores inteiros não negativos e <span class="math inline">\(Y!\)</span> (fatorial de Y) representa <span class="math inline">\(Y! = Y \times (Y-1) \times (Y-2) \times 2 \times 1\)</span>. Ainda:</p>
+<p><span class="math display">\[
+E(Y) = \mu
+\]</span>
+<span class="math display">\[
+var(Y) = \mu
+\]</span></p>
+<p>A distribuição de Poisson tem a variância igual à sua média. O modelo de regressão de Poisson, portanto, é dado por:</p>
+<p><span class="math display">\[
+Y_i = E(Y_i) +\mu_i = \mu_i + u_i
+\]</span>
+assim os <span class="math inline">\(Y\)</span> se distribuem independentemente como variáveis de Poisson aleatórias com média <span class="math inline">\(\mu_i\)</span> para cada indivíduo <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span> expresso:</p>
+<p><span class="math display">\[
+\mu_i = E(Y_i) = \beta_{i} + \beta _{2} X_{2i} + \beta_{3} X_{3i} + \dots + \beta_{k} X_{ki}
+\]</span></p>
+<p>onde X são as variáveis que podem afetar o valor médio. Para que a equação seja estimada, representa-se o modelo:</p>
+<p><span class="math display">\[
+Y_i = \frac{\mu^{Y}e^{-\mu}}{Y!} + u_i
+\]</span></p>
+<p>Assim, o modelo de regressão resultante não será linear nos parâmetros.</p>
+</div>
+<div id="estimando-os-parametros-do-modelo" class="section level2">
+<h2><span class="header-section-number">5.2</span> Estimando os parâmetros do modelo</h2>
+<p>No exemplo abaixo consta uma base de dados que será denominada <code>caranguejo</code>, derivada de <span class="citation">PennState (<a href="#ref-penn2018">2018</a>)</span>. Este estudo buscou investigar os fatores que afetam a quantidade de caranguejos machos (satélites) residindo perto dos caranguejos fêmeas. As variáveis explicativas:</p>
+<ul>
+<li><strong>(Sa)</strong> número de satélites (variável dependente);</li>
+<li><strong>(C)</strong> cor do caranguejo fêmea;</li>
+<li><strong>(S)</strong> condição da coluna;</li>
+<li><strong>(Wt)</strong> peso;</li>
+<li><strong>(W)</strong> largura da carapaça.</li>
+</ul>
+<p>Seguem os procedimentos para importação da base de dados do exemplo:</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb140-2" data-line-number="2">caranguejo &lt;-<span class="st"> </span><span class="kw">read_table2</span>(<span class="st">&quot;https://goo.gl/Wvvnrf&quot;</span>, </a>
+<a class="sourceLine" id="cb140-3" data-line-number="3">    <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb140-4" data-line-number="4"><span class="kw">colnames</span>(caranguejo)=<span class="kw">c</span>(<span class="st">&quot;Obs&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;W&quot;</span>,<span class="st">&quot;Wt&quot;</span>,<span class="st">&quot;Sa&quot;</span>)</a>
+<a class="sourceLine" id="cb140-5" data-line-number="5"><span class="kw">summary</span>(caranguejo)</a></code></pre></div>
+<pre><code>      Obs            C              S              W              Wt      
+ Min.   :  1   Min.   :1.00   Min.   :1.00   Min.   :21.0   Min.   :1.20  
+ 1st Qu.: 44   1st Qu.:2.00   1st Qu.:2.00   1st Qu.:24.9   1st Qu.:2.00  
+ Median : 87   Median :2.00   Median :3.00   Median :26.1   Median :2.35  
+ Mean   : 87   Mean   :2.44   Mean   :2.49   Mean   :26.3   Mean   :2.44  
+ 3rd Qu.:130   3rd Qu.:3.00   3rd Qu.:3.00   3rd Qu.:27.7   3rd Qu.:2.85  
+ Max.   :173   Max.   :4.00   Max.   :3.00   Max.   :33.5   Max.   :5.20  
+       Sa       
+ Min.   : 0.00  
+ 1st Qu.: 0.00  
+ Median : 2.00  
+ Mean   : 2.92  
+ 3rd Qu.: 5.00  
+ Max.   :15.00  </code></pre>
+<p>Abaixo o histograma da distribuição do número de satélites (variável dependente) da base de dados:</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1"><span class="kw">hist</span>(caranguejo<span class="op">$</span>Sa)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-72-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Relacionando a quantidade de satélites (Sa) com a largura da carapaça:</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="kw">plot</span>(caranguejo<span class="op">$</span>W,caranguejo<span class="op">$</span>Sa)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-73-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Para criação da regressão de Poisson utiliza-se a função já conhecida <code>glm()</code>, sendo que em <code>family</code> é determinado o tipo de análise desejada (“poisson”):</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1">regpoisson=<span class="kw">glm</span>(Sa<span class="op">~</span>W, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="dt">data=</span>caranguejo)</a>
+<a class="sourceLine" id="cb144-2" data-line-number="2"><span class="kw">summary</span>(regpoisson)</a></code></pre></div>
+<pre><code>
+Call:
+glm(formula = Sa ~ W, family = &quot;poisson&quot;, data = caranguejo)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-2.853  -1.988  -0.493   1.097   4.922  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)   -3.305      0.542   -6.09  1.1e-09 ***
+W              0.164      0.020    8.22  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 632.79  on 172  degrees of freedom
+Residual deviance: 567.88  on 171  degrees of freedom
+AIC: 927.2
+
+Number of Fisher Scoring iterations: 6</code></pre>
+<p>O modelo estimado:</p>
+<p><span class="math display">\[
+log(\hat\mu {/t}) = -3.30476 + 0,16405 W_i
+\]</span>
+ou</p>
+<p><span class="math display">\[
+E(Y)= e^{-3.30476} + e^{0,16405 W_i}
+\]</span></p>
+<p>A leitura do resultado da regressão em geral se assemelha com os modelos de regressão linear e múltipla. Os resultados mostram que a largura da carapaça (W) tem relação positiva com o número de satélites (Sa) em volta do caranguejo fêmea, possuindo significância estatística a <span class="math inline">\(p=0,001\)</span>.</p>
+<p>A interpretação do parâmetro <span class="math inline">\(0,16405W_i\)</span>:</p>
+<ul>
+<li><p><strong>(a)</strong> como o parâmetro <span class="math inline">\(\beta_1\)</span> é positivo, há uma relação positiva entre oa largura da carapaça (W) e o número de satélites (sa) esperados.</p></li>
+<li><p><strong>(b)</strong> exp(0,16405) = 1,178273. Logo, para cada elevação unitária na largura da carapaça (W) dos caranguejos, eleva-se em 1,178273 vezes o número de satélites (Sa).</p></li>
+</ul>
+<p>Teste de dispersão:</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="kw">require</span>(AER)</a></code></pre></div>
+<pre><code>Carregando pacotes exigidos: AER</code></pre>
+<pre><code>Carregando pacotes exigidos: car</code></pre>
+<pre><code>Carregando pacotes exigidos: carData</code></pre>
+<pre><code>
+Attaching package: &#39;car&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:faraway&#39;:
+
+    logit, vif</code></pre>
+<pre><code>The following object is masked from &#39;package:psych&#39;:
+
+    logit</code></pre>
+<pre><code>Carregando pacotes exigidos: survival</code></pre>
+<pre><code>
+Attaching package: &#39;survival&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:faraway&#39;:
+
+    rats, solder</code></pre>
+<pre><code>The following object is masked from &#39;package:caret&#39;:
+
+    cluster</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">dispersiontest</span>(regpoisson)</a></code></pre></div>
+<pre><code>
+    Overdispersion test
+
+data:  regpoisson
+z = 5.6, p-value = 1e-08
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+     3.157 </code></pre>
+<ul>
+<li><strong>(c)</strong> O parâmetro de super-dispersão para esta equação é maior que 1. Sempre que for muito superior a 1 há vestígios de super-disposição no modelo.</li>
+</ul>
+<p>Abaixo a análise de variância.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1"><span class="kw">anova</span>(regpoisson, <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
+<pre><code>Analysis of Deviance Table
+
+Model: poisson, link: log
+
+Response: Sa
+
+Terms added sequentially (first to last)
+
+     Df Deviance Resid. Df Resid. Dev Pr(&gt;Chi)    
+NULL                   172        633             
+W     1     64.9       171        568  7.8e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Abaixo são incluídos os valores preditos <code>regpoisson$fitted.values</code> juntamente com os dados originais.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1">print=<span class="kw">data.frame</span>(caranguejo, <span class="dt">pred=</span>(regpoisson<span class="op">$</span>fitted.values))</a>
+<a class="sourceLine" id="cb161-2" data-line-number="2"><span class="kw">head</span>(print)</a></code></pre></div>
+<pre><code>  Obs C S    W   Wt Sa  pred
+1   1 2 3 28.3 3.05  8 3.810
+2   2 3 3 26.0 2.60  4 2.613
+3   3 3 3 25.6 2.15  0 2.447
+4   4 4 2 21.0 1.85  0 1.150
+5   5 2 3 29.0 3.00  1 4.274
+6   6 1 2 25.0 2.30  3 2.217</code></pre>
+<p>É possível comparar a distribuição dos valores preditos decorrentes da utilização do modelo de regressão de Poisson com a amostra inicial da base de dados analisada:</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="kw">plot</span>(caranguejo<span class="op">$</span>W,caranguejo<span class="op">$</span>Sa)</a>
+<a class="sourceLine" id="cb163-2" data-line-number="2"><span class="kw">points</span>(regpoisson<span class="op">$</span>fitted.values,<span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-78"></span>
+<img src="index_files/figure-html/unnamed-chunk-78-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
+<p class="caption">
+Figura 5.1: Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)
+</p>
+</div>
+<p>No entanto, é possível melhorar a precisão do modelo de regressão utilizado, uma vez que os dados iniciais apresentam os casos individuais da amostra de cada caranguejo observado com suas respectivas características das variáveis independentes. Uma forma é agrupar os dados em intervalos da variável independente, contando os o número de casos (variável dependente) em cada intervalo.</p>
+<p>Foram determinados 8 intervalos (“Intervalo”) conforme o tamanho da carapaça dos caranguejos. Contou-se o número de casos (variável “numcasos”) de caranguejos em cada intervalo de tamanho da carapaça; o camanho médio da carapaça (“width”) em cada intervalo e; o número total de satélites (“satotal”) esperados em cada intervalo:</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1">Intervalo=<span class="kw">c</span>(<span class="st">&quot;&lt;23,25&quot;</span>, <span class="st">&quot;23,25-24,25&quot;</span>,<span class="st">&quot;24,25-25,25&quot;</span>,<span class="st">&quot;25,25-26,25&quot;</span>,</a>
+<a class="sourceLine" id="cb164-2" data-line-number="2">            <span class="st">&quot;26,25-27,25&quot;</span>,<span class="st">&quot;27,25-28,25&quot;</span>,<span class="st">&quot;28,25-29,25&quot;</span>,<span class="st">&quot;&gt;29,25&quot;</span>)</a>
+<a class="sourceLine" id="cb164-3" data-line-number="3"><span class="kw">attach</span>(caranguejo)</a>
+<a class="sourceLine" id="cb164-4" data-line-number="4">numcasos=<span class="kw">list</span>(<span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&lt;</span><span class="fl">23.25</span>)),</a>
+<a class="sourceLine" id="cb164-5" data-line-number="5">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),</a>
+<a class="sourceLine" id="cb164-6" data-line-number="6">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),</a>
+<a class="sourceLine" id="cb164-7" data-line-number="7">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),</a>
+<a class="sourceLine" id="cb164-8" data-line-number="8">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),</a>
+<a class="sourceLine" id="cb164-9" data-line-number="9">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),</a>
+<a class="sourceLine" id="cb164-10" data-line-number="10">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),</a>
+<a class="sourceLine" id="cb164-11" data-line-number="11">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">29.25</span>)))</a>
+<a class="sourceLine" id="cb164-12" data-line-number="12">width=<span class="kw">list</span>(<span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&lt;</span><span class="fl">23.25</span>)),</a>
+<a class="sourceLine" id="cb164-13" data-line-number="13">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),</a>
+<a class="sourceLine" id="cb164-14" data-line-number="14">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),</a>
+<a class="sourceLine" id="cb164-15" data-line-number="15">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),</a>
+<a class="sourceLine" id="cb164-16" data-line-number="16">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),</a>
+<a class="sourceLine" id="cb164-17" data-line-number="17">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),</a>
+<a class="sourceLine" id="cb164-18" data-line-number="18">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),</a>
+<a class="sourceLine" id="cb164-19" data-line-number="19">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">29.25</span>)))</a>
+<a class="sourceLine" id="cb164-20" data-line-number="20">satotal=<span class="kw">list</span>(<span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&lt;</span><span class="fl">23.25</span>)),</a>
+<a class="sourceLine" id="cb164-21" data-line-number="21">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),</a>
+<a class="sourceLine" id="cb164-22" data-line-number="22">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),</a>
+<a class="sourceLine" id="cb164-23" data-line-number="23">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),</a>
+<a class="sourceLine" id="cb164-24" data-line-number="24">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),</a>
+<a class="sourceLine" id="cb164-25" data-line-number="25">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),</a>
+<a class="sourceLine" id="cb164-26" data-line-number="26">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),</a>
+<a class="sourceLine" id="cb164-27" data-line-number="27">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">29.25</span>)))</a>
+<a class="sourceLine" id="cb164-28" data-line-number="28">numcasos &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(numcasos), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),</a>
+<a class="sourceLine" id="cb164-29" data-line-number="29">                       <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb164-30" data-line-number="30">width &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(width), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),</a>
+<a class="sourceLine" id="cb164-31" data-line-number="31">                    <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb164-32" data-line-number="32">satotal &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(satotal), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),</a>
+<a class="sourceLine" id="cb164-33" data-line-number="33">                      <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb164-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb164-35" data-line-number="35">novosdados=<span class="kw">data.frame</span>(Intervalo,numcasos,<span class="kw">round</span>(width,<span class="dv">2</span>),satotal)</a>
+<a class="sourceLine" id="cb164-36" data-line-number="36"></a>
+<a class="sourceLine" id="cb164-37" data-line-number="37"><span class="kw">names</span>(novosdados)=<span class="kw">c</span>(<span class="st">&quot;Intervalo&quot;</span>,<span class="st">&quot;numcasos&quot;</span>,<span class="st">&quot;width&quot;</span>,<span class="st">&quot;satotal&quot;</span>)</a>
+<a class="sourceLine" id="cb164-38" data-line-number="38">novosdados</a></code></pre></div>
+<pre><code>    Intervalo numcasos width satotal
+1      &lt;23,25       14 22.69      14
+2 23,25-24,25       14 23.84      20
+3 24,25-25,25       28 24.77      67
+4 25,25-26,25       39 25.84     105
+5 26,25-27,25       22 26.79      63
+6 27,25-28,25       24 27.74      93
+7 28,25-29,25       18 28.67      71
+8      &gt;29,25       14 30.41      72</code></pre>
+<p>Segue a especificação deste novo modelo agrupado. Segundo <span class="citation">PennState (<a href="#ref-penn2018">2018</a>)</span>, utiliou-se o componente de ajuste da equação (<code>offset</code>) como o logarítmo do número de casos (“lcases”), como “o valor de ajuste ‘t’ no modelo que representa o espaço fixo, neste caso o grupo (caranguejos com largura similar)”. O resultado da nova regressão se mostra melhor ajustado, com redução do índice AIC:</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1"><span class="co"># Log do Número de Casos</span></a>
+<a class="sourceLine" id="cb166-2" data-line-number="2">lcases=<span class="kw">log</span>(numcasos) </a>
+<a class="sourceLine" id="cb166-3" data-line-number="3"><span class="co"># Incluir a varíavel anterior no objeto novosdados</span></a>
+<a class="sourceLine" id="cb166-4" data-line-number="4">novosdados=<span class="kw">data.frame</span>(novosdados,lcases) </a>
+<a class="sourceLine" id="cb166-5" data-line-number="5"><span class="kw">names</span>(novosdados)[<span class="dv">5</span>]=<span class="st">&quot;lcases&quot;</span></a>
+<a class="sourceLine" id="cb166-6" data-line-number="6">model=<span class="kw">glm</span>(satotal<span class="op">~</span>width, <span class="dt">offset=</span>lcases, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="dt">data=</span>novosdados)</a>
+<a class="sourceLine" id="cb166-7" data-line-number="7"><span class="kw">summary</span>(model)</a></code></pre></div>
+<pre><code>
+Call:
+glm(formula = satotal ~ width, family = &quot;poisson&quot;, data = novosdados, 
+    offset = lcases)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-1.533  -0.773  -0.345   0.712   1.039  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  -3.5355     0.5760   -6.14  8.4e-10 ***
+width         0.1727     0.0212    8.13  4.1e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 72.3772  on 7  degrees of freedom
+Residual deviance:  6.5168  on 6  degrees of freedom
+AIC: 56.96
+
+Number of Fisher Scoring iterations: 4</code></pre>
+<p>A fórmula para esta nova regressão:</p>
+<p><span class="math display">\[
+log(\hat\mu/t)=-3.535 + 0,1727 width_i + log(t)
+\]</span>
+Desta forma:</p>
+<ul>
+<li><strong>(a)</strong> em conformidade com a equação anterior, o número esperado de satélites (satotal) cresce de acordo com o tamanho médio da carapaça dos caranguejos (width), pois o coeficiente é positivo.</li>
+<li><strong>(b)</strong> como exp(0,1727)=1,188509, espera-se que para cada alteração unitária no tamanho médio da carapaça dos caranguejos (width) eleve-se em 1,188509 vezes o número esperado de satélites (satotal).</li>
+</ul>
+<p>Teste de super-dispersão:</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="kw">require</span>(AER)</a>
+<a class="sourceLine" id="cb168-2" data-line-number="2"><span class="kw">dispersiontest</span>(model)</a></code></pre></div>
+<pre><code>
+    Overdispersion test
+
+data:  model
+z = -0.66, p-value = 0.7
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+    0.8273 </code></pre>
+<ul>
+<li><strong>(c)</strong> o tesde de superdispersão aprovou a hipótese nula (<span class="math inline">\(p&gt;0,05\)</span>) de que não há problemas de super-dispersão no modelo.</li>
+</ul>
+<p>Abaixo a análise de variância:</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1"><span class="kw">anova</span>(model, <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
+<pre><code>Analysis of Deviance Table
+
+Model: poisson, link: log
+
+Response: satotal
+
+Terms added sequentially (first to last)
+
+      Df Deviance Resid. Df Resid. Dev Pr(&gt;Chi)    
+NULL                      7       72.4             
+width  1     65.9         6        6.5  4.8e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Abaixo demonstra-se a plotagem dos valores originais e preditos com a regressão de Poisson:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1"><span class="kw">plot</span>(novosdados<span class="op">$</span>satotal, <span class="dt">pch=</span><span class="st">&quot;o&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Width (grupos)&quot;</span>,</a>
+<a class="sourceLine" id="cb172-2" data-line-number="2">     <span class="dt">ylab=</span><span class="st">&quot;Número de satélites&quot;</span>)</a>
+<a class="sourceLine" id="cb172-3" data-line-number="3"><span class="kw">points</span>(model<span class="op">$</span>fitted.values, <span class="dt">pch=</span><span class="st">&quot;p&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb172-4" data-line-number="4"><span class="kw">legend</span>(<span class="dv">6</span>,<span class="dv">30</span>,<span class="kw">c</span>(<span class="st">&quot;obs&quot;</span>,<span class="st">&quot;pred&quot;</span>), <span class="dt">pch=</span><span class="kw">c</span>(<span class="st">&quot;o&quot;</span>,<span class="st">&quot;p&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>))</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-83"></span>
+<img src="index_files/figure-html/unnamed-chunk-83-1.png" alt="Valores observados e preditos" width="80%" />
+<p class="caption">
+Figura 5.2: Valores observados e preditos
+</p>
+</div>
+<p>Fonte: Adaptado de <span class="citation">PennState (<a href="#ref-penn2018">2018</a>)</span>.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1">novosdados<span class="op">$</span>pred=model<span class="op">$</span>fitted.values</a>
+<a class="sourceLine" id="cb173-2" data-line-number="2"><span class="kw">head</span>(novosdados)</a></code></pre></div>
+<pre><code>    Intervalo numcasos width satotal lcases  pred
+1      &lt;23,25       14 22.69      14  2.639 20.54
+2 23,25-24,25       14 23.84      20  2.639 25.06
+3 24,25-25,25       28 24.77      67  3.332 58.85
+4 25,25-26,25       39 25.84     105  3.664 98.61
+5 26,25-27,25       22 26.79      63  3.091 65.54
+6 27,25-28,25       24 27.74      93  3.178 84.25</code></pre>
+<p>Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dados da regressão de Poisson:</p>
+<ul>
+<li>Análise de resíudos;</li>
+<li>Análise de pontos influentes;</li>
+<li>Análise de variância;</li>
+<li>Indicador AIC;</li>
+<li>Análise de super-dispersão do modelo (quando Var(Y) &gt; E(Y)). Neste caso, pode ocorrer por três motivos: a) função de ligação inadequada: talvez outras funções além da logarítimica se ajustem melhor; b) não inclusão de variáveis relevantes ao modelo; c) excessos de zeros.</li>
+</ul>
+</div>
+</div>
+<h3>Referências</h3>
+<div id="refs" class="references">
+<div id="ref-Gujarati2011">
+<p>Gujarati, Damodar N., e Down C Porter. 2011. <em>Econometria básica</em>. 5a ed. New York: Mc Graw Hill.</p>
+</div>
+<div id="ref-penn2018">
+<p>PennState. 2018. «R - Poisson Regression Model for Count Data». <a href="https://onlinecourses.science.psu.edu/stat504/node/169/" class="uri">https://onlinecourses.science.psu.edu/stat504/node/169/</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regressao-logistica.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"download": ["livroavancado.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

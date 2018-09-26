@@ -43,13 +43,8 @@ Algumas características importantes da regressão logística: a análise é sem
 A regressão logística utiliza a **curva logística** para assim representar a relação entre a variável dependente e as independentes. Os valores previstos portanto permanecem entre 0 e 1, sendo definidos pelos coeficientes estimados. A Figura \@ref(fig:curvalog)a demonstra a relação da curva logistica geral, enquanto a Figura \@ref(fig:curvalog)b mostra uma relação pobremente ajustada dos dados reais e a Figura \@ref(fig:curvalog)c demonstra um bom ajuste na relação entre as variáveis. 
 
 
-\begin{figure}[h]
-
-{\centering \includegraphics[width=0.9\linewidth]{curvalog} 
-
-}
-
-\caption{Curva logística}(\#fig:curvalog)
+\begin{figure}
+\includegraphics[width=12.03in]{curvalog} \caption{Curva logística}(\#fig:curvalog)
 \end{figure}
 Fonte: Adaptado de @Hair2009.
 
@@ -79,7 +74,7 @@ require(readr)
 ```
 
 ```
-Carregando pacotes exigidos: readr
+## Carregando pacotes exigidos: readr
 ```
 
 ```r
@@ -91,13 +86,13 @@ summary(chd)
 ```
 
 ```
-      AGE            AGRP      CHD   
- Min.   :20.0   Min.   :1.00   0:57  
- 1st Qu.:34.8   1st Qu.:2.75   1:43  
- Median :44.0   Median :4.00         
- Mean   :44.4   Mean   :4.48         
- 3rd Qu.:55.0   3rd Qu.:7.00         
- Max.   :69.0   Max.   :8.00         
+##       AGE             AGRP      CHD   
+##  Min.   :20.00   Min.   :1.00   0:57  
+##  1st Qu.:34.75   1st Qu.:2.75   1:43  
+##  Median :44.00   Median :4.00         
+##  Mean   :44.38   Mean   :4.48         
+##  3rd Qu.:55.00   3rd Qu.:7.00         
+##  Max.   :69.00   Max.   :8.00
 ```
 
 Observa-se na figura abaixo a dispersão dos "eventos" e dos "nao-eventos" da CHD relacionando-se com a variável idade (AGE).
@@ -112,14 +107,7 @@ ggplot(chd, aes(x=AGE, y=CHD)) +
   stat_smooth(method="glm", method.args=list(family="binomial"), se=FALSE)
 ```
 
-\begin{figure}[h]
-
-{\centering \includegraphics[width=0.9\linewidth]{05-RegLogist_files/figure-latex/dispev-1} 
-
-}
-
-\caption{Dispersão de evendos e não-eventos}(\#fig:dispev)
-\end{figure}
+![(\#fig:dispev)Dispersão de evendos e não-eventos](05-RegLogist_files/figure-latex/dispev-1.pdf) 
 
 Monta-se então o modelo de regressão logística com a variável dependente CHD e a variável independente AGE. Abaixo é demonstrada a descrição da equação utilizando o comando `summary()` para o modelo m1 com a sintaxe básica:
 
@@ -145,28 +133,28 @@ summary(m1)
 ```
 
 ```
-
-Call:
-glm(formula = CHD ~ AGE, family = binomial(link = "logit"), data = chd)
-
-Deviance Residuals: 
-   Min      1Q  Median      3Q     Max  
--1.972  -0.846  -0.458   0.825   2.286  
-
-Coefficients:
-            Estimate Std. Error z value Pr(>|z|)    
-(Intercept)  -5.3095     1.1337   -4.68  2.8e-06 ***
-AGE           0.1109     0.0241    4.61  4.0e-06 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 136.66  on 99  degrees of freedom
-Residual deviance: 107.35  on 98  degrees of freedom
-AIC: 111.4
-
-Number of Fisher Scoring iterations: 4
+## 
+## Call:
+## glm(formula = CHD ~ AGE, family = binomial(link = "logit"), data = chd)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.9718  -0.8456  -0.4576   0.8253   2.2859  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) -5.30945    1.13365  -4.683 2.82e-06 ***
+## AGE          0.11092    0.02406   4.610 4.02e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 136.66  on 99  degrees of freedom
+## Residual deviance: 107.35  on 98  degrees of freedom
+## AIC: 111.35
+## 
+## Number of Fisher Scoring iterations: 4
 ```
 
 Se observa o intercepto com o valor de -5,309, sendo que para a análise aqui proposta da relação entre CHD e AGE não obtém-se um significado prático para este resultado. No entanto, a variável de interesse é idade, que no modelo de regressão obteve o coeficiente de 0,1109. Pelo fato de ser positivo informa que quando a idade (AGE) se eleva, elevam-se as chances de ocorrência de CHD. De igual forma, nota-se que há significância estatística a $p=0,001$ na utilização da variável AGE para o modelo, mostrando que possui importância ao modelo de regressão proposto.
@@ -188,14 +176,7 @@ ggplot(chd, aes(x=AGE, y=PRED)) +
   geom_point()
 ```
 
-\begin{figure}[h]
-
-{\centering \includegraphics[width=0.9\linewidth]{05-RegLogist_files/figure-latex/distrpred-1} 
-
-}
-
-\caption{Distribuição das probabilidades preditas}(\#fig:distrpred)
-\end{figure}
+![(\#fig:distrpred)Distribuição das probabilidades preditas](05-RegLogist_files/figure-latex/distrpred-1.pdf) 
 
 
 
@@ -215,14 +196,14 @@ logitor(CHD~AGE,data = chd)
 ```
 
 ```
-Call:
-logitor(formula = CHD ~ AGE, data = chd)
-
-Odds Ratio:
-    OddsRatio Std. Err.    z P>|z|    
-AGE    1.1173    0.0269 4.61 4e-06 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Call:
+## logitor(formula = CHD ~ AGE, data = chd)
+## 
+## Odds Ratio:
+##     OddsRatio Std. Err.      z     P>|z|    
+## AGE  1.117307  0.026882 4.6102 4.022e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
@@ -239,9 +220,9 @@ exp(cbind(OR=coef(m1), confint(m1)))
 ```
 
 ```
-                  OR     2.5 %  97.5 %
-(Intercept) 0.004945 0.0004413 0.03892
-AGE         1.117307 1.0692223 1.17587
+##                      OR        2.5 %    97.5 %
+## (Intercept) 0.004944629 0.0004412621 0.0389236
+## AGE         1.117306795 1.0692223156 1.1758681
 ```
 
 ### Predição de Probabilidades
@@ -256,8 +237,8 @@ media
 ```
 
 ```
-    AGE
-1 44.38
+##     AGE
+## 1 44.38
 ```
 
 
@@ -268,8 +249,8 @@ media
 ```
 
 ```
-    AGE pred.prob
-1 44.38    0.4045
+##     AGE pred.prob
+## 1 44.38 0.4044944
 ```
 
 
@@ -342,11 +323,11 @@ require(caret)
 ```
 
 ```
-Carregando pacotes exigidos: caret
+## Carregando pacotes exigidos: caret
 ```
 
 ```
-Carregando pacotes exigidos: lattice
+## Carregando pacotes exigidos: lattice
 ```
 
 ```r
@@ -361,32 +342,32 @@ confusionMatrix(chd$pdata, chd$CHD, positive="1")
 ```
 
 ```
-Confusion Matrix and Statistics
-
-          Reference
-Prediction  0  1
-         0 45 14
-         1 12 29
-                                        
-               Accuracy : 0.74          
-                 95% CI : (0.643, 0.823)
-    No Information Rate : 0.57          
-    P-Value [Acc > NIR] : 0.000319      
-                                        
-                  Kappa : 0.467         
- Mcnemar's Test P-Value : 0.844519      
-                                        
-            Sensitivity : 0.674         
-            Specificity : 0.789         
-         Pos Pred Value : 0.707         
-         Neg Pred Value : 0.763         
-             Prevalence : 0.430         
-         Detection Rate : 0.290         
-   Detection Prevalence : 0.410         
-      Balanced Accuracy : 0.732         
-                                        
-       'Positive' Class : 1             
-                                        
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  0  1
+##          0 45 14
+##          1 12 29
+##                                           
+##                Accuracy : 0.74            
+##                  95% CI : (0.6427, 0.8226)
+##     No Information Rate : 0.57            
+##     P-Value [Acc > NIR] : 0.0003187       
+##                                           
+##                   Kappa : 0.4666          
+##  Mcnemar's Test P-Value : 0.8445193       
+##                                           
+##             Sensitivity : 0.6744          
+##             Specificity : 0.7895          
+##          Pos Pred Value : 0.7073          
+##          Neg Pred Value : 0.7627          
+##              Prevalence : 0.4300          
+##          Detection Rate : 0.2900          
+##    Detection Prevalence : 0.4100          
+##       Balanced Accuracy : 0.7319          
+##                                           
+##        'Positive' Class : 1               
+## 
 ```
 
 A matriz de confusão retoma uma excelente acurácia total do modelo em 74\%, sendo que o modelo consegue acertos de 70,7\% na predição de valores positivos ou dos "eventos" (29/41) e 76,3\% na predição de valores negativos ou os "não eventos" (45/59).
@@ -398,13 +379,8 @@ A Curva ROC (Receiver Operating Characteristic Curve) associada ao modelo logís
 
 A curva ROC é produzida bi-dimensionalmente como mostra a Figura \@ref(fig:curvaroc)a, pela obtenção da relação entre a taxa dos verdadeiros positivos do modelo e da taxa dos falsos positivos preditos. Desta forma, o ponto inferior esquerdo (0,0) significa que não é predita uma classificação positiva; no canto oposto do gráfico (1,1) classifica os resultados incondicionalmente positivos e; o ponto (0,1) representa uma excelente classificação. Quanto mais ao noroeste do gráfico o ponto estiver melhor, assim sendo o ponto B da Figura \@ref(fig:curvaroc)a classifica melhor os resultados que o ponto C.
 
-\begin{figure}[h]
-
-{\centering \includegraphics[width=0.9\linewidth]{curvaroc} 
-
-}
-
-\caption{Curva ROC}(\#fig:curvaroc)
+\begin{figure}
+\includegraphics[width=16.31in]{curvaroc} \caption{Curva ROC}(\#fig:curvaroc)
 \end{figure}
 Fonte: Adaptado de @Fawcett2006.
 
@@ -440,14 +416,7 @@ plot(roc1,
      print.thres=TRUE)
 ```
 
-\begin{figure}[h]
-
-{\centering \includegraphics[width=0.9\linewidth]{05-RegLogist_files/figure-latex/roc-1} 
-
-}
-
-\caption{Curva Roc}(\#fig:roc)
-\end{figure}
+![(\#fig:roc)Curva Roc](05-RegLogist_files/figure-latex/roc-1.pdf) 
 
 
 ### O teste Hosmer e Lemeshow
@@ -465,11 +434,11 @@ hl
 ```
 
 ```
-
-	Hosmer and Lemeshow goodness of fit (GOF) test
-
-data:  chd$CHD, fitted(m1)
-X-squared = 100, df = 8, p-value <2e-16
+## 
+## 	Hosmer and Lemeshow goodness of fit (GOF) test
+## 
+## data:  chd$CHD, fitted(m1)
+## X-squared = 100, df = 8, p-value < 2.2e-16
 ```
 
 
@@ -491,20 +460,20 @@ RsqGLM(m1)
 ```
 
 ```
-$CoxSnell
-[1] 0.2541
-
-$Nagelkerke
-[1] 0.341
-
-$McFadden
-[1] 0.2145
-
-$Tjur
-[1] 0.2706
-
-$sqPearson
-[1] 0.2726
+## $CoxSnell
+## [1] 0.2540516
+## 
+## $Nagelkerke
+## [1] 0.3409928
+## 
+## $McFadden
+## [1] 0.2144684
+## 
+## $Tjur
+## [1] 0.2705749
+## 
+## $sqPearson
+## [1] 0.2725518
 ```
 
 
@@ -519,35 +488,33 @@ O exemplo abaixo abordado foi extraído de @Torres-Reyna2014, onde observa-se o 
 
 
 ```r
-require(foreign)
+require(haven)
 ```
 
 ```
-Carregando pacotes exigidos: foreign
+## Carregando pacotes exigidos: haven
 ```
 
 ```r
-mydata <- read.dta("http://dss.princeton.edu/training/Panel101.dta") 
+mydata <- read_dta("http://dss.princeton.edu/training/Panel101.dta") 
 summary(mydata)
 ```
 
 ```
- country      year            y                 y_bin           x1        
- A:10    Min.   :1990   Min.   :-7.86e+09   Min.   :0.0   Min.   :-0.568  
- B:10    1st Qu.:1992   1st Qu.: 2.47e+08   1st Qu.:1.0   1st Qu.: 0.329  
- C:10    Median :1994   Median : 1.90e+09   Median :1.0   Median : 0.641  
- D:10    Mean   :1994   Mean   : 1.85e+09   Mean   :0.8   Mean   : 0.648  
- E:10    3rd Qu.:1997   3rd Qu.: 3.37e+09   3rd Qu.:1.0   3rd Qu.: 1.096  
- F:10    Max.   :1999   Max.   : 8.94e+09   Max.   :1.0   Max.   : 1.446  
- G:10                                                                     
-       x2               x3              opinion  
- Min.   :-1.622   Min.   :-1.165   Str agree:20  
- 1st Qu.:-1.216   1st Qu.:-0.079   Agree    :15  
- Median :-0.462   Median : 0.514   Disag    :19  
- Mean   : 0.134   Mean   : 0.762   Str disag:16  
- 3rd Qu.: 1.608   3rd Qu.: 1.155                 
- Max.   : 2.530   Max.   : 7.169                 
-                                                 
+##     country       year            y                  y_bin    
+##  Min.   :1   Min.   :1990   Min.   :-7.863e+09   Min.   :0.0  
+##  1st Qu.:2   1st Qu.:1992   1st Qu.: 2.466e+08   1st Qu.:1.0  
+##  Median :4   Median :1994   Median : 1.898e+09   Median :1.0  
+##  Mean   :4   Mean   :1994   Mean   : 1.845e+09   Mean   :0.8  
+##  3rd Qu.:6   3rd Qu.:1997   3rd Qu.: 3.372e+09   3rd Qu.:1.0  
+##  Max.   :7   Max.   :1999   Max.   : 8.941e+09   Max.   :1.0  
+##        x1                x2                x3              opinion     
+##  Min.   :-0.5676   Min.   :-1.6218   Min.   :-1.16539   Min.   :1.000  
+##  1st Qu.: 0.3290   1st Qu.:-1.2156   1st Qu.:-0.07931   1st Qu.:1.000  
+##  Median : 0.6413   Median :-0.4621   Median : 0.51419   Median :2.500  
+##  Mean   : 0.6480   Mean   : 0.1339   Mean   : 0.76185   Mean   :2.443  
+##  3rd Qu.: 1.0958   3rd Qu.: 1.6078   3rd Qu.: 1.15486   3rd Qu.:3.000  
+##  Max.   : 1.4464   Max.   : 2.5303   Max.   : 7.16892   Max.   :4.000
 ```
 
 
@@ -564,31 +531,31 @@ summary(logit)
 ```
 
 ```
-
-Call:
-glm(formula = y_bin ~ x1 + x2 + x3, family = binomial(link = "logit"), 
-    data = mydata)
-
-Deviance Residuals: 
-   Min      1Q  Median      3Q     Max  
--2.028   0.235   0.554   0.702   1.084  
-
-Coefficients:
-            Estimate Std. Error z value Pr(>|z|)  
-(Intercept)    0.426      0.639    0.67    0.505  
-x1             0.862      0.784    1.10    0.272  
-x2             0.367      0.308    1.19    0.234  
-x3             0.751      0.455    1.65    0.099 .
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 70.056  on 69  degrees of freedom
-Residual deviance: 65.512  on 66  degrees of freedom
-AIC: 73.51
-
-Number of Fisher Scoring iterations: 5
+## 
+## Call:
+## glm(formula = y_bin ~ x1 + x2 + x3, family = binomial(link = "logit"), 
+##     data = mydata)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.0277   0.2347   0.5542   0.7016   1.0839  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)  
+## (Intercept)   0.4262     0.6390   0.667   0.5048  
+## x1            0.8618     0.7840   1.099   0.2717  
+## x2            0.3665     0.3082   1.189   0.2343  
+## x3            0.7512     0.4548   1.652   0.0986 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 70.056  on 69  degrees of freedom
+## Residual deviance: 65.512  on 66  degrees of freedom
+## AIC: 73.512
+## 
+## Number of Fisher Scoring iterations: 5
 ```
 
 
@@ -603,31 +570,31 @@ stargazer(logit, title="Resultados",type = "text")
 ```
 
 ```
-
-Resultados
-=============================================
-                      Dependent variable:    
-                  ---------------------------
-                             y_bin           
----------------------------------------------
-x1                           0.862           
-                            (0.784)          
-                                             
-x2                           0.367           
-                            (0.308)          
-                                             
-x3                          0.751*           
-                            (0.455)          
-                                             
-Constant                     0.426           
-                            (0.639)          
-                                             
----------------------------------------------
-Observations                  70             
-Log Likelihood              -32.760          
-Akaike Inf. Crit.           73.510           
-=============================================
-Note:             *p<0.1; **p<0.05; ***p<0.01
+## 
+## Resultados
+## =============================================
+##                       Dependent variable:    
+##                   ---------------------------
+##                              y_bin           
+## ---------------------------------------------
+## x1                           0.862           
+##                             (0.784)          
+##                                              
+## x2                           0.367           
+##                             (0.308)          
+##                                              
+## x3                          0.751*           
+##                             (0.455)          
+##                                              
+## Constant                     0.426           
+##                             (0.639)          
+##                                              
+## ---------------------------------------------
+## Observations                  70             
+## Log Likelihood              -32.756          
+## Akaike Inf. Crit.           73.512           
+## =============================================
+## Note:             *p<0.1; **p<0.05; ***p<0.01
 ```
 
 
@@ -642,16 +609,16 @@ logitor(y_bin~x1+x2+x3,data=mydata)
 ```
 
 ```
-Call:
-logitor(formula = y_bin ~ x1 + x2 + x3, data = mydata)
-
-Odds Ratio:
-   OddsRatio Std. Err.    z P>|z|  
-x1     2.367     1.856 1.10 0.272  
-x2     1.443     0.445 1.19 0.234  
-x3     2.120     0.964 1.65 0.099 .
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Call:
+## logitor(formula = y_bin ~ x1 + x2 + x3, data = mydata)
+## 
+## Odds Ratio:
+##    OddsRatio Std. Err.      z   P>|z|  
+## x1   2.36735   1.85600 1.0992 0.27168  
+## x2   1.44273   0.44459 1.1894 0.23427  
+## x3   2.11957   0.96405 1.6516 0.09861 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 O resultado acima evidencia que para uma alteração em 1 (uma) unidade em x3, a chance de que y seja igual a 1 aumenta em 112\% ((2,12-1)*100). Dito de outra forma, a chance de y=1 é 2,12 vezes maior quando x3 aumenta em uma unidade (sendo que aqui mantêm-se as demais variáveis independentes constantes).
@@ -667,8 +634,8 @@ exp(coef(logit))
 ```
 
 ```
-(Intercept)          x1          x2          x3 
-      1.531       2.367       1.443       2.120 
+## (Intercept)          x1          x2          x3 
+##    1.531417    2.367352    1.442727    2.119566
 ```
 
 
@@ -681,11 +648,11 @@ exp(cbind(OR=coef(logit), confint(logit)))
 ```
 
 ```
-               OR  2.5 % 97.5 %
-(Intercept) 1.531 0.4387  5.625
-x1          2.367 0.5129 11.675
-x2          1.443 0.8041  2.738
-x3          2.120 1.0039  5.719
+##                   OR     2.5 %    97.5 %
+## (Intercept) 1.531417 0.4387468  5.625299
+## x1          2.367352 0.5129380 11.674641
+## x2          1.442727 0.8041221  2.737965
+## x3          2.119566 1.0038973  5.718637
 ```
 
 
@@ -700,8 +667,8 @@ allmean
 ```
 
 ```
-     x1     x2     x3
-1 0.648 0.1339 0.7619
+##          x1        x2       x3
+## 1 0.6480006 0.1338694 0.761851
 ```
 
 Utiliza-se o comando `predict()` para predição do modelo, como segue abaixo, informando o objeto criado com a equação do modelo (logit), a base de dados com as condições dos valores médios (allmean) e o tipo de teste requerido ("response") para predizer as probabilidades. Como resultado, o modelo informa que constando os valores médios das variáveis independentes, obtêm-se a probabilidade de 83\% em y se constituir igual a 1.
@@ -713,8 +680,8 @@ allmean
 ```
 
 ```
-     x1     x2     x3 pred.prob
-1 0.648 0.1339 0.7619    0.8329
+##          x1        x2       x3 pred.prob
+## 1 0.6480006 0.1338694 0.761851 0.8328555
 ```
 
 
@@ -733,46 +700,46 @@ step(logit, direction = 'both')
 ```
 
 ```
-Start:  AIC=73.51
-y_bin ~ x1 + x2 + x3
-
-       Df Deviance  AIC
-- x1    1     66.7 72.7
-- x2    1     67.0 73.0
-<none>        65.5 73.5
-- x3    1     69.4 75.4
-
-Step:  AIC=72.74
-y_bin ~ x2 + x3
-
-       Df Deviance  AIC
-- x2    1     67.3 71.3
-<none>        66.7 72.7
-+ x1    1     65.5 73.5
-- x3    1     70.0 74.0
-
-Step:  AIC=71.33
-y_bin ~ x3
-
-       Df Deviance  AIC
-<none>        67.3 71.3
-- x3    1     70.1 72.1
-+ x2    1     66.7 72.7
-+ x1    1     67.0 73.0
+## Start:  AIC=73.51
+## y_bin ~ x1 + x2 + x3
+## 
+##        Df Deviance    AIC
+## - x1    1   66.736 72.736
+## - x2    1   66.996 72.996
+## <none>      65.512 73.512
+## - x3    1   69.402 75.402
+## 
+## Step:  AIC=72.74
+## y_bin ~ x2 + x3
+## 
+##        Df Deviance    AIC
+## - x2    1   67.330 71.330
+## <none>      66.736 72.736
+## + x1    1   65.512 73.512
+## - x3    1   70.032 74.032
+## 
+## Step:  AIC=71.33
+## y_bin ~ x3
+## 
+##        Df Deviance    AIC
+## <none>      67.330 71.330
+## - x3    1   70.056 72.056
+## + x2    1   66.736 72.736
+## + x1    1   66.996 72.996
 ```
 
 ```
-
-Call:  glm(formula = y_bin ~ x3, family = binomial(link = "logit"), 
-    data = mydata)
-
-Coefficients:
-(Intercept)           x3  
-      1.134        0.487  
-
-Degrees of Freedom: 69 Total (i.e. Null);  68 Residual
-Null Deviance:	    70.1 
-Residual Deviance: 67.3 	AIC: 71.3
+## 
+## Call:  glm(formula = y_bin ~ x3, family = binomial(link = "logit"), 
+##     data = mydata)
+## 
+## Coefficients:
+## (Intercept)           x3  
+##      1.1339       0.4866  
+## 
+## Degrees of Freedom: 69 Total (i.e. Null);  68 Residual
+## Null Deviance:	    70.06 
+## Residual Deviance: 67.33 	AIC: 71.33
 ```
 
 ### VIF - Variance Inflation Factor
@@ -788,8 +755,8 @@ vif(logit)
 ```
 
 ```
-    x1     x2     x3 
- 9.292 12.318 29.860 
+##        x1        x2        x3 
+##  9.291872 12.317808 29.859879
 ```
 
 
@@ -811,7 +778,7 @@ ficou em 499,98 e com a inclusão das variáveis ao modelo baixou para 458,52, o
 ```r
 # Carregando o arquivo
 require(readr)
-binary <- read.csv("http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv")
+binary <- read_csv("http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv")
 
 # Transformando a variável rank em categórica
 binary$rank <- factor(binary$rank)
@@ -825,33 +792,33 @@ summary(mylogit)
 ```
 
 ```
-
-Call:
-glm(formula = admit ~ gre + gpa + rank, family = binomial(link = "logit"), 
-    data = binary)
-
-Deviance Residuals: 
-   Min      1Q  Median      3Q     Max  
--1.627  -0.866  -0.639   1.149   2.079  
-
-Coefficients:
-            Estimate Std. Error z value Pr(>|z|)    
-(Intercept) -3.98998    1.13995   -3.50  0.00047 ***
-gre          0.00226    0.00109    2.07  0.03847 *  
-gpa          0.80404    0.33182    2.42  0.01539 *  
-rank2       -0.67544    0.31649   -2.13  0.03283 *  
-rank3       -1.34020    0.34531   -3.88  0.00010 ***
-rank4       -1.55146    0.41783   -3.71  0.00020 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 499.98  on 399  degrees of freedom
-Residual deviance: 458.52  on 394  degrees of freedom
-AIC: 470.5
-
-Number of Fisher Scoring iterations: 4
+## 
+## Call:
+## glm(formula = admit ~ gre + gpa + rank, family = binomial(link = "logit"), 
+##     data = binary)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.6268  -0.8662  -0.6388   1.1490   2.0790  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) -3.989979   1.139951  -3.500 0.000465 ***
+## gre          0.002264   0.001094   2.070 0.038465 *  
+## gpa          0.804038   0.331819   2.423 0.015388 *  
+## rank2       -0.675443   0.316490  -2.134 0.032829 *  
+## rank3       -1.340204   0.345306  -3.881 0.000104 ***
+## rank4       -1.551464   0.417832  -3.713 0.000205 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 499.98  on 399  degrees of freedom
+## Residual deviance: 458.52  on 394  degrees of freedom
+## AIC: 470.52
+## 
+## Number of Fisher Scoring iterations: 4
 ```
 
 Utilizando o teste de análise de variância `anova` pode-se observar a variância com o modelo nulo (500) e à medida que as variáveis explicativas foram sendo incluídas, estas reduziram a variância do modelo para 459, contribuindo para o modelo.
@@ -863,21 +830,22 @@ anova(mylogit, test = "Chisq")
 ```
 
 ```
-Analysis of Deviance Table
-
-Model: binomial, link: logit
-
-Response: admit
-
-Terms added sequentially (first to last)
-
-     Df Deviance Resid. Df Resid. Dev Pr(>Chi)    
-NULL                   399        500             
-gre   1    13.92       398        486  0.00019 ***
-gpa   1     5.71       397        480  0.01685 *  
-rank  3    21.83       394        459  7.1e-05 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Analysis of Deviance Table
+## 
+## Model: binomial, link: logit
+## 
+## Response: admit
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##      Df Deviance Resid. Df Resid. Dev  Pr(>Chi)    
+## NULL                   399     499.98              
+## gre   1  13.9204       398     486.06 0.0001907 ***
+## gpa   1   5.7122       397     480.34 0.0168478 *  
+## rank  3  21.8265       394     458.52 7.088e-05 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 Caso seja interessante comparar diversos modelos de regressão com variáveis explicativas distintas, estes podem ser comparados no teste de variância `anova`. Utilizando a função `update` pode ser criada uma nova regressão com base na regressão anterior (`mylogit`) e é excluído do modelo a variável `gre` para exemplificar. Após, é efetuado novamente o teste `anova`, agora comparando os dois modelos, como segue abaixo. Evidencia-se que a exclusão da variável `gre` causou elevaçãod a variância do modelo para 463, piorando portanto a capacidade do modelo pois espera-se sempre reduções na sua variância.
@@ -891,15 +859,15 @@ anova(mylogit,mylogit2, test = "Chisq")
 ```
 
 ```
-Analysis of Deviance Table
-
-Model 1: admit ~ gre + gpa + rank
-Model 2: admit ~ gpa + rank
-  Resid. Df Resid. Dev Df Deviance Pr(>Chi)  
-1       394        459                       
-2       395        463 -1    -4.36    0.037 *
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Analysis of Deviance Table
+## 
+## Model 1: admit ~ gre + gpa + rank
+## Model 2: admit ~ gpa + rank
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)  
+## 1       394     458.52                       
+## 2       395     462.88 -1  -4.3578  0.03684 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
@@ -922,13 +890,13 @@ exp(cbind(OR = coef(mylogit), confint(mylogit)))
 ```
 
 ```
-                OR    2.5 % 97.5 %
-(Intercept) 0.0185 0.001889 0.1665
-gre         1.0023 1.000138 1.0044
-gpa         2.2345 1.173858 4.3238
-rank2       0.5089 0.272290 0.9448
-rank3       0.2618 0.131642 0.5115
-rank4       0.2119 0.090716 0.4707
+##                    OR       2.5 %    97.5 %
+## (Intercept) 0.0185001 0.001889165 0.1665354
+## gre         1.0022670 1.000137602 1.0044457
+## gpa         2.2345448 1.173858216 4.3238349
+## rank2       0.5089310 0.272289674 0.9448343
+## rank3       0.2617923 0.131641717 0.5115181
+## rank4       0.2119375 0.090715546 0.4706961
 ```
 
 A leitura dos resultados, para as variáveis numéricas continua sendo a mesma. Com relação ao resultado para a variável **gre**, para cada aumento unitário nesta variável, mantendo-se as demais constantes, elevam-se em 0,23\% ((1,0023-1)\*100) as chances de que o aluno seja aprovado no vestibular. Já para a cada variação unitária na variável **gpa**, aumentam em 123,45\% ((2,2345-1)*100). 
@@ -954,8 +922,8 @@ pred
 ```
 
 ```
-  gre  gpa rank   prob
-1 700 3.67    1 0.6332
+##   gre  gpa rank      prob
+## 1 700 3.67    1 0.6331924
 ```
 
 Comparando com um aluno que tirou as mesmas notas no **gre** e **gpa**, mas que estudou em uma escola *ranking* 4:
@@ -971,8 +939,8 @@ pred
 ```
 
 ```
-  gre  gpa rank   prob
-1 700 3.67    4 0.2679
+##   gre  gpa rank      prob
+## 1 700 3.67    4 0.2678562
 ```
 
 
@@ -1008,11 +976,16 @@ novosdados
 ```
 
 ```
-    gre  gpa rank   prob se.prob residual.scale      LL     UL
-1 587.7 3.39    1 0.5166 0.06632              1 0.38662 0.6466
-2 587.7 3.39    2 0.3523 0.03978              1 0.27431 0.4303
-3 587.7 3.39    3 0.2186 0.03825              1 0.14364 0.2936
-4 587.7 3.39    4 0.1847 0.04864              1 0.08934 0.2800
+##     gre    gpa rank      prob    se.prob residual.scale         LL
+## 1 587.7 3.3899    1 0.5166016 0.06631526              1 0.38662370
+## 2 587.7 3.3899    2 0.3522846 0.03978481              1 0.27430637
+## 3 587.7 3.3899    3 0.2186120 0.03825061              1 0.14364085
+## 4 587.7 3.3899    4 0.1846684 0.04863624              1 0.08934141
+##          UL
+## 1 0.6465795
+## 2 0.4302628
+## 3 0.2935832
+## 4 0.2799955
 ```
 
 
@@ -1026,9 +999,7 @@ ggplot(novosdados, aes(x=rank,y=prob))+
   labs(title="Probabilidades preditas", x="Ranking",y="Pr(y=1)")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.9\linewidth]{05-RegLogist_files/figure-latex/unnamed-chunk-28-1} \end{center}
+![](05-RegLogist_files/figure-latex/unnamed-chunk-27-1.pdf)<!-- --> 
 
 
 

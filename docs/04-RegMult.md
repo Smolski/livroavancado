@@ -1,7 +1,6 @@
 # Regressão Múltipla
 
 
-
 ## Modelo geral
 
 Um modelo de regressão múltipla é expresso como:
@@ -115,15 +114,15 @@ head(arvore2)
 ```
 
 ```
-# A tibble: 6 x 4
-  Nomecientifico            diametro_cm altura_m especie
-  <chr>                           <dbl>    <dbl>   <dbl>
-1 Sebastiania commersoniana        52.2     15.2       0
-2 Sebastiania commersoniana        95       17.3       0
-3 Sebastiania commersoniana        67.3     16.3       0
-4 Sebastiania commersoniana        46.3     14         0
-5 Sebastiania commersoniana        64.1     15         0
-6 Sebastiania commersoniana       122       22         0
+## # A tibble: 6 x 4
+##   Nomecientifico            diametro_cm altura_m especie
+##   <chr>                           <dbl>    <dbl>   <dbl>
+## 1 Sebastiania commersoniana        52.2     15.2       0
+## 2 Sebastiania commersoniana        95       17.3       0
+## 3 Sebastiania commersoniana        67.3     16.3       0
+## 4 Sebastiania commersoniana        46.3     14         0
+## 5 Sebastiania commersoniana        64.1     15         0
+## 6 Sebastiania commersoniana       122       22         0
 ```
 
 
@@ -133,13 +132,13 @@ modelom
 ```
 
 ```
-
-Call:
-lm(formula = altura_m ~ diametro_cm + especie)
-
-Coefficients:
-(Intercept)  diametro_cm      especie  
-    12.6959       0.0571      -1.6252  
+## 
+## Call:
+## lm(formula = altura_m ~ diametro_cm + especie)
+## 
+## Coefficients:
+## (Intercept)  diametro_cm      especie  
+##    12.69592      0.05713     -1.62517
 ```
 
 Modelo:
@@ -160,25 +159,25 @@ summary(modelom)
 ```
 
 ```
-
-Call:
-lm(formula = altura_m ~ diametro_cm + especie)
-
-Residuals:
-   Min     1Q Median     3Q    Max 
--3.269 -0.766 -0.124  0.813  2.873 
-
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept) 12.69592    0.38639   32.86  < 2e-16 ***
-diametro_cm  0.05713    0.00445   12.84  < 2e-16 ***
-especie     -1.62517    0.24459   -6.64  1.5e-09 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 1.19 on 102 degrees of freedom
-Multiple R-squared:   0.7,	Adjusted R-squared:  0.694 
-F-statistic:  119 on 2 and 102 DF,  p-value: <2e-16
+## 
+## Call:
+## lm(formula = altura_m ~ diametro_cm + especie)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.2688 -0.7663 -0.1236  0.8132  2.8727 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 12.69592    0.38639  32.857  < 2e-16 ***
+## diametro_cm  0.05713    0.00445  12.837  < 2e-16 ***
+## especie     -1.62517    0.24459  -6.644 1.52e-09 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.185 on 102 degrees of freedom
+## Multiple R-squared:  0.6995,	Adjusted R-squared:  0.6937 
+## F-statistic: 118.7 on 2 and 102 DF,  p-value: < 2.2e-16
 ```
 
 
@@ -210,6 +209,11 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 
 ```r
 plot(diametro_cm,altura_m)
+```
+
+![](04-RegMult_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
+
+```r
 # Gera o gráfico sem pontos
 plot(diametro_cm,altura_m,type='n') 
 # Acrescenta os pontos
@@ -220,9 +224,7 @@ abline(coef(modelom)[1], coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3], coef(modelom)[2], col='red')
 ```
 
-
-
-\begin{center}\includegraphics[width=0.6\linewidth]{04-RegMult_files/figure-latex/unnamed-chunk-5-1} \end{center}
+![](04-RegMult_files/figure-latex/unnamed-chunk-4-2.pdf)<!-- --> 
 
 
 ## Interação entre variáveis preditoras
@@ -240,16 +242,16 @@ modelom
 ```
 
 ```
-
-Call:
-lm(formula = altura_m ~ diametro_cm + especie + diametro_cm:especie, 
-    data = arvore2)
-
-Coefficients:
-        (Intercept)          diametro_cm              especie  
-            11.5480               0.0714               0.7863  
-diametro_cm:especie  
-            -0.0316  
+## 
+## Call:
+## lm(formula = altura_m ~ diametro_cm + especie + diametro_cm:especie, 
+##     data = arvore2)
+## 
+## Coefficients:
+##         (Intercept)          diametro_cm              especie  
+##            11.54805              0.07137              0.78630  
+## diametro_cm:especie  
+##            -0.03158
 ```
 
 
@@ -260,27 +262,27 @@ summary(modelom)
 ```
 
 ```
-
-Call:
-lm(formula = altura_m ~ diametro_cm + especie + diametro_cm:especie, 
-    data = arvore2)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--2.2460 -0.8545  0.0632  0.7552  2.5561 
-
-Coefficients:
-                    Estimate Std. Error t value Pr(>|t|)    
-(Intercept)         11.54805    0.47544   24.29  < 2e-16 ***
-diametro_cm          0.07137    0.00566   12.62  < 2e-16 ***
-especie              0.78630    0.68304    1.15  0.25237    
-diametro_cm:especie -0.03158    0.00842   -3.75  0.00029 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 1.12 on 101 degrees of freedom
-Multiple R-squared:  0.736,	Adjusted R-squared:  0.728 
-F-statistic:   94 on 3 and 101 DF,  p-value: <2e-16
+## 
+## Call:
+## lm(formula = altura_m ~ diametro_cm + especie + diametro_cm:especie, 
+##     data = arvore2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.24597 -0.85455  0.06317  0.75516  2.55607 
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)         11.548047   0.475441  24.289  < 2e-16 ***
+## diametro_cm          0.071375   0.005655  12.620  < 2e-16 ***
+## especie              0.786303   0.683038   1.151 0.252375    
+## diametro_cm:especie -0.031579   0.008421  -3.750 0.000295 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.116 on 101 degrees of freedom
+## Multiple R-squared:  0.7363,	Adjusted R-squared:  0.7284 
+## F-statistic: 93.99 on 3 and 101 DF,  p-value: < 2.2e-16
 ```
 
 
@@ -296,9 +298,7 @@ abline(coef(modelom)[1],coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3],coef(modelom)[2]+coef(modelom)[4], col='red')
 ```
 
-
-
-\begin{center}\includegraphics[width=0.6\linewidth]{04-RegMult_files/figure-latex/unnamed-chunk-8-1} \end{center}
+![](04-RegMult_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 
 

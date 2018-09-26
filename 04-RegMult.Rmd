@@ -1,21 +1,5 @@
 # Regressão Múltipla
 
-```{r echo=FALSE}
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-Sys.setenv(RSTUDIO_PDFLATEX = "latexmk")
-options(width = 80, digits = 4,
-        bookdown.clean_book = TRUE)
-knitr::opts_chunk$set(
-  tidy = FALSE, 
-  fig.align = "center", 
-  out.width = '60%',
-  comment = NA,
-  fig.pos = 'h',
-  fig.keep='last'
-  )
-```
 
 ## Modelo geral
 

@@ -1,21 +1,6 @@
 # Regressão Logística
 
-```{r echo=FALSE}
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-Sys.setenv(RSTUDIO_PDFLATEX = "latexmk")
-options(width = 80, digits = 4,
-        bookdown.clean_book = TRUE)
-knitr::opts_chunk$set(
-  tidy = FALSE, 
-  fig.align = "center", 
-  out.width = '90%',
-  comment = NA,
-  fig.pos = 'h',
-  fig.keep='last'
-  )
-```
+
 
 ```{r, echo=FALSE}
 
@@ -366,9 +351,8 @@ O exemplo abaixo abordado foi extraído de @Torres-Reyna2014, onde observa-se o 
 
 
 ```{r}
-
-require(foreign)
-mydata <- read.dta("http://dss.princeton.edu/training/Panel101.dta") 
+require(haven)
+mydata <- read_dta("http://dss.princeton.edu/training/Panel101.dta") 
 summary(mydata)
 ```
 
@@ -485,7 +469,7 @@ ficou em 499,98 e com a inclusão das variáveis ao modelo baixou para 458,52, o
 ```{r, message=FALSE, warning=FALSE}
 # Carregando o arquivo
 require(readr)
-binary <- read.csv("http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv")
+binary <- read_csv("http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv")
 
 # Transformando a variável rank em categórica
 binary$rank <- factor(binary$rank)

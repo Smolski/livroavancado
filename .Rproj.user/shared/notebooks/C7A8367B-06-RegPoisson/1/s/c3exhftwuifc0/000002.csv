@@ -1,0 +1,1 @@
+"0","plot(novosdados$satotal, pch=""o"", col=""blue"", xlab=""Width groups"", ylab=""Number of Satellites"")"
