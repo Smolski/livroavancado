@@ -1009,6 +1009,134 @@ Verificação da existência de multicolinearidade (correlação entre os X’s)
 \printbibliography[segment=\therefsegment,heading=subbibliography]
 -->
 
+# Regressão com Dados em Painel
+
+O modelo de regressão com dados em painel possuem uma característica especial: se constituem de uma dimensão *temporal* e outra *espacial*. Isto porque a mesma unidade de corte transversal (família, países, etc.) é acompanhada ao longo do tempo. Por exemplo, a produção industrial mensal dos Estados brasileiros em função da taxa de juros no período de 2015-2016. Têm-se então a 624 (26x24) observações *combinadas*: de cada um dos 26 Estados (exluindo o Distrito Federal) e 24 observações para os meses.
+
+
+Dentre os benefícios da regressão com dados em painel [@Gujarati2011]:
+
+- Devido à heterogeneidade da análise entre indivíduos, empresas, estados, países, etc., esta técnica pode levar em conta estas variáveis individuais específicas;
+
+- Maior informação, maior variabilidade e menor colinearidade entre variáveis, devido à combinaçãod e séries temporais e dados com corte transversal;
+
+- Dados em painel são mais adequados ao estudo da *dinâmica da mudança* (emprego, renda, etc).
+
+- Detecta e mede melhor os efeitos em comparação aos estudos transversais puros ou em séries temporais puras;
+
+- Possibilidade de modelos comportamentais mais complexos;
+
+- Minimização do viés decorrente da agregação de pessoas e/ou empresas nos grandes conjuntos.
+
+
+
+## Carregamento e transformação dos dados
+
+A base de dados utilizada neste exemplo ("Grunfeld") é proveniente do pacote `AER`. É constituída da variável dependente do nível de investimento ("invest") de diversas empresas ("firm"), bem como das variáveis explicativas de seu valor de mercado ("value") e do valor do estoque de capital ("capital") durante o período de 1935-1954 (20 anos). Portanto pretende-se descobrir os determinantes do valor do nível investimento das firmas durente o período.
+
+
+```{r, message=FALSE,warning=FALSE}
+require(AER) 
+data(Grunfeld, package="AER")
+```
+
+
+Após carregada a base de dados, serão selecionadas três empresas ("General Electric", "General Motors" e "IBM") para fins de análise dos dados. Utiliza-se o pacote `plm` e a função `pdata.frame` para alocar a base de dados para a análise de regressão de dados em painel, uma vez que é necessário definir o atributo individual ("firm") e temporal ("year") das observações. Para isso utiliza-se o argumento `index`, como segue:
+
+
+```{r, message=FALSE}
+require(plm)
+
+Grunfeld=subset(Grunfeld, firm %in% c("General Electric",
+                                      "General Motors",
+                                      "IBM"))
+Grunfeld=pdata.frame(Grunfeld, index=c("firm","year"))
+  
+head(Grunfeld)
+summary(Grunfeld)
+```
+
+Nota-se que nesta base que será trabalhada os dados das empresas aparecem "empilhados" , uma vez que a variável referente ao ano da observação ("year") está repetida para cada observação da referida empresa (corte transversal repetido em diversos períodos de tempo). Desta forma a nossa base de dados possui igualmente 20 informações para cada empresa, se constituindo em um *painel equilibrado*. Caso o número de informações para cada empresa fossem desiguais, teríamos um *painel desequilibrado*.
+
+Uma questão interessante emerge para a análise de regressão de dados em painel, em virtude da interação de variáveis individuais ("firm") com a série temporal ("year"): a elevação da complexidade da análise. Desta forma, várias possibilidades de análise de modelos de regressão surgem, dentre elas: 
+
+a) regressão considerando que o intercepto do modelo e seus coeficientes angulares são constantes ao londo do tempo e no espaço, sendo que o termo de erro capta a diferença no tempo e entre os indivíduos (POOLED);
+
+b) regressão considerando que os coeficientes angulares são constantes e o intercepto varia entre os indivíduos (EFEITOS FIXOS);
+
+c) regressão considerando que o intercepto e coeficientes angulares variam ao longo do tempo e também entre indivíduos (EFEITOS ALEATÓRIOS).
+
+Abaixo é demonstrada a evolução do investimento de acordo com cada empresa estudada:
+
+```{r}
+coplot(invest ~ year|firm, type="l", data=Grunfeld)
+```
+
+
+
+
+## Modelo Pooled
+
+```{r, warning=FALSE}
+reg.pooled=plm(invest~value+capital, 
+               data=Grunfeld, model="pooling")
+summary(reg.pooled)
+```
+
+```{r}
+
+
+
+#my.pooltest <- pooltest(invest~value+capital, data = Grunfeld, model = "pooling")
+
+
+#print(my.pooltest)
+
+#plmtest(reg.pooled)
+```
+
+
+## Modelo Efeitos Fixos
+
+```{r,warning=FALSE}
+reg.ef=plm(invest~value+capital, 
+           data=Grunfeld, model="within")
+summary(reg.ef)
+```
+
+```{r,warning=FALSE}
+summary(fixef(reg.ef))
+```
+
+
+```{r,warning=FALSE}
+pFtest(reg.ef,reg.pooled)
+```
+
+## Modelo Efeitos Aleatórios
+
+
+
+```{r}
+reg.ea=plm(invest~value+capital,
+           data=Grunfeld, model="random", 
+           random.method = "walhus")
+summary(reg.ea)
+```
+
+
+
+
+
+
+```{r}
+phtest(reg.ef,reg.ea)
+```
+
+
+## Comparação e escolha dos modelos
+
+
 
 # Regressão Logística
 

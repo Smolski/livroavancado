@@ -1,0 +1,7 @@
+"0","require(plm)"
+"0","Grunfeld=subset(Grunfeld, firm %in% c(""General Electric"","
+"0","                                      ""General Motors"","
+"0","                                      ""IBM""))"
+"0","Grunfeld=pdata.frame(Grunfeld, index=c(""firm"",""year""))"
+"0","  "
+"0","head(Grunfeld)"

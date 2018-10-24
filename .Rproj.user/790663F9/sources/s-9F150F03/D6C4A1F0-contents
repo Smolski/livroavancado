@@ -42,7 +42,7 @@ year = {2018}
 @article{Fawcett2006,
 author = {Fawcett, Tom},
 journal = {Pattern Recognition Letters},
-pages = {861--874},
+pages = {861-874},
 title = {{An introduction to ROC analysis}},
 volume = {27},
 year = {2006}
