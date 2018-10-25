@@ -658,7 +658,10 @@ Entrevistado 29: 2.24121650
 Este entrevistado se destacou em primeiro no segundo fator, apresentando preocupação quanto ao beneffício social da dentição: boa aparência dos dentes, hálito puro e boa aparência dos dentes.
 
 ```{r}
-factor.scores(creme_dental_exemplo1,PCAdentevarimax, Phi = NULL, method = c("Thurstone", "tenBerge", "Anderson", "Bartlett", "Harman","components"),rho=NULL)
+factor.scores(creme_dental_exemplo1,PCAdentevarimax, 
+              Phi = NULL, 
+              method = c("Thurstone", "tenBerge", "Anderson", "Bartlett", "Harman","components"),
+              rho=NULL)
 ```
 
 <!--
