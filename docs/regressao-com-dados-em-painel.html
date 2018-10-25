@@ -26,7 +26,7 @@
 <meta name="author" content="Iara Denise Endruweit Battisti">
 
 
-<meta name="date" content="2018-10-20">
+<meta name="date" content="2018-10-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -230,7 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="regressao-com-dados-em-painel" class="section level1">
 <h1><span class="header-section-number">Capítulo 4</span> Regressão com Dados em Painel</h1>
-<p>O modelo de regressão com dados em painel possuem uma característica especial: se constituem de uma dimensão <em>temporal</em> e outra <em>espacial</em>. Isto porque a mesma unidade de corte transversal (família, países, etc.) é acompanhada ao longo do tempo. Por exemplo, a produção industrial mensal dos Estados brasileiros em função da taxa de juros no período de 2015-2016. Têm-se então a 624 (26x24) observações <em>combinadas</em>: de cada um dos 26 Estados (exluindo o Distrito Federal) e 24 observações para os meses.</p>
+<p>O modelo de regressão com dados em painel possui uma característica especial: se constitui de uma dimensão <em>temporal</em> e outra <em>espacial</em>. Isto porque a mesma unidade de corte transversal (família, países, etc.) é acompanhada ao longo do tempo. Por exemplo, a produção industrial mensal dos Estados brasileiros em função da taxa de juros no período de 2015-2016. Têm-se então a 624 (26x24) observações <em>combinadas</em>: de cada um dos 26 Estados (exluindo o Distrito Federal) e 24 observações para os meses.</p>
 <p>Dentre os benefícios da regressão com dados em painel <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>:</p>
 <ul>
 <li><p>Devido à heterogeneidade da análise entre indivíduos, empresas, estados, países, etc., esta técnica pode levar em conta estas variáveis individuais específicas;</p></li>
@@ -243,17 +243,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="carregamento-e-transformacao-dos-dados" class="section level2">
 <h2><span class="header-section-number">4.1</span> Carregamento e transformação dos dados</h2>
 <p>A base de dados utilizada neste exemplo (“Grunfeld”) é proveniente do pacote <code>AER</code>. É constituída da variável dependente do nível de investimento (“invest”) de diversas empresas (“firm”), bem como das variáveis explicativas de seu valor de mercado (“value”) e do valor do estoque de capital (“capital”) durante o período de 1935-1954 (20 anos). Portanto pretende-se descobrir os determinantes do valor do nível investimento das firmas durente o período.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="kw">require</span>(AER) </a>
-<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="kw">data</span>(Grunfeld, <span class="dt">package=</span><span class="st">&quot;AER&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="kw">require</span>(AER) </a>
+<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="kw">data</span>(Grunfeld, <span class="dt">package=</span><span class="st">&quot;AER&quot;</span>)</a></code></pre></div>
 <p>Após carregada a base de dados, serão selecionadas três empresas (“General Electric”, “General Motors” e “IBM”) para fins de análise dos dados. Utiliza-se o pacote <code>plm</code> e a função <code>pdata.frame</code> para alocar a base de dados para a análise de regressão de dados em painel, uma vez que é necessário definir o atributo individual (“firm”) e temporal (“year”) das observações. Para isso utiliza-se o argumento <code>index</code>, como segue:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="kw">require</span>(plm)</a>
-<a class="sourceLine" id="cb77-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb77-3" data-line-number="3">Grunfeld=<span class="kw">subset</span>(Grunfeld, firm <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;General Electric&quot;</span>,</a>
-<a class="sourceLine" id="cb77-4" data-line-number="4">                                      <span class="st">&quot;General Motors&quot;</span>,</a>
-<a class="sourceLine" id="cb77-5" data-line-number="5">                                      <span class="st">&quot;IBM&quot;</span>))</a>
-<a class="sourceLine" id="cb77-6" data-line-number="6">Grunfeld=<span class="kw">pdata.frame</span>(Grunfeld, <span class="dt">index=</span><span class="kw">c</span>(<span class="st">&quot;firm&quot;</span>,<span class="st">&quot;year&quot;</span>))</a>
-<a class="sourceLine" id="cb77-7" data-line-number="7">  </a>
-<a class="sourceLine" id="cb77-8" data-line-number="8"><span class="kw">head</span>(Grunfeld)</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="kw">require</span>(plm)</a>
+<a class="sourceLine" id="cb79-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb79-3" data-line-number="3">Grunfeld=<span class="kw">subset</span>(Grunfeld, firm <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;General Electric&quot;</span>,</a>
+<a class="sourceLine" id="cb79-4" data-line-number="4">                                      <span class="st">&quot;General Motors&quot;</span>,</a>
+<a class="sourceLine" id="cb79-5" data-line-number="5">                                      <span class="st">&quot;IBM&quot;</span>))</a>
+<a class="sourceLine" id="cb79-6" data-line-number="6">Grunfeld=<span class="kw">pdata.frame</span>(Grunfeld, <span class="dt">index=</span><span class="kw">c</span>(<span class="st">&quot;firm&quot;</span>,<span class="st">&quot;year&quot;</span>))</a>
+<a class="sourceLine" id="cb79-7" data-line-number="7">  </a>
+<a class="sourceLine" id="cb79-8" data-line-number="8"><span class="kw">head</span>(Grunfeld)</a></code></pre></div>
 <pre><code>                    invest value capital           firm year
 General Motors-1935  317.6  3078     2.8 General Motors 1935
 General Motors-1936  391.8  4662    52.6 General Motors 1936
@@ -261,7 +261,7 @@ General Motors-1937  410.6  5387   156.9 General Motors 1937
 General Motors-1938  257.7  2792   209.2 General Motors 1938
 General Motors-1939  330.8  4313   203.4 General Motors 1939
 General Motors-1940  461.2  4644   207.2 General Motors 1940</code></pre>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="kw">summary</span>(Grunfeld)</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="kw">summary</span>(Grunfeld)</a></code></pre></div>
 <pre><code>     invest           value         capital                     firm   
  Min.   :  20.4   Min.   : 197   Min.   :   2.8   General Motors  :20  
  1st Qu.:  49.7   1st Qu.: 626   1st Qu.: 102.8   General Electric:20  
@@ -278,7 +278,7 @@ General Motors-1940  461.2  4644   207.2 General Motors 1940</code></pre>
  1939   : 3  
  1940   : 3  
  (Other):42  </code></pre>
-<p>Nota-se que nesta base que será trabalhada os dados das empresas aparecem “empilhados” , uma vez que a variável referente ao ano da observação (“year”) está repetida para cada observação da referida empresa (corte transversal repetido em diversos períodos de tempo). Desta forma a nossa base de dados possui igualmente 20 informações para cada empresa, se constituindo em um <em>painel equilibrado</em>. Caso o número de informações para cada empresa fossem desiguais, teríamos um <em>painel desequilibrado</em>.</p>
+<p>Nota-se que nesta base que será trabalhada os dados das empresas aparecem “empilhados”, uma vez que a variável referente ao ano da observação (“year”) está repetida para cada observação da referida empresa (corte transversal repetido em diversos períodos de tempo). Desta forma a nossa base de dados possui igualmente 20 informações para cada empresa, se constituindo em um <em>painel equilibrado</em>. Caso o número de informações para cada empresa fossem desiguais, teríamos um <em>painel desequilibrado</em>.</p>
 <p>Uma questão interessante emerge para a análise de regressão de dados em painel, em virtude da interação de variáveis individuais (“firm”) com a série temporal (“year”): a elevação da complexidade da análise. Desta forma, várias possibilidades de análise de modelos de regressão surgem, dentre elas:</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>regressão considerando que o intercepto do modelo e seus coeficientes angulares são constantes ao londo do tempo e no espaço, sendo que o termo de erro capta a diferença no tempo e entre os indivíduos (POOLED);</p></li>
@@ -286,14 +286,15 @@ General Motors-1940  461.2  4644   207.2 General Motors 1940</code></pre>
 <li><p>regressão considerando que o intercepto e coeficientes angulares variam ao longo do tempo e também entre indivíduos (EFEITOS ALEATÓRIOS).</p></li>
 </ol>
 <p>Abaixo é demonstrada a evolução do investimento de acordo com cada empresa estudada:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="kw">coplot</span>(invest <span class="op">~</span><span class="st"> </span>year<span class="op">|</span>firm, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">data=</span>Grunfeld)</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="kw">coplot</span>(invest <span class="op">~</span><span class="st"> </span>year<span class="op">|</span>firm, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">data=</span>Grunfeld)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="modelo-pooled" class="section level2">
 <h2><span class="header-section-number">4.2</span> Modelo Pooled</h2>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">reg.pooled=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, </a>
-<a class="sourceLine" id="cb82-2" data-line-number="2">               <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;pooling&quot;</span>)</a>
-<a class="sourceLine" id="cb82-3" data-line-number="3"><span class="kw">summary</span>(reg.pooled)</a></code></pre></div>
+<p>Este modelo trata de empilhar todas as observações da base de dados, ignorando a estrutura de dados em painel. Desta forma, todas as observações são tratadas como não correlacionadas para os indivíduos, com erros homoscedásticos para com os indivíduos. Trata-se, portanto, da forma mais simplista e ingênua pois desconsidera as dimensões de tempo e espaço combinados, ao mesmo tempo que estima a regressão pelo método dos Mínimos Quadrados Ordinários (MQO) <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">reg.pooled=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, </a>
+<a class="sourceLine" id="cb84-2" data-line-number="2">               <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;pooling&quot;</span>)</a>
+<a class="sourceLine" id="cb84-3" data-line-number="3"><span class="kw">summary</span>(reg.pooled)</a></code></pre></div>
 <pre><code>Pooling Model
 
 Call:
@@ -318,18 +319,18 @@ Residual Sum of Squares: 748000
 R-Squared:      0.867
 Adj. R-Squared: 0.863
 F-statistic: 186.524 on 2 and 57 DF, p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="co">#my.pooltest &lt;- pooltest(invest~value+capital, data = Grunfeld, model = &quot;pooling&quot;)</span></a>
-<a class="sourceLine" id="cb84-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb84-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb84-4" data-line-number="4"><span class="co">#print(my.pooltest)</span></a>
-<a class="sourceLine" id="cb84-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb84-6" data-line-number="6"><span class="co">#plmtest(reg.pooled)</span></a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="co">#my.pooltest &lt;- pooltest(invest~value+capital, data = Grunfeld, model = &quot;pooling&quot;)</span></a>
+<a class="sourceLine" id="cb86-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb86-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb86-4" data-line-number="4"><span class="co">#print(my.pooltest)</span></a>
+<a class="sourceLine" id="cb86-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb86-6" data-line-number="6"><span class="co">#plmtest(reg.pooled)</span></a></code></pre></div>
 </div>
 <div id="modelo-efeitos-fixos" class="section level2">
 <h2><span class="header-section-number">4.3</span> Modelo Efeitos Fixos</h2>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">reg.ef=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, </a>
-<a class="sourceLine" id="cb85-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;within&quot;</span>)</a>
-<a class="sourceLine" id="cb85-3" data-line-number="3"><span class="kw">summary</span>(reg.ef)</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">reg.ef=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, </a>
+<a class="sourceLine" id="cb87-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;within&quot;</span>)</a>
+<a class="sourceLine" id="cb87-3" data-line-number="3"><span class="kw">summary</span>(reg.ef)</a></code></pre></div>
 <pre><code>Oneway (individual) effect Within Model
 
 Call:
@@ -353,14 +354,14 @@ Residual Sum of Squares: 244000
 R-Squared:      0.871
 Adj. R-Squared: 0.861
 F-statistic: 185.407 on 2 and 55 DF, p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="kw">summary</span>(<span class="kw">fixef</span>(reg.ef))</a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="kw">summary</span>(<span class="kw">fixef</span>(reg.ef))</a></code></pre></div>
 <pre><code>                 Estimate Std. Error t-value Pr(&gt;|t|)    
 General Motors      -70.6       67.8   -1.04     0.30    
 General Electric   -239.6       32.8   -7.29  1.2e-09 ***
 IBM                 -24.6       16.2   -1.52     0.13    
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="kw">pFtest</span>(reg.ef,reg.pooled)</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="kw">pFtest</span>(reg.ef,reg.pooled)</a></code></pre></div>
 <pre><code>
     F test for individual effects
 
@@ -370,10 +371,10 @@ alternative hypothesis: significant effects</code></pre>
 </div>
 <div id="modelo-efeitos-aleatorios" class="section level2">
 <h2><span class="header-section-number">4.4</span> Modelo Efeitos Aleatórios</h2>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">reg.ea=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital,</a>
-<a class="sourceLine" id="cb91-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;random&quot;</span>, </a>
-<a class="sourceLine" id="cb91-3" data-line-number="3">           <span class="dt">random.method =</span> <span class="st">&quot;walhus&quot;</span>)</a>
-<a class="sourceLine" id="cb91-4" data-line-number="4"><span class="kw">summary</span>(reg.ea)</a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">reg.ea=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital,</a>
+<a class="sourceLine" id="cb93-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;random&quot;</span>, </a>
+<a class="sourceLine" id="cb93-3" data-line-number="3">           <span class="dt">random.method =</span> <span class="st">&quot;walhus&quot;</span>)</a>
+<a class="sourceLine" id="cb93-4" data-line-number="4"><span class="kw">summary</span>(reg.ea)</a></code></pre></div>
 <pre><code>Oneway (individual) effect Random Effect Model 
    (Wallace-Hussain&#39;s transformation)
 
@@ -406,7 +407,7 @@ Residual Sum of Squares: 258000
 R-Squared:      0.87
 Adj. R-Squared: 0.866
 F-statistic: 191.545 on 2 and 57 DF, p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">phtest</span>(reg.ef,reg.ea)</a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">phtest</span>(reg.ef,reg.ea)</a></code></pre></div>
 <pre><code>
     Hausman Test
 

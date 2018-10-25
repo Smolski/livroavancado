@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-10-20}
+    \date{2018-10-24}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -171,6 +171,8 @@ Estatística com R da UFFS}:
   Análise Fatorial
 \item
   Regressão Múltipla
+\item
+  Regressão com Dados em Painel
 \item
   Regressão Logística
 \item
@@ -1507,6 +1509,67 @@ Este entrevistado se destacou em primeiro no segundo fator, apresentando
 preocupação quanto ao beneffício social da dentição: boa aparência dos
 dentes, hálito puro e boa aparência dos dentes.
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{factor.scores}\NormalTok{(creme_dental_exemplo1,PCAdentevarimax, }\DataTypeTok{Phi =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{method =} \KeywordTok{c}\NormalTok{(}\StringTok{"Thurstone"}\NormalTok{, }\StringTok{"tenBerge"}\NormalTok{, }\StringTok{"Anderson"}\NormalTok{, }\StringTok{"Bartlett"}\NormalTok{, }\StringTok{"Harman"}\NormalTok{,}\StringTok{"components"}\NormalTok{),}\DataTypeTok{rho=}\OtherTok{NULL}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+$scores
+            RC1      RC2
+ [1,]  1.143442 -0.30236
+ [2,] -1.164116 -0.33355
+ [3,]  1.275078 -0.85487
+ [4,]  0.283039  1.10542
+ [5,] -1.414762 -1.47785
+ [6,]  0.962546 -0.30692
+ [7,]  0.386174 -0.92946
+ [8,]  1.314326 -0.02535
+ [9,] -1.013721 -0.63921
+[10,] -1.294149  1.54533
+[11,]  1.102641 -0.61320
+[12,] -1.150922 -0.30735
+[13,]  1.288272 -0.82867
+[14,]  0.148989  1.35741
+[15,] -1.326349 -0.91233
+[16,]  0.789822 -0.33831
+[17,]  0.608638 -0.61594
+[18,]  1.494935 -0.29386
+[19,] -1.026915 -0.66542
+[20,] -0.394467  1.34560
+[21,] -1.192011 -0.89125
+[22,]  0.614235 -0.01676
+[23,] -0.978198 -0.27596
+[24,] -0.006907  1.88497
+[25,]  0.833064 -0.23599
+[26,] -0.188091  1.60734
+[27,]  0.828975 -0.32987
+[28,] -0.677615  1.06323
+[29,]  0.182192  2.24122
+[30,] -1.428148 -0.95605
+
+$weights
+          RC1       RC2
+v1  0.3584504  0.009032
+v2  0.0003949  0.375030
+v3  0.3449550 -0.044523
+v4 -0.0148037  0.376748
+v5 -0.3505500 -0.057491
+v6  0.0538213  0.394380
+
+$r.scores
+          RC1       RC2
+RC1 1.000e+00 4.649e-16
+RC2 4.441e-16 1.000e+00
+
+$missing
+ [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+$R2
+[1] NA  1
+\end{verbatim}
+
 Destacando-se os entrevistados de interesse, verifica-se:
 
 \begin{figure}[H]
@@ -2126,14 +2189,14 @@ X's)
 \chapter{Regressão com Dados em
 Painel}\label{regressao-com-dados-em-painel}}
 
-O modelo de regressão com dados em painel possuem uma característica
-especial: constam uma dimensão \emph{temporal} e outra \emph{espacial}.
-Isto porque a mesma unidade de corte transversal (família, países, etc.)
-é acompanhada ao longo do tempo. Por exemplo, a produção industrial
-mensal dos Estados brasileiros e a taxa de juros no período de
-2015-2016. Têm-se então a 624 (26x24) observações \emph{combinadas}: de
-cada um dos 26 Estados (exluindo o Distrito Federal) e 24 observações
-para os meses.
+O modelo de regressão com dados em painel possui uma característica
+especial: se constitui de uma dimensão \emph{temporal} e outra
+\emph{espacial}. Isto porque a mesma unidade de corte transversal
+(família, países, etc.) é acompanhada ao longo do tempo. Por exemplo, a
+produção industrial mensal dos Estados brasileiros em função da taxa de
+juros no período de 2015-2016. Têm-se então a 624 (26x24) observações
+\emph{combinadas}: de cada um dos 26 Estados (exluindo o Distrito
+Federal) e 24 observações para os meses.
 
 Dentre os benefícios da regressão com dados em painel (GUJARATI; PORTER,
 \protect\hyperlink{ref-Gujarati2011}{2011}):
@@ -2236,7 +2299,7 @@ General Motors-1940  461.2  4644   207.2 General Motors 1940
 \end{verbatim}
 
 Nota-se que nesta base que será trabalhada os dados das empresas
-aparecem ``empilhados'' , uma vez que a variável referente ao ano da
+aparecem ``empilhados'', uma vez que a variável referente ao ano da
 observação (``year'') está repetida para cada observação da referida
 empresa (corte transversal repetido em diversos períodos de tempo).
 Desta forma a nossa base de dados possui igualmente 20 informações para
@@ -2279,6 +2342,15 @@ empresa estudada:
 
 \hypertarget{modelo-pooled}{%
 \section{Modelo Pooled}\label{modelo-pooled}}
+
+Este modelo trata de empilhar todas as observações da base de dados,
+ignorando a estrutura de dados em painel. Desta forma, todas as
+observações são tratadas como não correlacionadas para os indivíduos,
+com erros homoscedásticos para com os indivíduos. Trata-se, portanto, da
+forma mais simplista e ingênua pois desconsidera as dimensões de tempo e
+espaço combinados, ao mesmo tempo que estima a regressão pelo método dos
+Mínimos Quadrados Ordinários (MQO) (GUJARATI; PORTER,
+\protect\hyperlink{ref-Gujarati2011}{2011}).
 
 \begin{Shaded}
 \begin{Highlighting}[]

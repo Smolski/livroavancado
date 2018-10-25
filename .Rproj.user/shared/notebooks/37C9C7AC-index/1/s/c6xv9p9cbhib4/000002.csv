@@ -1,0 +1,6 @@
+"0","require(corrplot)"
+"2","Carregando pacotes exigidos: corrplot
+"
+"2","corrplot 0.84 loaded
+"
+"0","corrplot(matcor, method=""circle"")"

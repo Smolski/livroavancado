@@ -43,6 +43,7 @@ Esta é a estrutura provisória de capítulos do **Curso Avançado em Estatísti
 - Delineamentos Experimentais
 - Análise Fatorial
 - Regressão Múltipla
+- Regressão com Dados em Painel
 - Regressão Logística
 - Regressão de Poisson
 
@@ -657,7 +658,7 @@ Entrevistado 29: 2.24121650
 Este entrevistado se destacou em primeiro no segundo fator, apresentando preocupação quanto ao beneffício social da dentição: boa aparência dos dentes, hálito puro e boa aparência dos dentes.
 
 ```{r}
-
+factor.scores(creme_dental_exemplo1,PCAdentevarimax, Phi = NULL, method = c("Thurstone", "tenBerge", "Anderson", "Bartlett", "Harman","components"),rho=NULL)
 ```
 
 <!--
@@ -666,7 +667,7 @@ factor.scores(creme_dental_exemplo1,PCAdentevarimax, Phi = NULL, method = c("Thu
 
 Destacando-se os entrevistados de interesse, verifica-se:
 
-```{r, echo=FALSE, fig.cap='Principais resultados'}
+```{r, echo=FALSE, fig.cap='Principais resultados', warning=FALSE}
 knitr::include_graphics("anfat2.png")
 ```
 
@@ -1011,7 +1012,7 @@ Verificação da existência de multicolinearidade (correlação entre os X’s)
 
 # Regressão com Dados em Painel
 
-O modelo de regressão com dados em painel possuem uma característica especial: se constituem de uma dimensão *temporal* e outra *espacial*. Isto porque a mesma unidade de corte transversal (família, países, etc.) é acompanhada ao longo do tempo. Por exemplo, a produção industrial mensal dos Estados brasileiros em função da taxa de juros no período de 2015-2016. Têm-se então a 624 (26x24) observações *combinadas*: de cada um dos 26 Estados (exluindo o Distrito Federal) e 24 observações para os meses.
+O modelo de regressão com dados em painel possui uma característica especial: se constitui de uma dimensão *temporal* e outra *espacial*. Isto porque a mesma unidade de corte transversal (família, países, etc.) é acompanhada ao longo do tempo. Por exemplo, a produção industrial mensal dos Estados brasileiros em função da taxa de juros no período de 2015-2016. Têm-se então a 624 (26x24) observações *combinadas*: de cada um dos 26 Estados (exluindo o Distrito Federal) e 24 observações para os meses.
 
 
 Dentre os benefícios da regressão com dados em painel [@Gujarati2011]:
@@ -1056,7 +1057,7 @@ head(Grunfeld)
 summary(Grunfeld)
 ```
 
-Nota-se que nesta base que será trabalhada os dados das empresas aparecem "empilhados" , uma vez que a variável referente ao ano da observação ("year") está repetida para cada observação da referida empresa (corte transversal repetido em diversos períodos de tempo). Desta forma a nossa base de dados possui igualmente 20 informações para cada empresa, se constituindo em um *painel equilibrado*. Caso o número de informações para cada empresa fossem desiguais, teríamos um *painel desequilibrado*.
+Nota-se que nesta base que será trabalhada os dados das empresas aparecem "empilhados", uma vez que a variável referente ao ano da observação ("year") está repetida para cada observação da referida empresa (corte transversal repetido em diversos períodos de tempo). Desta forma a nossa base de dados possui igualmente 20 informações para cada empresa, se constituindo em um *painel equilibrado*. Caso o número de informações para cada empresa fossem desiguais, teríamos um *painel desequilibrado*.
 
 Uma questão interessante emerge para a análise de regressão de dados em painel, em virtude da interação de variáveis individuais ("firm") com a série temporal ("year"): a elevação da complexidade da análise. Desta forma, várias possibilidades de análise de modelos de regressão surgem, dentre elas: 
 
@@ -1076,6 +1077,9 @@ coplot(invest ~ year|firm, type="l", data=Grunfeld)
 
 
 ## Modelo Pooled
+
+Este modelo trata de empilhar todas as observações da base de dados, ignorando a estrutura de dados em painel. Desta forma, todas as observações são tratadas como não correlacionadas para os indivíduos, com erros homoscedásticos para com os indivíduos. Trata-se, portanto, da forma mais simplista e ingênua pois desconsidera as dimensões de tempo e espaço combinados, ao mesmo tempo que estima a regressão pelo método dos Mínimos Quadrados Ordinários (MQO) [@Gujarati2011].
+
 
 ```{r, warning=FALSE}
 reg.pooled=plm(invest~value+capital, 

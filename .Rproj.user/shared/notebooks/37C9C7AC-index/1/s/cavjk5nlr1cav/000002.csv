@@ -1,18 +1,5 @@
-"0","reg.pooled=plm(invest~value+capital,data=Grunfeld,model=""pooling"")"
-"2","Warning messages:
-"
-"2","1: "
-"2","In readLines(input, encoding = ""UTF-8"") :"
-"2","
- "
-"2"," incomplete final line found on 'D:/Github/livroavancado/_output.yml'
-"
-"2","2: "
-"2","In readLines(input, encoding = ""UTF-8"") :"
-"2","
- "
-"2"," incomplete final line found on 'D:/Github/livroavancado/_output.yml'
-"
+"0","reg.pooled=plm(invest~value+capital, "
+"0","               data=Grunfeld, model=""pooling"")"
 "0","summary(reg.pooled)"
 "1","Pooling Model"
 "1","
