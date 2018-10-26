@@ -245,15 +245,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A base de dados utilizada neste exemplo (“Grunfeld”) é proveniente do pacote <code>AER</code>. É constituída da variável dependente do nível de investimento (“invest”) de diversas empresas (“firm”), bem como das variáveis explicativas de seu valor de mercado (“value”) e do valor do estoque de capital (“capital”) durante o período de 1935-1954 (20 anos). Portanto pretende-se descobrir os determinantes do valor do nível investimento das firmas durente o período.</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="kw">require</span>(AER) </a>
 <a class="sourceLine" id="cb78-2" data-line-number="2"><span class="kw">data</span>(Grunfeld, <span class="dt">package=</span><span class="st">&quot;AER&quot;</span>)</a></code></pre></div>
-<p>Após carregada a base de dados, serão selecionadas três empresas (“General Electric”, “General Motors” e “IBM”) para fins de análise dos dados. Utiliza-se o pacote <code>plm</code> e a função <code>pdata.frame</code> para alocar a base de dados para a análise de regressão de dados em painel, uma vez que é necessário definir o atributo individual (“firm”) e temporal (“year”) das observações. Para isso utiliza-se o argumento <code>index</code>, como segue:</p>
+<p>Após carregada a base para o estudo, serão selecionadas quatro empresas (“General Electric”, “General Motors”, “US Steel” e “Westinghouse”) para fins de análise dos dados. Utiliza-se o pacote <code>plm</code> e a função <code>pdata.frame</code> para alocar a base de dados para a análise de regressão de dados em painel, uma vez que é necessário definir o atributo individual (“firm”) e temporal (“year”) das observações. Para isso utiliza-se o argumento <code>index</code>, como segue:</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="kw">require</span>(plm)</a>
 <a class="sourceLine" id="cb79-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb79-3" data-line-number="3">Grunfeld=<span class="kw">subset</span>(Grunfeld, firm <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;General Electric&quot;</span>,</a>
 <a class="sourceLine" id="cb79-4" data-line-number="4">                                      <span class="st">&quot;General Motors&quot;</span>,</a>
-<a class="sourceLine" id="cb79-5" data-line-number="5">                                      <span class="st">&quot;IBM&quot;</span>))</a>
-<a class="sourceLine" id="cb79-6" data-line-number="6">Grunfeld=<span class="kw">pdata.frame</span>(Grunfeld, <span class="dt">index=</span><span class="kw">c</span>(<span class="st">&quot;firm&quot;</span>,<span class="st">&quot;year&quot;</span>))</a>
-<a class="sourceLine" id="cb79-7" data-line-number="7">  </a>
-<a class="sourceLine" id="cb79-8" data-line-number="8"><span class="kw">head</span>(Grunfeld)</a></code></pre></div>
+<a class="sourceLine" id="cb79-5" data-line-number="5">                                      <span class="st">&quot;US Steel&quot;</span>,</a>
+<a class="sourceLine" id="cb79-6" data-line-number="6">                                      <span class="st">&quot;Westinghouse&quot;</span>))</a>
+<a class="sourceLine" id="cb79-7" data-line-number="7">Grunfeld=<span class="kw">pdata.frame</span>(Grunfeld, <span class="dt">index=</span><span class="kw">c</span>(<span class="st">&quot;firm&quot;</span>,<span class="st">&quot;year&quot;</span>))</a>
+<a class="sourceLine" id="cb79-8" data-line-number="8">  </a>
+<a class="sourceLine" id="cb79-9" data-line-number="9"><span class="kw">head</span>(Grunfeld)</a></code></pre></div>
 <pre><code>                    invest value capital           firm year
 General Motors-1935  317.6  3078     2.8 General Motors 1935
 General Motors-1936  391.8  4662    52.6 General Motors 1936
@@ -263,21 +264,21 @@ General Motors-1939  330.8  4313   203.4 General Motors 1939
 General Motors-1940  461.2  4644   207.2 General Motors 1940</code></pre>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="kw">summary</span>(Grunfeld)</a></code></pre></div>
 <pre><code>     invest           value         capital                     firm   
- Min.   :  20.4   Min.   : 197   Min.   :   2.8   General Motors  :20  
- 1st Qu.:  49.7   1st Qu.: 626   1st Qu.: 102.8   General Electric:20  
- Median : 106.2   Median :1921   Median : 208.2   IBM             :20  
- Mean   : 255.2   Mean   :2232   Mean   : 384.3                        
- 3rd Qu.: 419.9   3rd Qu.:3570   3rd Qu.: 478.1                        
+ Min.   :  12.9   Min.   : 192   Min.   :   0.8   General Motors  :20  
+ 1st Qu.:  55.3   1st Qu.:1192   1st Qu.: 118.1   US Steel        :20  
+ Median : 199.8   Median :1971   Median : 254.7   General Electric:20  
+ Mean   : 290.9   Mean   :2229   Mean   : 357.3   Westinghouse    :20  
+ 3rd Qu.: 459.8   3rd Qu.:2795   3rd Qu.: 368.9                        
  Max.   :1486.7   Max.   :6242   Max.   :2226.3                        
                                                                        
       year   
- 1935   : 3  
- 1936   : 3  
- 1937   : 3  
- 1938   : 3  
- 1939   : 3  
- 1940   : 3  
- (Other):42  </code></pre>
+ 1935   : 4  
+ 1936   : 4  
+ 1937   : 4  
+ 1938   : 4  
+ 1939   : 4  
+ 1940   : 4  
+ (Other):56  </code></pre>
 <p>Nota-se que nesta base que será trabalhada os dados das empresas aparecem “empilhados”, uma vez que a variável referente ao ano da observação (“year”) está repetida para cada observação da referida empresa (corte transversal repetido em diversos períodos de tempo). Desta forma a nossa base de dados possui igualmente 20 informações para cada empresa, se constituindo em um <em>painel equilibrado</em>. Caso o número de informações para cada empresa fossem desiguais, teríamos um <em>painel desequilibrado</em>.</p>
 <p>Uma questão interessante emerge para a análise de regressão de dados em painel, em virtude da interação de variáveis individuais (“firm”) com a série temporal (“year”): a elevação da complexidade da análise. Desta forma, várias possibilidades de análise de modelos de regressão surgem, dentre elas:</p>
 <ol style="list-style-type: lower-alpha">
@@ -291,7 +292,8 @@ General Motors-1940  461.2  4644   207.2 General Motors 1940</code></pre>
 </div>
 <div id="modelo-pooled" class="section level2">
 <h2><span class="header-section-number">4.2</span> Modelo Pooled</h2>
-<p>Este modelo trata de empilhar todas as observações da base de dados, ignorando a estrutura de dados em painel. Desta forma, todas as observações são tratadas como não correlacionadas para os indivíduos, com erros homoscedásticos para com os indivíduos. Trata-se, portanto, da forma mais simplista e ingênua pois desconsidera as dimensões de tempo e espaço combinados, ao mesmo tempo que estima a regressão pelo método dos Mínimos Quadrados Ordinários (MQO) <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>.</p>
+<p>Este modelo trata de “empilhar” todas as observações da base de dados, ignorando a estrutura de dados em painel. Desta forma, todas as observações são tratadas como não correlacionadas para os indivíduos, com erros homoscedásticos para com os indivíduos. Trata-se, portanto, da forma mais simplista e ingênua pois desconsidera as dimensões de tempo e espaço combinados, ao mesmo tempo que estima a regressão pelo método dos Mínimos Quadrados Ordinários (MQO) <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>.</p>
+<p>Para executar este modelo de regressão é necessário utilizar a função <code>plm</code>, juntamente com as variáveis dependente e independentes, indicando a base de dados (<code>data</code>) e o tipo da regressão (<code>&quot;pooling&quot;</code>).</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">reg.pooled=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, </a>
 <a class="sourceLine" id="cb84-2" data-line-number="2">               <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;pooling&quot;</span>)</a>
 <a class="sourceLine" id="cb84-3" data-line-number="3"><span class="kw">summary</span>(reg.pooled)</a></code></pre></div>
@@ -300,25 +302,26 @@ General Motors-1940  461.2  4644   207.2 General Motors 1940</code></pre>
 Call:
 plm(formula = invest ~ value + capital, data = Grunfeld, model = &quot;pooling&quot;)
 
-Balanced Panel: n = 3, T = 20, N = 60
+Balanced Panel: n = 4, T = 20, N = 80
 
 Residuals:
    Min. 1st Qu.  Median 3rd Qu.    Max. 
- -281.9   -94.9    37.0    81.0   291.3 
+-319.68  -99.95    1.96   65.99  336.21 
 
 Coefficients:
-             Estimate Std. Error t-value Pr(&gt;|t|)    
-(Intercept) -101.6030    24.4019   -4.16  0.00011 ***
-value          0.1050     0.0106    9.90  5.5e-14 ***
-capital        0.3187     0.0409    7.79  1.6e-10 ***
+            Estimate Std. Error t-value Pr(&gt;|t|)    
+(Intercept) -62.8318    29.7254   -2.11    0.038 *  
+value         0.1105     0.0138    8.02  9.2e-12 ***
+capital       0.3005     0.0494    6.08  4.3e-08 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Total Sum of Squares:    5640000
-Residual Sum of Squares: 748000
-R-Squared:      0.867
-Adj. R-Squared: 0.863
-F-statistic: 186.524 on 2 and 57 DF, p-value: &lt;2e-16</code></pre>
+Total Sum of Squares:    6410000
+Residual Sum of Squares: 1570000
+R-Squared:      0.755
+Adj. R-Squared: 0.748
+F-statistic: 118.424 on 2 and 77 DF, p-value: &lt;2e-16</code></pre>
+<p>A estimação da regressão <em>pooled</em> averiguou alta significância estatística nas variáveis dependentes (“value” e “capital”), indicando sinal positivo para os coeficientes (em consonância com a literatura), bem como um valor de R^2 alto. Este tipo de modelo não faz diferenciação entre a influência/diferença das empresas na variável investimentoe nem se a resposta do investimento às variáveis explicativas é a mesma ao longo do tempo. Isto faz com que não se saiba se existe heterogeneidade eentre as empresas. A comparação do modelo <em>pooled</em> com as regressões de efeitos fixos e efeitos aleatórios, que serão estimados na sequência, servirá para que o pesquisador decida pelo melhor modelo.</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="co">#my.pooltest &lt;- pooltest(invest~value+capital, data = Grunfeld, model = &quot;pooling&quot;)</span></a>
 <a class="sourceLine" id="cb86-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb86-3" data-line-number="3"></a>
@@ -336,29 +339,30 @@ F-statistic: 186.524 on 2 and 57 DF, p-value: &lt;2e-16</code></pre>
 Call:
 plm(formula = invest ~ value + capital, data = Grunfeld, model = &quot;within&quot;)
 
-Balanced Panel: n = 3, T = 20, N = 60
+Balanced Panel: n = 4, T = 20, N = 80
 
 Residuals:
    Min. 1st Qu.  Median 3rd Qu.    Max. 
--167.33  -26.14    2.09   26.84  201.68 
+-184.66  -48.26    9.33   40.55  197.67 
 
 Coefficients:
         Estimate Std. Error t-value Pr(&gt;|t|)    
-value     0.1049     0.0163    6.42  3.3e-08 ***
-capital   0.3453     0.0244   14.16  &lt; 2e-16 ***
+value     0.1084     0.0176    6.17  3.3e-08 ***
+capital   0.3451     0.0267   12.92  &lt; 2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Total Sum of Squares:    1890000
-Residual Sum of Squares: 244000
-R-Squared:      0.871
-Adj. R-Squared: 0.861
-F-statistic: 185.407 on 2 and 55 DF, p-value: &lt;2e-16</code></pre>
+Total Sum of Squares:    2170000
+Residual Sum of Squares: 422000
+R-Squared:      0.806
+Adj. R-Squared: 0.792
+F-statistic: 153.291 on 2 and 74 DF, p-value: &lt;2e-16</code></pre>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="kw">summary</span>(<span class="kw">fixef</span>(reg.ef))</a></code></pre></div>
 <pre><code>                 Estimate Std. Error t-value Pr(&gt;|t|)    
-General Motors      -70.6       67.8   -1.04     0.30    
-General Electric   -239.6       32.8   -7.29  1.2e-09 ***
-IBM                 -24.6       16.2   -1.52     0.13    
+General Motors      -85.5       73.5   -1.16   0.2483    
+US Steel             95.0       36.7    2.59   0.0115 *  
+General Electric   -246.2       35.9   -6.85  1.9e-09 ***
+Westinghouse        -59.4       20.2   -2.94   0.0044 ** 
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="kw">pFtest</span>(reg.ef,reg.pooled)</a></code></pre></div>
@@ -366,7 +370,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
     F test for individual effects
 
 data:  invest ~ value + capital
-F = 57, df1 = 2, df2 = 55, p-value = 4e-14
+F = 67, df1 = 3, df2 = 74, p-value &lt;2e-16
 alternative hypothesis: significant effects</code></pre>
 </div>
 <div id="modelo-efeitos-aleatorios" class="section level2">
@@ -382,37 +386,37 @@ Call:
 plm(formula = invest ~ value + capital, data = Grunfeld, model = &quot;random&quot;, 
     random.method = &quot;walhus&quot;)
 
-Balanced Panel: n = 3, T = 20, N = 60
+Balanced Panel: n = 4, T = 20, N = 80
 
 Effects:
-                 var std.dev share
-idiosyncratic 4389.3    66.3  0.35
-individual    8079.7    89.9  0.65
-theta: 0.837
+                  var std.dev share
+idiosyncratic  5786.5    76.1  0.29
+individual    13872.6   117.8  0.71
+theta: 0.857
 
 Residuals:
    Min. 1st Qu.  Median 3rd Qu.    Max. 
--187.40  -32.92    6.96   31.43  210.20 
+-193.89  -46.17    1.35   41.98  198.11 
 
 Coefficients:
-             Estimate Std. Error t-value Pr(&gt;|t|)    
-(Intercept) -109.9766    61.7014   -1.78     0.08 .  
-value          0.1043     0.0150    6.95  3.8e-09 ***
-capital        0.3448     0.0245   14.06  &lt; 2e-16 ***
+            Estimate Std. Error t-value Pr(&gt;|t|)    
+(Intercept) -72.6322    68.9083   -1.05      0.3    
+value         0.1079     0.0167    6.48    8e-09 ***
+capital       0.3443     0.0269   12.81   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Total Sum of Squares:    1990000
-Residual Sum of Squares: 258000
-R-Squared:      0.87
-Adj. R-Squared: 0.866
-F-statistic: 191.545 on 2 and 57 DF, p-value: &lt;2e-16</code></pre>
+Total Sum of Squares:    2260000
+Residual Sum of Squares: 446000
+R-Squared:      0.802
+Adj. R-Squared: 0.797
+F-statistic: 156.365 on 2 and 77 DF, p-value: &lt;2e-16</code></pre>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">phtest</span>(reg.ef,reg.ea)</a></code></pre></div>
 <pre><code>
     Hausman Test
 
 data:  invest ~ value + capital
-chisq = 0.04, df = 2, p-value = 1
+chisq = 0.075, df = 2, p-value = 1
 alternative hypothesis: one model is inconsistent</code></pre>
 </div>
 <div id="comparacao-e-escolha-dos-modelos" class="section level2">

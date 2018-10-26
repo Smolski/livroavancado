@@ -1045,7 +1045,7 @@ data(Grunfeld, package="AER")
 ```
 
 
-Após carregada a base de dados, serão selecionadas três empresas ("General Electric", "General Motors" e "IBM") para fins de análise dos dados. Utiliza-se o pacote `plm` e a função `pdata.frame` para alocar a base de dados para a análise de regressão de dados em painel, uma vez que é necessário definir o atributo individual ("firm") e temporal ("year") das observações. Para isso utiliza-se o argumento `index`, como segue:
+Após carregada a base para o estudo, serão selecionadas quatro empresas ("General Electric", "General Motors", "US Steel" e "Westinghouse") para fins de análise dos dados. Utiliza-se o pacote `plm` e a função `pdata.frame` para alocar a base de dados para a análise de regressão de dados em painel, uma vez que é necessário definir o atributo individual ("firm") e temporal ("year") das observações. Para isso utiliza-se o argumento `index`, como segue:
 
 
 ```{r, message=FALSE}
@@ -1053,7 +1053,8 @@ require(plm)
 
 Grunfeld=subset(Grunfeld, firm %in% c("General Electric",
                                       "General Motors",
-                                      "IBM"))
+                                      "US Steel",
+                                      "Westinghouse"))
 Grunfeld=pdata.frame(Grunfeld, index=c("firm","year"))
   
 head(Grunfeld)
@@ -1081,7 +1082,9 @@ coplot(invest ~ year|firm, type="l", data=Grunfeld)
 
 ## Modelo Pooled
 
-Este modelo trata de empilhar todas as observações da base de dados, ignorando a estrutura de dados em painel. Desta forma, todas as observações são tratadas como não correlacionadas para os indivíduos, com erros homoscedásticos para com os indivíduos. Trata-se, portanto, da forma mais simplista e ingênua pois desconsidera as dimensões de tempo e espaço combinados, ao mesmo tempo que estima a regressão pelo método dos Mínimos Quadrados Ordinários (MQO) [@Gujarati2011].
+Este modelo trata de "empilhar" todas as observações da base de dados, ignorando a estrutura de dados em painel. Desta forma, todas as observações são tratadas como não correlacionadas para os indivíduos, com erros homoscedásticos para com os indivíduos. Trata-se, portanto, da forma mais simplista e ingênua pois desconsidera as dimensões de tempo e espaço combinados, ao mesmo tempo que estima a regressão pelo método dos Mínimos Quadrados Ordinários (MQO) [@Gujarati2011]. 
+
+Para executar este modelo de regressão é necessário utilizar a função `plm`, juntamente com as variáveis dependente e independentes, indicando a base de dados (`data`) e o tipo da regressão (`"pooling"`).
 
 
 ```{r, warning=FALSE}
@@ -1089,6 +1092,9 @@ reg.pooled=plm(invest~value+capital,
                data=Grunfeld, model="pooling")
 summary(reg.pooled)
 ```
+
+A estimação da regressão *pooled* averiguou alta significância estatística nas variáveis dependentes ("value" e "capital"), indicando sinal positivo para os coeficientes (em consonância com a literatura), bem como um valor de R^2 alto. Este tipo de modelo não faz diferenciação entre a influência/diferença das empresas na variável investimentoe nem se a resposta do investimento às variáveis explicativas é a mesma  ao longo do tempo. Isto faz com que não se saiba se existe heterogeneidade eentre as empresas. A comparação do modelo *pooled* com as regressões de efeitos fixos e efeitos aleatórios, que serão estimados na sequência, servirá para que o pesquisador decida pelo melhor modelo.
+
 
 ```{r}
 
@@ -1104,6 +1110,8 @@ summary(reg.pooled)
 
 
 ## Modelo Efeitos Fixos
+
+
 
 ```{r,warning=FALSE}
 reg.ef=plm(invest~value+capital, 
