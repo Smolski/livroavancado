@@ -26,7 +26,7 @@
 <meta name="author" content="Iara Denise Endruweit Battisti">
 
 
-<meta name="date" content="2018-10-25">
+<meta name="date" content="2018-10-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -322,18 +322,29 @@ R-Squared:      0.755
 Adj. R-Squared: 0.748
 F-statistic: 118.424 on 2 and 77 DF, p-value: &lt;2e-16</code></pre>
 <p>A estimação da regressão <em>pooled</em> averiguou alta significância estatística nas variáveis dependentes (“value” e “capital”), indicando sinal positivo para os coeficientes (em consonância com a literatura), bem como um valor de R^2 alto. Este tipo de modelo não faz diferenciação entre a influência/diferença das empresas na variável investimentoe nem se a resposta do investimento às variáveis explicativas é a mesma ao longo do tempo. Isto faz com que não se saiba se existe heterogeneidade eentre as empresas. A comparação do modelo <em>pooled</em> com as regressões de efeitos fixos e efeitos aleatórios, que serão estimados na sequência, servirá para que o pesquisador decida pelo melhor modelo.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="co">#my.pooltest &lt;- pooltest(invest~value+capital, data = Grunfeld, model = &quot;pooling&quot;)</span></a>
-<a class="sourceLine" id="cb86-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb86-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb86-4" data-line-number="4"><span class="co">#print(my.pooltest)</span></a>
-<a class="sourceLine" id="cb86-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb86-6" data-line-number="6"><span class="co">#plmtest(reg.pooled)</span></a></code></pre></div>
+<!--
+
+```r
+#my.pooltest <- pooltest(invest~value+capital, data = Grunfeld, model = "pooling")
+
+#print(my.pooltest)
+
+#plmtest(reg.pooled)
+```
+-->
 </div>
 <div id="modelo-efeitos-fixos" class="section level2">
 <h2><span class="header-section-number">4.3</span> Modelo Efeitos Fixos</h2>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">reg.ef=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, </a>
-<a class="sourceLine" id="cb87-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;within&quot;</span>)</a>
-<a class="sourceLine" id="cb87-3" data-line-number="3"><span class="kw">summary</span>(reg.ef)</a></code></pre></div>
+<p>O modelo de regressão com efeitos fixos considera, como visto anteriormente, que os valores dos interceptos para cada regressão (<span class="math inline">\(\alpha_i\)</span>) variam de acordo com o efeito de cada indivíduo (“firma”) e que os coeficientes de declividade (das variáveis independentes “value” e “capital”) para cada equação são os mesmos para cada empresa, conforme equação abaixo:</p>
+<p><span class="math display">\[
+invest_{it} = value_{1it} + capital_{2it} + \alpha_i + \varepsilon_{it}
+\]</span>
+em que <span class="math inline">\(i=1,...,4\)</span>, <span class="math inline">\(t=1,...,20\)</span> (painel balanceado).</p>
+<p>Desta forma, o intercepto da equação é diferente para cada empresa, mas o efeito das variáveis independentes é o mesmo sobre a variável independente. Isto indica que existe características especiais em cada empresa influenciando o investimento, como por exemplo estilo de gestão <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>.</p>
+<p>Abaixo é montada a regressão de efeitos fixos:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">reg.ef=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, </a>
+<a class="sourceLine" id="cb86-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;within&quot;</span>)</a>
+<a class="sourceLine" id="cb86-3" data-line-number="3"><span class="kw">summary</span>(reg.ef)</a></code></pre></div>
 <pre><code>Oneway (individual) effect Within Model
 
 Call:
@@ -357,7 +368,9 @@ Residual Sum of Squares: 422000
 R-Squared:      0.806
 Adj. R-Squared: 0.792
 F-statistic: 153.291 on 2 and 74 DF, p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="kw">summary</span>(<span class="kw">fixef</span>(reg.ef))</a></code></pre></div>
+<p>Nota-se que o impacto do valor da empresa (“value”) e do capital (“capital”) é positivo sobre o investimento (“invest”), para todas as empresas como visto acima. Inclusive, há significância estatística
+para estas variáveis. No entanto, ainda resta definir o efeito dos interceptos de cada empresa, como segue:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="kw">summary</span>(<span class="kw">fixef</span>(reg.ef))</a></code></pre></div>
 <pre><code>                 Estimate Std. Error t-value Pr(&gt;|t|)    
 General Motors      -85.5       73.5   -1.16   0.2483    
 US Steel             95.0       36.7    2.59   0.0115 *  
@@ -365,20 +378,40 @@ General Electric   -246.2       35.9   -6.85  1.9e-09 ***
 Westinghouse        -59.4       20.2   -2.94   0.0044 ** 
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="kw">pFtest</span>(reg.ef,reg.pooled)</a></code></pre></div>
+<p>Com este resultado é possível observar que o efeito das firmas sobre o investimento parece ser diferente para cada indivíduo. Desta forma, somente a empresa US Steel consta com efeito positivo sobre o investimento. Por outo lado, a fórmula da regressão é apresentada de maneira diversa, por exemplo: <span class="math inline">\(invest = -85,515 + 0,108400value + 0,345058capital\)</span> para a regressão considerando a General Motors; <span class="math inline">\(invest = 94.988 + 0,108400value + 0,345058capital\)</span> considerando a firma US Steel e assim por diante.</p>
+<p>Outra forma de visualizar a equação de efeitos fixos é utilizando a função <code>lm</code> para definir a regressão, definindo a variável “firm” como um fator:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="kw">summary</span>(<span class="kw">lm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital<span class="op">+</span><span class="kw">as.factor</span>(firm), </a>
+<a class="sourceLine" id="cb90-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld))</a></code></pre></div>
 <pre><code>
-    F test for individual effects
+Call:
+lm(formula = invest ~ value + capital + as.factor(firm), data = Grunfeld)
 
-data:  invest ~ value + capital
-F = 67, df1 = 3, df2 = 74, p-value &lt;2e-16
-alternative hypothesis: significant effects</code></pre>
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-184.66  -48.26    9.33   40.55  197.67 
+
+Coefficients:
+                                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                      -85.5153    73.4898   -1.16  0.24831    
+value                              0.1084     0.0176    6.17  3.3e-08 ***
+capital                            0.3451     0.0267   12.92  &lt; 2e-16 ***
+as.factor(firm)US Steel          180.5029    45.7168    3.95  0.00018 ***
+as.factor(firm)General Electric -160.7122    46.6224   -3.45  0.00094 ***
+as.factor(firm)Westinghouse       26.1296    64.9435    0.40  0.68859    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 75.5 on 74 degrees of freedom
+Multiple R-squared:  0.934, Adjusted R-squared:  0.93 
+F-statistic:  210 on 5 and 74 DF,  p-value: &lt;2e-16</code></pre>
+<p>Note que o intercepto definido (-85,51533) refere-se à presença da empresa General Motors. Caso seja evidenciada a presença da empresa US Steel, o valor do intercepto passa para 94,988 (= -85,51533 + 180,50295), a mesma lógica vale para as demais empresas.</p>
 </div>
 <div id="modelo-efeitos-aleatorios" class="section level2">
 <h2><span class="header-section-number">4.4</span> Modelo Efeitos Aleatórios</h2>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">reg.ea=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital,</a>
-<a class="sourceLine" id="cb93-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;random&quot;</span>, </a>
-<a class="sourceLine" id="cb93-3" data-line-number="3">           <span class="dt">random.method =</span> <span class="st">&quot;walhus&quot;</span>)</a>
-<a class="sourceLine" id="cb93-4" data-line-number="4"><span class="kw">summary</span>(reg.ea)</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">reg.ea=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital,</a>
+<a class="sourceLine" id="cb92-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;random&quot;</span>, </a>
+<a class="sourceLine" id="cb92-3" data-line-number="3">           <span class="dt">random.method =</span> <span class="st">&quot;walhus&quot;</span>)</a>
+<a class="sourceLine" id="cb92-4" data-line-number="4"><span class="kw">summary</span>(reg.ea)</a></code></pre></div>
 <pre><code>Oneway (individual) effect Random Effect Model 
    (Wallace-Hussain&#39;s transformation)
 
@@ -411,16 +444,23 @@ Residual Sum of Squares: 446000
 R-Squared:      0.802
 Adj. R-Squared: 0.797
 F-statistic: 156.365 on 2 and 77 DF, p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">phtest</span>(reg.ef,reg.ea)</a></code></pre></div>
+</div>
+<div id="comparacao-e-escolha-dos-modelos" class="section level2">
+<h2><span class="header-section-number">4.5</span> Comparação e escolha dos modelos</h2>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">pFtest</span>(reg.ef,reg.pooled)</a></code></pre></div>
+<pre><code>
+    F test for individual effects
+
+data:  invest ~ value + capital
+F = 67, df1 = 3, df2 = 74, p-value &lt;2e-16
+alternative hypothesis: significant effects</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="kw">phtest</span>(reg.ef,reg.ea)</a></code></pre></div>
 <pre><code>
     Hausman Test
 
 data:  invest ~ value + capital
 chisq = 0.075, df = 2, p-value = 1
 alternative hypothesis: one model is inconsistent</code></pre>
-</div>
-<div id="comparacao-e-escolha-dos-modelos" class="section level2">
-<h2><span class="header-section-number">4.5</span> Comparação e escolha dos modelos</h2>
 </div>
 </div>
 <h3>Referências</h3>

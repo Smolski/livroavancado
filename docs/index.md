@@ -3,7 +3,7 @@ title: "Software R: curso avançado"
 author: 
 - Felipe Micail da Silva Smolski
 - Iara Denise Endruweit Battisti
-date: "2018-10-25"
+date: "2018-10-29"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -117,10 +117,14 @@ laboratórios.
 
 *Exemplo*: Um produtor deseja avaliar 4 variedades de pera (A, B, C e D). Para tanto, instalou um experimento no delineamento inteiramente casualizado, utilizando 5 repetições por variedade. Os resultados, peso médio do fruto, estão apresentados a seguir:
 
-<div class="figure" style="text-align: center">
-<img src="delimexp0.png" alt="Variedades de pera separadas por grupos em faixas de peso e repetição" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-2)Variedades de pera separadas por grupos em faixas de peso e repetição</p>
-</div>
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{delimexp0} 
+
+}
+
+\caption{Variedades de pera separadas por grupos em faixas de peso e repetição}(\#fig:unnamed-chunk-2)
+\end{figure}
 
 
 
@@ -271,13 +275,17 @@ The following objects are masked from DIC (pos = 5):
 boxplot(Peso~Variedade)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-7-1} \end{center}
 
 ```r
 boxplot(Peso~Variedade,xlab="Variedade",ylab="Peso")
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-7-2.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-7-2} \end{center}
 
 
 ```r
@@ -307,7 +315,9 @@ plot(ajustados,residuos)
 abline(h=0)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-9-1} \end{center}
 
 
 
@@ -317,7 +327,9 @@ qqnorm(residuos)
 qqline(residuos)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-10-1} \end{center}
 
 
 
@@ -329,10 +341,14 @@ qqline(residuos)
 
 *Exemplo*: Uma Nutricionista elaborou 4 dietas e quer aplicá-las em 20 pessoas a fim detestar suas eficiências quanto à perda de peso. Porém ela notou que entre essas 20 pessoas existem 5 grupos de faixas iniciais de peso. Então, para aumentar a eficácia do teste ela separou os 20 indivíduos em 5 grupos de faixas de peso.
 
-<div class="figure" style="text-align: center">
-<img src="delimexp1.png" alt="Indivíduos separados por grupos em faixas de peso" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-11)Indivíduos separados por grupos em faixas de peso</p>
-</div>
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{delimexp1} 
+
+}
+
+\caption{Indivíduos separados por grupos em faixas de peso}(\#fig:unnamed-chunk-11)
+\end{figure}
 
 
 Criar o arquivo acima em planilha eletrônica. Nomear como DBC e salvar em formato .xls.
@@ -428,14 +444,18 @@ Medidas descritivas com a variável resposta:
 boxplot(Perda~Tratamentos)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 
 ```r
 boxplot(Perda~Tratamentos,xlab="Tratamentos",ylab="Perda")
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-15-1} \end{center}
 
 
 
@@ -465,7 +485,9 @@ plot(ajustado,residuo)
 abline(h=0)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-17-1} \end{center}
 
 
 
@@ -474,7 +496,9 @@ qqnorm(residuo)
 qqline(residuo)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-18-1} \end{center}
 
 
 
@@ -487,10 +511,14 @@ Assim, é possível que as variaçõess de três ou quatro variáveis observadas
 
 Diferentemente da análise de variância, regressão e análise discriminante, onde uma das variáveis é identificada como a variável dependente, examina-se todo o conjunto de relações interdependentes entre variáveis.
 
-<div class="figure" style="text-align: center">
-<img src="anfat1.png" alt="Processo de análise de variáveis" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-19)Processo de análise de variáveis</p>
-</div>
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{anfat1} 
+
+}
+
+\caption{Processo de análise de variáveis}(\#fig:unnamed-chunk-19)
+\end{figure}
 
 
 
@@ -644,7 +672,9 @@ corrplot 0.84 loaded
 corrplot(matcor, method="circle")
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
 Na figura acima, as correlações estão em cor azul porque são positivas, com tons mais fortes para as correlações mais altas. 
 <!--
@@ -824,7 +854,9 @@ Abaixo vamos apresentar o `scree-plot`, em formato do gráfico de barras para o 
 screeplot(fit)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-26-1} \end{center}
 
 
 Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma ligeira suavização das alturas nas demais colunas.
@@ -836,7 +868,9 @@ Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma lige
 plot(fit,type="lines")
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-27-1} \end{center}
 
 
 ### Análise de Componentes Principais
@@ -994,7 +1028,9 @@ os fatores.
 biplot(PCAdentevarimax)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-32-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-32-1} \end{center}
 
 
 Os valores dos fatores obtidos para os 30 entrevistados encontram-se na matriz de coeficiente de escore do componente mostrada abaixo. Esta ajuda a entender como cada variável se relaciona aos escores dos componentes calculados para cada participante. Para melhor compreensão da análise dos escores dos entrevistados é importante especificar e comentar o significado de cada fator:
@@ -1082,10 +1118,14 @@ factor.scores(creme_dental_exemplo1,PCAdentevarimax, Phi = NULL, method = c("Thu
 
 Destacando-se os entrevistados de interesse, verifica-se:
 
-<div class="figure" style="text-align: center">
-<img src="anfat2.png" alt="Principais resultados" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-34)Principais resultados</p>
-</div>
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{anfat2} 
+
+}
+
+\caption{Principais resultados}(\#fig:unnamed-chunk-34)
+\end{figure}
 
 
 
@@ -1306,7 +1346,9 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 plot(diametro_cm,altura_m)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-38-1} \end{center}
 
 ```r
 # Gera o gráfico sem pontos
@@ -1319,7 +1361,9 @@ abline(coef(modelom)[1], coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3], coef(modelom)[2], col='red')
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-38-2.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-38-2} \end{center}
 
 
 ## Interação entre variáveis preditoras
@@ -1393,7 +1437,9 @@ abline(coef(modelom)[1],coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3],coef(modelom)[2]+coef(modelom)[4], col='red')
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-41-1} \end{center}
 
 
 
@@ -1485,10 +1531,14 @@ variáveis ou encerrar o processo de no passo 4 nenhuma variável tiver sido ane
 - Se Fmin < Fout: eliminar a variável cuja estatística é igual a Fmin e voltar ao passo 1 iniciando nova etapa com modelo
 reduzido com (k-1) variáveis.
 
-<div class="figure" style="text-align: center">
-<img src="regress1.png" alt="Modelagem estatística" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-42)Modelagem estatística</p>
-</div>
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{regress1} 
+
+}
+
+\caption{Modelagem estatística}(\#fig:unnamed-chunk-42)
+\end{figure}
 
 Fonte: @Riboldi2005
 
@@ -1623,7 +1673,9 @@ Abaixo é demonstrada a evolução do investimento de acordo com cada empresa es
 coplot(invest ~ year|firm, type="l", data=Grunfeld)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-45-1} \end{center}
 
 
 
@@ -1671,21 +1723,29 @@ F-statistic: 118.424 on 2 and 77 DF, p-value: <2e-16
 
 A estimação da regressão *pooled* averiguou alta significância estatística nas variáveis dependentes ("value" e "capital"), indicando sinal positivo para os coeficientes (em consonância com a literatura), bem como um valor de R^2 alto. Este tipo de modelo não faz diferenciação entre a influência/diferença das empresas na variável investimentoe nem se a resposta do investimento às variáveis explicativas é a mesma  ao longo do tempo. Isto faz com que não se saiba se existe heterogeneidade eentre as empresas. A comparação do modelo *pooled* com as regressões de efeitos fixos e efeitos aleatórios, que serão estimados na sequência, servirá para que o pesquisador decida pelo melhor modelo.
 
-
+<!--
 
 ```r
 #my.pooltest <- pooltest(invest~value+capital, data = Grunfeld, model = "pooling")
-
 
 #print(my.pooltest)
 
 #plmtest(reg.pooled)
 ```
-
+-->
 
 ## Modelo Efeitos Fixos
 
+O modelo de regressão com efeitos fixos considera, como visto anteriormente, que os valores dos interceptos para cada regressão ($\alpha_i$) variam de acordo com o efeito de cada indivíduo ("firma") e que os coeficientes de declividade (das variáveis independentes "value" e "capital") para cada equação são os mesmos para cada empresa, conforme equação abaixo:
 
+$$
+invest_{it} = value_{1it} + capital_{2it} + \alpha_i + \varepsilon_{it}
+$$
+em que $i=1,...,4$, $t=1,...,20$ (painel balanceado).
+
+Desta forma, o intercepto da equação é diferente para cada empresa, mas o efeito das variáveis independentes é o mesmo sobre a variável independente. Isto indica que existe características especiais em cada empresa influenciando o investimento, como por exemplo estilo de gestão [@Gujarati2011].
+
+Abaixo é montada a regressão de efeitos fixos:
 
 
 ```r
@@ -1720,6 +1780,9 @@ Adj. R-Squared: 0.792
 F-statistic: 153.291 on 2 and 74 DF, p-value: <2e-16
 ```
 
+Nota-se que o impacto do valor da empresa ("value") e do capital ("capital") é positivo sobre o investimento ("invest"), para todas as empresas como visto acima. Inclusive, há significância estatística
+ para estas variáveis. No entanto, ainda resta definir o efeito dos interceptos de cada empresa, como segue:
+
 
 ```r
 summary(fixef(reg.ef))
@@ -1736,19 +1799,46 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
+Com este resultado é possível observar que o efeito das firmas sobre o investimento parece ser diferente para cada indivíduo. Desta forma, somente a empresa US Steel consta com efeito positivo sobre o investimento. Por outo lado, a fórmula da regressão é apresentada de maneira diversa, por exemplo: $invest = -85,515 + 0,108400value + 0,345058capital$ para a regressão considerando a General Motors; $invest = 94.988 + 0,108400value + 0,345058capital$ considerando a firma US Steel e assim por diante.
+
+Outra forma de visualizar a equação de efeitos fixos é utilizando a função `lm` para definir a regressão, definindo a variável "firm" como um fator:
+
 
 ```r
-pFtest(reg.ef,reg.pooled)
+summary(lm(invest~value+capital+as.factor(firm), 
+           data=Grunfeld))
 ```
 
 ```
 
-	F test for individual effects
+Call:
+lm(formula = invest ~ value + capital + as.factor(firm), data = Grunfeld)
 
-data:  invest ~ value + capital
-F = 67, df1 = 3, df2 = 74, p-value <2e-16
-alternative hypothesis: significant effects
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-184.66  -48.26    9.33   40.55  197.67 
+
+Coefficients:
+                                 Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                      -85.5153    73.4898   -1.16  0.24831    
+value                              0.1084     0.0176    6.17  3.3e-08 ***
+capital                            0.3451     0.0267   12.92  < 2e-16 ***
+as.factor(firm)US Steel          180.5029    45.7168    3.95  0.00018 ***
+as.factor(firm)General Electric -160.7122    46.6224   -3.45  0.00094 ***
+as.factor(firm)Westinghouse       26.1296    64.9435    0.40  0.68859    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 75.5 on 74 degrees of freedom
+Multiple R-squared:  0.934,	Adjusted R-squared:  0.93 
+F-statistic:  210 on 5 and 74 DF,  p-value: <2e-16
 ```
+
+Note que o intercepto definido (-85,51533) refere-se à presença da empresa General Motors. Caso seja evidenciada a presença da empresa US Steel, o valor do intercepto passa para 94,988 (= -85,51533 + 180,50295), a mesma lógica vale para as demais empresas.
+
+
+
+
 
 ## Modelo Efeitos Aleatórios
 
@@ -1803,6 +1893,26 @@ F-statistic: 156.365 on 2 and 77 DF, p-value: <2e-16
 
 
 
+
+
+## Comparação e escolha dos modelos
+
+
+```r
+pFtest(reg.ef,reg.pooled)
+```
+
+```
+
+	F test for individual effects
+
+data:  invest ~ value + capital
+F = 67, df1 = 3, df2 = 74, p-value <2e-16
+alternative hypothesis: significant effects
+```
+
+
+
 ```r
 phtest(reg.ef,reg.ea)
 ```
@@ -1815,9 +1925,6 @@ data:  invest ~ value + capital
 chisq = 0.075, df = 2, p-value = 1
 alternative hypothesis: one model is inconsistent
 ```
-
-
-## Comparação e escolha dos modelos
 
 
 
@@ -1866,10 +1973,14 @@ Algumas características importantes da regressão logística: a análise é sem
 A regressão logística utiliza a **curva logística** para assim representar a relação entre a variável dependente e as independentes. Os valores previstos portanto permanecem entre 0 e 1, sendo definidos pelos coeficientes estimados. A Figura \@ref(fig:curvalog)a demonstra a relação da curva logistica geral, enquanto a Figura \@ref(fig:curvalog)b mostra uma relação pobremente ajustada dos dados reais e a Figura \@ref(fig:curvalog)c demonstra um bom ajuste na relação entre as variáveis. 
 
 
-<div class="figure" style="text-align: center">
-<img src="curvalog.png" alt="Curva logística" width="80%" />
-<p class="caption">(\#fig:curvalog)Curva logística</p>
-</div>
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{curvalog} 
+
+}
+
+\caption{Curva logística}(\#fig:curvalog)
+\end{figure}
 Fonte: Adaptado de @Hair2009.
 
 A estimação dos coeficientes da regressão logística, ao contrário da regressão múltipla que utiliza o método dos mínimos quadrados, é efetuada pelo uso da **máxima verossimilhança**. Esta, por sua vez, busca encontrar as estimativas mais prováveis dos coeficientes e maximizar a probabilidade de que um evento ocorra. A qualidade do ajuste do modelo é avaliada pelo "pseudo" R$^2$ e pelo exame da precisão preditiva (matriz de confusão).
@@ -1931,10 +2042,14 @@ ggplot(chd, aes(x=AGE, y=CHD)) +
   stat_smooth(method="glm", method.args=list(family="binomial"), se=FALSE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/dispev-1.png" alt="Dispersão de evendos e não-eventos" width="80%" />
-<p class="caption">(\#fig:dispev)Dispersão de evendos e não-eventos</p>
-</div>
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/dispev-1} 
+
+}
+
+\caption{Dispersão de evendos e não-eventos}(\#fig:dispev)
+\end{figure}
 
 Monta-se então o modelo de regressão logística com a variável dependente CHD e a variável independente AGE. Abaixo é demonstrada a descrição da equação utilizando o comando `summary()` para o modelo m1 com a sintaxe básica:
 
@@ -2003,10 +2118,14 @@ ggplot(chd, aes(x=AGE, y=PRED)) +
   geom_point()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/distrpred-1.png" alt="Distribuição das probabilidades preditas" width="80%" />
-<p class="caption">(\#fig:distrpred)Distribuição das probabilidades preditas</p>
-</div>
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/distrpred-1} 
+
+}
+
+\caption{Distribuição das probabilidades preditas}(\#fig:distrpred)
+\end{figure}
 
 
 
@@ -2220,10 +2339,14 @@ A Curva ROC (Receiver Operating Characteristic Curve) associada ao modelo logís
 
 A curva ROC é produzida bi-dimensionalmente como mostra a Figura \@ref(fig:curvaroc)a, pela obtenção da relação entre a taxa dos verdadeiros positivos do modelo e da taxa dos falsos positivos preditos. Desta forma, o ponto inferior esquerdo (0,0) significa que não é predita uma classificação positiva; no canto oposto do gráfico (1,1) classifica os resultados incondicionalmente positivos e; o ponto (0,1) representa uma excelente classificação. Quanto mais ao noroeste do gráfico o ponto estiver melhor, assim sendo o ponto B da Figura \@ref(fig:curvaroc)a classifica melhor os resultados que o ponto C.
 
-<div class="figure" style="text-align: center">
-<img src="curvaroc.png" alt="Curva ROC" width="80%" />
-<p class="caption">(\#fig:curvaroc)Curva ROC</p>
-</div>
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{curvaroc} 
+
+}
+
+\caption{Curva ROC}(\#fig:curvaroc)
+\end{figure}
 Fonte: Adaptado de @Fawcett2006.
 
 A Figura \@ref(fig:curvaroc)b mostra a formação da curva ROC para um teste com 20 instâncias, uma amostra pequena servindo portanto de exemplificação da sua criação. Para isto, o modelo de regressão logística é rodado randomicamente e a predição resultante é comparada com o valor real da variável dependente. O ponto de corte padrão, como visto anteriormente, é o valor de 0,5: acima deste valor, a predição é classificada como 1 e, abaixo dele 0. Na Figura \@ref(fig:curvaroc)b, a primeira predição foi 0,9 e a segunda 0,8 sendo que como estão mais perto do eixo X do gráfico, representam predições acertadas. Já para predições que não foram acertadas (como no exemplo as predições 0,7 e 0,54 por exemplo) a curva caminha para a direita. A lógica se mantém até o final da elaboração da curva.
@@ -2258,10 +2381,14 @@ plot(roc1,
      print.thres=TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/roc-1.png" alt="Curva Roc" width="80%" />
-<p class="caption">(\#fig:roc)Curva Roc</p>
-</div>
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/roc-1} 
+
+}
+
+\caption{Curva Roc}(\#fig:roc)
+\end{figure}
 
 
 ### O teste Hosmer e Lemeshow
@@ -2838,7 +2965,9 @@ ggplot(novosdados, aes(x=rank,y=prob))+
   labs(title="Probabilidades preditas", x="Ranking",y="Pr(y=1)")
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-79-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-80-1} \end{center}
 
 
 
@@ -3000,7 +3129,9 @@ Abaixo o histograma da distribuição do número de satélites (variável depend
 hist(caranguejo$Sa)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-82-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-83-1} \end{center}
 
 Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 
@@ -3009,7 +3140,9 @@ Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 plot(caranguejo$W,caranguejo$Sa)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-83-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-84-1} \end{center}
 
 Para criação da regressão de Poisson utiliza-se a função já conhecida `glm()`, sendo que em `family` é determinado o tipo de análise desejada ("poisson"):
 
@@ -3139,10 +3272,14 @@ plot(caranguejo$W,caranguejo$Sa)
 points(regpoisson$fitted.values,col='red', type = "l")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/unnamed-chunk-88-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-88)Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)</p>
-</div>
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-89-1} 
+
+}
+
+\caption{Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)}(\#fig:unnamed-chunk-89)
+\end{figure}
 
 
 
@@ -3313,10 +3450,14 @@ points(model$fitted.values, pch="p", col="red")
 legend(6,30,c("obs","pred"), pch=c("o","p"), col=c("blue","red"))
 ```
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/unnamed-chunk-93-1.png" alt="Valores observados e preditos" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-93)Valores observados e preditos</p>
-</div>
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-94-1} 
+
+}
+
+\caption{Valores observados e preditos}(\#fig:unnamed-chunk-94)
+\end{figure}
 Fonte: Adaptado de @penn2018.
 
 
@@ -3347,6 +3488,7 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 
 
 # Referências {-}
+
 
 
 

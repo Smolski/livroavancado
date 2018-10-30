@@ -26,7 +26,7 @@
 <meta name="author" content="Iara Denise Endruweit Battisti">
 
 
-<meta name="date" content="2018-10-25">
+<meta name="date" content="2018-10-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -292,13 +292,13 @@ Mais detalhes sobre o modelo de regressão logística podem ser verificados na s
 <div id="regressao-logistica-simples" class="section level2">
 <h2><span class="header-section-number">5.2</span> Regressão Logística Simples</h2>
 <p>Este primeiro exemplo tratará da regressão logística simples, portanto, utilizando somente uma variável independente, neste caso numérica. Os dados são originados do livro de <span class="citation">Hosmer e Lemeschow (<a href="#ref-Hosmer2000">2000</a>)</span>, tratando-se de uma amostra com 100 pessoas. A variável dependente é a ocorrência ou não (1 ou 0) de doença coronária cardíaca (CHD), associando-se com a idade (AGE) dos indivíduos, criando assim um modelo de regressão logística.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="kw">require</span>(readr)</a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">require</span>(readr)</a></code></pre></div>
 <pre><code>Carregando pacotes exigidos: readr</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1">chd &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;https://goo.gl/uDAAHv&quot;</span>, </a>
-<a class="sourceLine" id="cb99-2" data-line-number="2">    <span class="st">&quot;;&quot;</span>, <span class="dt">escape_double =</span> <span class="ot">FALSE</span>, <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="dt">CHD =</span> <span class="kw">col_factor</span>(<span class="dt">levels =</span> <span class="kw">c</span>())), </a>
-<a class="sourceLine" id="cb99-3" data-line-number="3">    <span class="dt">trim_ws =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb99-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb99-5" data-line-number="5"><span class="kw">summary</span>(chd)</a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1">chd &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;https://goo.gl/uDAAHv&quot;</span>, </a>
+<a class="sourceLine" id="cb100-2" data-line-number="2">    <span class="st">&quot;;&quot;</span>, <span class="dt">escape_double =</span> <span class="ot">FALSE</span>, <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="dt">CHD =</span> <span class="kw">col_factor</span>(<span class="dt">levels =</span> <span class="kw">c</span>())), </a>
+<a class="sourceLine" id="cb100-3" data-line-number="3">    <span class="dt">trim_ws =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb100-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb100-5" data-line-number="5"><span class="kw">summary</span>(chd)</a></code></pre></div>
 <pre><code>      AGE            AGRP      CHD   
  Min.   :20.0   Min.   :1.00   0:57  
  1st Qu.:34.8   1st Qu.:2.75   1:43  
@@ -307,11 +307,11 @@ Mais detalhes sobre o modelo de regressão logística podem ser verificados na s
  3rd Qu.:55.0   3rd Qu.:7.00         
  Max.   :69.0   Max.   :8.00         </code></pre>
 <p>Observa-se na figura abaixo a dispersão dos “eventos” e dos “nao-eventos” da CHD relacionando-se com a variável idade (AGE).</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="kw">require</span>(ggplot2)</a>
-<a class="sourceLine" id="cb101-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb101-3" data-line-number="3"><span class="kw">ggplot</span>(chd, <span class="kw">aes</span>(<span class="dt">x=</span>AGE, <span class="dt">y=</span>CHD)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb101-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb101-5" data-line-number="5"><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">method.args=</span><span class="kw">list</span>(<span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>), <span class="dt">se=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">require</span>(ggplot2)</a>
+<a class="sourceLine" id="cb102-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb102-3" data-line-number="3"><span class="kw">ggplot</span>(chd, <span class="kw">aes</span>(<span class="dt">x=</span>AGE, <span class="dt">y=</span>CHD)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb102-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb102-5" data-line-number="5"><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">method.args=</span><span class="kw">list</span>(<span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>), <span class="dt">se=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:dispev"></span>
 <img src="index_files/figure-html/dispev-1.png" alt="Dispersão de evendos e não-eventos" width="80%" />
 <p class="caption">
@@ -329,8 +329,8 @@ $$
 <p><span class="math display">\[
 ln\left (\frac{prob_{CHD}}{1-prob_{CHD}}  \right ) = - 5,309 + 0,1109AGE
 \]</span></p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1">m1=<span class="kw">glm</span>(CHD<span class="op">~</span>AGE, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>), <span class="dt">data =</span> chd)</a>
-<a class="sourceLine" id="cb102-2" data-line-number="2"><span class="kw">summary</span>(m1)</a></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1">m1=<span class="kw">glm</span>(CHD<span class="op">~</span>AGE, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>), <span class="dt">data =</span> chd)</a>
+<a class="sourceLine" id="cb103-2" data-line-number="2"><span class="kw">summary</span>(m1)</a></code></pre></div>
 <pre><code>
 Call:
 glm(formula = CHD ~ AGE, family = binomial(link = &quot;logit&quot;), data = chd)
@@ -355,16 +355,16 @@ AIC: 111.4
 Number of Fisher Scoring iterations: 4</code></pre>
 <p>Se observa o intercepto com o valor de -5,309, sendo que para a análise aqui proposta da relação entre CHD e AGE não obtém-se um significado prático para este resultado. No entanto, a variável de interesse é idade, que no modelo de regressão obteve o coeficiente de 0,1109. Pelo fato de ser positivo informa que quando a idade (AGE) se eleva, elevam-se as chances de ocorrência de CHD. De igual forma, nota-se que há significância estatística a <span class="math inline">\(p=0,001\)</span> na utilização da variável AGE para o modelo, mostrando que possui importância ao modelo de regressão proposto.</p>
 <p>Por fim, o modelo é utilizado para construção da predição de todos os valores das idades de todos os indivíduos desta amostra. Para isto, será criada um novo objeto contendo somente a variável dependente do modelo (AGE) e em sequida, é criada nova coluna constando os valores preditos. Assim, pode ser plotado um gráfico completo com todas as probabilidades desta base de dados:</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="co"># Filtrando a idade dos indivíduos</span></a>
-<a class="sourceLine" id="cb104-2" data-line-number="2">IDADE&lt;-chd[,<span class="dv">1</span>]  </a>
-<a class="sourceLine" id="cb104-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb104-4" data-line-number="4"><span class="co"># Criando campo de predição para cada idade dos indivíduos </span></a>
-<a class="sourceLine" id="cb104-5" data-line-number="5">chd<span class="op">$</span>PRED=<span class="kw">predict</span>(m1, <span class="dt">newdata=</span>IDADE, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb104-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb104-7" data-line-number="7"><span class="co"># Plotando a probabilidade predita pelo modelo</span></a>
-<a class="sourceLine" id="cb104-8" data-line-number="8"><span class="kw">require</span>(ggplot2)</a>
-<a class="sourceLine" id="cb104-9" data-line-number="9"><span class="kw">ggplot</span>(chd, <span class="kw">aes</span>(<span class="dt">x=</span>AGE, <span class="dt">y=</span>PRED)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb104-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="co"># Filtrando a idade dos indivíduos</span></a>
+<a class="sourceLine" id="cb105-2" data-line-number="2">IDADE&lt;-chd[,<span class="dv">1</span>]  </a>
+<a class="sourceLine" id="cb105-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb105-4" data-line-number="4"><span class="co"># Criando campo de predição para cada idade dos indivíduos </span></a>
+<a class="sourceLine" id="cb105-5" data-line-number="5">chd<span class="op">$</span>PRED=<span class="kw">predict</span>(m1, <span class="dt">newdata=</span>IDADE, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb105-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb105-7" data-line-number="7"><span class="co"># Plotando a probabilidade predita pelo modelo</span></a>
+<a class="sourceLine" id="cb105-8" data-line-number="8"><span class="kw">require</span>(ggplot2)</a>
+<a class="sourceLine" id="cb105-9" data-line-number="9"><span class="kw">ggplot</span>(chd, <span class="kw">aes</span>(<span class="dt">x=</span>AGE, <span class="dt">y=</span>PRED)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb105-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:distrpred"></span>
 <img src="index_files/figure-html/distrpred-1.png" alt="Distribuição das probabilidades preditas" width="80%" />
 <p class="caption">
@@ -375,8 +375,8 @@ Figura 5.3: Distribuição das probabilidades preditas
 <h3><span class="header-section-number">5.2.1</span> Estimando a Razão de Chances</h3>
 <p>O modelo de regressão logística, porém, traz os resultados dos estimadores na forma logarítma, ou seja, o log das chances da variável idade no modelo é 0,1109. No entanto, para uma interpretação mais enriquecida da relação da idade com o CHD é necessária a transformação deste coeficiente, ou seja, que seja efetuada a exponenciação da(s) variavel(eis) da regressão. Assim, obtém-se a razão das chances (OR - Odds Ratio em inglês) para as variáveis independentes.</p>
 <p>Uma maneira prática de se obter a razão de chances no RStudio é utilizando o pacote <span class="math inline">\(mfx\)</span>. Novamente o intercepto não nos interessa nesta análise mas sim a variável AGE. Como demonstrado abaixo, o resultado da razão de chances da variável AGE foi de 1,1173, o que pode assim ser interpretado: para cada variação unitária na idade (AGE), as chances de ocorrência de CHD aumentam 1,1173 vezes. Dito de outra forma, para cada variação unitária em AGE, aumentam-se 11,73% ((1,1173-1)*100) as chances da ocorrência de CHD.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="kw">require</span>(mfx)</a>
-<a class="sourceLine" id="cb105-2" data-line-number="2"><span class="kw">logitor</span>(CHD<span class="op">~</span>AGE,<span class="dt">data =</span> chd)</a></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="kw">require</span>(mfx)</a>
+<a class="sourceLine" id="cb106-2" data-line-number="2"><span class="kw">logitor</span>(CHD<span class="op">~</span>AGE,<span class="dt">data =</span> chd)</a></code></pre></div>
 <pre><code>Call:
 logitor(formula = CHD ~ AGE, data = chd)
 
@@ -390,7 +390,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <h3><span class="header-section-number">5.2.2</span> Determinando o Intervalo de Confiança</h3>
 <p>A determinação do intervalo de confiança do modelo proposto é relevante para que seja analizada a estimativa do intervalo de predição do coeficiente da variável independente, a um nível de confiança de 95%. Desta forma, em 95% dos casos, o parâmetro dos coeficientes estará dentro deste intervalo.</p>
 <p>De forma prática é possível determinar os intervalos de confiança com o comando <code>confint()</code> commo observado abaixo, sendo que o coeficiente AGE toma o valor de 1,1173, podendo variar de 1,0692 a 1,1758.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR=</span><span class="kw">coef</span>(m1), <span class="kw">confint</span>(m1)))</a></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR=</span><span class="kw">coef</span>(m1), <span class="kw">confint</span>(m1)))</a></code></pre></div>
 <pre><code>                  OR     2.5 %  97.5 %
 (Intercept) 0.004945 0.0004413 0.03892
 AGE         1.117307 1.0692223 1.17587</code></pre>
@@ -398,12 +398,12 @@ AGE         1.117307 1.0692223 1.17587</code></pre>
 <div id="predicao-de-probabilidades" class="section level3">
 <h3><span class="header-section-number">5.2.3</span> Predição de Probabilidades</h3>
 <p>A partir dos coeficientes do modelo de regressão logística é possível, portanto, efetuar a predição da variável categórica CHD, ou seja, saber a chance de ocorrer CHD com relação à uma determinada idade (AGE). No exemplo abaixo, primeiramente utilizamos a idade média das observações (44,38 anos), criando assim um novo data.frame chamado media. Para utilizar o valor da idade média na função de regressão obtida (<span class="math inline">\(m1\)</span>), utiliza-se a função <code>predict()</code>, de acordo com valor da média encontrada (data.frame media). O resultado mostra que para a idade média da amostra, 44,38 anos, há uma probabilidade de 40,44% na ocorrência da doença CHD. Esta ferramenta permite também a comparação pelo pesquisador das diferentes probabilidades entre as diversas idades (variável AGE).</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">media =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">AGE=</span><span class="kw">mean</span>(chd<span class="op">$</span>AGE))</a>
-<a class="sourceLine" id="cb109-2" data-line-number="2">media</a></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1">media =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">AGE=</span><span class="kw">mean</span>(chd<span class="op">$</span>AGE))</a>
+<a class="sourceLine" id="cb110-2" data-line-number="2">media</a></code></pre></div>
 <pre><code>    AGE
 1 44.38</code></pre>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">media<span class="op">$</span>pred.prob =<span class="st"> </span><span class="kw">predict</span>(m1, <span class="dt">newdata=</span>media, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb111-2" data-line-number="2">media</a></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">media<span class="op">$</span>pred.prob =<span class="st"> </span><span class="kw">predict</span>(m1, <span class="dt">newdata=</span>media, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb112-2" data-line-number="2">media</a></code></pre></div>
 <pre><code>    AGE pred.prob
 1 44.38    0.4045</code></pre>
 </div>
@@ -474,7 +474,7 @@ VPN=\frac{VN}{VN+FN}
 <!--
 ![Matriz de Confusão](matriz.png)
 -->
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="kw">require</span>(caret)</a></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="kw">require</span>(caret)</a></code></pre></div>
 <pre><code>Carregando pacotes exigidos: caret</code></pre>
 <pre><code>Carregando pacotes exigidos: lattice</code></pre>
 <pre><code>
@@ -482,14 +482,14 @@ Attaching package: &#39;caret&#39;</code></pre>
 <pre><code>The following object is masked from &#39;package:survival&#39;:
 
     cluster</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">chd<span class="op">$</span>pdata &lt;-<span class="st"> </span><span class="kw">as.factor</span>(</a>
-<a class="sourceLine" id="cb118-2" data-line-number="2">    <span class="kw">ifelse</span>(</a>
-<a class="sourceLine" id="cb118-3" data-line-number="3">        <span class="kw">predict</span>(m1, </a>
-<a class="sourceLine" id="cb118-4" data-line-number="4">                <span class="dt">newdata =</span> chd, </a>
-<a class="sourceLine" id="cb118-5" data-line-number="5">                <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb118-6" data-line-number="6">        <span class="op">&gt;</span><span class="fl">0.5</span>,<span class="st">&quot;1&quot;</span>,<span class="st">&quot;0&quot;</span>))</a>
-<a class="sourceLine" id="cb118-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb118-8" data-line-number="8"><span class="kw">confusionMatrix</span>(chd<span class="op">$</span>pdata, chd<span class="op">$</span>CHD, <span class="dt">positive=</span><span class="st">&quot;1&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">chd<span class="op">$</span>pdata &lt;-<span class="st"> </span><span class="kw">as.factor</span>(</a>
+<a class="sourceLine" id="cb119-2" data-line-number="2">    <span class="kw">ifelse</span>(</a>
+<a class="sourceLine" id="cb119-3" data-line-number="3">        <span class="kw">predict</span>(m1, </a>
+<a class="sourceLine" id="cb119-4" data-line-number="4">                <span class="dt">newdata =</span> chd, </a>
+<a class="sourceLine" id="cb119-5" data-line-number="5">                <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb119-6" data-line-number="6">        <span class="op">&gt;</span><span class="fl">0.5</span>,<span class="st">&quot;1&quot;</span>,<span class="st">&quot;0&quot;</span>))</a>
+<a class="sourceLine" id="cb119-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb119-8" data-line-number="8"><span class="kw">confusionMatrix</span>(chd<span class="op">$</span>pdata, chd<span class="op">$</span>CHD, <span class="dt">positive=</span><span class="st">&quot;1&quot;</span>)</a></code></pre></div>
 <pre><code>Confusion Matrix and Statistics
 
           Reference
@@ -541,14 +541,14 @@ O indicador AUC sempre terá seu valor entre 0 e 1, sendo que quanto maior, melh
 <ul>
 <li>Passo 2:</li>
 </ul>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="kw">plot</span>(roc1,</a>
-<a class="sourceLine" id="cb120-2" data-line-number="2">     <span class="dt">print.auc=</span><span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb120-3" data-line-number="3">     <span class="dt">auc.polygon=</span><span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb120-4" data-line-number="4">     <span class="dt">grud=</span><span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>),</a>
-<a class="sourceLine" id="cb120-5" data-line-number="5">     <span class="dt">grid.col=</span><span class="kw">c</span>(<span class="st">&quot;green&quot;</span>,<span class="st">&quot;red&quot;</span>), </a>
-<a class="sourceLine" id="cb120-6" data-line-number="6">     <span class="dt">max.auc.polygon=</span><span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb120-7" data-line-number="7">     <span class="dt">auc.polygon.col=</span><span class="st">&quot;lightgreen&quot;</span>, </a>
-<a class="sourceLine" id="cb120-8" data-line-number="8">     <span class="dt">print.thres=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="kw">plot</span>(roc1,</a>
+<a class="sourceLine" id="cb121-2" data-line-number="2">     <span class="dt">print.auc=</span><span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb121-3" data-line-number="3">     <span class="dt">auc.polygon=</span><span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb121-4" data-line-number="4">     <span class="dt">grud=</span><span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>),</a>
+<a class="sourceLine" id="cb121-5" data-line-number="5">     <span class="dt">grid.col=</span><span class="kw">c</span>(<span class="st">&quot;green&quot;</span>,<span class="st">&quot;red&quot;</span>), </a>
+<a class="sourceLine" id="cb121-6" data-line-number="6">     <span class="dt">max.auc.polygon=</span><span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb121-7" data-line-number="7">     <span class="dt">auc.polygon.col=</span><span class="st">&quot;lightgreen&quot;</span>, </a>
+<a class="sourceLine" id="cb121-8" data-line-number="8">     <span class="dt">print.thres=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:roc"></span>
 <img src="index_files/figure-html/roc-1.png" alt="Curva Roc" width="80%" />
 <p class="caption">
@@ -560,9 +560,9 @@ Figura 5.5: Curva Roc
 <h3><span class="header-section-number">5.2.6</span> O teste Hosmer e Lemeshow</h3>
 <p>O teste de Hosmer e Lemeshow é utilizado para demonstrar a qualidade do ajuste do modelo, ou seja, se o modelo pode explicar os dados observados. Para este teste, os dados são divididos de acordo com as probabilidades previstas em 10 grupos iguais, sendo que os números previstos e os reais são comparados com a estatística do qui-quadrado. <span class="citation">Hair et al. (<a href="#ref-Hair2009">2009</a>)</span> sugerem um tamanho de amostra de pelo menos 50 casos para a realização deste teste.</p>
 <p>A hipótese nula H<span class="math inline">\({_0}\)</span> do qui-quadrado (<code>p=0,05</code>) deste teste é a de que as proporções observadas e esperadas são as mesmas ao longo da amostra. Abaixo segue a estrutura do teste, sendo que o modelo apresenta dificuldade de ajuste em função de que rejeita a hipótese nula a <em>p=0,05</em>.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="kw">require</span>(ResourceSelection)</a>
-<a class="sourceLine" id="cb121-2" data-line-number="2">hl=<span class="kw">hoslem.test</span>(chd<span class="op">$</span>CHD,<span class="kw">fitted</span>(m1),<span class="dt">g=</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb121-3" data-line-number="3">hl</a></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="kw">require</span>(ResourceSelection)</a>
+<a class="sourceLine" id="cb122-2" data-line-number="2">hl=<span class="kw">hoslem.test</span>(chd<span class="op">$</span>CHD,<span class="kw">fitted</span>(m1),<span class="dt">g=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb122-3" data-line-number="3">hl</a></code></pre></div>
 <pre><code>
     Hosmer and Lemeshow goodness of fit (GOF) test
 
@@ -576,8 +576,8 @@ X-squared = 100, df = 8, p-value &lt;2e-16</code></pre>
 R{^2}_{LOGIT} = \frac{-2LL_{nulo}-(-2LL_{modelo})}{-2LL_{nulo}}
 \]</span>
 Lembrando que o valor -2LL representa -2 vezes o logaritmo do valor de verossimilhança, onde a verossimilhança do modelo nulo é comparado com o modelo completo. Abaixo mostra-se o código para calcular os indicadores, sendo que constam as medidas de pseudo R<span class="math inline">\({^2}\)</span> estipuladas por Cox e Snell, Nagelkerke e McFadden.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="kw">require</span>(modEvA)</a>
-<a class="sourceLine" id="cb123-2" data-line-number="2"><span class="kw">RsqGLM</span>(m1)</a></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="kw">require</span>(modEvA)</a>
+<a class="sourceLine" id="cb124-2" data-line-number="2"><span class="kw">RsqGLM</span>(m1)</a></code></pre></div>
 <pre><code>$CoxSnell
 [1] 0.2541
 
@@ -597,10 +597,10 @@ $sqPearson
 <div id="regressao-logistica-multipla" class="section level2">
 <h2><span class="header-section-number">5.3</span> Regressão Logística Múltipla</h2>
 <p>O exemplo abaixo abordado foi extraído de <span class="citation">Torres-Reyna (<a href="#ref-Torres-Reyna2014">2014</a>)</span>, onde observa-se o banco de dados criado chamado <code>mydata</code>, possuindo as variáveis<code>country</code>,<code>year</code>,<code>y</code>,<code>y_bin</code>,<code>x1</code>,<code>x2</code>,<code>x3</code> e<code>opinion</code>. A variável dependente é <code>y_bin</code>, da qual foi categorizada entre 0 e 1 conforme a ocorrência de valores negativos em<code>y</code>. As variáveis independentes do modelo serão<code>x1</code>,<code>x2</code>e<code>x3</code>.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="kw">require</span>(haven)</a></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="kw">require</span>(haven)</a></code></pre></div>
 <pre><code>Carregando pacotes exigidos: haven</code></pre>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">mydata &lt;-<span class="st"> </span><span class="kw">read_dta</span>(<span class="st">&quot;http://dss.princeton.edu/training/Panel101.dta&quot;</span>) </a>
-<a class="sourceLine" id="cb127-2" data-line-number="2"><span class="kw">summary</span>(mydata)</a></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">mydata &lt;-<span class="st"> </span><span class="kw">read_dta</span>(<span class="st">&quot;http://dss.princeton.edu/training/Panel101.dta&quot;</span>) </a>
+<a class="sourceLine" id="cb128-2" data-line-number="2"><span class="kw">summary</span>(mydata)</a></code></pre></div>
 <pre><code>    country       year            y                 y_bin           x1        
  Min.   :1   Min.   :1990   Min.   :-7.86e+09   Min.   :0.0   Min.   :-0.568  
  1st Qu.:2   1st Qu.:1992   1st Qu.: 2.47e+08   1st Qu.:1.0   1st Qu.: 0.329  
@@ -617,8 +617,8 @@ $sqPearson
  Max.   : 2.530   Max.   : 7.169   Max.   :4.00  </code></pre>
 <p>Utiliza-se uma função para Modelos Lineares Generalizados (glm - em inglês Generalized Linear Models), determinando a variável dependente (y_bin), as variáveis independentes <code>(x1+x2+x3)</code>, a base de dados a ser utilizada <code>(data=mydata)</code> e a família dos modelos <code>(family = binomial(link=&quot;logit&quot;))</code>.</p>
 <p>Abaixo os resultados da estimação do modelo utilizando o comando <code>summary</code>. Observa-se que os valores <code>estimados</code> mostram os coeficientes em formato logarítmo de chances. Assim, quando x3 eleva-se em 1 (uma) unidade, o log das chances esperado para x3 altera-se em 0,7512. Neste ponto, observa-se que as três variáveis independentes possuem efeitos positivos para determinação das chances do preditor ser igual a 1, caso contrário constariam com sinal negativo. A coluna <span class="math inline">\(Pr(&gt;|z|)\)</span> traz os p-valores das variáveis indicando o teste da hipótese nula. Como resultado a variável x3 revelou significância estatística a 10% ($&lt;$0,10), no entanto o valor usual para considerá-la estatísticamente significante é 5% (0,05). Para fins de explanação do modelo, neste trabalho, serão efetuadas as demais análises do modelo de forma explicativa.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">logit=<span class="kw">glm</span>(y_bin<span class="op">~</span>x1<span class="op">+</span>x2<span class="op">+</span>x3, <span class="dt">data=</span>mydata, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))</a>
-<a class="sourceLine" id="cb129-2" data-line-number="2"><span class="kw">summary</span>(logit)</a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">logit=<span class="kw">glm</span>(y_bin<span class="op">~</span>x1<span class="op">+</span>x2<span class="op">+</span>x3, <span class="dt">data=</span>mydata, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))</a>
+<a class="sourceLine" id="cb130-2" data-line-number="2"><span class="kw">summary</span>(logit)</a></code></pre></div>
 <pre><code>
 Call:
 glm(formula = y_bin ~ x1 + x2 + x3, family = binomial(link = &quot;logit&quot;), 
@@ -647,8 +647,8 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <!--
 %Uma forma eficiente para construção da tabela com os resultados do modelo é a utilização do pacote \textbf{stargazer}, sendo que após instalado (install.packages("stargazer")),  utiliza-se o comando \textbf{stargazer(logit, title="seu título")} ou \textbf{stargazer(logit, title="seu título", type="text")} (plotando assim os resultados diretamente no console do RStudio) para plotagem dos resultados, como segue:
 -->
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="kw">require</span>(stargazer)</a>
-<a class="sourceLine" id="cb131-2" data-line-number="2"><span class="kw">stargazer</span>(logit, <span class="dt">title=</span><span class="st">&quot;Resultados&quot;</span>,<span class="dt">type =</span> <span class="st">&quot;text&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1"><span class="kw">require</span>(stargazer)</a>
+<a class="sourceLine" id="cb132-2" data-line-number="2"><span class="kw">stargazer</span>(logit, <span class="dt">title=</span><span class="st">&quot;Resultados&quot;</span>,<span class="dt">type =</span> <span class="st">&quot;text&quot;</span>)</a></code></pre></div>
 <pre><code>
 Resultados
 =============================================
@@ -675,8 +675,8 @@ Akaike Inf. Crit.           73.510
 =============================================
 Note:             *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 <p>A razão de chances (OR - odds ratio em inglês) estimada no modelo terá de ser transformada por estar apresentada na forma logarítma conforme o modelo de regressão logística o estima. Assim, utiliza-se o pacote <code>mfx</code> para efetuar esta transformação para todo o modelo de forma automatizada <code>(logitor(y_bin~x1+x2+x3,data=mydata))</code>:</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="kw">require</span>(mfx)</a>
-<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="kw">logitor</span>(y_bin<span class="op">~</span>x1<span class="op">+</span>x2<span class="op">+</span>x3,<span class="dt">data=</span>mydata)</a></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="kw">require</span>(mfx)</a>
+<a class="sourceLine" id="cb134-2" data-line-number="2"><span class="kw">logitor</span>(y_bin<span class="op">~</span>x1<span class="op">+</span>x2<span class="op">+</span>x3,<span class="dt">data=</span>mydata)</a></code></pre></div>
 <pre><code>Call:
 logitor(formula = y_bin ~ x1 + x2 + x3, data = mydata)
 
@@ -690,26 +690,26 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>O resultado acima evidencia que para uma alteração em 1 (uma) unidade em x3, a chance de que y seja igual a 1 aumenta em 112% ((2,12-1)*100). Dito de outra forma, a chance de y=1 é 2,12 vezes maior quando x3 aumenta em uma unidade (sendo que aqui mantêm-se as demais variáveis independentes constantes).</p>
 <p>Como visto, para cada variação unitária em x3 o log das chances varia 0,7512. É possível estimar, portanto, a alteração das chances em função das médias dos valores de cada variável x1 e x2, e utilizar como exemplo os valores de 1, 2 e 3 para x3, para assim alcançar os preditores do log das chances nesta simulação, como segue abaixo:</p>
 <p>Para facilitar a interpretação do modelo, se torna mais fácil depois de transformado a sua exponenciação dos coeficientes logísticos utilizando o comando <code>exp(coef(logit))</code>. Desta forma, para cada incremento unitário em x2 e mantendo as demais variáveis constantes, conclui-se que é 1,443 vezes provável que y seja igual a 1 em oposição a não ser (igual a zero), ou seja, as chances aumentam em 44,30%.</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="kw">exp</span>(<span class="kw">coef</span>(logit))</a></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1"><span class="kw">exp</span>(<span class="kw">coef</span>(logit))</a></code></pre></div>
 <pre><code>(Intercept)          x1          x2          x3 
       1.531       2.367       1.443       2.120 </code></pre>
 <p>O <strong>intervalo de confiança</strong> do modelo pode ser exposto utilizando o comando <code>confint</code> para os coeficientes estimados, como segue abaixo:</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR=</span><span class="kw">coef</span>(logit), <span class="kw">confint</span>(logit)))</a></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR=</span><span class="kw">coef</span>(logit), <span class="kw">confint</span>(logit)))</a></code></pre></div>
 <pre><code>               OR  2.5 % 97.5 %
 (Intercept) 1.531 0.4387  5.625
 x1          2.367 0.5129 11.675
 x2          1.443 0.8041  2.738
 x3          2.120 1.0039  5.719</code></pre>
 <p>A partir do modelo logístico, podemos realizar <strong>predições das probabilidades</strong> de se encontrar o resultado y=1 conforme visto acima. Para isto, como exercício utilizaremos as médias das observações de cada variável independente do modelo. Em primeiro lugar deve ser criado um data.frame com os valores médios, como segue:</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1">allmean =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x1=</span><span class="kw">mean</span>(mydata<span class="op">$</span>x1),</a>
-<a class="sourceLine" id="cb139-2" data-line-number="2">                     <span class="dt">x2=</span><span class="kw">mean</span>(mydata<span class="op">$</span>x2),</a>
-<a class="sourceLine" id="cb139-3" data-line-number="3">                     <span class="dt">x3=</span><span class="kw">mean</span>(mydata<span class="op">$</span>x3))</a>
-<a class="sourceLine" id="cb139-4" data-line-number="4">allmean</a></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1">allmean =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x1=</span><span class="kw">mean</span>(mydata<span class="op">$</span>x1),</a>
+<a class="sourceLine" id="cb140-2" data-line-number="2">                     <span class="dt">x2=</span><span class="kw">mean</span>(mydata<span class="op">$</span>x2),</a>
+<a class="sourceLine" id="cb140-3" data-line-number="3">                     <span class="dt">x3=</span><span class="kw">mean</span>(mydata<span class="op">$</span>x3))</a>
+<a class="sourceLine" id="cb140-4" data-line-number="4">allmean</a></code></pre></div>
 <pre><code>     x1     x2     x3
 1 0.648 0.1339 0.7619</code></pre>
 <p>Utiliza-se o comando <code>predict()</code> para predição do modelo, como segue abaixo, informando o objeto criado com a equação do modelo (logit), a base de dados com as condições dos valores médios (allmean) e o tipo de teste requerido (“response”) para predizer as probabilidades. Como resultado, o modelo informa que constando os valores médios das variáveis independentes, obtêm-se a probabilidade de 83% em y se constituir igual a 1.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1">allmean<span class="op">$</span>pred.prob =<span class="st"> </span><span class="kw">predict</span>(logit, <span class="dt">newdata=</span>allmean, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb141-2" data-line-number="2">allmean</a></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1">allmean<span class="op">$</span>pred.prob =<span class="st"> </span><span class="kw">predict</span>(logit, <span class="dt">newdata=</span>allmean, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb142-2" data-line-number="2">allmean</a></code></pre></div>
 <pre><code>     x1     x2     x3 pred.prob
 1 0.648 0.1339 0.7619    0.8329</code></pre>
 <div id="metodo-stepwise" class="section level3">
@@ -719,7 +719,7 @@ x3          2.120 1.0039  5.719</code></pre>
 AIC = -2log(L_{p})+2[(p+1)+1]
 \]</span>
 onde <span class="math inline">\(L_{p}\)</span> é a função de máxima verossimilhança e <span class="math inline">\(p\)</span> é o número de variáveis explicativas do modelo. Segue o código para execução no console:</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="kw">step</span>(logit, <span class="dt">direction =</span> <span class="st">&#39;both&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="kw">step</span>(logit, <span class="dt">direction =</span> <span class="st">&#39;both&#39;</span>)</a></code></pre></div>
 <pre><code>Start:  AIC=73.51
 y_bin ~ x1 + x2 + x3
 
@@ -762,8 +762,8 @@ Residual Deviance: 67.3     AIC: 71.3</code></pre>
 <h3><span class="header-section-number">5.3.2</span> VIF - Variance Inflation Factor</h3>
 <p>Os problemas de multicolinearedade nos modelos de regressão, ou seja, as relações entre as variáveis do modelo, podem prejudicar a capacidade preditiva do mesmo. Nas palavras de <span class="citation">Hair et al. (<a href="#ref-Hair2009">2009</a>, 191)</span>, “multicolinearidade cria variância “compartilhada” entre variáveis, diminuindo assim a capacidade de prever a medida dependente, bem como averiguar os papéis relativos de cada variável independente”.
 Para resolver esta questão, utiliza-se o teste do fator de inflação da variância (VIF - Variance Inflation Factor), índice o qual não deve ficar abaixo de 10 para representar baixo problema de multicolinearidade segundo <span class="citation">Rawlings, Pantula, e Dickey (<a href="#ref-Rawlings1998">1998</a>)</span>.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="kw">require</span>(faraway)</a>
-<a class="sourceLine" id="cb146-2" data-line-number="2"><span class="kw">vif</span>(logit)</a></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1"><span class="kw">require</span>(faraway)</a>
+<a class="sourceLine" id="cb147-2" data-line-number="2"><span class="kw">vif</span>(logit)</a></code></pre></div>
 <pre><code>    x1     x2     x3 
  9.292 12.318 29.860 </code></pre>
 </div>
@@ -779,19 +779,19 @@ Para resolver esta questão, utiliza-se o teste do fator de inflação da variâ
 </ul>
 <p>Abaixo seguem os resultados do modelo, partindo-se do carregamento dos dados. É observado que as variáveis <strong>gre</strong> e <strong>gpa</strong> obtiveram significância estatística em 10%, bem como rank2, já rank3 e rank4 obtiveram <code>p=0,001</code>. A variância do modelo nulo
 ficou em 499,98 e com a inclusão das variáveis ao modelo baixou para 458,52, o que mostra que contribuíram para explicação da variável dependente.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1"><span class="co"># Carregando o arquivo</span></a>
-<a class="sourceLine" id="cb148-2" data-line-number="2"><span class="kw">require</span>(readr)</a>
-<a class="sourceLine" id="cb148-3" data-line-number="3">binary &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb148-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb148-5" data-line-number="5"><span class="co"># Transformando a variável rank em categórica</span></a>
-<a class="sourceLine" id="cb148-6" data-line-number="6">binary<span class="op">$</span>rank &lt;-<span class="st"> </span><span class="kw">factor</span>(binary<span class="op">$</span>rank)</a>
-<a class="sourceLine" id="cb148-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb148-8" data-line-number="8"><span class="co"># Determinando a regressão</span></a>
-<a class="sourceLine" id="cb148-9" data-line-number="9">mylogit &lt;-<span class="st"> </span><span class="kw">glm</span>(admit <span class="op">~</span><span class="st"> </span>gre <span class="op">+</span><span class="st"> </span>gpa <span class="op">+</span><span class="st"> </span>rank, <span class="dt">data =</span> binary, </a>
-<a class="sourceLine" id="cb148-10" data-line-number="10">               <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))</a>
-<a class="sourceLine" id="cb148-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb148-12" data-line-number="12"><span class="co"># Resultado</span></a>
-<a class="sourceLine" id="cb148-13" data-line-number="13"><span class="kw">summary</span>(mylogit)</a></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="co"># Carregando o arquivo</span></a>
+<a class="sourceLine" id="cb149-2" data-line-number="2"><span class="kw">require</span>(readr)</a>
+<a class="sourceLine" id="cb149-3" data-line-number="3">binary &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;http://www.karlin.mff.cuni.cz/~pesta/prednasky/NMFM404/Data/binary.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb149-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb149-5" data-line-number="5"><span class="co"># Transformando a variável rank em categórica</span></a>
+<a class="sourceLine" id="cb149-6" data-line-number="6">binary<span class="op">$</span>rank &lt;-<span class="st"> </span><span class="kw">factor</span>(binary<span class="op">$</span>rank)</a>
+<a class="sourceLine" id="cb149-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb149-8" data-line-number="8"><span class="co"># Determinando a regressão</span></a>
+<a class="sourceLine" id="cb149-9" data-line-number="9">mylogit &lt;-<span class="st"> </span><span class="kw">glm</span>(admit <span class="op">~</span><span class="st"> </span>gre <span class="op">+</span><span class="st"> </span>gpa <span class="op">+</span><span class="st"> </span>rank, <span class="dt">data =</span> binary, </a>
+<a class="sourceLine" id="cb149-10" data-line-number="10">               <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))</a>
+<a class="sourceLine" id="cb149-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb149-12" data-line-number="12"><span class="co"># Resultado</span></a>
+<a class="sourceLine" id="cb149-13" data-line-number="13"><span class="kw">summary</span>(mylogit)</a></code></pre></div>
 <pre><code>
 Call:
 glm(formula = admit ~ gre + gpa + rank, family = binomial(link = &quot;logit&quot;), 
@@ -820,7 +820,7 @@ AIC: 470.5
 
 Number of Fisher Scoring iterations: 4</code></pre>
 <p>Utilizando o teste de análise de variância <code>anova</code> pode-se observar a variância com o modelo nulo (500) e à medida que as variáveis explicativas foram sendo incluídas, estas reduziram a variância do modelo para 459, contribuindo para o modelo.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="kw">anova</span>(mylogit, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="kw">anova</span>(mylogit, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
 <pre><code>Analysis of Deviance Table
 
 Model: binomial, link: logit
@@ -837,10 +837,10 @@ rank  3    21.83       394        459  7.1e-05 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Caso seja interessante comparar diversos modelos de regressão com variáveis explicativas distintas, estes podem ser comparados no teste de variância <code>anova</code>. Utilizando a função <code>update</code> pode ser criada uma nova regressão com base na regressão anterior (<code>mylogit</code>) e é excluído do modelo a variável <code>gre</code> para exemplificar. Após, é efetuado novamente o teste <code>anova</code>, agora comparando os dois modelos, como segue abaixo. Evidencia-se que a exclusão da variável <code>gre</code> causou elevaçãod a variância do modelo para 463, piorando portanto a capacidade do modelo pois espera-se sempre reduções na sua variância.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="co"># Criação de novo modelo com base no anterior</span></a>
-<a class="sourceLine" id="cb152-2" data-line-number="2">mylogit2=<span class="kw">update</span>(mylogit,<span class="op">~</span>. <span class="op">-</span><span class="st"> </span>gre)</a>
-<a class="sourceLine" id="cb152-3" data-line-number="3"><span class="co"># </span></a>
-<a class="sourceLine" id="cb152-4" data-line-number="4"><span class="kw">anova</span>(mylogit,mylogit2, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1"><span class="co"># Criação de novo modelo com base no anterior</span></a>
+<a class="sourceLine" id="cb153-2" data-line-number="2">mylogit2=<span class="kw">update</span>(mylogit,<span class="op">~</span>. <span class="op">-</span><span class="st"> </span>gre)</a>
+<a class="sourceLine" id="cb153-3" data-line-number="3"><span class="co"># </span></a>
+<a class="sourceLine" id="cb153-4" data-line-number="4"><span class="kw">anova</span>(mylogit,mylogit2, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
 <pre><code>Analysis of Deviance Table
 
 Model 1: admit ~ gre + gpa + rank
@@ -856,7 +856,7 @@ ln(P=Y) =
 -3,98998 + 0.00226gre + 0,80404gpa -0,67544rank2 -1,34020rank3 -1,55146rank4
 \]</span></p>
 <p>Determinam-se os coeficientes exponenciados (as razões de chance) para cada variável do modelo, bem como seus intervalos de confiança:</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR =</span> <span class="kw">coef</span>(mylogit), <span class="kw">confint</span>(mylogit)))</a></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1"><span class="kw">exp</span>(<span class="kw">cbind</span>(<span class="dt">OR =</span> <span class="kw">coef</span>(mylogit), <span class="kw">confint</span>(mylogit)))</a></code></pre></div>
 <pre><code>                OR    2.5 % 97.5 %
 (Intercept) 0.0185 0.001889 0.1665
 gre         1.0023 1.000138 1.0044
@@ -871,58 +871,58 @@ Dito de outra forma, para cada elevação em <strong>gpa</strong> aumentam 2,234
 Pioram ainda mais as chances de passar no vestibular daqueles alunos que estudaram em uma escola de <em>ranking</em> 4: diminuem-se em 78,81% as chances de que estes aluno passe no vestibular, mantidas as demais veriáveis.</p>
 <p><strong>Predição das probabilidades</strong>: a partir da equação de regressão logística auferida neste exemplo, qual é a probabilidade de que um aluno que tirou nota no <strong>gre</strong> de 700, no <strong>gpa</strong> de 3,67 e estudou em uma escola de <em>ranking</em> 1 passe no vestibular?
 Nota-se que a probabilidade de que este aluno passe no vestibular é de 63,32%. Segue a predição para estas variáveis:</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1">pred=<span class="kw">data.frame</span>(<span class="dt">gre=</span><span class="dv">700</span>,</a>
-<a class="sourceLine" id="cb156-2" data-line-number="2">                <span class="dt">gpa=</span><span class="fl">3.67</span>,</a>
-<a class="sourceLine" id="cb156-3" data-line-number="3">                <span class="dt">rank=</span><span class="kw">factor</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb156-4" data-line-number="4">                )</a>
-<a class="sourceLine" id="cb156-5" data-line-number="5">pred<span class="op">$</span>prob=<span class="kw">predict</span>(mylogit, <span class="dt">newdata=</span>pred, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb156-6" data-line-number="6">pred</a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">pred=<span class="kw">data.frame</span>(<span class="dt">gre=</span><span class="dv">700</span>,</a>
+<a class="sourceLine" id="cb157-2" data-line-number="2">                <span class="dt">gpa=</span><span class="fl">3.67</span>,</a>
+<a class="sourceLine" id="cb157-3" data-line-number="3">                <span class="dt">rank=</span><span class="kw">factor</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb157-4" data-line-number="4">                )</a>
+<a class="sourceLine" id="cb157-5" data-line-number="5">pred<span class="op">$</span>prob=<span class="kw">predict</span>(mylogit, <span class="dt">newdata=</span>pred, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb157-6" data-line-number="6">pred</a></code></pre></div>
 <pre><code>  gre  gpa rank   prob
 1 700 3.67    1 0.6332</code></pre>
 <p>Comparando com um aluno que tirou as mesmas notas no <strong>gre</strong> e <strong>gpa</strong>, mas que estudou em uma escola <em>ranking</em> 4:</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1">pred=<span class="kw">data.frame</span>(<span class="dt">gre=</span><span class="dv">700</span>,</a>
-<a class="sourceLine" id="cb158-2" data-line-number="2">                <span class="dt">gpa=</span><span class="fl">3.67</span>,</a>
-<a class="sourceLine" id="cb158-3" data-line-number="3">                <span class="dt">rank=</span><span class="kw">factor</span>(<span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb158-4" data-line-number="4">                )</a>
-<a class="sourceLine" id="cb158-5" data-line-number="5">pred<span class="op">$</span>prob=<span class="kw">predict</span>(mylogit, <span class="dt">newdata=</span>pred, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb158-6" data-line-number="6">pred</a></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1">pred=<span class="kw">data.frame</span>(<span class="dt">gre=</span><span class="dv">700</span>,</a>
+<a class="sourceLine" id="cb159-2" data-line-number="2">                <span class="dt">gpa=</span><span class="fl">3.67</span>,</a>
+<a class="sourceLine" id="cb159-3" data-line-number="3">                <span class="dt">rank=</span><span class="kw">factor</span>(<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb159-4" data-line-number="4">                )</a>
+<a class="sourceLine" id="cb159-5" data-line-number="5">pred<span class="op">$</span>prob=<span class="kw">predict</span>(mylogit, <span class="dt">newdata=</span>pred, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb159-6" data-line-number="6">pred</a></code></pre></div>
 <pre><code>  gre  gpa rank   prob
 1 700 3.67    4 0.2679</code></pre>
 <p>Agora será efetuada a predição comparando-se os <em>rankings</em> das escolas. No exemplo abaixo, é criada uma base de dados com as notas médias dos alunos nas variáveis <strong>gre</strong> e <strong>gpa</strong>, intercalando com todos os <em>rankings</em> das escolas onde estudaram. Após criar a tabela, esta é unida com as colunas de predição dos valores da equação. São renomeadas as variáveis de <em>fit</em> para <em>prob</em> e <em>se.fit</em> para <em>se.prob</em>, no primeiro caso pois obteiveram-se as probabilidades de cada caso e no segundo caso incluiu-se o erro padrão (<em>se: standart error</em>) desta probabilidade. Com este erro padrão calculou-se os limites inferior (<em>LL: low level</em>) e superior (<em>UL: upper level </em>) no intervalo de confiança de 95%.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1"><span class="co"># Criação da tabela</span></a>
-<a class="sourceLine" id="cb160-2" data-line-number="2">novosdados=<span class="kw">with</span>(binary,</a>
-<a class="sourceLine" id="cb160-3" data-line-number="3">                <span class="kw">data.frame</span>(<span class="dt">gre=</span><span class="kw">mean</span>(gre),</a>
-<a class="sourceLine" id="cb160-4" data-line-number="4">                           <span class="dt">gpa=</span><span class="kw">mean</span>(gpa),</a>
-<a class="sourceLine" id="cb160-5" data-line-number="5">                           <span class="dt">rank=</span><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)))</a>
-<a class="sourceLine" id="cb160-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb160-7" data-line-number="7"><span class="co"># Incluindo a predição dos valores</span></a>
-<a class="sourceLine" id="cb160-8" data-line-number="8">novosdados=<span class="kw">cbind</span>(novosdados,<span class="kw">predict</span>(mylogit, </a>
-<a class="sourceLine" id="cb160-9" data-line-number="9">                                    <span class="dt">newdata=</span>novosdados,</a>
-<a class="sourceLine" id="cb160-10" data-line-number="10">                                    <span class="dt">type=</span><span class="st">&quot;response&quot;</span>,</a>
-<a class="sourceLine" id="cb160-11" data-line-number="11">                                    <span class="dt">se.fit=</span><span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb160-12" data-line-number="12"><span class="co"># Renomeando as variáveis</span></a>
-<a class="sourceLine" id="cb160-13" data-line-number="13"><span class="kw">names</span>(novosdados)[<span class="kw">names</span>(novosdados)<span class="op">==</span><span class="st">&#39;fit&#39;</span>]=<span class="st">&quot;prob&quot;</span></a>
-<a class="sourceLine" id="cb160-14" data-line-number="14"><span class="kw">names</span>(novosdados)[<span class="kw">names</span>(novosdados)<span class="op">==</span><span class="st">&#39;se.fit&#39;</span>]=<span class="st">&quot;se.prob&quot;</span></a>
-<a class="sourceLine" id="cb160-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb160-16" data-line-number="16"><span class="co"># Estimando os intervalos de confiança</span></a>
-<a class="sourceLine" id="cb160-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb160-18" data-line-number="18">novosdados<span class="op">$</span>LL=novosdados<span class="op">$</span>prob<span class="fl">-1.96</span><span class="op">*</span>novosdados<span class="op">$</span>se.prob</a>
-<a class="sourceLine" id="cb160-19" data-line-number="19">novosdados<span class="op">$</span>UL=novosdados<span class="op">$</span>prob<span class="fl">+1.96</span><span class="op">*</span>novosdados<span class="op">$</span>se.prob</a>
-<a class="sourceLine" id="cb160-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb160-21" data-line-number="21"><span class="co"># Vizualização dos dados</span></a>
-<a class="sourceLine" id="cb160-22" data-line-number="22">novosdados</a></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1"><span class="co"># Criação da tabela</span></a>
+<a class="sourceLine" id="cb161-2" data-line-number="2">novosdados=<span class="kw">with</span>(binary,</a>
+<a class="sourceLine" id="cb161-3" data-line-number="3">                <span class="kw">data.frame</span>(<span class="dt">gre=</span><span class="kw">mean</span>(gre),</a>
+<a class="sourceLine" id="cb161-4" data-line-number="4">                           <span class="dt">gpa=</span><span class="kw">mean</span>(gpa),</a>
+<a class="sourceLine" id="cb161-5" data-line-number="5">                           <span class="dt">rank=</span><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)))</a>
+<a class="sourceLine" id="cb161-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb161-7" data-line-number="7"><span class="co"># Incluindo a predição dos valores</span></a>
+<a class="sourceLine" id="cb161-8" data-line-number="8">novosdados=<span class="kw">cbind</span>(novosdados,<span class="kw">predict</span>(mylogit, </a>
+<a class="sourceLine" id="cb161-9" data-line-number="9">                                    <span class="dt">newdata=</span>novosdados,</a>
+<a class="sourceLine" id="cb161-10" data-line-number="10">                                    <span class="dt">type=</span><span class="st">&quot;response&quot;</span>,</a>
+<a class="sourceLine" id="cb161-11" data-line-number="11">                                    <span class="dt">se.fit=</span><span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb161-12" data-line-number="12"><span class="co"># Renomeando as variáveis</span></a>
+<a class="sourceLine" id="cb161-13" data-line-number="13"><span class="kw">names</span>(novosdados)[<span class="kw">names</span>(novosdados)<span class="op">==</span><span class="st">&#39;fit&#39;</span>]=<span class="st">&quot;prob&quot;</span></a>
+<a class="sourceLine" id="cb161-14" data-line-number="14"><span class="kw">names</span>(novosdados)[<span class="kw">names</span>(novosdados)<span class="op">==</span><span class="st">&#39;se.fit&#39;</span>]=<span class="st">&quot;se.prob&quot;</span></a>
+<a class="sourceLine" id="cb161-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb161-16" data-line-number="16"><span class="co"># Estimando os intervalos de confiança</span></a>
+<a class="sourceLine" id="cb161-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb161-18" data-line-number="18">novosdados<span class="op">$</span>LL=novosdados<span class="op">$</span>prob<span class="fl">-1.96</span><span class="op">*</span>novosdados<span class="op">$</span>se.prob</a>
+<a class="sourceLine" id="cb161-19" data-line-number="19">novosdados<span class="op">$</span>UL=novosdados<span class="op">$</span>prob<span class="fl">+1.96</span><span class="op">*</span>novosdados<span class="op">$</span>se.prob</a>
+<a class="sourceLine" id="cb161-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb161-21" data-line-number="21"><span class="co"># Vizualização dos dados</span></a>
+<a class="sourceLine" id="cb161-22" data-line-number="22">novosdados</a></code></pre></div>
 <pre><code>    gre  gpa rank   prob se.prob residual.scale      LL     UL
 1 587.7 3.39    1 0.5166 0.06632              1 0.38662 0.6466
 2 587.7 3.39    2 0.3523 0.03978              1 0.27431 0.4303
 3 587.7 3.39    3 0.2186 0.03825              1 0.14364 0.2936
 4 587.7 3.39    4 0.1847 0.04864              1 0.08934 0.2800</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1"><span class="kw">require</span>(ggplot2)</a>
-<a class="sourceLine" id="cb162-2" data-line-number="2"><span class="kw">ggplot</span>(novosdados, <span class="kw">aes</span>(<span class="dt">x=</span>rank,<span class="dt">y=</span>prob))<span class="op">+</span></a>
-<a class="sourceLine" id="cb162-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>LL, <span class="dt">ymax=</span>UL), <span class="dt">width=</span><span class="fl">0.2</span>,<span class="dt">lty=</span><span class="dv">1</span>,<span class="dt">lwd=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb162-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">18</span>, <span class="dt">size=</span><span class="dv">5</span>, <span class="dt">fill=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb162-5" data-line-number="5"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;4&quot;</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb162-6" data-line-number="6"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Probabilidades preditas&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Ranking&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Pr(y=1)&quot;</span>)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-79-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="kw">require</span>(ggplot2)</a>
+<a class="sourceLine" id="cb163-2" data-line-number="2"><span class="kw">ggplot</span>(novosdados, <span class="kw">aes</span>(<span class="dt">x=</span>rank,<span class="dt">y=</span>prob))<span class="op">+</span></a>
+<a class="sourceLine" id="cb163-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>LL, <span class="dt">ymax=</span>UL), <span class="dt">width=</span><span class="fl">0.2</span>,<span class="dt">lty=</span><span class="dv">1</span>,<span class="dt">lwd=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb163-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">18</span>, <span class="dt">size=</span><span class="dv">5</span>, <span class="dt">fill=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb163-5" data-line-number="5"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;4&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb163-6" data-line-number="6"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Probabilidades preditas&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Ranking&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Pr(y=1)&quot;</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-80-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <!--
 \printbibliography[segment=\therefsegment,heading=subbibliography]
 -->
