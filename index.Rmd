@@ -1149,6 +1149,7 @@ Note que o intercepto definido (-85,51533) refere-se à presença da empresa Gen
 
 ## Modelo Efeitos Aleatórios
 
+No modelo de regressão com efeitos aleatórios, os efeitos individuais das firmas ("firms" - $\alpha_i$) são considerados variáveis aleatórias, ao contrário do modelo visto anteriormente. A montagem deste tipo de regressão é feita através da função `plm`, incluindo como modelo "random" e como método "walhus", como segue:
 
 
 ```{r}
@@ -1158,25 +1159,87 @@ reg.ea=plm(invest~value+capital,
 summary(reg.ea)
 ```
 
-
-
-
-
-
-
+Os resultados corroboram com a direção dos sinais para as variáveis dependentes "value" e "capital", ambos positivos. Por outro lado, os resultados do modelo de efeitos aleatórios trazem os valores sobre a variância dos erros, primeiramente voltado ao componente de corte transversal (específico dos indivíduos) denominado `individual`, e outro fator idissiossincrático, o qual varia com o tempo e também com o corte transversal, denominado `idiosyncratic`.
 
 
 ## Comparação e escolha dos modelos
 
+Após a evidenciação dos modelos de regressão dos tipos agrupado (pooled), de efeitos fixos e de efeitos aleatórios, é preciso efetuar os testes para definir qual é o melhor modelo e que por consequência deverá ser considerado.
+
+- **Modelo Pooled x Modelo de Efeitos Fixos**
+
+Inicialmente compara-se o modelo Pooled com a regressão de Efeitos Fixos (*within*). Para isto utiliza-se o Teste F ou teste F de Chow. A hipótese nula é de que há igualdade nos interceptos e nas inclinações para todos os indivíduos, caracterizando o modelo de dados agrupados (pooled). A função utilizada é `pFtest()` do pacote `plm`.
+
+
 ```{r,warning=FALSE}
+require(plm)
 pFtest(reg.ef,reg.pooled)
 ```
 
+Como o valor *p* é inferior a 0,05, o modelo de Efeitos Fixos é melhor do que o modelo Pooled.
+
+
+- **Modelo Pooled x Modelo de Efeitos Aleatórios**
+
+O teste desenvolvido por Breusch e Pagan -@breusch1980 compara as estimativas entre os modelos, verificando se $\sigma^{2}_{\alpha} = 0$, sendo que:
+
+$$
+ \begin{matrix}
+H_{0}: \sigma^{2}_{\alpha} = 0 \\
+H_{1}: \sigma^{2}_{\alpha} \neq 0
+ \end{matrix}
+$$
+
+Desta forma, a aceitação da hipótese nula implica que o modelo de dados agrupados (pooled) é preferível. A função `plmtest` efetua este teste:
+
+```{r}
+plmtest(reg.pooled, type="bp")
+```
+
+Como o *p* valor foi inferior a 0,05 o modelo de Efeitos Aleatórios é superior ao modelo Pooled.
+
+
+
+
+- **Modelo Efeitos Fixos x Modelo de Efeitos Aleatórios**
+
+O teste de Hausmann [@hausman1978] efetua a especificação dos modelos de Efeito Fixo e de Efeitos Aleatórios, sendo que se o teste rejeitar a hipótese nula, o modelo de Efeitos Fixos é o mais adequado.
+
+$$
+ \begin{matrix}
+H_0: \alpha_{i} \text{não são correlacionados com } X_{it} \\
+H_1: \alpha_{i} \text{são correlacionados com } X_{it}
+ \end{matrix}
+$$
+A função a ser utilizada para este teste é `phtest`:
 
 ```{r}
 phtest(reg.ef,reg.ea)
 ```
 
+Como o valor *p* foi superior a 0,05 o modelo de Efeitos Aleatórios foi considerado superior ao modelo de Efeitos Fixos.
+
+
+## Testando dependência
+
+```{r}
+pcdtest(reg.ea, test="cd")
+```
+
+## Testando correlação serial
+
+```{r}
+pbgtest(reg.ea)
+```
+
+
+## Testando raízes unitárias
+
+
+```{r}
+require(tseries)
+
+```
 
 
 # Regressão Logística
@@ -2103,6 +2166,7 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 
 
 # Referências {-}
+
 
 
 

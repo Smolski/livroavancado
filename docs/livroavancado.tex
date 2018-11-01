@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-10-29}
+    \date{2018-10-31}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -2541,6 +2541,12 @@ Steel, o valor do intercepto passa para 94,988 (= -85,51533 +
 \hypertarget{modelo-efeitos-aleatorios}{%
 \section{Modelo Efeitos Aleatórios}\label{modelo-efeitos-aleatorios}}
 
+No modelo de regressão com efeitos aleatórios, os efeitos individuais
+das firmas (``firms'' - \(\alpha_i\)) são considerados variáveis
+aleatórias, ao contrário do modelo visto anteriormente. A montagem deste
+tipo de regressão é feita através da função \texttt{plm}, incluindo como
+modelo ``random'' e como método ``walhus'', como segue:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{reg.ea=}\KeywordTok{plm}\NormalTok{(invest}\OperatorTok{~}\NormalTok{value}\OperatorTok{+}\NormalTok{capital,}
@@ -2585,12 +2591,38 @@ Adj. R-Squared: 0.797
 F-statistic: 156.365 on 2 and 77 DF, p-value: <2e-16
 \end{verbatim}
 
+Os resultados corroboram com a direção dos sinais para as variáveis
+dependentes ``value'' e ``capital'', ambos positivos. Por outro lado, os
+resultados do modelo de efeitos aleatórios trazem os valores sobre a
+variância dos erros, primeiramente voltado ao componente de corte
+transversal (específico dos indivíduos) denominado \texttt{individual},
+e outro fator idissiossincrático, o qual varia com o tempo e também com
+o corte transversal, denominado \texttt{idiosyncratic}.
+
 \hypertarget{comparacao-e-escolha-dos-modelos}{%
 \section{Comparação e escolha dos
 modelos}\label{comparacao-e-escolha-dos-modelos}}
 
+Após a evidenciação dos modelos de regressão dos tipos agrupado
+(pooled), de efeitos fixos e de efeitos aleatórios, é preciso efetuar os
+testes para definir qual é o melhor modelo e que por consequência deverá
+ser considerado.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Modelo Pooled x Modelo de Efeitos Fixos}
+\end{itemize}
+
+Inicialmente compara-se o modelo Pooled com a regressão de Efeitos Fixos
+(\emph{within}). Para isto utiliza-se o Teste F ou teste F de Chow. A
+hipótese nula é de que há igualdade nos interceptos e nas inclinações
+para todos os indivíduos, caracterizando o modelo de dados agrupados
+(pooled). A função utilizada é \texttt{pFtest()} do pacote \texttt{plm}.
+
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(plm)}
 \KeywordTok{pFtest}\NormalTok{(reg.ef,reg.pooled)}
 \end{Highlighting}
 \end{Shaded}
@@ -2603,6 +2635,66 @@ data:  invest ~ value + capital
 F = 67, df1 = 3, df2 = 74, p-value <2e-16
 alternative hypothesis: significant effects
 \end{verbatim}
+
+Como o valor \emph{p} é inferior a 0,05, o modelo de Efeitos Fixos é
+melhor do que o modelo Pooled.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Modelo Pooled x Modelo de Efeitos Aleatórios}
+\end{itemize}
+
+O teste desenvolvido por Breusch e Pagan
+(\protect\hyperlink{ref-breusch1980}{1980}) compara as estimativas entre
+os modelos, verificando se \(\sigma^{2}_{\alpha} = 0\), sendo que:
+
+\[
+ \begin{matrix}
+H_{0}: \sigma^{2}_{\alpha} = 0 \\
+H_{1}: \sigma^{2}_{\alpha} \neq 0
+ \end{matrix}
+\]
+
+Desta forma, a aceitação da hipótese nula implica que o modelo de dados
+agrupados (pooled) é preferível. A função \texttt{plmtest} efetua este
+teste:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plmtest}\NormalTok{(reg.pooled, }\DataTypeTok{type=}\StringTok{"bp"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Lagrange Multiplier Test - (Breusch-Pagan) for balanced panels
+
+data:  invest ~ value + capital
+chisq = 380, df = 1, p-value <2e-16
+alternative hypothesis: significant effects
+\end{verbatim}
+
+Como o \emph{p} valor foi inferior a 0,05 o modelo de Efeitos Aleatórios
+é superior ao modelo Pooled.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Modelo Efeitos Fixos x Modelo de Efeitos Aleatórios}
+\end{itemize}
+
+O teste de Hausmann (HAUSMAN, \protect\hyperlink{ref-hausman1978}{1978})
+efetua a especificação dos modelos de Efeito Fixo e de Efeitos
+Aleatórios, sendo que se o teste rejeitar a hipótese nula, o modelo de
+Efeitos Fixos é o mais adequado.
+
+\[
+ \begin{matrix}
+H_0: \alpha_{i} \text{não são correlacionados com } X_{it} \\
+H_1: \alpha_{i} \text{são correlacionados com } X_{it}
+ \end{matrix}
+\] A função a ser utilizada para este teste é \texttt{phtest}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2617,6 +2709,58 @@ alternative hypothesis: significant effects
 data:  invest ~ value + capital
 chisq = 0.075, df = 2, p-value = 1
 alternative hypothesis: one model is inconsistent
+\end{verbatim}
+
+Como o valor \emph{p} foi superior a 0,05 o modelo de Efeitos Aleatórios
+foi considerado superior ao modelo de Efeitos Fixos.
+
+\hypertarget{testando-dependencia}{%
+\section{Testando dependência}\label{testando-dependencia}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pcdtest}\NormalTok{(reg.ea, }\DataTypeTok{test=}\StringTok{"cd"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Pesaran CD test for cross-sectional dependence in panels
+
+data:  invest ~ value + capital
+z = 0.31, p-value = 0.8
+alternative hypothesis: cross-sectional dependence
+\end{verbatim}
+
+\hypertarget{testando-correlacao-serial}{%
+\section{Testando correlação serial}\label{testando-correlacao-serial}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pbgtest}\NormalTok{(reg.ea)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Breusch-Godfrey/Wooldridge test for serial correlation in panel models
+
+data:  invest ~ value + capital
+chisq = 26, df = 20, p-value = 0.2
+alternative hypothesis: serial correlation in idiosyncratic errors
+\end{verbatim}
+
+\hypertarget{testando-raizes-unitarias}{%
+\section{Testando raízes unitárias}\label{testando-raizes-unitarias}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(tseries)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Carregando pacotes exigidos: tseries
 \end{verbatim}
 
 \hypertarget{regressao-logistica}{%
@@ -4046,7 +4190,7 @@ padrão calculou-se os limites inferior (\emph{LL: low level}) e superior
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-80-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-84-1} \end{center}
 
 \hypertarget{exercicios}{%
 \section{Exercícios}\label{exercicios}}
@@ -4230,7 +4374,7 @@ dependente) da base de dados:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-83-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-87-1} \end{center}
 
 Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 
@@ -4240,7 +4384,7 @@ Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-84-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-88-1} \end{center}
 
 Para criação da regressão de Poisson utiliza-se a função já conhecida
 \texttt{glm()}, sendo que em \texttt{family} é determinado o tipo de
@@ -4393,11 +4537,11 @@ base de dados analisada:
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-89-1} 
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-93-1} 
 
 }
 
-\caption{Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)}\label{fig:unnamed-chunk-89}
+\caption{Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)}\label{fig:unnamed-chunk-93}
 \end{figure}
 
 No entanto, é possível melhorar a precisão do modelo de regressão
@@ -4599,11 +4743,11 @@ regressão de Poisson:
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-94-1} 
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-98-1} 
 
 }
 
-\caption{Valores observados e preditos}\label{fig:unnamed-chunk-94}
+\caption{Valores observados e preditos}\label{fig:unnamed-chunk-98}
 \end{figure}
 
 Fonte: Adaptado de PENNSTATE (\protect\hyperlink{ref-penn2018}{2018}).
@@ -4651,6 +4795,11 @@ dos dados da regressão de Poisson:
 \addcontentsline{toc}{chapter}{Referências}
 
 \hypertarget{refs}{}
+\leavevmode\hypertarget{ref-breusch1980}{}%
+BREUSCH, T. S.; PAGAN, A. R. \textbf{The Lagrange multiplier test and
+its applications to model specification in econometrics}. \emph{The
+Review of Economic Studies}, {[}s.l.{]}, n. 1, 1980.
+
 \leavevmode\hypertarget{ref-Fawcett2006}{}%
 FAWCETT, T. \textbf{An introduction to ROC analysis}. \emph{Pattern
 Recognition Letters}, {[}s.l.{]}, 2006.
@@ -4662,6 +4811,11 @@ Graw Hill, 2011.
 \leavevmode\hypertarget{ref-Hair2009}{}%
 HAIR, J. F. et al. \textbf{Análise Multivariada de Dados}. São Paulo:
 Bookman, 2009.
+
+\leavevmode\hypertarget{ref-hausman1978}{}%
+HAUSMAN, J. A. \textbf{Specification tests in econometrics}.
+\emph{Econometrica: Journal of the econometric society}, {[}s.l.{]},
+1978.
 
 \leavevmode\hypertarget{ref-Hosmer2000}{}%
 HOSMER, D. W.; LEMESCHOW, S. \textbf{Applied Logistic Regression}. New

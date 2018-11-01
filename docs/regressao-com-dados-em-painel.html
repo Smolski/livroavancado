@@ -26,7 +26,7 @@
 <meta name="author" content="Iara Denise Endruweit Battisti">
 
 
-<meta name="date" content="2018-10-29">
+<meta name="date" content="2018-10-31">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -184,6 +184,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>4.3</b> Modelo Efeitos Fixos</a></li>
 <li class="chapter" data-level="4.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>4.4</b> Modelo Efeitos Aleatórios</a></li>
 <li class="chapter" data-level="4.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>4.5</b> Comparação e escolha dos modelos</a></li>
+<li class="chapter" data-level="4.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia"><i class="fa fa-check"></i><b>4.6</b> Testando dependência</a></li>
+<li class="chapter" data-level="4.7" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>4.7</b> Testando correlação serial</a></li>
+<li class="chapter" data-level="4.8" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>4.8</b> Testando raízes unitárias</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>5</b> Regressão Logística</a><ul>
 <li class="chapter" data-level="5.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-modelo"><i class="fa fa-check"></i><b>5.1</b> O modelo</a></li>
@@ -408,6 +411,7 @@ F-statistic:  210 on 5 and 74 DF,  p-value: &lt;2e-16</code></pre>
 </div>
 <div id="modelo-efeitos-aleatorios" class="section level2">
 <h2><span class="header-section-number">4.4</span> Modelo Efeitos Aleatórios</h2>
+<p>No modelo de regressão com efeitos aleatórios, os efeitos individuais das firmas (“firms” - <span class="math inline">\(\alpha_i\)</span>) são considerados variáveis aleatórias, ao contrário do modelo visto anteriormente. A montagem deste tipo de regressão é feita através da função <code>plm</code>, incluindo como modelo “random” e como método “walhus”, como segue:</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">reg.ea=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital,</a>
 <a class="sourceLine" id="cb92-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;random&quot;</span>, </a>
 <a class="sourceLine" id="cb92-3" data-line-number="3">           <span class="dt">random.method =</span> <span class="st">&quot;walhus&quot;</span>)</a>
@@ -444,29 +448,99 @@ Residual Sum of Squares: 446000
 R-Squared:      0.802
 Adj. R-Squared: 0.797
 F-statistic: 156.365 on 2 and 77 DF, p-value: &lt;2e-16</code></pre>
+<p>Os resultados corroboram com a direção dos sinais para as variáveis dependentes “value” e “capital”, ambos positivos. Por outro lado, os resultados do modelo de efeitos aleatórios trazem os valores sobre a variância dos erros, primeiramente voltado ao componente de corte transversal (específico dos indivíduos) denominado <code>individual</code>, e outro fator idissiossincrático, o qual varia com o tempo e também com o corte transversal, denominado <code>idiosyncratic</code>.</p>
 </div>
 <div id="comparacao-e-escolha-dos-modelos" class="section level2">
 <h2><span class="header-section-number">4.5</span> Comparação e escolha dos modelos</h2>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">pFtest</span>(reg.ef,reg.pooled)</a></code></pre></div>
+<p>Após a evidenciação dos modelos de regressão dos tipos agrupado (pooled), de efeitos fixos e de efeitos aleatórios, é preciso efetuar os testes para definir qual é o melhor modelo e que por consequência deverá ser considerado.</p>
+<ul>
+<li><strong>Modelo Pooled x Modelo de Efeitos Fixos</strong></li>
+</ul>
+<p>Inicialmente compara-se o modelo Pooled com a regressão de Efeitos Fixos (<em>within</em>). Para isto utiliza-se o Teste F ou teste F de Chow. A hipótese nula é de que há igualdade nos interceptos e nas inclinações para todos os indivíduos, caracterizando o modelo de dados agrupados (pooled). A função utilizada é <code>pFtest()</code> do pacote <code>plm</code>.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">require</span>(plm)</a>
+<a class="sourceLine" id="cb94-2" data-line-number="2"><span class="kw">pFtest</span>(reg.ef,reg.pooled)</a></code></pre></div>
 <pre><code>
     F test for individual effects
 
 data:  invest ~ value + capital
 F = 67, df1 = 3, df2 = 74, p-value &lt;2e-16
 alternative hypothesis: significant effects</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="kw">phtest</span>(reg.ef,reg.ea)</a></code></pre></div>
+<p>Como o valor <em>p</em> é inferior a 0,05, o modelo de Efeitos Fixos é melhor do que o modelo Pooled.</p>
+<ul>
+<li><strong>Modelo Pooled x Modelo de Efeitos Aleatórios</strong></li>
+</ul>
+<p>O teste desenvolvido por Breusch e Pagan <span class="citation">(<a href="#ref-breusch1980">1980</a>)</span> compara as estimativas entre os modelos, verificando se <span class="math inline">\(\sigma^{2}_{\alpha} = 0\)</span>, sendo que:</p>
+<p><span class="math display">\[
+ \begin{matrix}
+H_{0}: \sigma^{2}_{\alpha} = 0 \\
+H_{1}: \sigma^{2}_{\alpha} \neq 0
+ \end{matrix}
+\]</span></p>
+<p>Desta forma, a aceitação da hipótese nula implica que o modelo de dados agrupados (pooled) é preferível. A função <code>plmtest</code> efetua este teste:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="kw">plmtest</span>(reg.pooled, <span class="dt">type=</span><span class="st">&quot;bp&quot;</span>)</a></code></pre></div>
+<pre><code>
+    Lagrange Multiplier Test - (Breusch-Pagan) for balanced panels
+
+data:  invest ~ value + capital
+chisq = 380, df = 1, p-value &lt;2e-16
+alternative hypothesis: significant effects</code></pre>
+<p>Como o <em>p</em> valor foi inferior a 0,05 o modelo de Efeitos Aleatórios é superior ao modelo Pooled.</p>
+<ul>
+<li><strong>Modelo Efeitos Fixos x Modelo de Efeitos Aleatórios</strong></li>
+</ul>
+<p>O teste de Hausmann <span class="citation">(Hausman <a href="#ref-hausman1978">1978</a>)</span> efetua a especificação dos modelos de Efeito Fixo e de Efeitos Aleatórios, sendo que se o teste rejeitar a hipótese nula, o modelo de Efeitos Fixos é o mais adequado.</p>
+<p><span class="math display">\[
+ \begin{matrix}
+H_0: \alpha_{i} \text{não são correlacionados com } X_{it} \\
+H_1: \alpha_{i} \text{são correlacionados com } X_{it}
+ \end{matrix}
+\]</span>
+A função a ser utilizada para este teste é <code>phtest</code>:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">phtest</span>(reg.ef,reg.ea)</a></code></pre></div>
 <pre><code>
     Hausman Test
 
 data:  invest ~ value + capital
 chisq = 0.075, df = 2, p-value = 1
 alternative hypothesis: one model is inconsistent</code></pre>
+<p>Como o valor <em>p</em> foi superior a 0,05 o modelo de Efeitos Aleatórios foi considerado superior ao modelo de Efeitos Fixos.</p>
+</div>
+<div id="testando-dependencia" class="section level2">
+<h2><span class="header-section-number">4.6</span> Testando dependência</h2>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="kw">pcdtest</span>(reg.ea, <span class="dt">test=</span><span class="st">&quot;cd&quot;</span>)</a></code></pre></div>
+<pre><code>
+    Pesaran CD test for cross-sectional dependence in panels
+
+data:  invest ~ value + capital
+z = 0.31, p-value = 0.8
+alternative hypothesis: cross-sectional dependence</code></pre>
+</div>
+<div id="testando-correlacao-serial" class="section level2">
+<h2><span class="header-section-number">4.7</span> Testando correlação serial</h2>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">pbgtest</span>(reg.ea)</a></code></pre></div>
+<pre><code>
+    Breusch-Godfrey/Wooldridge test for serial correlation in panel models
+
+data:  invest ~ value + capital
+chisq = 26, df = 20, p-value = 0.2
+alternative hypothesis: serial correlation in idiosyncratic errors</code></pre>
+</div>
+<div id="testando-raizes-unitarias" class="section level2">
+<h2><span class="header-section-number">4.8</span> Testando raízes unitárias</h2>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="kw">require</span>(tseries)</a></code></pre></div>
+<pre><code>Carregando pacotes exigidos: tseries</code></pre>
 </div>
 </div>
 <h3>Referências</h3>
 <div id="refs" class="references">
 <div id="ref-Gujarati2011">
 <p>Gujarati, Damodar N., e Down C Porter. 2011. <em>Econometria básica</em>. 5a ed. New York: Mc Graw Hill.</p>
+</div>
+<div id="ref-breusch1980">
+<p>Breusch, Trevor Stanley, e Adrian Rodney Pagan. 1980. «The Lagrange multiplier test and its applications to model specification in econometrics». <em>The Review of Economic Studies</em> 47 (1). JSTOR:239–53.</p>
+</div>
+<div id="ref-hausman1978">
+<p>Hausman, Jerry A. 1978. «Specification tests in econometrics». <em>Econometrica: Journal of the econometric society</em>. JSTOR, 1251–71.</p>
 </div>
 </div>
             </section>
