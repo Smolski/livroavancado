@@ -26,7 +26,7 @@
 <meta name="author" content="Iara Denise Endruweit Battisti">
 
 
-<meta name="date" content="2018-10-31">
+<meta name="date" content="2018-11-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -184,9 +184,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>4.3</b> Modelo Efeitos Fixos</a></li>
 <li class="chapter" data-level="4.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>4.4</b> Modelo Efeitos Aleatórios</a></li>
 <li class="chapter" data-level="4.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>4.5</b> Comparação e escolha dos modelos</a></li>
-<li class="chapter" data-level="4.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia"><i class="fa fa-check"></i><b>4.6</b> Testando dependência</a></li>
-<li class="chapter" data-level="4.7" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>4.7</b> Testando correlação serial</a></li>
-<li class="chapter" data-level="4.8" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>4.8</b> Testando raízes unitárias</a></li>
+<li class="chapter" data-level="4.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>4.6</b> Alguns testes para os modelos</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>4.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
+<li class="chapter" data-level="4.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>4.6.2</b> Normalidade dos resíduos</a></li>
+<li class="chapter" data-level="4.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>4.6.3</b> Homocedasticidade dos resíduos</a></li>
+<li class="chapter" data-level="4.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>4.6.4</b> Testando correlação serial</a></li>
+<li class="chapter" data-level="4.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>4.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
+<li class="chapter" data-level="4.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>4.6.6</b> Testando raízes unitárias</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>5</b> Regressão Logística</a><ul>
 <li class="chapter" data-level="5.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-modelo"><i class="fa fa-check"></i><b>5.1</b> O modelo</a></li>
@@ -272,11 +277,11 @@ Y_i = \frac{\mu^{Y}e^{-\mu}}{Y!} + u_i
 <li><strong>(W)</strong> largura da carapaça.</li>
 </ul>
 <p>Seguem os procedimentos para importação da base de dados do exemplo:</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb172-2" data-line-number="2">caranguejo &lt;-<span class="st"> </span><span class="kw">read_table2</span>(<span class="st">&quot;https://goo.gl/Wvvnrf&quot;</span>, </a>
-<a class="sourceLine" id="cb172-3" data-line-number="3">    <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb172-4" data-line-number="4"><span class="kw">colnames</span>(caranguejo)=<span class="kw">c</span>(<span class="st">&quot;Obs&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;W&quot;</span>,<span class="st">&quot;Wt&quot;</span>,<span class="st">&quot;Sa&quot;</span>)</a>
-<a class="sourceLine" id="cb172-5" data-line-number="5"><span class="kw">summary</span>(caranguejo)</a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb182-2" data-line-number="2">caranguejo &lt;-<span class="st"> </span><span class="kw">read_table2</span>(<span class="st">&quot;https://goo.gl/Wvvnrf&quot;</span>, </a>
+<a class="sourceLine" id="cb182-3" data-line-number="3">    <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb182-4" data-line-number="4"><span class="kw">colnames</span>(caranguejo)=<span class="kw">c</span>(<span class="st">&quot;Obs&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;W&quot;</span>,<span class="st">&quot;Wt&quot;</span>,<span class="st">&quot;Sa&quot;</span>)</a>
+<a class="sourceLine" id="cb182-5" data-line-number="5"><span class="kw">summary</span>(caranguejo)</a></code></pre></div>
 <pre><code>      Obs            C              S              W              Wt      
  Min.   :  1   Min.   :1.00   Min.   :1.00   Min.   :21.0   Min.   :1.20  
  1st Qu.: 44   1st Qu.:2.00   1st Qu.:2.00   1st Qu.:24.9   1st Qu.:2.00  
@@ -292,14 +297,14 @@ Y_i = \frac{\mu^{Y}e^{-\mu}}{Y!} + u_i
  3rd Qu.: 5.00  
  Max.   :15.00  </code></pre>
 <p>Abaixo o histograma da distribuição do número de satélites (variável dependente) da base de dados:</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="kw">hist</span>(caranguejo<span class="op">$</span>Sa)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-87-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">hist</span>(caranguejo<span class="op">$</span>Sa)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-90-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Relacionando a quantidade de satélites (Sa) com a largura da carapaça:</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">plot</span>(caranguejo<span class="op">$</span>W,caranguejo<span class="op">$</span>Sa)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-88-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="kw">plot</span>(caranguejo<span class="op">$</span>W,caranguejo<span class="op">$</span>Sa)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-91-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Para criação da regressão de Poisson utiliza-se a função já conhecida <code>glm()</code>, sendo que em <code>family</code> é determinado o tipo de análise desejada (“poisson”):</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1">regpoisson=<span class="kw">glm</span>(Sa<span class="op">~</span>W, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="dt">data=</span>caranguejo)</a>
-<a class="sourceLine" id="cb176-2" data-line-number="2"><span class="kw">summary</span>(regpoisson)</a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1">regpoisson=<span class="kw">glm</span>(Sa<span class="op">~</span>W, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="dt">data=</span>caranguejo)</a>
+<a class="sourceLine" id="cb186-2" data-line-number="2"><span class="kw">summary</span>(regpoisson)</a></code></pre></div>
 <pre><code>
 Call:
 glm(formula = Sa ~ W, family = &quot;poisson&quot;, data = caranguejo)
@@ -337,8 +342,8 @@ E(Y)= e^{-3.30476} + e^{0,16405 W_i}
 <li><p><strong>(b)</strong> exp(0,16405) = 1,178273. Logo, para cada elevação unitária na largura da carapaça (W) dos caranguejos, eleva-se em 1,178273 vezes o número de satélites (Sa).</p></li>
 </ul>
 <p>Teste de dispersão:</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="kw">require</span>(AER)</a>
-<a class="sourceLine" id="cb178-2" data-line-number="2"><span class="kw">dispersiontest</span>(regpoisson)</a></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1"><span class="kw">require</span>(AER)</a>
+<a class="sourceLine" id="cb188-2" data-line-number="2"><span class="kw">dispersiontest</span>(regpoisson)</a></code></pre></div>
 <pre><code>
     Overdispersion test
 
@@ -352,7 +357,7 @@ dispersion
 <li><strong>(c)</strong> O parâmetro de super-dispersão para esta equação é maior que 1. Sempre que for muito superior a 1 há vestígios de super-disposição no modelo.</li>
 </ul>
 <p>Abaixo a análise de variância.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1"><span class="kw">anova</span>(regpoisson, <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1"><span class="kw">anova</span>(regpoisson, <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
 <pre><code>Analysis of Deviance Table
 
 Model: poisson, link: log
@@ -367,8 +372,8 @@ W     1     64.9       171        568  7.8e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Abaixo são incluídos os valores preditos <code>regpoisson$fitted.values</code> juntamente com os dados originais.</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1">print=<span class="kw">data.frame</span>(caranguejo, <span class="dt">pred=</span>(regpoisson<span class="op">$</span>fitted.values))</a>
-<a class="sourceLine" id="cb182-2" data-line-number="2"><span class="kw">head</span>(print)</a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1">print=<span class="kw">data.frame</span>(caranguejo, <span class="dt">pred=</span>(regpoisson<span class="op">$</span>fitted.values))</a>
+<a class="sourceLine" id="cb192-2" data-line-number="2"><span class="kw">head</span>(print)</a></code></pre></div>
 <pre><code>  Obs C S    W   Wt Sa  pred
 1   1 2 3 28.3 3.05  8 3.810
 2   2 3 3 26.0 2.60  4 2.613
@@ -377,54 +382,54 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 5   5 2 3 29.0 3.00  1 4.274
 6   6 1 2 25.0 2.30  3 2.217</code></pre>
 <p>É possível comparar a distribuição dos valores preditos decorrentes da utilização do modelo de regressão de Poisson com a amostra inicial da base de dados analisada:</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">plot</span>(caranguejo<span class="op">$</span>W,caranguejo<span class="op">$</span>Sa)</a>
-<a class="sourceLine" id="cb184-2" data-line-number="2"><span class="kw">points</span>(regpoisson<span class="op">$</span>fitted.values,<span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-93"></span>
-<img src="index_files/figure-html/unnamed-chunk-93-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"><span class="kw">plot</span>(caranguejo<span class="op">$</span>W,caranguejo<span class="op">$</span>Sa)</a>
+<a class="sourceLine" id="cb194-2" data-line-number="2"><span class="kw">points</span>(regpoisson<span class="op">$</span>fitted.values,<span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-96"></span>
+<img src="index_files/figure-html/unnamed-chunk-96-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
 <p class="caption">
 Figura 6.1: Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)
 </p>
 </div>
 <p>No entanto, é possível melhorar a precisão do modelo de regressão utilizado, uma vez que os dados iniciais apresentam os casos individuais da amostra de cada caranguejo observado com suas respectivas características das variáveis independentes. Uma forma é agrupar os dados em intervalos da variável independente, contando os o número de casos (variável dependente) em cada intervalo.</p>
 <p>Foram determinados 8 intervalos (“Intervalo”) conforme o tamanho da carapaça dos caranguejos. Contou-se o número de casos (variável “numcasos”) de caranguejos em cada intervalo de tamanho da carapaça; o camanho médio da carapaça (“width”) em cada intervalo e; o número total de satélites (“satotal”) esperados em cada intervalo:</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1">Intervalo=<span class="kw">c</span>(<span class="st">&quot;&lt;23,25&quot;</span>, <span class="st">&quot;23,25-24,25&quot;</span>,<span class="st">&quot;24,25-25,25&quot;</span>,<span class="st">&quot;25,25-26,25&quot;</span>,</a>
-<a class="sourceLine" id="cb185-2" data-line-number="2">            <span class="st">&quot;26,25-27,25&quot;</span>,<span class="st">&quot;27,25-28,25&quot;</span>,<span class="st">&quot;28,25-29,25&quot;</span>,<span class="st">&quot;&gt;29,25&quot;</span>)</a>
-<a class="sourceLine" id="cb185-3" data-line-number="3"><span class="kw">attach</span>(caranguejo)</a>
-<a class="sourceLine" id="cb185-4" data-line-number="4">numcasos=<span class="kw">list</span>(<span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&lt;</span><span class="fl">23.25</span>)),</a>
-<a class="sourceLine" id="cb185-5" data-line-number="5">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),</a>
-<a class="sourceLine" id="cb185-6" data-line-number="6">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),</a>
-<a class="sourceLine" id="cb185-7" data-line-number="7">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),</a>
-<a class="sourceLine" id="cb185-8" data-line-number="8">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),</a>
-<a class="sourceLine" id="cb185-9" data-line-number="9">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),</a>
-<a class="sourceLine" id="cb185-10" data-line-number="10">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),</a>
-<a class="sourceLine" id="cb185-11" data-line-number="11">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">29.25</span>)))</a>
-<a class="sourceLine" id="cb185-12" data-line-number="12">width=<span class="kw">list</span>(<span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&lt;</span><span class="fl">23.25</span>)),</a>
-<a class="sourceLine" id="cb185-13" data-line-number="13">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),</a>
-<a class="sourceLine" id="cb185-14" data-line-number="14">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),</a>
-<a class="sourceLine" id="cb185-15" data-line-number="15">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),</a>
-<a class="sourceLine" id="cb185-16" data-line-number="16">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),</a>
-<a class="sourceLine" id="cb185-17" data-line-number="17">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),</a>
-<a class="sourceLine" id="cb185-18" data-line-number="18">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),</a>
-<a class="sourceLine" id="cb185-19" data-line-number="19">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">29.25</span>)))</a>
-<a class="sourceLine" id="cb185-20" data-line-number="20">satotal=<span class="kw">list</span>(<span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&lt;</span><span class="fl">23.25</span>)),</a>
-<a class="sourceLine" id="cb185-21" data-line-number="21">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),</a>
-<a class="sourceLine" id="cb185-22" data-line-number="22">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),</a>
-<a class="sourceLine" id="cb185-23" data-line-number="23">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),</a>
-<a class="sourceLine" id="cb185-24" data-line-number="24">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),</a>
-<a class="sourceLine" id="cb185-25" data-line-number="25">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),</a>
-<a class="sourceLine" id="cb185-26" data-line-number="26">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),</a>
-<a class="sourceLine" id="cb185-27" data-line-number="27">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">29.25</span>)))</a>
-<a class="sourceLine" id="cb185-28" data-line-number="28">numcasos &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(numcasos), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),</a>
-<a class="sourceLine" id="cb185-29" data-line-number="29">                       <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb185-30" data-line-number="30">width &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(width), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),</a>
-<a class="sourceLine" id="cb185-31" data-line-number="31">                    <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb185-32" data-line-number="32">satotal &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(satotal), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),</a>
-<a class="sourceLine" id="cb185-33" data-line-number="33">                      <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb185-34" data-line-number="34"></a>
-<a class="sourceLine" id="cb185-35" data-line-number="35">novosdados=<span class="kw">data.frame</span>(Intervalo,numcasos,<span class="kw">round</span>(width,<span class="dv">2</span>),satotal)</a>
-<a class="sourceLine" id="cb185-36" data-line-number="36"></a>
-<a class="sourceLine" id="cb185-37" data-line-number="37"><span class="kw">names</span>(novosdados)=<span class="kw">c</span>(<span class="st">&quot;Intervalo&quot;</span>,<span class="st">&quot;numcasos&quot;</span>,<span class="st">&quot;width&quot;</span>,<span class="st">&quot;satotal&quot;</span>)</a>
-<a class="sourceLine" id="cb185-38" data-line-number="38">novosdados</a></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1">Intervalo=<span class="kw">c</span>(<span class="st">&quot;&lt;23,25&quot;</span>, <span class="st">&quot;23,25-24,25&quot;</span>,<span class="st">&quot;24,25-25,25&quot;</span>,<span class="st">&quot;25,25-26,25&quot;</span>,</a>
+<a class="sourceLine" id="cb195-2" data-line-number="2">            <span class="st">&quot;26,25-27,25&quot;</span>,<span class="st">&quot;27,25-28,25&quot;</span>,<span class="st">&quot;28,25-29,25&quot;</span>,<span class="st">&quot;&gt;29,25&quot;</span>)</a>
+<a class="sourceLine" id="cb195-3" data-line-number="3"><span class="kw">attach</span>(caranguejo)</a>
+<a class="sourceLine" id="cb195-4" data-line-number="4">numcasos=<span class="kw">list</span>(<span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&lt;</span><span class="fl">23.25</span>)),</a>
+<a class="sourceLine" id="cb195-5" data-line-number="5">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),</a>
+<a class="sourceLine" id="cb195-6" data-line-number="6">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),</a>
+<a class="sourceLine" id="cb195-7" data-line-number="7">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),</a>
+<a class="sourceLine" id="cb195-8" data-line-number="8">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),</a>
+<a class="sourceLine" id="cb195-9" data-line-number="9">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),</a>
+<a class="sourceLine" id="cb195-10" data-line-number="10">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),</a>
+<a class="sourceLine" id="cb195-11" data-line-number="11">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">29.25</span>)))</a>
+<a class="sourceLine" id="cb195-12" data-line-number="12">width=<span class="kw">list</span>(<span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&lt;</span><span class="fl">23.25</span>)),</a>
+<a class="sourceLine" id="cb195-13" data-line-number="13">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),</a>
+<a class="sourceLine" id="cb195-14" data-line-number="14">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),</a>
+<a class="sourceLine" id="cb195-15" data-line-number="15">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),</a>
+<a class="sourceLine" id="cb195-16" data-line-number="16">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),</a>
+<a class="sourceLine" id="cb195-17" data-line-number="17">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),</a>
+<a class="sourceLine" id="cb195-18" data-line-number="18">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),</a>
+<a class="sourceLine" id="cb195-19" data-line-number="19">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">29.25</span>)))</a>
+<a class="sourceLine" id="cb195-20" data-line-number="20">satotal=<span class="kw">list</span>(<span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&lt;</span><span class="fl">23.25</span>)),</a>
+<a class="sourceLine" id="cb195-21" data-line-number="21">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),</a>
+<a class="sourceLine" id="cb195-22" data-line-number="22">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),</a>
+<a class="sourceLine" id="cb195-23" data-line-number="23">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),</a>
+<a class="sourceLine" id="cb195-24" data-line-number="24">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),</a>
+<a class="sourceLine" id="cb195-25" data-line-number="25">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),</a>
+<a class="sourceLine" id="cb195-26" data-line-number="26">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),</a>
+<a class="sourceLine" id="cb195-27" data-line-number="27">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">29.25</span>)))</a>
+<a class="sourceLine" id="cb195-28" data-line-number="28">numcasos &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(numcasos), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),</a>
+<a class="sourceLine" id="cb195-29" data-line-number="29">                       <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb195-30" data-line-number="30">width &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(width), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),</a>
+<a class="sourceLine" id="cb195-31" data-line-number="31">                    <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb195-32" data-line-number="32">satotal &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(satotal), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),</a>
+<a class="sourceLine" id="cb195-33" data-line-number="33">                      <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb195-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb195-35" data-line-number="35">novosdados=<span class="kw">data.frame</span>(Intervalo,numcasos,<span class="kw">round</span>(width,<span class="dv">2</span>),satotal)</a>
+<a class="sourceLine" id="cb195-36" data-line-number="36"></a>
+<a class="sourceLine" id="cb195-37" data-line-number="37"><span class="kw">names</span>(novosdados)=<span class="kw">c</span>(<span class="st">&quot;Intervalo&quot;</span>,<span class="st">&quot;numcasos&quot;</span>,<span class="st">&quot;width&quot;</span>,<span class="st">&quot;satotal&quot;</span>)</a>
+<a class="sourceLine" id="cb195-38" data-line-number="38">novosdados</a></code></pre></div>
 <pre><code>    Intervalo numcasos width satotal
 1      &lt;23,25       14 22.69      14
 2 23,25-24,25       14 23.84      20
@@ -435,13 +440,13 @@ Figura 6.1: Valores ajustados e preditos do número de satélites (Sa) em funç�
 7 28,25-29,25       18 28.67      71
 8      &gt;29,25       14 30.41      72</code></pre>
 <p>Segue a especificação deste novo modelo agrupado. Segundo <span class="citation">PennState (<a href="#ref-penn2018">2018</a>)</span>, utiliou-se o componente de ajuste da equação (<code>offset</code>) como o logarítmo do número de casos (“lcases”), como “o valor de ajuste ‘t’ no modelo que representa o espaço fixo, neste caso o grupo (caranguejos com largura similar)”. O resultado da nova regressão se mostra melhor ajustado, com redução do índice AIC:</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="co"># Log do Número de Casos</span></a>
-<a class="sourceLine" id="cb187-2" data-line-number="2">lcases=<span class="kw">log</span>(numcasos) </a>
-<a class="sourceLine" id="cb187-3" data-line-number="3"><span class="co"># Incluir a varíavel anterior no objeto novosdados</span></a>
-<a class="sourceLine" id="cb187-4" data-line-number="4">novosdados=<span class="kw">data.frame</span>(novosdados,lcases) </a>
-<a class="sourceLine" id="cb187-5" data-line-number="5"><span class="kw">names</span>(novosdados)[<span class="dv">5</span>]=<span class="st">&quot;lcases&quot;</span></a>
-<a class="sourceLine" id="cb187-6" data-line-number="6">model=<span class="kw">glm</span>(satotal<span class="op">~</span>width, <span class="dt">offset=</span>lcases, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="dt">data=</span>novosdados)</a>
-<a class="sourceLine" id="cb187-7" data-line-number="7"><span class="kw">summary</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="co"># Log do Número de Casos</span></a>
+<a class="sourceLine" id="cb197-2" data-line-number="2">lcases=<span class="kw">log</span>(numcasos) </a>
+<a class="sourceLine" id="cb197-3" data-line-number="3"><span class="co"># Incluir a varíavel anterior no objeto novosdados</span></a>
+<a class="sourceLine" id="cb197-4" data-line-number="4">novosdados=<span class="kw">data.frame</span>(novosdados,lcases) </a>
+<a class="sourceLine" id="cb197-5" data-line-number="5"><span class="kw">names</span>(novosdados)[<span class="dv">5</span>]=<span class="st">&quot;lcases&quot;</span></a>
+<a class="sourceLine" id="cb197-6" data-line-number="6">model=<span class="kw">glm</span>(satotal<span class="op">~</span>width, <span class="dt">offset=</span>lcases, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="dt">data=</span>novosdados)</a>
+<a class="sourceLine" id="cb197-7" data-line-number="7"><span class="kw">summary</span>(model)</a></code></pre></div>
 <pre><code>
 Call:
 glm(formula = satotal ~ width, family = &quot;poisson&quot;, data = novosdados, 
@@ -475,8 +480,8 @@ Desta forma:</p>
 <li><strong>(b)</strong> como exp(0,1727)=1,188509, espera-se que para cada alteração unitária no tamanho médio da carapaça dos caranguejos (width) eleve-se em 1,188509 vezes o número esperado de satélites (satotal).</li>
 </ul>
 <p>Teste de super-dispersão:</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="kw">require</span>(AER)</a>
-<a class="sourceLine" id="cb189-2" data-line-number="2"><span class="kw">dispersiontest</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="kw">require</span>(AER)</a>
+<a class="sourceLine" id="cb199-2" data-line-number="2"><span class="kw">dispersiontest</span>(model)</a></code></pre></div>
 <pre><code>
     Overdispersion test
 
@@ -490,7 +495,7 @@ dispersion
 <li><strong>(c)</strong> o tesde de superdispersão aprovou a hipótese nula (<span class="math inline">\(p&gt;0,05\)</span>) de que não há problemas de super-dispersão no modelo.</li>
 </ul>
 <p>Abaixo a análise de variância:</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1"><span class="kw">anova</span>(model, <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="kw">anova</span>(model, <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
 <pre><code>Analysis of Deviance Table
 
 Model: poisson, link: log
@@ -505,19 +510,19 @@ width  1     65.9         6        6.5  4.8e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Abaixo demonstra-se a plotagem dos valores originais e preditos com a regressão de Poisson:</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="kw">plot</span>(novosdados<span class="op">$</span>satotal, <span class="dt">pch=</span><span class="st">&quot;o&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Width (grupos)&quot;</span>,</a>
-<a class="sourceLine" id="cb193-2" data-line-number="2">     <span class="dt">ylab=</span><span class="st">&quot;Número de satélites&quot;</span>)</a>
-<a class="sourceLine" id="cb193-3" data-line-number="3"><span class="kw">points</span>(model<span class="op">$</span>fitted.values, <span class="dt">pch=</span><span class="st">&quot;p&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb193-4" data-line-number="4"><span class="kw">legend</span>(<span class="dv">6</span>,<span class="dv">30</span>,<span class="kw">c</span>(<span class="st">&quot;obs&quot;</span>,<span class="st">&quot;pred&quot;</span>), <span class="dt">pch=</span><span class="kw">c</span>(<span class="st">&quot;o&quot;</span>,<span class="st">&quot;p&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>))</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-98"></span>
-<img src="index_files/figure-html/unnamed-chunk-98-1.png" alt="Valores observados e preditos" width="80%" />
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">plot</span>(novosdados<span class="op">$</span>satotal, <span class="dt">pch=</span><span class="st">&quot;o&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Width (grupos)&quot;</span>,</a>
+<a class="sourceLine" id="cb203-2" data-line-number="2">     <span class="dt">ylab=</span><span class="st">&quot;Número de satélites&quot;</span>)</a>
+<a class="sourceLine" id="cb203-3" data-line-number="3"><span class="kw">points</span>(model<span class="op">$</span>fitted.values, <span class="dt">pch=</span><span class="st">&quot;p&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb203-4" data-line-number="4"><span class="kw">legend</span>(<span class="dv">6</span>,<span class="dv">30</span>,<span class="kw">c</span>(<span class="st">&quot;obs&quot;</span>,<span class="st">&quot;pred&quot;</span>), <span class="dt">pch=</span><span class="kw">c</span>(<span class="st">&quot;o&quot;</span>,<span class="st">&quot;p&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>))</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-101"></span>
+<img src="index_files/figure-html/unnamed-chunk-101-1.png" alt="Valores observados e preditos" width="80%" />
 <p class="caption">
 Figura 6.2: Valores observados e preditos
 </p>
 </div>
 <p>Fonte: Adaptado de <span class="citation">PennState (<a href="#ref-penn2018">2018</a>)</span>.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">novosdados<span class="op">$</span>pred=model<span class="op">$</span>fitted.values</a>
-<a class="sourceLine" id="cb194-2" data-line-number="2"><span class="kw">head</span>(novosdados)</a></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1">novosdados<span class="op">$</span>pred=model<span class="op">$</span>fitted.values</a>
+<a class="sourceLine" id="cb204-2" data-line-number="2"><span class="kw">head</span>(novosdados)</a></code></pre></div>
 <pre><code>    Intervalo numcasos width satotal lcases  pred
 1      &lt;23,25       14 22.69      14  2.639 20.54
 2 23,25-24,25       14 23.84      20  2.639 25.06

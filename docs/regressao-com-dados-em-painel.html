@@ -26,7 +26,7 @@
 <meta name="author" content="Iara Denise Endruweit Battisti">
 
 
-<meta name="date" content="2018-10-31">
+<meta name="date" content="2018-11-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -184,9 +184,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>4.3</b> Modelo Efeitos Fixos</a></li>
 <li class="chapter" data-level="4.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>4.4</b> Modelo Efeitos Aleatórios</a></li>
 <li class="chapter" data-level="4.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>4.5</b> Comparação e escolha dos modelos</a></li>
-<li class="chapter" data-level="4.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia"><i class="fa fa-check"></i><b>4.6</b> Testando dependência</a></li>
-<li class="chapter" data-level="4.7" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>4.7</b> Testando correlação serial</a></li>
-<li class="chapter" data-level="4.8" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>4.8</b> Testando raízes unitárias</a></li>
+<li class="chapter" data-level="4.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>4.6</b> Alguns testes para os modelos</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>4.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
+<li class="chapter" data-level="4.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>4.6.2</b> Normalidade dos resíduos</a></li>
+<li class="chapter" data-level="4.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>4.6.3</b> Homocedasticidade dos resíduos</a></li>
+<li class="chapter" data-level="4.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>4.6.4</b> Testando correlação serial</a></li>
+<li class="chapter" data-level="4.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>4.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
+<li class="chapter" data-level="4.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>4.6.6</b> Testando raízes unitárias</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>5</b> Regressão Logística</a><ul>
 <li class="chapter" data-level="5.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-modelo"><i class="fa fa-check"></i><b>5.1</b> O modelo</a></li>
@@ -287,15 +292,23 @@ General Motors-1940  461.2  4644   207.2 General Motors 1940</code></pre>
 <ol style="list-style-type: lower-alpha">
 <li><p>regressão considerando que o intercepto do modelo e seus coeficientes angulares são constantes ao londo do tempo e no espaço, sendo que o termo de erro capta a diferença no tempo e entre os indivíduos (POOLED);</p></li>
 <li><p>regressão considerando que os coeficientes angulares são constantes e o intercepto varia entre os indivíduos (EFEITOS FIXOS);</p></li>
-<li><p>regressão considerando que o intercepto e coeficientes angulares variam ao longo do tempo e também entre indivíduos (EFEITOS ALEATÓRIOS).</p></li>
+<li><p>regressão considerando que o intercepto assume um valor médio comum entre os indivíduos e os coeficientes angulares variam ao longo do tempo e também entre indivíduos (EFEITOS ALEATÓRIOS).</p></li>
 </ol>
 <p>Abaixo é demonstrada a evolução do investimento de acordo com cada empresa estudada:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="kw">coplot</span>(invest <span class="op">~</span><span class="st"> </span>year<span class="op">|</span>firm, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">data=</span>Grunfeld)</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="kw">coplot</span>(invest <span class="op">~</span><span class="st"> </span>year<span class="op">|</span>firm, <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">data=</span>Grunfeld)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="modelo-pooled" class="section level2">
 <h2><span class="header-section-number">4.2</span> Modelo Pooled</h2>
-<p>Este modelo trata de “empilhar” todas as observações da base de dados, ignorando a estrutura de dados em painel. Desta forma, todas as observações são tratadas como não correlacionadas para os indivíduos, com erros homoscedásticos para com os indivíduos. Trata-se, portanto, da forma mais simplista e ingênua pois desconsidera as dimensões de tempo e espaço combinados, ao mesmo tempo que estima a regressão pelo método dos Mínimos Quadrados Ordinários (MQO) <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>.</p>
+<p>Este modelo trata de “empilhar” todas as observações da base de dados, ignorando a estrutura de dados em painel. Desta forma, todas as observações são tratadas como não correlacionadas para os indivíduos, com erros homoscedásticos para com os indivíduos. Trata-se, portanto, da forma mais simplista e ingênua pois desconsidera as dimensões de tempo e espaço combinados, ao mesmo tempo que estima a regressão pelo método dos Mínimos Quadrados Ordinários (MQO) <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>. Desta forma:</p>
+<p><span class="math display">\[
+ \begin{matrix}
+Y_{it} = \beta_1+\beta_2X_{2it} + \beta_3X_{3it} +u_{it}\\
+i=1,2,3,4\\
+t=1,2,\dots,20
+ \end{matrix}
+\]</span></p>
+<p>em que <span class="math inline">\(i\)</span> corresponde à <span class="math inline">\(i\)</span>-nésima unidade de corte transversal e <span class="math inline">\(t\)</span> o <span class="math inline">\(t\)</span>-nésimo período de tempo.</p>
 <p>Para executar este modelo de regressão é necessário utilizar a função <code>plm</code>, juntamente com as variáveis dependente e independentes, indicando a base de dados (<code>data</code>) e o tipo da regressão (<code>&quot;pooling&quot;</code>).</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">reg.pooled=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, </a>
 <a class="sourceLine" id="cb84-2" data-line-number="2">               <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;pooling&quot;</span>)</a>
@@ -324,7 +337,7 @@ Residual Sum of Squares: 1570000
 R-Squared:      0.755
 Adj. R-Squared: 0.748
 F-statistic: 118.424 on 2 and 77 DF, p-value: &lt;2e-16</code></pre>
-<p>A estimação da regressão <em>pooled</em> averiguou alta significância estatística nas variáveis dependentes (“value” e “capital”), indicando sinal positivo para os coeficientes (em consonância com a literatura), bem como um valor de R^2 alto. Este tipo de modelo não faz diferenciação entre a influência/diferença das empresas na variável investimentoe nem se a resposta do investimento às variáveis explicativas é a mesma ao longo do tempo. Isto faz com que não se saiba se existe heterogeneidade eentre as empresas. A comparação do modelo <em>pooled</em> com as regressões de efeitos fixos e efeitos aleatórios, que serão estimados na sequência, servirá para que o pesquisador decida pelo melhor modelo.</p>
+<p>A estimação da regressão <em>pooled</em> averiguou alta significância estatística nas variáveis dependentes (“value” e “capital”), indicando sinal positivo para os coeficientes (em consonância com a literatura), bem como um valor de R<span class="math inline">\(^2\)</span> alto. Este tipo de modelo não faz diferenciação entre a influência/diferença das empresas na variável investimento e nem se a resposta do investimento às variáveis explicativas é a mesma ao longo do tempo. Isto faz com que não se saiba se existe heterogeneidade entre as empresas. A comparação do modelo <em>pooled</em> com as regressões de efeitos fixos e efeitos aleatórios, que serão estimados na sequência, servirá mostrar ao pesquisador qual é o melhor modelo dentre eles.</p>
 <!--
 
 ```r
@@ -343,7 +356,7 @@ F-statistic: 118.424 on 2 and 77 DF, p-value: &lt;2e-16</code></pre>
 invest_{it} = value_{1it} + capital_{2it} + \alpha_i + \varepsilon_{it}
 \]</span>
 em que <span class="math inline">\(i=1,...,4\)</span>, <span class="math inline">\(t=1,...,20\)</span> (painel balanceado).</p>
-<p>Desta forma, o intercepto da equação é diferente para cada empresa, mas o efeito das variáveis independentes é o mesmo sobre a variável independente. Isto indica que existe características especiais em cada empresa influenciando o investimento, como por exemplo estilo de gestão <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>.</p>
+<p>Desta forma, o intercepto da equação é diferente para cada empresa, mas o efeito das variáveis independentes é o mesmo sobre a variável independente. Isto indica que existe características especiais em cada empresa influenciando o investimento, como por exemplo o estilo de gestão <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>.</p>
 <p>Abaixo é montada a regressão de efeitos fixos:</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">reg.ef=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, </a>
 <a class="sourceLine" id="cb86-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;within&quot;</span>)</a>
@@ -411,7 +424,23 @@ F-statistic:  210 on 5 and 74 DF,  p-value: &lt;2e-16</code></pre>
 </div>
 <div id="modelo-efeitos-aleatorios" class="section level2">
 <h2><span class="header-section-number">4.4</span> Modelo Efeitos Aleatórios</h2>
-<p>No modelo de regressão com efeitos aleatórios, os efeitos individuais das firmas (“firms” - <span class="math inline">\(\alpha_i\)</span>) são considerados variáveis aleatórias, ao contrário do modelo visto anteriormente. A montagem deste tipo de regressão é feita através da função <code>plm</code>, incluindo como modelo “random” e como método “walhus”, como segue:</p>
+<p>No modelo de regressão com efeitos aleatórios, os efeitos individuais das firmas (“firms”) são considerados variáveis aleatórias, ao contrário do modelo visto anteriormente. Desta forma:</p>
+<p><span class="math display">\[
+Y_{1i}=\beta_{1i}+\beta_2X_{2it}+\beta_3X_{3it}+u_{it}
+\]</span></p>
+<p>onde <span class="math inline">\(\beta_{1i}\)</span> é variável aleatória com valor médio <span class="math inline">\(\beta_1\)</span>, e o intercepto para a empresa individual é dado por <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>:</p>
+<p><span class="math display">\[
+\beta_{1i} = \beta_{1}+\varepsilon_{i} \quad i=1,2,\dots,N
+\]</span>
+em que <span class="math inline">\(\varepsilon_{i}\)</span> é um termo de erro de média zero e variânvia <span class="math inline">\(\sigma^{2}_{\varepsilon}\)</span>. Assim, as empresas possuem um valor médio para o intercepto (=<span class="math inline">\(\beta_1\)</span>), sendo que as diferenças refletem o termo de erro <span class="math inline">\(\varepsilon_i\)</span>. Obtêm-se:</p>
+<p><span class="math display">\[
+ \begin{matrix}
+Y_{it}=\beta_1+\beta_2X_{2it}+\beta_3X_{3it}+ w_{it}\\
+w_{it}=\varepsilon_i+u_{it}
+ \end{matrix}
+\]</span></p>
+<p>O erro composto <span class="math inline">\(w_{it}\)</span> é formado por <span class="math inline">\(\varepsilon_i\)</span> - elemento de corte transversal dos indivíduos e <span class="math inline">\(u_{it}\)</span>, que é o elemento da série temporal e do corte transversal <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>. Desta forma, assume-se que os erros individuais não estão correlacionados entre si e também não estão correlacionados entre aquelas unidades de corte transversal e das séries temporais.</p>
+<p>A montagem deste tipo de regressão é feita através da função <code>plm</code>, incluindo como modelo “random” e como método “walhus”, como segue:</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">reg.ea=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital,</a>
 <a class="sourceLine" id="cb92-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;random&quot;</span>, </a>
 <a class="sourceLine" id="cb92-3" data-line-number="3">           <span class="dt">random.method =</span> <span class="st">&quot;walhus&quot;</span>)</a>
@@ -505,8 +534,11 @@ chisq = 0.075, df = 2, p-value = 1
 alternative hypothesis: one model is inconsistent</code></pre>
 <p>Como o valor <em>p</em> foi superior a 0,05 o modelo de Efeitos Aleatórios foi considerado superior ao modelo de Efeitos Fixos.</p>
 </div>
-<div id="testando-dependencia" class="section level2">
-<h2><span class="header-section-number">4.6</span> Testando dependência</h2>
+<div id="alguns-testes-para-os-modelos" class="section level2">
+<h2><span class="header-section-number">4.6</span> Alguns testes para os modelos</h2>
+<div id="testando-dependencia-transversal-cross-sectional" class="section level3">
+<h3><span class="header-section-number">4.6.1</span> Testando dependência transversal (<em>cross-sectional</em>)</h3>
+<p>A dependência <em>cross-sectional</em> se apresenta em panieis com longas séries de tempo. A hipótese nula é de que os resíduos através dos indivíduos não estão correlacionados. Como resultado, nossa regressão aceita a hipótese nula do teste de Pesaran <span class="citation">(<a href="#ref-pesaran2015">2015</a>)</span>:</p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="kw">pcdtest</span>(reg.ea, <span class="dt">test=</span><span class="st">&quot;cd&quot;</span>)</a></code></pre></div>
 <pre><code>
     Pesaran CD test for cross-sectional dependence in panels
@@ -515,9 +547,33 @@ data:  invest ~ value + capital
 z = 0.31, p-value = 0.8
 alternative hypothesis: cross-sectional dependence</code></pre>
 </div>
-<div id="testando-correlacao-serial" class="section level2">
-<h2><span class="header-section-number">4.7</span> Testando correlação serial</h2>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">pbgtest</span>(reg.ea)</a></code></pre></div>
+<div id="normalidade-dos-residuos" class="section level3">
+<h3><span class="header-section-number">4.6.2</span> Normalidade dos resíduos</h3>
+<p>Segue o já conhecido teste para verificar a normalidade dos resíduos. Como resultado, foi aprovada a hipótese nula (H<span class="math inline">\(_0\)</span>) de normalidade nos resíduos da regressão.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">shapiro.test</span>(reg.ea<span class="op">$</span>residuals)</a></code></pre></div>
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  reg.ea$residuals
+W = 0.99, p-value = 0.9</code></pre>
+</div>
+<div id="homocedasticidade-dos-residuos" class="section level3">
+<h3><span class="header-section-number">4.6.3</span> Homocedasticidade dos resíduos</h3>
+<p>Abaixo o teste para homocedasticidade (variância constante) dos resíduos de Breusch-Pagan <span class="citation">(<a href="#ref-breusch1979">1979</a>)</span>:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="kw">library</span>(lmtest)</a>
+<a class="sourceLine" id="cb104-2" data-line-number="2"><span class="kw">bptest</span>(reg.ea)</a></code></pre></div>
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  reg.ea
+BP = 7.6, df = 2, p-value = 0.02</code></pre>
+<p>Como a hipótese nula é a de que não há homocedasticidade nos resíduos e o <em>p-value</em> foi inferior a 0,05, há problemas nos resíduos da regressão, portanto as veriáveis apresentam problemas de heterocedasticidade. Algumas soluções são possíveis, como a transformação das variáveis.</p>
+</div>
+<div id="testando-correlacao-serial" class="section level3">
+<h3><span class="header-section-number">4.6.4</span> Testando correlação serial</h3>
+<p>A hipótese nula do teste de correlação serial do teste Breusch-Godfrey/Wooldridge <span class="citation">(Breusch <a href="#ref-breusch1978">1978</a>)</span> é a de que não se encontra esta característica na série. Abaixo o resultado do teste, sendo que aprovou a hipótese nula, ou seja, não há problemas de correlação serial nos dados, pois o <em>p-value</em> é superior a 0,05.</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="co"># teste Breusch-Godfrey/Wooldridge - EFEITOS ALEATÓRIOS</span></a>
+<a class="sourceLine" id="cb106-2" data-line-number="2"><span class="kw">pbgtest</span>(reg.ea) </a></code></pre></div>
 <pre><code>
     Breusch-Godfrey/Wooldridge test for serial correlation in panel models
 
@@ -525,10 +581,38 @@ data:  invest ~ value + capital
 chisq = 26, df = 20, p-value = 0.2
 alternative hypothesis: serial correlation in idiosyncratic errors</code></pre>
 </div>
-<div id="testando-raizes-unitarias" class="section level2">
-<h2><span class="header-section-number">4.8</span> Testando raízes unitárias</h2>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="kw">require</span>(tseries)</a></code></pre></div>
+<div id="teste-para-efeitos-individuais-ou-de-tempo" class="section level3">
+<h3><span class="header-section-number">4.6.5</span> Teste para efeitos individuais ou de tempo</h3>
+<p>Pode ser efetuado o teste para verificar a presença de efeitos não observados de tempo ou individuais nos modelos de dados em painel <span class="citation">(Wooldridge <a href="#ref-wooldridge2010">2010</a>)</span>. A hipótse nula é a não correlação</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="co"># teste Wooldridge - POOLED</span></a>
+<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="kw">pwtest</span>(reg.pooled) </a></code></pre></div>
+<pre><code>
+    Wooldridge&#39;s test for unobserved individual effects
+
+data:  formula
+z = 1.4, p-value = 0.2
+alternative hypothesis: unobserved effect</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="kw">pwtest</span>(reg.pooled, <span class="dt">effect =</span> <span class="st">&quot;time&quot;</span>) </a></code></pre></div>
+<pre><code>
+    Wooldridge&#39;s test for unobserved time effects
+
+data:  formula
+z = -3.2, p-value = 0.001
+alternative hypothesis: unobserved effect</code></pre>
+</div>
+<div id="testando-raizes-unitarias" class="section level3">
+<h3><span class="header-section-number">4.6.6</span> Testando raízes unitárias</h3>
+<p>O teste de Dickey-Fuller prova se a série é estocástica, sendo que a hipótese nula é de que a série possui raiz unitária (não-estacionaridade). Abaixo o resultado do teste, sendo que observou-se que a série é não estacionária, ou seja, tem problemas para a regressão pois o <em>p-value</em> aprovou a hipótese nula. Desta forma, algumas saídas são possíveis, como a transformação da série ou mesmo a utilização da primeira diferença da série.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="kw">require</span>(tseries)</a></code></pre></div>
 <pre><code>Carregando pacotes exigidos: tseries</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="kw">adf.test</span>(Grunfeld<span class="op">$</span>invest, <span class="dt">k=</span><span class="dv">2</span>)</a></code></pre></div>
+<pre><code>
+    Augmented Dickey-Fuller Test
+
+data:  Grunfeld$invest
+Dickey-Fuller = -3.4, Lag order = 2, p-value = 0.07
+alternative hypothesis: stationary</code></pre>
+</div>
 </div>
 </div>
 <h3>Referências</h3>
@@ -541,6 +625,18 @@ alternative hypothesis: serial correlation in idiosyncratic errors</code></pre>
 </div>
 <div id="ref-hausman1978">
 <p>Hausman, Jerry A. 1978. «Specification tests in econometrics». <em>Econometrica: Journal of the econometric society</em>. JSTOR, 1251–71.</p>
+</div>
+<div id="ref-pesaran2015">
+<p>Pesaran, M Hashem. 2015. «Testing weak cross-sectional dependence in large panels». <em>Econometric Reviews</em> 34 (6-10). Taylor &amp; Francis:1089–1117.</p>
+</div>
+<div id="ref-breusch1979">
+<p>Breusch, Trevor S, e Adrian R Pagan. 1979. «A simple test for heteroscedasticity and random coefficient variation». <em>Econometrica: Journal of the Econometric Society</em>. JSTOR, 1287–94.</p>
+</div>
+<div id="ref-breusch1978">
+<p>Breusch, Trevor S. 1978. «Testing for autocorrelation in dynamic linear models». <em>Australian Economic Papers</em> 17 (31). Wiley Online Library:334–55.</p>
+</div>
+<div id="ref-wooldridge2010">
+<p>Wooldridge, Jeffrey M. 2010. <em>Econometric analysis of cross section and panel data</em>. MIT Press.</p>
 </div>
 </div>
             </section>

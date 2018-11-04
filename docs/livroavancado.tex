@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-10-31}
+    \date{2018-11-03}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -2329,9 +2329,9 @@ surgem, dentre elas:
   regressão considerando que os coeficientes angulares são constantes e
   o intercepto varia entre os indivíduos (EFEITOS FIXOS);
 \item
-  regressão considerando que o intercepto e coeficientes angulares
-  variam ao longo do tempo e também entre indivíduos (EFEITOS
-  ALEATÓRIOS).
+  regressão considerando que o intercepto assume um valor médio comum
+  entre os indivíduos e os coeficientes angulares variam ao longo do
+  tempo e também entre indivíduos (EFEITOS ALEATÓRIOS).
 \end{enumerate}
 
 Abaixo é demonstrada a evolução do investimento de acordo com cada
@@ -2339,7 +2339,7 @@ empresa estudada:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{coplot}\NormalTok{(invest }\OperatorTok{~}\StringTok{ }\NormalTok{year}\OperatorTok{|}\NormalTok{firm, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{data=}\NormalTok{Grunfeld)}
+\KeywordTok{coplot}\NormalTok{(invest }\OperatorTok{~}\StringTok{ }\NormalTok{year}\OperatorTok{|}\NormalTok{firm, }\DataTypeTok{type=}\StringTok{"b"}\NormalTok{, }\DataTypeTok{data=}\NormalTok{Grunfeld)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2355,7 +2355,18 @@ com erros homoscedásticos para com os indivíduos. Trata-se, portanto, da
 forma mais simplista e ingênua pois desconsidera as dimensões de tempo e
 espaço combinados, ao mesmo tempo que estima a regressão pelo método dos
 Mínimos Quadrados Ordinários (MQO) (GUJARATI; PORTER,
-\protect\hyperlink{ref-Gujarati2011}{2011}).
+\protect\hyperlink{ref-Gujarati2011}{2011}). Desta forma:
+
+\[
+ \begin{matrix}
+Y_{it} = \beta_1+\beta_2X_{2it} + \beta_3X_{3it} +u_{it}\\
+i=1,2,3,4\\
+t=1,2,\dots,20
+ \end{matrix}
+\]
+
+em que \(i\) corresponde à \(i\)-nésima unidade de corte transversal e
+\(t\) o \(t\)-nésimo período de tempo.
 
 Para executar este modelo de regressão é necessário utilizar a função
 \texttt{plm}, juntamente com as variáveis dependente e independentes,
@@ -2400,14 +2411,14 @@ F-statistic: 118.424 on 2 and 77 DF, p-value: <2e-16
 A estimação da regressão \emph{pooled} averiguou alta significância
 estatística nas variáveis dependentes (``value'' e ``capital''),
 indicando sinal positivo para os coeficientes (em consonância com a
-literatura), bem como um valor de R\^{}2 alto. Este tipo de modelo não
+literatura), bem como um valor de R\(^2\) alto. Este tipo de modelo não
 faz diferenciação entre a influência/diferença das empresas na variável
-investimentoe nem se a resposta do investimento às variáveis
+investimento e nem se a resposta do investimento às variáveis
 explicativas é a mesma ao longo do tempo. Isto faz com que não se saiba
-se existe heterogeneidade eentre as empresas. A comparação do modelo
+se existe heterogeneidade entre as empresas. A comparação do modelo
 \emph{pooled} com as regressões de efeitos fixos e efeitos aleatórios,
-que serão estimados na sequência, servirá para que o pesquisador decida
-pelo melhor modelo.
+que serão estimados na sequência, servirá mostrar ao pesquisador qual é
+o melhor modelo dentre eles.
 
 \hypertarget{modelo-efeitos-fixos}{%
 \section{Modelo Efeitos Fixos}\label{modelo-efeitos-fixos}}
@@ -2426,8 +2437,8 @@ invest_{it} = value_{1it} + capital_{2it} + \alpha_i + \varepsilon_{it}
 Desta forma, o intercepto da equação é diferente para cada empresa, mas
 o efeito das variáveis independentes é o mesmo sobre a variável
 independente. Isto indica que existe características especiais em cada
-empresa influenciando o investimento, como por exemplo estilo de gestão
-(GUJARATI; PORTER, \protect\hyperlink{ref-Gujarati2011}{2011}).
+empresa influenciando o investimento, como por exemplo o estilo de
+gestão (GUJARATI; PORTER, \protect\hyperlink{ref-Gujarati2011}{2011}).
 
 Abaixo é montada a regressão de efeitos fixos:
 
@@ -2542,10 +2553,42 @@ Steel, o valor do intercepto passa para 94,988 (= -85,51533 +
 \section{Modelo Efeitos Aleatórios}\label{modelo-efeitos-aleatorios}}
 
 No modelo de regressão com efeitos aleatórios, os efeitos individuais
-das firmas (``firms'' - \(\alpha_i\)) são considerados variáveis
-aleatórias, ao contrário do modelo visto anteriormente. A montagem deste
-tipo de regressão é feita através da função \texttt{plm}, incluindo como
-modelo ``random'' e como método ``walhus'', como segue:
+das firmas (``firms'') são considerados variáveis aleatórias, ao
+contrário do modelo visto anteriormente. Desta forma:
+
+\[
+Y_{1i}=\beta_{1i}+\beta_2X_{2it}+\beta_3X_{3it}+u_{it}
+\]
+
+onde \(\beta_{1i}\) é variável aleatória com valor médio \(\beta_1\), e
+o intercepto para a empresa individual é dado por (GUJARATI; PORTER,
+\protect\hyperlink{ref-Gujarati2011}{2011}):
+
+\[
+\beta_{1i} = \beta_{1}+\varepsilon_{i} \quad i=1,2,\dots,N
+\] em que \(\varepsilon_{i}\) é um termo de erro de média zero e
+variânvia \(\sigma^{2}_{\varepsilon}\). Assim, as empresas possuem um
+valor médio para o intercepto (=\(\beta_1\)), sendo que as diferenças
+refletem o termo de erro \(\varepsilon_i\). Obtêm-se:
+
+\[
+ \begin{matrix}
+Y_{it}=\beta_1+\beta_2X_{2it}+\beta_3X_{3it}+ w_{it}\\
+w_{it}=\varepsilon_i+u_{it}
+ \end{matrix}
+\]
+
+O erro composto \(w_{it}\) é formado por \(\varepsilon_i\) - elemento de
+corte transversal dos indivíduos e \(u_{it}\), que é o elemento da série
+temporal e do corte transversal (GUJARATI; PORTER,
+\protect\hyperlink{ref-Gujarati2011}{2011}). Desta forma, assume-se que
+os erros individuais não estão correlacionados entre si e também não
+estão correlacionados entre aquelas unidades de corte transversal e das
+séries temporais.
+
+A montagem deste tipo de regressão é feita através da função
+\texttt{plm}, incluindo como modelo ``random'' e como método ``walhus'',
+como segue:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2714,8 +2757,19 @@ alternative hypothesis: one model is inconsistent
 Como o valor \emph{p} foi superior a 0,05 o modelo de Efeitos Aleatórios
 foi considerado superior ao modelo de Efeitos Fixos.
 
-\hypertarget{testando-dependencia}{%
-\section{Testando dependência}\label{testando-dependencia}}
+\hypertarget{alguns-testes-para-os-modelos}{%
+\section{Alguns testes para os
+modelos}\label{alguns-testes-para-os-modelos}}
+
+\hypertarget{testando-dependencia-transversal-cross-sectional}{%
+\subsection{\texorpdfstring{Testando dependência transversal
+(\emph{cross-sectional})}{Testando dependência transversal (cross-sectional)}}\label{testando-dependencia-transversal-cross-sectional}}
+
+A dependência \emph{cross-sectional} se apresenta em panieis com longas
+séries de tempo. A hipótese nula é de que os resíduos através dos
+indivíduos não estão correlacionados. Como resultado, nossa regressão
+aceita a hipótese nula do teste de Pesaran
+(\protect\hyperlink{ref-pesaran2015}{2015}):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2732,12 +2786,70 @@ z = 0.31, p-value = 0.8
 alternative hypothesis: cross-sectional dependence
 \end{verbatim}
 
-\hypertarget{testando-correlacao-serial}{%
-\section{Testando correlação serial}\label{testando-correlacao-serial}}
+\hypertarget{normalidade-dos-residuos}{%
+\subsection{Normalidade dos resíduos}\label{normalidade-dos-residuos}}
+
+Segue o já conhecido teste para verificar a normalidade dos resíduos.
+Como resultado, foi aprovada a hipótese nula (H\(_0\)) de normalidade
+nos resíduos da regressão.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{pbgtest}\NormalTok{(reg.ea)}
+\KeywordTok{shapiro.test}\NormalTok{(reg.ea}\OperatorTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Shapiro-Wilk normality test
+
+data:  reg.ea$residuals
+W = 0.99, p-value = 0.9
+\end{verbatim}
+
+\hypertarget{homocedasticidade-dos-residuos}{%
+\subsection{Homocedasticidade dos
+resíduos}\label{homocedasticidade-dos-residuos}}
+
+Abaixo o teste para homocedasticidade (variância constante) dos resíduos
+de Breusch-Pagan (\protect\hyperlink{ref-breusch1979}{1979}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(lmtest)}
+\KeywordTok{bptest}\NormalTok{(reg.ea)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    studentized Breusch-Pagan test
+
+data:  reg.ea
+BP = 7.6, df = 2, p-value = 0.02
+\end{verbatim}
+
+Como a hipótese nula é a de que não há homocedasticidade nos resíduos e
+o \emph{p-value} foi inferior a 0,05, há problemas nos resíduos da
+regressão, portanto as veriáveis apresentam problemas de
+heterocedasticidade. Algumas soluções são possíveis, como a
+transformação das variáveis.
+
+\hypertarget{testando-correlacao-serial}{%
+\subsection{Testando correlação
+serial}\label{testando-correlacao-serial}}
+
+A hipótese nula do teste de correlação serial do teste
+Breusch-Godfrey/Wooldridge (BREUSCH,
+\protect\hyperlink{ref-breusch1978}{1978}) é a de que não se encontra
+esta característica na série. Abaixo o resultado do teste, sendo que
+aprovou a hipótese nula, ou seja, não há problemas de correlação serial
+nos dados, pois o \emph{p-value} é superior a 0,05.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# teste Breusch-Godfrey/Wooldridge - EFEITOS ALEATÓRIOS}
+\KeywordTok{pbgtest}\NormalTok{(reg.ea) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -2750,8 +2862,56 @@ chisq = 26, df = 20, p-value = 0.2
 alternative hypothesis: serial correlation in idiosyncratic errors
 \end{verbatim}
 
+\hypertarget{teste-para-efeitos-individuais-ou-de-tempo}{%
+\subsection{Teste para efeitos individuais ou de
+tempo}\label{teste-para-efeitos-individuais-ou-de-tempo}}
+
+Pode ser efetuado o teste para verificar a presença de efeitos não
+observados de tempo ou individuais nos modelos de dados em painel
+(WOOLDRIDGE, \protect\hyperlink{ref-wooldridge2010}{2010}). A hipótse
+nula é a não correlação
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# teste Wooldridge - POOLED}
+\KeywordTok{pwtest}\NormalTok{(reg.pooled) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Wooldridge's test for unobserved individual effects
+
+data:  formula
+z = 1.4, p-value = 0.2
+alternative hypothesis: unobserved effect
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pwtest}\NormalTok{(reg.pooled, }\DataTypeTok{effect =} \StringTok{"time"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Wooldridge's test for unobserved time effects
+
+data:  formula
+z = -3.2, p-value = 0.001
+alternative hypothesis: unobserved effect
+\end{verbatim}
+
 \hypertarget{testando-raizes-unitarias}{%
-\section{Testando raízes unitárias}\label{testando-raizes-unitarias}}
+\subsection{Testando raízes unitárias}\label{testando-raizes-unitarias}}
+
+O teste de Dickey-Fuller prova se a série é estocástica, sendo que a
+hipótese nula é de que a série possui raiz unitária
+(não-estacionaridade). Abaixo o resultado do teste, sendo que
+observou-se que a série é não estacionária, ou seja, tem problemas para
+a regressão pois o \emph{p-value} aprovou a hipótese nula. Desta forma,
+algumas saídas são possíveis, como a transformação da série ou mesmo a
+utilização da primeira diferença da série.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2761,6 +2921,21 @@ alternative hypothesis: serial correlation in idiosyncratic errors
 
 \begin{verbatim}
 Carregando pacotes exigidos: tseries
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{adf.test}\NormalTok{(Grunfeld}\OperatorTok{$}\NormalTok{invest, }\DataTypeTok{k=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Augmented Dickey-Fuller Test
+
+data:  Grunfeld$invest
+Dickey-Fuller = -3.4, Lag order = 2, p-value = 0.07
+alternative hypothesis: stationary
 \end{verbatim}
 
 \hypertarget{regressao-logistica}{%
@@ -4190,7 +4365,7 @@ padrão calculou-se os limites inferior (\emph{LL: low level}) e superior
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-84-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-87-1} \end{center}
 
 \hypertarget{exercicios}{%
 \section{Exercícios}\label{exercicios}}
@@ -4374,7 +4549,7 @@ dependente) da base de dados:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-87-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-90-1} \end{center}
 
 Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 
@@ -4384,7 +4559,7 @@ Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-88-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-91-1} \end{center}
 
 Para criação da regressão de Poisson utiliza-se a função já conhecida
 \texttt{glm()}, sendo que em \texttt{family} é determinado o tipo de
@@ -4537,11 +4712,11 @@ base de dados analisada:
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-93-1} 
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-96-1} 
 
 }
 
-\caption{Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)}\label{fig:unnamed-chunk-93}
+\caption{Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)}\label{fig:unnamed-chunk-96}
 \end{figure}
 
 No entanto, é possível melhorar a precisão do modelo de regressão
@@ -4743,11 +4918,11 @@ regressão de Poisson:
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-98-1} 
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-101-1} 
 
 }
 
-\caption{Valores observados e preditos}\label{fig:unnamed-chunk-98}
+\caption{Valores observados e preditos}\label{fig:unnamed-chunk-101}
 \end{figure}
 
 Fonte: Adaptado de PENNSTATE (\protect\hyperlink{ref-penn2018}{2018}).
@@ -4795,6 +4970,16 @@ dos dados da regressão de Poisson:
 \addcontentsline{toc}{chapter}{Referências}
 
 \hypertarget{refs}{}
+\leavevmode\hypertarget{ref-breusch1978}{}%
+BREUSCH, T. S. \textbf{Testing for autocorrelation in dynamic linear
+models}. \emph{Australian Economic Papers}, {[}s.l.{]}, n. 31, 1978.
+
+\leavevmode\hypertarget{ref-breusch1979}{}%
+BREUSCH, T. S.; PAGAN, A. R. \textbf{A simple test for
+heteroscedasticity and random coefficient variation}.
+\emph{Econometrica: Journal of the Econometric Society}, {[}s.l.{]},
+1979.
+
 \leavevmode\hypertarget{ref-breusch1980}{}%
 BREUSCH, T. S.; PAGAN, A. R. \textbf{The Lagrange multiplier test and
 its applications to model specification in econometrics}. \emph{The
@@ -4823,6 +5008,10 @@ York: Wiley, 2000.
 
 \leavevmode\hypertarget{ref-penn2018}{}%
 
+\leavevmode\hypertarget{ref-pesaran2015}{}%
+PESARAN, M. H. \textbf{Testing weak cross-sectional dependence in large
+panels}. \emph{Econometric Reviews}, {[}s.l.{]}, n. 6-10, 2015.
+
 \leavevmode\hypertarget{ref-Rawlings1998}{}%
 RAWLINGS, J. O.; PANTULA, S. G.; DICKEY, D. A. \textbf{Applied
 Regression Analysis: A Research Tool}. New York: Springer, 1998.
@@ -4836,6 +5025,10 @@ SIEGEL, E. \textbf{Análise Preditiva: O poder de prever quem vai clicar,
 comprar, mentir ou morrer}. Rio de Janeiro: Alta Books, 2017.
 
 \leavevmode\hypertarget{ref-Torres-Reyna2014}{}%
+
+\leavevmode\hypertarget{ref-wooldridge2010}{}%
+WOOLDRIDGE, J. M. \textbf{Econometric analysis of cross section and
+panel data}. {[}s.l.{]}: MIT Press, 2010.
 
 
 \end{document}
