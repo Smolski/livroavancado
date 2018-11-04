@@ -2089,7 +2089,7 @@ alternative hypothesis: serial correlation in idiosyncratic errors
 
 ### Teste para efeitos individuais ou de tempo
 
-Pode ser efetuado o teste para verificar a presença de efeitos não observados de tempo ou individuais nos modelos de dados em painel [@wooldridge2010]. A hipótse nula é a não correlação 
+Pode ser efetuado o teste para verificar a presença de efeitos não observados de tempo ou individuais nos modelos de dados em painel [@wooldridge2010]. A hipótse nula é a não correlação entre os erros do mesmo grupo. Observa-se que para o efeito tempo ("time") há aceitação da hipótese alternativa, mostrando a correlação entre erros, ao contrário do efeito individual:
 
 
 ```r

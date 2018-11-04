@@ -583,7 +583,7 @@ alternative hypothesis: serial correlation in idiosyncratic errors</code></pre>
 </div>
 <div id="teste-para-efeitos-individuais-ou-de-tempo" class="section level3">
 <h3><span class="header-section-number">4.6.5</span> Teste para efeitos individuais ou de tempo</h3>
-<p>Pode ser efetuado o teste para verificar a presença de efeitos não observados de tempo ou individuais nos modelos de dados em painel <span class="citation">(Wooldridge <a href="#ref-wooldridge2010">2010</a>)</span>. A hipótse nula é a não correlação</p>
+<p>Pode ser efetuado o teste para verificar a presença de efeitos não observados de tempo ou individuais nos modelos de dados em painel <span class="citation">(Wooldridge <a href="#ref-wooldridge2010">2010</a>)</span>. A hipótse nula é a não correlação entre os erros do mesmo grupo. Observa-se que para o efeito tempo (“time”) há aceitação da hipótese alternativa, mostrando a correlação entre erros, ao contrário do efeito individual:</p>
 <div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="co"># teste Wooldridge - POOLED</span></a>
 <a class="sourceLine" id="cb108-2" data-line-number="2"><span class="kw">pwtest</span>(reg.pooled) </a></code></pre></div>
 <pre><code>
