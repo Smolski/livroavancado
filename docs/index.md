@@ -3,7 +3,7 @@ title: "Software R: curso avançado"
 author: 
 - Felipe Micail da Silva Smolski
 - Iara Denise Endruweit Battisti
-date: "2018-11-03"
+date: "2018-11-05"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -23,6 +23,7 @@ classoption: oneside
 
 
 # Prefácio {-}
+\frenchspacing 
 
 Esta é a estrutura provisória de capítulos do **Curso Avançado em Estatística com R da UFFS**:
 
@@ -32,6 +33,7 @@ Esta é a estrutura provisória de capítulos do **Curso Avançado em Estatísti
 - Regressão com Dados em Painel
 - Regressão Logística
 - Regressão de Poisson
+- Manipulação de bases de dados
 
 <!--
 Algumas sugestões a incluir:
@@ -1053,7 +1055,8 @@ Este entrevistado se destacou em primeiro no segundo fator, apresentando preocup
 ```r
 factor.scores(creme_dental_exemplo1,PCAdentevarimax, 
               Phi = NULL, 
-              method = c("Thurstone", "tenBerge", "Anderson", "Bartlett", "Harman","components"),
+              method = c("Thurstone", "tenBerge", "Anderson",
+                         "Bartlett", "Harman","components"),
               rho=NULL)
 ```
 
@@ -3710,8 +3713,195 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 - Análise de super-dispersão do modelo (quando Var(Y) > E(Y)). Neste caso, pode ocorrer por três motivos: a) função de ligação inadequada: talvez outras funções além da logarítimica se ajustem melhor; b) não inclusão de variáveis relevantes ao modelo; c) excessos de zeros. 
 
 
+# Manipulando bases de dados
+
+## Pacote tidyr
+
+### Função *spread*
+
+
+
+```r
+require(tidyr)
+```
+
+```
+Carregando pacotes exigidos: tidyr
+```
+
+```r
+table1
+```
+
+```
+# A tibble: 6 x 4
+  country      year  cases population
+  <chr>       <int>  <int>      <int>
+1 Afghanistan  1999    745   19987071
+2 Afghanistan  2000   2666   20595360
+3 Brazil       1999  37737  172006362
+4 Brazil       2000  80488  174504898
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583
+```
+
+
+
+
+```r
+spread(table2, type, count)
+```
+
+```
+# A tibble: 6 x 4
+  country      year  cases population
+  <chr>       <int>  <int>      <int>
+1 Afghanistan  1999    745   19987071
+2 Afghanistan  2000   2666   20595360
+3 Brazil       1999  37737  172006362
+4 Brazil       2000  80488  174504898
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583
+```
+
+
+### Função *gather*
+
+
+```r
+table4a
+```
+
+```
+# A tibble: 3 x 3
+  country     `1999` `2000`
+* <chr>        <int>  <int>
+1 Afghanistan    745   2666
+2 Brazil       37737  80488
+3 China       212258 213766
+```
+
+
+```r
+gather(table4a, "year", "cases", 2:3)
+```
+
+```
+# A tibble: 6 x 3
+  country     year   cases
+  <chr>       <chr>  <int>
+1 Afghanistan 1999     745
+2 Brazil      1999   37737
+3 China       1999  212258
+4 Afghanistan 2000    2666
+5 Brazil      2000   80488
+6 China       2000  213766
+```
+
+
+
+### Função *separate*
+
+
+```r
+table3
+```
+
+```
+# A tibble: 6 x 3
+  country      year rate             
+* <chr>       <int> <chr>            
+1 Afghanistan  1999 745/19987071     
+2 Afghanistan  2000 2666/20595360    
+3 Brazil       1999 37737/172006362  
+4 Brazil       2000 80488/174504898  
+5 China        1999 212258/1272915272
+6 China        2000 213766/1280428583
+```
+
+
+
+```r
+separate(table3, rate, into = c("cases", "population"),sep = "/")
+```
+
+```
+# A tibble: 6 x 4
+  country      year cases  population
+* <chr>       <int> <chr>  <chr>     
+1 Afghanistan  1999 745    19987071  
+2 Afghanistan  2000 2666   20595360  
+3 Brazil       1999 37737  172006362 
+4 Brazil       2000 80488  174504898 
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583
+```
+
+
+
+
+```r
+separate(table3, year, into = c("century", "year"), sep = 2)
+```
+
+```
+# A tibble: 6 x 4
+  country     century year  rate             
+* <chr>       <chr>   <chr> <chr>            
+1 Afghanistan 19      99    745/19987071     
+2 Afghanistan 20      00    2666/20595360    
+3 Brazil      19      99    37737/172006362  
+4 Brazil      20      00    80488/174504898  
+5 China       19      99    212258/1272915272
+6 China       20      00    213766/1280428583
+```
+
+### Função *unite*
+
+
+
+```r
+table5
+```
+
+```
+# A tibble: 6 x 4
+  country     century year  rate             
+* <chr>       <chr>   <chr> <chr>            
+1 Afghanistan 19      99    745/19987071     
+2 Afghanistan 20      00    2666/20595360    
+3 Brazil      19      99    37737/172006362  
+4 Brazil      20      00    80488/174504898  
+5 China       19      99    212258/1272915272
+6 China       20      00    213766/1280428583
+```
+
+
+```r
+unite(table5, "new", century, year, sep = "")
+```
+
+```
+# A tibble: 6 x 3
+  country     new   rate             
+  <chr>       <chr> <chr>            
+1 Afghanistan 1999  745/19987071     
+2 Afghanistan 2000  2666/20595360    
+3 Brazil      1999  37737/172006362  
+4 Brazil      2000  80488/174504898  
+5 China       1999  212258/1272915272
+6 China       2000  213766/1280428583
+```
+
+
+\setlength{\parindent}{0.0cm}
+
+\RaggedRight
+
+\frenchspacing 
 
 # Referências {-}
+
 
 
 

@@ -37,6 +37,7 @@ knitr::opts_chunk$set(
 
 
 # Prefácio {-}
+\frenchspacing 
 
 Esta é a estrutura provisória de capítulos do **Curso Avançado em Estatística com R da UFFS**:
 
@@ -46,6 +47,7 @@ Esta é a estrutura provisória de capítulos do **Curso Avançado em Estatísti
 - Regressão com Dados em Painel
 - Regressão Logística
 - Regressão de Poisson
+- Manipulação de bases de dados
 
 <!--
 Algumas sugestões a incluir:
@@ -660,7 +662,8 @@ Este entrevistado se destacou em primeiro no segundo fator, apresentando preocup
 ```{r}
 factor.scores(creme_dental_exemplo1,PCAdentevarimax, 
               Phi = NULL, 
-              method = c("Thurstone", "tenBerge", "Anderson", "Bartlett", "Harman","components"),
+              method = c("Thurstone", "tenBerge", "Anderson",
+                         "Bartlett", "Harman","components"),
               rho=NULL)
 ```
 
@@ -2238,8 +2241,76 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 - Análise de super-dispersão do modelo (quando Var(Y) > E(Y)). Neste caso, pode ocorrer por três motivos: a) função de ligação inadequada: talvez outras funções além da logarítimica se ajustem melhor; b) não inclusão de variáveis relevantes ao modelo; c) excessos de zeros. 
 
 
+# Manipulando bases de dados
+
+## Pacote tidyr
+
+### Função *spread*
+
+
+```{r}
+require(tidyr)
+table1
+```
+
+
+
+```{r}
+spread(table2, type, count)
+
+```
+
+
+### Função *gather*
+
+```{r}
+table4a
+```
+
+```{r}
+gather(table4a, "year", "cases", 2:3)
+
+```
+
+
+
+### Função *separate*
+
+```{r}
+table3
+```
+
+
+```{r}
+separate(table3, rate, into = c("cases", "population"),sep = "/")
+```
+
+
+
+```{r}
+separate(table3, year, into = c("century", "year"), sep = 2)
+```
+
+### Função *unite*
+
+
+```{r}
+table5
+```
+
+```{r}
+unite(table5, "new", century, year, sep = "")
+```
+
+
+\setlength{\parindent}{0.0cm}
+
+\RaggedRight
+
+\frenchspacing 
 
 # Referências {-}
+
 
 
 

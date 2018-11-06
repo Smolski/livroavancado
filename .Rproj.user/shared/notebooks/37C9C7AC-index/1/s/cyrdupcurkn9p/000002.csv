@@ -1,0 +1,1 @@
+"0","separate(table3, year, into = c(""century"", ""year""), sep = 2)"

@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-11-03}
+    \date{2018-11-05}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -141,13 +141,23 @@
 \usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
 \usepackage{color}				% Controle das cores
 \usepackage{graphicx}
+\usepackage{microtype} 
 
-%\setlength{\parskip}{1em}
-\renewcommand{\baselinestretch}{1.0}
-\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0.1cm}
+%\renewcommand{\baselinestretch}{1.5}
+\setlength{\parindent}{1.0cm}
 \selectlanguage{brazil}
 
 \usepackage{float}
+\usepackage{ragged2e}
+
+%\setlength\afterchapskip{\onelineskip} %espaçamento entre capítulo e text
+%\setlength\aftersecskip{\onelineskip} %espaçamento entre seção e texto
+%\setlength\aftersubsecskip{\onelineskip} %espaçamento entre subseção e texto
+%Espaçamento entre linhas
+\renewcommand{\baselinestretch}{1.0}
+% O tamanho do parágrafo é dado por:
+%\setlength{\parindent}{1.25cm}
 
 \begin{document}
 \maketitle
@@ -159,6 +169,8 @@
 \hypertarget{prefacio}{%
 \chapter*{Prefácio}\label{prefacio}}
 \addcontentsline{toc}{chapter}{Prefácio}
+
+\frenchspacing
 
 Esta é a estrutura provisória de capítulos do \textbf{Curso Avançado em
 Estatística com R da UFFS}:
@@ -177,6 +189,8 @@ Estatística com R da UFFS}:
   Regressão Logística
 \item
   Regressão de Poisson
+\item
+  Manipulação de bases de dados
 \end{itemize}
 
 \hypertarget{introducao}{%
@@ -1513,7 +1527,8 @@ dentes, hálito puro e boa aparência dos dentes.
 \begin{Highlighting}[]
 \KeywordTok{factor.scores}\NormalTok{(creme_dental_exemplo1,PCAdentevarimax, }
               \DataTypeTok{Phi =} \OtherTok{NULL}\NormalTok{, }
-              \DataTypeTok{method =} \KeywordTok{c}\NormalTok{(}\StringTok{"Thurstone"}\NormalTok{, }\StringTok{"tenBerge"}\NormalTok{, }\StringTok{"Anderson"}\NormalTok{, }\StringTok{"Bartlett"}\NormalTok{, }\StringTok{"Harman"}\NormalTok{,}\StringTok{"components"}\NormalTok{),}
+              \DataTypeTok{method =} \KeywordTok{c}\NormalTok{(}\StringTok{"Thurstone"}\NormalTok{, }\StringTok{"tenBerge"}\NormalTok{, }\StringTok{"Anderson"}\NormalTok{,}
+                         \StringTok{"Bartlett"}\NormalTok{, }\StringTok{"Harman"}\NormalTok{,}\StringTok{"components"}\NormalTok{),}
               \DataTypeTok{rho=}\OtherTok{NULL}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -4966,6 +4981,203 @@ dos dados da regressão de Poisson:
   melhor; b) não inclusão de variáveis relevantes ao modelo; c) excessos
   de zeros.
 \end{itemize}
+
+\hypertarget{manipulando-bases-de-dados}{%
+\chapter{Manipulando bases de dados}\label{manipulando-bases-de-dados}}
+
+\hypertarget{pacote-tidyr}{%
+\section{Pacote tidyr}\label{pacote-tidyr}}
+
+\hypertarget{funcao-spread}{%
+\subsection{\texorpdfstring{Função
+\emph{spread}}{Função spread}}\label{funcao-spread}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(tidyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Carregando pacotes exigidos: tidyr
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 4
+  country      year  cases population
+  <chr>       <int>  <int>      <int>
+1 Afghanistan  1999    745   19987071
+2 Afghanistan  2000   2666   20595360
+3 Brazil       1999  37737  172006362
+4 Brazil       2000  80488  174504898
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{spread}\NormalTok{(table2, type, count)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 4
+  country      year  cases population
+  <chr>       <int>  <int>      <int>
+1 Afghanistan  1999    745   19987071
+2 Afghanistan  2000   2666   20595360
+3 Brazil       1999  37737  172006362
+4 Brazil       2000  80488  174504898
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583
+\end{verbatim}
+
+\hypertarget{funcao-gather}{%
+\subsection{\texorpdfstring{Função
+\emph{gather}}{Função gather}}\label{funcao-gather}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table4a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 3 x 3
+  country     `1999` `2000`
+* <chr>        <int>  <int>
+1 Afghanistan    745   2666
+2 Brazil       37737  80488
+3 China       212258 213766
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{gather}\NormalTok{(table4a, }\StringTok{"year"}\NormalTok{, }\StringTok{"cases"}\NormalTok{, }\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 3
+  country     year   cases
+  <chr>       <chr>  <int>
+1 Afghanistan 1999     745
+2 Brazil      1999   37737
+3 China       1999  212258
+4 Afghanistan 2000    2666
+5 Brazil      2000   80488
+6 China       2000  213766
+\end{verbatim}
+
+\hypertarget{funcao-separate}{%
+\subsection{\texorpdfstring{Função
+\emph{separate}}{Função separate}}\label{funcao-separate}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 3
+  country      year rate             
+* <chr>       <int> <chr>            
+1 Afghanistan  1999 745/19987071     
+2 Afghanistan  2000 2666/20595360    
+3 Brazil       1999 37737/172006362  
+4 Brazil       2000 80488/174504898  
+5 China        1999 212258/1272915272
+6 China        2000 213766/1280428583
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{separate}\NormalTok{(table3, rate, }\DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"cases"}\NormalTok{, }\StringTok{"population"}\NormalTok{),}\DataTypeTok{sep =} \StringTok{"/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 4
+  country      year cases  population
+* <chr>       <int> <chr>  <chr>     
+1 Afghanistan  1999 745    19987071  
+2 Afghanistan  2000 2666   20595360  
+3 Brazil       1999 37737  172006362 
+4 Brazil       2000 80488  174504898 
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{separate}\NormalTok{(table3, year, }\DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"century"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\DataTypeTok{sep =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 4
+  country     century year  rate             
+* <chr>       <chr>   <chr> <chr>            
+1 Afghanistan 19      99    745/19987071     
+2 Afghanistan 20      00    2666/20595360    
+3 Brazil      19      99    37737/172006362  
+4 Brazil      20      00    80488/174504898  
+5 China       19      99    212258/1272915272
+6 China       20      00    213766/1280428583
+\end{verbatim}
+
+\hypertarget{funcao-unite}{%
+\subsection{\texorpdfstring{Função
+\emph{unite}}{Função unite}}\label{funcao-unite}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 4
+  country     century year  rate             
+* <chr>       <chr>   <chr> <chr>            
+1 Afghanistan 19      99    745/19987071     
+2 Afghanistan 20      00    2666/20595360    
+3 Brazil      19      99    37737/172006362  
+4 Brazil      20      00    80488/174504898  
+5 China       19      99    212258/1272915272
+6 China       20      00    213766/1280428583
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{unite}\NormalTok{(table5, }\StringTok{"new"}\NormalTok{, century, year, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 3
+  country     new   rate             
+  <chr>       <chr> <chr>            
+1 Afghanistan 1999  745/19987071     
+2 Afghanistan 2000  2666/20595360    
+3 Brazil      1999  37737/172006362  
+4 Brazil      2000  80488/174504898  
+5 China       1999  212258/1272915272
+6 China       2000  213766/1280428583
+\end{verbatim}
+
+\setlength{\parindent}{0.0cm}
+
+\RaggedRight
+
+\frenchspacing
 
 \hypertarget{referencias}{%
 \chapter*{Referências}\label{referencias}}
