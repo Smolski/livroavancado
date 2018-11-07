@@ -2243,9 +2243,21 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 
 # Manipulando bases de dados
 
+
+
 ## Pacote tidyr
 
+Nesta seção será utilizado o pacote `tidyr` para demonstrar algumas funções no tocante da manipulação das bases de dados, tão importante no processo de preperação das informações para posterior análise. Serão utilizadas para demonstração as bases de dados existentes no próprio pacote.
+
+Abaixo segue uma demonstração das convenções a respeito das bases de dados. Desta forma verifica-se que cada variável é apresentada em sua respectiva coluna, bem como as observações são apresentadas em sua própria linha e portanto os valores constam em sua própria célula.
+
+```{r dados, echo=FALSE, fig.cap='Convenção sobre variáveis, observações e valores'}
+knitr::include_graphics("tidy-1.png")
+```
+
 ### Função *spread*
+
+A função *spread* é utilizada para transformar os valores constantes em uma coluna em nova configuração de colunas. Ainda, é possível determinar a transformação dos valores com o comando `convert = TRUE` informando o tipo de valores (doubles (numerics), integers, logicals, complexes, ou factors) nas colunas a serem criadas (comando `type.convert()`).
 
 
 ```{r}
@@ -2253,7 +2265,7 @@ require(tidyr)
 table1
 ```
 
-
+Neste exemplo, a coluna `type` abriga os valores `cases` e `population`, as quais terão suas próprias colunas com seus respectivos valores:
 
 ```{r}
 spread(table2, type, count)
@@ -2263,9 +2275,13 @@ spread(table2, type, count)
 
 ### Função *gather*
 
+Já a função *gather* realiza o processo oposto do comando *spread*, pois agrupa o valor de determinadas variável em uma chave comum.
+
 ```{r}
 table4a
 ```
+
+Abaixo a transformação das variáveis `1999` e `2000` em uma única variável `year`, mantendo os valores inseridos na variável `cases`:
 
 ```{r}
 gather(table4a, "year", "cases", 2:3)
@@ -2276,16 +2292,20 @@ gather(table4a, "year", "cases", 2:3)
 
 ### Função *separate*
 
+A função *separate* é utilizada para partir uma determinada variável em novas variáveis da base de dados.
+
 ```{r}
 table3
 ```
+
+Neste exemplo, a variável `rate`, que está composta de duas informações separadas pelo caractere "$/$", será separada nas novas variáveis `cases` e `population`:
 
 
 ```{r}
 separate(table3, rate, into = c("cases", "population"),sep = "/")
 ```
 
-
+Da mesma forma é possível criar duas novas variáveis a partir do segundo caractere do valor que consta nas células utilizando o comando `sep=2`:
 
 ```{r}
 separate(table3, year, into = c("century", "year"), sep = 2)
@@ -2293,15 +2313,19 @@ separate(table3, year, into = c("century", "year"), sep = 2)
 
 ### Função *unite*
 
+A função `unite` é oposta à função *separate*:
 
 ```{r}
 table5
 ```
 
+Neste exemplo, recria a variável `new` a partir dos dados de `century` e `year`:
+
 ```{r}
 unite(table5, "new", century, year, sep = "")
 ```
 
+# Análise de Clusters
 
 \setlength{\parindent}{0.0cm}
 

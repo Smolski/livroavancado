@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-11-05}
+    \date{2018-11-06}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -4988,9 +4988,36 @@ dos dados da regressão de Poisson:
 \hypertarget{pacote-tidyr}{%
 \section{Pacote tidyr}\label{pacote-tidyr}}
 
+Nesta seção será utilizado o pacote \texttt{tidyr} para demonstrar
+algumas funções no tocante da manipulação das bases de dados, tão
+importante no processo de preperação das informações para posterior
+análise. Serão utilizadas para demonstração as bases de dados existentes
+no próprio pacote.
+
+Abaixo segue uma demonstração das convenções a respeito das bases de
+dados. Desta forma verifica-se que cada variável é apresentada em sua
+respectiva coluna, bem como as observações são apresentadas em sua
+própria linha e portanto os valores constam em sua própria célula.
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{tidy-1} 
+
+}
+
+\caption{Convenção sobre variáveis, observações e valores}\label{fig:dados}
+\end{figure}
+
 \hypertarget{funcao-spread}{%
 \subsection{\texorpdfstring{Função
 \emph{spread}}{Função spread}}\label{funcao-spread}}
+
+A função \emph{spread} é utilizada para transformar os valores
+constantes em uma coluna em nova configuração de colunas. Ainda, é
+possível determinar a transformação dos valores com o comando
+\texttt{convert\ =\ TRUE} informando o tipo de valores (doubles
+(numerics), integers, logicals, complexes, ou factors) nas colunas a
+serem criadas (comando \texttt{type.convert()}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5020,6 +5047,10 @@ Carregando pacotes exigidos: tidyr
 6 China        2000 213766 1280428583
 \end{verbatim}
 
+Neste exemplo, a coluna \texttt{type} abriga os valores \texttt{cases} e
+\texttt{population}, as quais terão suas próprias colunas com seus
+respectivos valores:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{spread}\NormalTok{(table2, type, count)}
@@ -5042,6 +5073,10 @@ Carregando pacotes exigidos: tidyr
 \subsection{\texorpdfstring{Função
 \emph{gather}}{Função gather}}\label{funcao-gather}}
 
+Já a função \emph{gather} realiza o processo oposto do comando
+\emph{spread}, pois agrupa o valor de determinadas variável em uma chave
+comum.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{table4a}
@@ -5056,6 +5091,10 @@ Carregando pacotes exigidos: tidyr
 2 Brazil       37737  80488
 3 China       212258 213766
 \end{verbatim}
+
+Abaixo a transformação das variáveis \texttt{1999} e \texttt{2000} em
+uma única variável \texttt{year}, mantendo os valores inseridos na
+variável \texttt{cases}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5079,6 +5118,9 @@ Carregando pacotes exigidos: tidyr
 \subsection{\texorpdfstring{Função
 \emph{separate}}{Função separate}}\label{funcao-separate}}
 
+A função \emph{separate} é utilizada para partir uma determinada
+variável em novas variáveis da base de dados.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{table3}
@@ -5097,6 +5139,10 @@ Carregando pacotes exigidos: tidyr
 6 China        2000 213766/1280428583
 \end{verbatim}
 
+Neste exemplo, a variável \texttt{rate}, que está composta de duas
+informações separadas pelo caractere ``\(/\)'', será separada nas novas
+variáveis \texttt{cases} e \texttt{population}:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{separate}\NormalTok{(table3, rate, }\DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"cases"}\NormalTok{, }\StringTok{"population"}\NormalTok{),}\DataTypeTok{sep =} \StringTok{"/"}\NormalTok{)}
@@ -5114,6 +5160,10 @@ Carregando pacotes exigidos: tidyr
 5 China        1999 212258 1272915272
 6 China        2000 213766 1280428583
 \end{verbatim}
+
+Da mesma forma é possível criar duas novas variáveis a partir do segundo
+caractere do valor que consta nas células utilizando o comando
+\texttt{sep=2}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5137,6 +5187,8 @@ Carregando pacotes exigidos: tidyr
 \subsection{\texorpdfstring{Função
 \emph{unite}}{Função unite}}\label{funcao-unite}}
 
+A função \texttt{unite} é oposta à função \emph{separate}:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{table5}
@@ -5155,6 +5207,9 @@ Carregando pacotes exigidos: tidyr
 6 China       20      00    213766/1280428583
 \end{verbatim}
 
+Neste exemplo, recria a variável \texttt{new} a partir dos dados de
+\texttt{century} e \texttt{year}:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{unite}\NormalTok{(table5, }\StringTok{"new"}\NormalTok{, century, year, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
@@ -5172,6 +5227,9 @@ Carregando pacotes exigidos: tidyr
 5 China       1999  212258/1272915272
 6 China       2000  213766/1280428583
 \end{verbatim}
+
+\hypertarget{analise-de-clusters}{%
+\chapter{Análise de Clusters}\label{analise-de-clusters}}
 
 \setlength{\parindent}{0.0cm}
 

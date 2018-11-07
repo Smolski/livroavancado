@@ -26,7 +26,7 @@
 <meta name="author" content="Iara Denise Endruweit Battisti">
 
 
-<meta name="date" content="2018-11-05">
+<meta name="date" content="2018-11-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -224,6 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.4" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-unite"><i class="fa fa-check"></i><b>7.1.4</b> Função <em>unite</em></a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>8</b> Análise de Clusters</a></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referências</a></li>
 <li class="divider"></li>
 <li><a href="https://smolski.github.io/softwarelivrer/" target="blank">Curso de Extensão</a></li>
@@ -564,8 +565,9 @@ os fatores.</p>
 <p>Este entrevistado se destacou em primeiro no segundo fator, apresentando preocupação quanto ao beneffício social da dentição: boa aparência dos dentes, hálito puro e boa aparência dos dentes.</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">factor.scores</span>(creme_dental_exemplo1,PCAdentevarimax, </a>
 <a class="sourceLine" id="cb63-2" data-line-number="2">              <span class="dt">Phi =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb63-3" data-line-number="3">              <span class="dt">method =</span> <span class="kw">c</span>(<span class="st">&quot;Thurstone&quot;</span>, <span class="st">&quot;tenBerge&quot;</span>, <span class="st">&quot;Anderson&quot;</span>, <span class="st">&quot;Bartlett&quot;</span>, <span class="st">&quot;Harman&quot;</span>,<span class="st">&quot;components&quot;</span>),</a>
-<a class="sourceLine" id="cb63-4" data-line-number="4">              <span class="dt">rho=</span><span class="ot">NULL</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb63-3" data-line-number="3">              <span class="dt">method =</span> <span class="kw">c</span>(<span class="st">&quot;Thurstone&quot;</span>, <span class="st">&quot;tenBerge&quot;</span>, <span class="st">&quot;Anderson&quot;</span>,</a>
+<a class="sourceLine" id="cb63-4" data-line-number="4">                         <span class="st">&quot;Bartlett&quot;</span>, <span class="st">&quot;Harman&quot;</span>,<span class="st">&quot;components&quot;</span>),</a>
+<a class="sourceLine" id="cb63-5" data-line-number="5">              <span class="dt">rho=</span><span class="ot">NULL</span>)</a></code></pre></div>
 <pre><code>$scores
             RC1      RC2
  [1,]  1.143442 -0.30236
