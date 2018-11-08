@@ -2243,6 +2243,9 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 
 # Manipulando bases de dados
 
+O objetivo deste capítulo é retomar alguns pacotes importantes no RStudio para a
+manipulação e transformação de grandes bases de dados que o pesquisador terá que manejar ao longo dos processos de análise.
+
 
 
 ## Pacote tidyr
@@ -2324,6 +2327,10 @@ Neste exemplo, recria a variável `new` a partir dos dados de `century` e `year`
 ```{r}
 unite(table5, "new", century, year, sep = "")
 ```
+
+## Pacote dplyr
+
+
 
 # Análise de Clusters
 

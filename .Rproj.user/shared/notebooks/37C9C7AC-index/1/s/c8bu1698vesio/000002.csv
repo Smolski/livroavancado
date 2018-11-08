@@ -1,0 +1,2 @@
+"0","print=data.frame(caranguejo, pred=(regpoisson$fitted.values))"
+"0","head(print)"

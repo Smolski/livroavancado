@@ -1,0 +1,32 @@
+"0","require(tseries)"
+"2","Carregando pacotes exigidos: tseries
+"
+"2","
+    ‘tseries’ version: 0.10-45
+
+    ‘tseries’ is a package for time series analysis and computational finance.
+
+    See ‘library(help=""tseries"")’ for details.
+
+"
+"0","adf.test(Grunfeld$invest, k=2)"
+"1","
+"
+"1","	Augmented Dickey-Fuller Test"
+"1","
+"
+"1","
+"
+"1","data:  "
+"1","Grunfeld$invest"
+"1","
+"
+"1","Dickey-Fuller = -3.4, Lag order = 2, p-value = 0.07"
+"1","
+"
+"1","alternative hypothesis: "
+"1","stationary"
+"1","
+"
+"1","
+"

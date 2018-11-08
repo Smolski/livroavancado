@@ -1,0 +1,3 @@
+"0","residuo=residuals(anova)"
+"0","ajustado=fitted(anova)"
+"0","plot(ajustado,residuo)"

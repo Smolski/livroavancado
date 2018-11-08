@@ -5,17 +5,17 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "2410349319",
     "id" : "A267E391",
-    "lastKnownWriteTime" : 1541552501,
-    "last_content_update" : 1541552501321,
+    "lastKnownWriteTime" : 1541639146,
+    "last_content_update" : 1541639146813,
     "path" : "D:/Github/livroavancado/index.Rmd",
     "project_path" : "index.Rmd",
     "properties" : {
-        "cursorPosition" : "2328,0",
+        "cursorPosition" : "2332,0",
         "docOutlineSize" : "203.6575358905322",
         "docOutlineVisible" : "1",
-        "scrollLine" : "2323"
+        "scrollLine" : "2329"
     },
     "relative_order" : 1,
     "source_on_save" : false,

@@ -1,0 +1,12 @@
+"0","PCAdentevarimax<-principal(creme_dental_exemplo1, nfactors=2,"
+"0","            n.obs=30,rotate=""varimax"",scores=TRUE)"
+"0","PCAdentevarimax"
+"1","Principal Components Analysis"
+"1","
+Call: "
+"1","principal(r = creme_dental_exemplo1, nfactors = 2, rotate = ""varimax"", 
+"
+"1","    n.obs = 30, scores = TRUE)
+"
+"1","Standardized loadings (pattern matrix) based upon correlation matrix
+"

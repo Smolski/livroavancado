@@ -3,7 +3,7 @@ title: "Software R: curso avançado"
 author: 
 - Felipe Micail da Silva Smolski
 - Iara Denise Endruweit Battisti
-date: "2018-11-06"
+date: "2018-11-07"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -3715,6 +3715,9 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 
 # Manipulando bases de dados
 
+O objetivo deste capítulo é retomar alguns pacotes importantes no RStudio para a
+manipulação e transformação de grandes bases de dados que o pesquisador terá que manejar ao longo dos processos de análise.
+
 
 
 ## Pacote tidyr
@@ -3920,6 +3923,10 @@ unite(table5, "new", century, year, sep = "")
 5 China       1999  212258/1272915272
 6 China       2000  213766/1280428583
 ```
+
+## Pacote dplyr
+
+
 
 # Análise de Clusters
 

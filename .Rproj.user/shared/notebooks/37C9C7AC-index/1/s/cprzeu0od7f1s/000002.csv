@@ -1,0 +1,2 @@
+"0","allmean$pred.prob = predict(logit, newdata=allmean, type=""response"")"
+"0","allmean"

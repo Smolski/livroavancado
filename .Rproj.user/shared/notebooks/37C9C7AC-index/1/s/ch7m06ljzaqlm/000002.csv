@@ -1,0 +1,27 @@
+"0","library(agricolae)"
+"0","HSD.test(anova,as.factor(""Variedade""),console=TRUE)"
+"1","
+Study:"
+"1"," "
+"1","anova ~ as.factor(""Variedade"")"
+"1","
+
+HSD Test for"
+"1"," "
+"1","Peso"
+"1"," "
+"1","
+"
+"1","
+Mean Square Error: "
+"1"," "
+"1","124.8"
+"1"," "
+"1","
+
+"
+"1","Variedade,"
+"1"," "
+"1"," means
+
+"

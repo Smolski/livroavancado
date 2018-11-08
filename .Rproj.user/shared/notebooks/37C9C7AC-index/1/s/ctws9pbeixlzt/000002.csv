@@ -1,0 +1,31 @@
+"0","#install.packages(""psych"")"
+"0","require(psych)"
+"2","Carregando pacotes exigidos: psych
+"
+"0","cortest.bartlett(creme_dental_exemplo1)"
+"2","R was not square, finding R from data
+"
+"1","$`chisq`
+"
+"1","[1]"
+"1"," 111.3"
+"1","
+"
+"1","
+"
+"1","$p.value
+"
+"1","[1]"
+"1"," 9.017e-17"
+"1","
+"
+"1","
+"
+"1","$df
+"
+"1","[1]"
+"1"," 15"
+"1","
+"
+"1","
+"
