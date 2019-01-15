@@ -1,9 +1,9 @@
 --- 
 title: "Software R: curso avançado"
 author: 
-- Felipe Micail da Silva Smolski
 - Iara Denise Endruweit Battisti
-date: "2018-11-07"
+- Felipe Micail da Silva Smolski
+date: "2019-01-15"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -22,13 +22,14 @@ classoption: oneside
 
 
 
-# Prefácio {-}
+# Apresentação {-}
 \frenchspacing 
 
 Esta é a estrutura provisória de capítulos do **Curso Avançado em Estatística com R da UFFS**:
 
 - Delineamentos Experimentais
 - Análise Fatorial
+- Análise de Cluster
 - Regressão Múltipla
 - Regressão com Dados em Painel
 - Regressão Logística
@@ -52,7 +53,7 @@ Algumas sugestões a incluir:
 
 # Delineamentos Experimentais
 
-
+*Tatiane Chassot*
 
 A experimentação é uma parte da estatística probabilística que estuda o planejamento, execução, coleta de dados, análise de dados e interpretação dos resultados provenientes de um experimento.
 
@@ -107,9 +108,9 @@ Table: Nome da Tabela
 
 ## Hipóteses estatísticas
 
-- H0: Não existe diferença entre as médias dos tratamentos
+- H$_0$: Não existe diferença entre as médias dos tratamentos
 
-- H1: Existe, pelo menos, uma diferença entre as médias dos tratamentos
+- H$_1$: Existe, pelo menos, uma diferença entre as médias dos tratamentos
 
 ## Delineamento Inteiramente Causalizado (DIC)
 
@@ -119,14 +120,10 @@ laboratórios.
 
 *Exemplo*: Um produtor deseja avaliar 4 variedades de pera (A, B, C e D). Para tanto, instalou um experimento no delineamento inteiramente casualizado, utilizando 5 repetições por variedade. Os resultados, peso médio do fruto, estão apresentados a seguir:
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{delimexp0} 
-
-}
-
-\caption{Variedades de pera separadas por grupos em faixas de peso e repetição}(\#fig:unnamed-chunk-2)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="delimexp0.png" alt="Variedades de pera separadas por grupos em faixas de peso e repetição" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-2)Variedades de pera separadas por grupos em faixas de peso e repetição</p>
+</div>
 
 
 
@@ -143,8 +140,8 @@ Importar no RStudio:
 
 
 ```r
-require(readxl)
-url <- "https://github.com/Smolski/softwarelivrer/raw/master/avancado/dic.xls"
+library(readxl)
+url <- "https://github.com/Smolski/livroavancado/raw/master/dic.xls"
 destfile <- "dic.xls"
 curl::curl_download(url, destfile)
 DIC <- read_excel(destfile)
@@ -170,10 +167,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Hipóteses estatísticas:
 
-- H0: ti $=$ 0 (as médias dos tratamentos nãao diferem entre si)
-- H1: ti $\neq$ 0 (existe, no mínimo, uma diferença entre as médias dos tratamentos)
+- H$_0$: ti $=$ 0 (as médias dos tratamentos nãao diferem entre si)
+- H$_1$: ti $\neq$ 0 (existe, no mínimo, uma diferença entre as médias dos tratamentos)
 
-Como p = 0,0319 (0,01 $\leq$ p "menor ou igual a" 0,05), rejeita-se H0 com nível de significância de 5\% e conclui-se que existe diferença significativa entre as médias dos tratamentos.
+Como p = 0,0319 (0,01 $\leq$ p "menor ou igual a" 0,05), rejeita-se H$_0$ com nível de significância de 5\% e conclui-se que existe diferença significativa entre as médias dos tratamentos.
 
 Para saber quais as médias que diferem, utilizamos o teste de Tukey.
 
@@ -277,17 +274,13 @@ The following objects are masked from DIC (pos = 5):
 boxplot(Peso~Variedade)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-7-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" />
 
 ```r
 boxplot(Peso~Variedade,xlab="Variedade",ylab="Peso")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-7-2} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-7-2.png" width="80%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -317,9 +310,7 @@ plot(ajustados,residuos)
 abline(h=0)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-9-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -329,9 +320,7 @@ qqnorm(residuos)
 qqline(residuos)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-10-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -343,14 +332,10 @@ qqline(residuos)
 
 *Exemplo*: Uma Nutricionista elaborou 4 dietas e quer aplicá-las em 20 pessoas a fim detestar suas eficiências quanto à perda de peso. Porém ela notou que entre essas 20 pessoas existem 5 grupos de faixas iniciais de peso. Então, para aumentar a eficácia do teste ela separou os 20 indivíduos em 5 grupos de faixas de peso.
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{delimexp1} 
-
-}
-
-\caption{Indivíduos separados por grupos em faixas de peso}(\#fig:unnamed-chunk-11)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="delimexp1.png" alt="Indivíduos separados por grupos em faixas de peso" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-11)Indivíduos separados por grupos em faixas de peso</p>
+</div>
 
 
 Criar o arquivo acima em planilha eletrônica. Nomear como DBC e salvar em formato .xls.
@@ -360,7 +345,7 @@ Importar no RStudio:
 
 ```r
 require(readxl)
-url <- "https://github.com/Smolski/softwarelivrer/raw/master/avancado/dbc.xls"
+url <- "https://github.com/Smolski/livroavancado/raw/master/dbc.xls"
 destfile <- "dbc.xls"
 curl::curl_download(url, destfile)
 DBC  <- read_excel(destfile)
@@ -383,17 +368,17 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Hipóteses estatísticas:
 
-- H0: ti $=$ 0 (as médias dos tratamentos não diferem entre si)
-- H1: ti $\neq$ 0 (existe, no mínimo, uma diferença entre as médias dos tratamentos)
+- H$_0$: ti $=$ 0 (as médias dos tratamentos não diferem entre si)
+- H$_1$: ti $\neq$ 0 (existe, no mínimo, uma diferença entre as médias dos tratamentos)
 
-Como p = 0,00973 (p $\leq$ 0,01), rejeita-se H0 com nível de significância de 1\% e conclui-se que existe diferença significativa entre as médias dos tratamentos.
-
-
-- H0: $\sigma$^2^ blocos $=$ 0
-- H1: $\sigma$^2^ blocos $\leq$ 0
+Como p = 0,00973 (p $\leq$ 0,01), rejeita-se H$_0$ com nível de significância de 1\% e conclui-se que existe diferença significativa entre as médias dos tratamentos.
 
 
-Como p $=$ 0,68854 (p $\leq$ 0,05), não rejeita-se H0 e conclui-se que a variância entre os blocos não é significativa.
+- H$_0$: $\sigma$^2^ blocos $=$ 0
+- H$_1$: $\sigma$^2^ blocos $\leq$ 0
+
+
+Como p $=$ 0,68854 (p $\leq$ 0,05), não rejeita-se H$_0$ e conclui-se que a variância entre os blocos não é significativa.
 
 
 
@@ -446,18 +431,14 @@ Medidas descritivas com a variável resposta:
 boxplot(Perda~Tratamentos)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-14-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 ```r
 boxplot(Perda~Tratamentos,xlab="Tratamentos",ylab="Perda")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-15-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -487,9 +468,7 @@ plot(ajustado,residuo)
 abline(h=0)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-17-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -498,13 +477,13 @@ qqnorm(residuo)
 qqline(residuo)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-18-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
 # Análise Fatorial
+
+*Denize Ivete Reis*
 
 
 A análise fatorial é um método estatístico utilizado para descrever a variabilidade entre variáveis observadas e possivelmente correlacionadas em termos de um número potencialmente menor de variáveis não observadas chamadas fatores.
@@ -513,14 +492,10 @@ Assim, é possível que as variaçõess de três ou quatro variáveis observadas
 
 Diferentemente da análise de variância, regressão e análise discriminante, onde uma das variáveis é identificada como a variável dependente, examina-se todo o conjunto de relações interdependentes entre variáveis.
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{anfat1} 
-
-}
-
-\caption{Processo de análise de variáveis}(\#fig:unnamed-chunk-19)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="anfat1.png" alt="Processo de análise de variáveis" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-19)Processo de análise de variáveis</p>
+</div>
 
 
 
@@ -599,7 +574,7 @@ Inicialmente podemos explorar algumas estatísticas descritivas relacionadas às
 ```r
 require(readxl)
 
-url <- "https://github.com/Smolski/softwarelivrer/raw/master/avancado/creme_dental_exemplo1.xlsx"
+url <- "https://github.com/Smolski/livroavancado/raw/master/creme_dental_exemplo1.xlsx"
 destfile <- "creme_dental_exemplo1.xlsx"
 curl::curl_download(url, destfile)
 creme_dental_exemplo1 <- read_excel(destfile)
@@ -674,9 +649,7 @@ corrplot 0.84 loaded
 corrplot(matcor, method="circle")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-22-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" />
 
 Na figura acima, as correlações estão em cor azul porque são positivas, com tons mais fortes para as correlações mais altas. 
 <!--
@@ -696,7 +669,7 @@ Ho: A matriz de correlação da população é uma matriz identidade, ou seja as
 
 
 
-H1: A matriz de correlação da população não é uma matriz identidade, ou seja as variáveis são correlacionadas na população.
+H$_1$: A matriz de correlação da população não é uma matriz identidade, ou seja as variáveis são correlacionadas na população.
 
 
 
@@ -856,9 +829,7 @@ Abaixo vamos apresentar o `scree-plot`, em formato do gráfico de barras para o 
 screeplot(fit)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-26-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma ligeira suavização das alturas nas demais colunas.
@@ -870,9 +841,7 @@ Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma lige
 plot(fit,type="lines")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-27-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 ### Análise de Componentes Principais
@@ -1030,9 +999,7 @@ os fatores.
 biplot(PCAdentevarimax)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-32-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-32-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 Os valores dos fatores obtidos para os 30 entrevistados encontram-se na matriz de coeficiente de escore do componente mostrada abaixo. Esta ajuda a entender como cada variável se relaciona aos escores dos componentes calculados para cada participante. Para melhor compreensão da análise dos escores dos entrevistados é importante especificar e comentar o significado de cada fator:
@@ -1121,14 +1088,10 @@ factor.scores(creme_dental_exemplo1,PCAdentevarimax, Phi = NULL, method = c("Thu
 
 Destacando-se os entrevistados de interesse, verifica-se:
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{anfat2} 
-
-}
-
-\caption{Principais resultados}(\#fig:unnamed-chunk-34)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="anfat2.png" alt="Principais resultados" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-34)Principais resultados</p>
+</div>
 
 
 
@@ -1136,8 +1099,226 @@ Destacando-se os entrevistados de interesse, verifica-se:
 \printbibliography[segment=\therefsegment,heading=subbibliography]
 -->
 
+# Análise de Clusters
+
+*Felipe Micail da Silva Smolski*
+
+A ideia central da Análise de Cluster é a possibilidade de efetuar a classificação dos objetos em grupos, de forma que os objetos dentro do mesmo grupo sejam mais similares quanto possível e, de forma análoga, que os diversos grupos (clusters) sejam mais diferentes o possível em sua constituição [@Kassambara2017]. Embora possa parecer semelhante ao conteúdo do capítulo anterior, as diferenças residem no fato de que a Análise Fatorial agrega variáveis e efetua os agrupamentos em base de padrões de variação (correlação) dos dados enquanto a Análise de Cluster (agrupamentos) objetiva agregar objetos (e não variáveis), fazendo a agregação baseada na distância (proximidade) [@Hair2009].
+
+## K-Means
+
+O método de clusterização *K-means* classifica os objetos dentro de múltiplos grupos, de forma que a variação intra-cluster seja minimizada pela soma dos quadrados das distâncias Euclidianas entre os itens e seus centroides.
+
+$$
+W(C_k)=\sum _{x_i\in C_k}(x_i-\mu _k)^2
+$$
+Desta forma $x_i$ é o ponto que pertente ao cluster $C_k$ e $\mu _k$ representa a média do valor atribuído ao cluster $C_k$. Cada observação ($x_i$) é designada a um cluster de forma que a soma dos quadrados da distância da observação em relação ao seu cluster central ($\mu _k$) é mínima. Ainda, para definir a variação intra-cluster é utilizadaa fórmula abaixo, sendo que deve ser tão baixa quanto o possível [@Kassambara2017]:
+
+
+
+$$
+tot.intracluster=\sum_{k=1}^{k} W(C_k)=\sum_{k=1}^{k}\sum _{x_i\in C_k}(x_i-\mu _k)^2
+$$
+Como veremos adiante, deve-se selecionar o número de clusters desejado para que sejam criadas as classificações que precisar ou, executar o comando que definirá o número ótimos de clusters para a amostra carregada. O processo de seleção das variáveis, por padrão passa por [@Kassambara2017]: (a) determinação do número de clusters; (b) selecionar randomicamente objetos para determinar os valores centrais; (c) assinar as observações pela distância Euclidiana em relação aos seus centróides; (d) efetuar atualizações calculando a nova média dos valores dentro de seu cluster definido; (e) minimizar a soma dos quadrados intra-cluster (o R utiliza 10 repetições dos passos d-e).
+
+
+
+
+
+```r
+#Carregamento dos dados
+data("mtcars")
+df=scale(mtcars)
+head(df, n=3)
+```
+
+```
+                 mpg    cyl    disp      hp   drat      wt    qsec     vs   am
+Mazda RX4     0.1509 -0.105 -0.5706 -0.5351 0.5675 -0.6104 -0.7772 -0.868 1.19
+Mazda RX4 Wag 0.1509 -0.105 -0.5706 -0.5351 0.5675 -0.3498 -0.4638 -0.868 1.19
+Datsun 710    0.4495 -1.225 -0.9902 -0.7830 0.4740 -0.9170  0.4260  1.116 1.19
+                gear    carb
+Mazda RX4     0.4236  0.7352
+Mazda RX4 Wag 0.4236  0.7352
+Datsun 710    0.4236 -1.1222
+```
+
+```r
+# Função kmeans
+#kmeans(x, centers, iter.max=10, nstart=1)
+
+# Número ótimo de clusters
+library(factoextra)
+```
+
+```
+Carregando pacotes exigidos: ggplot2
+```
+
+```
+
+Attaching package: 'ggplot2'
+```
+
+```
+The following objects are masked from 'package:psych':
+
+    %+%, alpha
+```
+
+```
+Welcome! Related Books: `Practical Guide To Cluster Analysis in R` at https://goo.gl/13EFCZ
+```
+
+```
+
+Attaching package: 'factoextra'
+```
+
+```
+The following object is masked from 'package:agricolae':
+
+    hcut
+```
+
+```r
+fviz_nbclust(df, kmeans, method = "wss")+
+  geom_vline(xintercept = 4, linetype = 2)
+```
+
+<img src="index_files/figure-epub3/unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+```r
+# Clusterização k-means
+set.seed(123)
+km.res=kmeans(df, 4, nstart=25)
+print(km.res)
+```
+
+```
+K-means clustering with 4 clusters of sizes 12, 8, 7, 5
+
+Cluster means:
+      mpg     cyl     disp      hp     drat       wt    qsec     vs      am
+1 -0.8363  1.0149  1.02385  0.6925 -0.88975  0.90636 -0.3952 -0.868 -0.8141
+2  1.3248 -1.2249 -1.10627 -0.9453  1.09821 -1.20087  0.3365  0.868  1.1899
+3  0.1082 -0.5849 -0.44867 -0.6497 -0.04968 -0.02347  1.1855  1.116 -0.8141
+4 -0.2639  0.3430 -0.05908  0.7601  0.44782 -0.22101 -1.2495 -0.868  1.1899
+     gear    carb
+1 -0.9318  0.1677
+2  0.7624 -0.8126
+3 -0.1573 -0.4146
+4  1.2368  1.4781
+
+Clustering vector:
+          Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
+                  4                   4                   2                   3 
+  Hornet Sportabout             Valiant          Duster 360           Merc 240D 
+                  1                   3                   1                   3 
+           Merc 230            Merc 280           Merc 280C          Merc 450SE 
+                  3                   3                   3                   1 
+         Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental 
+                  1                   1                   1                   1 
+  Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla 
+                  1                   2                   2                   2 
+      Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 
+                  3                   1                   1                   1 
+   Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa 
+                  1                   2                   2                   2 
+     Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
+                  4                   4                   4                   2 
+
+Within cluster sum of squares by cluster:
+[1] 23.08 19.04 21.29 23.40
+ (between_SS / total_SS =  74.5 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+[6] "betweenss"    "size"         "iter"         "ifault"      
+```
+
+
+```r
+aggregate(mtcars, by=list(cluster=km.res$cluster), mean)
+```
+
+```
+  cluster   mpg   cyl   disp     hp  drat    wt  qsec    vs am  gear  carb
+1       1 15.05 8.000 357.62 194.17 3.121 4.104 17.14 0.000  0 3.000 3.083
+2       2 28.07 4.000  93.61  81.88 4.184 2.042 18.45 0.875  1 4.250 1.500
+3       3 20.74 5.143 175.11 102.14 3.570 3.194 19.97 1.000  0 3.571 2.143
+4       4 18.50 6.800 223.40 198.80 3.836 3.001 15.62 0.000  1 4.600 5.200
+```
+
+```r
+dd=cbind(mtcars, cluster=km.res$cluster)
+head(dd)
+```
+
+```
+                   mpg cyl disp  hp drat    wt  qsec vs am gear carb cluster
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4       4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4       4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1       2
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1       3
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2       1
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1       3
+```
+
+```r
+km.res$centers
+```
+
+```
+      mpg     cyl     disp      hp     drat       wt    qsec     vs      am
+1 -0.8363  1.0149  1.02385  0.6925 -0.88975  0.90636 -0.3952 -0.868 -0.8141
+2  1.3248 -1.2249 -1.10627 -0.9453  1.09821 -1.20087  0.3365  0.868  1.1899
+3  0.1082 -0.5849 -0.44867 -0.6497 -0.04968 -0.02347  1.1855  1.116 -0.8141
+4 -0.2639  0.3430 -0.05908  0.7601  0.44782 -0.22101 -1.2495 -0.868  1.1899
+     gear    carb
+1 -0.9318  0.1677
+2  0.7624 -0.8126
+3 -0.1573 -0.4146
+4  1.2368  1.4781
+```
+
+
+```r
+# Vizualizando os clusters
+
+library(ggplot2)
+library(factoextra)
+
+fviz_cluster(km.res, data=dd,
+             palette = c("#2E9FDF", "#00AFBB", "#E7B800", "#FC4E07"),
+             ellipse.type="euclid",
+             star.plot=TRUE,
+             repel=TRUE,
+             ggtheme=theme_minimal()
+             )
+```
+
+<img src="index_files/figure-epub3/unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+
+
+
+
+
+## Agglomerative
+
+
+
+
+
+
+
 # Regressão Múltipla
 
+*Iara Denise Endruweit Battisti*
 
 ## Modelo geral
 
@@ -1243,7 +1424,7 @@ Ainda, pode-se utilizar o comando `plot(regressao)` elabora diferentes gráficos
 
 ```r
 library(readxl)
-url <- "https://github.com/Smolski/softwarelivrer/raw/master/avancado/arvore2.xlsx"
+url <- "https://github.com/Smolski/livroavancado/raw/master/arvore2.xlsx"
 destfile <- "arvore2.xlsx"
 curl::curl_download(url, destfile)
 arvore2 <- read_excel(destfile)
@@ -1349,9 +1530,7 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 plot(diametro_cm,altura_m)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-38-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-42-1.png" width="80%" style="display: block; margin: auto;" />
 
 ```r
 # Gera o gráfico sem pontos
@@ -1364,9 +1543,7 @@ abline(coef(modelom)[1], coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3], coef(modelom)[2], col='red')
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-38-2} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-42-2.png" width="80%" style="display: block; margin: auto;" />
 
 
 ## Interação entre variáveis preditoras
@@ -1440,9 +1617,7 @@ abline(coef(modelom)[1],coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3],coef(modelom)[2]+coef(modelom)[4], col='red')
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-41-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -1534,14 +1709,10 @@ variáveis ou encerrar o processo de no passo 4 nenhuma variável tiver sido ane
 - Se Fmin < Fout: eliminar a variável cuja estatística é igual a Fmin e voltar ao passo 1 iniciando nova etapa com modelo
 reduzido com (k-1) variáveis.
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{regress1} 
-
-}
-
-\caption{Modelagem estatística}(\#fig:unnamed-chunk-42)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="regress1.png" alt="Modelagem estatística" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-46)Modelagem estatística</p>
+</div>
 
 Fonte: @Riboldi2005
 
@@ -1578,6 +1749,8 @@ Verificação da existência de multicolinearidade (correlação entre os X’s)
 -->
 
 # Regressão com Dados em Painel
+
+*Felipe Micail da Silva Smolski*
 
 O modelo de regressão com dados em painel possui uma característica especial: se constitui de uma dimensão *temporal* e outra *espacial*. Isto porque a mesma unidade de corte transversal (família, países, etc.) é acompanhada ao longo do tempo. Por exemplo, a produção industrial mensal dos Estados brasileiros em função da taxa de juros no período de 2015-2016. Têm-se então a 624 (26x24) observações *combinadas*: de cada um dos 26 Estados (exluindo o Distrito Federal) e 24 observações para os meses.
 
@@ -1676,9 +1849,7 @@ Abaixo é demonstrada a evolução do investimento de acordo com cada empresa es
 coplot(invest ~ year|firm, type="b", data=Grunfeld)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-45-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -2200,14 +2371,10 @@ Algumas características importantes da regressão logística: a análise é sem
 A regressão logística utiliza a **curva logística** para assim representar a relação entre a variável dependente e as independentes. Os valores previstos portanto permanecem entre 0 e 1, sendo definidos pelos coeficientes estimados. A Figura \@ref(fig:curvalog)a demonstra a relação da curva logistica geral, enquanto a Figura \@ref(fig:curvalog)b mostra uma relação pobremente ajustada dos dados reais e a Figura \@ref(fig:curvalog)c demonstra um bom ajuste na relação entre as variáveis. 
 
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{curvalog} 
-
-}
-
-\caption{Curva logística}(\#fig:curvalog)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="curvalog.png" alt="Curva logística" width="80%" />
+<p class="caption">(\#fig:curvalog)Curva logística</p>
+</div>
 Fonte: Adaptado de @Hair2009.
 
 A estimação dos coeficientes da regressão logística, ao contrário da regressão múltipla que utiliza o método dos mínimos quadrados, é efetuada pelo uso da **máxima verossimilhança**. Esta, por sua vez, busca encontrar as estimativas mais prováveis dos coeficientes e maximizar a probabilidade de que um evento ocorra. A qualidade do ajuste do modelo é avaliada pelo "pseudo" R$^2$ e pelo exame da precisão preditiva (matriz de confusão).
@@ -2240,7 +2407,7 @@ Carregando pacotes exigidos: readr
 ```
 
 ```r
-chd <- read_delim("https://goo.gl/uDAAHv", 
+chd <- read_delim("https://github.com/Smolski/livroavancado/raw/master/cdh.csv", 
     ";", escape_double = FALSE, col_types = cols(CHD = col_factor(levels = c())), 
     trim_ws = TRUE)
 
@@ -2269,14 +2436,10 @@ ggplot(chd, aes(x=AGE, y=CHD)) +
   stat_smooth(method="glm", method.args=list(family="binomial"), se=FALSE)
 ```
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/dispev-1} 
-
-}
-
-\caption{Dispersão de evendos e não-eventos}(\#fig:dispev)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="index_files/figure-epub3/dispev-1.png" alt="Dispersão de evendos e não-eventos" width="80%" />
+<p class="caption">(\#fig:dispev)Dispersão de evendos e não-eventos</p>
+</div>
 
 Monta-se então o modelo de regressão logística com a variável dependente CHD e a variável independente AGE. Abaixo é demonstrada a descrição da equação utilizando o comando `summary()` para o modelo m1 com a sintaxe básica:
 
@@ -2345,14 +2508,10 @@ ggplot(chd, aes(x=AGE, y=PRED)) +
   geom_point()
 ```
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/distrpred-1} 
-
-}
-
-\caption{Distribuição das probabilidades preditas}(\#fig:distrpred)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="index_files/figure-epub3/distrpred-1.png" alt="Distribuição das probabilidades preditas" width="80%" />
+<p class="caption">(\#fig:distrpred)Distribuição das probabilidades preditas</p>
+</div>
 
 
 
@@ -2566,14 +2725,10 @@ A Curva ROC (Receiver Operating Characteristic Curve) associada ao modelo logís
 
 A curva ROC é produzida bi-dimensionalmente como mostra a Figura \@ref(fig:curvaroc)a, pela obtenção da relação entre a taxa dos verdadeiros positivos do modelo e da taxa dos falsos positivos preditos. Desta forma, o ponto inferior esquerdo (0,0) significa que não é predita uma classificação positiva; no canto oposto do gráfico (1,1) classifica os resultados incondicionalmente positivos e; o ponto (0,1) representa uma excelente classificação. Quanto mais ao noroeste do gráfico o ponto estiver melhor, assim sendo o ponto B da Figura \@ref(fig:curvaroc)a classifica melhor os resultados que o ponto C.
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{curvaroc} 
-
-}
-
-\caption{Curva ROC}(\#fig:curvaroc)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="curvaroc.png" alt="Curva ROC" width="80%" />
+<p class="caption">(\#fig:curvaroc)Curva ROC</p>
+</div>
 Fonte: Adaptado de @Fawcett2006.
 
 A Figura \@ref(fig:curvaroc)b mostra a formação da curva ROC para um teste com 20 instâncias, uma amostra pequena servindo portanto de exemplificação da sua criação. Para isto, o modelo de regressão logística é rodado randomicamente e a predição resultante é comparada com o valor real da variável dependente. O ponto de corte padrão, como visto anteriormente, é o valor de 0,5: acima deste valor, a predição é classificada como 1 e, abaixo dele 0. Na Figura \@ref(fig:curvaroc)b, a primeira predição foi 0,9 e a segunda 0,8 sendo que como estão mais perto do eixo X do gráfico, representam predições acertadas. Já para predições que não foram acertadas (como no exemplo as predições 0,7 e 0,54 por exemplo) a curva caminha para a direita. A lógica se mantém até o final da elaboração da curva.
@@ -2608,14 +2763,10 @@ plot(roc1,
      print.thres=TRUE)
 ```
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/roc-1} 
-
-}
-
-\caption{Curva Roc}(\#fig:roc)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="index_files/figure-epub3/roc-1.png" alt="Curva Roc" width="80%" />
+<p class="caption">(\#fig:roc)Curva Roc</p>
+</div>
 
 
 ### O teste Hosmer e Lemeshow
@@ -3192,9 +3343,7 @@ ggplot(novosdados, aes(x=rank,y=prob))+
   labs(title="Probabilidades preditas", x="Ranking",y="Pr(y=1)")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-87-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-91-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -3356,9 +3505,7 @@ Abaixo o histograma da distribuição do número de satélites (variável depend
 hist(caranguejo$Sa)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-90-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-94-1.png" width="80%" style="display: block; margin: auto;" />
 
 Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 
@@ -3367,9 +3514,7 @@ Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 plot(caranguejo$W,caranguejo$Sa)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-91-1} \end{center}
+<img src="index_files/figure-epub3/unnamed-chunk-95-1.png" width="80%" style="display: block; margin: auto;" />
 
 Para criação da regressão de Poisson utiliza-se a função já conhecida `glm()`, sendo que em `family` é determinado o tipo de análise desejada ("poisson"):
 
@@ -3499,14 +3644,10 @@ plot(caranguejo$W,caranguejo$Sa)
 points(regpoisson$fitted.values,col='red', type = "l")
 ```
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-96-1} 
-
-}
-
-\caption{Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)}(\#fig:unnamed-chunk-96)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="index_files/figure-epub3/unnamed-chunk-100-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-100)Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)</p>
+</div>
 
 
 
@@ -3677,14 +3818,10 @@ points(model$fitted.values, pch="p", col="red")
 legend(6,30,c("obs","pred"), pch=c("o","p"), col=c("blue","red"))
 ```
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-101-1} 
-
-}
-
-\caption{Valores observados e preditos}(\#fig:unnamed-chunk-101)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="index_files/figure-epub3/unnamed-chunk-105-1.png" alt="Valores observados e preditos" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-105)Valores observados e preditos</p>
+</div>
 Fonte: Adaptado de @penn2018.
 
 
@@ -3715,6 +3852,8 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 
 # Manipulando bases de dados
 
+*Felipe Micail da Silva Smolski*
+
 O objetivo deste capítulo é retomar alguns pacotes importantes no RStudio para a
 manipulação e transformação de grandes bases de dados que o pesquisador terá que manejar ao longo dos processos de análise.
 
@@ -3726,14 +3865,10 @@ Nesta seção será utilizado o pacote `tidyr` para demonstrar algumas funções
 
 Abaixo segue uma demonstração das convenções a respeito das bases de dados. Desta forma verifica-se que cada variável é apresentada em sua respectiva coluna, bem como as observações são apresentadas em sua própria linha e portanto os valores constam em sua própria célula.
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.8\linewidth]{tidy-1} 
-
-}
-
-\caption{Convenção sobre variáveis, observações e valores}(\#fig:dados)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="tidy-1.png" alt="Convenção sobre variáveis, observações e valores" width="80%" />
+<p class="caption">(\#fig:dados)Convenção sobre variáveis, observações e valores</p>
+</div>
 
 ### Função *spread*
 
@@ -3928,7 +4063,17 @@ unite(table5, "new", century, year, sep = "")
 
 
 
-# Análise de Clusters
+
+
+
+
+
+
+
+
+
+
+
 
 \setlength{\parindent}{0.0cm}
 

@@ -1,2 +1,0 @@
-"0","# Acrescenta as linhas"
-"0","abline(coef(modelom)[1], coef(modelom)[2], col='blue')"

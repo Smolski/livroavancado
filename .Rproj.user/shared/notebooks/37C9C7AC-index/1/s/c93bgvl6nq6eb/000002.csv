@@ -1,7 +1,0 @@
-"0","library(readxl)"
-"0","url <- ""https://github.com/Smolski/softwarelivrer/raw/master/avancado/arvore2.xlsx"""
-"0","destfile <- ""arvore2.xlsx"""
-"0","curl::curl_download(url, destfile)"
-"0","arvore2 <- read_excel(destfile)"
-"0","attach(arvore2)"
-"0","head(arvore2)"

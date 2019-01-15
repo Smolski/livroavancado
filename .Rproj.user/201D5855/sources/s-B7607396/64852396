@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1545591735832.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "64852396",
+    "lastKnownWriteTime" : 1547547509,
+    "last_content_update" : 1547547551305,
+    "path" : "D:/Github/livroavancado/index.Rmd",
+    "project_path" : "index.Rmd",
+    "properties" : {
+        "cursorPosition" : "717,4",
+        "docOutlineSize" : "167.6704831246857",
+        "docOutlineVisible" : "1",
+        "scrollLine" : "709"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

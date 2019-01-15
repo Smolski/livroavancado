@@ -1,2 +1,0 @@
-"0","# Gera o gráfico sem pontos"
-"0","plot(diametro_cm,altura_m,type='n') "

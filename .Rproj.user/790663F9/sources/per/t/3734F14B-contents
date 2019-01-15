@@ -1,0 +1,39 @@
+bookdown::gitbook:
+  fig_caption: true
+  css: style.css
+  split_by: chapter
+  includes:
+    in_header: google-analytics.js
+  config:
+    toc:
+      collapse: subsection
+      before: |
+        <li><a href="./">UFFS - Cerro Largo</a></li>
+        <img src="logo1.png" alt="R" align="midle">
+      after: |
+        <li><a href="https://smolski.github.io/softwarelivrer/" target="blank">Curso de Extensão</a></li>
+    sharing:
+      facebook: no
+      twitter: no
+      google: no
+      linkedin: no
+      weibo: no
+      instapper: no
+      vk: no
+    edit: null
+    download: null
+    search: yes
+    fontsettings:
+      theme: white
+      family: sans
+      size: 2
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  keep_tex: TRUE
+  citation_package: none
+  pandoc_args: [ "--csl", "associacao-brasileira-de-normas-tecnicas-unirio-eipp.csl" ]
+bookdown::epub_book:
+  stylesheet: style.css
+  toc: yes

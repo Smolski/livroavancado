@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Software R: curso avançado</title>
+  <title>Capítulo 5 Regressão com Dados em Painel | Software R: curso avançado</title>
   <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Software R: curso avançado" />
+  <meta property="og:title" content="Capítulo 5 Regressão com Dados em Painel | Software R: curso avançado />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://rstub.github.io/bookdown-chapterbib/" />
   
@@ -17,16 +17,16 @@
   <meta name="github-repo" content="rstub/bookdown-chapterbib" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Software R: curso avançado" />
+  <meta name="twitter:title" content="Capítulo 5 Regressão com Dados em Painel | Software R: curso avançado />
   
   <meta name="twitter:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
   
 
-<meta name="author" content="Felipe Micail da Silva Smolski">
 <meta name="author" content="Iara Denise Endruweit Battisti">
+<meta name="author" content="Felipe Micail da Silva Smolski">
 
 
-<meta name="date" content="2018-11-07">
+<meta name="date" content="2019-01-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -37,6 +37,7 @@
 <link rel="next" href="regressao-logistica.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -62,7 +63,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -75,13 +76,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -142,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="logo1.png" alt="R" align="midle">
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefácio</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Apresentação</a></li>
 <li class="chapter" data-level="" data-path="introducao.html"><a href="introducao.html"><i class="fa fa-check"></i>Introdução</a></li>
 <li class="chapter" data-level="1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html"><i class="fa fa-check"></i><b>1</b> Delineamentos Experimentais</a><ul>
 <li class="chapter" data-level="1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#principios-basicos-da-experimentacao"><i class="fa fa-check"></i><b>1.1</b> Princípios básicos da Experimentação</a><ul>
@@ -167,65 +166,68 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.6" data-path="analise-fatorial.html"><a href="analise-fatorial.html#autovalores-1"><i class="fa fa-check"></i><b>2.3.6</b> Autovalores</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>3</b> Regressão Múltipla</a><ul>
-<li class="chapter" data-level="3.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>3.1</b> Modelo geral</a></li>
-<li class="chapter" data-level="3.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>3.2</b> Variável dummy</a></li>
-<li class="chapter" data-level="3.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>3.3</b> Interação entre variáveis preditoras</a></li>
-<li class="chapter" data-level="3.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>3.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>3.4.1</b> Full model – Modelo completo</a></li>
-<li class="chapter" data-level="3.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>3.4.2</b> Procedimento backward</a></li>
-<li class="chapter" data-level="3.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>3.4.3</b> Procedimento forward</a></li>
-<li class="chapter" data-level="3.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>3.4.4</b> Procedimento stepwise</a></li>
+<li class="chapter" data-level="3" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>3</b> Análise de Clusters</a><ul>
+<li class="chapter" data-level="3.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>3.1</b> K-Means</a></li>
+<li class="chapter" data-level="3.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#agglomerative"><i class="fa fa-check"></i><b>3.2</b> Agglomerative</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>3.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
+<li class="chapter" data-level="4" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>4</b> Regressão Múltipla</a><ul>
+<li class="chapter" data-level="4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>4.1</b> Modelo geral</a></li>
+<li class="chapter" data-level="4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>4.2</b> Variável dummy</a></li>
+<li class="chapter" data-level="4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>4.3</b> Interação entre variáveis preditoras</a></li>
+<li class="chapter" data-level="4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>4.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>4.4.1</b> Full model – Modelo completo</a></li>
+<li class="chapter" data-level="4.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>4.4.2</b> Procedimento backward</a></li>
+<li class="chapter" data-level="4.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>4.4.3</b> Procedimento forward</a></li>
+<li class="chapter" data-level="4.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>4.4.4</b> Procedimento stepwise</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html"><i class="fa fa-check"></i><b>4</b> Regressão com Dados em Painel</a><ul>
-<li class="chapter" data-level="4.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#carregamento-e-transformacao-dos-dados"><i class="fa fa-check"></i><b>4.1</b> Carregamento e transformação dos dados</a></li>
-<li class="chapter" data-level="4.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-pooled"><i class="fa fa-check"></i><b>4.2</b> Modelo Pooled</a></li>
-<li class="chapter" data-level="4.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>4.3</b> Modelo Efeitos Fixos</a></li>
-<li class="chapter" data-level="4.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>4.4</b> Modelo Efeitos Aleatórios</a></li>
-<li class="chapter" data-level="4.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>4.5</b> Comparação e escolha dos modelos</a></li>
-<li class="chapter" data-level="4.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>4.6</b> Alguns testes para os modelos</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>4.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
-<li class="chapter" data-level="4.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>4.6.2</b> Normalidade dos resíduos</a></li>
-<li class="chapter" data-level="4.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>4.6.3</b> Homocedasticidade dos resíduos</a></li>
-<li class="chapter" data-level="4.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>4.6.4</b> Testando correlação serial</a></li>
-<li class="chapter" data-level="4.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>4.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
-<li class="chapter" data-level="4.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>4.6.6</b> Testando raízes unitárias</a></li>
+<li class="chapter" data-level="4.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>4.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html"><i class="fa fa-check"></i><b>5</b> Regressão com Dados em Painel</a><ul>
+<li class="chapter" data-level="5.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#carregamento-e-transformacao-dos-dados"><i class="fa fa-check"></i><b>5.1</b> Carregamento e transformação dos dados</a></li>
+<li class="chapter" data-level="5.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-pooled"><i class="fa fa-check"></i><b>5.2</b> Modelo Pooled</a></li>
+<li class="chapter" data-level="5.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>5.3</b> Modelo Efeitos Fixos</a></li>
+<li class="chapter" data-level="5.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>5.4</b> Modelo Efeitos Aleatórios</a></li>
+<li class="chapter" data-level="5.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>5.5</b> Comparação e escolha dos modelos</a></li>
+<li class="chapter" data-level="5.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>5.6</b> Alguns testes para os modelos</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>5.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
+<li class="chapter" data-level="5.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>5.6.2</b> Normalidade dos resíduos</a></li>
+<li class="chapter" data-level="5.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>5.6.3</b> Homocedasticidade dos resíduos</a></li>
+<li class="chapter" data-level="5.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>5.6.4</b> Testando correlação serial</a></li>
+<li class="chapter" data-level="5.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>5.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
+<li class="chapter" data-level="5.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>5.6.6</b> Testando raízes unitárias</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>5</b> Regressão Logística</a><ul>
-<li class="chapter" data-level="5.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-modelo"><i class="fa fa-check"></i><b>5.1</b> O modelo</a></li>
-<li class="chapter" data-level="5.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>5.2</b> Regressão Logística Simples</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>5.2.1</b> Estimando a Razão de Chances</a></li>
-<li class="chapter" data-level="5.2.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>5.2.2</b> Determinando o Intervalo de Confiança</a></li>
-<li class="chapter" data-level="5.2.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>5.2.3</b> Predição de Probabilidades</a></li>
-<li class="chapter" data-level="5.2.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#matriz-de-confusao"><i class="fa fa-check"></i><b>5.2.4</b> Matriz de Confusão</a></li>
-<li class="chapter" data-level="5.2.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#curva-roc"><i class="fa fa-check"></i><b>5.2.5</b> Curva ROC</a></li>
-<li class="chapter" data-level="5.2.6" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>5.2.6</b> O teste Hosmer e Lemeshow</a></li>
-<li class="chapter" data-level="5.2.7" data-path="regressao-logistica.html"><a href="regressao-logistica.html#pseudo-r2"><i class="fa fa-check"></i><b>5.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
+<li class="chapter" data-level="6" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>6</b> Regressão Logística</a><ul>
+<li class="chapter" data-level="6.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-modelo"><i class="fa fa-check"></i><b>6.1</b> O modelo</a></li>
+<li class="chapter" data-level="6.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>6.2</b> Regressão Logística Simples</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>6.2.1</b> Estimando a Razão de Chances</a></li>
+<li class="chapter" data-level="6.2.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>6.2.2</b> Determinando o Intervalo de Confiança</a></li>
+<li class="chapter" data-level="6.2.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>6.2.3</b> Predição de Probabilidades</a></li>
+<li class="chapter" data-level="6.2.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#matriz-de-confusao"><i class="fa fa-check"></i><b>6.2.4</b> Matriz de Confusão</a></li>
+<li class="chapter" data-level="6.2.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#curva-roc"><i class="fa fa-check"></i><b>6.2.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="6.2.6" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>6.2.6</b> O teste Hosmer e Lemeshow</a></li>
+<li class="chapter" data-level="6.2.7" data-path="regressao-logistica.html"><a href="regressao-logistica.html#pseudo-r2"><i class="fa fa-check"></i><b>6.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>5.3</b> Regressão Logística Múltipla</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#metodo-stepwise"><i class="fa fa-check"></i><b>5.3.1</b> Método Stepwise</a></li>
-<li class="chapter" data-level="5.3.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>5.3.2</b> VIF - Variance Inflation Factor</a></li>
+<li class="chapter" data-level="6.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>6.3</b> Regressão Logística Múltipla</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#metodo-stepwise"><i class="fa fa-check"></i><b>6.3.1</b> Método Stepwise</a></li>
+<li class="chapter" data-level="6.3.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>6.3.2</b> VIF - Variance Inflation Factor</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>5.4</b> Regressão Logística Múltipla com variável categórica</a></li>
-<li class="chapter" data-level="5.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#exercicios"><i class="fa fa-check"></i><b>5.5</b> Exercícios</a></li>
+<li class="chapter" data-level="6.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>6.4</b> Regressão Logística Múltipla com variável categórica</a></li>
+<li class="chapter" data-level="6.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#exercicios"><i class="fa fa-check"></i><b>6.5</b> Exercícios</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>6</b> Regressão de Poisson</a><ul>
-<li class="chapter" data-level="6.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>6.1</b> O modelo</a></li>
-<li class="chapter" data-level="6.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>6.2</b> Estimando os parâmetros do modelo</a></li>
+<li class="chapter" data-level="7" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>7</b> Regressão de Poisson</a><ul>
+<li class="chapter" data-level="7.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>7.1</b> O modelo</a></li>
+<li class="chapter" data-level="7.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>7.2</b> Estimando os parâmetros do modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html"><i class="fa fa-check"></i><b>7</b> Manipulando bases de dados</a><ul>
-<li class="chapter" data-level="7.1" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#pacote-tidyr"><i class="fa fa-check"></i><b>7.1</b> Pacote tidyr</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-spread"><i class="fa fa-check"></i><b>7.1.1</b> Função <em>spread</em></a></li>
-<li class="chapter" data-level="7.1.2" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-gather"><i class="fa fa-check"></i><b>7.1.2</b> Função <em>gather</em></a></li>
-<li class="chapter" data-level="7.1.3" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-separate"><i class="fa fa-check"></i><b>7.1.3</b> Função <em>separate</em></a></li>
-<li class="chapter" data-level="7.1.4" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-unite"><i class="fa fa-check"></i><b>7.1.4</b> Função <em>unite</em></a></li>
+<li class="chapter" data-level="8" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html"><i class="fa fa-check"></i><b>8</b> Manipulando bases de dados</a><ul>
+<li class="chapter" data-level="8.1" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#pacote-tidyr"><i class="fa fa-check"></i><b>8.1</b> Pacote tidyr</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-spread"><i class="fa fa-check"></i><b>8.1.1</b> Função <em>spread</em></a></li>
+<li class="chapter" data-level="8.1.2" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-gather"><i class="fa fa-check"></i><b>8.1.2</b> Função <em>gather</em></a></li>
+<li class="chapter" data-level="8.1.3" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-separate"><i class="fa fa-check"></i><b>8.1.3</b> Função <em>separate</em></a></li>
+<li class="chapter" data-level="8.1.4" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-unite"><i class="fa fa-check"></i><b>8.1.4</b> Função <em>unite</em></a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#pacote-dplyr"><i class="fa fa-check"></i><b>7.2</b> Pacote dplyr</a></li>
+<li class="chapter" data-level="8.2" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#pacote-dplyr"><i class="fa fa-check"></i><b>8.2</b> Pacote dplyr</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>8</b> Análise de Clusters</a></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referências</a></li>
 <li class="divider"></li>
 <li><a href="https://smolski.github.io/softwarelivrer/" target="blank">Curso de Extensão</a></li>
@@ -248,7 +250,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="regressao-com-dados-em-painel" class="section level1">
-<h1><span class="header-section-number">Capítulo 4</span> Regressão com Dados em Painel</h1>
+<h1><span class="header-section-number">Capítulo 5</span> Regressão com Dados em Painel</h1>
+<p><em>Felipe Micail da Silva Smolski</em></p>
 <p>O modelo de regressão com dados em painel possui uma característica especial: se constitui de uma dimensão <em>temporal</em> e outra <em>espacial</em>. Isto porque a mesma unidade de corte transversal (família, países, etc.) é acompanhada ao longo do tempo. Por exemplo, a produção industrial mensal dos Estados brasileiros em função da taxa de juros no período de 2015-2016. Têm-se então a 624 (26x24) observações <em>combinadas</em>: de cada um dos 26 Estados (exluindo o Distrito Federal) e 24 observações para os meses.</p>
 <p>Dentre os benefícios da regressão com dados em painel <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>:</p>
 <ul>
@@ -260,20 +263,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Minimização do viés decorrente da agregação de pessoas e/ou empresas nos grandes conjuntos.</p></li>
 </ul>
 <div id="carregamento-e-transformacao-dos-dados" class="section level2">
-<h2><span class="header-section-number">4.1</span> Carregamento e transformação dos dados</h2>
+<h2><span class="header-section-number">5.1</span> Carregamento e transformação dos dados</h2>
 <p>A base de dados utilizada neste exemplo (“Grunfeld”) é proveniente do pacote <code>AER</code>. É constituída da variável dependente do nível de investimento (“invest”) de diversas empresas (“firm”), bem como das variáveis explicativas de seu valor de mercado (“value”) e do valor do estoque de capital (“capital”) durante o período de 1935-1954 (20 anos). Portanto pretende-se descobrir os determinantes do valor do nível investimento das firmas durente o período.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="kw">require</span>(AER) </a>
-<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="kw">data</span>(Grunfeld, <span class="dt">package=</span><span class="st">&quot;AER&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(AER) 
+<span class="kw">data</span>(Grunfeld, <span class="dt">package=</span><span class="st">&quot;AER&quot;</span>)</code></pre>
 <p>Após carregada a base para o estudo, serão selecionadas quatro empresas (“General Electric”, “General Motors”, “US Steel” e “Westinghouse”) para fins de análise dos dados. Utiliza-se o pacote <code>plm</code> e a função <code>pdata.frame</code> para alocar a base de dados para a análise de regressão de dados em painel, uma vez que é necessário definir o atributo individual (“firm”) e temporal (“year”) das observações. Para isso utiliza-se o argumento <code>index</code>, como segue:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="kw">require</span>(plm)</a>
-<a class="sourceLine" id="cb79-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb79-3" data-line-number="3">Grunfeld=<span class="kw">subset</span>(Grunfeld, firm <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;General Electric&quot;</span>,</a>
-<a class="sourceLine" id="cb79-4" data-line-number="4">                                      <span class="st">&quot;General Motors&quot;</span>,</a>
-<a class="sourceLine" id="cb79-5" data-line-number="5">                                      <span class="st">&quot;US Steel&quot;</span>,</a>
-<a class="sourceLine" id="cb79-6" data-line-number="6">                                      <span class="st">&quot;Westinghouse&quot;</span>))</a>
-<a class="sourceLine" id="cb79-7" data-line-number="7">Grunfeld=<span class="kw">pdata.frame</span>(Grunfeld, <span class="dt">index=</span><span class="kw">c</span>(<span class="st">&quot;firm&quot;</span>,<span class="st">&quot;year&quot;</span>))</a>
-<a class="sourceLine" id="cb79-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb79-9" data-line-number="9"><span class="kw">head</span>(Grunfeld)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(plm)
+
+Grunfeld=<span class="kw">subset</span>(Grunfeld, firm <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;General Electric&quot;</span>,
+                                      <span class="st">&quot;General Motors&quot;</span>,
+                                      <span class="st">&quot;US Steel&quot;</span>,
+                                      <span class="st">&quot;Westinghouse&quot;</span>))
+Grunfeld=<span class="kw">pdata.frame</span>(Grunfeld, <span class="dt">index=</span><span class="kw">c</span>(<span class="st">&quot;firm&quot;</span>,<span class="st">&quot;year&quot;</span>))
+  
+<span class="kw">head</span>(Grunfeld)</code></pre>
 <pre><code>                    invest value capital           firm year
 General Motors-1935  317.6  3078     2.8 General Motors 1935
 General Motors-1936  391.8  4662    52.6 General Motors 1936
@@ -281,7 +284,7 @@ General Motors-1937  410.6  5387   156.9 General Motors 1937
 General Motors-1938  257.7  2792   209.2 General Motors 1938
 General Motors-1939  330.8  4313   203.4 General Motors 1939
 General Motors-1940  461.2  4644   207.2 General Motors 1940</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="kw">summary</span>(Grunfeld)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(Grunfeld)</code></pre>
 <pre><code>     invest           value         capital                     firm   
  Min.   :  12.9   Min.   : 192   Min.   :   0.8   General Motors  :20  
  1st Qu.:  55.3   1st Qu.:1192   1st Qu.: 118.1   US Steel        :20  
@@ -306,11 +309,11 @@ General Motors-1940  461.2  4644   207.2 General Motors 1940</code></pre>
 <li><p>regressão considerando que o intercepto assume um valor médio comum entre os indivíduos e os coeficientes angulares variam ao longo do tempo e também entre indivíduos (EFEITOS ALEATÓRIOS).</p></li>
 </ol>
 <p>Abaixo é demonstrada a evolução do investimento de acordo com cada empresa estudada:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="kw">coplot</span>(invest <span class="op">~</span><span class="st"> </span>year<span class="op">|</span>firm, <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">data=</span>Grunfeld)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coplot</span>(invest <span class="op">~</span><span class="st"> </span>year<span class="op">|</span>firm, <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">data=</span>Grunfeld)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="modelo-pooled" class="section level2">
-<h2><span class="header-section-number">4.2</span> Modelo Pooled</h2>
+<h2><span class="header-section-number">5.2</span> Modelo Pooled</h2>
 <p>Este modelo trata de “empilhar” todas as observações da base de dados, ignorando a estrutura de dados em painel. Desta forma, todas as observações são tratadas como não correlacionadas para os indivíduos, com erros homoscedásticos para com os indivíduos. Trata-se, portanto, da forma mais simplista e ingênua pois desconsidera as dimensões de tempo e espaço combinados, ao mesmo tempo que estima a regressão pelo método dos Mínimos Quadrados Ordinários (MQO) <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>. Desta forma:</p>
 <p><span class="math display">\[
  \begin{matrix}
@@ -320,10 +323,10 @@ t=1,2,\dots,20
  \end{matrix}
 \]</span></p>
 <p>em que <span class="math inline">\(i\)</span> corresponde à <span class="math inline">\(i\)</span>-nésima unidade de corte transversal e <span class="math inline">\(t\)</span> o <span class="math inline">\(t\)</span>-nésimo período de tempo.</p>
-<p>Para executar este modelo de regressão é necessário utilizar a função <code>plm</code>, juntamente com as variáveis dependente e independentes, indicando a base de dados (<code>data</code>) e o tipo da regressão (<code>&quot;pooling&quot;</code>).</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">reg.pooled=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, </a>
-<a class="sourceLine" id="cb84-2" data-line-number="2">               <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;pooling&quot;</span>)</a>
-<a class="sourceLine" id="cb84-3" data-line-number="3"><span class="kw">summary</span>(reg.pooled)</a></code></pre></div>
+<p>Para executar este modelo de regressão é necessário utilizar a função <code>plm</code>, juntamente com as variáveis dependente e independentes, indicando a base de dados (<code>data</code>) e o tipo da regressão (<code>"pooling"</code>).</p>
+<pre class="sourceCode r"><code class="sourceCode r">reg.pooled=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, 
+               <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;pooling&quot;</span>)
+<span class="kw">summary</span>(reg.pooled)</code></pre>
 <pre><code>Pooling Model
 
 Call:
@@ -361,7 +364,7 @@ F-statistic: 118.424 on 2 and 77 DF, p-value: &lt;2e-16</code></pre>
 -->
 </div>
 <div id="modelo-efeitos-fixos" class="section level2">
-<h2><span class="header-section-number">4.3</span> Modelo Efeitos Fixos</h2>
+<h2><span class="header-section-number">5.3</span> Modelo Efeitos Fixos</h2>
 <p>O modelo de regressão com efeitos fixos considera, como visto anteriormente, que os valores dos interceptos para cada regressão (<span class="math inline">\(\alpha_i\)</span>) variam de acordo com o efeito de cada indivíduo (“firma”) e que os coeficientes de declividade (das variáveis independentes “value” e “capital”) para cada equação são os mesmos para cada empresa, conforme equação abaixo:</p>
 <p><span class="math display">\[
 invest_{it} = value_{1it} + capital_{2it} + \alpha_i + \varepsilon_{it}
@@ -369,9 +372,9 @@ invest_{it} = value_{1it} + capital_{2it} + \alpha_i + \varepsilon_{it}
 em que <span class="math inline">\(i=1,...,4\)</span>, <span class="math inline">\(t=1,...,20\)</span> (painel balanceado).</p>
 <p>Desta forma, o intercepto da equação é diferente para cada empresa, mas o efeito das variáveis independentes é o mesmo sobre a variável independente. Isto indica que existe características especiais em cada empresa influenciando o investimento, como por exemplo o estilo de gestão <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>.</p>
 <p>Abaixo é montada a regressão de efeitos fixos:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">reg.ef=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, </a>
-<a class="sourceLine" id="cb86-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;within&quot;</span>)</a>
-<a class="sourceLine" id="cb86-3" data-line-number="3"><span class="kw">summary</span>(reg.ef)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">reg.ef=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital, 
+           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;within&quot;</span>)
+<span class="kw">summary</span>(reg.ef)</code></pre>
 <pre><code>Oneway (individual) effect Within Model
 
 Call:
@@ -397,7 +400,7 @@ Adj. R-Squared: 0.792
 F-statistic: 153.291 on 2 and 74 DF, p-value: &lt;2e-16</code></pre>
 <p>Nota-se que o impacto do valor da empresa (“value”) e do capital (“capital”) é positivo sobre o investimento (“invest”), para todas as empresas como visto acima. Inclusive, há significância estatística
 para estas variáveis. No entanto, ainda resta definir o efeito dos interceptos de cada empresa, como segue:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="kw">summary</span>(<span class="kw">fixef</span>(reg.ef))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">fixef</span>(reg.ef))</code></pre>
 <pre><code>                 Estimate Std. Error t-value Pr(&gt;|t|)    
 General Motors      -85.5       73.5   -1.16   0.2483    
 US Steel             95.0       36.7    2.59   0.0115 *  
@@ -407,8 +410,8 @@ Westinghouse        -59.4       20.2   -2.94   0.0044 **
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Com este resultado é possível observar que o efeito das firmas sobre o investimento parece ser diferente para cada indivíduo. Desta forma, somente a empresa US Steel consta com efeito positivo sobre o investimento. Por outo lado, a fórmula da regressão é apresentada de maneira diversa, por exemplo: <span class="math inline">\(invest = -85,515 + 0,108400value + 0,345058capital\)</span> para a regressão considerando a General Motors; <span class="math inline">\(invest = 94.988 + 0,108400value + 0,345058capital\)</span> considerando a firma US Steel e assim por diante.</p>
 <p>Outra forma de visualizar a equação de efeitos fixos é utilizando a função <code>lm</code> para definir a regressão, definindo a variável “firm” como um fator:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="kw">summary</span>(<span class="kw">lm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital<span class="op">+</span><span class="kw">as.factor</span>(firm), </a>
-<a class="sourceLine" id="cb90-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital<span class="op">+</span><span class="kw">as.factor</span>(firm), 
+           <span class="dt">data=</span>Grunfeld))</code></pre>
 <pre><code>
 Call:
 lm(formula = invest ~ value + capital + as.factor(firm), data = Grunfeld)
@@ -434,7 +437,7 @@ F-statistic:  210 on 5 and 74 DF,  p-value: &lt;2e-16</code></pre>
 <p>Note que o intercepto definido (-85,51533) refere-se à presença da empresa General Motors. Caso seja evidenciada a presença da empresa US Steel, o valor do intercepto passa para 94,988 (= -85,51533 + 180,50295), a mesma lógica vale para as demais empresas.</p>
 </div>
 <div id="modelo-efeitos-aleatorios" class="section level2">
-<h2><span class="header-section-number">4.4</span> Modelo Efeitos Aleatórios</h2>
+<h2><span class="header-section-number">5.4</span> Modelo Efeitos Aleatórios</h2>
 <p>No modelo de regressão com efeitos aleatórios, os efeitos individuais das firmas (“firms”) são considerados variáveis aleatórias, ao contrário do modelo visto anteriormente. Desta forma:</p>
 <p><span class="math display">\[
 Y_{1i}=\beta_{1i}+\beta_2X_{2it}+\beta_3X_{3it}+u_{it}
@@ -452,10 +455,10 @@ w_{it}=\varepsilon_i+u_{it}
 \]</span></p>
 <p>O erro composto <span class="math inline">\(w_{it}\)</span> é formado por <span class="math inline">\(\varepsilon_i\)</span> - elemento de corte transversal dos indivíduos e <span class="math inline">\(u_{it}\)</span>, que é o elemento da série temporal e do corte transversal <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>. Desta forma, assume-se que os erros individuais não estão correlacionados entre si e também não estão correlacionados entre aquelas unidades de corte transversal e das séries temporais.</p>
 <p>A montagem deste tipo de regressão é feita através da função <code>plm</code>, incluindo como modelo “random” e como método “walhus”, como segue:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">reg.ea=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital,</a>
-<a class="sourceLine" id="cb92-2" data-line-number="2">           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;random&quot;</span>, </a>
-<a class="sourceLine" id="cb92-3" data-line-number="3">           <span class="dt">random.method =</span> <span class="st">&quot;walhus&quot;</span>)</a>
-<a class="sourceLine" id="cb92-4" data-line-number="4"><span class="kw">summary</span>(reg.ea)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">reg.ea=<span class="kw">plm</span>(invest<span class="op">~</span>value<span class="op">+</span>capital,
+           <span class="dt">data=</span>Grunfeld, <span class="dt">model=</span><span class="st">&quot;random&quot;</span>, 
+           <span class="dt">random.method =</span> <span class="st">&quot;walhus&quot;</span>)
+<span class="kw">summary</span>(reg.ea)</code></pre>
 <pre><code>Oneway (individual) effect Random Effect Model 
    (Wallace-Hussain&#39;s transformation)
 
@@ -491,14 +494,14 @@ F-statistic: 156.365 on 2 and 77 DF, p-value: &lt;2e-16</code></pre>
 <p>Os resultados corroboram com a direção dos sinais para as variáveis dependentes “value” e “capital”, ambos positivos. Por outro lado, os resultados do modelo de efeitos aleatórios trazem os valores sobre a variância dos erros, primeiramente voltado ao componente de corte transversal (específico dos indivíduos) denominado <code>individual</code>, e outro fator idissiossincrático, o qual varia com o tempo e também com o corte transversal, denominado <code>idiosyncratic</code>.</p>
 </div>
 <div id="comparacao-e-escolha-dos-modelos" class="section level2">
-<h2><span class="header-section-number">4.5</span> Comparação e escolha dos modelos</h2>
+<h2><span class="header-section-number">5.5</span> Comparação e escolha dos modelos</h2>
 <p>Após a evidenciação dos modelos de regressão dos tipos agrupado (pooled), de efeitos fixos e de efeitos aleatórios, é preciso efetuar os testes para definir qual é o melhor modelo e que por consequência deverá ser considerado.</p>
 <ul>
 <li><strong>Modelo Pooled x Modelo de Efeitos Fixos</strong></li>
 </ul>
 <p>Inicialmente compara-se o modelo Pooled com a regressão de Efeitos Fixos (<em>within</em>). Para isto utiliza-se o Teste F ou teste F de Chow. A hipótese nula é de que há igualdade nos interceptos e nas inclinações para todos os indivíduos, caracterizando o modelo de dados agrupados (pooled). A função utilizada é <code>pFtest()</code> do pacote <code>plm</code>.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">require</span>(plm)</a>
-<a class="sourceLine" id="cb94-2" data-line-number="2"><span class="kw">pFtest</span>(reg.ef,reg.pooled)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(plm)
+<span class="kw">pFtest</span>(reg.ef,reg.pooled)</code></pre>
 <pre><code>
     F test for individual effects
 
@@ -517,7 +520,7 @@ H_{1}: \sigma^{2}_{\alpha} \neq 0
  \end{matrix}
 \]</span></p>
 <p>Desta forma, a aceitação da hipótese nula implica que o modelo de dados agrupados (pooled) é preferível. A função <code>plmtest</code> efetua este teste:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="kw">plmtest</span>(reg.pooled, <span class="dt">type=</span><span class="st">&quot;bp&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plmtest</span>(reg.pooled, <span class="dt">type=</span><span class="st">&quot;bp&quot;</span>)</code></pre>
 <pre><code>
     Lagrange Multiplier Test - (Breusch-Pagan) for balanced panels
 
@@ -536,7 +539,7 @@ H_1: \alpha_{i} \text{são correlacionados com } X_{it}
  \end{matrix}
 \]</span>
 A função a ser utilizada para este teste é <code>phtest</code>:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">phtest</span>(reg.ef,reg.ea)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">phtest</span>(reg.ef,reg.ea)</code></pre>
 <pre><code>
     Hausman Test
 
@@ -546,11 +549,11 @@ alternative hypothesis: one model is inconsistent</code></pre>
 <p>Como o valor <em>p</em> foi superior a 0,05 o modelo de Efeitos Aleatórios foi considerado superior ao modelo de Efeitos Fixos.</p>
 </div>
 <div id="alguns-testes-para-os-modelos" class="section level2">
-<h2><span class="header-section-number">4.6</span> Alguns testes para os modelos</h2>
+<h2><span class="header-section-number">5.6</span> Alguns testes para os modelos</h2>
 <div id="testando-dependencia-transversal-cross-sectional" class="section level3">
-<h3><span class="header-section-number">4.6.1</span> Testando dependência transversal (<em>cross-sectional</em>)</h3>
+<h3><span class="header-section-number">5.6.1</span> Testando dependência transversal (<em>cross-sectional</em>)</h3>
 <p>A dependência <em>cross-sectional</em> se apresenta em panieis com longas séries de tempo. A hipótese nula é de que os resíduos através dos indivíduos não estão correlacionados. Como resultado, nossa regressão aceita a hipótese nula do teste de Pesaran <span class="citation">(<a href="#ref-pesaran2015">2015</a>)</span>:</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="kw">pcdtest</span>(reg.ea, <span class="dt">test=</span><span class="st">&quot;cd&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pcdtest</span>(reg.ea, <span class="dt">test=</span><span class="st">&quot;cd&quot;</span>)</code></pre>
 <pre><code>
     Pesaran CD test for cross-sectional dependence in panels
 
@@ -559,9 +562,9 @@ z = 0.31, p-value = 0.8
 alternative hypothesis: cross-sectional dependence</code></pre>
 </div>
 <div id="normalidade-dos-residuos" class="section level3">
-<h3><span class="header-section-number">4.6.2</span> Normalidade dos resíduos</h3>
+<h3><span class="header-section-number">5.6.2</span> Normalidade dos resíduos</h3>
 <p>Segue o já conhecido teste para verificar a normalidade dos resíduos. Como resultado, foi aprovada a hipótese nula (H<span class="math inline">\(_0\)</span>) de normalidade nos resíduos da regressão.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">shapiro.test</span>(reg.ea<span class="op">$</span>residuals)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shapiro.test</span>(reg.ea<span class="op">$</span>residuals)</code></pre>
 <pre><code>
     Shapiro-Wilk normality test
 
@@ -569,10 +572,10 @@ data:  reg.ea$residuals
 W = 0.99, p-value = 0.9</code></pre>
 </div>
 <div id="homocedasticidade-dos-residuos" class="section level3">
-<h3><span class="header-section-number">4.6.3</span> Homocedasticidade dos resíduos</h3>
+<h3><span class="header-section-number">5.6.3</span> Homocedasticidade dos resíduos</h3>
 <p>Abaixo o teste para homocedasticidade (variância constante) dos resíduos de Breusch-Pagan <span class="citation">(<a href="#ref-breusch1979">1979</a>)</span>:</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="kw">library</span>(lmtest)</a>
-<a class="sourceLine" id="cb104-2" data-line-number="2"><span class="kw">bptest</span>(reg.ea)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lmtest)
+<span class="kw">bptest</span>(reg.ea)</code></pre>
 <pre><code>
     studentized Breusch-Pagan test
 
@@ -581,10 +584,10 @@ BP = 7.6, df = 2, p-value = 0.02</code></pre>
 <p>Como a hipótese nula é a de que não há homocedasticidade nos resíduos e o <em>p-value</em> foi inferior a 0,05, há problemas nos resíduos da regressão, portanto as veriáveis apresentam problemas de heterocedasticidade. Algumas soluções são possíveis, como a transformação das variáveis.</p>
 </div>
 <div id="testando-correlacao-serial" class="section level3">
-<h3><span class="header-section-number">4.6.4</span> Testando correlação serial</h3>
+<h3><span class="header-section-number">5.6.4</span> Testando correlação serial</h3>
 <p>A hipótese nula do teste de correlação serial do teste Breusch-Godfrey/Wooldridge <span class="citation">(Breusch <a href="#ref-breusch1978">1978</a>)</span> é a de que não se encontra esta característica na série. Abaixo o resultado do teste, sendo que aprovou a hipótese nula, ou seja, não há problemas de correlação serial nos dados, pois o <em>p-value</em> é superior a 0,05.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="co"># teste Breusch-Godfrey/Wooldridge - EFEITOS ALEATÓRIOS</span></a>
-<a class="sourceLine" id="cb106-2" data-line-number="2"><span class="kw">pbgtest</span>(reg.ea) </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># teste Breusch-Godfrey/Wooldridge - EFEITOS ALEATÓRIOS</span>
+<span class="kw">pbgtest</span>(reg.ea) </code></pre>
 <pre><code>
     Breusch-Godfrey/Wooldridge test for serial correlation in panel models
 
@@ -593,17 +596,17 @@ chisq = 26, df = 20, p-value = 0.2
 alternative hypothesis: serial correlation in idiosyncratic errors</code></pre>
 </div>
 <div id="teste-para-efeitos-individuais-ou-de-tempo" class="section level3">
-<h3><span class="header-section-number">4.6.5</span> Teste para efeitos individuais ou de tempo</h3>
+<h3><span class="header-section-number">5.6.5</span> Teste para efeitos individuais ou de tempo</h3>
 <p>Pode ser efetuado o teste para verificar a presença de efeitos não observados de tempo ou individuais nos modelos de dados em painel <span class="citation">(Wooldridge <a href="#ref-wooldridge2010">2010</a>)</span>. A hipótse nula é a não correlação entre os erros do mesmo grupo. Observa-se que para o efeito tempo (“time”) há aceitação da hipótese alternativa, mostrando a correlação entre erros, ao contrário do efeito individual:</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="co"># teste Wooldridge - POOLED</span></a>
-<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="kw">pwtest</span>(reg.pooled) </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># teste Wooldridge - POOLED</span>
+<span class="kw">pwtest</span>(reg.pooled) </code></pre>
 <pre><code>
     Wooldridge&#39;s test for unobserved individual effects
 
 data:  formula
 z = 1.4, p-value = 0.2
 alternative hypothesis: unobserved effect</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="kw">pwtest</span>(reg.pooled, <span class="dt">effect =</span> <span class="st">&quot;time&quot;</span>) </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pwtest</span>(reg.pooled, <span class="dt">effect =</span> <span class="st">&quot;time&quot;</span>) </code></pre>
 <pre><code>
     Wooldridge&#39;s test for unobserved time effects
 
@@ -612,11 +615,11 @@ z = -3.2, p-value = 0.001
 alternative hypothesis: unobserved effect</code></pre>
 </div>
 <div id="testando-raizes-unitarias" class="section level3">
-<h3><span class="header-section-number">4.6.6</span> Testando raízes unitárias</h3>
+<h3><span class="header-section-number">5.6.6</span> Testando raízes unitárias</h3>
 <p>O teste de Dickey-Fuller prova se a série é estocástica, sendo que a hipótese nula é de que a série possui raiz unitária (não-estacionaridade). Abaixo o resultado do teste, sendo que observou-se que a série é não estacionária, ou seja, tem problemas para a regressão pois o <em>p-value</em> aprovou a hipótese nula. Desta forma, algumas saídas são possíveis, como a transformação da série ou mesmo a utilização da primeira diferença da série.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="kw">require</span>(tseries)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(tseries)</code></pre>
 <pre><code>Carregando pacotes exigidos: tseries</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="kw">adf.test</span>(Grunfeld<span class="op">$</span>invest, <span class="dt">k=</span><span class="dv">2</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">adf.test</span>(Grunfeld<span class="op">$</span>invest, <span class="dt">k=</span><span class="dv">2</span>)</code></pre>
 <pre><code>
     Augmented Dickey-Fuller Test
 
@@ -632,19 +635,19 @@ alternative hypothesis: stationary</code></pre>
 <p>Gujarati, Damodar N., e Down C Porter. 2011. <em>Econometria básica</em>. 5a ed. New York: Mc Graw Hill.</p>
 </div>
 <div id="ref-breusch1980">
-<p>Breusch, Trevor Stanley, e Adrian Rodney Pagan. 1980. «The Lagrange multiplier test and its applications to model specification in econometrics». <em>The Review of Economic Studies</em> 47 (1). JSTOR:239–53.</p>
+<p>Breusch, Trevor Stanley, e Adrian Rodney Pagan. 1980. «The Lagrange multiplier test and its applications to model specification in econometrics». <em>The Review of Economic Studies</em> 47 (1): 239–53.</p>
 </div>
 <div id="ref-hausman1978">
-<p>Hausman, Jerry A. 1978. «Specification tests in econometrics». <em>Econometrica: Journal of the econometric society</em>. JSTOR, 1251–71.</p>
+<p>Hausman, Jerry A. 1978. «Specification tests in econometrics». <em>Econometrica: Journal of the econometric society</em>, 1251–71.</p>
 </div>
 <div id="ref-pesaran2015">
-<p>Pesaran, M Hashem. 2015. «Testing weak cross-sectional dependence in large panels». <em>Econometric Reviews</em> 34 (6-10). Taylor &amp; Francis:1089–1117.</p>
+<p>Pesaran, M Hashem. 2015. «Testing weak cross-sectional dependence in large panels». <em>Econometric Reviews</em> 34 (6-10): 1089–1117.</p>
 </div>
 <div id="ref-breusch1979">
-<p>Breusch, Trevor S, e Adrian R Pagan. 1979. «A simple test for heteroscedasticity and random coefficient variation». <em>Econometrica: Journal of the Econometric Society</em>. JSTOR, 1287–94.</p>
+<p>Breusch, Trevor S, e Adrian R Pagan. 1979. «A simple test for heteroscedasticity and random coefficient variation». <em>Econometrica: Journal of the Econometric Society</em>, 1287–94.</p>
 </div>
 <div id="ref-breusch1978">
-<p>Breusch, Trevor S. 1978. «Testing for autocorrelation in dynamic linear models». <em>Australian Economic Papers</em> 17 (31). Wiley Online Library:334–55.</p>
+<p>Breusch, Trevor S. 1978. «Testing for autocorrelation in dynamic linear models». <em>Australian Economic Papers</em> 17 (31): 334–55.</p>
 </div>
 <div id="ref-wooldridge2010">
 <p>Wooldridge, Jeffrey M. 2010. <em>Econometric analysis of cross section and panel data</em>. MIT Press.</p>
@@ -676,9 +679,10 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
+"instapper": false
 },
 "fontsettings": {
 "theme": "white",
@@ -686,7 +690,11 @@ gitbook.start({
 "size": 2
 },
 "edit": null,
-"download": ["livroavancado.pdf"],
+"history": {
+"link": null,
+"text": null
+},
+"download": ["livroavancado.pdf", "livroavancado.epub"],
 "toc": {
 "collapse": "subsection"
 },
@@ -701,7 +709,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

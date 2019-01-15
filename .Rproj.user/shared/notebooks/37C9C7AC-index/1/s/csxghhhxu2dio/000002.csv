@@ -1,6 +1,0 @@
-"0","require(readxl)"
-"0","url <- ""https://github.com/Smolski/softwarelivrer/raw/master/avancado/dic.xls"""
-"0","destfile <- ""dic.xls"""
-"0","curl::curl_download(url, destfile)"
-"0","DIC <- read_excel(destfile)"
-"0","attach(DIC)"

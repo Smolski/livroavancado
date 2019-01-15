@@ -1,3 +1,0 @@
-"0","residuos=residuals(anova)"
-"0","ajustados=fitted(anova)"
-"0","plot(ajustados,residuos)"

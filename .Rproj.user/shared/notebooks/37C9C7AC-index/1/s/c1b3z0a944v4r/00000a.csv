@@ -1,1 +1,0 @@
-"0","abline(coef(modelom)[1]+coef(modelom)[3],coef(modelom)[2]+coef(modelom)[4], col='red')"
