@@ -708,24 +708,45 @@ tot.intracluster=\sum_{k=1}^{k} W(C_k)=\sum_{k=1}^{k}\sum _{x_i\in C_k}(x_i-\mu 
 $$
 Como veremos adiante, deve-se selecionar o número de clusters desejado para que sejam criadas as classificações que precisar ou, executar o comando que definirá o número ótimos de clusters para a amostra carregada. O processo de seleção das variáveis, por padrão passa por [@Kassambara2017]: (a) determinação do número de clusters; (b) selecionar randomicamente objetos para determinar os valores centrais; (c) assinar as observações pela distância Euclidiana em relação aos seus centróides; (d) efetuar atualizações calculando a nova média dos valores dentro de seu cluster definido; (e) minimizar a soma dos quadrados intra-cluster (o R utiliza 10 repetições dos passos d-e).
 
+Vamos carregar a tradicional base de dados nativa do RStudio `mtcars`, que traz informações sobre 32 modelos de automóveis, sendo as respectivas variáveis que os descrevem:
+
+- **mpg**: milhas por galão;
+- **cyl**:  número de cilindros;
+- **disp**: deslocamento;
+- **hp**: potência;
+- **drat**: relação do eixo traseiro;
+- **wt**: peso (1.000 lbs);
+- **qsec**: tempo de 1/4 de milha;
+- **vs**: motor (0 = em forma de V; 1 = linha reta);
+- **am**: transmissão (0 = automático; 1 = manual);
+- **gear**: número de marchas na transmissão (3-4 automático; 4-5 manual);
+- **carb**: númerod e carburadores;
 
 
-
-```{r}
+```{r,message=FALSE, warning=FALSE}
 #Carregamento dos dados
 data("mtcars")
 df=scale(mtcars)
 head(df, n=3)
+```
 
-# Função kmeans
-#kmeans(x, centers, iter.max=10, nstart=1)
+A função `kmeans()` é utilizada para o cálculo, sendo que **x** representa a base de dados a ser analisada; **centers** será substituído pelo número de clusters desejados; **iter.max** representa o número de iterações para a constituição dos objetos dentro dos clusters, sendo que o padrão é 10; **nstart** é o número inicial de partições, sendo que o recomendado é superior a 1.
 
+`kmeans(x, centers, iter.max=10, nstart=1)`
+
+Para determinar automaticamente o número ótimo de clusters da classificação, antes de rodar a função `kmeans()`, é possível utilizar a função `fviz_nbclust()` do pacote `factoextra`. Desta forma, utilizando a noção da soma dos quadrados intra cluster é possível verificar que o número ótimo de clusters para a amostra é 4. Isto porque novos clusters acima de 4 possuem baixo ganho para aumentar a diferenciação dos demais.
+
+
+```{r, message=FALSE, warning=FALSE}
 # Número ótimo de clusters
 library(factoextra)
 
 fviz_nbclust(df, kmeans, method = "wss")+
   geom_vline(xintercept = 4, linetype = 2)
 ```
+
+
+
 
 ```{r}
 # Clusterização k-means

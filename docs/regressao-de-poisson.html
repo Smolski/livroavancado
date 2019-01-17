@@ -311,10 +311,10 @@ caranguejo &lt;-<span class="st"> </span><span class="kw">read_table2</span>(<sp
  Max.   :15.00  </code></pre>
 <p>Abaixo o histograma da distribuição do número de satélites (variável dependente) da base de dados:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(caranguejo<span class="op">$</span>Sa)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-94-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-95-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Relacionando a quantidade de satélites (Sa) com a largura da carapaça:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(caranguejo<span class="op">$</span>W,caranguejo<span class="op">$</span>Sa)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-95-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-96-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Para criação da regressão de Poisson utiliza-se a função já conhecida <code>glm()</code>, sendo que em <code>family</code> é determinado o tipo de análise desejada (“poisson”):</p>
 <pre class="sourceCode r"><code class="sourceCode r">regpoisson=<span class="kw">glm</span>(Sa<span class="op">~</span>W, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="dt">data=</span>caranguejo)
 <span class="kw">summary</span>(regpoisson)</code></pre>
@@ -397,8 +397,8 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>É possível comparar a distribuição dos valores preditos decorrentes da utilização do modelo de regressão de Poisson com a amostra inicial da base de dados analisada:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(caranguejo<span class="op">$</span>W,caranguejo<span class="op">$</span>Sa)
 <span class="kw">points</span>(regpoisson<span class="op">$</span>fitted.values,<span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-100"></span>
-<img src="index_files/figure-html/unnamed-chunk-100-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-101"></span>
+<img src="index_files/figure-html/unnamed-chunk-101-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
 <p class="caption">
 Figura 7.1: Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)
 </p>
@@ -527,8 +527,8 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
      <span class="dt">ylab=</span><span class="st">&quot;Número de satélites&quot;</span>)
 <span class="kw">points</span>(model<span class="op">$</span>fitted.values, <span class="dt">pch=</span><span class="st">&quot;p&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">legend</span>(<span class="dv">6</span>,<span class="dv">30</span>,<span class="kw">c</span>(<span class="st">&quot;obs&quot;</span>,<span class="st">&quot;pred&quot;</span>), <span class="dt">pch=</span><span class="kw">c</span>(<span class="st">&quot;o&quot;</span>,<span class="st">&quot;p&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>))</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-105"></span>
-<img src="index_files/figure-html/unnamed-chunk-105-1.png" alt="Valores observados e preditos" width="80%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-106"></span>
+<img src="index_files/figure-html/unnamed-chunk-106-1.png" alt="Valores observados e preditos" width="80%" />
 <p class="caption">
 Figura 7.2: Valores observados e preditos
 </p>

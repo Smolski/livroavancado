@@ -1,0 +1,11 @@
+"0","# Número ótimo de clusters"
+"0","library(factoextra)"
+"2","Warning message:
+"
+"2","In readLines(input, encoding = ""UTF-8"") :"
+"2","
+ "
+"2"," incomplete final line found on '_output.yml'
+"
+"0","fviz_nbclust(df, kmeans, method = ""wss"")+"
+"0","  geom_vline(xintercept = 4, linetype = 2)"
