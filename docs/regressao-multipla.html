@@ -26,7 +26,7 @@
 <meta name="author" content="Felipe Micail da Silva Smolski">
 
 
-<meta name="date" content="2019-01-15">
+<meta name="date" content="2019-01-17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -400,7 +400,7 @@ F-statistic:  119 on 2 and 102 DF,  p-value: &lt;2e-16</code></pre>
 Em seguida, os pontos são acrescentados separadamente, com a função points, a qual acrescenta pontos ao gráfico, sendo que o colchetes <code>[espécie==0]</code> seleciona somente os casos desejados.</p>
 <p>Por fim, acrescentamos as retas de regressão para cada resposta a variável independente espécie. Usamos a função <code>coef</code> para extrair os coeficientes de interesse.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(diametro_cm,altura_m)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-43-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-44-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Gera o gráfico sem pontos</span>
 <span class="kw">plot</span>(diametro_cm,altura_m,<span class="dt">type=</span><span class="st">&#39;n&#39;</span>) 
 <span class="co"># Acrescenta os pontos</span>
@@ -409,7 +409,7 @@ Em seguida, os pontos são acrescentados separadamente, com a função points, a
 <span class="co"># Acrescenta as linhas</span>
 <span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>], <span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)
 <span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">3</span>], <span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-43-2.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-44-2.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="interacao-entre-variaveis-preditoras" class="section level2">
 <h2><span class="header-section-number">4.3</span> Interação entre variáveis preditoras</h2>
@@ -457,7 +457,7 @@ F-statistic:   94 on 3 and 101 DF,  p-value: &lt;2e-16</code></pre>
 
 <span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>],<span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)
 <span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">3</span>],<span class="kw">coef</span>(modelom)[<span class="dv">2</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">4</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-46-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-47-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="metodos-selecao-de-variaveis-na-regressao-multipla" class="section level2">
 <h2><span class="header-section-number">4.4</span> Métodos seleção de variáveis na regressão múltipla</h2>
@@ -521,7 +521,7 @@ variáveis ou encerrar o processo de no passo 4 nenhuma variável tiver sido ane
 <li><p>Se Fmin &lt; Fout: eliminar a variável cuja estatística é igual a Fmin e voltar ao passo 1 iniciando nova etapa com modelo
 reduzido com (k-1) variáveis.</p></li>
 </ul>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-47"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-48"></span>
 <img src="regress1.png" alt="Modelagem estatística" width="80%" />
 <p class="caption">
 Figura 4.1: Modelagem estatística

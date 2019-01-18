@@ -26,7 +26,7 @@
 <meta name="author" content="Felipe Micail da Silva Smolski">
 
 
-<meta name="date" content="2019-01-15">
+<meta name="date" content="2019-01-17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -299,6 +299,7 @@ Datsun 710    0.4236 -1.1222</code></pre>
 <span class="kw">fviz_nbclust</span>(df, kmeans, <span class="dt">method =</span> <span class="st">&quot;wss&quot;</span>)<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">4</span>, <span class="dt">linetype =</span> <span class="dv">2</span>)</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Em seguida utilizamos o número determinado de clusters (neste caso 4) com o comando <code>kmeans</code>. Como resultado temos a média dos centros por clusters e a classificação de cada modelo de veículo da amostra dentro do respectivo cluster. Observa-se que o cluste 1 tem 12 modelos de veículos, o cluster 2 tem 8 modelos, o cluster 3 possui 7 modelos e no cluster 4 foram enquadrados 5 modelos.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Clusterização k-means</span>
 <span class="kw">set.seed</span>(<span class="dv">123</span>)
 km.res=<span class="kw">kmeans</span>(df, <span class="dv">4</span>, <span class="dt">nstart=</span><span class="dv">25</span>)
@@ -343,14 +344,15 @@ Available components:
 
 [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
 [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;      </code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(mtcars, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">cluster=</span>km.res<span class="op">$</span>cluster), mean)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pander)
+<span class="kw">aggregate</span>(mtcars, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">cluster=</span>km.res<span class="op">$</span>cluster), mean)</code></pre>
 <pre><code>  cluster   mpg   cyl   disp     hp  drat    wt  qsec    vs am  gear  carb
 1       1 15.05 8.000 357.62 194.17 3.121 4.104 17.14 0.000  0 3.000 3.083
 2       2 28.07 4.000  93.61  81.88 4.184 2.042 18.45 0.875  1 4.250 1.500
 3       3 20.74 5.143 175.11 102.14 3.570 3.194 19.97 1.000  0 3.571 2.143
 4       4 18.50 6.800 223.40 198.80 3.836 3.001 15.62 0.000  1 4.600 5.200</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">dd=<span class="kw">cbind</span>(mtcars, <span class="dt">cluster=</span>km.res<span class="op">$</span>cluster)
-<span class="kw">head</span>(dd)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mtcars2=<span class="kw">cbind</span>(mtcars, <span class="dt">cluster=</span>km.res<span class="op">$</span>cluster)
+<span class="kw">head</span>(mtcars2)</code></pre>
 <pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb cluster
 Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4       4
 Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4       4
@@ -374,14 +376,14 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1       3</co
 <span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(factoextra)
 
-<span class="kw">fviz_cluster</span>(km.res, <span class="dt">data=</span>dd,
+<span class="kw">fviz_cluster</span>(km.res, <span class="dt">data=</span>mtcars2,
              <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;#2E9FDF&quot;</span>, <span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),
              <span class="dt">ellipse.type=</span><span class="st">&quot;euclid&quot;</span>,
              <span class="dt">star.plot=</span><span class="ot">TRUE</span>,
              <span class="dt">repel=</span><span class="ot">TRUE</span>,
              <span class="dt">ggtheme=</span><span class="kw">theme_minimal</span>()
              )</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="agglomerative" class="section level2">
 <h2><span class="header-section-number">3.2</span> Agglomerative</h2>

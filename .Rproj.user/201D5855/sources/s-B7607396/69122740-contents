@@ -1,0 +1,188 @@
+---
+title: "Carteira 2019.1"
+author: "Felipe"
+date: "4 de janeiro de 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+## Carteira Felipe 2019.1
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+options(scipen=999)
+library(readr)
+library(readr)
+carteira <- read_delim("D:/Github/arq/Carteira/carteira.csv", 
+    "\t", escape_double = FALSE, locale = locale(decimal_mark = ",", 
+        grouping_mark = "."), trim_ws = TRUE)
+
+
+#Excluir filiais
+carteira=subset(carteira, FILIAIS==1)
+#View(carteira)
+```
+
+
+**CLIENTES X RISCO X PROTESTO**
+
+```{r, echo=FALSE}
+library(ggplot2)
+p = ggplot(data = carteira) +
+  aes(x = RISCO, fill = `IMP PROTESTO`) +
+  geom_histogram(bins = 30) +
+  theme_minimal()
+p  
+```
+
+**CLIENTES X RISCO**
+
+```{r}
+ggplot(data = carteira) +
+    aes(x = RISCO) +
+    geom_histogram(bins = 30, fill = "#0c4c8a") +
+    stat_bin(geom="text", aes(label=..count..))
+```
+
+**CLIENTES X FMM**
+
+```{r}
+options(scipen=9)
+hist(carteira$FMM, 
+     breaks=10, 
+     labels=TRUE, 
+     ylim=c(0,200), 
+     xlab = 'FMM',
+     ylab = 'Frequência',
+     main = 'Empresas por FMM',
+     col = '#BBDEFB')
+```
+
+
+**CLIENTES X PROTESTO**
+
+```{r, echo=FALSE}
+library(kableExtra)
+rat0=addmargins(table(carteira$`IMP PROTESTO`, carteira$RISCO))
+
+kable(rat0) %>% 
+ kable_styling(bootstrap_options = c("striped", "hover")) 
+```
+
+**CLIENTES X PROTESTO X RISCO**
+
+```{r, echo=FALSE}
+library(kableExtra)
+
+rat=addmargins(table(carteira$RATING, carteira$RISCO))
+
+kable(rat) %>% 
+ kable_styling(bootstrap_options = c("striped", "hover")) 
+
+```
+
+```{r}
+ggplot(data = carteira) +
+  aes(x = `VALOR LC`) +
+  geom_histogram(bins = 100, fill = "#0c4c8a") +
+  theme_minimal()
+```
+
+```{r}
+require(ggplot2)
+ggplot(data = carteira) +
+  aes(x = FMM, y = `MARGEM CONTRIB`, size=as.factor(RISCO)) +
+  geom_point(color = "#0c4c8a") +
+  theme_minimal()
+```
+
+```{r}
+require(ggplot2)
+ggplot(data = carteira) +
+  aes(x = `APLICACAO - SALDO DEVEDOR`, y = `RESP. SISBACEN`, size = RISCO) +
+  geom_point(color = "#0c4c8a") +
+  theme_minimal()
+```
+
+
+```{r}
+head(subset(carteira, FMM >200000))
+```
+
+## Regressão
+
+
+```{r}
+a=lm(`MARGEM CONTRIB`~FMM+RISCO+SEGURO+CONSORCIO, data=carteira)
+summary(a)
+```
+
+```{r}
+step(a, direction='both')
+```
+
+```{r}
+require(faraway)
+vif(a)
+```
+
+
+
+## Análise de Clusters
+
+```{r}
+library(factoextra)
+
+df=carteira[c(5,6,7,8,9,10,12,18)]
+
+
+fviz_nbclust(df, kmeans, method = "wss")+
+  geom_vline(xintercept = 4, linetype = 2)
+```
+
+```{r}
+set.seed(123)
+km.res=kmeans(df, 4, nstart=25)
+print(km.res)
+```
+
+
+```{r}
+library(kableExtra)
+a=aggregate(df, by=list(cluster=km.res$cluster), mean)
+kable(a) %>% 
+ kable_styling(bootstrap_options = c("striped", "hover")) 
+
+```
+```{r}
+library(kableExtra)
+b=table(km.res$cluster)
+kable(b) %>% 
+ kable_styling(bootstrap_options = c("striped", "hover")) 
+
+```
+
+
+
+```{r}
+dd=cbind(df, cluster=km.res$cluster)
+head(dd)
+```
+
+```{r}
+library(ggplot2)
+library(factoextra)
+
+fviz_cluster(km.res, data=dd,
+             palette = c("#2E9FDF", "#00AFBB", "#E7B800", "#FC4E07"),
+             ellipse.type="euclid",
+             star.plot=TRUE,
+             repel=FALSE,
+             ggtheme=theme_minimal()
+             )
+```
+

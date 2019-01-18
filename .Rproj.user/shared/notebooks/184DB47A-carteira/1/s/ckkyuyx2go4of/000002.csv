@@ -1,0 +1,6 @@
+"0","ggplot(data = carteira) +"
+"0","  aes(x = `VALOR LC`) +"
+"0","  geom_histogram(bins = 100, fill = ""#0c4c8a"") +"
+"0","  theme_minimal()"
+"2","Error in ggplot(data = carteira) : object 'carteira' not found
+"

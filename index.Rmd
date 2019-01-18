@@ -745,7 +745,7 @@ fviz_nbclust(df, kmeans, method = "wss")+
   geom_vline(xintercept = 4, linetype = 2)
 ```
 
-
+Em seguida utilizamos o número determinado de clusters (neste caso 4) com o comando `kmeans`. Como resultado temos a média dos centros por clusters e a classificação de cada modelo de veículo da amostra dentro do respectivo cluster. Observa-se que o cluste 1 tem 12 modelos de veículos, o cluster 2 tem 8 modelos, o cluster 3 possui 7 modelos e no cluster 4 foram enquadrados 5 modelos.
 
 
 ```{r}
@@ -756,11 +756,18 @@ print(km.res)
 ```
 
 ```{r}
-
+library(pander)
 aggregate(mtcars, by=list(cluster=km.res$cluster), mean)
+```
 
-dd=cbind(mtcars, cluster=km.res$cluster)
-head(dd)
+
+
+
+
+
+```{r}
+mtcars2=cbind(mtcars, cluster=km.res$cluster)
+head(mtcars2)
 
 km.res$centers
 ```
@@ -771,7 +778,7 @@ km.res$centers
 library(ggplot2)
 library(factoextra)
 
-fviz_cluster(km.res, data=dd,
+fviz_cluster(km.res, data=mtcars2,
              palette = c("#2E9FDF", "#00AFBB", "#E7B800", "#FC4E07"),
              ellipse.type="euclid",
              star.plot=TRUE,

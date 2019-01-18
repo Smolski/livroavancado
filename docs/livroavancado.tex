@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-01-15}
+    \date{2019-01-17}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -1434,6 +1434,8 @@ Para determinar automaticamente o número ótimo de clusters da classificação,
 
 \begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-36-1} \end{center}
 
+Em seguida utilizamos o número determinado de clusters (neste caso 4) com o comando \texttt{kmeans}. Como resultado temos a média dos centros por clusters e a classificação de cada modelo de veículo da amostra dentro do respectivo cluster. Observa-se que o cluste 1 tem 12 modelos de veículos, o cluster 2 tem 8 modelos, o cluster 3 possui 7 modelos e no cluster 4 foram enquadrados 5 modelos.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Clusterização k-means}
@@ -1488,6 +1490,7 @@ Available components:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(pander)}
 \KeywordTok{aggregate}\NormalTok{(mtcars, }\DataTypeTok{by=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{cluster=}\NormalTok{km.res}\OperatorTok{$}\NormalTok{cluster), mean)}
 \end{Highlighting}
 \end{Shaded}
@@ -1502,8 +1505,8 @@ Available components:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dd=}\KeywordTok{cbind}\NormalTok{(mtcars, }\DataTypeTok{cluster=}\NormalTok{km.res}\OperatorTok{$}\NormalTok{cluster)}
-\KeywordTok{head}\NormalTok{(dd)}
+\NormalTok{mtcars2=}\KeywordTok{cbind}\NormalTok{(mtcars, }\DataTypeTok{cluster=}\NormalTok{km.res}\OperatorTok{$}\NormalTok{cluster)}
+\KeywordTok{head}\NormalTok{(mtcars2)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1543,7 +1546,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1       3
 \KeywordTok{library}\NormalTok{(ggplot2)}
 \KeywordTok{library}\NormalTok{(factoextra)}
 
-\KeywordTok{fviz_cluster}\NormalTok{(km.res, }\DataTypeTok{data=}\NormalTok{dd,}
+\KeywordTok{fviz_cluster}\NormalTok{(km.res, }\DataTypeTok{data=}\NormalTok{mtcars2,}
              \DataTypeTok{palette =} \KeywordTok{c}\NormalTok{(}\StringTok{"#2E9FDF"}\NormalTok{, }\StringTok{"#00AFBB"}\NormalTok{, }\StringTok{"#E7B800"}\NormalTok{, }\StringTok{"#FC4E07"}\NormalTok{),}
              \DataTypeTok{ellipse.type=}\StringTok{"euclid"}\NormalTok{,}
              \DataTypeTok{star.plot=}\OtherTok{TRUE}\NormalTok{,}
@@ -1553,7 +1556,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1       3
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-39-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-40-1} \end{center}
 
 \hypertarget{agglomerative}{%
 \section{Agglomerative}\label{agglomerative}}
@@ -1819,7 +1822,7 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-43-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-44-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1834,7 +1837,7 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-43-2} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-44-2} \end{center}
 
 \hypertarget{interacao-entre-variaveis-preditoras}{%
 \section{Interação entre variáveis preditoras}\label{interacao-entre-variaveis-preditoras}}
@@ -1907,7 +1910,7 @@ F-statistic:   94 on 3 and 101 DF,  p-value: <2e-16
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-46-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-47-1} \end{center}
 
 \hypertarget{metodos-selecao-de-variaveis-na-regressao-multipla}{%
 \section{Métodos seleção de variáveis na regressão múltipla}\label{metodos-selecao-de-variaveis-na-regressao-multipla}}
@@ -2015,7 +2018,7 @@ Passo 8) Seja F\textsubscript{out} o valor da distribuição F com 1 e (n-k-1) g
 
 }
 
-\caption{Modelagem estatística}\label{fig:unnamed-chunk-47}
+\caption{Modelagem estatística}\label{fig:unnamed-chunk-48}
 \end{figure}
 
 Fonte: RIBOLDI (\protect\hyperlink{ref-Riboldi2005}{2005})
@@ -2180,7 +2183,7 @@ Abaixo é demonstrada a evolução do investimento de acordo com cada empresa es
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-50-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-51-1} \end{center}
 
 \hypertarget{modelo-pooled}{%
 \section{Modelo Pooled}\label{modelo-pooled}}
@@ -3743,7 +3746,7 @@ Agora será efetuada a predição comparando-se os \emph{rankings} das escolas. 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-92-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-93-1} \end{center}
 
 \hypertarget{exercicios}{%
 \section{Exercícios}\label{exercicios}}
@@ -3884,7 +3887,7 @@ Abaixo o histograma da distribuição do número de satélites (variável depend
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-95-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-96-1} \end{center}
 
 Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 
@@ -3894,7 +3897,7 @@ Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-96-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-97-1} \end{center}
 
 Para criação da regressão de Poisson utiliza-se a função já conhecida \texttt{glm()}, sendo que em \texttt{family} é determinado o tipo de análise desejada (``poisson''):
 
@@ -4033,11 +4036,11 @@ Abaixo são incluídos os valores preditos \texttt{regpoisson\$fitted.values} ju
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-101-1} 
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-102-1} 
 
 }
 
-\caption{Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)}\label{fig:unnamed-chunk-101}
+\caption{Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)}\label{fig:unnamed-chunk-102}
 \end{figure}
 
 No entanto, é possível melhorar a precisão do modelo de regressão utilizado, uma vez que os dados iniciais apresentam os casos individuais da amostra de cada caranguejo observado com suas respectivas características das variáveis independentes. Uma forma é agrupar os dados em intervalos da variável independente, contando os o número de casos (variável dependente) em cada intervalo.
@@ -4218,11 +4221,11 @@ Abaixo demonstra-se a plotagem dos valores originais e preditos com a regressão
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-106-1} 
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-107-1} 
 
 }
 
-\caption{Valores observados e preditos}\label{fig:unnamed-chunk-106}
+\caption{Valores observados e preditos}\label{fig:unnamed-chunk-107}
 \end{figure}
 
 Fonte: Adaptado de PENNSTATE (\protect\hyperlink{ref-penn2018}{2018}).

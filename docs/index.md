@@ -3,7 +3,7 @@ title: "Software R: curso avançado"
 author: 
 - Iara Denise Endruweit Battisti
 - Felipe Micail da Silva Smolski
-date: "2019-01-15"
+date: "2019-01-17"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -1173,7 +1173,7 @@ fviz_nbclust(df, kmeans, method = "wss")+
 
 <img src="index_files/figure-epub3/unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" />
 
-
+Em seguida utilizamos o número determinado de clusters (neste caso 4) com o comando `kmeans`. Como resultado temos a média dos centros por clusters e a classificação de cada modelo de veículo da amostra dentro do respectivo cluster. Observa-se que o cluste 1 tem 12 modelos de veículos, o cluster 2 tem 8 modelos, o cluster 3 possui 7 modelos e no cluster 4 foram enquadrados 5 modelos.
 
 
 
@@ -1229,6 +1229,7 @@ Available components:
 
 
 ```r
+library(pander)
 aggregate(mtcars, by=list(cluster=km.res$cluster), mean)
 ```
 
@@ -1240,9 +1241,15 @@ aggregate(mtcars, by=list(cluster=km.res$cluster), mean)
 4       4 18.50 6.800 223.40 198.80 3.836 3.001 15.62 0.000  1 4.600 5.200
 ```
 
+
+
+
+
+
+
 ```r
-dd=cbind(mtcars, cluster=km.res$cluster)
-head(dd)
+mtcars2=cbind(mtcars, cluster=km.res$cluster)
+head(mtcars2)
 ```
 
 ```
@@ -1279,7 +1286,7 @@ km.res$centers
 library(ggplot2)
 library(factoextra)
 
-fviz_cluster(km.res, data=dd,
+fviz_cluster(km.res, data=mtcars2,
              palette = c("#2E9FDF", "#00AFBB", "#E7B800", "#FC4E07"),
              ellipse.type="euclid",
              star.plot=TRUE,
@@ -1288,7 +1295,7 @@ fviz_cluster(km.res, data=dd,
              )
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -1518,7 +1525,7 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 plot(diametro_cm,altura_m)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-43-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-44-1.png" width="80%" style="display: block; margin: auto;" />
 
 ```r
 # Gera o gráfico sem pontos
@@ -1531,7 +1538,7 @@ abline(coef(modelom)[1], coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3], coef(modelom)[2], col='red')
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-43-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-44-2.png" width="80%" style="display: block; margin: auto;" />
 
 
 ## Interação entre variáveis preditoras
@@ -1605,7 +1612,7 @@ abline(coef(modelom)[1],coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3],coef(modelom)[2]+coef(modelom)[4], col='red')
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-46-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-47-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -1699,7 +1706,7 @@ reduzido com (k-1) variáveis.
 
 <div class="figure" style="text-align: center">
 <img src="regress1.png" alt="Modelagem estatística" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-47)Modelagem estatística</p>
+<p class="caption">(\#fig:unnamed-chunk-48)Modelagem estatística</p>
 </div>
 
 Fonte: @Riboldi2005
@@ -1837,7 +1844,7 @@ Abaixo é demonstrada a evolução do investimento de acordo com cada empresa es
 coplot(invest ~ year|firm, type="b", data=Grunfeld)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-50-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-51-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -3331,7 +3338,7 @@ ggplot(novosdados, aes(x=rank,y=prob))+
   labs(title="Probabilidades preditas", x="Ranking",y="Pr(y=1)")
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-92-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-93-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -3493,7 +3500,7 @@ Abaixo o histograma da distribuição do número de satélites (variável depend
 hist(caranguejo$Sa)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-95-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-96-1.png" width="80%" style="display: block; margin: auto;" />
 
 Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 
@@ -3502,7 +3509,7 @@ Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 plot(caranguejo$W,caranguejo$Sa)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-96-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-97-1.png" width="80%" style="display: block; margin: auto;" />
 
 Para criação da regressão de Poisson utiliza-se a função já conhecida `glm()`, sendo que em `family` é determinado o tipo de análise desejada ("poisson"):
 
@@ -3633,8 +3640,8 @@ points(regpoisson$fitted.values,col='red', type = "l")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-epub3/unnamed-chunk-101-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-101)Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)</p>
+<img src="index_files/figure-epub3/unnamed-chunk-102-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-102)Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)</p>
 </div>
 
 
@@ -3807,8 +3814,8 @@ legend(6,30,c("obs","pred"), pch=c("o","p"), col=c("blue","red"))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-epub3/unnamed-chunk-106-1.png" alt="Valores observados e preditos" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-106)Valores observados e preditos</p>
+<img src="index_files/figure-epub3/unnamed-chunk-107-1.png" alt="Valores observados e preditos" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-107)Valores observados e preditos</p>
 </div>
 Fonte: Adaptado de @penn2018.
 
