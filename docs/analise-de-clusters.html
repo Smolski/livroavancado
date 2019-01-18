@@ -344,8 +344,7 @@ Available components:
 
 [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
 [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;      </code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pander)
-<span class="kw">aggregate</span>(mtcars, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">cluster=</span>km.res<span class="op">$</span>cluster), mean)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(mtcars, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">cluster=</span>km.res<span class="op">$</span>cluster), mean)</code></pre>
 <pre><code>  cluster   mpg   cyl   disp     hp  drat    wt  qsec    vs am  gear  carb
 1       1 15.05 8.000 357.62 194.17 3.121 4.104 17.14 0.000  0 3.000 3.083
 2       2 28.07 4.000  93.61  81.88 4.184 2.042 18.45 0.875  1 4.250 1.500

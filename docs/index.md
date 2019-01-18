@@ -1229,7 +1229,6 @@ Available components:
 
 
 ```r
-library(pander)
 aggregate(mtcars, by=list(cluster=km.res$cluster), mean)
 ```
 
