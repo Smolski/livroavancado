@@ -3,7 +3,7 @@ title: "Software R: curso avançado"
 author: 
 - Iara Denise Endruweit Battisti
 - Felipe Micail da Silva Smolski
-date: "2019-01-17"
+date: "2019-02-10"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -54,6 +54,11 @@ Algumas sugestões a incluir:
 # Delineamentos Experimentais
 
 *Tatiane Chassot*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 
 A experimentação é uma parte da estatística probabilística que estuda o planejamento, execução, coleta de dados, análise de dados e interpretação dos resultados provenientes de um experimento.
 
@@ -212,6 +217,7 @@ Para que o RStudio apresente uma tabela com as médias e letras indicando quais 
 
 ```r
 library(agricolae)
+library(gtools)
 HSD.test(anova,as.factor("Variedade"),console=TRUE)
 ```
 
@@ -259,13 +265,13 @@ attach(DIC)
 ```
 
 ```
-The following objects are masked from DIC (pos = 4):
+The following objects are masked from DIC (pos = 5):
 
     Peso, Repeticao, Variedade
 ```
 
 ```
-The following objects are masked from DIC (pos = 5):
+The following objects are masked from DIC (pos = 6):
 
     Peso, Repeticao, Variedade
 ```
@@ -485,19 +491,23 @@ qqline(residuo)
 
 *Denize Ivete Reis*
 
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 
 A análise fatorial é um método estatístico utilizado para descrever a variabilidade entre variáveis observadas e possivelmente correlacionadas em termos de um número potencialmente menor de variáveis não observadas chamadas fatores.
 
-Assim, é possível que as variaçõess de três ou quatro variáveis observadas possam ser explicadas por somente um fator, o que evidencia a utilidade da análise fatorial para descrever um conjunto de dados utilizando para isso apenas alguns fatores.
 
-Diferentemente da análise de variância, regressão e análise discriminante, onde uma das variáveis é identificada como a variável dependente, examina-se todo o conjunto de relações interdependentes entre variáveis.
 
 <div class="figure" style="text-align: center">
 <img src="anfat1.png" alt="Processo de análise de variáveis" width="80%" />
 <p class="caption">(\#fig:unnamed-chunk-19)Processo de análise de variáveis</p>
 </div>
 
+Assim, é possível que as variações de três ou quatro variáveis observadas possam ser explicadas por somente um fator, o que evidencia a utilidade da análise fatorial para descrever um conjunto de dados utilizando para isso apenas alguns fatores.
 
+Diferentemente da análise de variância, regressão e análise discriminante, onde uma das variáveis é identificada como a variável dependente, examina-se todo o conjunto de relações interdependentes entre variáveis.
 
 A análise fatorial aborda o problema de analisar a estrutura das inter-relações (correlações) entre um grande número de variáveis (escores de testes, itens de testes, respostas de questionários), definindo um conjunto de dimensões latentes comuns, chamados fatores. Então, a análise fatorial, permite primeiro identificar as dimensões separadas da estrutura e então determinar o grau em que cada variável é explicada por cada dimensão. Uma vez que essas dimensões e a explicação da cada variável estejam determinadas, os dois principais usos da análise fatorial podem ser conseguidos:
 
@@ -680,6 +690,17 @@ require(psych)
 
 ```
 Carregando pacotes exigidos: psych
+```
+
+```
+
+Attaching package: 'psych'
+```
+
+```
+The following object is masked from 'package:gtools':
+
+    logit
 ```
 
 ```r
@@ -1103,7 +1124,23 @@ Destacando-se os entrevistados de interesse, verifica-se:
 
 *Felipe Micail da Silva Smolski*
 
+\begin{flushright}
+\emph{}
+\end{flushright}
+
+
 A ideia central da Análise de Cluster é a possibilidade de efetuar a classificação dos objetos em grupos, de forma que os objetos dentro do mesmo grupo sejam mais similares quanto possível e, de forma análoga, que os diversos grupos (clusters) sejam mais diferentes o possível em sua constituição [@Kassambara2017]. Embora possa parecer semelhante ao conteúdo do capítulo anterior, as diferenças residem no fato de que a Análise Fatorial agrega variáveis e efetua os agrupamentos em base de padrões de variação (correlação) dos dados enquanto a Análise de Cluster (agrupamentos) objetiva agregar objetos (e não variáveis), fazendo a agregação baseada na distância (proximidade) [@Hair2009].
+
+A medida de distância utilizada de maneira mais comum utililizada é a Distância Euclidiana como mostra a Figura abaixo (embora existam outras métricas como a Distância de Manhattan, a Distância de Correlação de Pearson, a Distância de Correlação de  Eisen, a Distância de Correlação de  Spearman e a Distância de Correlação de  Kendal). 
+
+<div class="figure" style="text-align: center">
+<img src="distecludiana.png" alt="Cálculo da distância entre A e B no espaço X Y" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-35)Cálculo da distância entre A e B no espaço X Y</p>
+</div>
+
+Fonte: @Pereira2004.
+
+Em outro sentido, existem vários métodos de clusterização, dentre eles: a) Clusterização Particionada, que faz parte as técnicas K-Means, K-Medoids e CLARA; b) Clusterização Hierárquica, de que faz parte a Clusterização Aglomerativa [@Kassambara2017]. Neste capítulo serão apresentadas as técnicas denominadas K-Means e a Clusterização Aglomerativa.
 
 ## K-Means
 
@@ -1125,7 +1162,7 @@ Vamos carregar a tradicional base de dados nativa do RStudio `mtcars`, que traz 
 
 - **mpg**: milhas por galão;
 - **cyl**:  número de cilindros;
-- **disp**: deslocamento;
+- **disp**: número que representa o volume total no motor como um fator de circunferência do cilindro, profundidade e número total de cilindros;
 - **hp**: potência;
 - **drat**: relação do eixo traseiro;
 - **wt**: peso (1.000 lbs);
@@ -1133,7 +1170,9 @@ Vamos carregar a tradicional base de dados nativa do RStudio `mtcars`, que traz 
 - **vs**: motor (0 = em forma de V; 1 = linha reta);
 - **am**: transmissão (0 = automático; 1 = manual);
 - **gear**: número de marchas na transmissão (3-4 automático; 4-5 manual);
-- **carb**: númerod e carburadores;
+- **carb**: número de carburadores;
+
+Segue abaixo o carregamento da base de dados, sendo que neste exemplo foi utilizada a função `scale()` para balancear as informações (para mais informações utilize a ajuda do RStudio `?scale`).
 
 
 
@@ -1171,7 +1210,7 @@ fviz_nbclust(df, kmeans, method = "wss")+
   geom_vline(xintercept = 4, linetype = 2)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" />
 
 Em seguida utilizamos o número determinado de clusters (neste caso 4) com o comando `kmeans`. Como resultado temos a média dos centros por clusters e a classificação de cada modelo de veículo da amostra dentro do respectivo cluster. Observa-se que o cluste 1 tem 12 modelos de veículos, o cluster 2 tem 8 modelos, o cluster 3 possui 7 modelos e no cluster 4 foram enquadrados 5 modelos.
 
@@ -1227,6 +1266,9 @@ Available components:
 [6] "betweenss"    "size"         "iter"         "ifault"      
 ```
 
+Após determinado o número de clusters ideal e calculado para qual cluster cada variável do banco de dados pertence, é possível verificar as características de cada aglomeração. Com o cálculo da média utilizando a função `aggregate`, observa-se que os veículos com milhas por galão (mpg) médias mais baixos encontram-se no cluster 1, juntamente com aqueles com maior quantidade de cilindros (cyl) como é de se imaginar, com alta potência em cavalos (hp), concentranto-se automóveis automáticos (am=0). Já no cluster 2, por exemplo, estão aqueles veículos com maior similaridade e com uma maior autonomia (média de 28,07 mpg), baixa potência em cavalos (hp), veículos com câmbio manual (am) e baixos cilindros (cyl). Ainda os clusters 3 e 4 completam os grupos de veículos similares entre si.
+
+
 
 ```r
 aggregate(mtcars, by=list(cluster=km.res$cluster), mean)
@@ -1241,8 +1283,7 @@ aggregate(mtcars, by=list(cluster=km.res$cluster), mean)
 ```
 
 
-
-
+Abaixo são incluídas as informações dos clusters calculados anteriormente para cada modelo de automóvel:
 
 
 
@@ -1278,6 +1319,9 @@ km.res$centers
 4  1.2368  1.4781
 ```
 
+É importante ainda verificar a similaridade dos clusters de veículos calculados neste exemplo de forma visual. Para isto uma sugestão elencada por @Kassambara2017 é a função `fviz_cluster` do pacote `factoextra`. Esta função utiliza os dados originais e os clusters encontrados para plotar os resultados em um gráfico utilizando a técnica de componentes princiapais, como segue na imagem abaixo. Desta forma fica nítido a proximidade entre os modelos de veículos em seus clusters:
+
+
 
 ```r
 # Vizualizando os clusters
@@ -1294,25 +1338,84 @@ fviz_cluster(km.res, data=mtcars2,
              )
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+
+
+
+## Clusterização Aglomerativa
 
 
 
 
 
 
+```r
+#Carregamento dos dados
+data("mtcars")
+df=scale(mtcars)
+head(df, n=3)
+```
 
-## Agglomerative
+```
+                 mpg    cyl    disp      hp   drat      wt    qsec     vs   am
+Mazda RX4     0.1509 -0.105 -0.5706 -0.5351 0.5675 -0.6104 -0.7772 -0.868 1.19
+Mazda RX4 Wag 0.1509 -0.105 -0.5706 -0.5351 0.5675 -0.3498 -0.4638 -0.868 1.19
+Datsun 710    0.4495 -1.225 -0.9902 -0.7830 0.4740 -0.9170  0.4260  1.116 1.19
+                gear    carb
+Mazda RX4     0.4236  0.7352
+Mazda RX4 Wag 0.4236  0.7352
+Datsun 710    0.4236 -1.1222
+```
 
 
 
 
 
+
+```r
+dista=dist(df, method="euclidean")
+```
+
+
+
+```r
+as.matrix(dista)[1:3,1:3]
+```
+
+```
+              Mazda RX4 Mazda RX4 Wag Datsun 710
+Mazda RX4        0.0000        0.4076      3.243
+Mazda RX4 Wag    0.4076        0.0000      3.176
+Datsun 710       3.2431        3.1764      0.000
+```
+
+
+
+```r
+dista.hc=hclust(d=dista, method="ward.D")
+```
+
+
+
+
+```r
+library("factoextra")
+fviz_dend(dista.hc, cex=0.5)
+```
+
+<img src="index_files/figure-epub3/unnamed-chunk-46-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 # Regressão Múltipla
 
 *Iara Denise Endruweit Battisti*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 
 ## Modelo geral
 
@@ -1524,7 +1627,7 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 plot(diametro_cm,altura_m)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-44-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-50-1.png" width="80%" style="display: block; margin: auto;" />
 
 ```r
 # Gera o gráfico sem pontos
@@ -1537,7 +1640,7 @@ abline(coef(modelom)[1], coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3], coef(modelom)[2], col='red')
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-44-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-50-2.png" width="80%" style="display: block; margin: auto;" />
 
 
 ## Interação entre variáveis preditoras
@@ -1611,7 +1714,7 @@ abline(coef(modelom)[1],coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3],coef(modelom)[2]+coef(modelom)[4], col='red')
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-47-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-53-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -1705,7 +1808,7 @@ reduzido com (k-1) variáveis.
 
 <div class="figure" style="text-align: center">
 <img src="regress1.png" alt="Modelagem estatística" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-48)Modelagem estatística</p>
+<p class="caption">(\#fig:unnamed-chunk-54)Modelagem estatística</p>
 </div>
 
 Fonte: @Riboldi2005
@@ -1745,6 +1848,11 @@ Verificação da existência de multicolinearidade (correlação entre os X’s)
 # Regressão com Dados em Painel
 
 *Felipe Micail da Silva Smolski*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 
 O modelo de regressão com dados em painel possui uma característica especial: se constitui de uma dimensão *temporal* e outra *espacial*. Isto porque a mesma unidade de corte transversal (família, países, etc.) é acompanhada ao longo do tempo. Por exemplo, a produção industrial mensal dos Estados brasileiros em função da taxa de juros no período de 2015-2016. Têm-se então a 624 (26x24) observações *combinadas*: de cada um dos 26 Estados (exluindo o Distrito Federal) e 24 observações para os meses.
 
@@ -1843,7 +1951,7 @@ Abaixo é demonstrada a evolução do investimento de acordo com cada empresa es
 coplot(invest ~ year|firm, type="b", data=Grunfeld)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-51-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-57-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -2074,10 +2182,10 @@ Residuals:
 -193.89  -46.17    1.35   41.98  198.11 
 
 Coefficients:
-            Estimate Std. Error t-value Pr(>|t|)    
-(Intercept) -72.6322    68.9083   -1.05      0.3    
-value         0.1079     0.0167    6.48    8e-09 ***
-capital       0.3443     0.0269   12.81   <2e-16 ***
+            Estimate Std. Error z-value Pr(>|z|)    
+(Intercept) -72.6322    68.9083   -1.05     0.29    
+value         0.1079     0.0167    6.48  9.3e-11 ***
+capital       0.3443     0.0269   12.81  < 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -2085,7 +2193,7 @@ Total Sum of Squares:    2260000
 Residual Sum of Squares: 446000
 R-Squared:      0.802
 Adj. R-Squared: 0.797
-F-statistic: 156.365 on 2 and 77 DF, p-value: <2e-16
+Chisq: 312.731 on 2 DF, p-value: <2e-16
 ```
 
 Os resultados corroboram com a direção dos sinais para as variáveis dependentes "value" e "capital", ambos positivos. Por outro lado, os resultados do modelo de efeitos aleatórios trazem os valores sobre a variância dos erros, primeiramente voltado ao componente de corte transversal (específico dos indivíduos) denominado `individual`, e outro fator idissiossincrático, o qual varia com o tempo e também com o corte transversal, denominado `idiosyncratic`.
@@ -2321,6 +2429,13 @@ alternative hypothesis: stationary
 
 
 # Regressão Logística
+
+*Felipe Micail da Silva Smolski*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 
 
 
@@ -3337,7 +3452,7 @@ ggplot(novosdados, aes(x=rank,y=prob))+
   labs(title="Probabilidades preditas", x="Ranking",y="Pr(y=1)")
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-93-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-99-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -3411,6 +3526,13 @@ step(glm(reinc~., data=condicionalcrime),direction = 'both')
 
 
 # Regressão de Poisson
+
+*Felipe Micail da Silva Smolski*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 
 
 
@@ -3499,7 +3621,7 @@ Abaixo o histograma da distribuição do número de satélites (variável depend
 hist(caranguejo$Sa)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-96-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-102-1.png" width="80%" style="display: block; margin: auto;" />
 
 Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 
@@ -3508,7 +3630,7 @@ Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 plot(caranguejo$W,caranguejo$Sa)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-97-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-epub3/unnamed-chunk-103-1.png" width="80%" style="display: block; margin: auto;" />
 
 Para criação da regressão de Poisson utiliza-se a função já conhecida `glm()`, sendo que em `family` é determinado o tipo de análise desejada ("poisson"):
 
@@ -3639,8 +3761,8 @@ points(regpoisson$fitted.values,col='red', type = "l")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-epub3/unnamed-chunk-102-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-102)Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)</p>
+<img src="index_files/figure-epub3/unnamed-chunk-108-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-108)Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)</p>
 </div>
 
 
@@ -3813,8 +3935,8 @@ legend(6,30,c("obs","pred"), pch=c("o","p"), col=c("blue","red"))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-epub3/unnamed-chunk-107-1.png" alt="Valores observados e preditos" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-107)Valores observados e preditos</p>
+<img src="index_files/figure-epub3/unnamed-chunk-113-1.png" alt="Valores observados e preditos" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-113)Valores observados e preditos</p>
 </div>
 Fonte: Adaptado de @penn2018.
 
@@ -3847,6 +3969,11 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 # Manipulando bases de dados
 
 *Felipe Micail da Silva Smolski*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 
 O objetivo deste capítulo é retomar alguns pacotes importantes no RStudio para a
 manipulação e transformação de grandes bases de dados que o pesquisador terá que manejar ao longo dos processos de análise.
@@ -3985,7 +4112,7 @@ separate(table3, rate, into = c("cases", "population"),sep = "/")
 ```
 # A tibble: 6 x 4
   country      year cases  population
-* <chr>       <int> <chr>  <chr>     
+  <chr>       <int> <chr>  <chr>     
 1 Afghanistan  1999 745    19987071  
 2 Afghanistan  2000 2666   20595360  
 3 Brazil       1999 37737  172006362 
@@ -4004,7 +4131,7 @@ separate(table3, year, into = c("century", "year"), sep = 2)
 ```
 # A tibble: 6 x 4
   country     century year  rate             
-* <chr>       <chr>   <chr> <chr>            
+  <chr>       <chr>   <chr> <chr>            
 1 Afghanistan 19      99    745/19987071     
 2 Afghanistan 20      00    2666/20595360    
 3 Brazil      19      99    37737/172006362  

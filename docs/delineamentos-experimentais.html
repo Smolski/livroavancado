@@ -9,7 +9,7 @@
   <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Capítulo 1 Delineamentos Experimentais | Software R: curso avançado />
+  <meta property="og:title" content="Capítulo 1 Delineamentos Experimentais | Software R: curso avançado" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://rstub.github.io/bookdown-chapterbib/" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstub/bookdown-chapterbib" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 1 Delineamentos Experimentais | Software R: curso avançado />
+  <meta name="twitter:title" content="Capítulo 1 Delineamentos Experimentais | Software R: curso avançado" />
   
   <meta name="twitter:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
   
@@ -26,7 +26,7 @@
 <meta name="author" content="Felipe Micail da Silva Smolski">
 
 
-<meta name="date" content="2019-01-17">
+<meta name="date" content="2019-02-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -168,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>3</b> Análise de Clusters</a><ul>
 <li class="chapter" data-level="3.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>3.1</b> K-Means</a></li>
-<li class="chapter" data-level="3.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#agglomerative"><i class="fa fa-check"></i><b>3.2</b> Agglomerative</a></li>
+<li class="chapter" data-level="3.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>3.2</b> Clusterização Aglomerativa</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>4</b> Regressão Múltipla</a><ul>
 <li class="chapter" data-level="4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>4.1</b> Modelo geral</a></li>
@@ -252,6 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="delineamentos-experimentais" class="section level1">
 <h1><span class="header-section-number">Capítulo 1</span> Delineamentos Experimentais</h1>
 <p><em>Tatiane Chassot</em></p>
+
 <p>A experimentação é uma parte da estatística probabilística que estuda o planejamento, execução, coleta de dados, análise de dados e interpretação dos resultados provenientes de um experimento.</p>
 <p>Um experimento é um procedimento planejado com base em uma hipótese, que tem por objetivo provocar fenômenos (tratamentos) de forma controlada, analisando e interpretando os
 resultados obtidos.</p>
@@ -399,6 +400,7 @@ A-C 16.6  -3.616 36.82 0.1282
 A-B 10.6  -9.616 30.82 0.4602</code></pre>
 <p>Para que o RStudio apresente uma tabela com as médias e letras indicando quais as médias que diferiram, devemos instalar o pacote <code>agricolae</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(agricolae)
+<span class="kw">library</span>(gtools)
 <span class="kw">HSD.test</span>(anova,<span class="kw">as.factor</span>(<span class="st">&quot;Variedade&quot;</span>),<span class="dt">console=</span><span class="ot">TRUE</span>)</code></pre>
 <pre><code>
 Study: anova ~ as.factor(&quot;Variedade&quot;)
@@ -430,10 +432,10 @@ D 59.2      b</code></pre>
 <p>*Médias dos tratamentos não seguidas por mesma letra diferem pelo teste de Tukey, ao nível de 5% de significância.</p>
 <p>Conclusão: A variedade de pera A apresentou o maior peso médio dos frutos, que não diferiu significativamente do peso médio das variedades B e C. A variedade de pera D apresentou o menor peso médio dos frutos, que não diferiu significativamente do peso médio das variedades B e C. As variedades B e C apresentaram peso médio dos frutos intermediário.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attach</span>(DIC)</code></pre>
-<pre><code>The following objects are masked from DIC (pos = 4):
+<pre><code>The following objects are masked from DIC (pos = 5):
 
     Peso, Repeticao, Variedade</code></pre>
-<pre><code>The following objects are masked from DIC (pos = 5):
+<pre><code>The following objects are masked from DIC (pos = 6):
 
     Peso, Repeticao, Variedade</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(Peso<span class="op">~</span>Variedade)</code></pre>

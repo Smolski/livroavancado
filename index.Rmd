@@ -69,6 +69,11 @@ Algumas sugestões a incluir:
 
 *Tatiane Chassot*
 
+\begin{flushright}
+\emph{}
+\end{flushright}
+
+
 A experimentação é uma parte da estatística probabilística que estuda o planejamento, execução, coleta de dados, análise de dados e interpretação dos resultados provenientes de um experimento.
 
 Um experimento é um procedimento planejado com base em uma hipótese, que tem por objetivo provocar fenômenos (tratamentos) de forma controlada, analisando e interpretando os
@@ -188,6 +193,7 @@ Para que o RStudio apresente uma tabela com as médias e letras indicando quais 
 
 ```{r}
 library(agricolae)
+library(gtools)
 HSD.test(anova,as.factor("Variedade"),console=TRUE)
 ```
 
@@ -320,18 +326,22 @@ qqline(residuo)
 
 *Denize Ivete Reis*
 
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 
 A análise fatorial é um método estatístico utilizado para descrever a variabilidade entre variáveis observadas e possivelmente correlacionadas em termos de um número potencialmente menor de variáveis não observadas chamadas fatores.
 
-Assim, é possível que as variaçõess de três ou quatro variáveis observadas possam ser explicadas por somente um fator, o que evidencia a utilidade da análise fatorial para descrever um conjunto de dados utilizando para isso apenas alguns fatores.
 
-Diferentemente da análise de variância, regressão e análise discriminante, onde uma das variáveis é identificada como a variável dependente, examina-se todo o conjunto de relações interdependentes entre variáveis.
 
 ```{r, echo=FALSE, fig.cap='Processo de análise de variáveis'}
 knitr::include_graphics("anfat1.png")
 ```
 
+Assim, é possível que as variações de três ou quatro variáveis observadas possam ser explicadas por somente um fator, o que evidencia a utilidade da análise fatorial para descrever um conjunto de dados utilizando para isso apenas alguns fatores.
 
+Diferentemente da análise de variância, regressão e análise discriminante, onde uma das variáveis é identificada como a variável dependente, examina-se todo o conjunto de relações interdependentes entre variáveis.
 
 A análise fatorial aborda o problema de analisar a estrutura das inter-relações (correlações) entre um grande número de variáveis (escores de testes, itens de testes, respostas de questionários), definindo um conjunto de dimensões latentes comuns, chamados fatores. Então, a análise fatorial, permite primeiro identificar as dimensões separadas da estrutura e então determinar o grau em que cada variável é explicada por cada dimensão. Uma vez que essas dimensões e a explicação da cada variável estejam determinadas, os dois principais usos da análise fatorial podem ser conseguidos:
 
@@ -690,7 +700,22 @@ knitr::include_graphics("anfat2.png")
 
 *Felipe Micail da Silva Smolski*
 
+\begin{flushright}
+\emph{}
+\end{flushright}
+
+
 A ideia central da Análise de Cluster é a possibilidade de efetuar a classificação dos objetos em grupos, de forma que os objetos dentro do mesmo grupo sejam mais similares quanto possível e, de forma análoga, que os diversos grupos (clusters) sejam mais diferentes o possível em sua constituição [@Kassambara2017]. Embora possa parecer semelhante ao conteúdo do capítulo anterior, as diferenças residem no fato de que a Análise Fatorial agrega variáveis e efetua os agrupamentos em base de padrões de variação (correlação) dos dados enquanto a Análise de Cluster (agrupamentos) objetiva agregar objetos (e não variáveis), fazendo a agregação baseada na distância (proximidade) [@Hair2009].
+
+A medida de distância utilizada de maneira mais comum utililizada é a Distância Euclidiana como mostra a Figura abaixo (embora existam outras métricas como a Distância de Manhattan, a Distância de Correlação de Pearson, a Distância de Correlação de  Eisen, a Distância de Correlação de  Spearman e a Distância de Correlação de  Kendal). 
+
+```{r, echo=FALSE, fig.cap='Cálculo da distância entre A e B no espaço X Y', warning=FALSE}
+knitr::include_graphics("distecludiana.png")
+```
+
+Fonte: @Pereira2004.
+
+Em outro sentido, existem vários métodos de clusterização, dentre eles: a) Clusterização Particionada, que faz parte as técnicas K-Means, K-Medoids e CLARA; b) Clusterização Hierárquica, de que faz parte a Clusterização Aglomerativa [@Kassambara2017]. Neste capítulo serão apresentadas as técnicas denominadas K-Means e a Clusterização Aglomerativa.
 
 ## K-Means
 
@@ -712,7 +737,7 @@ Vamos carregar a tradicional base de dados nativa do RStudio `mtcars`, que traz 
 
 - **mpg**: milhas por galão;
 - **cyl**:  número de cilindros;
-- **disp**: deslocamento;
+- **disp**: número que representa o volume total no motor como um fator de circunferência do cilindro, profundidade e número total de cilindros;
 - **hp**: potência;
 - **drat**: relação do eixo traseiro;
 - **wt**: peso (1.000 lbs);
@@ -720,7 +745,9 @@ Vamos carregar a tradicional base de dados nativa do RStudio `mtcars`, que traz 
 - **vs**: motor (0 = em forma de V; 1 = linha reta);
 - **am**: transmissão (0 = automático; 1 = manual);
 - **gear**: número de marchas na transmissão (3-4 automático; 4-5 manual);
-- **carb**: númerod e carburadores;
+- **carb**: número de carburadores;
+
+Segue abaixo o carregamento da base de dados, sendo que neste exemplo foi utilizada a função `scale()` para balancear as informações (para mais informações utilize a ajuda do RStudio `?scale`).
 
 
 ```{r,message=FALSE, warning=FALSE}
@@ -755,13 +782,15 @@ km.res=kmeans(df, 4, nstart=25)
 print(km.res)
 ```
 
+Após determinado o número de clusters ideal e calculado para qual cluster cada variável do banco de dados pertence, é possível verificar as características de cada aglomeração. Com o cálculo da média utilizando a função `aggregate`, observa-se que os veículos com milhas por galão (mpg) médias mais baixos encontram-se no cluster 1, juntamente com aqueles com maior quantidade de cilindros (cyl) como é de se imaginar, com alta potência em cavalos (hp), concentranto-se automóveis automáticos (am=0). Já no cluster 2, por exemplo, estão aqueles veículos com maior similaridade e com uma maior autonomia (média de 28,07 mpg), baixa potência em cavalos (hp), veículos com câmbio manual (am) e baixos cilindros (cyl). Ainda os clusters 3 e 4 completam os grupos de veículos similares entre si.
+
+
 ```{r}
 aggregate(mtcars, by=list(cluster=km.res$cluster), mean)
 ```
 
 
-
-
+Abaixo são incluídas as informações dos clusters calculados anteriormente para cada modelo de automóvel, bem como as distâncias dos centros calculados:
 
 
 ```{r}
@@ -770,6 +799,9 @@ head(mtcars2)
 
 km.res$centers
 ```
+
+É importante ainda verificar a similaridade dos clusters de veículos calculados neste exemplo de forma visual. Para isto uma sugestão elencada por @Kassambara2017 é a função `fviz_cluster` do pacote `factoextra`. Esta função utiliza os dados originais e os clusters encontrados para plotar os resultados em um gráfico utilizando a técnica de componentes princiapais, como segue na imagem abaixo. Desta forma fica nítido a proximidade entre os modelos de veículos em seus clusters:
+
 
 ```{r}
 # Vizualizando os clusters
@@ -791,19 +823,53 @@ fviz_cluster(km.res, data=mtcars2,
 
 
 
-
-
-## Agglomerative
+## Clusterização Aglomerativa
 
 
 
 
 
+```{r,message=FALSE, warning=FALSE}
+#Carregamento dos dados
+data("mtcars")
+df=scale(mtcars)
+head(df, n=3)
+```
+
+
+
+
+
+```{r}
+dista=dist(df, method="euclidean")
+```
+
+
+```{r}
+as.matrix(dista)[1:3,1:3]
+```
+
+
+```{r}
+dista.hc=hclust(d=dista, method="ward.D")
+```
+
+
+
+```{r}
+library("factoextra")
+fviz_dend(dista.hc, cex=0.5)
+```
 
 
 # Regressão Múltipla
 
 *Iara Denise Endruweit Battisti*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 
 ## Modelo geral
 
@@ -1139,6 +1205,11 @@ Verificação da existência de multicolinearidade (correlação entre os X’s)
 
 *Felipe Micail da Silva Smolski*
 
+\begin{flushright}
+\emph{}
+\end{flushright}
+
+
 O modelo de regressão com dados em painel possui uma característica especial: se constitui de uma dimensão *temporal* e outra *espacial*. Isto porque a mesma unidade de corte transversal (família, países, etc.) é acompanhada ao longo do tempo. Por exemplo, a produção industrial mensal dos Estados brasileiros em função da taxa de juros no período de 2015-2016. Têm-se então a 624 (26x24) observações *combinadas*: de cada um dos 26 Estados (exluindo o Distrito Federal) e 24 observações para os meses.
 
 
@@ -1441,6 +1512,13 @@ adf.test(Grunfeld$invest, k=2)
 
 
 # Regressão Logística
+
+*Felipe Micail da Silva Smolski*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 
 
 
@@ -2107,6 +2185,13 @@ step(glm(reinc~., data=condicionalcrime),direction = 'both')
 
 # Regressão de Poisson
 
+*Felipe Micail da Silva Smolski*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
+
 
 ```{r, echo=FALSE}
 
@@ -2365,6 +2450,11 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 # Manipulando bases de dados
 
 *Felipe Micail da Silva Smolski*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 
 O objetivo deste capítulo é retomar alguns pacotes importantes no RStudio para a
 manipulação e transformação de grandes bases de dados que o pesquisador terá que manejar ao longo dos processos de análise.

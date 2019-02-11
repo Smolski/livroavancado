@@ -9,7 +9,7 @@
   <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Capítulo 5 Regressão com Dados em Painel | Software R: curso avançado />
+  <meta property="og:title" content="Capítulo 5 Regressão com Dados em Painel | Software R: curso avançado" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://rstub.github.io/bookdown-chapterbib/" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstub/bookdown-chapterbib" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 5 Regressão com Dados em Painel | Software R: curso avançado />
+  <meta name="twitter:title" content="Capítulo 5 Regressão com Dados em Painel | Software R: curso avançado" />
   
   <meta name="twitter:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
   
@@ -26,7 +26,7 @@
 <meta name="author" content="Felipe Micail da Silva Smolski">
 
 
-<meta name="date" content="2019-01-17">
+<meta name="date" content="2019-02-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -168,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>3</b> Análise de Clusters</a><ul>
 <li class="chapter" data-level="3.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>3.1</b> K-Means</a></li>
-<li class="chapter" data-level="3.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#agglomerative"><i class="fa fa-check"></i><b>3.2</b> Agglomerative</a></li>
+<li class="chapter" data-level="3.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>3.2</b> Clusterização Aglomerativa</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>4</b> Regressão Múltipla</a><ul>
 <li class="chapter" data-level="4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>4.1</b> Modelo geral</a></li>
@@ -252,6 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="regressao-com-dados-em-painel" class="section level1">
 <h1><span class="header-section-number">Capítulo 5</span> Regressão com Dados em Painel</h1>
 <p><em>Felipe Micail da Silva Smolski</em></p>
+
 <p>O modelo de regressão com dados em painel possui uma característica especial: se constitui de uma dimensão <em>temporal</em> e outra <em>espacial</em>. Isto porque a mesma unidade de corte transversal (família, países, etc.) é acompanhada ao longo do tempo. Por exemplo, a produção industrial mensal dos Estados brasileiros em função da taxa de juros no período de 2015-2016. Têm-se então a 624 (26x24) observações <em>combinadas</em>: de cada um dos 26 Estados (exluindo o Distrito Federal) e 24 observações para os meses.</p>
 <p>Dentre os benefícios da regressão com dados em painel <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>:</p>
 <ul>
@@ -310,7 +311,7 @@ General Motors-1940  461.2  4644   207.2 General Motors 1940</code></pre>
 </ol>
 <p>Abaixo é demonstrada a evolução do investimento de acordo com cada empresa estudada:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coplot</span>(invest <span class="op">~</span><span class="st"> </span>year<span class="op">|</span>firm, <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">data=</span>Grunfeld)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-51-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-57-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="modelo-pooled" class="section level2">
 <h2><span class="header-section-number">5.2</span> Modelo Pooled</h2>
@@ -479,10 +480,10 @@ Residuals:
 -193.89  -46.17    1.35   41.98  198.11 
 
 Coefficients:
-            Estimate Std. Error t-value Pr(&gt;|t|)    
-(Intercept) -72.6322    68.9083   -1.05      0.3    
-value         0.1079     0.0167    6.48    8e-09 ***
-capital       0.3443     0.0269   12.81   &lt;2e-16 ***
+            Estimate Std. Error z-value Pr(&gt;|z|)    
+(Intercept) -72.6322    68.9083   -1.05     0.29    
+value         0.1079     0.0167    6.48  9.3e-11 ***
+capital       0.3443     0.0269   12.81  &lt; 2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
@@ -490,7 +491,7 @@ Total Sum of Squares:    2260000
 Residual Sum of Squares: 446000
 R-Squared:      0.802
 Adj. R-Squared: 0.797
-F-statistic: 156.365 on 2 and 77 DF, p-value: &lt;2e-16</code></pre>
+Chisq: 312.731 on 2 DF, p-value: &lt;2e-16</code></pre>
 <p>Os resultados corroboram com a direção dos sinais para as variáveis dependentes “value” e “capital”, ambos positivos. Por outro lado, os resultados do modelo de efeitos aleatórios trazem os valores sobre a variância dos erros, primeiramente voltado ao componente de corte transversal (específico dos indivíduos) denominado <code>individual</code>, e outro fator idissiossincrático, o qual varia com o tempo e também com o corte transversal, denominado <code>idiosyncratic</code>.</p>
 </div>
 <div id="comparacao-e-escolha-dos-modelos" class="section level2">

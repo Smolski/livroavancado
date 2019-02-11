@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-01-17}
+    \date{2019-02-10}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -202,6 +202,10 @@ Esta é a estrutura provisória de capítulos do \textbf{Curso Avançado em Esta
 \chapter{Delineamentos Experimentais}\label{delineamentos-experimentais}}
 
 \emph{Tatiane Chassot}
+
+\begin{flushright}
+\emph{}
+\end{flushright}
 
 A experimentação é uma parte da estatística probabilística que estuda o planejamento, execução, coleta de dados, análise de dados e interpretação dos resultados provenientes de um experimento.
 
@@ -448,6 +452,7 @@ Para que o RStudio apresente uma tabela com as médias e letras indicando quais 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(agricolae)}
+\KeywordTok{library}\NormalTok{(gtools)}
 \KeywordTok{HSD.test}\NormalTok{(anova,}\KeywordTok{as.factor}\NormalTok{(}\StringTok{"Variedade"}\NormalTok{),}\DataTypeTok{console=}\OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -493,13 +498,13 @@ Conclusão: A variedade de pera A apresentou o maior peso médio dos frutos, que
 \end{Shaded}
 
 \begin{verbatim}
-The following objects are masked from DIC (pos = 4):
+The following objects are masked from DIC (pos = 5):
 
     Peso, Repeticao, Variedade
 \end{verbatim}
 
 \begin{verbatim}
-The following objects are masked from DIC (pos = 5):
+The following objects are masked from DIC (pos = 6):
 
     Peso, Repeticao, Variedade
 \end{verbatim}
@@ -733,11 +738,11 @@ Dieta 1 Dieta 2 Dieta 3 Dieta 4
 
 \emph{Denize Ivete Reis}
 
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 A análise fatorial é um método estatístico utilizado para descrever a variabilidade entre variáveis observadas e possivelmente correlacionadas em termos de um número potencialmente menor de variáveis não observadas chamadas fatores.
-
-Assim, é possível que as variaçõess de três ou quatro variáveis observadas possam ser explicadas por somente um fator, o que evidencia a utilidade da análise fatorial para descrever um conjunto de dados utilizando para isso apenas alguns fatores.
-
-Diferentemente da análise de variância, regressão e análise discriminante, onde uma das variáveis é identificada como a variável dependente, examina-se todo o conjunto de relações interdependentes entre variáveis.
 
 \begin{figure}[H]
 
@@ -747,6 +752,10 @@ Diferentemente da análise de variância, regressão e análise discriminante, o
 
 \caption{Processo de análise de variáveis}\label{fig:unnamed-chunk-19}
 \end{figure}
+
+Assim, é possível que as variações de três ou quatro variáveis observadas possam ser explicadas por somente um fator, o que evidencia a utilidade da análise fatorial para descrever um conjunto de dados utilizando para isso apenas alguns fatores.
+
+Diferentemente da análise de variância, regressão e análise discriminante, onde uma das variáveis é identificada como a variável dependente, examina-se todo o conjunto de relações interdependentes entre variáveis.
 
 A análise fatorial aborda o problema de analisar a estrutura das inter-relações (correlações) entre um grande número de variáveis (escores de testes, itens de testes, respostas de questionários), definindo um conjunto de dimensões latentes comuns, chamados fatores. Então, a análise fatorial, permite primeiro identificar as dimensões separadas da estrutura e então determinar o grau em que cada variável é explicada por cada dimensão. Uma vez que essas dimensões e a explicação da cada variável estejam determinadas, os dois principais usos da análise fatorial podem ser conseguidos:
 
@@ -939,6 +948,17 @@ H\(_1\): A matriz de correlação da população não é uma matriz identidade, 
 
 \begin{verbatim}
 Carregando pacotes exigidos: psych
+\end{verbatim}
+
+\begin{verbatim}
+
+Attaching package: 'psych'
+\end{verbatim}
+
+\begin{verbatim}
+The following object is masked from 'package:gtools':
+
+    logit
 \end{verbatim}
 
 \begin{Shaded}
@@ -1351,7 +1371,26 @@ Destacando-se os entrevistados de interesse, verifica-se:
 
 \emph{Felipe Micail da Silva Smolski}
 
+\begin{flushright}
+\emph{}
+\end{flushright}
+
 A ideia central da Análise de Cluster é a possibilidade de efetuar a classificação dos objetos em grupos, de forma que os objetos dentro do mesmo grupo sejam mais similares quanto possível e, de forma análoga, que os diversos grupos (clusters) sejam mais diferentes o possível em sua constituição (KASSAMBARA, \protect\hyperlink{ref-Kassambara2017}{2017}). Embora possa parecer semelhante ao conteúdo do capítulo anterior, as diferenças residem no fato de que a Análise Fatorial agrega variáveis e efetua os agrupamentos em base de padrões de variação (correlação) dos dados enquanto a Análise de Cluster (agrupamentos) objetiva agregar objetos (e não variáveis), fazendo a agregação baseada na distância (proximidade) (HAIR et al., \protect\hyperlink{ref-Hair2009}{2009}).
+
+A medida de distância utilizada de maneira mais comum utililizada é a Distância Euclidiana como mostra a Figura abaixo (embora existam outras métricas como a Distância de Manhattan, a Distância de Correlação de Pearson, a Distância de Correlação de Eisen, a Distância de Correlação de Spearman e a Distância de Correlação de Kendal).
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.8\linewidth]{distecludiana} 
+
+}
+
+\caption{Cálculo da distância entre A e B no espaço X Y}\label{fig:unnamed-chunk-35}
+\end{figure}
+
+Fonte: PEREIRA (\protect\hyperlink{ref-Pereira2004}{2004}).
+
+Em outro sentido, existem vários métodos de clusterização, dentre eles: a) Clusterização Particionada, que faz parte as técnicas K-Means, K-Medoids e CLARA; b) Clusterização Hierárquica, de que faz parte a Clusterização Aglomerativa (KASSAMBARA, \protect\hyperlink{ref-Kassambara2017}{2017}). Neste capítulo serão apresentadas as técnicas denominadas K-Means e a Clusterização Aglomerativa.
 
 \hypertarget{k-means}{%
 \section{K-Means}\label{k-means}}
@@ -1377,7 +1416,7 @@ Vamos carregar a tradicional base de dados nativa do RStudio \texttt{mtcars}, qu
 \item
   \textbf{cyl}: número de cilindros;
 \item
-  \textbf{disp}: deslocamento;
+  \textbf{disp}: número que representa o volume total no motor como um fator de circunferência do cilindro, profundidade e número total de cilindros;
 \item
   \textbf{hp}: potência;
 \item
@@ -1393,8 +1432,10 @@ Vamos carregar a tradicional base de dados nativa do RStudio \texttt{mtcars}, qu
 \item
   \textbf{gear}: número de marchas na transmissão (3-4 automático; 4-5 manual);
 \item
-  \textbf{carb}: númerod e carburadores;
+  \textbf{carb}: número de carburadores;
 \end{itemize}
+
+Segue abaixo o carregamento da base de dados, sendo que neste exemplo foi utilizada a função \texttt{scale()} para balancear as informações (para mais informações utilize a ajuda do RStudio \texttt{?scale}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1432,7 +1473,7 @@ Para determinar automaticamente o número ótimo de clusters da classificação,
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-36-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-37-1} \end{center}
 
 Em seguida utilizamos o número determinado de clusters (neste caso 4) com o comando \texttt{kmeans}. Como resultado temos a média dos centros por clusters e a classificação de cada modelo de veículo da amostra dentro do respectivo cluster. Observa-se que o cluste 1 tem 12 modelos de veículos, o cluster 2 tem 8 modelos, o cluster 3 possui 7 modelos e no cluster 4 foram enquadrados 5 modelos.
 
@@ -1488,6 +1529,8 @@ Available components:
 [6] "betweenss"    "size"         "iter"         "ifault"      
 \end{verbatim}
 
+Após determinado o número de clusters ideal e calculado para qual cluster cada variável do banco de dados pertence, é possível verificar as características de cada aglomeração. Com o cálculo da média utilizando a função \texttt{aggregate}, observa-se que os veículos com milhas por galão (mpg) médias mais baixos encontram-se no cluster 1, juntamente com aqueles com maior quantidade de cilindros (cyl) como é de se imaginar, com alta potência em cavalos (hp), concentranto-se automóveis automáticos (am=0). Já no cluster 2, por exemplo, estão aqueles veículos com maior similaridade e com uma maior autonomia (média de 28,07 mpg), baixa potência em cavalos (hp), veículos com câmbio manual (am) e baixos cilindros (cyl). Ainda os clusters 3 e 4 completam os grupos de veículos similares entre si.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{aggregate}\NormalTok{(mtcars, }\DataTypeTok{by=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{cluster=}\NormalTok{km.res}\OperatorTok{$}\NormalTok{cluster), mean)}
@@ -1501,6 +1544,8 @@ Available components:
 3       3 20.74 5.143 175.11 102.14 3.570 3.194 19.97 1.000  0 3.571 2.143
 4       4 18.50 6.800 223.40 198.80 3.836 3.001 15.62 0.000  1 4.600 5.200
 \end{verbatim}
+
+Abaixo são incluídas as informações dos clusters calculados anteriormente para cada modelo de automóvel:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1538,6 +1583,8 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1       3
 4  1.2368  1.4781
 \end{verbatim}
 
+É importante ainda verificar a similaridade dos clusters de veículos calculados neste exemplo de forma visual. Para isto uma sugestão elencada por KASSAMBARA (\protect\hyperlink{ref-Kassambara2017}{2017}) é a função \texttt{fviz\_cluster} do pacote \texttt{factoextra}. Esta função utiliza os dados originais e os clusters encontrados para plotar os resultados em um gráfico utilizando a técnica de componentes princiapais, como segue na imagem abaixo. Desta forma fica nítido a proximidade entre os modelos de veículos em seus clusters:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Vizualizando os clusters}
@@ -1555,15 +1602,73 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1       3
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-40-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-41-1} \end{center}
 
-\hypertarget{agglomerative}{%
-\section{Agglomerative}\label{agglomerative}}
+\hypertarget{clusterizacao-aglomerativa}{%
+\section{Clusterização Aglomerativa}\label{clusterizacao-aglomerativa}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Carregamento dos dados}
+\KeywordTok{data}\NormalTok{(}\StringTok{"mtcars"}\NormalTok{)}
+\NormalTok{df=}\KeywordTok{scale}\NormalTok{(mtcars)}
+\KeywordTok{head}\NormalTok{(df, }\DataTypeTok{n=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                 mpg    cyl    disp      hp   drat      wt    qsec     vs   am
+Mazda RX4     0.1509 -0.105 -0.5706 -0.5351 0.5675 -0.6104 -0.7772 -0.868 1.19
+Mazda RX4 Wag 0.1509 -0.105 -0.5706 -0.5351 0.5675 -0.3498 -0.4638 -0.868 1.19
+Datsun 710    0.4495 -1.225 -0.9902 -0.7830 0.4740 -0.9170  0.4260  1.116 1.19
+                gear    carb
+Mazda RX4     0.4236  0.7352
+Mazda RX4 Wag 0.4236  0.7352
+Datsun 710    0.4236 -1.1222
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dista=}\KeywordTok{dist}\NormalTok{(df, }\DataTypeTok{method=}\StringTok{"euclidean"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{as.matrix}\NormalTok{(dista)[}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+              Mazda RX4 Mazda RX4 Wag Datsun 710
+Mazda RX4        0.0000        0.4076      3.243
+Mazda RX4 Wag    0.4076        0.0000      3.176
+Datsun 710       3.2431        3.1764      0.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dista.hc=}\KeywordTok{hclust}\NormalTok{(}\DataTypeTok{d=}\NormalTok{dista, }\DataTypeTok{method=}\StringTok{"ward.D"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"factoextra"}\NormalTok{)}
+\KeywordTok{fviz_dend}\NormalTok{(dista.hc, }\DataTypeTok{cex=}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-46-1} \end{center}
 
 \hypertarget{regressao-multipla}{%
 \chapter{Regressão Múltipla}\label{regressao-multipla}}
 
 \emph{Iara Denise Endruweit Battisti}
+
+\begin{flushright}
+\emph{}
+\end{flushright}
 
 \hypertarget{modelo-geral}{%
 \section{Modelo geral}\label{modelo-geral}}
@@ -1821,7 +1926,7 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-44-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-50-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1836,7 +1941,7 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-44-2} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-50-2} \end{center}
 
 \hypertarget{interacao-entre-variaveis-preditoras}{%
 \section{Interação entre variáveis preditoras}\label{interacao-entre-variaveis-preditoras}}
@@ -1909,7 +2014,7 @@ F-statistic:   94 on 3 and 101 DF,  p-value: <2e-16
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-47-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-53-1} \end{center}
 
 \hypertarget{metodos-selecao-de-variaveis-na-regressao-multipla}{%
 \section{Métodos seleção de variáveis na regressão múltipla}\label{metodos-selecao-de-variaveis-na-regressao-multipla}}
@@ -2017,7 +2122,7 @@ Passo 8) Seja F\textsubscript{out} o valor da distribuição F com 1 e (n-k-1) g
 
 }
 
-\caption{Modelagem estatística}\label{fig:unnamed-chunk-48}
+\caption{Modelagem estatística}\label{fig:unnamed-chunk-54}
 \end{figure}
 
 Fonte: RIBOLDI (\protect\hyperlink{ref-Riboldi2005}{2005})
@@ -2077,6 +2182,10 @@ Verificação da existência de multicolinearidade (correlação entre os X's)
 \chapter{Regressão com Dados em Painel}\label{regressao-com-dados-em-painel}}
 
 \emph{Felipe Micail da Silva Smolski}
+
+\begin{flushright}
+\emph{}
+\end{flushright}
 
 O modelo de regressão com dados em painel possui uma característica especial: se constitui de uma dimensão \emph{temporal} e outra \emph{espacial}. Isto porque a mesma unidade de corte transversal (família, países, etc.) é acompanhada ao longo do tempo. Por exemplo, a produção industrial mensal dos Estados brasileiros em função da taxa de juros no período de 2015-2016. Têm-se então a 624 (26x24) observações \emph{combinadas}: de cada um dos 26 Estados (exluindo o Distrito Federal) e 24 observações para os meses.
 
@@ -2182,7 +2291,7 @@ Abaixo é demonstrada a evolução do investimento de acordo com cada empresa es
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-51-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-57-1} \end{center}
 
 \hypertarget{modelo-pooled}{%
 \section{Modelo Pooled}\label{modelo-pooled}}
@@ -2400,10 +2509,10 @@ Residuals:
 -193.89  -46.17    1.35   41.98  198.11 
 
 Coefficients:
-            Estimate Std. Error t-value Pr(>|t|)    
-(Intercept) -72.6322    68.9083   -1.05      0.3    
-value         0.1079     0.0167    6.48    8e-09 ***
-capital       0.3443     0.0269   12.81   <2e-16 ***
+            Estimate Std. Error z-value Pr(>|z|)    
+(Intercept) -72.6322    68.9083   -1.05     0.29    
+value         0.1079     0.0167    6.48  9.3e-11 ***
+capital       0.3443     0.0269   12.81  < 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -2411,7 +2520,7 @@ Total Sum of Squares:    2260000
 Residual Sum of Squares: 446000
 R-Squared:      0.802
 Adj. R-Squared: 0.797
-F-statistic: 156.365 on 2 and 77 DF, p-value: <2e-16
+Chisq: 312.731 on 2 DF, p-value: <2e-16
 \end{verbatim}
 
 Os resultados corroboram com a direção dos sinais para as variáveis dependentes ``value'' e ``capital'', ambos positivos. Por outro lado, os resultados do modelo de efeitos aleatórios trazem os valores sobre a variância dos erros, primeiramente voltado ao componente de corte transversal (específico dos indivíduos) denominado \texttt{individual}, e outro fator idissiossincrático, o qual varia com o tempo e também com o corte transversal, denominado \texttt{idiosyncratic}.
@@ -2667,6 +2776,12 @@ alternative hypothesis: stationary
 
 \hypertarget{regressao-logistica}{%
 \chapter{Regressão Logística}\label{regressao-logistica}}
+
+\emph{Felipe Micail da Silva Smolski}
+
+\begin{flushright}
+\emph{}
+\end{flushright}
 
 A técnica de regressão logística é uma ferramenta estatística utilizada nas análises preditivas. O interesse em mensurar a probabilidade de um evento ocorrer é extremamente relevante em diversas áreas, como por exemplo em Marketing, Propaganda e Internet, na Aplicação da Lei e Detecção de Fraude, na Assistência Médica, com relação aos Riscos Financeiros e Seguros ou mesmo estudando a Força de Trabalho. É imprescindível elevar o conhecimento sobre quais clientes possuem maior propensão à responder o contato de marketing, quais transações serão fraudulentas, quais e-mails são \emph{spam}, quem efetivamente fará o pagamento de uma obrigação ou mesmo qual criminoso reincidirá.\footnote{Para mais exemplos como estes sobre análises preditivas, ver SIEGEL (\protect\hyperlink{ref-Siegel2017}{2017}).}
 
@@ -3745,7 +3860,7 @@ Agora será efetuada a predição comparando-se os \emph{rankings} das escolas. 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-93-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-99-1} \end{center}
 
 \hypertarget{exercicios}{%
 \section{Exercícios}\label{exercicios}}
@@ -3791,6 +3906,12 @@ Agora será efetuada a predição comparando-se os \emph{rankings} das escolas. 
 
 \hypertarget{regressao-de-poisson}{%
 \chapter{Regressão de Poisson}\label{regressao-de-poisson}}
+
+\emph{Felipe Micail da Silva Smolski}
+
+\begin{flushright}
+\emph{}
+\end{flushright}
 
 O modelo de Regressão de Poisson é aquele mais adequado quando os dados das variáveis dependentes são contáveis. Em muitos casos é de interesse do pesquisador modelar e estimar tais episódios. O número de alunos matriculados, a quantidade de visitantes de um parque, o número de multas efetuadas em determinado ano, o número de produtos registrados em determinado ano, etc. Em todos estes casos, a variável resposta é discreta e assume um número finito de valores.
 
@@ -3886,7 +4007,7 @@ Abaixo o histograma da distribuição do número de satélites (variável depend
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-96-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-102-1} \end{center}
 
 Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 
@@ -3896,7 +4017,7 @@ Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-97-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-103-1} \end{center}
 
 Para criação da regressão de Poisson utiliza-se a função já conhecida \texttt{glm()}, sendo que em \texttt{family} é determinado o tipo de análise desejada (``poisson''):
 
@@ -4035,11 +4156,11 @@ Abaixo são incluídos os valores preditos \texttt{regpoisson\$fitted.values} ju
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-102-1} 
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-108-1} 
 
 }
 
-\caption{Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)}\label{fig:unnamed-chunk-102}
+\caption{Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)}\label{fig:unnamed-chunk-108}
 \end{figure}
 
 No entanto, é possível melhorar a precisão do modelo de regressão utilizado, uma vez que os dados iniciais apresentam os casos individuais da amostra de cada caranguejo observado com suas respectivas características das variáveis independentes. Uma forma é agrupar os dados em intervalos da variável independente, contando os o número de casos (variável dependente) em cada intervalo.
@@ -4220,11 +4341,11 @@ Abaixo demonstra-se a plotagem dos valores originais e preditos com a regressão
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-107-1} 
+{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/unnamed-chunk-113-1} 
 
 }
 
-\caption{Valores observados e preditos}\label{fig:unnamed-chunk-107}
+\caption{Valores observados e preditos}\label{fig:unnamed-chunk-113}
 \end{figure}
 
 Fonte: Adaptado de PENNSTATE (\protect\hyperlink{ref-penn2018}{2018}).
@@ -4266,6 +4387,10 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 \chapter{Manipulando bases de dados}\label{manipulando-bases-de-dados}}
 
 \emph{Felipe Micail da Silva Smolski}
+
+\begin{flushright}
+\emph{}
+\end{flushright}
 
 O objetivo deste capítulo é retomar alguns pacotes importantes no RStudio para a
 manipulação e transformação de grandes bases de dados que o pesquisador terá que manejar ao longo dos processos de análise.
@@ -4413,7 +4538,7 @@ Neste exemplo, a variável \texttt{rate}, que está composta de duas informaçõ
 \begin{verbatim}
 # A tibble: 6 x 4
   country      year cases  population
-* <chr>       <int> <chr>  <chr>     
+  <chr>       <int> <chr>  <chr>     
 1 Afghanistan  1999 745    19987071  
 2 Afghanistan  2000 2666   20595360  
 3 Brazil       1999 37737  172006362 
@@ -4433,7 +4558,7 @@ Da mesma forma é possível criar duas novas variáveis a partir do segundo cara
 \begin{verbatim}
 # A tibble: 6 x 4
   country     century year  rate             
-* <chr>       <chr>   <chr> <chr>            
+  <chr>       <chr>   <chr> <chr>            
 1 Afghanistan 19      99    745/19987071     
 2 Afghanistan 20      00    2666/20595360    
 3 Brazil      19      99    37737/172006362  
@@ -4528,6 +4653,9 @@ KASSAMBARA, A. \textbf{Practical Guide To Cluster Analysis in R}. USA: CreateSpa
 
 \leavevmode\hypertarget{ref-penn2018}{}%
 PENNSTATE. \textbf{R - Poisson Regression Model for Count Data}. 2018.
+
+\leavevmode\hypertarget{ref-Pereira2004}{}%
+PEREIRA, J. C. R. \textbf{Análise de Dados Qualitativos: Estratégias Metodológicas para as Ciências da Saúde, Humanas e Sociais}. São Paulo: Editora da Universidade de São Paulo, 2004.
 
 \leavevmode\hypertarget{ref-pesaran2015}{}%
 PESARAN, M. H. \textbf{Testing weak cross-sectional dependence in large panels}. \emph{Econometric Reviews}, {[}s.l.{]}, n. 6-10, 2015.

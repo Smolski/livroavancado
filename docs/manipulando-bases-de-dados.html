@@ -9,7 +9,7 @@
   <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Capítulo 8 Manipulando bases de dados | Software R: curso avançado />
+  <meta property="og:title" content="Capítulo 8 Manipulando bases de dados | Software R: curso avançado" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://rstub.github.io/bookdown-chapterbib/" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstub/bookdown-chapterbib" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 8 Manipulando bases de dados | Software R: curso avançado />
+  <meta name="twitter:title" content="Capítulo 8 Manipulando bases de dados | Software R: curso avançado" />
   
   <meta name="twitter:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
   
@@ -26,7 +26,7 @@
 <meta name="author" content="Felipe Micail da Silva Smolski">
 
 
-<meta name="date" content="2019-01-17">
+<meta name="date" content="2019-02-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -168,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>3</b> Análise de Clusters</a><ul>
 <li class="chapter" data-level="3.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>3.1</b> K-Means</a></li>
-<li class="chapter" data-level="3.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#agglomerative"><i class="fa fa-check"></i><b>3.2</b> Agglomerative</a></li>
+<li class="chapter" data-level="3.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>3.2</b> Clusterização Aglomerativa</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>4</b> Regressão Múltipla</a><ul>
 <li class="chapter" data-level="4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>4.1</b> Modelo geral</a></li>
@@ -252,6 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="manipulando-bases-de-dados" class="section level1">
 <h1><span class="header-section-number">Capítulo 8</span> Manipulando bases de dados</h1>
 <p><em>Felipe Micail da Silva Smolski</em></p>
+
 <p>O objetivo deste capítulo é retomar alguns pacotes importantes no RStudio para a
 manipulação e transformação de grandes bases de dados que o pesquisador terá que manejar ao longo dos processos de análise.</p>
 <div id="pacote-tidyr" class="section level2">
@@ -330,7 +331,7 @@ Figura 8.1: Convenção sobre variáveis, observações e valores
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">separate</span>(table3, rate, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>),<span class="dt">sep =</span> <span class="st">&quot;/&quot;</span>)</code></pre>
 <pre><code># A tibble: 6 x 4
   country      year cases  population
-* &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     
+  &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     
 1 Afghanistan  1999 745    19987071  
 2 Afghanistan  2000 2666   20595360  
 3 Brazil       1999 37737  172006362 
@@ -341,7 +342,7 @@ Figura 8.1: Convenção sobre variáveis, observações e valores
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">separate</span>(table3, year, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;century&quot;</span>, <span class="st">&quot;year&quot;</span>), <span class="dt">sep =</span> <span class="dv">2</span>)</code></pre>
 <pre><code># A tibble: 6 x 4
   country     century year  rate             
-* &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;            
+  &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;            
 1 Afghanistan 19      99    745/19987071     
 2 Afghanistan 20      00    2666/20595360    
 3 Brazil      19      99    37737/172006362  
