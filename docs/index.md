@@ -3,7 +3,7 @@ title: "Software R: curso avançado"
 author: 
 - Iara Denise Endruweit Battisti
 - Felipe Micail da Silva Smolski
-date: "2019-02-10"
+date: "2019-02-11"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -1283,7 +1283,7 @@ aggregate(mtcars, by=list(cluster=km.res$cluster), mean)
 ```
 
 
-Abaixo são incluídas as informações dos clusters calculados anteriormente para cada modelo de automóvel:
+Abaixo são incluídas as informações dos clusters calculados anteriormente para cada modelo de automóvel, bem como as distâncias dos centros calculados:
 
 
 
@@ -1346,9 +1346,9 @@ fviz_cluster(km.res, data=mtcars2,
 
 ## Clusterização Aglomerativa
 
+Uma das principais técnicas de Clusterização Hierárquica é a Clusterização Aglomerativa. Como premissa básica para a formação de clusters nesta técnica é realizada: a) a inclusão inicial de casa objeto considerando um agrupamento individual; b) próximo passo são formados pares de clusters com maiores similaridades entre si; c) repete-se o procedimento em novos clusters maiores, chegando até um único grande cluster [@Kassambara2017]. 
 
-
-
+Pimeiramente é demonstrado o carregamento da base de dados `mtcars` (utilizada no subcapítulo anterior), efetuando o balanceamento dos dados com a função `scale()` (segundo @Kassambara2017 a padronização das variáveis ajuda a deixá-las comparáveis, pois estão originalmente em escalas diferentes):
 
 
 ```r
@@ -1371,13 +1371,14 @@ Datsun 710    0.4236 -1.1222
 
 
 
-
+Agora é utilizada a função `dist()` para criar a distância entre os pares de dados que serão objeto de análise para a formação dos primeiros pares de dados similares. No exemplo abaixo foi utilizada a Distância Euclidiana como `method`.
 
 
 ```r
 dista=dist(df, method="euclidean")
 ```
 
+Depois de calculada a distância entre os objetos é possível verificar os índices encontrados (matriz de dissimilaridade), sendo que no exemplo abaixo extraímos somente as três primeiras linhas e as três primeiras colunas para fins de visualização:
 
 
 ```r
@@ -1391,13 +1392,15 @@ Mazda RX4 Wag    0.4076        0.0000      3.176
 Datsun 710       3.2431        3.1764      0.000
 ```
 
+O próximo passo é efetuar a criação dos clusters com base na similaridade, por meio de iterações que agrupem as variáveis em clusters cada vez maiores até formar uma árvore hierárquica. A função `hclust()` utiliza os dados das distâncias encontradas anteriormente (objeto "dista") e o método (`method`). O método a ser utilizado pode ser: `ward.D`, `ward.D2`, `single`, `complete`, `average`, `mcquitty`, `median` ou `centroid`, sendo que os métodos denominados ward e complete são mais utilizados, pois o primeiro minimiza a variância intra-cluster e o segundo define a distância entre dois clusters como o valor máximo de todos os pareamentos enrte os elementos do cluster 1 e os elementos do cluster 2 (extraído de @Kassambara2017, que traz maiores explicações sobre a diferença entre os métodos).
+
 
 
 ```r
 dista.hc=hclust(d=dista, method="ward.D")
 ```
 
-
+A representação gráfica da Aglomeração Hierárquica é efetuada através da imagem de um dendograma, que pode ser facilmente criada com a fórmula `plot(dista.hc)`. Aqui foi utilizado o pacote `factoextra` e sua função `fviz_dend` para a criação do dendograma:
 
 
 ```r
@@ -1406,6 +1409,9 @@ fviz_dend(dista.hc, cex=0.5)
 ```
 
 <img src="index_files/figure-epub3/unnamed-chunk-46-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+
 
 
 # Regressão Múltipla

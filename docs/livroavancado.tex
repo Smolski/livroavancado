@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-02-10}
+    \date{2019-02-11}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -1545,7 +1545,7 @@ Após determinado o número de clusters ideal e calculado para qual cluster cada
 4       4 18.50 6.800 223.40 198.80 3.836 3.001 15.62 0.000  1 4.600 5.200
 \end{verbatim}
 
-Abaixo são incluídas as informações dos clusters calculados anteriormente para cada modelo de automóvel:
+Abaixo são incluídas as informações dos clusters calculados anteriormente para cada modelo de automóvel, bem como as distâncias dos centros calculados:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1607,6 +1607,10 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1       3
 \hypertarget{clusterizacao-aglomerativa}{%
 \section{Clusterização Aglomerativa}\label{clusterizacao-aglomerativa}}
 
+Uma das principais técnicas de Clusterização Hierárquica é a Clusterização Aglomerativa. Como premissa básica para a formação de clusters nesta técnica é realizada: a) a inclusão inicial de casa objeto considerando um agrupamento individual; b) próximo passo são formados pares de clusters com maiores similaridades entre si; c) repete-se o procedimento em novos clusters maiores, chegando até um único grande cluster (KASSAMBARA, \protect\hyperlink{ref-Kassambara2017}{2017}).
+
+Pimeiramente é demonstrado o carregamento da base de dados \texttt{mtcars} (utilizada no subcapítulo anterior), efetuando o balanceamento dos dados com a função \texttt{scale()} (segundo KASSAMBARA (\protect\hyperlink{ref-Kassambara2017}{2017}) a padronização das variáveis ajuda a deixá-las comparáveis, pois estão originalmente em escalas diferentes):
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{#Carregamento dos dados}
@@ -1627,11 +1631,15 @@ Mazda RX4 Wag 0.4236  0.7352
 Datsun 710    0.4236 -1.1222
 \end{verbatim}
 
+Agora é utilizada a função \texttt{dist()} para criar a distância entre os pares de dados que serão objeto de análise para a formação dos primeiros pares de dados similares. No exemplo abaixo foi utilizada a Distância Euclidiana como \texttt{method}.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dista=}\KeywordTok{dist}\NormalTok{(df, }\DataTypeTok{method=}\StringTok{"euclidean"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+Depois de calculada a distância entre os objetos é possível verificar os índices encontrados (matriz de dissimilaridade), sendo que no exemplo abaixo extraímos somente as três primeiras linhas e as três primeiras colunas para fins de visualização:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1646,11 +1654,15 @@ Mazda RX4 Wag    0.4076        0.0000      3.176
 Datsun 710       3.2431        3.1764      0.000
 \end{verbatim}
 
+O próximo passo é efetuar a criação dos clusters com base na similaridade, por meio de iterações que agrupem as variáveis em clusters cada vez maiores até formar uma árvore hierárquica. A função \texttt{hclust()} utiliza os dados das distâncias encontradas anteriormente (objeto ``dista'') e o método (\texttt{method}). O método a ser utilizado pode ser: \texttt{ward.D}, \texttt{ward.D2}, \texttt{single}, \texttt{complete}, \texttt{average}, \texttt{mcquitty}, \texttt{median} ou \texttt{centroid}, sendo que os métodos denominados ward e complete são mais utilizados, pois o primeiro minimiza a variância intra-cluster e o segundo define a distância entre dois clusters como o valor máximo de todos os pareamentos enrte os elementos do cluster 1 e os elementos do cluster 2 (extraído de KASSAMBARA (\protect\hyperlink{ref-Kassambara2017}{2017}), que traz maiores explicações sobre a diferença entre os métodos).
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dista.hc=}\KeywordTok{hclust}\NormalTok{(}\DataTypeTok{d=}\NormalTok{dista, }\DataTypeTok{method=}\StringTok{"ward.D"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+A representação gráfica da Aglomeração Hierárquica é efetuada através da imagem de um dendograma, que pode ser facilmente criada com a fórmula \texttt{plot(dista.hc)}. Aqui foi utilizado o pacote \texttt{factoextra} e sua função \texttt{fviz\_dend} para a criação do dendograma:
 
 \begin{Shaded}
 \begin{Highlighting}[]
