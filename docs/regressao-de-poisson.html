@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html  lang="pt-Br">
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-Br" xml:lang="pt-Br">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Capítulo 7 Regressão de Poisson | Software R: curso avançado</title>
-  <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 8 Regressão de Poisson | Software R: curso avançado</title>
+  <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 7 Regressão de Poisson | Software R: curso avançado" />
+  <meta property="og:title" content="Capítulo 8 Regressão de Poisson | Software R: curso avançado" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://rstub.github.io/bookdown-chapterbib/" />
   
@@ -17,24 +16,24 @@
   <meta name="github-repo" content="rstub/bookdown-chapterbib" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 7 Regressão de Poisson | Software R: curso avançado" />
+  <meta name="twitter:title" content="Capítulo 8 Regressão de Poisson | Software R: curso avançado" />
   
   <meta name="twitter:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
   
 
-<meta name="author" content="Iara Denise Endruweit Battisti">
-<meta name="author" content="Felipe Micail da Silva Smolski">
+<meta name="author" content="Iara Denise Endruweit Battisti" />
+<meta name="author" content="Felipe Micail da Silva Smolski" />
 
 
-<meta name="date" content="2019-02-11">
+<meta name="date" content="2019-08-26" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="regressao-logistica.html">
-<link rel="next" href="manipulando-bases-de-dados.html">
+<link rel="prev" href="reglog.html">
+<link rel="next" href="producao-de-mapas.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -66,7 +65,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -141,92 +139,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="logo1.png" alt="R" align="midle">
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="" data-path="introducao.html"><a href="introducao.html"><i class="fa fa-check"></i>Introdução</a></li>
-<li class="chapter" data-level="1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html"><i class="fa fa-check"></i><b>1</b> Delineamentos Experimentais</a><ul>
-<li class="chapter" data-level="1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#principios-basicos-da-experimentacao"><i class="fa fa-check"></i><b>1.1</b> Princípios básicos da Experimentação</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#repeticao"><i class="fa fa-check"></i><b>1.1.1</b> Repetição</a></li>
-<li class="chapter" data-level="1.1.2" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#casualizacao"><i class="fa fa-check"></i><b>1.1.2</b> Casualização</a></li>
-<li class="chapter" data-level="1.1.3" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#controle-local"><i class="fa fa-check"></i><b>1.1.3</b> Controle local</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introdução</a></li>
+<li class="chapter" data-level="1" data-path="delin.html"><a href="delin.html"><i class="fa fa-check"></i><b>1</b> Delineamentos Experimentais</a><ul>
+<li class="chapter" data-level="1.1" data-path="delin.html"><a href="delin.html#principios-basicos-da-experimentacao"><i class="fa fa-check"></i><b>1.1</b> Princípios básicos da Experimentação</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="delin.html"><a href="delin.html#repeticao"><i class="fa fa-check"></i><b>1.1.1</b> Repetição</a></li>
+<li class="chapter" data-level="1.1.2" data-path="delin.html"><a href="delin.html#casualizacao"><i class="fa fa-check"></i><b>1.1.2</b> Casualização</a></li>
+<li class="chapter" data-level="1.1.3" data-path="delin.html"><a href="delin.html#controle-local"><i class="fa fa-check"></i><b>1.1.3</b> Controle local</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#analise-de-variancia"><i class="fa fa-check"></i><b>1.2</b> Análise de Variância</a></li>
-<li class="chapter" data-level="1.3" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#hipoteses-estatisticas"><i class="fa fa-check"></i><b>1.3</b> Hipóteses estatísticas</a></li>
-<li class="chapter" data-level="1.4" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#delineamento-inteiramente-causalizado-dic"><i class="fa fa-check"></i><b>1.4</b> Delineamento Inteiramente Causalizado (DIC)</a></li>
-<li class="chapter" data-level="1.5" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#delineamento-blocos-casualizados-dbc"><i class="fa fa-check"></i><b>1.5</b> Delineamento Blocos Casualizados (DBC)</a></li>
+<li class="chapter" data-level="1.2" data-path="delin.html"><a href="delin.html#analise-de-variancia"><i class="fa fa-check"></i><b>1.2</b> Análise de Variância</a></li>
+<li class="chapter" data-level="1.3" data-path="delin.html"><a href="delin.html#hipoteses-estatisticas"><i class="fa fa-check"></i><b>1.3</b> Hipóteses estatísticas</a></li>
+<li class="chapter" data-level="1.4" data-path="delin.html"><a href="delin.html#delineamento-inteiramente-causalizado-dic"><i class="fa fa-check"></i><b>1.4</b> Delineamento Inteiramente Causalizado (DIC)</a></li>
+<li class="chapter" data-level="1.5" data-path="delin.html"><a href="delin.html#delineamento-blocos-casualizados-dbc"><i class="fa fa-check"></i><b>1.5</b> Delineamento Blocos Casualizados (DBC)</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="analise-fatorial.html"><a href="analise-fatorial.html"><i class="fa fa-check"></i><b>2</b> Análise Fatorial</a><ul>
-<li class="chapter" data-level="2.1" data-path="analise-fatorial.html"><a href="analise-fatorial.html#pressupostos"><i class="fa fa-check"></i><b>2.1</b> Pressupostos</a></li>
-<li class="chapter" data-level="2.2" data-path="analise-fatorial.html"><a href="analise-fatorial.html#estatisticas-associadas-a-analise-fatorial"><i class="fa fa-check"></i><b>2.2</b> Estatísticas Associadas a Análise Fatorial</a></li>
-<li class="chapter" data-level="2.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#passos-da-analise-fatorial"><i class="fa fa-check"></i><b>2.3</b> Passos da Análise Fatorial</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="analise-fatorial.html"><a href="analise-fatorial.html#construcao-da-matriz-de-correlacao"><i class="fa fa-check"></i><b>2.3.1</b> Construção da Matriz de Correlação</a></li>
-<li class="chapter" data-level="2.3.2" data-path="analise-fatorial.html"><a href="analise-fatorial.html#metodo-de-analise-fatorial"><i class="fa fa-check"></i><b>2.3.2</b> Método de Análise Fatorial</a></li>
-<li class="chapter" data-level="2.3.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#determinacao-do-nuumero-de-fatores"><i class="fa fa-check"></i><b>2.3.3</b> Determinação do núumero de fatores</a></li>
-<li class="chapter" data-level="2.3.4" data-path="analise-fatorial.html"><a href="analise-fatorial.html#analise-de-componentes-principais"><i class="fa fa-check"></i><b>2.3.4</b> Análise de Componentes Principais</a></li>
-<li class="chapter" data-level="2.3.5" data-path="analise-fatorial.html"><a href="analise-fatorial.html#matriz-rotada-do-fator"><i class="fa fa-check"></i><b>2.3.5</b> Matriz Rotada do Fator</a></li>
-<li class="chapter" data-level="2.3.6" data-path="analise-fatorial.html"><a href="analise-fatorial.html#autovalores-1"><i class="fa fa-check"></i><b>2.3.6</b> Autovalores</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>3</b> Análise de Clusters</a><ul>
-<li class="chapter" data-level="3.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>3.1</b> K-Means</a></li>
-<li class="chapter" data-level="3.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>3.2</b> Clusterização Aglomerativa</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>4</b> Regressão Múltipla</a><ul>
-<li class="chapter" data-level="4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>4.1</b> Modelo geral</a></li>
-<li class="chapter" data-level="4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>4.2</b> Variável dummy</a></li>
-<li class="chapter" data-level="4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>4.3</b> Interação entre variáveis preditoras</a></li>
-<li class="chapter" data-level="4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>4.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>4.4.1</b> Full model – Modelo completo</a></li>
-<li class="chapter" data-level="4.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>4.4.2</b> Procedimento backward</a></li>
-<li class="chapter" data-level="4.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>4.4.3</b> Procedimento forward</a></li>
-<li class="chapter" data-level="4.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>4.4.4</b> Procedimento stepwise</a></li>
-</ul></li>
-<li class="chapter" data-level="4.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>4.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html"><i class="fa fa-check"></i><b>5</b> Regressão com Dados em Painel</a><ul>
-<li class="chapter" data-level="5.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#carregamento-e-transformacao-dos-dados"><i class="fa fa-check"></i><b>5.1</b> Carregamento e transformação dos dados</a></li>
-<li class="chapter" data-level="5.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-pooled"><i class="fa fa-check"></i><b>5.2</b> Modelo Pooled</a></li>
-<li class="chapter" data-level="5.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>5.3</b> Modelo Efeitos Fixos</a></li>
-<li class="chapter" data-level="5.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>5.4</b> Modelo Efeitos Aleatórios</a></li>
-<li class="chapter" data-level="5.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>5.5</b> Comparação e escolha dos modelos</a></li>
-<li class="chapter" data-level="5.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>5.6</b> Alguns testes para os modelos</a><ul>
-<li class="chapter" data-level="5.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>5.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
-<li class="chapter" data-level="5.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>5.6.2</b> Normalidade dos resíduos</a></li>
-<li class="chapter" data-level="5.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>5.6.3</b> Homocedasticidade dos resíduos</a></li>
-<li class="chapter" data-level="5.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>5.6.4</b> Testando correlação serial</a></li>
-<li class="chapter" data-level="5.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>5.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
-<li class="chapter" data-level="5.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>5.6.6</b> Testando raízes unitárias</a></li>
+<li class="chapter" data-level="2" data-path="analisf.html"><a href="analisf.html"><i class="fa fa-check"></i><b>2</b> Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.1" data-path="analisf.html"><a href="analisf.html#pressupostos"><i class="fa fa-check"></i><b>2.1</b> Pressupostos</a></li>
+<li class="chapter" data-level="2.2" data-path="analisf.html"><a href="analisf.html#estatisticas-associadas-a-analise-fatorial"><i class="fa fa-check"></i><b>2.2</b> Estatísticas Associadas a Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3" data-path="analisf.html"><a href="analisf.html#passos-da-analise-fatorial"><i class="fa fa-check"></i><b>2.3</b> Passos da Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="analisf.html"><a href="analisf.html#construcao-da-matriz-de-correlacao"><i class="fa fa-check"></i><b>2.3.1</b> Construção da Matriz de Correlação</a></li>
+<li class="chapter" data-level="2.3.2" data-path="analisf.html"><a href="analisf.html#metodo-de-analise-fatorial"><i class="fa fa-check"></i><b>2.3.2</b> Método de Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3.3" data-path="analisf.html"><a href="analisf.html#determinacao-do-numero-de-fatores"><i class="fa fa-check"></i><b>2.3.3</b> Determinação do número de fatores</a></li>
+<li class="chapter" data-level="2.3.4" data-path="analisf.html"><a href="analisf.html#analise-de-componentes-principais"><i class="fa fa-check"></i><b>2.3.4</b> Análise de Componentes Principais</a></li>
+<li class="chapter" data-level="2.3.5" data-path="analisf.html"><a href="analisf.html#matriz-rotada-do-fator"><i class="fa fa-check"></i><b>2.3.5</b> Matriz Rotada do Fator</a></li>
+<li class="chapter" data-level="2.3.6" data-path="analisf.html"><a href="analisf.html#autovalores-1"><i class="fa fa-check"></i><b>2.3.6</b> Autovalores</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>6</b> Regressão Logística</a><ul>
-<li class="chapter" data-level="6.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-modelo"><i class="fa fa-check"></i><b>6.1</b> O modelo</a></li>
-<li class="chapter" data-level="6.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>6.2</b> Regressão Logística Simples</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>6.2.1</b> Estimando a Razão de Chances</a></li>
-<li class="chapter" data-level="6.2.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>6.2.2</b> Determinando o Intervalo de Confiança</a></li>
-<li class="chapter" data-level="6.2.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>6.2.3</b> Predição de Probabilidades</a></li>
-<li class="chapter" data-level="6.2.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#matriz-de-confusao"><i class="fa fa-check"></i><b>6.2.4</b> Matriz de Confusão</a></li>
-<li class="chapter" data-level="6.2.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#curva-roc"><i class="fa fa-check"></i><b>6.2.5</b> Curva ROC</a></li>
-<li class="chapter" data-level="6.2.6" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>6.2.6</b> O teste Hosmer e Lemeshow</a></li>
-<li class="chapter" data-level="6.2.7" data-path="regressao-logistica.html"><a href="regressao-logistica.html#pseudo-r2"><i class="fa fa-check"></i><b>6.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
+<li class="chapter" data-level="3" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html"><i class="fa fa-check"></i><b>3</b> Análise de Componentes Principais</a><ul>
+<li class="chapter" data-level="3.1" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html#preparacao-dos-dados"><i class="fa fa-check"></i><b>3.1</b> Preparação dos dados</a></li>
+<li class="chapter" data-level="3.2" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html#criacao-dos-componentes"><i class="fa fa-check"></i><b>3.2</b> Criação dos componentes</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>6.3</b> Regressão Logística Múltipla</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#metodo-stepwise"><i class="fa fa-check"></i><b>6.3.1</b> Método Stepwise</a></li>
-<li class="chapter" data-level="6.3.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>6.3.2</b> VIF - Variance Inflation Factor</a></li>
+<li class="chapter" data-level="4" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>4</b> Análise de Clusters</a><ul>
+<li class="chapter" data-level="4.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>4.1</b> K-Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>4.2</b> Clusterização Aglomerativa</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>6.4</b> Regressão Logística Múltipla com variável categórica</a></li>
-<li class="chapter" data-level="6.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#exercicios"><i class="fa fa-check"></i><b>6.5</b> Exercícios</a></li>
+<li class="chapter" data-level="5" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>5</b> Regressão Múltipla</a><ul>
+<li class="chapter" data-level="5.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>5.1</b> Modelo geral</a></li>
+<li class="chapter" data-level="5.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>5.2</b> Variável dummy</a></li>
+<li class="chapter" data-level="5.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>5.3</b> Interação entre variáveis preditoras</a></li>
+<li class="chapter" data-level="5.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>5.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>5.4.1</b> Full model – Modelo completo</a></li>
+<li class="chapter" data-level="5.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>5.4.2</b> Procedimento backward</a></li>
+<li class="chapter" data-level="5.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>5.4.3</b> Procedimento forward</a></li>
+<li class="chapter" data-level="5.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>5.4.4</b> Procedimento stepwise</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>7</b> Regressão de Poisson</a><ul>
-<li class="chapter" data-level="7.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>7.1</b> O modelo</a></li>
-<li class="chapter" data-level="7.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>7.2</b> Estimando os parâmetros do modelo</a></li>
+<li class="chapter" data-level="5.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>5.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html"><i class="fa fa-check"></i><b>8</b> Manipulando bases de dados</a><ul>
-<li class="chapter" data-level="8.1" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#pacote-tidyr"><i class="fa fa-check"></i><b>8.1</b> Pacote tidyr</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-spread"><i class="fa fa-check"></i><b>8.1.1</b> Função <em>spread</em></a></li>
-<li class="chapter" data-level="8.1.2" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-gather"><i class="fa fa-check"></i><b>8.1.2</b> Função <em>gather</em></a></li>
-<li class="chapter" data-level="8.1.3" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-separate"><i class="fa fa-check"></i><b>8.1.3</b> Função <em>separate</em></a></li>
-<li class="chapter" data-level="8.1.4" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-unite"><i class="fa fa-check"></i><b>8.1.4</b> Função <em>unite</em></a></li>
+<li class="chapter" data-level="6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html"><i class="fa fa-check"></i><b>6</b> Regressão com Dados em Painel</a><ul>
+<li class="chapter" data-level="6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#carregamento-e-transformacao-dos-dados"><i class="fa fa-check"></i><b>6.1</b> Carregamento e transformação dos dados</a></li>
+<li class="chapter" data-level="6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-pooled"><i class="fa fa-check"></i><b>6.2</b> Modelo Pooled</a></li>
+<li class="chapter" data-level="6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>6.3</b> Modelo Efeitos Fixos</a></li>
+<li class="chapter" data-level="6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>6.4</b> Modelo Efeitos Aleatórios</a></li>
+<li class="chapter" data-level="6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>6.5</b> Comparação e escolha dos modelos</a></li>
+<li class="chapter" data-level="6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>6.6</b> Alguns testes para os modelos</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>6.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
+<li class="chapter" data-level="6.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>6.6.2</b> Normalidade dos resíduos</a></li>
+<li class="chapter" data-level="6.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>6.6.3</b> Homocedasticidade dos resíduos</a></li>
+<li class="chapter" data-level="6.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>6.6.4</b> Testando correlação serial</a></li>
+<li class="chapter" data-level="6.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>6.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
+<li class="chapter" data-level="6.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>6.6.6</b> Testando raízes unitárias</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#pacote-dplyr"><i class="fa fa-check"></i><b>8.2</b> Pacote dplyr</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="reglog.html"><a href="reglog.html"><i class="fa fa-check"></i><b>7</b> Regressão Logística</a><ul>
+<li class="chapter" data-level="7.1" data-path="reglog.html"><a href="reglog.html#o-modelo"><i class="fa fa-check"></i><b>7.1</b> O modelo</a></li>
+<li class="chapter" data-level="7.2" data-path="reglog.html"><a href="reglog.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>7.2</b> Regressão Logística Simples</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="reglog.html"><a href="reglog.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>7.2.1</b> Estimando a Razão de Chances</a></li>
+<li class="chapter" data-level="7.2.2" data-path="reglog.html"><a href="reglog.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>7.2.2</b> Determinando o Intervalo de Confiança</a></li>
+<li class="chapter" data-level="7.2.3" data-path="reglog.html"><a href="reglog.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>7.2.3</b> Predição de Probabilidades</a></li>
+<li class="chapter" data-level="7.2.4" data-path="reglog.html"><a href="reglog.html#matriz-de-confusao"><i class="fa fa-check"></i><b>7.2.4</b> Matriz de Confusão</a></li>
+<li class="chapter" data-level="7.2.5" data-path="reglog.html"><a href="reglog.html#curva-roc"><i class="fa fa-check"></i><b>7.2.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="7.2.6" data-path="reglog.html"><a href="reglog.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>7.2.6</b> O teste Hosmer e Lemeshow</a></li>
+<li class="chapter" data-level="7.2.7" data-path="reglog.html"><a href="reglog.html#pseudo-r2"><i class="fa fa-check"></i><b>7.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="reglog.html"><a href="reglog.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>7.3</b> Regressão Logística Múltipla</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="reglog.html"><a href="reglog.html#metodo-stepwise"><i class="fa fa-check"></i><b>7.3.1</b> Método Stepwise</a></li>
+<li class="chapter" data-level="7.3.2" data-path="reglog.html"><a href="reglog.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>7.3.2</b> VIF - Variance Inflation Factor</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="reglog.html"><a href="reglog.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>7.4</b> Regressão Logística Múltipla com variável categórica</a></li>
+<li class="chapter" data-level="7.5" data-path="reglog.html"><a href="reglog.html#exercicios"><i class="fa fa-check"></i><b>7.5</b> Exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>8</b> Regressão de Poisson</a><ul>
+<li class="chapter" data-level="8.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>8.1</b> O modelo</a></li>
+<li class="chapter" data-level="8.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>8.2</b> Estimando os parâmetros do modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html"><i class="fa fa-check"></i><b>9</b> Produção de Mapas</a><ul>
+<li class="chapter" data-level="9.1" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#introducao-aos-shapes"><i class="fa fa-check"></i><b>9.1</b> Introdução aos <em>shapes</em></a></li>
+<li class="chapter" data-level="9.2" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#pacote-tmap"><i class="fa fa-check"></i><b>9.2</b> Pacote tmap</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#adicionando-dados-ao-mapa"><i class="fa fa-check"></i><b>9.2.1</b> Adicionando dados ao mapa</a></li>
+<li class="chapter" data-level="9.2.2" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#plotando-o-mapa-e-melhorando-a-visualizacao"><i class="fa fa-check"></i><b>9.2.2</b> Plotando o mapa e melhorando a visualização</a></li>
+<li class="chapter" data-level="9.2.3" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#utilizando-dados-de-fontes-externas-pacote-datasus"><i class="fa fa-check"></i><b>9.2.3</b> Utilizando dados de fontes externas: pacote datasus</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referências</a></li>
 <li class="divider"></li>
@@ -250,12 +250,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="regressao-de-poisson" class="section level1">
-<h1><span class="header-section-number">Capítulo 7</span> Regressão de Poisson</h1>
+<h1><span class="header-section-number">Capítulo 8</span> Regressão de Poisson</h1>
 <p><em>Felipe Micail da Silva Smolski</em></p>
 
 <p>O modelo de Regressão de Poisson é aquele mais adequado quando os dados das variáveis dependentes são contáveis. Em muitos casos é de interesse do pesquisador modelar e estimar tais episódios. O número de alunos matriculados, a quantidade de visitantes de um parque, o número de multas efetuadas em determinado ano, o número de produtos registrados em determinado ano, etc. Em todos estes casos, a variável resposta é discreta e assume um número finito de valores.</p>
 <div id="o-modelo-1" class="section level2">
-<h2><span class="header-section-number">7.1</span> O modelo</h2>
+<h2><span class="header-section-number">8.1</span> O modelo</h2>
 <p>A distribuição de <em>Poisson</em> é dada por <span class="citation">(Gujarati e Porter <a href="#ref-Gujarati2011">2011</a>)</span>:</p>
 <p><span class="math display">\[
 f(Y_i) = \frac{\mu^{Y}e^{-\mu}}{Y!}
@@ -282,7 +282,7 @@ Y_i = \frac{\mu^{Y}e^{-\mu}}{Y!} + u_i
 <p>Assim, o modelo de regressão resultante não será linear nos parâmetros.</p>
 </div>
 <div id="estimando-os-parametros-do-modelo" class="section level2">
-<h2><span class="header-section-number">7.2</span> Estimando os parâmetros do modelo</h2>
+<h2><span class="header-section-number">8.2</span> Estimando os parâmetros do modelo</h2>
 <p>No exemplo abaixo consta uma base de dados que será denominada <code>caranguejo</code>, derivada de <span class="citation">PennState (<a href="#ref-penn2018">2018</a>)</span>. Este estudo buscou investigar os fatores que afetam a quantidade de caranguejos machos (satélites) residindo perto dos caranguejos fêmeas. As variáveis explicativas:</p>
 <ul>
 <li><strong>(Sa)</strong> número de satélites (variável dependente);</li>
@@ -292,11 +292,11 @@ Y_i = \frac{\mu^{Y}e^{-\mu}}{Y!} + u_i
 <li><strong>(W)</strong> largura da carapaça.</li>
 </ul>
 <p>Seguem os procedimentos para importação da base de dados do exemplo:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
-caranguejo &lt;-<span class="st"> </span><span class="kw">read_table2</span>(<span class="st">&quot;https://goo.gl/Wvvnrf&quot;</span>, 
-    <span class="dt">col_names =</span> <span class="ot">FALSE</span>)
-<span class="kw">colnames</span>(caranguejo)=<span class="kw">c</span>(<span class="st">&quot;Obs&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;W&quot;</span>,<span class="st">&quot;Wt&quot;</span>,<span class="st">&quot;Sa&quot;</span>)
-<span class="kw">summary</span>(caranguejo)</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" title="1"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb256-2" title="2">caranguejo &lt;-<span class="st"> </span><span class="kw">read_table2</span>(<span class="st">&quot;https://goo.gl/Wvvnrf&quot;</span>, </a>
+<a class="sourceLine" id="cb256-3" title="3">    <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb256-4" title="4"><span class="kw">colnames</span>(caranguejo)=<span class="kw">c</span>(<span class="st">&quot;Obs&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;W&quot;</span>,<span class="st">&quot;Wt&quot;</span>,<span class="st">&quot;Sa&quot;</span>)</a>
+<a class="sourceLine" id="cb256-5" title="5"><span class="kw">summary</span>(caranguejo)</a></code></pre></div>
 <pre><code>      Obs            C              S              W              Wt      
  Min.   :  1   Min.   :1.00   Min.   :1.00   Min.   :21.0   Min.   :1.20  
  1st Qu.: 44   1st Qu.:2.00   1st Qu.:2.00   1st Qu.:24.9   1st Qu.:2.00  
@@ -312,14 +312,14 @@ caranguejo &lt;-<span class="st"> </span><span class="kw">read_table2</span>(<sp
  3rd Qu.: 5.00  
  Max.   :15.00  </code></pre>
 <p>Abaixo o histograma da distribuição do número de satélites (variável dependente) da base de dados:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(caranguejo<span class="op">$</span>Sa)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-102-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" title="1"><span class="kw">hist</span>(caranguejo<span class="op">$</span>Sa)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-121-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Relacionando a quantidade de satélites (Sa) com a largura da carapaça:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(caranguejo<span class="op">$</span>W,caranguejo<span class="op">$</span>Sa)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-103-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" title="1"><span class="kw">plot</span>(caranguejo<span class="op">$</span>W,caranguejo<span class="op">$</span>Sa)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-122-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Para criação da regressão de Poisson utiliza-se a função já conhecida <code>glm()</code>, sendo que em <code>family</code> é determinado o tipo de análise desejada (“poisson”):</p>
-<pre class="sourceCode r"><code class="sourceCode r">regpoisson=<span class="kw">glm</span>(Sa<span class="op">~</span>W, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="dt">data=</span>caranguejo)
-<span class="kw">summary</span>(regpoisson)</code></pre>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" title="1">regpoisson=<span class="kw">glm</span>(Sa<span class="op">~</span>W, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="dt">data=</span>caranguejo)</a>
+<a class="sourceLine" id="cb260-2" title="2"><span class="kw">summary</span>(regpoisson)</a></code></pre></div>
 <pre><code>
 Call:
 glm(formula = Sa ~ W, family = &quot;poisson&quot;, data = caranguejo)
@@ -357,8 +357,8 @@ E(Y)= e^{-3.30476} + e^{0,16405 W_i}
 <li><p><strong>(b)</strong> exp(0,16405) = 1,178273. Logo, para cada elevação unitária na largura da carapaça (W) dos caranguejos, eleva-se em 1,178273 vezes o número de satélites (Sa).</p></li>
 </ul>
 <p>Teste de dispersão:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(AER)
-<span class="kw">dispersiontest</span>(regpoisson)</code></pre>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" title="1"><span class="kw">require</span>(AER)</a>
+<a class="sourceLine" id="cb262-2" title="2"><span class="kw">dispersiontest</span>(regpoisson)</a></code></pre></div>
 <pre><code>
     Overdispersion test
 
@@ -372,7 +372,7 @@ dispersion
 <li><strong>(c)</strong> O parâmetro de super-dispersão para esta equação é maior que 1. Sempre que for muito superior a 1 há vestígios de super-disposição no modelo.</li>
 </ul>
 <p>Abaixo a análise de variância.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(regpoisson, <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" title="1"><span class="kw">anova</span>(regpoisson, <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
 <pre><code>Analysis of Deviance Table
 
 Model: poisson, link: log
@@ -387,8 +387,8 @@ W     1     64.9       171        568  7.8e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Abaixo são incluídos os valores preditos <code>regpoisson$fitted.values</code> juntamente com os dados originais.</p>
-<pre class="sourceCode r"><code class="sourceCode r">print=<span class="kw">data.frame</span>(caranguejo, <span class="dt">pred=</span>(regpoisson<span class="op">$</span>fitted.values))
-<span class="kw">head</span>(print)</code></pre>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1">print=<span class="kw">data.frame</span>(caranguejo, <span class="dt">pred=</span>(regpoisson<span class="op">$</span>fitted.values))</a>
+<a class="sourceLine" id="cb266-2" title="2"><span class="kw">head</span>(print)</a></code></pre></div>
 <pre><code>  Obs C S    W   Wt Sa  pred
 1   1 2 3 28.3 3.05  8 3.810
 2   2 3 3 26.0 2.60  4 2.613
@@ -397,54 +397,54 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 5   5 2 3 29.0 3.00  1 4.274
 6   6 1 2 25.0 2.30  3 2.217</code></pre>
 <p>É possível comparar a distribuição dos valores preditos decorrentes da utilização do modelo de regressão de Poisson com a amostra inicial da base de dados analisada:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(caranguejo<span class="op">$</span>W,caranguejo<span class="op">$</span>Sa)
-<span class="kw">points</span>(regpoisson<span class="op">$</span>fitted.values,<span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-108"></span>
-<img src="index_files/figure-html/unnamed-chunk-108-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" title="1"><span class="kw">plot</span>(caranguejo<span class="op">$</span>W,caranguejo<span class="op">$</span>Sa)</a>
+<a class="sourceLine" id="cb268-2" title="2"><span class="kw">points</span>(regpoisson<span class="op">$</span>fitted.values,<span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-127"></span>
+<img src="index_files/figure-html/unnamed-chunk-127-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
 <p class="caption">
-Figura 7.1: Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)
+Figura 8.1: Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)
 </p>
 </div>
 <p>No entanto, é possível melhorar a precisão do modelo de regressão utilizado, uma vez que os dados iniciais apresentam os casos individuais da amostra de cada caranguejo observado com suas respectivas características das variáveis independentes. Uma forma é agrupar os dados em intervalos da variável independente, contando os o número de casos (variável dependente) em cada intervalo.</p>
 <p>Foram determinados 8 intervalos (“Intervalo”) conforme o tamanho da carapaça dos caranguejos. Contou-se o número de casos (variável “numcasos”) de caranguejos em cada intervalo de tamanho da carapaça; o camanho médio da carapaça (“width”) em cada intervalo e; o número total de satélites (“satotal”) esperados em cada intervalo:</p>
-<pre class="sourceCode r"><code class="sourceCode r">Intervalo=<span class="kw">c</span>(<span class="st">&quot;&lt;23,25&quot;</span>, <span class="st">&quot;23,25-24,25&quot;</span>,<span class="st">&quot;24,25-25,25&quot;</span>,<span class="st">&quot;25,25-26,25&quot;</span>,
-            <span class="st">&quot;26,25-27,25&quot;</span>,<span class="st">&quot;27,25-28,25&quot;</span>,<span class="st">&quot;28,25-29,25&quot;</span>,<span class="st">&quot;&gt;29,25&quot;</span>)
-<span class="kw">attach</span>(caranguejo)
-numcasos=<span class="kw">list</span>(<span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&lt;</span><span class="fl">23.25</span>)),
-              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),
-              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),
-              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),
-              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),
-              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),
-              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),
-              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">29.25</span>)))
-width=<span class="kw">list</span>(<span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&lt;</span><span class="fl">23.25</span>)),
-              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),
-              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),
-              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),
-              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),
-              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),
-              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),
-              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">29.25</span>)))
-satotal=<span class="kw">list</span>(<span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&lt;</span><span class="fl">23.25</span>)),
-              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),
-              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),
-              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),
-              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),
-              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),
-              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),
-              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">29.25</span>)))
-numcasos &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(numcasos), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),
-                       <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
-width &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(width), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),
-                    <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
-satotal &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(satotal), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),
-                      <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
-
-novosdados=<span class="kw">data.frame</span>(Intervalo,numcasos,<span class="kw">round</span>(width,<span class="dv">2</span>),satotal)
-
-<span class="kw">names</span>(novosdados)=<span class="kw">c</span>(<span class="st">&quot;Intervalo&quot;</span>,<span class="st">&quot;numcasos&quot;</span>,<span class="st">&quot;width&quot;</span>,<span class="st">&quot;satotal&quot;</span>)
-novosdados</code></pre>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" title="1">Intervalo=<span class="kw">c</span>(<span class="st">&quot;&lt;23,25&quot;</span>, <span class="st">&quot;23,25-24,25&quot;</span>,<span class="st">&quot;24,25-25,25&quot;</span>,<span class="st">&quot;25,25-26,25&quot;</span>,</a>
+<a class="sourceLine" id="cb269-2" title="2">            <span class="st">&quot;26,25-27,25&quot;</span>,<span class="st">&quot;27,25-28,25&quot;</span>,<span class="st">&quot;28,25-29,25&quot;</span>,<span class="st">&quot;&gt;29,25&quot;</span>)</a>
+<a class="sourceLine" id="cb269-3" title="3"><span class="kw">attach</span>(caranguejo)</a>
+<a class="sourceLine" id="cb269-4" title="4">numcasos=<span class="kw">list</span>(<span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&lt;</span><span class="fl">23.25</span>)),</a>
+<a class="sourceLine" id="cb269-5" title="5">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),</a>
+<a class="sourceLine" id="cb269-6" title="6">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),</a>
+<a class="sourceLine" id="cb269-7" title="7">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),</a>
+<a class="sourceLine" id="cb269-8" title="8">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),</a>
+<a class="sourceLine" id="cb269-9" title="9">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),</a>
+<a class="sourceLine" id="cb269-10" title="10">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),</a>
+<a class="sourceLine" id="cb269-11" title="11">              <span class="kw">length</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">29.25</span>)))</a>
+<a class="sourceLine" id="cb269-12" title="12">width=<span class="kw">list</span>(<span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&lt;</span><span class="fl">23.25</span>)),</a>
+<a class="sourceLine" id="cb269-13" title="13">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),</a>
+<a class="sourceLine" id="cb269-14" title="14">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),</a>
+<a class="sourceLine" id="cb269-15" title="15">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),</a>
+<a class="sourceLine" id="cb269-16" title="16">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),</a>
+<a class="sourceLine" id="cb269-17" title="17">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),</a>
+<a class="sourceLine" id="cb269-18" title="18">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),</a>
+<a class="sourceLine" id="cb269-19" title="19">              <span class="kw">mean</span>(<span class="kw">subset</span>(W, W <span class="op">&gt;</span><span class="fl">29.25</span>)))</a>
+<a class="sourceLine" id="cb269-20" title="20">satotal=<span class="kw">list</span>(<span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&lt;</span><span class="fl">23.25</span>)),</a>
+<a class="sourceLine" id="cb269-21" title="21">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">23.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">24.25</span>)),</a>
+<a class="sourceLine" id="cb269-22" title="22">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">24.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">25.25</span>)),</a>
+<a class="sourceLine" id="cb269-23" title="23">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">25.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">26.25</span>)),</a>
+<a class="sourceLine" id="cb269-24" title="24">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">26.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">27.25</span>)),</a>
+<a class="sourceLine" id="cb269-25" title="25">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">27.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">28.25</span>)),</a>
+<a class="sourceLine" id="cb269-26" title="26">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">28.25</span> <span class="op">&amp;</span><span class="st"> </span>W <span class="op">&lt;</span><span class="fl">29.25</span>)),</a>
+<a class="sourceLine" id="cb269-27" title="27">              <span class="kw">sum</span>(<span class="kw">subset</span>(Sa, W <span class="op">&gt;</span><span class="fl">29.25</span>)))</a>
+<a class="sourceLine" id="cb269-28" title="28">numcasos &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(numcasos), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),</a>
+<a class="sourceLine" id="cb269-29" title="29">                       <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb269-30" title="30">width &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(width), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),</a>
+<a class="sourceLine" id="cb269-31" title="31">                    <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb269-32" title="32">satotal &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">unlist</span>(satotal), <span class="dt">nrow=</span><span class="dv">8</span>, <span class="dt">byrow=</span>T),</a>
+<a class="sourceLine" id="cb269-33" title="33">                      <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb269-34" title="34"></a>
+<a class="sourceLine" id="cb269-35" title="35">novosdados=<span class="kw">data.frame</span>(Intervalo,numcasos,<span class="kw">round</span>(width,<span class="dv">2</span>),satotal)</a>
+<a class="sourceLine" id="cb269-36" title="36"></a>
+<a class="sourceLine" id="cb269-37" title="37"><span class="kw">names</span>(novosdados)=<span class="kw">c</span>(<span class="st">&quot;Intervalo&quot;</span>,<span class="st">&quot;numcasos&quot;</span>,<span class="st">&quot;width&quot;</span>,<span class="st">&quot;satotal&quot;</span>)</a>
+<a class="sourceLine" id="cb269-38" title="38">novosdados</a></code></pre></div>
 <pre><code>    Intervalo numcasos width satotal
 1      &lt;23,25       14 22.69      14
 2 23,25-24,25       14 23.84      20
@@ -455,13 +455,13 @@ novosdados</code></pre>
 7 28,25-29,25       18 28.67      71
 8      &gt;29,25       14 30.41      72</code></pre>
 <p>Segue a especificação deste novo modelo agrupado. Segundo <span class="citation">PennState (<a href="#ref-penn2018">2018</a>)</span>, utiliou-se o componente de ajuste da equação (<code>offset</code>) como o logarítmo do número de casos (“lcases”), como “o valor de ajuste ‘t’ no modelo que representa o espaço fixo, neste caso o grupo (caranguejos com largura similar)”. O resultado da nova regressão se mostra melhor ajustado, com redução do índice AIC:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Log do Número de Casos</span>
-lcases=<span class="kw">log</span>(numcasos) 
-<span class="co"># Incluir a varíavel anterior no objeto novosdados</span>
-novosdados=<span class="kw">data.frame</span>(novosdados,lcases) 
-<span class="kw">names</span>(novosdados)[<span class="dv">5</span>]=<span class="st">&quot;lcases&quot;</span>
-model=<span class="kw">glm</span>(satotal<span class="op">~</span>width, <span class="dt">offset=</span>lcases, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="dt">data=</span>novosdados)
-<span class="kw">summary</span>(model)</code></pre>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" title="1"><span class="co"># Log do Número de Casos</span></a>
+<a class="sourceLine" id="cb271-2" title="2">lcases=<span class="kw">log</span>(numcasos) </a>
+<a class="sourceLine" id="cb271-3" title="3"><span class="co"># Incluir a varíavel anterior no objeto novosdados</span></a>
+<a class="sourceLine" id="cb271-4" title="4">novosdados=<span class="kw">data.frame</span>(novosdados,lcases) </a>
+<a class="sourceLine" id="cb271-5" title="5"><span class="kw">names</span>(novosdados)[<span class="dv">5</span>]=<span class="st">&quot;lcases&quot;</span></a>
+<a class="sourceLine" id="cb271-6" title="6">model=<span class="kw">glm</span>(satotal<span class="op">~</span>width, <span class="dt">offset=</span>lcases, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="dt">data=</span>novosdados)</a>
+<a class="sourceLine" id="cb271-7" title="7"><span class="kw">summary</span>(model)</a></code></pre></div>
 <pre><code>
 Call:
 glm(formula = satotal ~ width, family = &quot;poisson&quot;, data = novosdados, 
@@ -495,8 +495,8 @@ Desta forma:</p>
 <li><strong>(b)</strong> como exp(0,1727)=1,188509, espera-se que para cada alteração unitária no tamanho médio da carapaça dos caranguejos (width) eleve-se em 1,188509 vezes o número esperado de satélites (satotal).</li>
 </ul>
 <p>Teste de super-dispersão:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(AER)
-<span class="kw">dispersiontest</span>(model)</code></pre>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" title="1"><span class="kw">require</span>(AER)</a>
+<a class="sourceLine" id="cb273-2" title="2"><span class="kw">dispersiontest</span>(model)</a></code></pre></div>
 <pre><code>
     Overdispersion test
 
@@ -510,7 +510,7 @@ dispersion
 <li><strong>(c)</strong> o tesde de superdispersão aprovou a hipótese nula (<span class="math inline">\(p&gt;0,05\)</span>) de que não há problemas de super-dispersão no modelo.</li>
 </ul>
 <p>Abaixo a análise de variância:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(model, <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1"><span class="kw">anova</span>(model, <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</a></code></pre></div>
 <pre><code>Analysis of Deviance Table
 
 Model: poisson, link: log
@@ -525,19 +525,19 @@ width  1     65.9         6        6.5  4.8e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Abaixo demonstra-se a plotagem dos valores originais e preditos com a regressão de Poisson:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(novosdados<span class="op">$</span>satotal, <span class="dt">pch=</span><span class="st">&quot;o&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Width (grupos)&quot;</span>,
-     <span class="dt">ylab=</span><span class="st">&quot;Número de satélites&quot;</span>)
-<span class="kw">points</span>(model<span class="op">$</span>fitted.values, <span class="dt">pch=</span><span class="st">&quot;p&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
-<span class="kw">legend</span>(<span class="dv">6</span>,<span class="dv">30</span>,<span class="kw">c</span>(<span class="st">&quot;obs&quot;</span>,<span class="st">&quot;pred&quot;</span>), <span class="dt">pch=</span><span class="kw">c</span>(<span class="st">&quot;o&quot;</span>,<span class="st">&quot;p&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>))</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-113"></span>
-<img src="index_files/figure-html/unnamed-chunk-113-1.png" alt="Valores observados e preditos" width="80%" />
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" title="1"><span class="kw">plot</span>(novosdados<span class="op">$</span>satotal, <span class="dt">pch=</span><span class="st">&quot;o&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Width (grupos)&quot;</span>,</a>
+<a class="sourceLine" id="cb277-2" title="2">     <span class="dt">ylab=</span><span class="st">&quot;Número de satélites&quot;</span>)</a>
+<a class="sourceLine" id="cb277-3" title="3"><span class="kw">points</span>(model<span class="op">$</span>fitted.values, <span class="dt">pch=</span><span class="st">&quot;p&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb277-4" title="4"><span class="kw">legend</span>(<span class="dv">6</span>,<span class="dv">30</span>,<span class="kw">c</span>(<span class="st">&quot;obs&quot;</span>,<span class="st">&quot;pred&quot;</span>), <span class="dt">pch=</span><span class="kw">c</span>(<span class="st">&quot;o&quot;</span>,<span class="st">&quot;p&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>))</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-132"></span>
+<img src="index_files/figure-html/unnamed-chunk-132-1.png" alt="Valores observados e preditos" width="80%" />
 <p class="caption">
-Figura 7.2: Valores observados e preditos
+Figura 8.2: Valores observados e preditos
 </p>
 </div>
 <p>Fonte: Adaptado de <span class="citation">PennState (<a href="#ref-penn2018">2018</a>)</span>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">novosdados<span class="op">$</span>pred=model<span class="op">$</span>fitted.values
-<span class="kw">head</span>(novosdados)</code></pre>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" title="1">novosdados<span class="op">$</span>pred=model<span class="op">$</span>fitted.values</a>
+<a class="sourceLine" id="cb278-2" title="2"><span class="kw">head</span>(novosdados)</a></code></pre></div>
 <pre><code>    Intervalo numcasos width satotal lcases  pred
 1      &lt;23,25       14 22.69      14  2.639 20.54
 2 23,25-24,25       14 23.84      20  2.639 25.06
@@ -553,15 +553,633 @@ Figura 7.2: Valores observados e preditos
 <li>Indicador AIC;</li>
 <li>Análise de super-dispersão do modelo (quando Var(Y) &gt; E(Y)). Neste caso, pode ocorrer por três motivos: a) função de ligação inadequada: talvez outras funções além da logarítimica se ajustem melhor; b) não inclusão de variáveis relevantes ao modelo; c) excessos de zeros.</li>
 </ul>
+<!--
+# Classificação
+
+
+## Árvores de Decisão
+
+
+```r
+library(rpart)
+```
+
+```
+
+Attaching package: 'rpart'
+```
+
+```
+The following object is masked from 'package:faraway':
+
+    solder
+```
+
+```r
+library(rpart.plot)
+
+set.seed(123)
+data(iris)
+head(iris)
+```
+
+```
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+```
+
+```r
+dim(iris)
+```
+
+```
+[1] 150   5
+```
+
+```r
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+amostra
+```
+
+```
+  [1] 1 2 1 2 2 1 1 2 1 1 2 1 1 1 1 2 1 1 1 2 2 1 1 2 1 2 1 1 1 1 2 2 1 2 1 1 2
+ [38] 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 2 1 1 1 1 2 2 1 1 1 1 1 2 1 2 2 2 1 2 1 2 1
+ [75] 1 1 1 1 1 1 1 1 1 2 1 1 2 2 2 1 1 1 1 1 1 1 2 1 1 1 1 1 1 2 1 2 2 1 1 1 2
+[112] 1 1 2 2 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 1 2 1 2 1 1 2 2 2 1 1 1 1 1 2 1 1 1
+[149] 1 2
+```
+
+```r
+iristreino = iris[amostra==1,]
+iristeste = iris[amostra==2,]
+
+dim(iristreino)
+```
+
+```
+[1] 106   5
+```
+
+```r
+dim(iristeste)
+```
+
+```
+[1] 44  5
+```
+
+```r
+arvore = rpart(Species ~ ., data=iris,  method="class")
+
+print(arvore)
+```
+
+```
+n= 150 
+
+node), split, n, loss, yval, (yprob)
+      * denotes terminal node
+
+1) root 150 100 setosa (0.33333 0.33333 0.33333)  
+  2) Petal.Length< 2.45 50   0 setosa (1.00000 0.00000 0.00000) *
+  3) Petal.Length>=2.45 100  50 versicolor (0.00000 0.50000 0.50000)  
+    6) Petal.Width< 1.75 54   5 versicolor (0.00000 0.90741 0.09259) *
+    7) Petal.Width>=1.75 46   1 virginica (0.00000 0.02174 0.97826) *
+```
+
+```r
+#plot(arvore)
+#text(arvore, use.n=TRUE, all=TRUE, cex=.8)
+
+rpart.plot(arvore)
+```
+
+<img src="index_files/figure-html/unnamed-chunk-134-1.png" width="80%" style="display: block; margin: auto;" />
+
+```r
+teste = predict(arvore,newdata=iristeste)
+
+teste
+```
+
+```
+    setosa versicolor virginica
+2        1    0.00000   0.00000
+4        1    0.00000   0.00000
+5        1    0.00000   0.00000
+8        1    0.00000   0.00000
+11       1    0.00000   0.00000
+16       1    0.00000   0.00000
+20       1    0.00000   0.00000
+21       1    0.00000   0.00000
+24       1    0.00000   0.00000
+26       1    0.00000   0.00000
+31       1    0.00000   0.00000
+32       1    0.00000   0.00000
+34       1    0.00000   0.00000
+37       1    0.00000   0.00000
+50       1    0.00000   0.00000
+53       0    0.90741   0.09259
+58       0    0.90741   0.09259
+59       0    0.90741   0.09259
+65       0    0.90741   0.09259
+67       0    0.90741   0.09259
+68       0    0.90741   0.09259
+69       0    0.90741   0.09259
+71       0    0.02174   0.97826
+73       0    0.90741   0.09259
+84       0    0.90741   0.09259
+87       0    0.90741   0.09259
+88       0    0.90741   0.09259
+89       0    0.90741   0.09259
+97       0    0.90741   0.09259
+104      0    0.02174   0.97826
+106      0    0.02174   0.97826
+107      0    0.90741   0.09259
+111      0    0.02174   0.97826
+114      0    0.02174   0.97826
+115      0    0.02174   0.97826
+118      0    0.02174   0.97826
+126      0    0.02174   0.97826
+132      0    0.02174   0.97826
+134      0    0.90741   0.09259
+137      0    0.02174   0.97826
+138      0    0.02174   0.97826
+139      0    0.02174   0.97826
+145      0    0.02174   0.97826
+150      0    0.02174   0.97826
+```
+
+```r
+iris1 = cbind(iristeste,teste)
+
+head(iris1)
+```
+
+```
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species setosa versicolor
+2           4.9         3.0          1.4         0.2  setosa      1          0
+4           4.6         3.1          1.5         0.2  setosa      1          0
+5           5.0         3.6          1.4         0.2  setosa      1          0
+8           5.0         3.4          1.5         0.2  setosa      1          0
+11          5.4         3.7          1.5         0.2  setosa      1          0
+16          5.7         4.4          1.5         0.4  setosa      1          0
+   virginica
+2          0
+4          0
+5          0
+8          0
+11         0
+16         0
+```
+
+```r
+iris1['Result'] = ifelse(iris1$setosa>=0.5,"setosa",
+                         ifelse(iris1$versicolor>=0.5, "versicolor",
+                         "virginica"))
+head(iris1)
+```
+
+```
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species setosa versicolor
+2           4.9         3.0          1.4         0.2  setosa      1          0
+4           4.6         3.1          1.5         0.2  setosa      1          0
+5           5.0         3.6          1.4         0.2  setosa      1          0
+8           5.0         3.4          1.5         0.2  setosa      1          0
+11          5.4         3.7          1.5         0.2  setosa      1          0
+16          5.7         4.4          1.5         0.4  setosa      1          0
+   virginica Result
+2          0 setosa
+4          0 setosa
+5          0 setosa
+8          0 setosa
+11         0 setosa
+16         0 setosa
+```
+
+```r
+confusao = table(iris1$Species,iris1$Result)
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+```
+
+```
+[1] 0.9318
+```
+
+```r
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+taxaerro
+```
+
+```
+[1] 0.06818
+```
+
+
+
+## Naive Bayes
+
+
+
+
+```r
+library(e1071)
+```
+
+```
+
+Attaching package: 'e1071'
+```
+
+```
+The following object is masked from 'package:flexclust':
+
+    bclust
+```
+
+```
+The following object is masked from 'package:gtools':
+
+    permutations
+```
+
+```
+The following objects are masked from 'package:agricolae':
+
+    kurtosis, skewness
+```
+
+```r
+data(iris)
+head(iris)
+```
+
+```
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+```
+
+```r
+dim(iris)
+```
+
+```
+[1] 150   5
+```
+
+```r
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+amostra
+```
+
+```
+  [1] 2 1 2 2 1 1 1 1 1 1 1 1 2 1 1 2 2 1 1 2 2 1 1 2 1 1 2 1 1 2 1 1 2 2 1 1 1
+ [38] 1 1 2 1 1 1 1 1 1 2 1 1 1 1 2 1 1 1 2 1 1 1 2 1 1 2 1 1 2 1 1 1 1 1 1 2 1
+ [75] 1 2 2 1 1 2 1 2 1 2 1 2 1 1 1 1 2 1 2 2 1 1 1 1 1 2 2 1 2 1 1 1 2 1 1 1 1
+[112] 2 1 1 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 2 2 1 1 2 1 1 1 1 1 1 1 1 2 1 2 2 2 1
+[149] 1 1
+```
+
+```r
+iristreino = iris[amostra==1,]
+iristeste = iris[amostra==2,]
+
+dim(iristreino)
+```
+
+```
+[1] 106   5
+```
+
+```r
+dim(iristeste)
+```
+
+```
+[1] 44  5
+```
+
+```r
+modelo <- naiveBayes(Species ~., iris)
+
+modelo
+```
+
+```
+
+Naive Bayes Classifier for Discrete Predictors
+
+Call:
+naiveBayes.default(x = X, y = Y, laplace = laplace)
+
+A-priori probabilities:
+Y
+    setosa versicolor  virginica 
+    0.3333     0.3333     0.3333 
+
+Conditional probabilities:
+            Sepal.Length
+Y             [,1]   [,2]
+  setosa     5.006 0.3525
+  versicolor 5.936 0.5162
+  virginica  6.588 0.6359
+
+            Sepal.Width
+Y             [,1]   [,2]
+  setosa     3.428 0.3791
+  versicolor 2.770 0.3138
+  virginica  2.974 0.3225
+
+            Petal.Length
+Y             [,1]   [,2]
+  setosa     1.462 0.1737
+  versicolor 4.260 0.4699
+  virginica  5.552 0.5519
+
+            Petal.Width
+Y             [,1]   [,2]
+  setosa     0.246 0.1054
+  versicolor 1.326 0.1978
+  virginica  2.026 0.2747
+```
+
+```r
+predicao <- predict(modelo, iristreino)
+
+predicao
+```
+
+```
+  [1] setosa     setosa     setosa     setosa     setosa     setosa    
+  [7] setosa     setosa     setosa     setosa     setosa     setosa    
+ [13] setosa     setosa     setosa     setosa     setosa     setosa    
+ [19] setosa     setosa     setosa     setosa     setosa     setosa    
+ [25] setosa     setosa     setosa     setosa     setosa     setosa    
+ [31] setosa     setosa     setosa     setosa     setosa     versicolor
+ [37] virginica  versicolor versicolor versicolor versicolor versicolor
+ [43] versicolor versicolor versicolor versicolor versicolor versicolor
+ [49] versicolor versicolor virginica  versicolor versicolor versicolor
+ [55] virginica  versicolor versicolor versicolor versicolor versicolor
+ [61] versicolor versicolor versicolor versicolor versicolor versicolor
+ [67] versicolor versicolor versicolor virginica  virginica  virginica 
+ [73] virginica  virginica  virginica  virginica  virginica  virginica 
+ [79] virginica  virginica  virginica  virginica  virginica  versicolor
+ [85] virginica  virginica  virginica  virginica  virginica  virginica 
+ [91] virginica  virginica  virginica  virginica  virginica  virginica 
+ [97] virginica  virginica  virginica  virginica  virginica  virginica 
+[103] virginica  virginica  virginica  virginica 
+Levels: setosa versicolor virginica
+```
+
+```r
+confusao = table(iristreino$Species,predicao)
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+```
+
+```
+[1] 0.9623
+```
+
+```r
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+
+class(modelo)
+```
+
+```
+[1] "naiveBayes"
+```
+
+```r
+#Prevendo com novos dados
+predict(modelo,iristeste)
+```
+
+```
+ [1] setosa     setosa     setosa     setosa     setosa     setosa    
+ [7] setosa     setosa     setosa     setosa     setosa     setosa    
+[13] setosa     setosa     setosa     versicolor versicolor versicolor
+[19] versicolor versicolor versicolor versicolor versicolor versicolor
+[25] versicolor versicolor versicolor versicolor versicolor versicolor
+[31] versicolor virginica  virginica  versicolor virginica  virginica 
+[37] virginica  virginica  virginica  versicolor virginica  virginica 
+[43] virginica  virginica 
+Levels: setosa versicolor virginica
+```
+
+
+
+
+
+## Redes Neurais
+
+
+
+## Máquina de Vetor de  Suporte
+
+
+
+```r
+data(iris)
+head(iris)
+```
+
+```
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+```
+
+```r
+dim(iris)
+```
+
+```
+[1] 150   5
+```
+
+```r
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+amostra
+```
+
+```
+  [1] 1 1 1 1 1 2 2 2 1 1 2 1 1 1 1 1 1 1 1 2 1 2 1 2 1 1 1 1 1 2 1 2 1 1 2 1 1
+ [38] 1 1 2 2 1 1 2 1 2 1 1 1 2 1 1 1 1 1 1 1 1 2 1 1 1 2 1 2 1 1 2 1 2 1 1 1 1
+ [75] 1 1 2 1 2 1 2 1 1 2 1 2 1 2 1 1 2 1 2 1 2 2 1 2 2 1 1 1 1 2 1 1 1 1 1 1 1
+[112] 2 2 1 1 1 1 2 1 2 1 2 1 1 2 2 1 1 1 1 2 2 2 1 2 1 1 1 2 1 1 1 2 1 1 2 1 1
+[149] 2 1
+```
+
+```r
+iristreino = iris[amostra==1,]
+iristeste = iris[amostra==2,]
+```
+
+
+
+```r
+library(e1071)
+modelo <- svm(Species ~., iristreino)
+predicao <- predict(modelo,iristeste)
+confusao = table(iristeste$Species,predicao)
+confusao
+```
+
+```
+            predicao
+             setosa versicolor virginica
+  setosa         15          0         0
+  versicolor      0         16         1
+  virginica       0          1        15
+```
+
+```r
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+```
+
+```
+[1] 0.9583
+```
+
+```r
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+taxaerro
+```
+
+```
+[1] 0.04167
+```
+
+
+## Vizinho mais próximo
+
+
+
+```r
+# ALTERAR OS DADOS!!!
+#install.packages("class", dependencies=T)
+library(class)
+
+head(iris)
+```
+
+```
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+```
+
+```r
+summary(iris)
+```
+
+```
+  Sepal.Length   Sepal.Width    Petal.Length   Petal.Width        Species  
+ Min.   :4.30   Min.   :2.00   Min.   :1.00   Min.   :0.1   setosa    :50  
+ 1st Qu.:5.10   1st Qu.:2.80   1st Qu.:1.60   1st Qu.:0.3   versicolor:50  
+ Median :5.80   Median :3.00   Median :4.35   Median :1.3   virginica :50  
+ Mean   :5.84   Mean   :3.06   Mean   :3.76   Mean   :1.2                  
+ 3rd Qu.:6.40   3rd Qu.:3.30   3rd Qu.:5.10   3rd Qu.:1.8                  
+ Max.   :7.90   Max.   :4.40   Max.   :6.90   Max.   :2.5                  
+```
+
+```r
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+iristreino = iris[amostra==1,]
+classificar = iris[amostra==2,]
+
+dim(iristreino)
+```
+
+```
+[1] 98  5
+```
+
+```r
+dim(classificar)
+```
+
+```
+[1] 52  5
+```
+
+```r
+previsao = knn(iristreino[,1:4],classificar[,1:4],iristreino[,5],k=3)
+# knn(vizinhomaisproximo, dadosaclassificar, classeaclassificar)
+tabela=table(classificar[,5],previsao)
+tabela
+```
+
+```
+            previsao
+             setosa versicolor virginica
+  setosa         20          0         0
+  versicolor      0         14         1
+  virginica       0          0        17
+```
+
+```r
+(tabela[1] + tabela[5] + tabela[9]) / sum(tabela) 
+```
+
+```
+[1] 0.9808
+```
+
+
+## Random Forest
+
+
+
+## Seleção de Variáveis
+
+-->
 </div>
 </div>
 <h3>Referências</h3>
 <div id="refs" class="references">
 <div id="ref-Gujarati2011">
-<p>Gujarati, Damodar N., e Down C Porter. 2011. <em>Econometria básica</em>. 5a ed. New York: Mc Graw Hill.</p>
+<p>Gujarati, Damodar N., e Down C Porter. 2011. <em>Econometria básica</em>. 5a ed. New York: Mc Graw Hill. <a href="https://doi.org/10.1126/science.1186874">https://doi.org/10.1126/science.1186874</a>.</p>
 </div>
 <div id="ref-penn2018">
-<p>PennState. 2018. <em>R - Poisson Regression Model for Count Data</em>. <a href="https://onlinecourses.science.psu.edu/stat504/node/169/">https://onlinecourses.science.psu.edu/stat504/node/169/</a>.</p>
+<p>PennState. 2018. «R - Poisson Regression Model for Count Data». <a href="https://onlinecourses.science.psu.edu/stat504/node/169/">https://onlinecourses.science.psu.edu/stat504/node/169/</a>.</p>
 </div>
 </div>
             </section>
@@ -569,8 +1187,8 @@ Figura 7.2: Valores observados e preditos
           </div>
         </div>
       </div>
-<a href="regressao-logistica.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="manipulando-bases-de-dados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="reglog.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="producao-de-mapas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -605,7 +1223,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["livroavancado.pdf", "livroavancado.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 },

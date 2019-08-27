@@ -33,7 +33,7 @@ bookdown::pdf_book:
   latex_engine: xelatex
   keep_tex: TRUE
   citation_package: none
-  pandoc_args: [ "--csl", "associacao-brasileira-de-normas-tecnicas-unirio-eipp.csl" ]
+  pandoc_args: [ "--csl", "associacao-brasileira-de-normas-tecnicas-usp-fmvz.csl" ]
 bookdown::epub_book:
   stylesheet: style.css
   toc: yes

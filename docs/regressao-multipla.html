@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html  lang="pt-Br">
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-Br" xml:lang="pt-Br">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Capítulo 4 Regressão Múltipla | Software R: curso avançado</title>
-  <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 Regressão Múltipla | Software R: curso avançado</title>
+  <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 4 Regressão Múltipla | Software R: curso avançado" />
+  <meta property="og:title" content="Capítulo 5 Regressão Múltipla | Software R: curso avançado" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://rstub.github.io/bookdown-chapterbib/" />
   
@@ -17,20 +16,20 @@
   <meta name="github-repo" content="rstub/bookdown-chapterbib" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 4 Regressão Múltipla | Software R: curso avançado" />
+  <meta name="twitter:title" content="Capítulo 5 Regressão Múltipla | Software R: curso avançado" />
   
   <meta name="twitter:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
   
 
-<meta name="author" content="Iara Denise Endruweit Battisti">
-<meta name="author" content="Felipe Micail da Silva Smolski">
+<meta name="author" content="Iara Denise Endruweit Battisti" />
+<meta name="author" content="Felipe Micail da Silva Smolski" />
 
 
-<meta name="date" content="2019-02-11">
+<meta name="date" content="2019-08-26" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="analise-de-clusters.html">
@@ -66,7 +65,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -141,92 +139,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="logo1.png" alt="R" align="midle">
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="" data-path="introducao.html"><a href="introducao.html"><i class="fa fa-check"></i>Introdução</a></li>
-<li class="chapter" data-level="1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html"><i class="fa fa-check"></i><b>1</b> Delineamentos Experimentais</a><ul>
-<li class="chapter" data-level="1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#principios-basicos-da-experimentacao"><i class="fa fa-check"></i><b>1.1</b> Princípios básicos da Experimentação</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#repeticao"><i class="fa fa-check"></i><b>1.1.1</b> Repetição</a></li>
-<li class="chapter" data-level="1.1.2" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#casualizacao"><i class="fa fa-check"></i><b>1.1.2</b> Casualização</a></li>
-<li class="chapter" data-level="1.1.3" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#controle-local"><i class="fa fa-check"></i><b>1.1.3</b> Controle local</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introdução</a></li>
+<li class="chapter" data-level="1" data-path="delin.html"><a href="delin.html"><i class="fa fa-check"></i><b>1</b> Delineamentos Experimentais</a><ul>
+<li class="chapter" data-level="1.1" data-path="delin.html"><a href="delin.html#principios-basicos-da-experimentacao"><i class="fa fa-check"></i><b>1.1</b> Princípios básicos da Experimentação</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="delin.html"><a href="delin.html#repeticao"><i class="fa fa-check"></i><b>1.1.1</b> Repetição</a></li>
+<li class="chapter" data-level="1.1.2" data-path="delin.html"><a href="delin.html#casualizacao"><i class="fa fa-check"></i><b>1.1.2</b> Casualização</a></li>
+<li class="chapter" data-level="1.1.3" data-path="delin.html"><a href="delin.html#controle-local"><i class="fa fa-check"></i><b>1.1.3</b> Controle local</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#analise-de-variancia"><i class="fa fa-check"></i><b>1.2</b> Análise de Variância</a></li>
-<li class="chapter" data-level="1.3" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#hipoteses-estatisticas"><i class="fa fa-check"></i><b>1.3</b> Hipóteses estatísticas</a></li>
-<li class="chapter" data-level="1.4" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#delineamento-inteiramente-causalizado-dic"><i class="fa fa-check"></i><b>1.4</b> Delineamento Inteiramente Causalizado (DIC)</a></li>
-<li class="chapter" data-level="1.5" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#delineamento-blocos-casualizados-dbc"><i class="fa fa-check"></i><b>1.5</b> Delineamento Blocos Casualizados (DBC)</a></li>
+<li class="chapter" data-level="1.2" data-path="delin.html"><a href="delin.html#analise-de-variancia"><i class="fa fa-check"></i><b>1.2</b> Análise de Variância</a></li>
+<li class="chapter" data-level="1.3" data-path="delin.html"><a href="delin.html#hipoteses-estatisticas"><i class="fa fa-check"></i><b>1.3</b> Hipóteses estatísticas</a></li>
+<li class="chapter" data-level="1.4" data-path="delin.html"><a href="delin.html#delineamento-inteiramente-causalizado-dic"><i class="fa fa-check"></i><b>1.4</b> Delineamento Inteiramente Causalizado (DIC)</a></li>
+<li class="chapter" data-level="1.5" data-path="delin.html"><a href="delin.html#delineamento-blocos-casualizados-dbc"><i class="fa fa-check"></i><b>1.5</b> Delineamento Blocos Casualizados (DBC)</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="analise-fatorial.html"><a href="analise-fatorial.html"><i class="fa fa-check"></i><b>2</b> Análise Fatorial</a><ul>
-<li class="chapter" data-level="2.1" data-path="analise-fatorial.html"><a href="analise-fatorial.html#pressupostos"><i class="fa fa-check"></i><b>2.1</b> Pressupostos</a></li>
-<li class="chapter" data-level="2.2" data-path="analise-fatorial.html"><a href="analise-fatorial.html#estatisticas-associadas-a-analise-fatorial"><i class="fa fa-check"></i><b>2.2</b> Estatísticas Associadas a Análise Fatorial</a></li>
-<li class="chapter" data-level="2.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#passos-da-analise-fatorial"><i class="fa fa-check"></i><b>2.3</b> Passos da Análise Fatorial</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="analise-fatorial.html"><a href="analise-fatorial.html#construcao-da-matriz-de-correlacao"><i class="fa fa-check"></i><b>2.3.1</b> Construção da Matriz de Correlação</a></li>
-<li class="chapter" data-level="2.3.2" data-path="analise-fatorial.html"><a href="analise-fatorial.html#metodo-de-analise-fatorial"><i class="fa fa-check"></i><b>2.3.2</b> Método de Análise Fatorial</a></li>
-<li class="chapter" data-level="2.3.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#determinacao-do-nuumero-de-fatores"><i class="fa fa-check"></i><b>2.3.3</b> Determinação do núumero de fatores</a></li>
-<li class="chapter" data-level="2.3.4" data-path="analise-fatorial.html"><a href="analise-fatorial.html#analise-de-componentes-principais"><i class="fa fa-check"></i><b>2.3.4</b> Análise de Componentes Principais</a></li>
-<li class="chapter" data-level="2.3.5" data-path="analise-fatorial.html"><a href="analise-fatorial.html#matriz-rotada-do-fator"><i class="fa fa-check"></i><b>2.3.5</b> Matriz Rotada do Fator</a></li>
-<li class="chapter" data-level="2.3.6" data-path="analise-fatorial.html"><a href="analise-fatorial.html#autovalores-1"><i class="fa fa-check"></i><b>2.3.6</b> Autovalores</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>3</b> Análise de Clusters</a><ul>
-<li class="chapter" data-level="3.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>3.1</b> K-Means</a></li>
-<li class="chapter" data-level="3.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>3.2</b> Clusterização Aglomerativa</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>4</b> Regressão Múltipla</a><ul>
-<li class="chapter" data-level="4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>4.1</b> Modelo geral</a></li>
-<li class="chapter" data-level="4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>4.2</b> Variável dummy</a></li>
-<li class="chapter" data-level="4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>4.3</b> Interação entre variáveis preditoras</a></li>
-<li class="chapter" data-level="4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>4.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>4.4.1</b> Full model – Modelo completo</a></li>
-<li class="chapter" data-level="4.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>4.4.2</b> Procedimento backward</a></li>
-<li class="chapter" data-level="4.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>4.4.3</b> Procedimento forward</a></li>
-<li class="chapter" data-level="4.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>4.4.4</b> Procedimento stepwise</a></li>
-</ul></li>
-<li class="chapter" data-level="4.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>4.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html"><i class="fa fa-check"></i><b>5</b> Regressão com Dados em Painel</a><ul>
-<li class="chapter" data-level="5.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#carregamento-e-transformacao-dos-dados"><i class="fa fa-check"></i><b>5.1</b> Carregamento e transformação dos dados</a></li>
-<li class="chapter" data-level="5.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-pooled"><i class="fa fa-check"></i><b>5.2</b> Modelo Pooled</a></li>
-<li class="chapter" data-level="5.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>5.3</b> Modelo Efeitos Fixos</a></li>
-<li class="chapter" data-level="5.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>5.4</b> Modelo Efeitos Aleatórios</a></li>
-<li class="chapter" data-level="5.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>5.5</b> Comparação e escolha dos modelos</a></li>
-<li class="chapter" data-level="5.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>5.6</b> Alguns testes para os modelos</a><ul>
-<li class="chapter" data-level="5.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>5.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
-<li class="chapter" data-level="5.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>5.6.2</b> Normalidade dos resíduos</a></li>
-<li class="chapter" data-level="5.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>5.6.3</b> Homocedasticidade dos resíduos</a></li>
-<li class="chapter" data-level="5.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>5.6.4</b> Testando correlação serial</a></li>
-<li class="chapter" data-level="5.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>5.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
-<li class="chapter" data-level="5.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>5.6.6</b> Testando raízes unitárias</a></li>
+<li class="chapter" data-level="2" data-path="analisf.html"><a href="analisf.html"><i class="fa fa-check"></i><b>2</b> Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.1" data-path="analisf.html"><a href="analisf.html#pressupostos"><i class="fa fa-check"></i><b>2.1</b> Pressupostos</a></li>
+<li class="chapter" data-level="2.2" data-path="analisf.html"><a href="analisf.html#estatisticas-associadas-a-analise-fatorial"><i class="fa fa-check"></i><b>2.2</b> Estatísticas Associadas a Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3" data-path="analisf.html"><a href="analisf.html#passos-da-analise-fatorial"><i class="fa fa-check"></i><b>2.3</b> Passos da Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="analisf.html"><a href="analisf.html#construcao-da-matriz-de-correlacao"><i class="fa fa-check"></i><b>2.3.1</b> Construção da Matriz de Correlação</a></li>
+<li class="chapter" data-level="2.3.2" data-path="analisf.html"><a href="analisf.html#metodo-de-analise-fatorial"><i class="fa fa-check"></i><b>2.3.2</b> Método de Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3.3" data-path="analisf.html"><a href="analisf.html#determinacao-do-numero-de-fatores"><i class="fa fa-check"></i><b>2.3.3</b> Determinação do número de fatores</a></li>
+<li class="chapter" data-level="2.3.4" data-path="analisf.html"><a href="analisf.html#analise-de-componentes-principais"><i class="fa fa-check"></i><b>2.3.4</b> Análise de Componentes Principais</a></li>
+<li class="chapter" data-level="2.3.5" data-path="analisf.html"><a href="analisf.html#matriz-rotada-do-fator"><i class="fa fa-check"></i><b>2.3.5</b> Matriz Rotada do Fator</a></li>
+<li class="chapter" data-level="2.3.6" data-path="analisf.html"><a href="analisf.html#autovalores-1"><i class="fa fa-check"></i><b>2.3.6</b> Autovalores</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>6</b> Regressão Logística</a><ul>
-<li class="chapter" data-level="6.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-modelo"><i class="fa fa-check"></i><b>6.1</b> O modelo</a></li>
-<li class="chapter" data-level="6.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>6.2</b> Regressão Logística Simples</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>6.2.1</b> Estimando a Razão de Chances</a></li>
-<li class="chapter" data-level="6.2.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>6.2.2</b> Determinando o Intervalo de Confiança</a></li>
-<li class="chapter" data-level="6.2.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>6.2.3</b> Predição de Probabilidades</a></li>
-<li class="chapter" data-level="6.2.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#matriz-de-confusao"><i class="fa fa-check"></i><b>6.2.4</b> Matriz de Confusão</a></li>
-<li class="chapter" data-level="6.2.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#curva-roc"><i class="fa fa-check"></i><b>6.2.5</b> Curva ROC</a></li>
-<li class="chapter" data-level="6.2.6" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>6.2.6</b> O teste Hosmer e Lemeshow</a></li>
-<li class="chapter" data-level="6.2.7" data-path="regressao-logistica.html"><a href="regressao-logistica.html#pseudo-r2"><i class="fa fa-check"></i><b>6.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
+<li class="chapter" data-level="3" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html"><i class="fa fa-check"></i><b>3</b> Análise de Componentes Principais</a><ul>
+<li class="chapter" data-level="3.1" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html#preparacao-dos-dados"><i class="fa fa-check"></i><b>3.1</b> Preparação dos dados</a></li>
+<li class="chapter" data-level="3.2" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html#criacao-dos-componentes"><i class="fa fa-check"></i><b>3.2</b> Criação dos componentes</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>6.3</b> Regressão Logística Múltipla</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#metodo-stepwise"><i class="fa fa-check"></i><b>6.3.1</b> Método Stepwise</a></li>
-<li class="chapter" data-level="6.3.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>6.3.2</b> VIF - Variance Inflation Factor</a></li>
+<li class="chapter" data-level="4" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>4</b> Análise de Clusters</a><ul>
+<li class="chapter" data-level="4.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>4.1</b> K-Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>4.2</b> Clusterização Aglomerativa</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>6.4</b> Regressão Logística Múltipla com variável categórica</a></li>
-<li class="chapter" data-level="6.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#exercicios"><i class="fa fa-check"></i><b>6.5</b> Exercícios</a></li>
+<li class="chapter" data-level="5" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>5</b> Regressão Múltipla</a><ul>
+<li class="chapter" data-level="5.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>5.1</b> Modelo geral</a></li>
+<li class="chapter" data-level="5.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>5.2</b> Variável dummy</a></li>
+<li class="chapter" data-level="5.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>5.3</b> Interação entre variáveis preditoras</a></li>
+<li class="chapter" data-level="5.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>5.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>5.4.1</b> Full model – Modelo completo</a></li>
+<li class="chapter" data-level="5.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>5.4.2</b> Procedimento backward</a></li>
+<li class="chapter" data-level="5.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>5.4.3</b> Procedimento forward</a></li>
+<li class="chapter" data-level="5.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>5.4.4</b> Procedimento stepwise</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>7</b> Regressão de Poisson</a><ul>
-<li class="chapter" data-level="7.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>7.1</b> O modelo</a></li>
-<li class="chapter" data-level="7.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>7.2</b> Estimando os parâmetros do modelo</a></li>
+<li class="chapter" data-level="5.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>5.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html"><i class="fa fa-check"></i><b>8</b> Manipulando bases de dados</a><ul>
-<li class="chapter" data-level="8.1" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#pacote-tidyr"><i class="fa fa-check"></i><b>8.1</b> Pacote tidyr</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-spread"><i class="fa fa-check"></i><b>8.1.1</b> Função <em>spread</em></a></li>
-<li class="chapter" data-level="8.1.2" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-gather"><i class="fa fa-check"></i><b>8.1.2</b> Função <em>gather</em></a></li>
-<li class="chapter" data-level="8.1.3" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-separate"><i class="fa fa-check"></i><b>8.1.3</b> Função <em>separate</em></a></li>
-<li class="chapter" data-level="8.1.4" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-unite"><i class="fa fa-check"></i><b>8.1.4</b> Função <em>unite</em></a></li>
+<li class="chapter" data-level="6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html"><i class="fa fa-check"></i><b>6</b> Regressão com Dados em Painel</a><ul>
+<li class="chapter" data-level="6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#carregamento-e-transformacao-dos-dados"><i class="fa fa-check"></i><b>6.1</b> Carregamento e transformação dos dados</a></li>
+<li class="chapter" data-level="6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-pooled"><i class="fa fa-check"></i><b>6.2</b> Modelo Pooled</a></li>
+<li class="chapter" data-level="6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>6.3</b> Modelo Efeitos Fixos</a></li>
+<li class="chapter" data-level="6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>6.4</b> Modelo Efeitos Aleatórios</a></li>
+<li class="chapter" data-level="6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>6.5</b> Comparação e escolha dos modelos</a></li>
+<li class="chapter" data-level="6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>6.6</b> Alguns testes para os modelos</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>6.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
+<li class="chapter" data-level="6.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>6.6.2</b> Normalidade dos resíduos</a></li>
+<li class="chapter" data-level="6.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>6.6.3</b> Homocedasticidade dos resíduos</a></li>
+<li class="chapter" data-level="6.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>6.6.4</b> Testando correlação serial</a></li>
+<li class="chapter" data-level="6.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>6.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
+<li class="chapter" data-level="6.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>6.6.6</b> Testando raízes unitárias</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#pacote-dplyr"><i class="fa fa-check"></i><b>8.2</b> Pacote dplyr</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="reglog.html"><a href="reglog.html"><i class="fa fa-check"></i><b>7</b> Regressão Logística</a><ul>
+<li class="chapter" data-level="7.1" data-path="reglog.html"><a href="reglog.html#o-modelo"><i class="fa fa-check"></i><b>7.1</b> O modelo</a></li>
+<li class="chapter" data-level="7.2" data-path="reglog.html"><a href="reglog.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>7.2</b> Regressão Logística Simples</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="reglog.html"><a href="reglog.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>7.2.1</b> Estimando a Razão de Chances</a></li>
+<li class="chapter" data-level="7.2.2" data-path="reglog.html"><a href="reglog.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>7.2.2</b> Determinando o Intervalo de Confiança</a></li>
+<li class="chapter" data-level="7.2.3" data-path="reglog.html"><a href="reglog.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>7.2.3</b> Predição de Probabilidades</a></li>
+<li class="chapter" data-level="7.2.4" data-path="reglog.html"><a href="reglog.html#matriz-de-confusao"><i class="fa fa-check"></i><b>7.2.4</b> Matriz de Confusão</a></li>
+<li class="chapter" data-level="7.2.5" data-path="reglog.html"><a href="reglog.html#curva-roc"><i class="fa fa-check"></i><b>7.2.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="7.2.6" data-path="reglog.html"><a href="reglog.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>7.2.6</b> O teste Hosmer e Lemeshow</a></li>
+<li class="chapter" data-level="7.2.7" data-path="reglog.html"><a href="reglog.html#pseudo-r2"><i class="fa fa-check"></i><b>7.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="reglog.html"><a href="reglog.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>7.3</b> Regressão Logística Múltipla</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="reglog.html"><a href="reglog.html#metodo-stepwise"><i class="fa fa-check"></i><b>7.3.1</b> Método Stepwise</a></li>
+<li class="chapter" data-level="7.3.2" data-path="reglog.html"><a href="reglog.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>7.3.2</b> VIF - Variance Inflation Factor</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="reglog.html"><a href="reglog.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>7.4</b> Regressão Logística Múltipla com variável categórica</a></li>
+<li class="chapter" data-level="7.5" data-path="reglog.html"><a href="reglog.html#exercicios"><i class="fa fa-check"></i><b>7.5</b> Exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>8</b> Regressão de Poisson</a><ul>
+<li class="chapter" data-level="8.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>8.1</b> O modelo</a></li>
+<li class="chapter" data-level="8.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>8.2</b> Estimando os parâmetros do modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html"><i class="fa fa-check"></i><b>9</b> Produção de Mapas</a><ul>
+<li class="chapter" data-level="9.1" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#introducao-aos-shapes"><i class="fa fa-check"></i><b>9.1</b> Introdução aos <em>shapes</em></a></li>
+<li class="chapter" data-level="9.2" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#pacote-tmap"><i class="fa fa-check"></i><b>9.2</b> Pacote tmap</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#adicionando-dados-ao-mapa"><i class="fa fa-check"></i><b>9.2.1</b> Adicionando dados ao mapa</a></li>
+<li class="chapter" data-level="9.2.2" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#plotando-o-mapa-e-melhorando-a-visualizacao"><i class="fa fa-check"></i><b>9.2.2</b> Plotando o mapa e melhorando a visualização</a></li>
+<li class="chapter" data-level="9.2.3" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#utilizando-dados-de-fontes-externas-pacote-datasus"><i class="fa fa-check"></i><b>9.2.3</b> Utilizando dados de fontes externas: pacote datasus</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referências</a></li>
 <li class="divider"></li>
@@ -250,11 +250,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="regressao-multipla" class="section level1">
-<h1><span class="header-section-number">Capítulo 4</span> Regressão Múltipla</h1>
+<h1><span class="header-section-number">Capítulo 5</span> Regressão Múltipla</h1>
 <p><em>Iara Denise Endruweit Battisti</em></p>
 
 <div id="modelo-geral" class="section level2">
-<h2><span class="header-section-number">4.1</span> Modelo geral</h2>
+<h2><span class="header-section-number">5.1</span> Modelo geral</h2>
 <p>Um modelo de regressão múltipla é expresso como:</p>
 <p><span class="math display">\[ 
 y_{i} = \beta_0+\ \beta_1x_{1i}+\beta_2x_{2i}+\dots+\beta_kx_{ki}+\varepsilon_i\ 
@@ -277,7 +277,7 @@ em que:</p>
 </ul>
 </div>
 <div id="variavel-dummy" class="section level2">
-<h2><span class="header-section-number">4.2</span> Variável dummy</h2>
+<h2><span class="header-section-number">5.2</span> Variável dummy</h2>
 <p>Em algumas situações é necessário introduzir, como variável preditora (independente), uma variável categórica no
 modelo de regressão linear simples ou múltiplo, como por exemplo, local (urbano ou rural), área (preservada ou degradada), etc, podendo ter mais que duas categorias. Essa variável terá que ser codificada, utilizando somente códigos 0 e 1, assim chamada variável dummy.</p>
 <p>O número de variáveis dummy no modelo será sempre igual ao número de categorias da variável preditora original
@@ -331,13 +331,13 @@ em função do diâmetro. Veja essa relação no diagrama de dispersão. Interpr
 <li><p>Ajuste um segundo modelo de regressão linear simples para predizer a altura das árvores em função da espécie. Veja essa relação no diagrama de dispersão. Interprete os resultados.</p></li>
 <li><p>Ajuste um terceiro modelo de regressão múltipla para predizer a altura das árvores em função do diâmetro e da espécie. Interprete os resultados.</p></li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readxl)
-url &lt;-<span class="st"> &quot;https://github.com/Smolski/livroavancado/raw/master/arvore2.xlsx&quot;</span>
-destfile &lt;-<span class="st"> &quot;arvore2.xlsx&quot;</span>
-curl<span class="op">::</span><span class="kw">curl_download</span>(url, destfile)
-arvore2 &lt;-<span class="st"> </span><span class="kw">read_excel</span>(destfile)
-<span class="kw">attach</span>(arvore2)
-<span class="kw">head</span>(arvore2)</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1"><span class="kw">library</span>(readxl)</a>
+<a class="sourceLine" id="cb139-2" title="2">url &lt;-<span class="st"> &quot;https://github.com/Smolski/livroavancado/raw/master/arvore2.xlsx&quot;</span></a>
+<a class="sourceLine" id="cb139-3" title="3">destfile &lt;-<span class="st"> &quot;arvore2.xlsx&quot;</span></a>
+<a class="sourceLine" id="cb139-4" title="4">curl<span class="op">::</span><span class="kw">curl_download</span>(url, destfile)</a>
+<a class="sourceLine" id="cb139-5" title="5">arvore2 &lt;-<span class="st"> </span><span class="kw">read_excel</span>(destfile)</a>
+<a class="sourceLine" id="cb139-6" title="6"><span class="kw">attach</span>(arvore2)</a>
+<a class="sourceLine" id="cb139-7" title="7"><span class="kw">head</span>(arvore2)</a></code></pre></div>
 <pre><code># A tibble: 6 x 4
   Nomecientifico            diametro_cm altura_m especie
   &lt;chr&gt;                           &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
@@ -347,8 +347,8 @@ arvore2 &lt;-<span class="st"> </span><span class="kw">read_excel</span>(destfil
 4 Sebastiania commersoniana        46.3     14         0
 5 Sebastiania commersoniana        64.1     15         0
 6 Sebastiania commersoniana       122       22         0</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">modelom=<span class="kw">lm</span>(altura_m<span class="op">~</span>diametro_cm<span class="op">+</span>especie) 
-modelom</code></pre>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1">modelom=<span class="kw">lm</span>(altura_m<span class="op">~</span>diametro_cm<span class="op">+</span>especie) </a>
+<a class="sourceLine" id="cb141-2" title="2">modelom</a></code></pre></div>
 <pre><code>
 Call:
 lm(formula = altura_m ~ diametro_cm + especie)
@@ -365,7 +365,7 @@ Ou</p>
 \text{Altura} = 12,328 + 0,0576\text{diâmetro} – 1,423\text{espécie}
 \]</span></p>
 <p>Verificando a significância de cada coeficiente do modelo de regressão múltipla:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(modelom)</code></pre>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" title="1"><span class="kw">summary</span>(modelom)</a></code></pre></div>
 <pre><code>
 Call:
 lm(formula = altura_m ~ diametro_cm + especie)
@@ -400,25 +400,25 @@ F-statistic:  119 on 2 and 102 DF,  p-value: &lt;2e-16</code></pre>
 <p>Primeiro, os pontos são plotados. O argumento <code>type='n'</code> indica que não é para acrescentar nenhum ponto ao gráfico.
 Em seguida, os pontos são acrescentados separadamente, com a função points, a qual acrescenta pontos ao gráfico, sendo que o colchetes <code>[espécie==0]</code> seleciona somente os casos desejados.</p>
 <p>Por fim, acrescentamos as retas de regressão para cada resposta a variável independente espécie. Usamos a função <code>coef</code> para extrair os coeficientes de interesse.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(diametro_cm,altura_m)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-50-1.png" width="80%" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Gera o gráfico sem pontos</span>
-<span class="kw">plot</span>(diametro_cm,altura_m,<span class="dt">type=</span><span class="st">&#39;n&#39;</span>) 
-<span class="co"># Acrescenta os pontos</span>
-<span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">0</span>],altura_m[especie<span class="op">==</span><span class="dv">0</span>],<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)
-<span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">1</span>],altura_m[especie<span class="op">==</span><span class="dv">1</span>],<span class="dt">col=</span><span class="st">&#39;red&#39;</span>)
-<span class="co"># Acrescenta as linhas</span>
-<span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>], <span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)
-<span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">3</span>], <span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-50-2.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" title="1"><span class="kw">plot</span>(diametro_cm,altura_m)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-69-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" title="1"><span class="co"># Gera o gráfico sem pontos</span></a>
+<a class="sourceLine" id="cb146-2" title="2"><span class="kw">plot</span>(diametro_cm,altura_m,<span class="dt">type=</span><span class="st">&#39;n&#39;</span>) </a>
+<a class="sourceLine" id="cb146-3" title="3"><span class="co"># Acrescenta os pontos</span></a>
+<a class="sourceLine" id="cb146-4" title="4"><span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">0</span>],altura_m[especie<span class="op">==</span><span class="dv">0</span>],<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb146-5" title="5"><span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">1</span>],altura_m[especie<span class="op">==</span><span class="dv">1</span>],<span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a>
+<a class="sourceLine" id="cb146-6" title="6"><span class="co"># Acrescenta as linhas</span></a>
+<a class="sourceLine" id="cb146-7" title="7"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>], <span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb146-8" title="8"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">3</span>], <span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-69-2.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="interacao-entre-variaveis-preditoras" class="section level2">
-<h2><span class="header-section-number">4.3</span> Interação entre variáveis preditoras</h2>
+<h2><span class="header-section-number">5.3</span> Interação entre variáveis preditoras</h2>
 <p>Quando suspeita-se que os coeficientes de inclinação podem variar entre as categorias da variável preditora então aconselha-se testar a interação entre as duas variáveis. No software R utiliza-se ‘:’ para indicar a interação entre as duas variáveis. Se a interação for significativa (P&lt;0,05), então conclui-se que os coeficientes de inclinação diferem entre si.</p>
 <p>O modelo de regressão múltipla apresentando anteriormente pressupõe que a inclinação da reta de regressão é igual para os dois grupos considerados, espécie Syphoneugena reitzii e espécie Sebastiania commersoniana espécie. Se existem motivos para acreditar que a inclinação pode variar de um grupo para o outro, pode-se acrescentar um termo de interação (interação entre variáveis) (Kaszubowski, 2016).</p>
 <p>A interação, neste caso, nada mais é do que o acréscimo de uma nova variável preditora ao modelo. Essa nova variável preditora é o produto das duas variáveis que já constam no modelo. Para acrescentar um termo de interação no R, basta utilizar dois pontos ‘:’ entre o nome das duas variáveis para as quais se deseja criar o termo de interação.</p>
-<pre class="sourceCode r"><code class="sourceCode r">modelom=<span class="kw">lm</span>(<span class="st">`</span><span class="dt">altura_m</span><span class="st">`</span><span class="op">~</span><span class="st">`</span><span class="dt">diametro_cm</span><span class="st">`</span><span class="op">+</span>especie<span class="op">+</span><span class="st">`</span><span class="dt">diametro_cm</span><span class="st">`</span><span class="op">:</span>especie, <span class="dt">data =</span> arvore2)
-modelom</code></pre>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" title="1">modelom=<span class="kw">lm</span>(<span class="st">`</span><span class="dt">altura_m</span><span class="st">`</span><span class="op">~</span><span class="st">`</span><span class="dt">diametro_cm</span><span class="st">`</span><span class="op">+</span>especie<span class="op">+</span><span class="st">`</span><span class="dt">diametro_cm</span><span class="st">`</span><span class="op">:</span>especie, <span class="dt">data =</span> arvore2)</a>
+<a class="sourceLine" id="cb147-2" title="2">modelom</a></code></pre></div>
 <pre><code>
 Call:
 lm(formula = altura_m ~ diametro_cm + especie + diametro_cm:especie, 
@@ -429,7 +429,7 @@ Coefficients:
             11.5480               0.0714               0.7863  
 diametro_cm:especie  
             -0.0316  </code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(modelom)</code></pre>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="kw">summary</span>(modelom)</a></code></pre></div>
 <pre><code>
 Call:
 lm(formula = altura_m ~ diametro_cm + especie + diametro_cm:especie, 
@@ -451,19 +451,19 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 1.12 on 101 degrees of freedom
 Multiple R-squared:  0.736, Adjusted R-squared:  0.728 
 F-statistic:   94 on 3 and 101 DF,  p-value: &lt;2e-16</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(diametro_cm,altura_m,<span class="dt">type=</span><span class="st">&#39;n&#39;</span>)
-
-<span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">0</span>],altura_m[especie<span class="op">==</span><span class="dv">0</span>],<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)
-<span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">1</span>],altura_m[especie<span class="op">==</span><span class="dv">1</span>],<span class="dt">col=</span><span class="st">&#39;red&#39;</span>)
-
-<span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>],<span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)
-<span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">3</span>],<span class="kw">coef</span>(modelom)[<span class="dv">2</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">4</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-53-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" title="1"><span class="kw">plot</span>(diametro_cm,altura_m,<span class="dt">type=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb151-2" title="2"></a>
+<a class="sourceLine" id="cb151-3" title="3"><span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">0</span>],altura_m[especie<span class="op">==</span><span class="dv">0</span>],<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb151-4" title="4"><span class="kw">points</span>(diametro_cm[especie<span class="op">==</span><span class="dv">1</span>],altura_m[especie<span class="op">==</span><span class="dv">1</span>],<span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a>
+<a class="sourceLine" id="cb151-5" title="5"></a>
+<a class="sourceLine" id="cb151-6" title="6"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>],<span class="kw">coef</span>(modelom)[<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb151-7" title="7"><span class="kw">abline</span>(<span class="kw">coef</span>(modelom)[<span class="dv">1</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">3</span>],<span class="kw">coef</span>(modelom)[<span class="dv">2</span>]<span class="op">+</span><span class="kw">coef</span>(modelom)[<span class="dv">4</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-72-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="metodos-selecao-de-variaveis-na-regressao-multipla" class="section level2">
-<h2><span class="header-section-number">4.4</span> Métodos seleção de variáveis na regressão múltipla</h2>
+<h2><span class="header-section-number">5.4</span> Métodos seleção de variáveis na regressão múltipla</h2>
 <div id="full-model-modelo-completo" class="section level3">
-<h3><span class="header-section-number">4.4.1</span> Full model – Modelo completo</h3>
+<h3><span class="header-section-number">5.4.1</span> Full model – Modelo completo</h3>
 <p>Sintaxe no software R para um modelo de regressão múltipla com três variáveis preditivas:</p>
 <p><code>regressao=lm(y~x1+x2+x3)</code></p>
 <p><code>summary(regressao)</code></p>
@@ -471,7 +471,7 @@ F-statistic:   94 on 3 and 101 DF,  p-value: &lt;2e-16</code></pre>
 <p><code>regressao=step(lm(y~x1+x2+x3),direction = 'método')</code></p>
 </div>
 <div id="procedimento-backward" class="section level3">
-<h3><span class="header-section-number">4.4.2</span> Procedimento backward</h3>
+<h3><span class="header-section-number">5.4.2</span> Procedimento backward</h3>
 <p>Considera todas as variáveis inicialmente, testando posteriormente, a permanência de cada uma no modelo. Se p <span class="math inline">\(\leq\)</span> 15%, permanece no modelo (saiu do modelo não entra mais) (Riboldi, 2005).</p>
 <p>Passo 1) Ajustar o modelo completo de m variáveis e obter <span class="math inline">\(SQR^{c}_{eg}\)</span> e <span class="math inline">\(\sigma^{2}\)</span>;</p>
 <p>Passo 2) Para cada uma das m variáveis do modelo completo do passo 1, considerar o modelo reduzido – retirando esta variável
@@ -485,7 +485,7 @@ eliminação da variável cuja estatística é igual a F<sub>min</sub>.</p></li>
 </ul>
 </div>
 <div id="procedimento-forward" class="section level3">
-<h3><span class="header-section-number">4.4.3</span> Procedimento forward</h3>
+<h3><span class="header-section-number">5.4.3</span> Procedimento forward</h3>
 <p>Inclui uma variável de cada vez, se p <span class="math inline">\(\leq\)</span> 20%, entra no modelo. Este método não testa a permanência da variável (entrou no modelo não sai mais) <span class="citation">Riboldi (<a href="#ref-Riboldi2005">2005</a>)</span>.</p>
 <p>Passo 1) Ajustar o modelo reduzido de m variáveis e obter <span class="math inline">\(SQR^{c}_{eg}\)</span>;</p>
 <p>Passo 2) Para cada variável não pertencente ao modelo do passo 1, considerar o modelo completo com adição desta variável
@@ -499,7 +499,7 @@ da variável cuja estatística é igual a F<sub>max</sub>.</p></li>
 </ul>
 </div>
 <div id="procedimento-stepwise" class="section level3">
-<h3><span class="header-section-number">4.4.4</span> Procedimento stepwise</h3>
+<h3><span class="header-section-number">5.4.4</span> Procedimento stepwise</h3>
 <p>Inclui as variáveis passo-a-passo e testa a permanência (as variáveis podem entrar e sair do modelo) (Riboldi, 2005).</p>
 <p>Passo 1) Ajustar o modelo reduzido de m variáveis e obter <span class="math inline">\(SQR^{r}_{eg}\)</span>;</p>
 <p>Passo 2) Para cada variável não pertencente ao modelo do passo 1, considerar o modelo completo - com adição desta variável
@@ -522,17 +522,17 @@ variáveis ou encerrar o processo de no passo 4 nenhuma variável tiver sido ane
 <li><p>Se Fmin &lt; Fout: eliminar a variável cuja estatística é igual a Fmin e voltar ao passo 1 iniciando nova etapa com modelo
 reduzido com (k-1) variáveis.</p></li>
 </ul>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-54"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-73"></span>
 <img src="regress1.png" alt="Modelagem estatística" width="80%" />
 <p class="caption">
-Figura 4.1: Modelagem estatística
+Figura 5.1: Modelagem estatística
 </p>
 </div>
 <p>Fonte: <span class="citation">Riboldi (<a href="#ref-Riboldi2005">2005</a>)</span></p>
 </div>
 </div>
 <div id="roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado" class="section level2">
-<h2><span class="header-section-number">4.5</span> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</h2>
+<h2><span class="header-section-number">5.5</span> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</h2>
 <p>Identificação de observações destoantes para Y</p>
 <ul>
 <li>Resíduo studentizado externamente – r_student (studentized residual with currente observation deleted)</li>
@@ -609,7 +609,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["livroavancado.pdf", "livroavancado.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 },

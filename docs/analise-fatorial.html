@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html  lang="pt-Br">
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-Br" xml:lang="pt-Br">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 2 Análise Fatorial | Software R: curso avançado</title>
-  <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 2 Análise Fatorial | Software R: curso avançado" />
   <meta property="og:type" content="book" />
@@ -22,19 +21,19 @@
   <meta name="twitter:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
   
 
-<meta name="author" content="Iara Denise Endruweit Battisti">
-<meta name="author" content="Felipe Micail da Silva Smolski">
+<meta name="author" content="Iara Denise Endruweit Battisti" />
+<meta name="author" content="Felipe Micail da Silva Smolski" />
 
 
-<meta name="date" content="2019-02-11">
+<meta name="date" content="2019-08-26" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="delineamentos-experimentais.html">
-<link rel="next" href="analise-de-clusters.html">
+<link rel="next" href="analise-de-componentes-principais-1.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -66,7 +65,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -141,8 +139,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="logo1.png" alt="R" align="midle">
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="" data-path="introducao.html"><a href="introducao.html"><i class="fa fa-check"></i>Introdução</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introdução</a></li>
 <li class="chapter" data-level="1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html"><i class="fa fa-check"></i><b>1</b> Delineamentos Experimentais</a><ul>
 <li class="chapter" data-level="1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#principios-basicos-da-experimentacao"><i class="fa fa-check"></i><b>1.1</b> Princípios básicos da Experimentação</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#repeticao"><i class="fa fa-check"></i><b>1.1.1</b> Repetição</a></li>
@@ -160,73 +157,85 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#passos-da-analise-fatorial"><i class="fa fa-check"></i><b>2.3</b> Passos da Análise Fatorial</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="analise-fatorial.html"><a href="analise-fatorial.html#construcao-da-matriz-de-correlacao"><i class="fa fa-check"></i><b>2.3.1</b> Construção da Matriz de Correlação</a></li>
 <li class="chapter" data-level="2.3.2" data-path="analise-fatorial.html"><a href="analise-fatorial.html#metodo-de-analise-fatorial"><i class="fa fa-check"></i><b>2.3.2</b> Método de Análise Fatorial</a></li>
-<li class="chapter" data-level="2.3.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#determinacao-do-nuumero-de-fatores"><i class="fa fa-check"></i><b>2.3.3</b> Determinação do núumero de fatores</a></li>
+<li class="chapter" data-level="2.3.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#determinacao-do-numero-de-fatores"><i class="fa fa-check"></i><b>2.3.3</b> Determinação do número de fatores</a></li>
 <li class="chapter" data-level="2.3.4" data-path="analise-fatorial.html"><a href="analise-fatorial.html#analise-de-componentes-principais"><i class="fa fa-check"></i><b>2.3.4</b> Análise de Componentes Principais</a></li>
 <li class="chapter" data-level="2.3.5" data-path="analise-fatorial.html"><a href="analise-fatorial.html#matriz-rotada-do-fator"><i class="fa fa-check"></i><b>2.3.5</b> Matriz Rotada do Fator</a></li>
 <li class="chapter" data-level="2.3.6" data-path="analise-fatorial.html"><a href="analise-fatorial.html#autovalores-1"><i class="fa fa-check"></i><b>2.3.6</b> Autovalores</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>3</b> Análise de Clusters</a><ul>
-<li class="chapter" data-level="3.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>3.1</b> K-Means</a></li>
-<li class="chapter" data-level="3.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>3.2</b> Clusterização Aglomerativa</a></li>
+<li class="chapter" data-level="3" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html"><i class="fa fa-check"></i><b>3</b> Análise de Componentes Principais</a><ul>
+<li class="chapter" data-level="3.1" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html#preparacao-dos-dados"><i class="fa fa-check"></i><b>3.1</b> Preparação dos dados</a></li>
+<li class="chapter" data-level="3.2" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html#criacao-dos-componentes"><i class="fa fa-check"></i><b>3.2</b> Criação dos componentes</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>4</b> Regressão Múltipla</a><ul>
-<li class="chapter" data-level="4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>4.1</b> Modelo geral</a></li>
-<li class="chapter" data-level="4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>4.2</b> Variável dummy</a></li>
-<li class="chapter" data-level="4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>4.3</b> Interação entre variáveis preditoras</a></li>
-<li class="chapter" data-level="4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>4.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>4.4.1</b> Full model – Modelo completo</a></li>
-<li class="chapter" data-level="4.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>4.4.2</b> Procedimento backward</a></li>
-<li class="chapter" data-level="4.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>4.4.3</b> Procedimento forward</a></li>
-<li class="chapter" data-level="4.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>4.4.4</b> Procedimento stepwise</a></li>
+<li class="chapter" data-level="4" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>4</b> Análise de Clusters</a><ul>
+<li class="chapter" data-level="4.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>4.1</b> K-Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>4.2</b> Clusterização Aglomerativa</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>4.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
+<li class="chapter" data-level="5" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>5</b> Regressão Múltipla</a><ul>
+<li class="chapter" data-level="5.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>5.1</b> Modelo geral</a></li>
+<li class="chapter" data-level="5.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>5.2</b> Variável dummy</a></li>
+<li class="chapter" data-level="5.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>5.3</b> Interação entre variáveis preditoras</a></li>
+<li class="chapter" data-level="5.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>5.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>5.4.1</b> Full model – Modelo completo</a></li>
+<li class="chapter" data-level="5.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>5.4.2</b> Procedimento backward</a></li>
+<li class="chapter" data-level="5.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>5.4.3</b> Procedimento forward</a></li>
+<li class="chapter" data-level="5.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>5.4.4</b> Procedimento stepwise</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html"><i class="fa fa-check"></i><b>5</b> Regressão com Dados em Painel</a><ul>
-<li class="chapter" data-level="5.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#carregamento-e-transformacao-dos-dados"><i class="fa fa-check"></i><b>5.1</b> Carregamento e transformação dos dados</a></li>
-<li class="chapter" data-level="5.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-pooled"><i class="fa fa-check"></i><b>5.2</b> Modelo Pooled</a></li>
-<li class="chapter" data-level="5.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>5.3</b> Modelo Efeitos Fixos</a></li>
-<li class="chapter" data-level="5.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>5.4</b> Modelo Efeitos Aleatórios</a></li>
-<li class="chapter" data-level="5.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>5.5</b> Comparação e escolha dos modelos</a></li>
-<li class="chapter" data-level="5.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>5.6</b> Alguns testes para os modelos</a><ul>
-<li class="chapter" data-level="5.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>5.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
-<li class="chapter" data-level="5.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>5.6.2</b> Normalidade dos resíduos</a></li>
-<li class="chapter" data-level="5.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>5.6.3</b> Homocedasticidade dos resíduos</a></li>
-<li class="chapter" data-level="5.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>5.6.4</b> Testando correlação serial</a></li>
-<li class="chapter" data-level="5.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>5.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
-<li class="chapter" data-level="5.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>5.6.6</b> Testando raízes unitárias</a></li>
+<li class="chapter" data-level="5.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>5.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html"><i class="fa fa-check"></i><b>6</b> Regressão com Dados em Painel</a><ul>
+<li class="chapter" data-level="6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#carregamento-e-transformacao-dos-dados"><i class="fa fa-check"></i><b>6.1</b> Carregamento e transformação dos dados</a></li>
+<li class="chapter" data-level="6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-pooled"><i class="fa fa-check"></i><b>6.2</b> Modelo Pooled</a></li>
+<li class="chapter" data-level="6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>6.3</b> Modelo Efeitos Fixos</a></li>
+<li class="chapter" data-level="6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>6.4</b> Modelo Efeitos Aleatórios</a></li>
+<li class="chapter" data-level="6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>6.5</b> Comparação e escolha dos modelos</a></li>
+<li class="chapter" data-level="6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>6.6</b> Alguns testes para os modelos</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>6.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
+<li class="chapter" data-level="6.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>6.6.2</b> Normalidade dos resíduos</a></li>
+<li class="chapter" data-level="6.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>6.6.3</b> Homocedasticidade dos resíduos</a></li>
+<li class="chapter" data-level="6.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>6.6.4</b> Testando correlação serial</a></li>
+<li class="chapter" data-level="6.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>6.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
+<li class="chapter" data-level="6.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>6.6.6</b> Testando raízes unitárias</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>6</b> Regressão Logística</a><ul>
-<li class="chapter" data-level="6.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-modelo"><i class="fa fa-check"></i><b>6.1</b> O modelo</a></li>
-<li class="chapter" data-level="6.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>6.2</b> Regressão Logística Simples</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>6.2.1</b> Estimando a Razão de Chances</a></li>
-<li class="chapter" data-level="6.2.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>6.2.2</b> Determinando o Intervalo de Confiança</a></li>
-<li class="chapter" data-level="6.2.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>6.2.3</b> Predição de Probabilidades</a></li>
-<li class="chapter" data-level="6.2.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#matriz-de-confusao"><i class="fa fa-check"></i><b>6.2.4</b> Matriz de Confusão</a></li>
-<li class="chapter" data-level="6.2.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#curva-roc"><i class="fa fa-check"></i><b>6.2.5</b> Curva ROC</a></li>
-<li class="chapter" data-level="6.2.6" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>6.2.6</b> O teste Hosmer e Lemeshow</a></li>
-<li class="chapter" data-level="6.2.7" data-path="regressao-logistica.html"><a href="regressao-logistica.html#pseudo-r2"><i class="fa fa-check"></i><b>6.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
+<li class="chapter" data-level="7" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>7</b> Regressão Logística</a><ul>
+<li class="chapter" data-level="7.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-modelo"><i class="fa fa-check"></i><b>7.1</b> O modelo</a></li>
+<li class="chapter" data-level="7.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>7.2</b> Regressão Logística Simples</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>7.2.1</b> Estimando a Razão de Chances</a></li>
+<li class="chapter" data-level="7.2.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>7.2.2</b> Determinando o Intervalo de Confiança</a></li>
+<li class="chapter" data-level="7.2.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>7.2.3</b> Predição de Probabilidades</a></li>
+<li class="chapter" data-level="7.2.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#matriz-de-confusao"><i class="fa fa-check"></i><b>7.2.4</b> Matriz de Confusão</a></li>
+<li class="chapter" data-level="7.2.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#curva-roc"><i class="fa fa-check"></i><b>7.2.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="7.2.6" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>7.2.6</b> O teste Hosmer e Lemeshow</a></li>
+<li class="chapter" data-level="7.2.7" data-path="regressao-logistica.html"><a href="regressao-logistica.html#pseudo-r2"><i class="fa fa-check"></i><b>7.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>6.3</b> Regressão Logística Múltipla</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#metodo-stepwise"><i class="fa fa-check"></i><b>6.3.1</b> Método Stepwise</a></li>
-<li class="chapter" data-level="6.3.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>6.3.2</b> VIF - Variance Inflation Factor</a></li>
+<li class="chapter" data-level="7.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>7.3</b> Regressão Logística Múltipla</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#metodo-stepwise"><i class="fa fa-check"></i><b>7.3.1</b> Método Stepwise</a></li>
+<li class="chapter" data-level="7.3.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>7.3.2</b> VIF - Variance Inflation Factor</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>6.4</b> Regressão Logística Múltipla com variável categórica</a></li>
-<li class="chapter" data-level="6.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#exercicios"><i class="fa fa-check"></i><b>6.5</b> Exercícios</a></li>
+<li class="chapter" data-level="7.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>7.4</b> Regressão Logística Múltipla com variável categórica</a></li>
+<li class="chapter" data-level="7.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#exercicios"><i class="fa fa-check"></i><b>7.5</b> Exercícios</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>7</b> Regressão de Poisson</a><ul>
-<li class="chapter" data-level="7.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>7.1</b> O modelo</a></li>
-<li class="chapter" data-level="7.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>7.2</b> Estimando os parâmetros do modelo</a></li>
+<li class="chapter" data-level="8" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>8</b> Regressão de Poisson</a><ul>
+<li class="chapter" data-level="8.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>8.1</b> O modelo</a></li>
+<li class="chapter" data-level="8.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>8.2</b> Estimando os parâmetros do modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html"><i class="fa fa-check"></i><b>8</b> Manipulando bases de dados</a><ul>
-<li class="chapter" data-level="8.1" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#pacote-tidyr"><i class="fa fa-check"></i><b>8.1</b> Pacote tidyr</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-spread"><i class="fa fa-check"></i><b>8.1.1</b> Função <em>spread</em></a></li>
-<li class="chapter" data-level="8.1.2" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-gather"><i class="fa fa-check"></i><b>8.1.2</b> Função <em>gather</em></a></li>
-<li class="chapter" data-level="8.1.3" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-separate"><i class="fa fa-check"></i><b>8.1.3</b> Função <em>separate</em></a></li>
-<li class="chapter" data-level="8.1.4" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-unite"><i class="fa fa-check"></i><b>8.1.4</b> Função <em>unite</em></a></li>
+<li class="chapter" data-level="9" data-path="classificacao.html"><a href="classificacao.html"><i class="fa fa-check"></i><b>9</b> Classificação</a><ul>
+<li class="chapter" data-level="9.1" data-path="classificacao.html"><a href="classificacao.html#arvores-de-decisao"><i class="fa fa-check"></i><b>9.1</b> Árvores de Decisão</a></li>
+<li class="chapter" data-level="9.2" data-path="classificacao.html"><a href="classificacao.html#naive-bayes"><i class="fa fa-check"></i><b>9.2</b> Naive Bayes</a></li>
+<li class="chapter" data-level="9.3" data-path="classificacao.html"><a href="classificacao.html#redes-neurais"><i class="fa fa-check"></i><b>9.3</b> Redes Neurais</a></li>
+<li class="chapter" data-level="9.4" data-path="classificacao.html"><a href="classificacao.html#maquina-de-vetor-de-suporte"><i class="fa fa-check"></i><b>9.4</b> Máquina de Vetor de Suporte</a></li>
+<li class="chapter" data-level="9.5" data-path="classificacao.html"><a href="classificacao.html#vizinho-mais-proximo"><i class="fa fa-check"></i><b>9.5</b> Vizinho mais próximo</a></li>
+<li class="chapter" data-level="9.6" data-path="classificacao.html"><a href="classificacao.html#random-forest"><i class="fa fa-check"></i><b>9.6</b> Random Forest</a></li>
+<li class="chapter" data-level="9.7" data-path="classificacao.html"><a href="classificacao.html#selecao-de-variaveis"><i class="fa fa-check"></i><b>9.7</b> Seleção de Variáveis</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#pacote-dplyr"><i class="fa fa-check"></i><b>8.2</b> Pacote dplyr</a></li>
+<li class="chapter" data-level="10" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html"><i class="fa fa-check"></i><b>10</b> Produção de Mapas</a><ul>
+<li class="chapter" data-level="10.1" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#introducao-aos-shapes"><i class="fa fa-check"></i><b>10.1</b> Introdução aos <em>shapes</em></a></li>
+<li class="chapter" data-level="10.2" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#pacote-tmap"><i class="fa fa-check"></i><b>10.2</b> Pacote tmap</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#adicionando-dados-ao-mapa"><i class="fa fa-check"></i><b>10.2.1</b> Adicionando dados ao mapa</a></li>
+<li class="chapter" data-level="10.2.2" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#plotando-o-mapa-e-melhorando-a-visualizacao"><i class="fa fa-check"></i><b>10.2.2</b> Plotando o mapa e melhorando a visualização</a></li>
+<li class="chapter" data-level="10.2.3" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#utilizando-dados-de-fontes-externas-pacote-datasus"><i class="fa fa-check"></i><b>10.2.3</b> Utilizando dados de fontes externas: pacote datasus</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referências</a></li>
 <li class="divider"></li>
@@ -254,7 +263,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Denize Ivete Reis</em></p>
 
 <p>A análise fatorial é um método estatístico utilizado para descrever a variabilidade entre variáveis observadas e possivelmente correlacionadas em termos de um número potencialmente menor de variáveis não observadas chamadas fatores.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-26"></span>
 <img src="anfat1.png" alt="Processo de análise de variáveis" width="80%" />
 <p class="caption">
 Figura 2.1: Processo de análise de variáveis
@@ -264,7 +273,7 @@ Figura 2.1: Processo de análise de variáveis
 <p>Diferentemente da análise de variância, regressão e análise discriminante, onde uma das variáveis é identificada como a variável dependente, examina-se todo o conjunto de relações interdependentes entre variáveis.</p>
 <p>A análise fatorial aborda o problema de analisar a estrutura das inter-relações (correlações) entre um grande número de variáveis (escores de testes, itens de testes, respostas de questionários), definindo um conjunto de dimensões latentes comuns, chamados fatores. Então, a análise fatorial, permite primeiro identificar as dimensões separadas da estrutura e então determinar o grau em que cada variável é explicada por cada dimensão. Uma vez que essas dimensões e a explicação da cada variável estejam determinadas, os dois principais usos da análise fatorial podem ser conseguidos:</p>
 <ul>
-<li><p><strong>Resumo</strong>: ao resumir os dados, a análise fatorial obtém dimensões latentes que, quando interpretadas e compreendidas, descrevem os dados em um núumero muito menor de conceitos do que as variáveis individuais originais.</p></li>
+<li><p><strong>Resumo</strong>: ao resumir os dados, a análise fatorial obtém dimensões latentes que, quando interpretadas e compreendidas, descrevem os dados em um número muito menor de conceitos do que as variáveis individuais originais.</p></li>
 <li><p><strong>Redução de dados</strong>: pode ser obtida calculando escores para cada dimensão latente e substituindo as variáveis originais pelos mesmos.</p></li>
 </ul>
 <p>As técnicas analíticas fatoriais podem ser classificadas quanto aos seus objetivos como <strong>exploratória</strong> ou <strong>confirmatória</strong>. Exploratória, útil na busca da estrutura em um conjunto de variáveis ou como um método de redução de dados. Sob esta perspectiva, as técnicas analíticas fatoriais “consideram o que os dados oferecem”e não estabelecem restriçoes <em>a priori</em> sobre o número de componentes a serem extraídos. O uso da análise fatorial em situações, que se deseja testar hipóteses envolvendo questões sobre, quais variáveis deveriam ser agrupadasem fator ou número exato de fatores, por exemplo, a análise fatorial desempenha um papel confirmatório, ou seja, avalia o grau em que os dados satisfazem a estrutura esperada.</p>
@@ -307,15 +316,15 @@ Figura 2.1: Processo de análise de variáveis
 <li>V6: O aspecto mais importante na compra de um creme dental é tornar os dentes atraentes.</li>
 </ul>
 <p>Inicialmente podemos explorar algumas estatísticas descritivas relacionadas às variáveis pesquisadas, utilizando a função <code>summary</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(readxl)
-
-url &lt;-<span class="st"> &quot;https://github.com/Smolski/livroavancado/raw/master/creme_dental_exemplo1.xlsx&quot;</span>
-destfile &lt;-<span class="st"> &quot;creme_dental_exemplo1.xlsx&quot;</span>
-curl<span class="op">::</span><span class="kw">curl_download</span>(url, destfile)
-creme_dental_exemplo1 &lt;-<span class="st"> </span><span class="kw">read_excel</span>(destfile)
-
-<span class="kw">attach</span>(creme_dental_exemplo1)
-<span class="kw">summary</span>(creme_dental_exemplo1)</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">require</span>(readxl)</a>
+<a class="sourceLine" id="cb33-2" title="2"></a>
+<a class="sourceLine" id="cb33-3" title="3">url &lt;-<span class="st"> &quot;https://github.com/Smolski/livroavancado/raw/master/creme_dental_exemplo1.xlsx&quot;</span></a>
+<a class="sourceLine" id="cb33-4" title="4">destfile &lt;-<span class="st"> &quot;creme_dental_exemplo1.xlsx&quot;</span></a>
+<a class="sourceLine" id="cb33-5" title="5">curl<span class="op">::</span><span class="kw">curl_download</span>(url, destfile)</a>
+<a class="sourceLine" id="cb33-6" title="6">creme_dental_exemplo1 &lt;-<span class="st"> </span><span class="kw">read_excel</span>(destfile)</a>
+<a class="sourceLine" id="cb33-7" title="7"></a>
+<a class="sourceLine" id="cb33-8" title="8"><span class="kw">attach</span>(creme_dental_exemplo1)</a>
+<a class="sourceLine" id="cb33-9" title="9"><span class="kw">summary</span>(creme_dental_exemplo1)</a></code></pre></div>
 <pre><code>       v1             v2            v3            v4            v5     
  Min.   :1.00   Min.   :2.0   Min.   :1.0   Min.   :2.0   Min.   :1.0  
  1st Qu.:2.00   1st Qu.:3.0   1st Qu.:2.0   1st Qu.:3.0   1st Qu.:2.0  
@@ -339,8 +348,8 @@ creme_dental_exemplo1 &lt;-<span class="st"> </span><span class="kw">read_excel<
 <p>Entrada de Dados (BASE): os dados de entrada da análise fatorial geralmente tomam a forma de um conjunto de valores de variáveis para cada objeto ou indivíduo na amostra. Toda matriz, cujos componentes ofereçam uma medida de similaridade entre variáveis, pode ser passível de análise fatorial. A medida de similaridade não precisa ser uma correlação, embora, geralmente, ou seja:</p>
 <p>Para que a análise fatorial seja adequada, as variáveis devem ser correlacionadas. Espera-se também que as variáveis altamente correlacionadas umas com as outras se correlacionem também com o(s) mesmo(s) fatore(s).</p>
 <p>Note que existem correlações amostrais positivas e negativas relativamente elevadas entre V1 (prevenção de cáries), V3 (gengivas fortes) e V5 (dentes sadios). Espera-se que essas variáveis se relacionem com o mesmo conjunto de fatores. Verificam-se também correlações relativamente elevadas entre V2 (clareie os dentes), V4 (hálito puro) e V6 (dentes atraentes). Essas variáveis também devem correlacionar-se com os mesmos fatores.</p>
-<pre class="sourceCode r"><code class="sourceCode r">matcor &lt;-<span class="st"> </span><span class="kw">cor</span>(creme_dental_exemplo1)
-<span class="kw">print</span>(matcor, <span class="dt">digits =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">matcor &lt;-<span class="st"> </span><span class="kw">cor</span>(creme_dental_exemplo1)</a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="kw">print</span>(matcor, <span class="dt">digits =</span> <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>        v1     v2     v3      v4      v5      v6
 v1  1.0000 -0.053  0.873 -0.0862 -0.8576  0.0042
 v2 -0.0532  1.000 -0.155  0.5722  0.0197  0.6405
@@ -348,11 +357,11 @@ v3  0.8731 -0.155  1.000 -0.2478 -0.7778 -0.0181
 v4 -0.0862  0.572 -0.248  1.0000 -0.0066  0.6405
 v5 -0.8576  0.020 -0.778 -0.0066  1.0000 -0.1364
 v6  0.0042  0.640 -0.018  0.6405 -0.1364  1.0000</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(corrplot)</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">require</span>(corrplot)</a></code></pre></div>
 <pre><code>Carregando pacotes exigidos: corrplot</code></pre>
 <pre><code>corrplot 0.84 loaded</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">corrplot</span>(matcor, <span class="dt">method=</span><span class="st">&quot;circle&quot;</span>)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">corrplot</span>(matcor, <span class="dt">method=</span><span class="st">&quot;circle&quot;</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-29-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Na figura acima, as correlações estão em cor azul porque são positivas, com tons mais fortes para as correlações mais altas.
 <!--
 Para estas, o ângulo (sentido horário) no gráfico de setores do painel
@@ -365,15 +374,15 @@ correlação parcial. Pequenos valores de KMO indicam que as correlações entre
 <p>Hipóteses:</p>
 <p>Ho: A matriz de correlação da população é uma matriz identidade, ou seja as variáveis não são correlacionadas na população.</p>
 <p>H<span class="math inline">\(_1\)</span>: A matriz de correlação da população não é uma matriz identidade, ou seja as variáveis são correlacionadas na população.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&quot;psych&quot;)</span>
-<span class="kw">require</span>(psych)</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co">#install.packages(&quot;psych&quot;)</span></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="kw">require</span>(psych)</a></code></pre></div>
 <pre><code>Carregando pacotes exigidos: psych</code></pre>
 <pre><code>
 Attaching package: &#39;psych&#39;</code></pre>
 <pre><code>The following object is masked from &#39;package:gtools&#39;:
 
     logit</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cortest.bartlett</span>(creme_dental_exemplo1)</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">cortest.bartlett</span>(creme_dental_exemplo1)</a></code></pre></div>
 <pre><code>R was not square, finding R from data</code></pre>
 <pre><code>$chisq
 [1] 111.3
@@ -385,7 +394,7 @@ $df
 [1] 15</code></pre>
 <p>Veja que a hipótese nula de que a matriz de correlação da população seja uma matriz identidade é rejeitada pelo teste de esfericidade de Bartlett. A estatística qui-quadrado aproximada
 é 111,314, com 15 graus de liberdade, significativa ao nível de 0,05.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">KMO</span>(creme_dental_exemplo1)</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">KMO</span>(creme_dental_exemplo1)</a></code></pre></div>
 <pre><code>Kaiser-Meyer-Olkin factor adequacy
 Call: KMO(r = creme_dental_exemplo1)
 Overall MSA =  0.66
@@ -406,8 +415,8 @@ da matriz de correlação.</p>
 <p>Obs.:</p>
 <p>cor = TRUE: as componentes principais serão geradas a partir da matriz de correlação.</p>
 <p>cor = FALSE: as componentes principais serão geradas a partir da matriz de covariância.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fit&lt;-<span class="kw">princomp</span>(creme_dental_exemplo1,<span class="dt">cor=</span><span class="ot">TRUE</span>)
-fit</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">fit&lt;-<span class="kw">princomp</span>(creme_dental_exemplo1,<span class="dt">cor=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb50-2" title="2">fit</a></code></pre></div>
 <pre><code>Call:
 princomp(x = creme_dental_exemplo1, cor = TRUE)
 
@@ -416,7 +425,7 @@ Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6
 1.6526 1.4893 0.6645 0.5842 0.4274 0.2919 
 
  6  variables and  30 observations.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fit)</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">summary</span>(fit)</a></code></pre></div>
 <pre><code>Importance of components:
                        Comp.1 Comp.2 Comp.3  Comp.4  Comp.5 Comp.6
 Standard deviation     1.6526 1.4893 0.6645 0.58417 0.42735 0.2919
@@ -425,10 +434,10 @@ Cumulative Proportion  0.4552 0.8249 0.8985 0.95536 0.98580 1.0000</code></pre>
 <p>A função <code>summary(fit)</code> mostra a aplicação da análise de componentes principais. O fator 1
 responde por 45,52% da variância total. Da mesma forma, o segundo fator responde por 36,97% da
 variância total, sendo que os dois primeiros fatores respondem por 82,49% da variância total. Várias
-considerações devem integrar a análise do núumero de fatores que devem ser usados na análise.</p>
+considerações devem integrar a análise do número de fatores que devem ser usados na análise.</p>
 </div>
-<div id="determinacao-do-nuumero-de-fatores" class="section level3">
-<h3><span class="header-section-number">2.3.3</span> Determinação do núumero de fatores</h3>
+<div id="determinacao-do-numero-de-fatores" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Determinação do número de fatores</h3>
 <p>A fim de reduzir as informações presentes nas variáveis originais, deve-se reduzir o número de fatores. Na literatura, diversos processos são sugeridos: determinação a priori, observação dos autovalores, representação gráfica (<strong>scree plot</strong>), testes de significância entre outros.</p>
 <div id="determinacao-a-priori" class="section level4">
 <h4><span class="header-section-number">2.3.3.1</span> Determinação a priori</h4>
@@ -454,19 +463,19 @@ que em geral é superior ao revelado pelos autovalores.</p>
 <h4><span class="header-section-number">2.3.3.5</span> Teste de significância</h4>
 <p>É possível reter apenas os fatores estatisticamente significativos com base na significância estatística dos autovalores separados.</p>
 <p>Abaixo vamos apresentar o <code>scree-plot</code>, em formato do gráfico de barras para o nosso exemplo</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">screeplot</span>(fit)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">screeplot</span>(fit)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-33-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma ligeira suavização das alturas nas demais colunas.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit,<span class="dt">type=</span><span class="st">&quot;lines&quot;</span>)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">plot</span>(fit,<span class="dt">type=</span><span class="st">&quot;lines&quot;</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="analise-de-componentes-principais" class="section level3">
 <h3><span class="header-section-number">2.3.4</span> Análise de Componentes Principais</h3>
 <p>Rodando a Análise de Componentes Principais no R, temos:</p>
-<pre class="sourceCode r"><code class="sourceCode r">PCAdente&lt;-<span class="kw">principal</span>(creme_dental_exemplo1, <span class="dt">nfactors=</span><span class="dv">2</span>,
-                <span class="dt">n.obs=</span><span class="dv">30</span>,<span class="dt">rotate=</span><span class="st">&quot;none&quot;</span>, <span class="dt">scores=</span><span class="ot">TRUE</span>)
-PCAdente</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1">PCAdente&lt;-<span class="kw">principal</span>(creme_dental_exemplo1, <span class="dt">nfactors=</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb56-2" title="2">                <span class="dt">n.obs=</span><span class="dv">30</span>,<span class="dt">rotate=</span><span class="st">&quot;none&quot;</span>, <span class="dt">scores=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb56-3" title="3">PCAdente</a></code></pre></div>
 <pre><code>Principal Components Analysis
 Call: principal(r = creme_dental_exemplo1, nfactors = 2, rotate = &quot;none&quot;, 
     n.obs = 30, scores = TRUE)
@@ -503,9 +512,9 @@ Valores altos das cargas fatoriais, representam boa relação entre a variável 
 <p>Com o objetivo de possibilitar uma melhor interpretação dos fatores, é prática comum fazer uma rotação ou uma transformação dos fatores.</p>
 <p>O conjunto de cargas fatoriais, obtidas por qualquer método de solução fatorial, quando o número de fatores comuns é maior do que um, não é único, pois outros conjuntos equivalentes podem ser encontrados, por transformações ortogonais de cargas.</p>
 <p>Na rotação ortogonal, os eixos são mantidos em ângulo reto, sendo o método mais utilizado o processo varimax. Esse método ortogonal de rotação minimiza o número de variáveis com altas cargas sobre um fator afim de permitir a interpretaçã dos fatores. A rotação ortogonal resulta em fatores nãocorrelacionados ao passo que a rotação oblíqua não mantém os eixos em ângulo reto e os fatores são correlacionados (MALHOTRA, 2001).</p>
-<pre class="sourceCode r"><code class="sourceCode r">PCAdentevarimax&lt;-<span class="kw">principal</span>(creme_dental_exemplo1, <span class="dt">nfactors=</span><span class="dv">2</span>,
-            <span class="dt">n.obs=</span><span class="dv">30</span>,<span class="dt">rotate=</span><span class="st">&quot;varimax&quot;</span>,<span class="dt">scores=</span><span class="ot">TRUE</span>)
-PCAdentevarimax</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">PCAdentevarimax&lt;-<span class="kw">principal</span>(creme_dental_exemplo1, <span class="dt">nfactors=</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb58-2" title="2">            <span class="dt">n.obs=</span><span class="dv">30</span>,<span class="dt">rotate=</span><span class="st">&quot;varimax&quot;</span>,<span class="dt">scores=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb58-3" title="3">PCAdentevarimax</a></code></pre></div>
 <pre><code>Principal Components Analysis
 Call: principal(r = creme_dental_exemplo1, nfactors = 2, rotate = &quot;varimax&quot;, 
     n.obs = 30, scores = TRUE)
@@ -542,11 +551,11 @@ Fit based upon off diagonal values = 0.98</code></pre>
 <div id="autovalores-1" class="section level3">
 <h3><span class="header-section-number">2.3.6</span> Autovalores</h3>
 <p>Para acessar os eingenvalues (autovalores):</p>
-<pre class="sourceCode r"><code class="sourceCode r">PCAdentevarimax<span class="op">$</span>values</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">PCAdentevarimax<span class="op">$</span>values</a></code></pre></div>
 <pre><code>[1] 2.73119 2.21812 0.44160 0.34126 0.18263 0.08521</code></pre>
 <p>Confirmando, temos autovalores acima de 1, nos dois primeiros casos.</p>
 <p>Para visualizar melhor a contribuição de cada variável (peso):</p>
-<pre class="sourceCode r"><code class="sourceCode r">PCAdentevarimax<span class="op">$</span>loadings</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">PCAdentevarimax<span class="op">$</span>loadings</a></code></pre></div>
 <pre><code>
 Loadings:
    RC1    RC2   
@@ -563,8 +572,8 @@ Proportion Var 0.448 0.377
 Cumulative Var 0.448 0.825</code></pre>
 <p>Recurso importante na interpretação dos fatores, o gráfico das variáveis, apresenta ao final do eixo, as variáveis que com cargas mais altas sobre aquele fator. Quanto mais próximas da origem menores as cargas destas variáveis sobre aquele fator. Variáveis distantes dos dois eixos, estão relacionadas a ambos
 os fatores.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(PCAdentevarimax)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-32-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">biplot</span>(PCAdentevarimax)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Os valores dos fatores obtidos para os 30 entrevistados encontram-se na matriz de coeficiente de escore do componente mostrada abaixo. Esta ajuda a entender como cada variável se relaciona aos escores dos componentes calculados para cada participante. Para melhor compreensão da análise dos escores dos entrevistados é importante especificar e comentar o significado de cada fator:</p>
 <p><strong>Fator 1</strong>: Fator de benefício para a saúde.</p>
 <p><strong>Fator 2</strong>: Fator de benefício social.</p>
@@ -573,11 +582,11 @@ os fatores.</p>
 <p>Este entrevistado se destacou como o primeiro colocado no ranqueamento, obtendo o maior escore ponderado, demonstrando ser bastante atento à prevenção de cáries, gengivas fortes e dentes sadios.</p>
 <p>Entrevistado 29: 2.24121650</p>
 <p>Este entrevistado se destacou em primeiro no segundo fator, apresentando preocupação quanto ao beneffício social da dentição: boa aparência dos dentes, hálito puro e boa aparência dos dentes.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">factor.scores</span>(creme_dental_exemplo1,PCAdentevarimax, 
-              <span class="dt">Phi =</span> <span class="ot">NULL</span>, 
-              <span class="dt">method =</span> <span class="kw">c</span>(<span class="st">&quot;Thurstone&quot;</span>, <span class="st">&quot;tenBerge&quot;</span>, <span class="st">&quot;Anderson&quot;</span>,
-                         <span class="st">&quot;Bartlett&quot;</span>, <span class="st">&quot;Harman&quot;</span>,<span class="st">&quot;components&quot;</span>),
-              <span class="dt">rho=</span><span class="ot">NULL</span>)</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="kw">factor.scores</span>(creme_dental_exemplo1,PCAdentevarimax, </a>
+<a class="sourceLine" id="cb65-2" title="2">              <span class="dt">Phi =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb65-3" title="3">              <span class="dt">method =</span> <span class="kw">c</span>(<span class="st">&quot;Thurstone&quot;</span>, <span class="st">&quot;tenBerge&quot;</span>, <span class="st">&quot;Anderson&quot;</span>,</a>
+<a class="sourceLine" id="cb65-4" title="4">                         <span class="st">&quot;Bartlett&quot;</span>, <span class="st">&quot;Harman&quot;</span>,<span class="st">&quot;components&quot;</span>),</a>
+<a class="sourceLine" id="cb65-5" title="5">              <span class="dt">rho=</span><span class="ot">NULL</span>)</a></code></pre></div>
 <pre><code>$scores
             RC1      RC2
  [1,]  1.143442 -0.30236
@@ -634,7 +643,7 @@ $R2
 factor.scores(creme_dental_exemplo1,PCAdentevarimax, Phi = NULL, method = c("Thurstone", "tenB
 -->
 <p>Destacando-se os entrevistados de interesse, verifica-se:</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-34"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-41"></span>
 <img src="anfat2.png" alt="Principais resultados" width="80%" />
 <p class="caption">
 Figura 2.2: Principais resultados
@@ -652,7 +661,7 @@ Figura 2.2: Principais resultados
         </div>
       </div>
 <a href="delineamentos-experimentais.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="analise-de-clusters.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analise-de-componentes-principais-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

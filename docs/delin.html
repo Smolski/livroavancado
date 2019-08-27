@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-Br" xml:lang="pt-Br">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 1 Delineamentos Experimentais | Software R: curso avançado</title>
+  <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 1 Delineamentos Experimentais | Software R: curso avançado" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://rstub.github.io/bookdown-chapterbib/" />
+  
+  <meta property="og:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  <meta name="github-repo" content="rstub/bookdown-chapterbib" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 1 Delineamentos Experimentais | Software R: curso avançado" />
+  
+  <meta name="twitter:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  
+
+<meta name="author" content="Iara Denise Endruweit Battisti" />
+<meta name="author" content="Felipe Micail da Silva Smolski" />
+
+
+<meta name="date" content="2019-08-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="analisf.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112034801-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-112034801-3');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">UFFS - Cerro Largo</a></li>
+<img src="logo1.png" alt="R" align="midle">
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introdução</a></li>
+<li class="chapter" data-level="1" data-path="delin.html"><a href="delin.html"><i class="fa fa-check"></i><b>1</b> Delineamentos Experimentais</a><ul>
+<li class="chapter" data-level="1.1" data-path="delin.html"><a href="delin.html#principios-basicos-da-experimentacao"><i class="fa fa-check"></i><b>1.1</b> Princípios básicos da Experimentação</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="delin.html"><a href="delin.html#repeticao"><i class="fa fa-check"></i><b>1.1.1</b> Repetição</a></li>
+<li class="chapter" data-level="1.1.2" data-path="delin.html"><a href="delin.html#casualizacao"><i class="fa fa-check"></i><b>1.1.2</b> Casualização</a></li>
+<li class="chapter" data-level="1.1.3" data-path="delin.html"><a href="delin.html#controle-local"><i class="fa fa-check"></i><b>1.1.3</b> Controle local</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="delin.html"><a href="delin.html#analise-de-variancia"><i class="fa fa-check"></i><b>1.2</b> Análise de Variância</a></li>
+<li class="chapter" data-level="1.3" data-path="delin.html"><a href="delin.html#hipoteses-estatisticas"><i class="fa fa-check"></i><b>1.3</b> Hipóteses estatísticas</a></li>
+<li class="chapter" data-level="1.4" data-path="delin.html"><a href="delin.html#delineamento-inteiramente-causalizado-dic"><i class="fa fa-check"></i><b>1.4</b> Delineamento Inteiramente Causalizado (DIC)</a></li>
+<li class="chapter" data-level="1.5" data-path="delin.html"><a href="delin.html#delineamento-blocos-casualizados-dbc"><i class="fa fa-check"></i><b>1.5</b> Delineamento Blocos Casualizados (DBC)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analisf.html"><a href="analisf.html"><i class="fa fa-check"></i><b>2</b> Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.1" data-path="analisf.html"><a href="analisf.html#pressupostos"><i class="fa fa-check"></i><b>2.1</b> Pressupostos</a></li>
+<li class="chapter" data-level="2.2" data-path="analisf.html"><a href="analisf.html#estatisticas-associadas-a-analise-fatorial"><i class="fa fa-check"></i><b>2.2</b> Estatísticas Associadas a Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3" data-path="analisf.html"><a href="analisf.html#passos-da-analise-fatorial"><i class="fa fa-check"></i><b>2.3</b> Passos da Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="analisf.html"><a href="analisf.html#construcao-da-matriz-de-correlacao"><i class="fa fa-check"></i><b>2.3.1</b> Construção da Matriz de Correlação</a></li>
+<li class="chapter" data-level="2.3.2" data-path="analisf.html"><a href="analisf.html#metodo-de-analise-fatorial"><i class="fa fa-check"></i><b>2.3.2</b> Método de Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3.3" data-path="analisf.html"><a href="analisf.html#determinacao-do-numero-de-fatores"><i class="fa fa-check"></i><b>2.3.3</b> Determinação do número de fatores</a></li>
+<li class="chapter" data-level="2.3.4" data-path="analisf.html"><a href="analisf.html#analise-de-componentes-principais"><i class="fa fa-check"></i><b>2.3.4</b> Análise de Componentes Principais</a></li>
+<li class="chapter" data-level="2.3.5" data-path="analisf.html"><a href="analisf.html#matriz-rotada-do-fator"><i class="fa fa-check"></i><b>2.3.5</b> Matriz Rotada do Fator</a></li>
+<li class="chapter" data-level="2.3.6" data-path="analisf.html"><a href="analisf.html#autovalores-1"><i class="fa fa-check"></i><b>2.3.6</b> Autovalores</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html"><i class="fa fa-check"></i><b>3</b> Análise de Componentes Principais</a><ul>
+<li class="chapter" data-level="3.1" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html#preparacao-dos-dados"><i class="fa fa-check"></i><b>3.1</b> Preparação dos dados</a></li>
+<li class="chapter" data-level="3.2" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html#criacao-dos-componentes"><i class="fa fa-check"></i><b>3.2</b> Criação dos componentes</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>4</b> Análise de Clusters</a><ul>
+<li class="chapter" data-level="4.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>4.1</b> K-Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>4.2</b> Clusterização Aglomerativa</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>5</b> Regressão Múltipla</a><ul>
+<li class="chapter" data-level="5.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>5.1</b> Modelo geral</a></li>
+<li class="chapter" data-level="5.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>5.2</b> Variável dummy</a></li>
+<li class="chapter" data-level="5.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>5.3</b> Interação entre variáveis preditoras</a></li>
+<li class="chapter" data-level="5.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>5.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>5.4.1</b> Full model – Modelo completo</a></li>
+<li class="chapter" data-level="5.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>5.4.2</b> Procedimento backward</a></li>
+<li class="chapter" data-level="5.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>5.4.3</b> Procedimento forward</a></li>
+<li class="chapter" data-level="5.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>5.4.4</b> Procedimento stepwise</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>5.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html"><i class="fa fa-check"></i><b>6</b> Regressão com Dados em Painel</a><ul>
+<li class="chapter" data-level="6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#carregamento-e-transformacao-dos-dados"><i class="fa fa-check"></i><b>6.1</b> Carregamento e transformação dos dados</a></li>
+<li class="chapter" data-level="6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-pooled"><i class="fa fa-check"></i><b>6.2</b> Modelo Pooled</a></li>
+<li class="chapter" data-level="6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>6.3</b> Modelo Efeitos Fixos</a></li>
+<li class="chapter" data-level="6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>6.4</b> Modelo Efeitos Aleatórios</a></li>
+<li class="chapter" data-level="6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>6.5</b> Comparação e escolha dos modelos</a></li>
+<li class="chapter" data-level="6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>6.6</b> Alguns testes para os modelos</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>6.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
+<li class="chapter" data-level="6.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>6.6.2</b> Normalidade dos resíduos</a></li>
+<li class="chapter" data-level="6.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>6.6.3</b> Homocedasticidade dos resíduos</a></li>
+<li class="chapter" data-level="6.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>6.6.4</b> Testando correlação serial</a></li>
+<li class="chapter" data-level="6.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>6.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
+<li class="chapter" data-level="6.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>6.6.6</b> Testando raízes unitárias</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="reglog.html"><a href="reglog.html"><i class="fa fa-check"></i><b>7</b> Regressão Logística</a><ul>
+<li class="chapter" data-level="7.1" data-path="reglog.html"><a href="reglog.html#o-modelo"><i class="fa fa-check"></i><b>7.1</b> O modelo</a></li>
+<li class="chapter" data-level="7.2" data-path="reglog.html"><a href="reglog.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>7.2</b> Regressão Logística Simples</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="reglog.html"><a href="reglog.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>7.2.1</b> Estimando a Razão de Chances</a></li>
+<li class="chapter" data-level="7.2.2" data-path="reglog.html"><a href="reglog.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>7.2.2</b> Determinando o Intervalo de Confiança</a></li>
+<li class="chapter" data-level="7.2.3" data-path="reglog.html"><a href="reglog.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>7.2.3</b> Predição de Probabilidades</a></li>
+<li class="chapter" data-level="7.2.4" data-path="reglog.html"><a href="reglog.html#matriz-de-confusao"><i class="fa fa-check"></i><b>7.2.4</b> Matriz de Confusão</a></li>
+<li class="chapter" data-level="7.2.5" data-path="reglog.html"><a href="reglog.html#curva-roc"><i class="fa fa-check"></i><b>7.2.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="7.2.6" data-path="reglog.html"><a href="reglog.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>7.2.6</b> O teste Hosmer e Lemeshow</a></li>
+<li class="chapter" data-level="7.2.7" data-path="reglog.html"><a href="reglog.html#pseudo-r2"><i class="fa fa-check"></i><b>7.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="reglog.html"><a href="reglog.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>7.3</b> Regressão Logística Múltipla</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="reglog.html"><a href="reglog.html#metodo-stepwise"><i class="fa fa-check"></i><b>7.3.1</b> Método Stepwise</a></li>
+<li class="chapter" data-level="7.3.2" data-path="reglog.html"><a href="reglog.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>7.3.2</b> VIF - Variance Inflation Factor</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="reglog.html"><a href="reglog.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>7.4</b> Regressão Logística Múltipla com variável categórica</a></li>
+<li class="chapter" data-level="7.5" data-path="reglog.html"><a href="reglog.html#exercicios"><i class="fa fa-check"></i><b>7.5</b> Exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>8</b> Regressão de Poisson</a><ul>
+<li class="chapter" data-level="8.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>8.1</b> O modelo</a></li>
+<li class="chapter" data-level="8.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>8.2</b> Estimando os parâmetros do modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html"><i class="fa fa-check"></i><b>9</b> Produção de Mapas</a><ul>
+<li class="chapter" data-level="9.1" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#introducao-aos-shapes"><i class="fa fa-check"></i><b>9.1</b> Introdução aos <em>shapes</em></a></li>
+<li class="chapter" data-level="9.2" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#pacote-tmap"><i class="fa fa-check"></i><b>9.2</b> Pacote tmap</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#adicionando-dados-ao-mapa"><i class="fa fa-check"></i><b>9.2.1</b> Adicionando dados ao mapa</a></li>
+<li class="chapter" data-level="9.2.2" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#plotando-o-mapa-e-melhorando-a-visualizacao"><i class="fa fa-check"></i><b>9.2.2</b> Plotando o mapa e melhorando a visualização</a></li>
+<li class="chapter" data-level="9.2.3" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#utilizando-dados-de-fontes-externas-pacote-datasus"><i class="fa fa-check"></i><b>9.2.3</b> Utilizando dados de fontes externas: pacote datasus</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referências</a></li>
+<li class="divider"></li>
+<li><a href="https://smolski.github.io/softwarelivrer/" target="blank">Curso de Extensão</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Software R: curso avançado</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="delin" class="section level1">
+<h1><span class="header-section-number">Capítulo 1</span> Delineamentos Experimentais</h1>
+<p><em>Tatiane Chassot</em></p>
+
+<p>A experimentação é uma parte da estatística probabilística que estuda o planejamento, execução, coleta de dados, análise de dados e interpretação dos resultados provenientes de um experimento.</p>
+<p>Um experimento é um procedimento planejado com base em uma hipótese, que tem por objetivo provocar fenômenos (tratamentos) de forma controlada, analisando e interpretando os
+resultados obtidos.</p>
+<p>O tratamento é o método, elemento ou material cujo efeito desejamos avaliar em um experimento. Por exemplo: formas de preparo de solo, diferentes cultivares, doses de adubação, controle de insetos e outras pragas, controle de uma doença. Num experimento, somente o tratamento variade uma unidade experimental para outra, as demais condições são mantidas constantes, salvo erros não controláveis.</p>
+<p>E alguns experimentos, utiliza-se a testemunha (nas ciências agrárias e ambientais) ou placebo (na saúde), que são as unidades experimentais que não recebem tratamento.</p>
+<p>A unidade experimental é a unidade que recebe o tratamento uma vez e, normalmente são chamadas de parcelas. A escolha da unidade experimental depende dos tipos de tratamentos que serão avaliados. Podem ser: uma área de campo, um vaso com solo, um animal, uma placa de Petri, uma planta. Em áreas de campo, normalmente utiliza-se a bordadura. Num experimento, recomenda-se, no mínimo, a utilização de 20 UEs.</p>
+<p>Em um experimento, a variável a ser avaliada chamamos de variável resposta. Por exemplo, número de grãos por planta, número de folhas por planta, altura das plantas.</p>
+<div id="principios-basicos-da-experimentacao" class="section level2">
+<h2><span class="header-section-number">1.1</span> Princípios básicos da Experimentação</h2>
+<div id="repeticao" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Repetição</h3>
+<p>A repetição consiste na aplicação do mesmo tratamento sobre duas ou mais unidades experimentais. Permite estimar o erro experimental e avaliar de forma mais precisa o efeito de
+cada tratamento.</p>
+<p>O erro experimental é caracterizado pela variância entre as unidades experimentais que receberam o mesmo tratamento.</p>
+</div>
+<div id="casualizacao" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Casualização</h3>
+<p>A casualização consiste na aplicação dos tratamentos aleatoriamente (sorteio) sobre as unidades experimentais. A casualização é usada para obter a independência dos erros, ou seja, evitar que determinados tratamentos sejam favorecidos.</p>
+</div>
+<div id="controle-local" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> Controle local</h3>
+<p>Quando tiver heterogeneidade no material experimental: plantas de diferentes alturas, animais de diferentes idades, solo com declividade, deve-se separar o material em grupos homogêneos
+e aplicar o tratamento uma vez dentro de cada grupo (blocos).
+A homogeneidade ou não do material dá origem aos tipos de delineamentos:</p>
+<ul>
+<li><p>Delineamento Inteiramente Casualizado (DIC): material experimental homogêneo;</p></li>
+<li><p>Delineamento Blocos Casualizados (DBC): material experimental com uma fonte de heterogeneidade;</p></li>
+<li><p>Delineamento Quadrado Latino (DQL): material experimental com duas fontes de heterogeneidade.</p></li>
+</ul>
+</div>
+</div>
+<div id="analise-de-variancia" class="section level2">
+<h2><span class="header-section-number">1.2</span> Análise de Variância</h2>
+<p>Para saber se existe diferença significativa entre as médias resultados dos efeitos de tratamentos, realiza-se a Análise de Variância (ANOVA).</p>
+<table style="width:100%;">
+<caption>Nome da Tabela</caption>
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><strong>Fonte de Variação</strong></th>
+<th align="center"><strong>Graus de Liberdade (GL)</strong></th>
+<th align="center"><strong>Soma de Quadrados (SQ)</strong></th>
+<th align="center"><strong>Quadrado Médio (QM)</strong></th>
+<th align="center"><strong>Falc</strong></th>
+<th align="center"><strong>P</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Tratamento</td>
+<td align="center">I-1</td>
+<td align="center">SQtrat</td>
+<td align="center">QMat</td>
+<td align="center">QMatr/QMerro</td>
+<td align="center">P</td>
+</tr>
+<tr class="even">
+<td align="center">Erro</td>
+<td align="center">GLerro</td>
+<td align="center">SQerro</td>
+<td align="center">QMerro</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center">IJ-1</td>
+<td align="center">SQtotal</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="hipoteses-estatisticas" class="section level2">
+<h2><span class="header-section-number">1.3</span> Hipóteses estatísticas</h2>
+<ul>
+<li><p>H<span class="math inline">\(_0\)</span>: Não existe diferença entre as médias dos tratamentos</p></li>
+<li><p>H<span class="math inline">\(_1\)</span>: Existe, pelo menos, uma diferença entre as médias dos tratamentos</p></li>
+</ul>
+</div>
+<div id="delineamento-inteiramente-causalizado-dic" class="section level2">
+<h2><span class="header-section-number">1.4</span> Delineamento Inteiramente Causalizado (DIC)</h2>
+<p>É utilizado quando as unidades experimentais são homogêneas. É o mais simples dos delineamentos e os tratamentos são designados às unidades experimentais de forma casualizada, por meio de um único sorteio. Usado principalmente em pequenos animais, casas de vegetação e em
+laboratórios.</p>
+<p><em>Exemplo</em>: Um produtor deseja avaliar 4 variedades de pera (A, B, C e D). Para tanto, instalou um experimento no delineamento inteiramente casualizado, utilizando 5 repetições por variedade. Os resultados, peso médio do fruto, estão apresentados a seguir:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="delimexp0.png" alt="Variedades de pera separadas por grupos em faixas de peso e repetição" width="80%" />
+<p class="caption">
+Figura 1.1: Variedades de pera separadas por grupos em faixas de peso e repetição
+</p>
+</div>
+<p>Existe diferença significativa entre as variedades de pera, considerando o peso médio dos frutos de cada variedade?</p>
+<p>Para responder esta pergunta, utilizamos a Análise de Variância (ANOVA).</p>
+<p>No software RStudio:</p>
+<p>Criar o arquivo acima em planilha eletrônica. Nomear como DIC e salvar em formato .xls.</p>
+<p>Importar no RStudio:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(readxl)</a>
+<a class="sourceLine" id="cb1-2" title="2">url &lt;-<span class="st"> &quot;https://github.com/Smolski/livroavancado/raw/master/dic.xls&quot;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">destfile &lt;-<span class="st"> &quot;dic.xls&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">curl<span class="op">::</span><span class="kw">curl_download</span>(url, destfile)</a>
+<a class="sourceLine" id="cb1-5" title="5">DIC &lt;-<span class="st"> </span><span class="kw">read_excel</span>(destfile)</a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="kw">attach</span>(DIC)</a></code></pre></div>
+<p>O comando que gera a análise de variância é o <code>aov()</code> e o comando que exibe o quadro da ANOVA é o <code>anova</code>. Então, podemos gerar o quadro da análise de uma são vez associando os dois comandos.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">anova=<span class="kw">aov</span>(Peso<span class="op">~</span>Variedade)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">summary</span>(anova)</a></code></pre></div>
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
+Variedade    3   1414     471    3.78  0.032 *
+Residuals   16   1997     125                 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Hipóteses estatísticas:</p>
+<ul>
+<li>H<span class="math inline">\(_0\)</span>: ti <span class="math inline">\(=\)</span> 0 (as médias dos tratamentos nãao diferem entre si)</li>
+<li>H<span class="math inline">\(_1\)</span>: ti <span class="math inline">\(\neq\)</span> 0 (existe, no mínimo, uma diferença entre as médias dos tratamentos)</li>
+</ul>
+<p>Como p = 0,0319 (0,01 <span class="math inline">\(\leq\)</span> p “menor ou igual a” 0,05), rejeita-se H<span class="math inline">\(_0\)</span> com nível de significância de 5% e conclui-se que existe diferença significativa entre as médias dos tratamentos.</p>
+<p>Para saber quais as médias que diferem, utilizamos o teste de Tukey.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">attach</span>(DIC)</a></code></pre></div>
+<pre><code>The following objects are masked from DIC (pos = 3):
+
+    Peso, Repeticao, Variedade</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">TukeyHSD</span>(anova,<span class="kw">as.factor</span>(<span class="st">&quot;Variedade&quot;</span>),<span class="dt">ordered=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+    factor levels have been ordered
+
+Fit: aov(formula = Peso ~ Variedade)
+
+$Variedade
+    diff     lwr   upr  p adj
+C-D  6.2 -14.016 26.42 0.8164
+B-D 12.2  -8.016 32.42 0.3429
+A-D 22.8   2.584 43.02 0.0245
+B-C  6.0 -14.216 26.22 0.8303
+A-C 16.6  -3.616 36.82 0.1282
+A-B 10.6  -9.616 30.82 0.4602</code></pre>
+<p>Para que o RStudio apresente uma tabela com as médias e letras indicando quais as médias que diferiram, devemos instalar o pacote <code>agricolae</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">library</span>(agricolae)</a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">library</span>(gtools)</a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="kw">HSD.test</span>(anova,<span class="kw">as.factor</span>(<span class="st">&quot;Variedade&quot;</span>),<span class="dt">console=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>
+Study: anova ~ as.factor(&quot;Variedade&quot;)
+
+HSD Test for Peso 
+
+Mean Square Error:  124.8 
+
+Variedade,  means
+
+  Peso    std r Min Max
+A 82.0 10.863 5  72  98
+B 71.4 17.097 5  55  96
+C 65.4  8.562 5  58  79
+D 59.2  3.962 5  54  65
+
+Alpha: 0.05 ; DF Error: 16 
+Critical Value of Studentized Range: 4.046 
+
+Minimun Significant Difference: 20.22 
+
+Treatments with the same letter are not significantly different.
+
+  Peso groups
+A 82.0      a
+B 71.4     ab
+C 65.4     ab
+D 59.2      b</code></pre>
+<p>*Médias dos tratamentos não seguidas por mesma letra diferem pelo teste de Tukey, ao nível de 5% de significância.</p>
+<p>Conclusão: A variedade de pera A apresentou o maior peso médio dos frutos, que não diferiu significativamente do peso médio das variedades B e C. A variedade de pera D apresentou o menor peso médio dos frutos, que não diferiu significativamente do peso médio das variedades B e C. As variedades B e C apresentaram peso médio dos frutos intermediário.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">attach</span>(DIC)</a></code></pre></div>
+<pre><code>The following objects are masked from DIC (pos = 5):
+
+    Peso, Repeticao, Variedade</code></pre>
+<pre><code>The following objects are masked from DIC (pos = 6):
+
+    Peso, Repeticao, Variedade</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">boxplot</span>(Peso<span class="op">~</span>Variedade)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">boxplot</span>(Peso<span class="op">~</span>Variedade,<span class="dt">xlab=</span><span class="st">&quot;Variedade&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Peso&quot;</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-14-2.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">tapply</span>(Peso,Variedade,mean)</a></code></pre></div>
+<pre><code>   A    B    C    D 
+82.0 71.4 65.4 59.2 </code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">tapply</span>(Peso,Variedade,sd)</a></code></pre></div>
+<pre><code>     A      B      C      D 
+10.863 17.097  8.562  3.962 </code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">residuos=<span class="kw">residuals</span>(anova)</a>
+<a class="sourceLine" id="cb19-2" title="2">ajustados=<span class="kw">fitted</span>(anova)</a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="kw">plot</span>(ajustados,residuos)</a>
+<a class="sourceLine" id="cb19-4" title="4"><span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">qqnorm</span>(residuos)</a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="kw">qqline</span>(residuos)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="delineamento-blocos-casualizados-dbc" class="section level2">
+<h2><span class="header-section-number">1.5</span> Delineamento Blocos Casualizados (DBC)</h2>
+<p>É utilizado quando as unidades experimentais são heterogêneas. Os tratamentos são designados às unidades experimentais de forma casualizada, por meio de sorteio por blocos. Na área agrícola, é usado principalmente em áreas de campo e grandes animais.</p>
+<p><em>Exemplo</em>: Uma Nutricionista elaborou 4 dietas e quer aplicá-las em 20 pessoas a fim detestar suas eficiências quanto à perda de peso. Porém ela notou que entre essas 20 pessoas existem 5 grupos de faixas iniciais de peso. Então, para aumentar a eficácia do teste ela separou os 20 indivíduos em 5 grupos de faixas de peso.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-18"></span>
+<img src="delimexp1.png" alt="Indivíduos separados por grupos em faixas de peso" width="80%" />
+<p class="caption">
+Figura 1.2: Indivíduos separados por grupos em faixas de peso
+</p>
+</div>
+<p>Criar o arquivo acima em planilha eletrônica. Nomear como DBC e salvar em formato .xls.</p>
+<p>Importar no RStudio:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">require</span>(readxl)</a>
+<a class="sourceLine" id="cb21-2" title="2">url &lt;-<span class="st"> &quot;https://github.com/Smolski/livroavancado/raw/master/dbc.xls&quot;</span></a>
+<a class="sourceLine" id="cb21-3" title="3">destfile &lt;-<span class="st"> &quot;dbc.xls&quot;</span></a>
+<a class="sourceLine" id="cb21-4" title="4">curl<span class="op">::</span><span class="kw">curl_download</span>(url, destfile)</a>
+<a class="sourceLine" id="cb21-5" title="5">DBC  &lt;-<span class="st"> </span><span class="kw">read_excel</span>(destfile)</a>
+<a class="sourceLine" id="cb21-6" title="6"></a>
+<a class="sourceLine" id="cb21-7" title="7"><span class="kw">attach</span>(DBC)</a>
+<a class="sourceLine" id="cb21-8" title="8">anova=<span class="kw">aov</span>(Perda<span class="op">~</span>Tratamentos<span class="op">+</span>Blocos)</a>
+<a class="sourceLine" id="cb21-9" title="9"><span class="kw">summary</span>(anova)</a></code></pre></div>
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)   
+Tratamentos  3   25.2     8.4    6.00 0.0097 **
+Blocos       4    3.2     0.8    0.57 0.6885   
+Residuals   12   16.8     1.4                  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Hipóteses estatísticas:</p>
+<ul>
+<li>H<span class="math inline">\(_0\)</span>: ti <span class="math inline">\(=\)</span> 0 (as médias dos tratamentos não diferem entre si)</li>
+<li>H<span class="math inline">\(_1\)</span>: ti <span class="math inline">\(\neq\)</span> 0 (existe, no mínimo, uma diferença entre as médias dos tratamentos)</li>
+</ul>
+<p>Como p = 0,00973 (p <span class="math inline">\(\leq\)</span> 0,01), rejeita-se H<span class="math inline">\(_0\)</span> com nível de significância de 1% e conclui-se que existe diferença significativa entre as médias dos tratamentos.</p>
+<ul>
+<li>H<span class="math inline">\(_0\)</span>: <span class="math inline">\(\sigma\)</span><sup>2</sup> blocos <span class="math inline">\(=\)</span> 0</li>
+<li>H<span class="math inline">\(_1\)</span>: <span class="math inline">\(\sigma\)</span><sup>2</sup> blocos <span class="math inline">\(\leq\)</span> 0</li>
+</ul>
+<p>Como p <span class="math inline">\(=\)</span> 0,68854 (p <span class="math inline">\(\leq\)</span> 0,05), não rejeita-se H<span class="math inline">\(_0\)</span> e conclui-se que a variância entre os blocos não é significativa.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">attach</span>(DBC)</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw">HSD.test</span>(anova,<span class="kw">as.factor</span>(<span class="st">&quot;Tratamentos&quot;</span>),<span class="dt">console=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>
+Study: anova ~ as.factor(&quot;Tratamentos&quot;)
+
+HSD Test for Perda 
+
+Mean Square Error:  1.4 
+
+Tratamentos,  means
+
+        Perda    std r Min Max
+Dieta 1   2.6 0.8944 5   2   4
+Dieta 2   5.6 0.8944 5   5   7
+Dieta 3   3.2 1.6432 5   1   5
+Dieta 4   3.8 0.8367 5   3   5
+
+Alpha: 0.05 ; DF Error: 12 
+Critical Value of Studentized Range: 4.199 
+
+Minimun Significant Difference: 2.222 
+
+Treatments with the same letter are not significantly different.
+
+        Perda groups
+Dieta 2   5.6      a
+Dieta 4   3.8     ab
+Dieta 3   3.2      b
+Dieta 1   2.6      b</code></pre>
+<p>Médias dos tratamentos não seguidas por mesma letra diferem pelo teste de Tukey, ao nível de 5% de significância.</p>
+<p>Conclusão: A dieta que resultou na maior perda de peso foi a dieta 2, que não diferiu da dieta 4. A dieta que resultou na menor perda de peso foi a dieta 1, que não diferiu das dietas 3 e 4.</p>
+<p>Medidas descritivas com a variável resposta:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">boxplot</span>(Perda<span class="op">~</span>Tratamentos)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">boxplot</span>(Perda<span class="op">~</span>Tratamentos,<span class="dt">xlab=</span><span class="st">&quot;Tratamentos&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Perda&quot;</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">tapply</span>(Perda,Tratamentos,mean)</a></code></pre></div>
+<pre><code>Dieta 1 Dieta 2 Dieta 3 Dieta 4 
+    2.6     5.6     3.2     3.8 </code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">tapply</span>(Perda,Tratamentos,sd)</a></code></pre></div>
+<pre><code>Dieta 1 Dieta 2 Dieta 3 Dieta 4 
+ 0.8944  0.8944  1.6432  0.8367 </code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">residuo=<span class="kw">residuals</span>(anova)</a>
+<a class="sourceLine" id="cb31-2" title="2">ajustado=<span class="kw">fitted</span>(anova)</a>
+<a class="sourceLine" id="cb31-3" title="3"><span class="kw">plot</span>(ajustado,residuo)</a>
+<a class="sourceLine" id="cb31-4" title="4"><span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">qqnorm</span>(residuo)</a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="kw">qqline</span>(residuo)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analisf.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
+"instapper": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

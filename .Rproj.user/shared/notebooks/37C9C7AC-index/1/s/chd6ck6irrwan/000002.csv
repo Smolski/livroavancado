@@ -1,7 +1,0 @@
-"0","library(readxl)"
-"0","url <- ""https://github.com/Smolski/livroavancado/raw/master/dic.xls"""
-"0","destfile <- ""dic.xls"""
-"0","curl::curl_download(url, destfile)"
-"2","Error in curl::curl_download(url, destfile) : 
-  Send failure: Connection was aborted
-"

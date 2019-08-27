@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html  lang="pt-Br">
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-Br" xml:lang="pt-Br">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Capítulo 3 Análise de Clusters | Software R: curso avançado</title>
-  <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 4 Análise de Clusters | Software R: curso avançado</title>
+  <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 3 Análise de Clusters | Software R: curso avançado" />
+  <meta property="og:title" content="Capítulo 4 Análise de Clusters | Software R: curso avançado" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://rstub.github.io/bookdown-chapterbib/" />
   
@@ -17,23 +16,23 @@
   <meta name="github-repo" content="rstub/bookdown-chapterbib" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 3 Análise de Clusters | Software R: curso avançado" />
+  <meta name="twitter:title" content="Capítulo 4 Análise de Clusters | Software R: curso avançado" />
   
   <meta name="twitter:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
   
 
-<meta name="author" content="Iara Denise Endruweit Battisti">
-<meta name="author" content="Felipe Micail da Silva Smolski">
+<meta name="author" content="Iara Denise Endruweit Battisti" />
+<meta name="author" content="Felipe Micail da Silva Smolski" />
 
 
-<meta name="date" content="2019-02-11">
+<meta name="date" content="2019-08-26" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="analise-fatorial.html">
+<link rel="prev" href="analise-de-componentes-principais-1.html">
 <link rel="next" href="regressao-multipla.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -66,7 +65,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -141,92 +139,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="logo1.png" alt="R" align="midle">
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Apresentação</a></li>
-<li class="chapter" data-level="" data-path="introducao.html"><a href="introducao.html"><i class="fa fa-check"></i>Introdução</a></li>
-<li class="chapter" data-level="1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html"><i class="fa fa-check"></i><b>1</b> Delineamentos Experimentais</a><ul>
-<li class="chapter" data-level="1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#principios-basicos-da-experimentacao"><i class="fa fa-check"></i><b>1.1</b> Princípios básicos da Experimentação</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#repeticao"><i class="fa fa-check"></i><b>1.1.1</b> Repetição</a></li>
-<li class="chapter" data-level="1.1.2" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#casualizacao"><i class="fa fa-check"></i><b>1.1.2</b> Casualização</a></li>
-<li class="chapter" data-level="1.1.3" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#controle-local"><i class="fa fa-check"></i><b>1.1.3</b> Controle local</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introdução</a></li>
+<li class="chapter" data-level="1" data-path="delin.html"><a href="delin.html"><i class="fa fa-check"></i><b>1</b> Delineamentos Experimentais</a><ul>
+<li class="chapter" data-level="1.1" data-path="delin.html"><a href="delin.html#principios-basicos-da-experimentacao"><i class="fa fa-check"></i><b>1.1</b> Princípios básicos da Experimentação</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="delin.html"><a href="delin.html#repeticao"><i class="fa fa-check"></i><b>1.1.1</b> Repetição</a></li>
+<li class="chapter" data-level="1.1.2" data-path="delin.html"><a href="delin.html#casualizacao"><i class="fa fa-check"></i><b>1.1.2</b> Casualização</a></li>
+<li class="chapter" data-level="1.1.3" data-path="delin.html"><a href="delin.html#controle-local"><i class="fa fa-check"></i><b>1.1.3</b> Controle local</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#analise-de-variancia"><i class="fa fa-check"></i><b>1.2</b> Análise de Variância</a></li>
-<li class="chapter" data-level="1.3" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#hipoteses-estatisticas"><i class="fa fa-check"></i><b>1.3</b> Hipóteses estatísticas</a></li>
-<li class="chapter" data-level="1.4" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#delineamento-inteiramente-causalizado-dic"><i class="fa fa-check"></i><b>1.4</b> Delineamento Inteiramente Causalizado (DIC)</a></li>
-<li class="chapter" data-level="1.5" data-path="delineamentos-experimentais.html"><a href="delineamentos-experimentais.html#delineamento-blocos-casualizados-dbc"><i class="fa fa-check"></i><b>1.5</b> Delineamento Blocos Casualizados (DBC)</a></li>
+<li class="chapter" data-level="1.2" data-path="delin.html"><a href="delin.html#analise-de-variancia"><i class="fa fa-check"></i><b>1.2</b> Análise de Variância</a></li>
+<li class="chapter" data-level="1.3" data-path="delin.html"><a href="delin.html#hipoteses-estatisticas"><i class="fa fa-check"></i><b>1.3</b> Hipóteses estatísticas</a></li>
+<li class="chapter" data-level="1.4" data-path="delin.html"><a href="delin.html#delineamento-inteiramente-causalizado-dic"><i class="fa fa-check"></i><b>1.4</b> Delineamento Inteiramente Causalizado (DIC)</a></li>
+<li class="chapter" data-level="1.5" data-path="delin.html"><a href="delin.html#delineamento-blocos-casualizados-dbc"><i class="fa fa-check"></i><b>1.5</b> Delineamento Blocos Casualizados (DBC)</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="analise-fatorial.html"><a href="analise-fatorial.html"><i class="fa fa-check"></i><b>2</b> Análise Fatorial</a><ul>
-<li class="chapter" data-level="2.1" data-path="analise-fatorial.html"><a href="analise-fatorial.html#pressupostos"><i class="fa fa-check"></i><b>2.1</b> Pressupostos</a></li>
-<li class="chapter" data-level="2.2" data-path="analise-fatorial.html"><a href="analise-fatorial.html#estatisticas-associadas-a-analise-fatorial"><i class="fa fa-check"></i><b>2.2</b> Estatísticas Associadas a Análise Fatorial</a></li>
-<li class="chapter" data-level="2.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#passos-da-analise-fatorial"><i class="fa fa-check"></i><b>2.3</b> Passos da Análise Fatorial</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="analise-fatorial.html"><a href="analise-fatorial.html#construcao-da-matriz-de-correlacao"><i class="fa fa-check"></i><b>2.3.1</b> Construção da Matriz de Correlação</a></li>
-<li class="chapter" data-level="2.3.2" data-path="analise-fatorial.html"><a href="analise-fatorial.html#metodo-de-analise-fatorial"><i class="fa fa-check"></i><b>2.3.2</b> Método de Análise Fatorial</a></li>
-<li class="chapter" data-level="2.3.3" data-path="analise-fatorial.html"><a href="analise-fatorial.html#determinacao-do-nuumero-de-fatores"><i class="fa fa-check"></i><b>2.3.3</b> Determinação do núumero de fatores</a></li>
-<li class="chapter" data-level="2.3.4" data-path="analise-fatorial.html"><a href="analise-fatorial.html#analise-de-componentes-principais"><i class="fa fa-check"></i><b>2.3.4</b> Análise de Componentes Principais</a></li>
-<li class="chapter" data-level="2.3.5" data-path="analise-fatorial.html"><a href="analise-fatorial.html#matriz-rotada-do-fator"><i class="fa fa-check"></i><b>2.3.5</b> Matriz Rotada do Fator</a></li>
-<li class="chapter" data-level="2.3.6" data-path="analise-fatorial.html"><a href="analise-fatorial.html#autovalores-1"><i class="fa fa-check"></i><b>2.3.6</b> Autovalores</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>3</b> Análise de Clusters</a><ul>
-<li class="chapter" data-level="3.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>3.1</b> K-Means</a></li>
-<li class="chapter" data-level="3.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>3.2</b> Clusterização Aglomerativa</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>4</b> Regressão Múltipla</a><ul>
-<li class="chapter" data-level="4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>4.1</b> Modelo geral</a></li>
-<li class="chapter" data-level="4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>4.2</b> Variável dummy</a></li>
-<li class="chapter" data-level="4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>4.3</b> Interação entre variáveis preditoras</a></li>
-<li class="chapter" data-level="4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>4.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>4.4.1</b> Full model – Modelo completo</a></li>
-<li class="chapter" data-level="4.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>4.4.2</b> Procedimento backward</a></li>
-<li class="chapter" data-level="4.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>4.4.3</b> Procedimento forward</a></li>
-<li class="chapter" data-level="4.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>4.4.4</b> Procedimento stepwise</a></li>
-</ul></li>
-<li class="chapter" data-level="4.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>4.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html"><i class="fa fa-check"></i><b>5</b> Regressão com Dados em Painel</a><ul>
-<li class="chapter" data-level="5.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#carregamento-e-transformacao-dos-dados"><i class="fa fa-check"></i><b>5.1</b> Carregamento e transformação dos dados</a></li>
-<li class="chapter" data-level="5.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-pooled"><i class="fa fa-check"></i><b>5.2</b> Modelo Pooled</a></li>
-<li class="chapter" data-level="5.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>5.3</b> Modelo Efeitos Fixos</a></li>
-<li class="chapter" data-level="5.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>5.4</b> Modelo Efeitos Aleatórios</a></li>
-<li class="chapter" data-level="5.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>5.5</b> Comparação e escolha dos modelos</a></li>
-<li class="chapter" data-level="5.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>5.6</b> Alguns testes para os modelos</a><ul>
-<li class="chapter" data-level="5.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>5.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
-<li class="chapter" data-level="5.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>5.6.2</b> Normalidade dos resíduos</a></li>
-<li class="chapter" data-level="5.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>5.6.3</b> Homocedasticidade dos resíduos</a></li>
-<li class="chapter" data-level="5.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>5.6.4</b> Testando correlação serial</a></li>
-<li class="chapter" data-level="5.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>5.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
-<li class="chapter" data-level="5.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>5.6.6</b> Testando raízes unitárias</a></li>
+<li class="chapter" data-level="2" data-path="analisf.html"><a href="analisf.html"><i class="fa fa-check"></i><b>2</b> Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.1" data-path="analisf.html"><a href="analisf.html#pressupostos"><i class="fa fa-check"></i><b>2.1</b> Pressupostos</a></li>
+<li class="chapter" data-level="2.2" data-path="analisf.html"><a href="analisf.html#estatisticas-associadas-a-analise-fatorial"><i class="fa fa-check"></i><b>2.2</b> Estatísticas Associadas a Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3" data-path="analisf.html"><a href="analisf.html#passos-da-analise-fatorial"><i class="fa fa-check"></i><b>2.3</b> Passos da Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="analisf.html"><a href="analisf.html#construcao-da-matriz-de-correlacao"><i class="fa fa-check"></i><b>2.3.1</b> Construção da Matriz de Correlação</a></li>
+<li class="chapter" data-level="2.3.2" data-path="analisf.html"><a href="analisf.html#metodo-de-analise-fatorial"><i class="fa fa-check"></i><b>2.3.2</b> Método de Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3.3" data-path="analisf.html"><a href="analisf.html#determinacao-do-numero-de-fatores"><i class="fa fa-check"></i><b>2.3.3</b> Determinação do número de fatores</a></li>
+<li class="chapter" data-level="2.3.4" data-path="analisf.html"><a href="analisf.html#analise-de-componentes-principais"><i class="fa fa-check"></i><b>2.3.4</b> Análise de Componentes Principais</a></li>
+<li class="chapter" data-level="2.3.5" data-path="analisf.html"><a href="analisf.html#matriz-rotada-do-fator"><i class="fa fa-check"></i><b>2.3.5</b> Matriz Rotada do Fator</a></li>
+<li class="chapter" data-level="2.3.6" data-path="analisf.html"><a href="analisf.html#autovalores-1"><i class="fa fa-check"></i><b>2.3.6</b> Autovalores</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="regressao-logistica.html"><a href="regressao-logistica.html"><i class="fa fa-check"></i><b>6</b> Regressão Logística</a><ul>
-<li class="chapter" data-level="6.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-modelo"><i class="fa fa-check"></i><b>6.1</b> O modelo</a></li>
-<li class="chapter" data-level="6.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>6.2</b> Regressão Logística Simples</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>6.2.1</b> Estimando a Razão de Chances</a></li>
-<li class="chapter" data-level="6.2.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>6.2.2</b> Determinando o Intervalo de Confiança</a></li>
-<li class="chapter" data-level="6.2.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>6.2.3</b> Predição de Probabilidades</a></li>
-<li class="chapter" data-level="6.2.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#matriz-de-confusao"><i class="fa fa-check"></i><b>6.2.4</b> Matriz de Confusão</a></li>
-<li class="chapter" data-level="6.2.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#curva-roc"><i class="fa fa-check"></i><b>6.2.5</b> Curva ROC</a></li>
-<li class="chapter" data-level="6.2.6" data-path="regressao-logistica.html"><a href="regressao-logistica.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>6.2.6</b> O teste Hosmer e Lemeshow</a></li>
-<li class="chapter" data-level="6.2.7" data-path="regressao-logistica.html"><a href="regressao-logistica.html#pseudo-r2"><i class="fa fa-check"></i><b>6.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
+<li class="chapter" data-level="3" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html"><i class="fa fa-check"></i><b>3</b> Análise de Componentes Principais</a><ul>
+<li class="chapter" data-level="3.1" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html#preparacao-dos-dados"><i class="fa fa-check"></i><b>3.1</b> Preparação dos dados</a></li>
+<li class="chapter" data-level="3.2" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html#criacao-dos-componentes"><i class="fa fa-check"></i><b>3.2</b> Criação dos componentes</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>6.3</b> Regressão Logística Múltipla</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="regressao-logistica.html"><a href="regressao-logistica.html#metodo-stepwise"><i class="fa fa-check"></i><b>6.3.1</b> Método Stepwise</a></li>
-<li class="chapter" data-level="6.3.2" data-path="regressao-logistica.html"><a href="regressao-logistica.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>6.3.2</b> VIF - Variance Inflation Factor</a></li>
+<li class="chapter" data-level="4" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>4</b> Análise de Clusters</a><ul>
+<li class="chapter" data-level="4.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>4.1</b> K-Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>4.2</b> Clusterização Aglomerativa</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="regressao-logistica.html"><a href="regressao-logistica.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>6.4</b> Regressão Logística Múltipla com variável categórica</a></li>
-<li class="chapter" data-level="6.5" data-path="regressao-logistica.html"><a href="regressao-logistica.html#exercicios"><i class="fa fa-check"></i><b>6.5</b> Exercícios</a></li>
+<li class="chapter" data-level="5" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>5</b> Regressão Múltipla</a><ul>
+<li class="chapter" data-level="5.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>5.1</b> Modelo geral</a></li>
+<li class="chapter" data-level="5.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>5.2</b> Variável dummy</a></li>
+<li class="chapter" data-level="5.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>5.3</b> Interação entre variáveis preditoras</a></li>
+<li class="chapter" data-level="5.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>5.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>5.4.1</b> Full model – Modelo completo</a></li>
+<li class="chapter" data-level="5.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>5.4.2</b> Procedimento backward</a></li>
+<li class="chapter" data-level="5.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>5.4.3</b> Procedimento forward</a></li>
+<li class="chapter" data-level="5.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>5.4.4</b> Procedimento stepwise</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>7</b> Regressão de Poisson</a><ul>
-<li class="chapter" data-level="7.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>7.1</b> O modelo</a></li>
-<li class="chapter" data-level="7.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>7.2</b> Estimando os parâmetros do modelo</a></li>
+<li class="chapter" data-level="5.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>5.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html"><i class="fa fa-check"></i><b>8</b> Manipulando bases de dados</a><ul>
-<li class="chapter" data-level="8.1" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#pacote-tidyr"><i class="fa fa-check"></i><b>8.1</b> Pacote tidyr</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-spread"><i class="fa fa-check"></i><b>8.1.1</b> Função <em>spread</em></a></li>
-<li class="chapter" data-level="8.1.2" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-gather"><i class="fa fa-check"></i><b>8.1.2</b> Função <em>gather</em></a></li>
-<li class="chapter" data-level="8.1.3" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-separate"><i class="fa fa-check"></i><b>8.1.3</b> Função <em>separate</em></a></li>
-<li class="chapter" data-level="8.1.4" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#funcao-unite"><i class="fa fa-check"></i><b>8.1.4</b> Função <em>unite</em></a></li>
+<li class="chapter" data-level="6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html"><i class="fa fa-check"></i><b>6</b> Regressão com Dados em Painel</a><ul>
+<li class="chapter" data-level="6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#carregamento-e-transformacao-dos-dados"><i class="fa fa-check"></i><b>6.1</b> Carregamento e transformação dos dados</a></li>
+<li class="chapter" data-level="6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-pooled"><i class="fa fa-check"></i><b>6.2</b> Modelo Pooled</a></li>
+<li class="chapter" data-level="6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>6.3</b> Modelo Efeitos Fixos</a></li>
+<li class="chapter" data-level="6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>6.4</b> Modelo Efeitos Aleatórios</a></li>
+<li class="chapter" data-level="6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>6.5</b> Comparação e escolha dos modelos</a></li>
+<li class="chapter" data-level="6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>6.6</b> Alguns testes para os modelos</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>6.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
+<li class="chapter" data-level="6.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>6.6.2</b> Normalidade dos resíduos</a></li>
+<li class="chapter" data-level="6.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>6.6.3</b> Homocedasticidade dos resíduos</a></li>
+<li class="chapter" data-level="6.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>6.6.4</b> Testando correlação serial</a></li>
+<li class="chapter" data-level="6.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>6.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
+<li class="chapter" data-level="6.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>6.6.6</b> Testando raízes unitárias</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="manipulando-bases-de-dados.html"><a href="manipulando-bases-de-dados.html#pacote-dplyr"><i class="fa fa-check"></i><b>8.2</b> Pacote dplyr</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="reglog.html"><a href="reglog.html"><i class="fa fa-check"></i><b>7</b> Regressão Logística</a><ul>
+<li class="chapter" data-level="7.1" data-path="reglog.html"><a href="reglog.html#o-modelo"><i class="fa fa-check"></i><b>7.1</b> O modelo</a></li>
+<li class="chapter" data-level="7.2" data-path="reglog.html"><a href="reglog.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>7.2</b> Regressão Logística Simples</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="reglog.html"><a href="reglog.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>7.2.1</b> Estimando a Razão de Chances</a></li>
+<li class="chapter" data-level="7.2.2" data-path="reglog.html"><a href="reglog.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>7.2.2</b> Determinando o Intervalo de Confiança</a></li>
+<li class="chapter" data-level="7.2.3" data-path="reglog.html"><a href="reglog.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>7.2.3</b> Predição de Probabilidades</a></li>
+<li class="chapter" data-level="7.2.4" data-path="reglog.html"><a href="reglog.html#matriz-de-confusao"><i class="fa fa-check"></i><b>7.2.4</b> Matriz de Confusão</a></li>
+<li class="chapter" data-level="7.2.5" data-path="reglog.html"><a href="reglog.html#curva-roc"><i class="fa fa-check"></i><b>7.2.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="7.2.6" data-path="reglog.html"><a href="reglog.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>7.2.6</b> O teste Hosmer e Lemeshow</a></li>
+<li class="chapter" data-level="7.2.7" data-path="reglog.html"><a href="reglog.html#pseudo-r2"><i class="fa fa-check"></i><b>7.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="reglog.html"><a href="reglog.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>7.3</b> Regressão Logística Múltipla</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="reglog.html"><a href="reglog.html#metodo-stepwise"><i class="fa fa-check"></i><b>7.3.1</b> Método Stepwise</a></li>
+<li class="chapter" data-level="7.3.2" data-path="reglog.html"><a href="reglog.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>7.3.2</b> VIF - Variance Inflation Factor</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="reglog.html"><a href="reglog.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>7.4</b> Regressão Logística Múltipla com variável categórica</a></li>
+<li class="chapter" data-level="7.5" data-path="reglog.html"><a href="reglog.html#exercicios"><i class="fa fa-check"></i><b>7.5</b> Exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>8</b> Regressão de Poisson</a><ul>
+<li class="chapter" data-level="8.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>8.1</b> O modelo</a></li>
+<li class="chapter" data-level="8.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>8.2</b> Estimando os parâmetros do modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html"><i class="fa fa-check"></i><b>9</b> Produção de Mapas</a><ul>
+<li class="chapter" data-level="9.1" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#introducao-aos-shapes"><i class="fa fa-check"></i><b>9.1</b> Introdução aos <em>shapes</em></a></li>
+<li class="chapter" data-level="9.2" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#pacote-tmap"><i class="fa fa-check"></i><b>9.2</b> Pacote tmap</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#adicionando-dados-ao-mapa"><i class="fa fa-check"></i><b>9.2.1</b> Adicionando dados ao mapa</a></li>
+<li class="chapter" data-level="9.2.2" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#plotando-o-mapa-e-melhorando-a-visualizacao"><i class="fa fa-check"></i><b>9.2.2</b> Plotando o mapa e melhorando a visualização</a></li>
+<li class="chapter" data-level="9.2.3" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#utilizando-dados-de-fontes-externas-pacote-datasus"><i class="fa fa-check"></i><b>9.2.3</b> Utilizando dados de fontes externas: pacote datasus</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referências</a></li>
 <li class="divider"></li>
@@ -250,30 +250,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="analise-de-clusters" class="section level1">
-<h1><span class="header-section-number">Capítulo 3</span> Análise de Clusters</h1>
+<h1><span class="header-section-number">Capítulo 4</span> Análise de Clusters</h1>
 <p><em>Felipe Micail da Silva Smolski</em></p>
 
-<p>A ideia central da Análise de Cluster é a possibilidade de efetuar a classificação dos objetos em grupos, de forma que os objetos dentro do mesmo grupo sejam mais similares quanto possível e, de forma análoga, que os diversos grupos (clusters) sejam mais diferentes o possível em sua constituição <span class="citation">(Kassambara <a href="#ref-Kassambara2017">2017</a>)</span>. Embora possa parecer semelhante ao conteúdo do capítulo anterior, as diferenças residem no fato de que a Análise Fatorial agrega variáveis e efetua os agrupamentos em base de padrões de variação (correlação) dos dados enquanto a Análise de Cluster (agrupamentos) objetiva agregar objetos (e não variáveis), fazendo a agregação baseada na distância (proximidade) <span class="citation">(Hair et al. <a href="#ref-Hair2009">2009</a>)</span>.</p>
+<p>A ideia central da Análise de Cluster é a possibilidade de efetuar a classificação dos objetos em grupos, de forma que os objetos dentro do mesmo grupo sejam mais similares quanto possível e, de forma análoga, que os diversos grupos (clusters) sejam mais diferentes o possível em sua constituição <span class="citation">(Kassambara <a href="#ref-Kassambara2017">2017</a><a href="#ref-Kassambara2017">a</a>)</span>. Embora possa parecer semelhante ao conteúdo do capítulo anterior, as diferenças residem no fato de que a Análise Fatorial agrega variáveis e efetua os agrupamentos em base de padrões de variação (correlação) dos dados enquanto a Análise de Cluster (agrupamentos) objetiva agregar objetos (e não variáveis), fazendo a agregação baseada na distância (proximidade) <span class="citation">(Hair et al. <a href="#ref-Hair2009">2009</a>)</span>.</p>
 <p>A medida de distância utilizada de maneira mais comum utililizada é a Distância Euclidiana como mostra a Figura abaixo (embora existam outras métricas como a Distância de Manhattan, a Distância de Correlação de Pearson, a Distância de Correlação de Eisen, a Distância de Correlação de Spearman e a Distância de Correlação de Kendal).</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-35"></span>
-<img src="distecludiana.png" alt="Cálculo da distância entre A e B no espaço X Y" width="80%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-47"></span>
+<img src="distecludiana.jpg" alt="Cálculo da distância entre A e B no espaço X Y" width="80%" />
 <p class="caption">
-Figura 3.1: Cálculo da distância entre A e B no espaço X Y
+Figura 4.1: Cálculo da distância entre A e B no espaço X Y
 </p>
 </div>
-<p>Fonte: <span class="citation">Pereira (<a href="#ref-Pereira2004">2004</a>)</span>.</p>
-<p>Em outro sentido, existem vários métodos de clusterização, dentre eles: a) Clusterização Particionada, que faz parte as técnicas K-Means, K-Medoids e CLARA; b) Clusterização Hierárquica, de que faz parte a Clusterização Aglomerativa <span class="citation">(Kassambara <a href="#ref-Kassambara2017">2017</a>)</span>. Neste capítulo serão apresentadas as técnicas denominadas K-Means e a Clusterização Aglomerativa.</p>
+<p>Fonte: <span class="citation">Pereira (<a href="#ref-Pereira2004a">2004</a>)</span>.</p>
+<p>Em outro sentido, existem vários métodos de clusterização, dentre eles: a) Clusterização Particionada, que faz parte as técnicas K-Means, K-Medoids e CLARA; b) Clusterização Hierárquica, de que faz parte a Clusterização Aglomerativa <span class="citation">(Kassambara <a href="#ref-Kassambara2017">2017</a><a href="#ref-Kassambara2017">a</a>)</span>. Neste capítulo serão apresentadas as técnicas denominadas K-Means e a Clusterização Aglomerativa.</p>
 <div id="k-means" class="section level2">
-<h2><span class="header-section-number">3.1</span> K-Means</h2>
+<h2><span class="header-section-number">4.1</span> K-Means</h2>
 <p>O método de clusterização <em>K-means</em> classifica os objetos dentro de múltiplos grupos, de forma que a variação intra-cluster seja minimizada pela soma dos quadrados das distâncias Euclidianas entre os itens e seus centroides.</p>
 <p><span class="math display">\[
 W(C_k)=\sum _{x_i\in C_k}(x_i-\mu _k)^2
 \]</span>
-Desta forma <span class="math inline">\(x_i\)</span> é o ponto que pertente ao cluster <span class="math inline">\(C_k\)</span> e <span class="math inline">\(\mu _k\)</span> representa a média do valor atribuído ao cluster <span class="math inline">\(C_k\)</span>. Cada observação (<span class="math inline">\(x_i\)</span>) é designada a um cluster de forma que a soma dos quadrados da distância da observação em relação ao seu cluster central (<span class="math inline">\(\mu _k\)</span>) é mínima. Ainda, para definir a variação intra-cluster é utilizadaa fórmula abaixo, sendo que deve ser tão baixa quanto o possível <span class="citation">(Kassambara <a href="#ref-Kassambara2017">2017</a>)</span>:</p>
+Desta forma <span class="math inline">\(x_i\)</span> é o ponto que pertente ao cluster <span class="math inline">\(C_k\)</span> e <span class="math inline">\(\mu _k\)</span> representa a média do valor atribuído ao cluster <span class="math inline">\(C_k\)</span>. Cada observação (<span class="math inline">\(x_i\)</span>) é designada a um cluster de forma que a soma dos quadrados da distância da observação em relação ao seu cluster central (<span class="math inline">\(\mu _k\)</span>) é mínima. Ainda, para definir a variação intra-cluster é utilizadaa fórmula abaixo, sendo que deve ser tão baixa quanto o possível <span class="citation">(Kassambara <a href="#ref-Kassambara2017">2017</a><a href="#ref-Kassambara2017">a</a>)</span>:</p>
 <p><span class="math display">\[
 tot.intracluster=\sum_{k=1}^{k} W(C_k)=\sum_{k=1}^{k}\sum _{x_i\in C_k}(x_i-\mu _k)^2
 \]</span>
-Como veremos adiante, deve-se selecionar o número de clusters desejado para que sejam criadas as classificações que precisar ou, executar o comando que definirá o número ótimos de clusters para a amostra carregada. O processo de seleção das variáveis, por padrão passa por <span class="citation">(Kassambara <a href="#ref-Kassambara2017">2017</a>)</span>: (a) determinação do número de clusters; (b) selecionar randomicamente objetos para determinar os valores centrais; (c) assinar as observações pela distância Euclidiana em relação aos seus centróides; (d) efetuar atualizações calculando a nova média dos valores dentro de seu cluster definido; (e) minimizar a soma dos quadrados intra-cluster (o R utiliza 10 repetições dos passos d-e).</p>
+Como veremos adiante, deve-se selecionar o número de clusters desejado para que sejam criadas as classificações que precisar ou, executar o comando que definirá o número ótimos de clusters para a amostra carregada. O processo de seleção das variáveis, por padrão passa por <span class="citation">(Kassambara <a href="#ref-Kassambara2017">2017</a><a href="#ref-Kassambara2017">a</a>)</span>: (a) determinação do número de clusters; (b) selecionar randomicamente objetos para determinar os valores centrais; (c) assinar as observações pela distância Euclidiana em relação aos seus centróides; (d) efetuar atualizações calculando a nova média dos valores dentro de seu cluster definido; (e) minimizar a soma dos quadrados intra-cluster (o R utiliza 10 repetições dos passos d-e).</p>
 <p>Vamos carregar a tradicional base de dados nativa do RStudio <code>mtcars</code>, que traz informações sobre 32 modelos de automóveis, sendo as respectivas variáveis que os descrevem:</p>
 <ul>
 <li><strong>mpg</strong>: milhas por galão;</li>
@@ -289,10 +289,10 @@ Como veremos adiante, deve-se selecionar o número de clusters desejado para que
 <li><strong>carb</strong>: número de carburadores;</li>
 </ul>
 <p>Segue abaixo o carregamento da base de dados, sendo que neste exemplo foi utilizada a função <code>scale()</code> para balancear as informações (para mais informações utilize a ajuda do RStudio <code>?scale</code>).</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Carregamento dos dados</span>
-<span class="kw">data</span>(<span class="st">&quot;mtcars&quot;</span>)
-df=<span class="kw">scale</span>(mtcars)
-<span class="kw">head</span>(df, <span class="dt">n=</span><span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="co">#Carregamento dos dados</span></a>
+<a class="sourceLine" id="cb85-2" title="2"><span class="kw">data</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb85-3" title="3">df=<span class="kw">scale</span>(mtcars)</a>
+<a class="sourceLine" id="cb85-4" title="4"><span class="kw">head</span>(df, <span class="dt">n=</span><span class="dv">3</span>)</a></code></pre></div>
 <pre><code>                 mpg    cyl    disp      hp   drat      wt    qsec     vs   am
 Mazda RX4     0.1509 -0.105 -0.5706 -0.5351 0.5675 -0.6104 -0.7772 -0.868 1.19
 Mazda RX4 Wag 0.1509 -0.105 -0.5706 -0.5351 0.5675 -0.3498 -0.4638 -0.868 1.19
@@ -304,17 +304,17 @@ Datsun 710    0.4236 -1.1222</code></pre>
 <p>A função <code>kmeans()</code> é utilizada para o cálculo, sendo que <strong>x</strong> representa a base de dados a ser analisada; <strong>centers</strong> será substituído pelo número de clusters desejados; <strong>iter.max</strong> representa o número de iterações para a constituição dos objetos dentro dos clusters, sendo que o padrão é 10; <strong>nstart</strong> é o número inicial de partições, sendo que o recomendado é superior a 1.</p>
 <p><code>kmeans(x, centers, iter.max=10, nstart=1)</code></p>
 <p>Para determinar automaticamente o número ótimo de clusters da classificação, antes de rodar a função <code>kmeans()</code>, é possível utilizar a função <code>fviz_nbclust()</code> do pacote <code>factoextra</code>. Desta forma, utilizando a noção da soma dos quadrados intra cluster é possível verificar que o número ótimo de clusters para a amostra é 4. Isto porque novos clusters acima de 4 possuem baixo ganho para aumentar a diferenciação dos demais.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Número ótimo de clusters</span>
-<span class="kw">library</span>(factoextra)
-
-<span class="kw">fviz_nbclust</span>(df, kmeans, <span class="dt">method =</span> <span class="st">&quot;wss&quot;</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">4</span>, <span class="dt">linetype =</span> <span class="dv">2</span>)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="co"># Número ótimo de clusters</span></a>
+<a class="sourceLine" id="cb87-2" title="2"><span class="kw">library</span>(factoextra)</a>
+<a class="sourceLine" id="cb87-3" title="3"></a>
+<a class="sourceLine" id="cb87-4" title="4"><span class="kw">fviz_nbclust</span>(df, kmeans, <span class="dt">method =</span> <span class="st">&quot;wss&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb87-5" title="5"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">4</span>, <span class="dt">linetype =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Em seguida utilizamos o número determinado de clusters (neste caso 4) com o comando <code>kmeans</code>. Como resultado temos a média dos centros por clusters e a classificação de cada modelo de veículo da amostra dentro do respectivo cluster. Observa-se que o cluste 1 tem 12 modelos de veículos, o cluster 2 tem 8 modelos, o cluster 3 possui 7 modelos e no cluster 4 foram enquadrados 5 modelos.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Clusterização k-means</span>
-<span class="kw">set.seed</span>(<span class="dv">123</span>)
-km.res=<span class="kw">kmeans</span>(df, <span class="dv">4</span>, <span class="dt">nstart=</span><span class="dv">25</span>)
-<span class="kw">print</span>(km.res)</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1"><span class="co"># Clusterização k-means</span></a>
+<a class="sourceLine" id="cb88-2" title="2"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb88-3" title="3">km.res=<span class="kw">kmeans</span>(df, <span class="dv">4</span>, <span class="dt">nstart=</span><span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb88-4" title="4"><span class="kw">print</span>(km.res)</a></code></pre></div>
 <pre><code>K-means clustering with 4 clusters of sizes 12, 8, 7, 5
 
 Cluster means:
@@ -356,15 +356,15 @@ Available components:
 [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
 [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;      </code></pre>
 <p>Após determinado o número de clusters ideal e calculado para qual cluster cada variável do banco de dados pertence, é possível verificar as características de cada aglomeração. Com o cálculo da média utilizando a função <code>aggregate</code>, observa-se que os veículos com milhas por galão (mpg) médias mais baixos encontram-se no cluster 1, juntamente com aqueles com maior quantidade de cilindros (cyl) como é de se imaginar, com alta potência em cavalos (hp), concentranto-se automóveis automáticos (am=0). Já no cluster 2, por exemplo, estão aqueles veículos com maior similaridade e com uma maior autonomia (média de 28,07 mpg), baixa potência em cavalos (hp), veículos com câmbio manual (am) e baixos cilindros (cyl). Ainda os clusters 3 e 4 completam os grupos de veículos similares entre si.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(mtcars, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">cluster=</span>km.res<span class="op">$</span>cluster), mean)</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1"><span class="kw">aggregate</span>(mtcars, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">cluster=</span>km.res<span class="op">$</span>cluster), mean)</a></code></pre></div>
 <pre><code>  cluster   mpg   cyl   disp     hp  drat    wt  qsec    vs am  gear  carb
 1       1 15.05 8.000 357.62 194.17 3.121 4.104 17.14 0.000  0 3.000 3.083
 2       2 28.07 4.000  93.61  81.88 4.184 2.042 18.45 0.875  1 4.250 1.500
 3       3 20.74 5.143 175.11 102.14 3.570 3.194 19.97 1.000  0 3.571 2.143
 4       4 18.50 6.800 223.40 198.80 3.836 3.001 15.62 0.000  1 4.600 5.200</code></pre>
 <p>Abaixo são incluídas as informações dos clusters calculados anteriormente para cada modelo de automóvel, bem como as distâncias dos centros calculados:</p>
-<pre class="sourceCode r"><code class="sourceCode r">mtcars2=<span class="kw">cbind</span>(mtcars, <span class="dt">cluster=</span>km.res<span class="op">$</span>cluster)
-<span class="kw">head</span>(mtcars2)</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1">mtcars2=<span class="kw">cbind</span>(mtcars, <span class="dt">cluster=</span>km.res<span class="op">$</span>cluster)</a>
+<a class="sourceLine" id="cb92-2" title="2"><span class="kw">head</span>(mtcars2)</a></code></pre></div>
 <pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb cluster
 Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4       4
 Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4       4
@@ -372,7 +372,7 @@ Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1       2
 Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1       3
 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2       1
 Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1       3</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">km.res<span class="op">$</span>centers</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1">km.res<span class="op">$</span>centers</a></code></pre></div>
 <pre><code>      mpg     cyl     disp      hp     drat       wt    qsec     vs      am
 1 -0.8363  1.0149  1.02385  0.6925 -0.88975  0.90636 -0.3952 -0.868 -0.8141
 2  1.3248 -1.2249 -1.10627 -0.9453  1.09821 -1.20087  0.3365  0.868  1.1899
@@ -383,29 +383,176 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1       3</co
 2  0.7624 -0.8126
 3 -0.1573 -0.4146
 4  1.2368  1.4781</code></pre>
-<p>É importante ainda verificar a similaridade dos clusters de veículos calculados neste exemplo de forma visual. Para isto uma sugestão elencada por <span class="citation">Kassambara (<a href="#ref-Kassambara2017">2017</a>)</span> é a função <code>fviz_cluster</code> do pacote <code>factoextra</code>. Esta função utiliza os dados originais e os clusters encontrados para plotar os resultados em um gráfico utilizando a técnica de componentes princiapais, como segue na imagem abaixo. Desta forma fica nítido a proximidade entre os modelos de veículos em seus clusters:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Vizualizando os clusters</span>
+<p>É importante ainda verificar a similaridade dos clusters de veículos calculados neste exemplo de forma visual. Para isto uma sugestão elencada por <span class="citation">Kassambara (<a href="#ref-Kassambara2017">2017</a><a href="#ref-Kassambara2017">a</a>)</span> é a função <code>fviz_cluster</code> do pacote <code>factoextra</code>. Esta função utiliza os dados originais e os clusters encontrados para plotar os resultados em um gráfico utilizando a técnica de componentes princiapais, como segue na imagem abaixo. Desta forma fica nítido a proximidade entre os modelos de veículos em seus clusters:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1"><span class="co"># Vizualizando os clusters</span></a>
+<a class="sourceLine" id="cb96-2" title="2"></a>
+<a class="sourceLine" id="cb96-3" title="3"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb96-4" title="4"><span class="kw">library</span>(factoextra)</a>
+<a class="sourceLine" id="cb96-5" title="5"></a>
+<a class="sourceLine" id="cb96-6" title="6"><span class="kw">fviz_cluster</span>(km.res, <span class="dt">data=</span>mtcars2,</a>
+<a class="sourceLine" id="cb96-7" title="7">             <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;#2E9FDF&quot;</span>, <span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</a>
+<a class="sourceLine" id="cb96-8" title="8">             <span class="dt">ellipse.type=</span><span class="st">&quot;euclid&quot;</span>,</a>
+<a class="sourceLine" id="cb96-9" title="9">             <span class="dt">star.plot=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb96-10" title="10">             <span class="dt">repel=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb96-11" title="11">             <span class="dt">ggtheme=</span><span class="kw">theme_minimal</span>()</a>
+<a class="sourceLine" id="cb96-12" title="12">             )</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-53-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><em>Efetuando predições com o modelo de cluster</em></p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1"><span class="kw">head</span>(iris)</a></code></pre></div>
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="kw">table</span>(iris<span class="op">$</span>Species)</a></code></pre></div>
+<pre><code>
+    setosa versicolor  virginica 
+        50         50         50 </code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1"><span class="kw">library</span>(<span class="st">&quot;gridExtra&quot;</span>)</a>
+<a class="sourceLine" id="cb101-2" title="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb101-3" title="3"></a>
+<a class="sourceLine" id="cb101-4" title="4">a=<span class="kw">ggplot</span>(<span class="dt">data =</span> iris) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-5" title="5"><span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> Petal.Width, <span class="dt">y =</span> Petal.Length, <span class="dt">color =</span> Species) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-7" title="7"><span class="st">  </span><span class="kw">theme_minimal</span>()</a>
+<a class="sourceLine" id="cb101-8" title="8"></a>
+<a class="sourceLine" id="cb101-9" title="9">b=<span class="kw">ggplot</span>(<span class="dt">data =</span> iris) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-10" title="10"><span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> Sepal.Width, <span class="dt">y =</span> Sepal.Length, <span class="dt">color =</span> Species) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-11" title="11"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-12" title="12"><span class="st">  </span><span class="kw">theme_minimal</span>()</a>
+<a class="sourceLine" id="cb101-13" title="13"></a>
+<a class="sourceLine" id="cb101-14" title="14"><span class="kw">grid.arrange</span>(a, b, <span class="dt">ncol=</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-55-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb102-2" title="2"></a>
+<a class="sourceLine" id="cb102-3" title="3">amostra =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">2</span>,<span class="dv">150</span>,<span class="dt">replace=</span>T, <span class="dt">prob=</span><span class="kw">c</span>(<span class="fl">0.7</span>,<span class="fl">0.3</span>))</a>
+<a class="sourceLine" id="cb102-4" title="4">amostra</a></code></pre></div>
+<pre><code>  [1] 1 2 1 2 2 1 1 2 1 1 2 1 1 1 1 2 1 1 1 2 2 1 1 2 1 2 1 1 1 1 2 2 1 2 1 1 2
+ [38] 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 2 1 1 1 1 2 2 1 1 1 1 1 2 1 2 2 2 1 2 1 2 1
+ [75] 1 1 1 1 1 1 1 1 1 2 1 1 2 2 2 1 1 1 1 1 1 1 2 1 1 1 1 1 1 2 1 2 2 1 1 1 2
+[112] 1 1 2 2 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 1 2 1 2 1 1 2 2 2 1 1 1 1 1 2 1 1 1
+[149] 1 2</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1">iristreino =<span class="st"> </span>iris[amostra<span class="op">==</span><span class="dv">1</span>,]</a>
+<a class="sourceLine" id="cb104-2" title="2">iristeste =<span class="st"> </span>iris[amostra<span class="op">==</span><span class="dv">2</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb105-2" title="2">km.res=<span class="kw">kmeans</span>(iristreino[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dv">3</span>, <span class="dt">nstart=</span><span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb105-3" title="3"><span class="kw">print</span>(km.res)</a></code></pre></div>
+<pre><code>K-means clustering with 3 clusters of sizes 35, 29, 42
 
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(factoextra)
+Cluster means:
+  Sepal.Length Sepal.Width Petal.Length Petal.Width
+1        4.940       3.406        1.446      0.2429
+2        6.821       3.007        5.683      2.0690
+3        5.883       2.733        4.317      1.3905
 
-<span class="kw">fviz_cluster</span>(km.res, <span class="dt">data=</span>mtcars2,
-             <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;#2E9FDF&quot;</span>, <span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),
-             <span class="dt">ellipse.type=</span><span class="st">&quot;euclid&quot;</span>,
-             <span class="dt">star.plot=</span><span class="ot">TRUE</span>,
-             <span class="dt">repel=</span><span class="ot">TRUE</span>,
-             <span class="dt">ggtheme=</span><span class="kw">theme_minimal</span>()
-             )</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" /></p>
+Clustering vector:
+  1   3   6   7   9  10  12  13  14  15  17  18  19  22  23  25  27  28  29  30 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+ 33  35  36  38  39  40  41  42  43  44  45  46  47  48  49  51  52  54  55  56 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   3   3   3   3 
+ 57  60  61  62  63  64  66  70  72  74  75  76  77  78  79  80  81  82  83  85 
+  3   3   3   3   3   3   3   3   3   3   3   3   3   2   3   3   3   3   3   3 
+ 86  90  91  92  93  94  95  96  98  99 100 101 102 103 105 108 109 110 112 113 
+  3   3   3   3   3   3   3   3   3   3   3   2   3   2   2   2   2   2   2   2 
+116 117 119 120 121 122 123 124 125 127 128 129 130 131 133 135 136 140 141 142 
+  2   2   2   3   2   3   2   3   2   3   3   2   2   2   2   2   2   2   2   2 
+143 144 146 147 148 149 
+  3   2   2   3   2   2 
+
+Within cluster sum of squares by cluster:
+[1] 10.56 16.21 25.01
+ (between_SS / total_SS =  89.2 %)
+
+Available components:
+
+[1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+[6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;      </code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1">iristreino=<span class="kw">cbind</span>(iristreino, <span class="dt">cluster=</span>km.res<span class="op">$</span>cluster)</a>
+<a class="sourceLine" id="cb107-2" title="2"><span class="kw">head</span>(iristreino)</a></code></pre></div>
+<pre><code>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species cluster
+1           5.1         3.5          1.4         0.2  setosa       1
+3           4.7         3.2          1.3         0.2  setosa       1
+6           5.4         3.9          1.7         0.4  setosa       1
+7           4.6         3.4          1.4         0.3  setosa       1
+9           4.4         2.9          1.4         0.2  setosa       1
+10          4.9         3.1          1.5         0.1  setosa       1</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1">confusao =<span class="st"> </span><span class="kw">table</span>(iristreino<span class="op">$</span>Species, km.res<span class="op">$</span>cluster)</a>
+<a class="sourceLine" id="cb109-2" title="2">confusao</a></code></pre></div>
+<pre><code>            
+              1  2  3
+  setosa     35  0  0
+  versicolor  0  2 34
+  virginica   0 27  8</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1">taxaacerto =<span class="st"> </span>(confusao[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>confusao[<span class="dv">5</span>] <span class="op">+</span><span class="st"> </span>confusao[<span class="dv">9</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(confusao)</a>
+<a class="sourceLine" id="cb111-2" title="2">taxaacerto</a></code></pre></div>
+<pre><code>[1] 0.4245</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1">taxaerro =<span class="st"> </span>(confusao[<span class="dv">2</span>]<span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb113-2" title="2"><span class="st">            </span>confusao[<span class="dv">3</span>]<span class="op">+</span></a>
+<a class="sourceLine" id="cb113-3" title="3"><span class="st">            </span>confusao[<span class="dv">4</span>]<span class="op">+</span></a>
+<a class="sourceLine" id="cb113-4" title="4"><span class="st">            </span>confusao[<span class="dv">6</span>]<span class="op">+</span></a>
+<a class="sourceLine" id="cb113-5" title="5"><span class="st">            </span>confusao[<span class="dv">7</span>]<span class="op">+</span></a>
+<a class="sourceLine" id="cb113-6" title="6"><span class="st">            </span>confusao[<span class="dv">8</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(confusao)</a>
+<a class="sourceLine" id="cb113-7" title="7">taxaerro</a></code></pre></div>
+<pre><code>[1] 0.5755</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb115-2" title="2"><span class="kw">library</span>(flexclust)</a></code></pre></div>
+<pre><code>Carregando pacotes exigidos: grid</code></pre>
+<pre><code>Carregando pacotes exigidos: lattice</code></pre>
+<pre><code>Carregando pacotes exigidos: modeltools</code></pre>
+<pre><code>Carregando pacotes exigidos: stats4</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" title="1">km =<span class="st"> </span><span class="kw">kcca</span>(iristreino[ , <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">k=</span><span class="dv">3</span>, <span class="kw">kccaFamily</span>(<span class="st">&quot;kmeans&quot;</span>))</a>
+<a class="sourceLine" id="cb120-2" title="2">km</a></code></pre></div>
+<pre><code>kcca object of family &#39;kmeans&#39; 
+
+call:
+kcca(x = iristreino[, 1:4], k = 3, family = kccaFamily(&quot;kmeans&quot;))
+
+cluster sizes:
+
+ 1  2  3 
+35 31 40 </code></pre>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" title="1">predteste=<span class="kw">predict</span>(km, <span class="dt">newdata=</span>iristeste[ , <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">k=</span><span class="dv">3</span>, <span class="kw">kccaFamily</span>(<span class="st">&quot;kmeans&quot;</span>))</a>
+<a class="sourceLine" id="cb122-2" title="2"><span class="kw">head</span>(predteste)</a></code></pre></div>
+<pre><code> 2  4  5  8 11 16 
+ 1  1  1  1  1  1 </code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" title="1">iristeste=<span class="kw">cbind</span>(iristeste, predteste)</a>
+<a class="sourceLine" id="cb124-2" title="2"><span class="kw">head</span>(iristreino)</a></code></pre></div>
+<pre><code>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species cluster
+1           5.1         3.5          1.4         0.2  setosa       1
+3           4.7         3.2          1.3         0.2  setosa       1
+6           5.4         3.9          1.7         0.4  setosa       1
+7           4.6         3.4          1.4         0.3  setosa       1
+9           4.4         2.9          1.4         0.2  setosa       1
+10          4.9         3.1          1.5         0.1  setosa       1</code></pre>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" title="1">confusao =<span class="st"> </span><span class="kw">table</span>(iristeste<span class="op">$</span>Species, iristeste<span class="op">$</span>predteste)</a>
+<a class="sourceLine" id="cb126-2" title="2">confusao</a></code></pre></div>
+<pre><code>            
+              1  2  3
+  setosa     15  0  0
+  versicolor  0  1 13
+  virginica   0 11  4</code></pre>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1">taxaacerto =<span class="st"> </span>(confusao[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>confusao[<span class="dv">5</span>] <span class="op">+</span><span class="st"> </span>confusao[<span class="dv">9</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(confusao)</a>
+<a class="sourceLine" id="cb128-2" title="2">taxaacerto</a></code></pre></div>
+<pre><code>[1] 0.4545</code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1">taxaerro =<span class="st"> </span>(confusao[<span class="dv">2</span>]<span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb130-2" title="2"><span class="st">            </span>confusao[<span class="dv">3</span>]<span class="op">+</span></a>
+<a class="sourceLine" id="cb130-3" title="3"><span class="st">            </span>confusao[<span class="dv">4</span>]<span class="op">+</span></a>
+<a class="sourceLine" id="cb130-4" title="4"><span class="st">            </span>confusao[<span class="dv">6</span>]<span class="op">+</span></a>
+<a class="sourceLine" id="cb130-5" title="5"><span class="st">            </span>confusao[<span class="dv">7</span>]<span class="op">+</span></a>
+<a class="sourceLine" id="cb130-6" title="6"><span class="st">            </span>confusao[<span class="dv">8</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(confusao)</a>
+<a class="sourceLine" id="cb130-7" title="7">taxaerro</a></code></pre></div>
+<pre><code>[1] 0.5455</code></pre>
 </div>
 <div id="clusterizacao-aglomerativa" class="section level2">
-<h2><span class="header-section-number">3.2</span> Clusterização Aglomerativa</h2>
-<p>Uma das principais técnicas de Clusterização Hierárquica é a Clusterização Aglomerativa. Como premissa básica para a formação de clusters nesta técnica é realizada: a) a inclusão inicial de casa objeto considerando um agrupamento individual; b) próximo passo são formados pares de clusters com maiores similaridades entre si; c) repete-se o procedimento em novos clusters maiores, chegando até um único grande cluster <span class="citation">(Kassambara <a href="#ref-Kassambara2017">2017</a>)</span>.</p>
-<p>Pimeiramente é demonstrado o carregamento da base de dados <code>mtcars</code> (utilizada no subcapítulo anterior), efetuando o balanceamento dos dados com a função <code>scale()</code> (segundo <span class="citation">Kassambara (<a href="#ref-Kassambara2017">2017</a>)</span> a padronização das variáveis ajuda a deixá-las comparáveis, pois estão originalmente em escalas diferentes):</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Carregamento dos dados</span>
-<span class="kw">data</span>(<span class="st">&quot;mtcars&quot;</span>)
-df=<span class="kw">scale</span>(mtcars)
-<span class="kw">head</span>(df, <span class="dt">n=</span><span class="dv">3</span>)</code></pre>
+<h2><span class="header-section-number">4.2</span> Clusterização Aglomerativa</h2>
+<p>Uma das principais técnicas de Clusterização Hierárquica é a Clusterização Aglomerativa. Como premissa básica para a formação de clusters nesta técnica é realizada: a) a inclusão inicial de casa objeto considerando um agrupamento individual; b) próximo passo são formados pares de clusters com maiores similaridades entre si; c) repete-se o procedimento em novos clusters maiores, chegando até um único grande cluster <span class="citation">(Kassambara <a href="#ref-Kassambara2017">2017</a><a href="#ref-Kassambara2017">a</a>)</span>.</p>
+<p>Pimeiramente é demonstrado o carregamento da base de dados <code>mtcars</code> (utilizada no subcapítulo anterior), efetuando o balanceamento dos dados com a função <code>scale()</code> (segundo <span class="citation">Kassambara (<a href="#ref-Kassambara2017">2017</a><a href="#ref-Kassambara2017">a</a>)</span> a padronização das variáveis ajuda a deixá-las comparáveis, pois estão originalmente em escalas diferentes):</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1"><span class="co">#Carregamento dos dados</span></a>
+<a class="sourceLine" id="cb132-2" title="2"><span class="kw">data</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb132-3" title="3">df=<span class="kw">scale</span>(mtcars)</a>
+<a class="sourceLine" id="cb132-4" title="4"><span class="kw">head</span>(df, <span class="dt">n=</span><span class="dv">3</span>)</a></code></pre></div>
 <pre><code>                 mpg    cyl    disp      hp   drat      wt    qsec     vs   am
 Mazda RX4     0.1509 -0.105 -0.5706 -0.5351 0.5675 -0.6104 -0.7772 -0.868 1.19
 Mazda RX4 Wag 0.1509 -0.105 -0.5706 -0.5351 0.5675 -0.3498 -0.4638 -0.868 1.19
@@ -415,30 +562,30 @@ Mazda RX4     0.4236  0.7352
 Mazda RX4 Wag 0.4236  0.7352
 Datsun 710    0.4236 -1.1222</code></pre>
 <p>Agora é utilizada a função <code>dist()</code> para criar a distância entre os pares de dados que serão objeto de análise para a formação dos primeiros pares de dados similares. No exemplo abaixo foi utilizada a Distância Euclidiana como <code>method</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">dista=<span class="kw">dist</span>(df, <span class="dt">method=</span><span class="st">&quot;euclidean&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1">dista=<span class="kw">dist</span>(df, <span class="dt">method=</span><span class="st">&quot;euclidean&quot;</span>)</a></code></pre></div>
 <p>Depois de calculada a distância entre os objetos é possível verificar os índices encontrados (matriz de dissimilaridade), sendo que no exemplo abaixo extraímos somente as três primeiras linhas e as três primeiras colunas para fins de visualização:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.matrix</span>(dista)[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" title="1"><span class="kw">as.matrix</span>(dista)[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a></code></pre></div>
 <pre><code>              Mazda RX4 Mazda RX4 Wag Datsun 710
 Mazda RX4        0.0000        0.4076      3.243
 Mazda RX4 Wag    0.4076        0.0000      3.176
 Datsun 710       3.2431        3.1764      0.000</code></pre>
-<p>O próximo passo é efetuar a criação dos clusters com base na similaridade, por meio de iterações que agrupem as variáveis em clusters cada vez maiores até formar uma árvore hierárquica. A função <code>hclust()</code> utiliza os dados das distâncias encontradas anteriormente (objeto “dista”) e o método (<code>method</code>). O método a ser utilizado pode ser: <code>ward.D</code>, <code>ward.D2</code>, <code>single</code>, <code>complete</code>, <code>average</code>, <code>mcquitty</code>, <code>median</code> ou <code>centroid</code>, sendo que os métodos denominados ward e complete são mais utilizados, pois o primeiro minimiza a variância intra-cluster e o segundo define a distância entre dois clusters como o valor máximo de todos os pareamentos enrte os elementos do cluster 1 e os elementos do cluster 2 (extraído de <span class="citation">Kassambara (<a href="#ref-Kassambara2017">2017</a>)</span>, que traz maiores explicações sobre a diferença entre os métodos).</p>
-<pre class="sourceCode r"><code class="sourceCode r">dista.hc=<span class="kw">hclust</span>(<span class="dt">d=</span>dista, <span class="dt">method=</span><span class="st">&quot;ward.D&quot;</span>)</code></pre>
+<p>O próximo passo é efetuar a criação dos clusters com base na similaridade, por meio de iterações que agrupem as variáveis em clusters cada vez maiores até formar uma árvore hierárquica. A função <code>hclust()</code> utiliza os dados das distâncias encontradas anteriormente (objeto “dista”) e o método (<code>method</code>). O método a ser utilizado pode ser: <code>ward.D</code>, <code>ward.D2</code>, <code>single</code>, <code>complete</code>, <code>average</code>, <code>mcquitty</code>, <code>median</code> ou <code>centroid</code>, sendo que os métodos denominados ward e complete são mais utilizados, pois o primeiro minimiza a variância intra-cluster e o segundo define a distância entre dois clusters como o valor máximo de todos os pareamentos enrte os elementos do cluster 1 e os elementos do cluster 2 (extraído de <span class="citation">Kassambara (<a href="#ref-Kassambara2017">2017</a><a href="#ref-Kassambara2017">a</a>)</span>, que traz maiores explicações sobre a diferença entre os métodos).</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1">dista.hc=<span class="kw">hclust</span>(<span class="dt">d=</span>dista, <span class="dt">method=</span><span class="st">&quot;ward.D&quot;</span>)</a></code></pre></div>
 <p>A representação gráfica da Aglomeração Hierárquica é efetuada através da imagem de um dendograma, que pode ser facilmente criada com a fórmula <code>plot(dista.hc)</code>. Aqui foi utilizado o pacote <code>factoextra</code> e sua função <code>fviz_dend</code> para a criação do dendograma:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;factoextra&quot;</span>)
-<span class="kw">fviz_dend</span>(dista.hc, <span class="dt">cex=</span><span class="fl">0.5</span>)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-46-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1"><span class="kw">library</span>(<span class="st">&quot;factoextra&quot;</span>)</a>
+<a class="sourceLine" id="cb138-2" title="2"><span class="kw">fviz_dend</span>(dista.hc, <span class="dt">cex=</span><span class="fl">0.5</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-65-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <h3>Referências</h3>
 <div id="refs" class="references">
-<div id="ref-Kassambara2017">
-<p>Kassambara, Alboukadel. 2017. <em>Practical Guide To Cluster Analysis in R</em>. 1 ed. USA: CreateSpace: North Charleston.</p>
-</div>
 <div id="ref-Hair2009">
 <p>Hair, Joseph F., William C. Black, Barry J. Babin, e Ronald L. Tatham. 2009. <em>Análise Multivariada de Dados</em>. 6a ed. São Paulo: Bookman.</p>
 </div>
-<div id="ref-Pereira2004">
+<div id="ref-Kassambara2017">
+<p>Kassambara, Alboukadel. 2017a. <em>Practical Guide To Cluster Analysis in R</em>. 1 ed. USA: STHDA.</p>
+</div>
+<div id="ref-Pereira2004a">
 <p>Pereira, Júlio Cesar Rodrigues. 2004. <em>Análise de Dados Qualitativos: Estratégias Metodológicas para as Ciências da Saúde, Humanas e Sociais</em>. 3 ed. São Paulo: Editora da Universidade de São Paulo.</p>
 </div>
 </div>
@@ -447,7 +594,7 @@ Datsun 710       3.2431        3.1764      0.000</code></pre>
           </div>
         </div>
       </div>
-<a href="analise-fatorial.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analise-de-componentes-principais-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="regressao-multipla.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -483,7 +630,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["livroavancado.pdf", "livroavancado.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 },

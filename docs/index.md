@@ -1,42 +1,46 @@
 --- 
-title: "Software R: curso avançado"
-author: 
+title: 'Software R: curso avançado'
+author:
 - Iara Denise Endruweit Battisti
 - Felipe Micail da Silva Smolski
-date: "2019-02-11"
-site: bookdown::bookdown_site
-documentclass: book
-bibliography: [book.bib, packages.bib]
-biblio-style: authoryear
-link-citations: yes
-github-repo: rstub/bookdown-chapterbib
-url: 'http\://rstub.github.io/bookdown-chapterbib/'
-description: "Curso avançado de análise estatística com R da UFFS Cerro Largo - RS"
-fontsize: 12pt
-lang: pt-Br
-always_allow_html: yes
+date: "2019-08-26"
+bibliography: library.bib
 classoption: oneside
+biblio-style: authoryear
+description: Curso avançado de análise estatística com R da UFFS Cerro Largo - RS
+documentclass: book
+fontsize: 12pt
+github-repo: rstub/bookdown-chapterbib
+lang: pt-Br
+link-citations: yes
+site: bookdown::bookdown_site
+always_allow_html: yes
+url: http\://rstub.github.io/bookdown-chapterbib/
 ---
 
 
 
 
-
+<!--
 # Apresentação {-}
 \frenchspacing 
 
-Esta é a estrutura provisória de capítulos do **Curso Avançado em Estatística com R da UFFS**:
+Esta é a estrutura provisória de capítulos do **Curso Avançado em Estatística com R da UFFS**
+
 
 - Delineamentos Experimentais
 - Análise Fatorial
 - Análise de Cluster
+- Análise de Componentes Principais (em construção...)
 - Regressão Múltipla
 - Regressão com Dados em Painel
 - Regressão Logística
 - Regressão de Poisson
-- Manipulação de bases de dados
+- Classificação (em construção...)
+- Séries Temporais (em construção...)
+- Produção de Mapas 
 
-<!--
+
 Algumas sugestões a incluir:
 
 - Produção de Mapas
@@ -51,7 +55,327 @@ Algumas sugestões a incluir:
 
 # Introdução {-}
 
-# Delineamentos Experimentais
+Esta é a estrutura dos capítulos do **Curso Avançado em Estatística com R da UFFS**:
+
+- [Delineamentos Experimentais](#delin)
+
+- [Regressão Logística](#reglog)
+
+- [Ajuste de Parâmetros em Funções não Lineares]()
+
+- [RMarkdown](https://smolski.github.io/livror/rmark.html)
+
+- [Metodologia de Superfície Resposta]()
+
+- [Análise Fatorial](#analisf)
+
+<!--
+# Amostragem
+
+*Iara Denise Endruweit Battisti*
+
+*Felipe Micail da Silva Smolski*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
+
+As amostras são utilizadas diariamente, por exemplo, quando se prova uma comida para ver se o tempero está bom ou quando assiste-se uma parte de um programa da televisão para ver se interessa.
+
+Quando e porque amostragem?
+
+- Menor tempo
+- Menor custo
+- Maior precisão dos dados
+- Material experimental é raro
+- Teste destrói o material experimental
+
+Sempre que se optar por uma amostra é necessário fazer um plano de amostragem (ou delineamento amostral), para isto, deve estar bem definido o(s) objetivo(s) da pesquisa, a população de interesse, os parâmetros a serem estimados. O plano de amostragem engloba:
+
+
+- Definição da unidade amostral
+- Fforma de seleção das unidades amostrais
+- Cálculo do tamanho da amostra
+- Sorteio da amostra
+
+Exemplos:
+
+- 1. Verificar a prevalência de obesidade em escolares no município de Cerro Largo em 2016.
+- 2. Verificar a opinião dos consumidores de chocolate referente a um novo produto, com edição limitada.
+- 3. Pesquisa para verificar os impactos sócio-ambientais da instalação de uma usina hidrelétrica numa região.
+- 4. Verificar a contaminação dos rios de uma sub-bacia hidrográfica.
+
+
+## Amostragem Probabilística
+
+A amostragem probabilística permite a estimação do erro amostral (diferença entre o valor da estimativa e do parâmetro), possibilitando a utilização das técnicas de inferência estatística, as quais permitem a generalização dos resultados para a população.
+
+Como as técnicas de inferência estatística não controlam o erro não-amostral (erro de coleta de dados), o pesquisador deve tentar minimizá-los, por exemplo: utilizar amostra não-tendenciosa, calibrar o instrumento de mensuração, questões bem formuladas, correta digitação, treinamento dos entrevistadores, etc.
+
+### Amostra Aleatória (probabilística)
+
+Amostra aleatória é aquela que sofreu algum mecanismo de sorteio no processo de coleta. A
+amostra deve ser representativa, ou seja, deve reproduzir as mesmas propriedades da população. Os tipos
+de amostras aleatórias são apresentadas a seguir.
+
+
+#### Amostragem Aleatória Simples (AAS)
+
+É a mais simples, nesta todos os elementos da população tem a mesma probabilidade de ser
+sorteados. Assim, se a população for finita com N elementos, cada elemento terá a probabilidade de 1/N de
+ser sorteado. A amostragem pode ser feita com ou sem reposição do elemento sorteado.
+
+- Se a AAS for feita com reposição em uma população finita com N elementos, então o
+número total de amostras possíveis é dado por $N^n$;
+
+- Se for feita sem reposição, então o número de amostras possíveis é dadopor $C_{N,n}$.
+
+Quando a população for infinita, não é possível identificar seus infinitos elementos com um número.
+Nesse caso, pode-se fazer o sorteio com aqueles que estejam disponíveis.
+
+Existem diferentes maneiras para fazer o sorteio de uma amostra aleatória simples. Primeiramente
+deve-se atribuir um número a cada elemento da população, após faz-se o sorteio.
+
+*Exemplo no R:* utilizando o comando `sample()` pode ser efetuada a amostragem, sendo que o comando `set.seed()` serve para repetir o exercício da forma com que ele foi concebido e com os mesmos resultados. No exemplo abaixo, busca-se o retorno de um valor entre 0 e 1 (`c(0,1)`), para uma população de 32 itens, com reposição (`replace=TRUE`, sendo que o padrão é `FALSE`) e com a probabilidade de 50\% para cada item (`prob=c(0.5,0.5)`):
+
+
+```r
+set.seed(123)
+amostra = sample(c(0,1),32, replace=TRUE, prob=c(0.5,0.5))
+amostra
+```
+
+```
+ [1] 1 0 1 0 0 1 0 0 0 1 0 1 0 0 1 0 1 1 1 0 0 0 0 0 0 0 0 0 1 1 0 0
+```
+
+```r
+table(amostra)
+```
+
+```
+amostra
+ 0  1 
+21 11 
+```
+
+Abaixo um exemplo de amostragem, retomando uma amostra de 10 números entre os números 1 a 32, com e sem reposição:
+
+
+```r
+set.seed(123)
+sample(1:32, 10, replace=TRUE) # Com reposição
+```
+
+```
+ [1] 10 26 14 29 31  2 17 29 18 15
+```
+
+```r
+sample(1:32, 10, replace=FALSE) # Sem reposição
+```
+
+```
+ [1] 31 15 21 17  3 25  7  2  8 22
+```
+
+Utilizando o índice de uma base de dados, como exemplo a base `mtcars`, buscamos uma amostra aleatória com reposição de 10 itens (observa-se que o modelo Ford Pantera L foi repetido nas amostragens):
+
+
+```r
+set.seed(123)
+indice=sample(1:nrow(mtcars),10, replace=TRUE)
+mtcars[indice,]
+```
+
+```
+                    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Merc 280           19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Fiat X1-9          27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Merc 450SLC        15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Ford Pantera L     15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Maserati Bora      15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+Mazda RX4 Wag      21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Chrysler Imperial  14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Ford Pantera L.1   15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Fiat 128           32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Cadillac Fleetwood 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+```
+
+E agora o mesmo exemplo para a amostra aleatória simples sem reposição:
+
+
+```r
+set.seed(123)
+indice=sample(1:nrow(mtcars),10, replace=FALSE)
+mtcars[indice,]
+```
+
+```
+                  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Merc 280         19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Pontiac Firebird 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Merc 450SL       17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Fiat X1-9        27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2    26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Mazda RX4 Wag    21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Merc 450SLC      15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+AMC Javelin      15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Ford Pantera L   15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Merc 280C        17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+```
+
+#### Amostragem Aleatória Estratificada (AAE)
+
+É utilizada quando a população se caracteriza por subdivisões com características distintas, as
+quais podem interferir na característica em estudo, gerando maior variabilidade. Primeiramente, divide-se a
+população em subgrupos (estratos), sendo estes mais homogêneos dentro de si.
+
+
+
+```r
+head(InsectSprays)
+```
+
+```
+  count spray
+1    10     A
+2     7     A
+3    20     A
+4    14     A
+5    14     A
+6    12     A
+```
+
+```r
+summary(as.factor(InsectSprays$spray))
+```
+
+```
+ A  B  C  D  E  F 
+12 12 12 12 12 12 
+```
+
+
+
+
+
+```r
+library(sampling)
+a=strata(InsectSprays, c("spray"), size=c(3,3,3,3,3,3), method="srswor")
+summary(a)
+```
+
+```
+ spray    ID_unit          Prob         Stratum   
+ A:3   Min.   : 5.0   Min.   :0.25   Min.   :1.0  
+ B:3   1st Qu.:19.5   1st Qu.:0.25   1st Qu.:2.0  
+ C:3   Median :35.5   Median :0.25   Median :3.5  
+ D:3   Mean   :37.3   Mean   :0.25   Mean   :3.5  
+ E:3   3rd Qu.:55.8   3rd Qu.:0.25   3rd Qu.:5.0  
+ F:3   Max.   :71.0   Max.   :0.25   Max.   :6.0  
+```
+
+
+
+```r
+a
+```
+
+```
+   spray ID_unit Prob Stratum
+5      A       5 0.25       1
+7      A       7 0.25       1
+12     A      12 0.25       1
+14     B      14 0.25       2
+19     B      19 0.25       2
+21     B      21 0.25       2
+25     C      25 0.25       3
+27     C      27 0.25       3
+28     C      28 0.25       3
+43     D      43 0.25       4
+46     D      46 0.25       4
+48     D      48 0.25       4
+55     E      55 0.25       5
+56     E      56 0.25       5
+59     E      59 0.25       5
+66     F      66 0.25       6
+69     F      69 0.25       6
+71     F      71 0.25       6
+```
+
+
+#### Amostragem Sistemática (AS)
+
+Utiliza-se quando os elementos da população estão dispostos em uma lista, como por exemplo, um
+fichário, uma fila de espera. Inicialmente, determina-se o passo de amostragem, ou seja, o número k de
+elementos entre cada coleta. O processo inicia pelo sorteio do primeiro elemento entre os k primeiros, em
+seguida, salta-se k elementos para então coletar o segundo elemento e assim sucessivamente até a coleta
+do último elemento da amostra. Determina-se k da seguinte forma:
+
+$$ 
+k=\frac{N}{n}
+$$
+
+É importante o sorteio do primeiro elemento para que todos tenham a mesma probabilidade de
+serem sorteados.
+
+Neste tipo de amostra deve-se ter cuidado para que os elementos sorteados não tenham alguma
+relação entre si, devido ao fato de serem coletados sistematicamente.
+
+
+Amostragem Aleatória por Conglomerados (AAC)
+
+Na amostra aleatória por conglomerados divide-se a população em grupos (conglomerados) de mesmas características, com o objetivo de facilitar o processo de coleta dos elementos da amostra. É utilizada quando a pesquisa envolve uma grande área geográfica.
+
+*Exemplo*: suponha o estudo das despesas familiares na cidade de Cerro Largo. Opta-se por fazer uma amostragem por conglomerados, dividindo-se a área total em diversas áreas menores (quarteirões). Então, selecionam-se aleatoriamente alguns quarteirões, com a amostra final englobando todas as famílias desses quarteirões ou uma amostra delas.
+
+
+
+## Amostragem Não-Probabilística
+
+A amostra não probabilística é utilizada por simplicidade ou pela impossibilidade de obter uma amostra probabilística, neste caso não é possível estimar o erro amostral. Os tipos mais utilizados de amostra não-probabilística são:
+
+- Amostragem por Julgamento: escolhem-se casos julgados como típicos da população de interesse.
+- Amostragem por Quotas: procura-se obter uma amostra que seja similar à população, sob alguns aspectos.
+Exemplo: controlar as características sexo e faixa etária na amostra de acordo com sua proporção na população.
+- Amostragem por Conveniência: é o tipo de amostragem menos confiável. São utilizadas para pesquisas exploratórias e não são recomendadas para pesquisas conclusivas. Exemplo: durante um programa de televisão ao vivo, solicitar aos telespectadores que liguem para opinarem sobre algum assunto.
+
+
+*Estudo de Caso*: o estudo de caso é caracterizado pelo estudo profundo e exaustivo de um ou poucos objetos, de maneira que permita o seu amplo e detalhado conhecimento, tarefa praticamente impossível mediante os outros delineamentos considerados.
+
+## Tamanho da Amostra
+
+Quando deseja-se dimensionar o tamanho da amostra, o procedimento desenvolve-se em três etapas distintas:
+
+- 1. Avaliar o instrumento de coleta de dados e julgar a variável mais importante do questionário ou o grupo de variáveis mais significativas;
+- 2. Analisar se é qualitativa ou quantitativa;
+- 3. Verificar se a população é finita ou infinita.
+
+No cálculo do tamanho da amostra é necessário considerar:
+
+- variabilidade
+-  precisão
+- confiabilidade
+
+Ainda, na definição do tamanho da amostra deve-se considerar o *tipo de amostragem*.
+
+
+### Cálculo do tamanho da amostra para estimar a média, considerandno uma população infinita, com $\mu$ 
+
+-->
+
+
+
+
+
+
+
+
+
+
+# Delineamentos Experimentais{#delin}
 
 *Tatiane Chassot*
 
@@ -71,7 +395,7 @@ E alguns experimentos, utiliza-se a testemunha (nas ciências agrárias e ambien
 
 A unidade experimental é a unidade que recebe o tratamento uma vez e, normalmente são chamadas de parcelas. A escolha da unidade experimental depende dos tipos de tratamentos que serão avaliados. Podem ser: uma área de campo, um vaso com solo, um animal, uma placa de Petri, uma planta. Em áreas de campo, normalmente utiliza-se a bordadura. Num experimento, recomenda-se, no mínimo, a utilização de 20 UEs. 
 
-Em um experimento, a variável a ser avaliada chamamos de variável resposta. Por exemplo, núumero de grãos por planta, número de folhas por planta, altura das plantas.
+Em um experimento, a variável a ser avaliada chamamos de variável resposta. Por exemplo, número de grãos por planta, número de folhas por planta, altura das plantas.
 
 ## Princípios básicos da Experimentação
 
@@ -127,7 +451,7 @@ laboratórios.
 
 <div class="figure" style="text-align: center">
 <img src="delimexp0.png" alt="Variedades de pera separadas por grupos em faixas de peso e repetição" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-2)Variedades de pera separadas por grupos em faixas de peso e repetição</p>
+<p class="caption">(\#fig:unnamed-chunk-9)Variedades de pera separadas por grupos em faixas de peso e repetição</p>
 </div>
 
 
@@ -280,13 +604,13 @@ The following objects are masked from DIC (pos = 6):
 boxplot(Peso~Variedade)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" />
 
 ```r
 boxplot(Peso~Variedade,xlab="Variedade",ylab="Peso")
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-7-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-14-2.png" width="80%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -316,7 +640,7 @@ plot(ajustados,residuos)
 abline(h=0)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -326,7 +650,7 @@ qqnorm(residuos)
 qqline(residuos)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -340,7 +664,7 @@ qqline(residuos)
 
 <div class="figure" style="text-align: center">
 <img src="delimexp1.png" alt="Indivíduos separados por grupos em faixas de peso" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-11)Indivíduos separados por grupos em faixas de peso</p>
+<p class="caption">(\#fig:unnamed-chunk-18)Indivíduos separados por grupos em faixas de peso</p>
 </div>
 
 
@@ -437,14 +761,14 @@ Medidas descritivas com a variável resposta:
 boxplot(Perda~Tratamentos)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-21-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 ```r
 boxplot(Perda~Tratamentos,xlab="Tratamentos",ylab="Perda")
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -474,7 +798,7 @@ plot(ajustado,residuo)
 abline(h=0)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -483,11 +807,11 @@ qqnorm(residuo)
 qqline(residuo)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
-# Análise Fatorial
+# Análise Fatorial{#analisf}
 
 *Denize Ivete Reis*
 
@@ -502,7 +826,7 @@ A análise fatorial é um método estatístico utilizado para descrever a variab
 
 <div class="figure" style="text-align: center">
 <img src="anfat1.png" alt="Processo de análise de variáveis" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-19)Processo de análise de variáveis</p>
+<p class="caption">(\#fig:unnamed-chunk-26)Processo de análise de variáveis</p>
 </div>
 
 Assim, é possível que as variações de três ou quatro variáveis observadas possam ser explicadas por somente um fator, o que evidencia a utilidade da análise fatorial para descrever um conjunto de dados utilizando para isso apenas alguns fatores.
@@ -511,7 +835,7 @@ Diferentemente da análise de variância, regressão e análise discriminante, o
 
 A análise fatorial aborda o problema de analisar a estrutura das inter-relações (correlações) entre um grande número de variáveis (escores de testes, itens de testes, respostas de questionários), definindo um conjunto de dimensões latentes comuns, chamados fatores. Então, a análise fatorial, permite primeiro identificar as dimensões separadas da estrutura e então determinar o grau em que cada variável é explicada por cada dimensão. Uma vez que essas dimensões e a explicação da cada variável estejam determinadas, os dois principais usos da análise fatorial podem ser conseguidos:
 
-- **Resumo**: ao resumir os dados, a análise fatorial obtém dimensões latentes que, quando interpretadas e compreendidas, descrevem os dados em um núumero muito menor de conceitos do que as variáveis individuais originais.
+- **Resumo**: ao resumir os dados, a análise fatorial obtém dimensões latentes que, quando interpretadas e compreendidas, descrevem os dados em um número muito menor de conceitos do que as variáveis individuais originais.
 
 - **Redução de dados**: pode ser obtida calculando escores para cada dimensão latente e substituindo as variáveis originais pelos mesmos.
 
@@ -659,7 +983,7 @@ corrplot 0.84 loaded
 corrplot(matcor, method="circle")
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-29-1.png" width="80%" style="display: block; margin: auto;" />
 
 Na figura acima, as correlações estão em cor azul porque são positivas, com tons mais fortes para as correlações mais altas. 
 <!--
@@ -805,9 +1129,9 @@ Cumulative Proportion  0.4552 0.8249 0.8985 0.95536 0.98580 1.0000
 A função `summary(fit)` mostra a aplicação da análise de componentes principais. O fator 1
 responde por 45,52\% da variância total. Da mesma forma, o segundo fator responde por 36,97\% da
 variância total, sendo que os dois primeiros fatores respondem por 82,49\% da variância total. Várias
-considerações devem integrar a análise do núumero de fatores que devem ser usados na análise.
+considerações devem integrar a análise do número de fatores que devem ser usados na análise.
 
-### Determinação do núumero de fatores 
+### Determinação do número de fatores 
 
 
 A fim de reduzir as informações presentes nas variáveis originais, deve-se reduzir o número de fatores. Na literatura, diversos processos são sugeridos: determinação a priori, observação dos autovalores, representação gráfica (**scree plot**), testes de significância entre outros.
@@ -850,7 +1174,7 @@ Abaixo vamos apresentar o `scree-plot`, em formato do gráfico de barras para o 
 screeplot(fit)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-33-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma ligeira suavização das alturas nas demais colunas.
@@ -862,7 +1186,7 @@ Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma lige
 plot(fit,type="lines")
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 ### Análise de Componentes Principais
@@ -1020,7 +1344,7 @@ os fatores.
 biplot(PCAdentevarimax)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-32-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 Os valores dos fatores obtidos para os 30 entrevistados encontram-se na matriz de coeficiente de escore do componente mostrada abaixo. Esta ajuda a entender como cada variável se relaciona aos escores dos componentes calculados para cada participante. Para melhor compreensão da análise dos escores dos entrevistados é importante especificar e comentar o significado de cada fator:
@@ -1111,7 +1435,7 @@ Destacando-se os entrevistados de interesse, verifica-se:
 
 <div class="figure" style="text-align: center">
 <img src="anfat2.png" alt="Principais resultados" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-34)Principais resultados</p>
+<p class="caption">(\#fig:unnamed-chunk-41)Principais resultados</p>
 </div>
 
 
@@ -1119,6 +1443,178 @@ Destacando-se os entrevistados de interesse, verifica-se:
 <!--
 \printbibliography[segment=\therefsegment,heading=subbibliography]
 -->
+
+
+# Análise de Componentes Principais
+
+*Felipe Micail da Silva Smolski*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
+
+A técnica de Componentes Principais retoma informações de uma base de dados multivariada, transformando estes dados em variáveis de número igual ou inferior à amostra inicial e denominados "componentes principais". Estes por sua vez, correspondem à combinação dos dados originais, sendo que representam uma redução de dimensionalidade dos dados originais em dois ou três componentes, identificando as direções pelas quais a variação dos dados são máximas, apresentando graficamente os resultados conforme @Kassambara2017b. Ainda segundo este autor, são propósitos resumidos da anáise dae componentes principais:
+
+- Identificação de padrões ocultos dos dados;
+- Redução de dimensionalidade, pela diminuição da redundância nos dados;
+- Identificar variáveis correlacionadas.
+
+
+## Preparação dos dados
+
+```r
+library(factoextra)
+```
+
+```
+Carregando pacotes exigidos: ggplot2
+```
+
+```
+
+Attaching package: 'ggplot2'
+```
+
+```
+The following objects are masked from 'package:psych':
+
+    %+%, alpha
+```
+
+```
+Welcome! Related Books: `Practical Guide To Cluster Analysis in R` at https://goo.gl/13EFCZ
+```
+
+```
+
+Attaching package: 'factoextra'
+```
+
+```
+The following object is masked from 'package:agricolae':
+
+    hcut
+```
+
+```r
+data("decathlon2", package = "factoextra")
+head(decathlon2)
+```
+
+```
+          X100m Long.jump Shot.put High.jump X400m X110m.hurdle Discus
+SEBRLE    11.04      7.58    14.83      2.07 49.81        14.69  43.75
+CLAY      10.76      7.40    14.26      1.86 49.37        14.05  50.72
+BERNARD   11.02      7.23    14.25      1.92 48.93        14.99  40.87
+YURKOV    11.34      7.09    15.19      2.10 50.42        15.31  46.26
+ZSIVOCZKY 11.13      7.30    13.48      2.01 48.62        14.17  45.67
+McMULLEN  10.83      7.31    13.76      2.13 49.91        14.38  44.41
+          Pole.vault Javeline X1500m Rank Points Competition
+SEBRLE          5.02    63.19  291.7    1   8217    Decastar
+CLAY            4.92    60.15  301.5    2   8122    Decastar
+BERNARD         5.32    62.77  280.1    4   8067    Decastar
+YURKOV          4.72    63.44  276.4    5   8036    Decastar
+ZSIVOCZKY       4.42    55.37  268.0    7   8004    Decastar
+McMULLEN        4.42    56.37  285.1    8   7995    Decastar
+```
+
+```r
+decathlon2.active=decathlon2[1:23,1:10]
+```
+
+## Criação dos componentes 
+
+
+
+```r
+library(FactoMineR)
+pca=PCA(decathlon2.active, graph=TRUE)
+```
+
+<img src="index_files/figure-html/unnamed-chunk-43-1.png" width="80%" style="display: block; margin: auto;" /><img src="index_files/figure-html/unnamed-chunk-43-2.png" width="80%" style="display: block; margin: auto;" />
+
+```r
+pca
+```
+
+```
+**Results for the Principal Component Analysis (PCA)**
+The analysis was performed on 23 individuals, described by 10 variables
+*The results are available in the following objects:
+
+   name               description                          
+1  "$eig"             "eigenvalues"                        
+2  "$var"             "results for the variables"          
+3  "$var$coord"       "coord. for the variables"           
+4  "$var$cor"         "correlations variables - dimensions"
+5  "$var$cos2"        "cos2 for the variables"             
+6  "$var$contrib"     "contributions of the variables"     
+7  "$ind"             "results for the individuals"        
+8  "$ind$coord"       "coord. for the individuals"         
+9  "$ind$cos2"        "cos2 for the individuals"           
+10 "$ind$contrib"     "contributions of the individuals"   
+11 "$call"            "summary statistics"                 
+12 "$call$centre"     "mean of the variables"              
+13 "$call$ecart.type" "standard error of the variables"    
+14 "$call$row.w"      "weights for the individuals"        
+15 "$call$col.w"      "weights for the variables"          
+```
+
+A variância retida em cada um dos compomentes é medida pelos "autovalores" (*eigenvalues*), que podem ser extraídos utilizando a função `get_eigenvalue()`:
+
+
+
+```r
+library(factoextra)
+autovalores=get_eigenvalue(pca)
+autovalores
+```
+
+```
+       eigenvalue variance.percent cumulative.variance.percent
+Dim.1      4.1242           41.242                       41.24
+Dim.2      1.8385           18.385                       59.63
+Dim.3      1.2391           12.391                       72.02
+Dim.4      0.8194            8.194                       80.21
+Dim.5      0.7016            7.016                       87.23
+Dim.6      0.4229            4.229                       91.46
+Dim.7      0.3026            3.026                       94.48
+Dim.8      0.2745            2.745                       97.23
+Dim.9      0.1552            1.552                       98.78
+Dim.10     0.1220            1.220                      100.00
+```
+
+
+Autovaloes superiores a 1 indicam que a variância do componente é superior ao que representaria a variância dos dados originais, sendo possível utilizar inclusive como ponto de corte para decidir quantos componentes utilizar. Observa-se que no exemplo acima, foram criados 10 componentes principais, dos quais os três primeiros explicam 72,02\% da variação.
+
+
+```r
+fviz_eig(pca, addlabels=TRUE, ylim = c(0,50))
+```
+
+<img src="index_files/figure-html/unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+
+
+```r
+variaveis=get_pca_var(pca)
+head(variaveis$coord)
+```
+
+```
+               Dim.1    Dim.2   Dim.3    Dim.4   Dim.5
+X100m        -0.8506 -0.17940  0.3016  0.03357 -0.1944
+Long.jump     0.7942  0.28086 -0.1905 -0.11539  0.2332
+Shot.put      0.7339  0.08540  0.5176  0.12847 -0.2488
+High.jump     0.6101 -0.46521  0.3301  0.14455  0.4027
+X400m        -0.7016  0.29018  0.2835  0.43083  0.1039
+X110m.hurdle -0.7641 -0.02474  0.4489 -0.01690  0.2242
+```
+
+
+
 
 # Análise de Clusters
 
@@ -1134,11 +1630,11 @@ A ideia central da Análise de Cluster é a possibilidade de efetuar a classific
 A medida de distância utilizada de maneira mais comum utililizada é a Distância Euclidiana como mostra a Figura abaixo (embora existam outras métricas como a Distância de Manhattan, a Distância de Correlação de Pearson, a Distância de Correlação de  Eisen, a Distância de Correlação de  Spearman e a Distância de Correlação de  Kendal). 
 
 <div class="figure" style="text-align: center">
-<img src="distecludiana.png" alt="Cálculo da distância entre A e B no espaço X Y" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-35)Cálculo da distância entre A e B no espaço X Y</p>
+<img src="distecludiana.jpg" alt="Cálculo da distância entre A e B no espaço X Y" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-47)Cálculo da distância entre A e B no espaço X Y</p>
 </div>
 
-Fonte: @Pereira2004.
+Fonte: @Pereira2004a.
 
 Em outro sentido, existem vários métodos de clusterização, dentre eles: a) Clusterização Particionada, que faz parte as técnicas K-Means, K-Medoids e CLARA; b) Clusterização Hierárquica, de que faz parte a Clusterização Aglomerativa [@Kassambara2017]. Neste capítulo serão apresentadas as técnicas denominadas K-Means e a Clusterização Aglomerativa.
 
@@ -1210,7 +1706,7 @@ fviz_nbclust(df, kmeans, method = "wss")+
   geom_vline(xintercept = 4, linetype = 2)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;" />
 
 Em seguida utilizamos o número determinado de clusters (neste caso 4) com o comando `kmeans`. Como resultado temos a média dos centros por clusters e a classificação de cada modelo de veículo da amostra dentro do respectivo cluster. Observa-se que o cluste 1 tem 12 modelos de veículos, o cluster 2 tem 8 modelos, o cluster 3 possui 7 modelos e no cluster 4 foram enquadrados 5 modelos.
 
@@ -1338,9 +1834,279 @@ fviz_cluster(km.res, data=mtcars2,
              )
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-53-1.png" width="80%" style="display: block; margin: auto;" />
 
 
+*Efetuando predições com o modelo de cluster*
+
+
+```r
+head(iris)
+```
+
+```
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+```
+
+```r
+table(iris$Species)
+```
+
+```
+
+    setosa versicolor  virginica 
+        50         50         50 
+```
+
+
+
+```r
+library("gridExtra")
+library(ggplot2)
+
+a=ggplot(data = iris) +
+  aes(x = Petal.Width, y = Petal.Length, color = Species) +
+  geom_point() +
+  theme_minimal()
+
+b=ggplot(data = iris) +
+  aes(x = Sepal.Width, y = Sepal.Length, color = Species) +
+  geom_point() +
+  theme_minimal()
+
+grid.arrange(a, b, ncol=2)
+```
+
+<img src="index_files/figure-html/unnamed-chunk-55-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+
+
+```r
+set.seed(123)
+
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+amostra
+```
+
+```
+  [1] 1 2 1 2 2 1 1 2 1 1 2 1 1 1 1 2 1 1 1 2 2 1 1 2 1 2 1 1 1 1 2 2 1 2 1 1 2
+ [38] 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 2 1 1 1 1 2 2 1 1 1 1 1 2 1 2 2 2 1 2 1 2 1
+ [75] 1 1 1 1 1 1 1 1 1 2 1 1 2 2 2 1 1 1 1 1 1 1 2 1 1 1 1 1 1 2 1 2 2 1 1 1 2
+[112] 1 1 2 2 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 1 2 1 2 1 1 2 2 2 1 1 1 1 1 2 1 1 1
+[149] 1 2
+```
+
+```r
+iristreino = iris[amostra==1,]
+iristeste = iris[amostra==2,]
+```
+
+
+
+```r
+set.seed(123)
+km.res=kmeans(iristreino[1:4], 3, nstart=25)
+print(km.res)
+```
+
+```
+K-means clustering with 3 clusters of sizes 35, 29, 42
+
+Cluster means:
+  Sepal.Length Sepal.Width Petal.Length Petal.Width
+1        4.940       3.406        1.446      0.2429
+2        6.821       3.007        5.683      2.0690
+3        5.883       2.733        4.317      1.3905
+
+Clustering vector:
+  1   3   6   7   9  10  12  13  14  15  17  18  19  22  23  25  27  28  29  30 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+ 33  35  36  38  39  40  41  42  43  44  45  46  47  48  49  51  52  54  55  56 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   3   3   3   3 
+ 57  60  61  62  63  64  66  70  72  74  75  76  77  78  79  80  81  82  83  85 
+  3   3   3   3   3   3   3   3   3   3   3   3   3   2   3   3   3   3   3   3 
+ 86  90  91  92  93  94  95  96  98  99 100 101 102 103 105 108 109 110 112 113 
+  3   3   3   3   3   3   3   3   3   3   3   2   3   2   2   2   2   2   2   2 
+116 117 119 120 121 122 123 124 125 127 128 129 130 131 133 135 136 140 141 142 
+  2   2   2   3   2   3   2   3   2   3   3   2   2   2   2   2   2   2   2   2 
+143 144 146 147 148 149 
+  3   2   2   3   2   2 
+
+Within cluster sum of squares by cluster:
+[1] 10.56 16.21 25.01
+ (between_SS / total_SS =  89.2 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+[6] "betweenss"    "size"         "iter"         "ifault"      
+```
+
+
+```r
+iristreino=cbind(iristreino, cluster=km.res$cluster)
+head(iristreino)
+```
+
+```
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species cluster
+1           5.1         3.5          1.4         0.2  setosa       1
+3           4.7         3.2          1.3         0.2  setosa       1
+6           5.4         3.9          1.7         0.4  setosa       1
+7           4.6         3.4          1.4         0.3  setosa       1
+9           4.4         2.9          1.4         0.2  setosa       1
+10          4.9         3.1          1.5         0.1  setosa       1
+```
+
+```r
+confusao = table(iristreino$Species, km.res$cluster)
+confusao
+```
+
+```
+            
+              1  2  3
+  setosa     35  0  0
+  versicolor  0  2 34
+  virginica   0 27  8
+```
+
+```r
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+```
+
+```
+[1] 0.4245
+```
+
+```r
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+taxaerro
+```
+
+```
+[1] 0.5755
+```
+
+
+
+
+
+
+```r
+set.seed(123)
+library(flexclust)
+```
+
+```
+Carregando pacotes exigidos: grid
+```
+
+```
+Carregando pacotes exigidos: lattice
+```
+
+```
+Carregando pacotes exigidos: modeltools
+```
+
+```
+Carregando pacotes exigidos: stats4
+```
+
+```r
+km = kcca(iristreino[ , 1:4], k=3, kccaFamily("kmeans"))
+km
+```
+
+```
+kcca object of family 'kmeans' 
+
+call:
+kcca(x = iristreino[, 1:4], k = 3, family = kccaFamily("kmeans"))
+
+cluster sizes:
+
+ 1  2  3 
+35 31 40 
+```
+
+```r
+predteste=predict(km, newdata=iristeste[ , 1:4], k=3, kccaFamily("kmeans"))
+head(predteste)
+```
+
+```
+ 2  4  5  8 11 16 
+ 1  1  1  1  1  1 
+```
+
+
+
+
+```r
+iristeste=cbind(iristeste, predteste)
+head(iristreino)
+```
+
+```
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species cluster
+1           5.1         3.5          1.4         0.2  setosa       1
+3           4.7         3.2          1.3         0.2  setosa       1
+6           5.4         3.9          1.7         0.4  setosa       1
+7           4.6         3.4          1.4         0.3  setosa       1
+9           4.4         2.9          1.4         0.2  setosa       1
+10          4.9         3.1          1.5         0.1  setosa       1
+```
+
+```r
+confusao = table(iristeste$Species, iristeste$predteste)
+confusao
+```
+
+```
+            
+              1  2  3
+  setosa     15  0  0
+  versicolor  0  1 13
+  virginica   0 11  4
+```
+
+```r
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+```
+
+```
+[1] 0.4545
+```
+
+```r
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+taxaerro
+```
+
+```
+[1] 0.5455
+```
 
 
 
@@ -1408,7 +2174,7 @@ library("factoextra")
 fviz_dend(dista.hc, cex=0.5)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-46-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-65-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -1633,7 +2399,7 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 plot(diametro_cm,altura_m)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-50-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-69-1.png" width="80%" style="display: block; margin: auto;" />
 
 ```r
 # Gera o gráfico sem pontos
@@ -1646,7 +2412,7 @@ abline(coef(modelom)[1], coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3], coef(modelom)[2], col='red')
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-50-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-69-2.png" width="80%" style="display: block; margin: auto;" />
 
 
 ## Interação entre variáveis preditoras
@@ -1720,7 +2486,7 @@ abline(coef(modelom)[1],coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3],coef(modelom)[2]+coef(modelom)[4], col='red')
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-53-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-72-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -1814,7 +2580,7 @@ reduzido com (k-1) variáveis.
 
 <div class="figure" style="text-align: center">
 <img src="regress1.png" alt="Modelagem estatística" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-54)Modelagem estatística</p>
+<p class="caption">(\#fig:unnamed-chunk-73)Modelagem estatística</p>
 </div>
 
 Fonte: @Riboldi2005
@@ -1957,7 +2723,7 @@ Abaixo é demonstrada a evolução do investimento de acordo com cada empresa es
 coplot(invest ~ year|firm, type="b", data=Grunfeld)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-57-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-76-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -2270,8 +3036,8 @@ O teste de Hausmann [@hausman1978] efetua a especificação dos modelos de Efeit
 
 $$
  \begin{matrix}
-H_0: \alpha_{i} \text{não são correlacionados com } X_{it} \\
-H_1: \alpha_{i} \text{são correlacionados com } X_{it}
+H_0: \alpha_{i} \text{ não são correlacionados com } X_{it} \\
+H_1: \alpha_{i} \text{ são correlacionados com } X_{it}
  \end{matrix}
 $$
 A função a ser utilizada para este teste é `phtest`:
@@ -2434,7 +3200,7 @@ alternative hypothesis: stationary
 
 
 
-# Regressão Logística
+# Regressão Logística{#reglog}
 
 *Felipe Micail da Silva Smolski*
 
@@ -2552,7 +3318,7 @@ ggplot(chd, aes(x=AGE, y=CHD)) +
 ```
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-epub3/dispev-1.png" alt="Dispersão de evendos e não-eventos" width="80%" />
+<img src="index_files/figure-html/dispev-1.png" alt="Dispersão de evendos e não-eventos" width="80%" />
 <p class="caption">(\#fig:dispev)Dispersão de evendos e não-eventos</p>
 </div>
 
@@ -2624,7 +3390,7 @@ ggplot(chd, aes(x=AGE, y=PRED)) +
 ```
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-epub3/distrpred-1.png" alt="Distribuição das probabilidades preditas" width="80%" />
+<img src="index_files/figure-html/distrpred-1.png" alt="Distribuição das probabilidades preditas" width="80%" />
 <p class="caption">(\#fig:distrpred)Distribuição das probabilidades preditas</p>
 </div>
 
@@ -2777,16 +3543,18 @@ Carregando pacotes exigidos: caret
 ```
 
 ```
-Carregando pacotes exigidos: lattice
-```
-
-```
 
 Attaching package: 'caret'
 ```
 
 ```
 The following object is masked from 'package:survival':
+
+    cluster
+```
+
+```
+The following object is masked from 'package:sampling':
 
     cluster
 ```
@@ -2816,6 +3584,7 @@ Prediction  0  1
     P-Value [Acc > NIR] : 0.000319      
                                         
                   Kappa : 0.467         
+                                        
  Mcnemar's Test P-Value : 0.844519      
                                         
             Sensitivity : 0.674         
@@ -2879,7 +3648,7 @@ plot(roc1,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-epub3/roc-1.png" alt="Curva Roc" width="80%" />
+<img src="index_files/figure-html/roc-1.png" alt="Curva Roc" width="80%" />
 <p class="caption">(\#fig:roc)Curva Roc</p>
 </div>
 
@@ -3458,7 +4227,7 @@ ggplot(novosdados, aes(x=rank,y=prob))+
   labs(title="Probabilidades preditas", x="Ranking",y="Pr(y=1)")
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-99-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-118-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -3627,7 +4396,7 @@ Abaixo o histograma da distribuição do número de satélites (variável depend
 hist(caranguejo$Sa)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-102-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-121-1.png" width="80%" style="display: block; margin: auto;" />
 
 Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 
@@ -3636,7 +4405,7 @@ Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 plot(caranguejo$W,caranguejo$Sa)
 ```
 
-<img src="index_files/figure-epub3/unnamed-chunk-103-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-122-1.png" width="80%" style="display: block; margin: auto;" />
 
 Para criação da regressão de Poisson utiliza-se a função já conhecida `glm()`, sendo que em `family` é determinado o tipo de análise desejada ("poisson"):
 
@@ -3767,8 +4536,8 @@ points(regpoisson$fitted.values,col='red', type = "l")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-epub3/unnamed-chunk-108-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-108)Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)</p>
+<img src="index_files/figure-html/unnamed-chunk-127-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-127)Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)</p>
 </div>
 
 
@@ -3941,8 +4710,8 @@ legend(6,30,c("obs","pred"), pch=c("o","p"), col=c("blue","red"))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-epub3/unnamed-chunk-113-1.png" alt="Valores observados e preditos" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-113)Valores observados e preditos</p>
+<img src="index_files/figure-html/unnamed-chunk-132-1.png" alt="Valores observados e preditos" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-132)Valores observados e preditos</p>
 </div>
 Fonte: Adaptado de @penn2018.
 
@@ -3972,7 +4741,627 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 - Análise de super-dispersão do modelo (quando Var(Y) > E(Y)). Neste caso, pode ocorrer por três motivos: a) função de ligação inadequada: talvez outras funções além da logarítimica se ajustem melhor; b) não inclusão de variáveis relevantes ao modelo; c) excessos de zeros. 
 
 
-# Manipulando bases de dados
+<!--
+# Classificação
+
+
+## Árvores de Decisão
+
+
+```r
+library(rpart)
+```
+
+```
+
+Attaching package: 'rpart'
+```
+
+```
+The following object is masked from 'package:faraway':
+
+    solder
+```
+
+```r
+library(rpart.plot)
+
+set.seed(123)
+data(iris)
+head(iris)
+```
+
+```
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+```
+
+```r
+dim(iris)
+```
+
+```
+[1] 150   5
+```
+
+```r
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+amostra
+```
+
+```
+  [1] 1 2 1 2 2 1 1 2 1 1 2 1 1 1 1 2 1 1 1 2 2 1 1 2 1 2 1 1 1 1 2 2 1 2 1 1 2
+ [38] 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 2 1 1 1 1 2 2 1 1 1 1 1 2 1 2 2 2 1 2 1 2 1
+ [75] 1 1 1 1 1 1 1 1 1 2 1 1 2 2 2 1 1 1 1 1 1 1 2 1 1 1 1 1 1 2 1 2 2 1 1 1 2
+[112] 1 1 2 2 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 1 2 1 2 1 1 2 2 2 1 1 1 1 1 2 1 1 1
+[149] 1 2
+```
+
+```r
+iristreino = iris[amostra==1,]
+iristeste = iris[amostra==2,]
+
+dim(iristreino)
+```
+
+```
+[1] 106   5
+```
+
+```r
+dim(iristeste)
+```
+
+```
+[1] 44  5
+```
+
+```r
+arvore = rpart(Species ~ ., data=iris,  method="class")
+
+print(arvore)
+```
+
+```
+n= 150 
+
+node), split, n, loss, yval, (yprob)
+      * denotes terminal node
+
+1) root 150 100 setosa (0.33333 0.33333 0.33333)  
+  2) Petal.Length< 2.45 50   0 setosa (1.00000 0.00000 0.00000) *
+  3) Petal.Length>=2.45 100  50 versicolor (0.00000 0.50000 0.50000)  
+    6) Petal.Width< 1.75 54   5 versicolor (0.00000 0.90741 0.09259) *
+    7) Petal.Width>=1.75 46   1 virginica (0.00000 0.02174 0.97826) *
+```
+
+```r
+#plot(arvore)
+#text(arvore, use.n=TRUE, all=TRUE, cex=.8)
+
+rpart.plot(arvore)
+```
+
+<img src="index_files/figure-html/unnamed-chunk-134-1.png" width="80%" style="display: block; margin: auto;" />
+
+```r
+teste = predict(arvore,newdata=iristeste)
+
+teste
+```
+
+```
+    setosa versicolor virginica
+2        1    0.00000   0.00000
+4        1    0.00000   0.00000
+5        1    0.00000   0.00000
+8        1    0.00000   0.00000
+11       1    0.00000   0.00000
+16       1    0.00000   0.00000
+20       1    0.00000   0.00000
+21       1    0.00000   0.00000
+24       1    0.00000   0.00000
+26       1    0.00000   0.00000
+31       1    0.00000   0.00000
+32       1    0.00000   0.00000
+34       1    0.00000   0.00000
+37       1    0.00000   0.00000
+50       1    0.00000   0.00000
+53       0    0.90741   0.09259
+58       0    0.90741   0.09259
+59       0    0.90741   0.09259
+65       0    0.90741   0.09259
+67       0    0.90741   0.09259
+68       0    0.90741   0.09259
+69       0    0.90741   0.09259
+71       0    0.02174   0.97826
+73       0    0.90741   0.09259
+84       0    0.90741   0.09259
+87       0    0.90741   0.09259
+88       0    0.90741   0.09259
+89       0    0.90741   0.09259
+97       0    0.90741   0.09259
+104      0    0.02174   0.97826
+106      0    0.02174   0.97826
+107      0    0.90741   0.09259
+111      0    0.02174   0.97826
+114      0    0.02174   0.97826
+115      0    0.02174   0.97826
+118      0    0.02174   0.97826
+126      0    0.02174   0.97826
+132      0    0.02174   0.97826
+134      0    0.90741   0.09259
+137      0    0.02174   0.97826
+138      0    0.02174   0.97826
+139      0    0.02174   0.97826
+145      0    0.02174   0.97826
+150      0    0.02174   0.97826
+```
+
+```r
+iris1 = cbind(iristeste,teste)
+
+head(iris1)
+```
+
+```
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species setosa versicolor
+2           4.9         3.0          1.4         0.2  setosa      1          0
+4           4.6         3.1          1.5         0.2  setosa      1          0
+5           5.0         3.6          1.4         0.2  setosa      1          0
+8           5.0         3.4          1.5         0.2  setosa      1          0
+11          5.4         3.7          1.5         0.2  setosa      1          0
+16          5.7         4.4          1.5         0.4  setosa      1          0
+   virginica
+2          0
+4          0
+5          0
+8          0
+11         0
+16         0
+```
+
+```r
+iris1['Result'] = ifelse(iris1$setosa>=0.5,"setosa",
+                         ifelse(iris1$versicolor>=0.5, "versicolor",
+                         "virginica"))
+head(iris1)
+```
+
+```
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species setosa versicolor
+2           4.9         3.0          1.4         0.2  setosa      1          0
+4           4.6         3.1          1.5         0.2  setosa      1          0
+5           5.0         3.6          1.4         0.2  setosa      1          0
+8           5.0         3.4          1.5         0.2  setosa      1          0
+11          5.4         3.7          1.5         0.2  setosa      1          0
+16          5.7         4.4          1.5         0.4  setosa      1          0
+   virginica Result
+2          0 setosa
+4          0 setosa
+5          0 setosa
+8          0 setosa
+11         0 setosa
+16         0 setosa
+```
+
+```r
+confusao = table(iris1$Species,iris1$Result)
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+```
+
+```
+[1] 0.9318
+```
+
+```r
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+taxaerro
+```
+
+```
+[1] 0.06818
+```
+
+
+
+## Naive Bayes
+
+
+
+
+```r
+library(e1071)
+```
+
+```
+
+Attaching package: 'e1071'
+```
+
+```
+The following object is masked from 'package:flexclust':
+
+    bclust
+```
+
+```
+The following object is masked from 'package:gtools':
+
+    permutations
+```
+
+```
+The following objects are masked from 'package:agricolae':
+
+    kurtosis, skewness
+```
+
+```r
+data(iris)
+head(iris)
+```
+
+```
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+```
+
+```r
+dim(iris)
+```
+
+```
+[1] 150   5
+```
+
+```r
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+amostra
+```
+
+```
+  [1] 2 1 2 2 1 1 1 1 1 1 1 1 2 1 1 2 2 1 1 2 2 1 1 2 1 1 2 1 1 2 1 1 2 2 1 1 1
+ [38] 1 1 2 1 1 1 1 1 1 2 1 1 1 1 2 1 1 1 2 1 1 1 2 1 1 2 1 1 2 1 1 1 1 1 1 2 1
+ [75] 1 2 2 1 1 2 1 2 1 2 1 2 1 1 1 1 2 1 2 2 1 1 1 1 1 2 2 1 2 1 1 1 2 1 1 1 1
+[112] 2 1 1 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 2 2 1 1 2 1 1 1 1 1 1 1 1 2 1 2 2 2 1
+[149] 1 1
+```
+
+```r
+iristreino = iris[amostra==1,]
+iristeste = iris[amostra==2,]
+
+dim(iristreino)
+```
+
+```
+[1] 106   5
+```
+
+```r
+dim(iristeste)
+```
+
+```
+[1] 44  5
+```
+
+```r
+modelo <- naiveBayes(Species ~., iris)
+
+modelo
+```
+
+```
+
+Naive Bayes Classifier for Discrete Predictors
+
+Call:
+naiveBayes.default(x = X, y = Y, laplace = laplace)
+
+A-priori probabilities:
+Y
+    setosa versicolor  virginica 
+    0.3333     0.3333     0.3333 
+
+Conditional probabilities:
+            Sepal.Length
+Y             [,1]   [,2]
+  setosa     5.006 0.3525
+  versicolor 5.936 0.5162
+  virginica  6.588 0.6359
+
+            Sepal.Width
+Y             [,1]   [,2]
+  setosa     3.428 0.3791
+  versicolor 2.770 0.3138
+  virginica  2.974 0.3225
+
+            Petal.Length
+Y             [,1]   [,2]
+  setosa     1.462 0.1737
+  versicolor 4.260 0.4699
+  virginica  5.552 0.5519
+
+            Petal.Width
+Y             [,1]   [,2]
+  setosa     0.246 0.1054
+  versicolor 1.326 0.1978
+  virginica  2.026 0.2747
+```
+
+```r
+predicao <- predict(modelo, iristreino)
+
+predicao
+```
+
+```
+  [1] setosa     setosa     setosa     setosa     setosa     setosa    
+  [7] setosa     setosa     setosa     setosa     setosa     setosa    
+ [13] setosa     setosa     setosa     setosa     setosa     setosa    
+ [19] setosa     setosa     setosa     setosa     setosa     setosa    
+ [25] setosa     setosa     setosa     setosa     setosa     setosa    
+ [31] setosa     setosa     setosa     setosa     setosa     versicolor
+ [37] virginica  versicolor versicolor versicolor versicolor versicolor
+ [43] versicolor versicolor versicolor versicolor versicolor versicolor
+ [49] versicolor versicolor virginica  versicolor versicolor versicolor
+ [55] virginica  versicolor versicolor versicolor versicolor versicolor
+ [61] versicolor versicolor versicolor versicolor versicolor versicolor
+ [67] versicolor versicolor versicolor virginica  virginica  virginica 
+ [73] virginica  virginica  virginica  virginica  virginica  virginica 
+ [79] virginica  virginica  virginica  virginica  virginica  versicolor
+ [85] virginica  virginica  virginica  virginica  virginica  virginica 
+ [91] virginica  virginica  virginica  virginica  virginica  virginica 
+ [97] virginica  virginica  virginica  virginica  virginica  virginica 
+[103] virginica  virginica  virginica  virginica 
+Levels: setosa versicolor virginica
+```
+
+```r
+confusao = table(iristreino$Species,predicao)
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+```
+
+```
+[1] 0.9623
+```
+
+```r
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+
+class(modelo)
+```
+
+```
+[1] "naiveBayes"
+```
+
+```r
+#Prevendo com novos dados
+predict(modelo,iristeste)
+```
+
+```
+ [1] setosa     setosa     setosa     setosa     setosa     setosa    
+ [7] setosa     setosa     setosa     setosa     setosa     setosa    
+[13] setosa     setosa     setosa     versicolor versicolor versicolor
+[19] versicolor versicolor versicolor versicolor versicolor versicolor
+[25] versicolor versicolor versicolor versicolor versicolor versicolor
+[31] versicolor virginica  virginica  versicolor virginica  virginica 
+[37] virginica  virginica  virginica  versicolor virginica  virginica 
+[43] virginica  virginica 
+Levels: setosa versicolor virginica
+```
+
+
+
+
+
+## Redes Neurais
+
+
+
+## Máquina de Vetor de  Suporte
+
+
+
+```r
+data(iris)
+head(iris)
+```
+
+```
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+```
+
+```r
+dim(iris)
+```
+
+```
+[1] 150   5
+```
+
+```r
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+amostra
+```
+
+```
+  [1] 1 1 1 1 1 2 2 2 1 1 2 1 1 1 1 1 1 1 1 2 1 2 1 2 1 1 1 1 1 2 1 2 1 1 2 1 1
+ [38] 1 1 2 2 1 1 2 1 2 1 1 1 2 1 1 1 1 1 1 1 1 2 1 1 1 2 1 2 1 1 2 1 2 1 1 1 1
+ [75] 1 1 2 1 2 1 2 1 1 2 1 2 1 2 1 1 2 1 2 1 2 2 1 2 2 1 1 1 1 2 1 1 1 1 1 1 1
+[112] 2 2 1 1 1 1 2 1 2 1 2 1 1 2 2 1 1 1 1 2 2 2 1 2 1 1 1 2 1 1 1 2 1 1 2 1 1
+[149] 2 1
+```
+
+```r
+iristreino = iris[amostra==1,]
+iristeste = iris[amostra==2,]
+```
+
+
+
+```r
+library(e1071)
+modelo <- svm(Species ~., iristreino)
+predicao <- predict(modelo,iristeste)
+confusao = table(iristeste$Species,predicao)
+confusao
+```
+
+```
+            predicao
+             setosa versicolor virginica
+  setosa         15          0         0
+  versicolor      0         16         1
+  virginica       0          1        15
+```
+
+```r
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+```
+
+```
+[1] 0.9583
+```
+
+```r
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+taxaerro
+```
+
+```
+[1] 0.04167
+```
+
+
+## Vizinho mais próximo
+
+
+
+```r
+# ALTERAR OS DADOS!!!
+#install.packages("class", dependencies=T)
+library(class)
+
+head(iris)
+```
+
+```
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+```
+
+```r
+summary(iris)
+```
+
+```
+  Sepal.Length   Sepal.Width    Petal.Length   Petal.Width        Species  
+ Min.   :4.30   Min.   :2.00   Min.   :1.00   Min.   :0.1   setosa    :50  
+ 1st Qu.:5.10   1st Qu.:2.80   1st Qu.:1.60   1st Qu.:0.3   versicolor:50  
+ Median :5.80   Median :3.00   Median :4.35   Median :1.3   virginica :50  
+ Mean   :5.84   Mean   :3.06   Mean   :3.76   Mean   :1.2                  
+ 3rd Qu.:6.40   3rd Qu.:3.30   3rd Qu.:5.10   3rd Qu.:1.8                  
+ Max.   :7.90   Max.   :4.40   Max.   :6.90   Max.   :2.5                  
+```
+
+```r
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+iristreino = iris[amostra==1,]
+classificar = iris[amostra==2,]
+
+dim(iristreino)
+```
+
+```
+[1] 98  5
+```
+
+```r
+dim(classificar)
+```
+
+```
+[1] 52  5
+```
+
+```r
+previsao = knn(iristreino[,1:4],classificar[,1:4],iristreino[,5],k=3)
+# knn(vizinhomaisproximo, dadosaclassificar, classeaclassificar)
+tabela=table(classificar[,5],previsao)
+tabela
+```
+
+```
+            previsao
+             setosa versicolor virginica
+  setosa         20          0         0
+  versicolor      0         14         1
+  virginica       0          0        17
+```
+
+```r
+(tabela[1] + tabela[5] + tabela[9]) / sum(tabela) 
+```
+
+```
+[1] 0.9808
+```
+
+
+## Random Forest
+
+
+
+## Seleção de Variáveis
+
+-->
+
+
+# Produção de Mapas
 
 *Felipe Micail da Silva Smolski*
 
@@ -3981,225 +5370,440 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 \end{flushright}
 
 
-O objetivo deste capítulo é retomar alguns pacotes importantes no RStudio para a
-manipulação e transformação de grandes bases de dados que o pesquisador terá que manejar ao longo dos processos de análise.
+Este capítulo almeja levantar o ferra  mental básico para a construção de mapas simples no RStudio. Ainda, interessa demonstrar os comandos para a manipulação destes tipos de bases de dados, inclusive possibilitando a junção de indicadores de municípios, regiões e países. Estes dados podem ser advindos de institutos de pesquisas ou mesmo dados criados pelo estudante em suas análises.
+
+Os pacotes utilizados neste capítulo são: `tmap`, `maptools`,
+`tmap` e `rgdal`.
+
+## Introdução aos *shapes*
+
+Existem vários *softwares* específicos para a produção de mapas, sejam produtos comerciais ou no formato *software* livre. A grande vantagem da utilização do R para criação de mapas é a utilização dos *shapes* disponibilizadas para vários programas. 
+
+Denominam-se *shapes* os arquivos que contém os elementos gráficos, em formato de ponto, linhas ou polígonos, contendo coordenadas geográficas para um elemento para que possa ser transformado em mapa. O *shape* é formado por três arquivos principais individuais que armazenam os dados: o arquivo ".shp", ".shx" e ".dbf". Além disto, podem ser acompanhados de arquivos ".prj", o ".sbn" e o ".sbx" [@Semace2018].
+
+Os *shapefiles* podem ser obtidos de várias fontes oficiais, como institutos de pesquisa e universidades. A seguir alguns links para *download*:
+
+- IBGE: ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2017/
+<!--
+ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2016/Brasil/BR/
+https://mapas.ibge.gov.br/bases-e-referenciais/bases-cartograficas/malhas-digitais.html
+
+http://dados.gov.br/dataset/malha-geometrica-dos-municipios-brasileiros
+-->
+
+- IPEAGEO: http://www.ipea.gov.br/ipeageo/malhas.html
+
+- Forest Gis: http://forest-gis.com/2009/04/base-de-dados-shapefile-do-brasil-todo.html/
+
+- FEPAM: http://www.fepam.rs.gov.br/biblioteca/geo/bases_geo.asp
 
 
+No exemplo abaixo, é utilizado um *shape* proveniente do IBGE representando os municípios do Estado do Rio Grande do Sul (ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2017/UFs/RS/rs_municipios.zip). Ao *shape* denominado `municipios_IBGE` será dado o nome de "MAPARS", com a utilização do pacote `raster` para carregar a malha:
 
-## Pacote tidyr
 
-Nesta seção será utilizado o pacote `tidyr` para demonstrar algumas funções no tocante da manipulação das bases de dados, tão importante no processo de preperação das informações para posterior análise. Serão utilizadas para demonstração as bases de dados existentes no próprio pacote.
+```r
+library(raster)
+# Carregando o arquivo
+MAPARS=shapefile("D:/Github/livroavancado/mapas/rs_municipios/43MUE250GC_SIR.shp")
 
-Abaixo segue uma demonstração das convenções a respeito das bases de dados. Desta forma verifica-se que cada variável é apresentada em sua respectiva coluna, bem como as observações são apresentadas em sua própria linha e portanto os valores constam em sua própria célula.
+# Excluindo dados inconvenientes
+MAPARS=MAPARS[MAPARS$CD_GEOCMU !="4300001" & MAPARS$CD_GEOCMU !="4300002",]
+```
 
-<div class="figure" style="text-align: center">
-<img src="tidy-1.png" alt="Convenção sobre variáveis, observações e valores" width="80%" />
-<p class="caption">(\#fig:dados)Convenção sobre variáveis, observações e valores</p>
-</div>
+<!--
+#library(tmaptools)
+#library(tmap)
+#library(rgdal)
+#MAPARS=readShapePoly("D:/Github/livroavancado/mapas/RS_Mun97_region/RS_Mun97_region.shp")
+#MAPA_RS=readShapeSpatial('D:/Github/livroavancado/mapas/RS_Mun97_region/RS_Mun97_region.shp')
+#MAPA=readShapePoly(file.choose())
+-->
 
-### Função *spread*
+O arquivo MAPARS se constitui em um *SpatialPolygonsDataFrame*, objeto complexo que carrega informações dos dados (`MAPARS@data`) e demais informações com as coordenadas  para criarem-se os mapas no R. Utilizando a função `summary` podem ser observados alguns dos os itens que compõe este objeto,  o nome do municípios (NM\_MUNICIP) o seu código IBGE (CD\_GEOCMU), lembrando que cada município terá um código de IBGE diferente, informação extremamente útil como será visto posteriormente ao efetuar a manipulação da base de dados e a inclusão de informações provenientes de outras bases. Abaixo efetua-se também a padronização do código IBGE (comando `substr`), mantendo os 6 primeiros dígitos, sendo necessária para que posteriormente sejam agregados outros dados.
 
-A função *spread* é utilizada para transformar os valores constantes em uma coluna em nova configuração de colunas. Ainda, é possível determinar a transformação dos valores com o comando `convert = TRUE` informando o tipo de valores (doubles (numerics), integers, logicals, complexes, ou factors) nas colunas a serem criadas (comando `type.convert()`).
+
+```r
+class(MAPARS)
+```
+
+```
+[1] "SpatialPolygonsDataFrame"
+attr(,"package")
+[1] "sp"
+```
+
+```r
+summary(MAPARS)
+```
+
+```
+Object of class SpatialPolygonsDataFrame
+Coordinates:
+     min    max
+x -57.65 -49.69
+y -33.75 -27.08
+Is projected: FALSE 
+proj4string : [+proj=longlat +ellps=GRS80 +no_defs]
+Data attributes:
+  NM_MUNICIP         CD_GEOCMU        
+ Length:497         Length:497        
+ Class :character   Class :character  
+ Mode  :character   Mode  :character  
+```
+
+```r
+# Corrigindo os dados do código IBGE dos municípios
+MAPARS$CD_GEOCMU=substr(MAPARS$CD_GEOCMU,1,6)
+# Vizualização dos dados principais
+head(MAPARS@data)
+```
+
+```
+   NM_MUNICIP CD_GEOCMU
+0     ACEGUÃ\201    430003
+1 Ã\201GUA SANTA    430005
+2       AGUDO    430010
+3   AJURICABA    430020
+4     ALECRIM    430030
+5    ALEGRETE    430040
+```
+
+Note novamente que este objeto pertence a uma classe diferente (*SpatialPolygonsDataFrame*), indicando que é constituída especialmente de um conjunto de polígonos para a construção de mapas conjuntamente com o carregamento de dados.
+
+A seguir, a função `plot()` pode ser utilizada para a plotagem da malha carregada:
+
+
+```r
+plot(MAPARS)
+```
+
+<img src="index_files/figure-html/unnamed-chunk-141-1.png" width="80%" style="display: block; margin: auto;" />
+
+Um exercício simples é a filtragem dos dados do *shape* pelo nome do município, obtendo assim apenas o mapa da(s) unidade(s) escolhida(s):
 
 
 
 ```r
-require(tidyr)
+plot(MAPARS[MAPARS$NM_MUNICIP=='SANTA ROSA',], 
+    axes="TRUE",  
+    main="Mapa do município de Santa Rosa - RS",
+    border=gray(0.5), 
+    lwd=.5)
 ```
 
-```
-Carregando pacotes exigidos: tidyr
-```
+<img src="index_files/figure-html/unnamed-chunk-142-1.png" width="80%" style="display: block; margin: auto;" />
 
-```r
-table1
-```
+## Pacote tmap
 
-```
-# A tibble: 6 x 4
-  country      year  cases population
-  <chr>       <int>  <int>      <int>
-1 Afghanistan  1999    745   19987071
-2 Afghanistan  2000   2666   20595360
-3 Brazil       1999  37737  172006362
-4 Brazil       2000  80488  174504898
-5 China        1999 212258 1272915272
-6 China        2000 213766 1280428583
-```
+O pacote `tmap` [@tmap] é utilizado para gerar mapas temáticos com relativa facilidade, sendo possível ajustar todos os itens de visualização (legendas, cores, bordas, alinhamento, etc.) para um ajuste desejado do pesquisador. Todas as funções do pacote podem ser encontradas em <https://www.rdocumentation.org/packages/tmap/versions/2.2> ou no endereço <https://www.jstatsoft.org/article/view/v084i06> como exemplos.
 
-Neste exemplo, a coluna `type` abriga os valores `cases` e `population`, as quais terão suas próprias colunas com seus respectivos valores:
-
-
-```r
-spread(table2, type, count)
-```
-
-```
-# A tibble: 6 x 4
-  country      year  cases population
-  <chr>       <int>  <int>      <int>
-1 Afghanistan  1999    745   19987071
-2 Afghanistan  2000   2666   20595360
-3 Brazil       1999  37737  172006362
-4 Brazil       2000  80488  174504898
-5 China        1999 212258 1272915272
-6 China        2000 213766 1280428583
-```
-
-
-### Função *gather*
-
-Já a função *gather* realiza o processo oposto do comando *spread*, pois agrupa o valor de determinadas variável em uma chave comum.
-
-
-```r
-table4a
-```
-
-```
-# A tibble: 3 x 3
-  country     `1999` `2000`
-* <chr>        <int>  <int>
-1 Afghanistan    745   2666
-2 Brazil       37737  80488
-3 China       212258 213766
-```
-
-Abaixo a transformação das variáveis `1999` e `2000` em uma única variável `year`, mantendo os valores inseridos na variável `cases`:
-
-
-```r
-gather(table4a, "year", "cases", 2:3)
-```
-
-```
-# A tibble: 6 x 3
-  country     year   cases
-  <chr>       <chr>  <int>
-1 Afghanistan 1999     745
-2 Brazil      1999   37737
-3 China       1999  212258
-4 Afghanistan 2000    2666
-5 Brazil      2000   80488
-6 China       2000  213766
-```
-
-
-
-### Função *separate*
-
-A função *separate* é utilizada para partir uma determinada variável em novas variáveis da base de dados.
-
-
-```r
-table3
-```
-
-```
-# A tibble: 6 x 3
-  country      year rate             
-* <chr>       <int> <chr>            
-1 Afghanistan  1999 745/19987071     
-2 Afghanistan  2000 2666/20595360    
-3 Brazil       1999 37737/172006362  
-4 Brazil       2000 80488/174504898  
-5 China        1999 212258/1272915272
-6 China        2000 213766/1280428583
-```
-
-Neste exemplo, a variável `rate`, que está composta de duas informações separadas pelo caractere "$/$", será separada nas novas variáveis `cases` e `population`:
+Inicialmente utiliza-se a função `tm_shape` para carregar a base, `tm_fill` para plotar o fundo e `tm_borders` cria as bordas entre os municípios. A função `tmap_mode` não é obrigatória, e varia da apresentação tradicional do mapa ("plot") e da apresentação para web ("view").
 
 
 
 ```r
-separate(table3, rate, into = c("cases", "population"),sep = "/")
+library(tmap)
+tmap_mode("plot")
+tm_shape(MAPARS)+
+  tm_fill()+
+  tm_borders()
 ```
 
-```
-# A tibble: 6 x 4
-  country      year cases  population
-  <chr>       <int> <chr>  <chr>     
-1 Afghanistan  1999 745    19987071  
-2 Afghanistan  2000 2666   20595360  
-3 Brazil       1999 37737  172006362 
-4 Brazil       2000 80488  174504898 
-5 China        1999 212258 1272915272
-6 China        2000 213766 1280428583
-```
+<img src="index_files/figure-html/unnamed-chunk-143-1.png" width="80%" style="display: block; margin: auto;" />
 
-Da mesma forma é possível criar duas novas variáveis a partir do segundo caractere do valor que consta nas células utilizando o comando `sep=2`:
+
+### Adicionando dados ao mapa
+
+Para enriquecer a análise, serão incluídos novos dados relativos aos municípios do Rio Grande do Sul provenientes da @FEE2016, como o indicador de IDESE (Índice de Desenvolvimento Socioeconômico), PIB (Produto Interno Bruto), população, etc.
+
 
 
 ```r
-separate(table3, year, into = c("century", "year"), sep = 2)
+#Carrega a planilha com as informações
+library(readr)
+RS2013 <- read_delim("mapas/RS2013.csv", 
+    ";", escape_double = FALSE, trim_ws = TRUE)
+
+# Corrigindo o campo com o código do IBGE
+names(RS2013)[3]="CD_GEOCMU" 
+# Corrigindo os dados do código IBGE dos municípios
+RS2013$CD_GEOCMU=substr(RS2013$CD_GEOCMU,1,6)
+
+head(RS2013)
 ```
 
 ```
-# A tibble: 6 x 4
-  country     century year  rate             
-  <chr>       <chr>   <chr> <chr>            
-1 Afghanistan 19      99    745/19987071     
-2 Afghanistan 20      00    2666/20595360    
-3 Brazil      19      99    37737/172006362  
-4 Brazil      20      00    80488/174504898  
-5 China       19      99    212258/1272915272
-6 China       20      00    213766/1280428583
+# A tibble: 6 x 20
+  Label_N COREDE CD_GEOCMU IDESE_2013 POUPANCA OP_CREDITO `OBRIGACOES _RE~
+  <chr>   <chr>  <chr>     <chr>         <dbl>      <dbl>            <dbl>
+1 Alto A~ "Alto~ 430055    0,7973015~       NA         NA               NA
+2 Barros~ "Alto~ 430200    0,6103697~  7647609   27295139             5931
+3 Campos~ "Alto~ 430410    0,7352054~       NA         NA               NA
+4 Espumo~ "Alto~ 430750    0,79296863 45673907  230697134            66237
+5 Fontou~ "Alto~ 430830    0,6336514~ 13985159   54390691             4177
+6 Gramad~ "Alto~ 430915    0,6578415~  1119359    2073680                0
+# ... with 13 more variables: DEP_A_VISTA_PRIV <dbl>, DEP_A_VISTA_GOV <dbl>,
+#   DEP_PRAZO <dbl>, COOP_CRED <dbl>, CEF <dbl>, BANCO_COM <dbl>,
+#   N_VINCULOS_EMP <dbl>, DENS_DEM_HABKM2 <dbl>, IMPOSTOS <dbl>,
+#   AREA_KM2 <dbl>, PIB_PERC <dbl>, PIB <dbl>, POPULACAO <dbl>
 ```
 
-### Função *unite*
+Para agregar estas informações aos dados das malhas, é preciso em primeiro lugar que se tenha um campo em comum único dos arquivos. Neste caso, o código do IBGE dos municípios ("CD\_GEOCMU") será utilizado, sendo  que precisa ser exatamente igual nos dois objetos que se quer unir, para que as informações de determinado município sejam corretamente unidas às informações geográficas da malha para o mapa.
 
-A função `unite` é oposta à função *separate*:
 
 
 ```r
-table5
+#Une a base de dados da planilha com o mapa pelo nome do município
+RS2013MAPA=merge(MAPARS,RS2013,by="CD_GEOCMU", all.x=T) 
+names(RS2013MAPA)
 ```
 
 ```
-# A tibble: 6 x 4
-  country     century year  rate             
-* <chr>       <chr>   <chr> <chr>            
-1 Afghanistan 19      99    745/19987071     
-2 Afghanistan 20      00    2666/20595360    
-3 Brazil      19      99    37737/172006362  
-4 Brazil      20      00    80488/174504898  
-5 China       19      99    212258/1272915272
-6 China       20      00    213766/1280428583
+ [1] "CD_GEOCMU"               "NM_MUNICIP"             
+ [3] "Label_N"                 "COREDE"                 
+ [5] "IDESE_2013"              "POUPANCA"               
+ [7] "OP_CREDITO"              "OBRIGACOES _RECEBIMENTO"
+ [9] "DEP_A_VISTA_PRIV"        "DEP_A_VISTA_GOV"        
+[11] "DEP_PRAZO"               "COOP_CRED"              
+[13] "CEF"                     "BANCO_COM"              
+[15] "N_VINCULOS_EMP"          "DENS_DEM_HABKM2"        
+[17] "IMPOSTOS"                "AREA_KM2"               
+[19] "PIB_PERC"                "PIB"                    
+[21] "POPULACAO"              
 ```
 
-Neste exemplo, recria a variável `new` a partir dos dados de `century` e `year`:
+```r
+head(RS2013MAPA@data)
+```
+
+```
+  CD_GEOCMU  NM_MUNICIP       Label_N             COREDE  IDESE_2013  POUPANCA
+1    430003     ACEGUÃ\201     Acegu<e1>           Campanha 0,718832327    654998
+2    430005 Ã\201GUA SANTA <c1>gua Santa           Nordeste 0,867600828   5771664
+3    430010       AGUDO         Agudo            Central 0,702817421  60413751
+4    430020   AJURICABA     Ajuricaba  Noroeste Colonial 0,785470135  10097428
+5    430030     ALECRIM       Alecrim Fronteira Noroeste 0,677111834  11317058
+6    430040    ALEGRETE      Alegrete    Fronteira Oeste 0,726877131 143979215
+  OP_CREDITO OBRIGACOES _RECEBIMENTO DEP_A_VISTA_PRIV DEP_A_VISTA_GOV DEP_PRAZO
+1    2123323                     990           436095          211613         0
+2   58309611                   40094          1814681           89008   3205509
+3  129527759                   28351          7005194          593901   5826631
+4   89098650                   35621          4739225         1116209   2322985
+5   14649086                     265          1754832          150166    740890
+6  747409945                  232866         42122392         1138492  63194800
+  COOP_CRED CEF BANCO_COM N_VINCULOS_EMP DENS_DEM_HABKM2 IMPOSTOS AREA_KM2
+1        NA  NA         1           1075       2.922e+09  7712922  1549383
+2        NA  NA         1            743       1.293e+08  2339861   291792
+3         1   1         3           3374       3.105e+09 26733502   536114
+4        NA  NA         2           1610       2.223e+08 12668813   323239
+5        NA  NA         2            690       2.163e+09  3193931   314743
+6        NA   1         6          20091       9.794e+09 96877929  7803954
+  PIB_PERC       PIB POPULACAO
+1   383451 1.778e+08      4623
+2  6343962 2.435e+08      3825
+3   206121 3.537e+08     17044
+4  2715728 2.015e+08      7568
+5  1202022 8.426e+07      6905
+6  1902703 1.504e+09     78056
+```
+
+
+### Plotando o mapa e melhorando a visualização
+
+Após unidas as informações da malha e dos índices para todos os municípios, é possível criar o mapa temático. Além de utilizar a função `tm_shape` para carregar os novos dados e `tm_fill` inclui a área de cada município (KM$^2$). Ainda é possível definir opções de formato (`tm_format_Europe2`), de estilo (`tm_style_classic`), ajustar a legenda (`tm_legend`), incluir o compasso (`tm_compass`), a escala (`tm_scale_bar`). 
+
 
 
 ```r
-unite(table5, "new", century, year, sep = "")
+    tm_shape(RS2013MAPA)+
+      tm_fill("AREA_KM2", auto.palette.mapping=FALSE, 
+              title="Área por município")+
+      tm_format_Europe2()+
+      tm_style_classic()+
+      tm_legend(position=c("left","bottom"))+
+      tm_compass()+
+      tm_scale_bar()+
+      tm_borders(alpha=.5)+
+  tm_bubbles(size = 'PIB',col = '#b3de69', title.size='PIB') +
+  tm_legend(legend.format = list(text.separator= "a"))
+```
+
+<img src="index_files/figure-html/unnamed-chunk-146-1.png" width="80%" style="display: block; margin: auto;" />
+
+Algumas opções de layout podem ser escolhidas pelo pesquisador com as funções:`tm_format_World`,`tm_format_World_wide`, `tm_format_Europe`, `tm_format_Europe2`, `tm_format_Europe_wide`, `tm_format_NLD`, `tm_format_NLD_wide`, `tm_format_NLD_wide`. Seguem as opções de estilo do gráfico:`tm_style_white`, `tm_style_gray`, `tm_style_natural`, `tm_style_grey`, `tm_style_cobalt`, `tm_style_col_blind`, `tm_style_albatross`, `tm_style_beaver`, `tm_style_bw`, `tm_style_classic`.
+
+
+Abaixo segue um exemplo de criação e plotagem de múltiplos mapas na mesma imagem. A função `style` determinda como serão determinadas as cores do mapa, juntamente com a função `palette`. Já a função `breaks` ajuda a determinar os pontos de corte para a plotagem das cores, no primeiro mapa utilizando a função `quantile` e no segundo determinando intervalos de valores pré-determinados pelo autor.
+
+
+```r
+tm_shape(RS2013MAPA) +
+    tm_polygons(c("PIB", "POPULACAO"), 
+        style=c("kmeans","fixed"),
+        palette=list("Reds", "Blues"),
+        auto.palette.mapping=FALSE,
+        breaks=list(quantile(RS2013MAPA$POPULACAO),
+                    c(-Inf,100000,200000,Inf)),
+        title=c("PIB", "População")) +
+tm_format_World() + 
+tm_style_grey()+
+tm_compass()+
+tm_scale_bar()+
+tm_legend(legend.format = list(text.separator= "a"))+
+tm_layout(legend.position = c("LEFT","BOTTOM"),
+            legend.frame = FALSE, title = c("Mapa 1","Mapa 2"))
+```
+
+<img src="index_files/figure-html/unnamed-chunk-147-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+É possível ainda efetuar a filtragem de uma determinada característica para a criação do mapa. No exemplo, são filtrados os municípios do Corede Sul:
+
+
+
+```r
+tm_shape(RS2013MAPA[RS2013MAPA$COREDE =='Sul',]) +
+    tm_polygons("POPULACAO", title="Pop", 
+                style="kmeans", text="Label_N") +
+    tm_facets("COREDE") +
+    tm_text("NM_MUNICIP", scale=0.45)+
+tm_style_grey()+
+tm_layout(inner.margins = c(.03,.03,.03,.03),
+            main.title = "Municípios do Corede Sul",
+            main.title.position = 'center')+
+tm_legend(legend.format = list(text.separator= "a"))  
+```
+
+<img src="index_files/figure-html/unnamed-chunk-148-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+### Utilizando dados de fontes externas: pacote datasus
+
+Encontrar informações de bases de dados que podem ser diretamente utilizadas no R é de extrama importância aos pesquisadores. Neste exemplo são demonstrados alguns comandos para utilizar o pacote datasus [@datasus], que agiliza a utilização de alguns dados do Ministério da Saúde (<http://www2.datasus.gov.br/DATASUS/index.php?area=02>).
+
+Utilizando o pacote `devtools` (`library(devtools)`) é feita ainstalação do pacote `datasus` diretamente do repositório Github pelo comando `install_github("rpradosiqueira/datasus")`.
+
+Após instalado o pacote `datasus`, utiliza-se a função `sinasc_nv_uf` para carregar a quantidade de nascimentos por município:
+
+
+
+```r
+library(datasus)
+nascimentos=sinasc_nv_uf(uf = "rs",
+             periodo = c(2014:2016),
+             coluna = "Ano do nascimento")
+head(nascimentos)
 ```
 
 ```
-# A tibble: 6 x 3
-  country     new   rate             
-  <chr>       <chr> <chr>            
-1 Afghanistan 1999  745/19987071     
-2 Afghanistan 2000  2666/20595360    
-3 Brazil      1999  37737/172006362  
-4 Brazil      2000  80488/174504898  
-5 China       1999  212258/1272915272
-6 China       2000  213766/1280428583
+          Município   2014   2015   2016  Total
+1             TOTAL 143315 148359 141411 433085
+2     430003 Aceguá     73     55     49    177
+3 430005 Água Santa     48     36     43    127
+4      430010 Agudo    162    161    165    488
+5  430020 Ajuricaba     61     68     78    207
+6    430030 Alecrim     59     48     57    164
 ```
 
-## Pacote dplyr
+Efetua-se uma limpeza da linha de total, bem como a criação de uma coluna com o código do IBGE ("CD\_GEOCMU"):
+
+
+```r
+nascimentos=nascimentos[-1,]
+library(tidyr)
+nascimentos <- separate(nascimentos, `Município`, c("CD_GEOCMU", "NM_MUNICIP"), sep = 6)
+head(nascimentos)
+```
+
+```
+  CD_GEOCMU  NM_MUNICIP 2014 2015 2016 Total
+2    430003      Aceguá   73   55   49   177
+3    430005  Água Santa   48   36   43   127
+4    430010       Agudo  162  161  165   488
+5    430020   Ajuricaba   61   68   78   207
+6    430030     Alecrim   59   48   57   164
+7    430040    Alegrete  925  954  858  2737
+```
+
+Após é possível criar novo mapa ("RS2013MAPAN"), unindo as informações novas com o mapa anterior:
+
+
+```r
+RS2013MAPAN=merge(RS2013MAPA,nascimentos,by="CD_GEOCMU", all.x=T) 
+names(RS2013MAPAN)
+```
+
+```
+ [1] "CD_GEOCMU"               "NM_MUNICIP.x"           
+ [3] "Label_N"                 "COREDE"                 
+ [5] "IDESE_2013"              "POUPANCA"               
+ [7] "OP_CREDITO"              "OBRIGACOES _RECEBIMENTO"
+ [9] "DEP_A_VISTA_PRIV"        "DEP_A_VISTA_GOV"        
+[11] "DEP_PRAZO"               "COOP_CRED"              
+[13] "CEF"                     "BANCO_COM"              
+[15] "N_VINCULOS_EMP"          "DENS_DEM_HABKM2"        
+[17] "IMPOSTOS"                "AREA_KM2"               
+[19] "PIB_PERC"                "PIB"                    
+[21] "POPULACAO"               "NM_MUNICIP.y"           
+[23] "2014"                    "2015"                   
+[25] "2016"                    "Total"                  
+```
+
+
+Então pode ser criado o mapa com as informações de nascimentos por município. Neste caso, foi utilizado o `style` denomnado `kmeans`, pois utilizamos os quartis para determinar as faixas de cores das quantidades de nascimentos:
+<!--
+
+```r
+   tm_shape(RS2013MAPAN)+
+      tm_fill("2016", auto.palette.mapping=FALSE, title="Nascimentos por município",textNA="NA")+
+      tm_legend(position=c("left","bottom"))+
+      tm_compass()+
+      tm_scale_bar()+
+      tm_borders(alpha=.5)+
+     tm_legend(legend.format = list(text.separator= "a"))  +
+     tm_layout(legend.position = c("LEFT","BOTTOM"),
+            legend.frame = FALSE)
+```
+
+<img src="index_files/figure-html/unnamed-chunk-152-1.png" width="80%" style="display: block; margin: auto;" />
+-->
+
+
+```r
+quantile(RS2013MAPAN$`2016`)
+```
+
+```
+   0%   25%   50%   75%  100% 
+    4    28    55   175 18635 
+```
 
 
 
+```r
+   tm_shape(RS2013MAPAN)+
+      tm_fill("2016", auto.palette.mapping=FALSE, 
+              title="Nascimentos por município (2016)",
+              textNA="NA",
+              palette="Greens",
+              style = "kmeans",
+              breaks = quantile(RS2013MAPAN$`2016`))+
+      tm_legend(position=c("left","bottom"))+
+      tm_compass()+
+      tm_scale_bar()+
+      tm_borders(alpha=.5)+
+     tm_legend(legend.format = list(text.separator= "a"))  +
+     tm_layout(legend.position = c("LEFT","BOTTOM"),
+            legend.frame = FALSE)
+```
 
+```
+Warning: The argument auto.palette.mapping is deprecated. Please use midpoint
+for numeric data and stretch.palette for categorical data to control the palette
+mapping.
+```
 
-
-
-
-
-
-
-
-
+<img src="index_files/figure-html/unnamed-chunk-154-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 \setlength{\parindent}{0.0cm}

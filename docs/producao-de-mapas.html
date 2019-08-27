@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-Br" xml:lang="pt-Br">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 9 Produção de Mapas | Software R: curso avançado</title>
+  <meta name="description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 9 Produção de Mapas | Software R: curso avançado" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://rstub.github.io/bookdown-chapterbib/" />
+  
+  <meta property="og:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  <meta name="github-repo" content="rstub/bookdown-chapterbib" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 9 Produção de Mapas | Software R: curso avançado" />
+  
+  <meta name="twitter:description" content="Curso avançado de análise estatística com R da UFFS Cerro Largo - RS" />
+  
+
+<meta name="author" content="Iara Denise Endruweit Battisti" />
+<meta name="author" content="Felipe Micail da Silva Smolski" />
+
+
+<meta name="date" content="2019-08-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="regressao-de-poisson.html">
+<link rel="next" href="referencias.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112034801-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-112034801-3');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">UFFS - Cerro Largo</a></li>
+<img src="logo1.png" alt="R" align="midle">
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introdução</a></li>
+<li class="chapter" data-level="1" data-path="delin.html"><a href="delin.html"><i class="fa fa-check"></i><b>1</b> Delineamentos Experimentais</a><ul>
+<li class="chapter" data-level="1.1" data-path="delin.html"><a href="delin.html#principios-basicos-da-experimentacao"><i class="fa fa-check"></i><b>1.1</b> Princípios básicos da Experimentação</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="delin.html"><a href="delin.html#repeticao"><i class="fa fa-check"></i><b>1.1.1</b> Repetição</a></li>
+<li class="chapter" data-level="1.1.2" data-path="delin.html"><a href="delin.html#casualizacao"><i class="fa fa-check"></i><b>1.1.2</b> Casualização</a></li>
+<li class="chapter" data-level="1.1.3" data-path="delin.html"><a href="delin.html#controle-local"><i class="fa fa-check"></i><b>1.1.3</b> Controle local</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="delin.html"><a href="delin.html#analise-de-variancia"><i class="fa fa-check"></i><b>1.2</b> Análise de Variância</a></li>
+<li class="chapter" data-level="1.3" data-path="delin.html"><a href="delin.html#hipoteses-estatisticas"><i class="fa fa-check"></i><b>1.3</b> Hipóteses estatísticas</a></li>
+<li class="chapter" data-level="1.4" data-path="delin.html"><a href="delin.html#delineamento-inteiramente-causalizado-dic"><i class="fa fa-check"></i><b>1.4</b> Delineamento Inteiramente Causalizado (DIC)</a></li>
+<li class="chapter" data-level="1.5" data-path="delin.html"><a href="delin.html#delineamento-blocos-casualizados-dbc"><i class="fa fa-check"></i><b>1.5</b> Delineamento Blocos Casualizados (DBC)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analisf.html"><a href="analisf.html"><i class="fa fa-check"></i><b>2</b> Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.1" data-path="analisf.html"><a href="analisf.html#pressupostos"><i class="fa fa-check"></i><b>2.1</b> Pressupostos</a></li>
+<li class="chapter" data-level="2.2" data-path="analisf.html"><a href="analisf.html#estatisticas-associadas-a-analise-fatorial"><i class="fa fa-check"></i><b>2.2</b> Estatísticas Associadas a Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3" data-path="analisf.html"><a href="analisf.html#passos-da-analise-fatorial"><i class="fa fa-check"></i><b>2.3</b> Passos da Análise Fatorial</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="analisf.html"><a href="analisf.html#construcao-da-matriz-de-correlacao"><i class="fa fa-check"></i><b>2.3.1</b> Construção da Matriz de Correlação</a></li>
+<li class="chapter" data-level="2.3.2" data-path="analisf.html"><a href="analisf.html#metodo-de-analise-fatorial"><i class="fa fa-check"></i><b>2.3.2</b> Método de Análise Fatorial</a></li>
+<li class="chapter" data-level="2.3.3" data-path="analisf.html"><a href="analisf.html#determinacao-do-numero-de-fatores"><i class="fa fa-check"></i><b>2.3.3</b> Determinação do número de fatores</a></li>
+<li class="chapter" data-level="2.3.4" data-path="analisf.html"><a href="analisf.html#analise-de-componentes-principais"><i class="fa fa-check"></i><b>2.3.4</b> Análise de Componentes Principais</a></li>
+<li class="chapter" data-level="2.3.5" data-path="analisf.html"><a href="analisf.html#matriz-rotada-do-fator"><i class="fa fa-check"></i><b>2.3.5</b> Matriz Rotada do Fator</a></li>
+<li class="chapter" data-level="2.3.6" data-path="analisf.html"><a href="analisf.html#autovalores-1"><i class="fa fa-check"></i><b>2.3.6</b> Autovalores</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html"><i class="fa fa-check"></i><b>3</b> Análise de Componentes Principais</a><ul>
+<li class="chapter" data-level="3.1" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html#preparacao-dos-dados"><i class="fa fa-check"></i><b>3.1</b> Preparação dos dados</a></li>
+<li class="chapter" data-level="3.2" data-path="analise-de-componentes-principais-1.html"><a href="analise-de-componentes-principais-1.html#criacao-dos-componentes"><i class="fa fa-check"></i><b>3.2</b> Criação dos componentes</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html"><i class="fa fa-check"></i><b>4</b> Análise de Clusters</a><ul>
+<li class="chapter" data-level="4.1" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#k-means"><i class="fa fa-check"></i><b>4.1</b> K-Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analise-de-clusters.html"><a href="analise-de-clusters.html#clusterizacao-aglomerativa"><i class="fa fa-check"></i><b>4.2</b> Clusterização Aglomerativa</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regressao-multipla.html"><a href="regressao-multipla.html"><i class="fa fa-check"></i><b>5</b> Regressão Múltipla</a><ul>
+<li class="chapter" data-level="5.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#modelo-geral"><i class="fa fa-check"></i><b>5.1</b> Modelo geral</a></li>
+<li class="chapter" data-level="5.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#variavel-dummy"><i class="fa fa-check"></i><b>5.2</b> Variável dummy</a></li>
+<li class="chapter" data-level="5.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#interacao-entre-variaveis-preditoras"><i class="fa fa-check"></i><b>5.3</b> Interação entre variáveis preditoras</a></li>
+<li class="chapter" data-level="5.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#metodos-selecao-de-variaveis-na-regressao-multipla"><i class="fa fa-check"></i><b>5.4</b> Métodos seleção de variáveis na regressão múltipla</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="regressao-multipla.html"><a href="regressao-multipla.html#full-model-modelo-completo"><i class="fa fa-check"></i><b>5.4.1</b> Full model – Modelo completo</a></li>
+<li class="chapter" data-level="5.4.2" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-backward"><i class="fa fa-check"></i><b>5.4.2</b> Procedimento backward</a></li>
+<li class="chapter" data-level="5.4.3" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-forward"><i class="fa fa-check"></i><b>5.4.3</b> Procedimento forward</a></li>
+<li class="chapter" data-level="5.4.4" data-path="regressao-multipla.html"><a href="regressao-multipla.html#procedimento-stepwise"><i class="fa fa-check"></i><b>5.4.4</b> Procedimento stepwise</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="regressao-multipla.html"><a href="regressao-multipla.html#roteiro-para-o-diagnostico-do-modelo-de-regressao-multipla-ajustado"><i class="fa fa-check"></i><b>5.5</b> Roteiro para o diagnóstico do modelo de regressão múltipla ajustado</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html"><i class="fa fa-check"></i><b>6</b> Regressão com Dados em Painel</a><ul>
+<li class="chapter" data-level="6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#carregamento-e-transformacao-dos-dados"><i class="fa fa-check"></i><b>6.1</b> Carregamento e transformação dos dados</a></li>
+<li class="chapter" data-level="6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-pooled"><i class="fa fa-check"></i><b>6.2</b> Modelo Pooled</a></li>
+<li class="chapter" data-level="6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-fixos"><i class="fa fa-check"></i><b>6.3</b> Modelo Efeitos Fixos</a></li>
+<li class="chapter" data-level="6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#modelo-efeitos-aleatorios"><i class="fa fa-check"></i><b>6.4</b> Modelo Efeitos Aleatórios</a></li>
+<li class="chapter" data-level="6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#comparacao-e-escolha-dos-modelos"><i class="fa fa-check"></i><b>6.5</b> Comparação e escolha dos modelos</a></li>
+<li class="chapter" data-level="6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#alguns-testes-para-os-modelos"><i class="fa fa-check"></i><b>6.6</b> Alguns testes para os modelos</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-dependencia-transversal-cross-sectional"><i class="fa fa-check"></i><b>6.6.1</b> Testando dependência transversal (<em>cross-sectional</em>)</a></li>
+<li class="chapter" data-level="6.6.2" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#normalidade-dos-residuos"><i class="fa fa-check"></i><b>6.6.2</b> Normalidade dos resíduos</a></li>
+<li class="chapter" data-level="6.6.3" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#homocedasticidade-dos-residuos"><i class="fa fa-check"></i><b>6.6.3</b> Homocedasticidade dos resíduos</a></li>
+<li class="chapter" data-level="6.6.4" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-correlacao-serial"><i class="fa fa-check"></i><b>6.6.4</b> Testando correlação serial</a></li>
+<li class="chapter" data-level="6.6.5" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#teste-para-efeitos-individuais-ou-de-tempo"><i class="fa fa-check"></i><b>6.6.5</b> Teste para efeitos individuais ou de tempo</a></li>
+<li class="chapter" data-level="6.6.6" data-path="regressao-com-dados-em-painel.html"><a href="regressao-com-dados-em-painel.html#testando-raizes-unitarias"><i class="fa fa-check"></i><b>6.6.6</b> Testando raízes unitárias</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="reglog.html"><a href="reglog.html"><i class="fa fa-check"></i><b>7</b> Regressão Logística</a><ul>
+<li class="chapter" data-level="7.1" data-path="reglog.html"><a href="reglog.html#o-modelo"><i class="fa fa-check"></i><b>7.1</b> O modelo</a></li>
+<li class="chapter" data-level="7.2" data-path="reglog.html"><a href="reglog.html#regressao-logistica-simples"><i class="fa fa-check"></i><b>7.2</b> Regressão Logística Simples</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="reglog.html"><a href="reglog.html#estimando-a-razao-de-chances"><i class="fa fa-check"></i><b>7.2.1</b> Estimando a Razão de Chances</a></li>
+<li class="chapter" data-level="7.2.2" data-path="reglog.html"><a href="reglog.html#determinando-o-intervalo-de-confianca"><i class="fa fa-check"></i><b>7.2.2</b> Determinando o Intervalo de Confiança</a></li>
+<li class="chapter" data-level="7.2.3" data-path="reglog.html"><a href="reglog.html#predicao-de-probabilidades"><i class="fa fa-check"></i><b>7.2.3</b> Predição de Probabilidades</a></li>
+<li class="chapter" data-level="7.2.4" data-path="reglog.html"><a href="reglog.html#matriz-de-confusao"><i class="fa fa-check"></i><b>7.2.4</b> Matriz de Confusão</a></li>
+<li class="chapter" data-level="7.2.5" data-path="reglog.html"><a href="reglog.html#curva-roc"><i class="fa fa-check"></i><b>7.2.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="7.2.6" data-path="reglog.html"><a href="reglog.html#o-teste-hosmer-e-lemeshow"><i class="fa fa-check"></i><b>7.2.6</b> O teste Hosmer e Lemeshow</a></li>
+<li class="chapter" data-level="7.2.7" data-path="reglog.html"><a href="reglog.html#pseudo-r2"><i class="fa fa-check"></i><b>7.2.7</b> Pseudo R<span class="math inline">\(^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="reglog.html"><a href="reglog.html#regressao-logistica-multipla"><i class="fa fa-check"></i><b>7.3</b> Regressão Logística Múltipla</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="reglog.html"><a href="reglog.html#metodo-stepwise"><i class="fa fa-check"></i><b>7.3.1</b> Método Stepwise</a></li>
+<li class="chapter" data-level="7.3.2" data-path="reglog.html"><a href="reglog.html#vif---variance-inflation-factor"><i class="fa fa-check"></i><b>7.3.2</b> VIF - Variance Inflation Factor</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="reglog.html"><a href="reglog.html#regressao-logistica-multipla-com-variavel-categorica"><i class="fa fa-check"></i><b>7.4</b> Regressão Logística Múltipla com variável categórica</a></li>
+<li class="chapter" data-level="7.5" data-path="reglog.html"><a href="reglog.html#exercicios"><i class="fa fa-check"></i><b>7.5</b> Exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html"><i class="fa fa-check"></i><b>8</b> Regressão de Poisson</a><ul>
+<li class="chapter" data-level="8.1" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#o-modelo-1"><i class="fa fa-check"></i><b>8.1</b> O modelo</a></li>
+<li class="chapter" data-level="8.2" data-path="regressao-de-poisson.html"><a href="regressao-de-poisson.html#estimando-os-parametros-do-modelo"><i class="fa fa-check"></i><b>8.2</b> Estimando os parâmetros do modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html"><i class="fa fa-check"></i><b>9</b> Produção de Mapas</a><ul>
+<li class="chapter" data-level="9.1" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#introducao-aos-shapes"><i class="fa fa-check"></i><b>9.1</b> Introdução aos <em>shapes</em></a></li>
+<li class="chapter" data-level="9.2" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#pacote-tmap"><i class="fa fa-check"></i><b>9.2</b> Pacote tmap</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#adicionando-dados-ao-mapa"><i class="fa fa-check"></i><b>9.2.1</b> Adicionando dados ao mapa</a></li>
+<li class="chapter" data-level="9.2.2" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#plotando-o-mapa-e-melhorando-a-visualizacao"><i class="fa fa-check"></i><b>9.2.2</b> Plotando o mapa e melhorando a visualização</a></li>
+<li class="chapter" data-level="9.2.3" data-path="producao-de-mapas.html"><a href="producao-de-mapas.html#utilizando-dados-de-fontes-externas-pacote-datasus"><i class="fa fa-check"></i><b>9.2.3</b> Utilizando dados de fontes externas: pacote datasus</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referências</a></li>
+<li class="divider"></li>
+<li><a href="https://smolski.github.io/softwarelivrer/" target="blank">Curso de Extensão</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Software R: curso avançado</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="producao-de-mapas" class="section level1">
+<h1><span class="header-section-number">Capítulo 9</span> Produção de Mapas</h1>
+<p><em>Felipe Micail da Silva Smolski</em></p>
+
+<p>Este capítulo almeja levantar o ferra mental básico para a construção de mapas simples no RStudio. Ainda, interessa demonstrar os comandos para a manipulação destes tipos de bases de dados, inclusive possibilitando a junção de indicadores de municípios, regiões e países. Estes dados podem ser advindos de institutos de pesquisas ou mesmo dados criados pelo estudante em suas análises.</p>
+<p>Os pacotes utilizados neste capítulo são: <code>tmap</code>, <code>maptools</code>,
+<code>tmap</code> e <code>rgdal</code>.</p>
+<div id="introducao-aos-shapes" class="section level2">
+<h2><span class="header-section-number">9.1</span> Introdução aos <em>shapes</em></h2>
+<p>Existem vários <em>softwares</em> específicos para a produção de mapas, sejam produtos comerciais ou no formato <em>software</em> livre. A grande vantagem da utilização do R para criação de mapas é a utilização dos <em>shapes</em> disponibilizadas para vários programas.</p>
+<p>Denominam-se <em>shapes</em> os arquivos que contém os elementos gráficos, em formato de ponto, linhas ou polígonos, contendo coordenadas geográficas para um elemento para que possa ser transformado em mapa. O <em>shape</em> é formado por três arquivos principais individuais que armazenam os dados: o arquivo “.shp”, “.shx” e “.dbf”. Além disto, podem ser acompanhados de arquivos “.prj”, o “.sbn” e o “.sbx” <span class="citation">(Semace <a href="#ref-Semace2018">2018</a>)</span>.</p>
+<p>Os <em>shapefiles</em> podem ser obtidos de várias fontes oficiais, como institutos de pesquisa e universidades. A seguir alguns links para <em>download</em>:</p>
+<ul>
+<li><p>IBGE: <a href="ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2017/" class="uri">ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2017/</a>
+<!--
+ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2016/Brasil/BR/
+https://mapas.ibge.gov.br/bases-e-referenciais/bases-cartograficas/malhas-digitais.html
+
+http://dados.gov.br/dataset/malha-geometrica-dos-municipios-brasileiros
+--></p></li>
+<li><p>IPEAGEO: <a href="http://www.ipea.gov.br/ipeageo/malhas.html" class="uri">http://www.ipea.gov.br/ipeageo/malhas.html</a></p></li>
+<li><p>Forest Gis: <a href="http://forest-gis.com/2009/04/base-de-dados-shapefile-do-brasil-todo.html/" class="uri">http://forest-gis.com/2009/04/base-de-dados-shapefile-do-brasil-todo.html/</a></p></li>
+<li><p>FEPAM: <a href="http://www.fepam.rs.gov.br/biblioteca/geo/bases_geo.asp" class="uri">http://www.fepam.rs.gov.br/biblioteca/geo/bases_geo.asp</a></p></li>
+</ul>
+<p>No exemplo abaixo, é utilizado um <em>shape</em> proveniente do IBGE representando os municípios do Estado do Rio Grande do Sul (<a href="ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2017/UFs/RS/rs_municipios.zip" class="uri">ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2017/UFs/RS/rs_municipios.zip</a>). Ao <em>shape</em> denominado <code>municipios_IBGE</code> será dado o nome de “MAPARS”, com a utilização do pacote <code>raster</code> para carregar a malha:</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" title="1"><span class="kw">library</span>(raster)</a>
+<a class="sourceLine" id="cb280-2" title="2"><span class="co"># Carregando o arquivo</span></a>
+<a class="sourceLine" id="cb280-3" title="3">MAPARS=<span class="kw">shapefile</span>(<span class="st">&quot;D:/Github/livroavancado/mapas/rs_municipios/43MUE250GC_SIR.shp&quot;</span>)</a>
+<a class="sourceLine" id="cb280-4" title="4"></a>
+<a class="sourceLine" id="cb280-5" title="5"><span class="co"># Excluindo dados inconvenientes</span></a>
+<a class="sourceLine" id="cb280-6" title="6">MAPARS=MAPARS[MAPARS<span class="op">$</span>CD_GEOCMU <span class="op">!=</span><span class="st">&quot;4300001&quot;</span> <span class="op">&amp;</span><span class="st"> </span>MAPARS<span class="op">$</span>CD_GEOCMU <span class="op">!=</span><span class="st">&quot;4300002&quot;</span>,]</a></code></pre></div>
+<!--
+#library(tmaptools)
+#library(tmap)
+#library(rgdal)
+#MAPARS=readShapePoly("D:/Github/livroavancado/mapas/RS_Mun97_region/RS_Mun97_region.shp")
+#MAPA_RS=readShapeSpatial('D:/Github/livroavancado/mapas/RS_Mun97_region/RS_Mun97_region.shp')
+#MAPA=readShapePoly(file.choose())
+-->
+<p>O arquivo MAPARS se constitui em um <em>SpatialPolygonsDataFrame</em>, objeto complexo que carrega informações dos dados (<code>MAPARS@data</code>) e demais informações com as coordenadas para criarem-se os mapas no R. Utilizando a função <code>summary</code> podem ser observados alguns dos os itens que compõe este objeto, o nome do municípios (NM_MUNICIP) o seu código IBGE (CD_GEOCMU), lembrando que cada município terá um código de IBGE diferente, informação extremamente útil como será visto posteriormente ao efetuar a manipulação da base de dados e a inclusão de informações provenientes de outras bases. Abaixo efetua-se também a padronização do código IBGE (comando <code>substr</code>), mantendo os 6 primeiros dígitos, sendo necessária para que posteriormente sejam agregados outros dados.</p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" title="1"><span class="kw">class</span>(MAPARS)</a></code></pre></div>
+<pre><code>[1] &quot;SpatialPolygonsDataFrame&quot;
+attr(,&quot;package&quot;)
+[1] &quot;sp&quot;</code></pre>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" title="1"><span class="kw">summary</span>(MAPARS)</a></code></pre></div>
+<pre><code>Object of class SpatialPolygonsDataFrame
+Coordinates:
+     min    max
+x -57.65 -49.69
+y -33.75 -27.08
+Is projected: FALSE 
+proj4string : [+proj=longlat +ellps=GRS80 +no_defs]
+Data attributes:
+  NM_MUNICIP         CD_GEOCMU        
+ Length:497         Length:497        
+ Class :character   Class :character  
+ Mode  :character   Mode  :character  </code></pre>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" title="1"><span class="co"># Corrigindo os dados do código IBGE dos municípios</span></a>
+<a class="sourceLine" id="cb285-2" title="2">MAPARS<span class="op">$</span>CD_GEOCMU=<span class="kw">substr</span>(MAPARS<span class="op">$</span>CD_GEOCMU,<span class="dv">1</span>,<span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb285-3" title="3"><span class="co"># Vizualização dos dados principais</span></a>
+<a class="sourceLine" id="cb285-4" title="4"><span class="kw">head</span>(MAPARS<span class="op">@</span>data)</a></code></pre></div>
+<pre><code>   NM_MUNICIP CD_GEOCMU
+0     ACEGUÃ\201    430003
+1 Ã\201GUA SANTA    430005
+2       AGUDO    430010
+3   AJURICABA    430020
+4     ALECRIM    430030
+5    ALEGRETE    430040</code></pre>
+<p>Note novamente que este objeto pertence a uma classe diferente (<em>SpatialPolygonsDataFrame</em>), indicando que é constituída especialmente de um conjunto de polígonos para a construção de mapas conjuntamente com o carregamento de dados.</p>
+<p>A seguir, a função <code>plot()</code> pode ser utilizada para a plotagem da malha carregada:</p>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb287-1" title="1"><span class="kw">plot</span>(MAPARS)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-141-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Um exercício simples é a filtragem dos dados do <em>shape</em> pelo nome do município, obtendo assim apenas o mapa da(s) unidade(s) escolhida(s):</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" title="1"><span class="kw">plot</span>(MAPARS[MAPARS<span class="op">$</span>NM_MUNICIP<span class="op">==</span><span class="st">&#39;SANTA ROSA&#39;</span>,], </a>
+<a class="sourceLine" id="cb288-2" title="2">    <span class="dt">axes=</span><span class="st">&quot;TRUE&quot;</span>,  </a>
+<a class="sourceLine" id="cb288-3" title="3">    <span class="dt">main=</span><span class="st">&quot;Mapa do município de Santa Rosa - RS&quot;</span>,</a>
+<a class="sourceLine" id="cb288-4" title="4">    <span class="dt">border=</span><span class="kw">gray</span>(<span class="fl">0.5</span>), </a>
+<a class="sourceLine" id="cb288-5" title="5">    <span class="dt">lwd=</span>.<span class="dv">5</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-142-1.png" width="80%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pacote-tmap" class="section level2">
+<h2><span class="header-section-number">9.2</span> Pacote tmap</h2>
+<p>O pacote <code>tmap</code> <span class="citation">(Tennekes <a href="#ref-tmap">2018</a>)</span> é utilizado para gerar mapas temáticos com relativa facilidade, sendo possível ajustar todos os itens de visualização (legendas, cores, bordas, alinhamento, etc.) para um ajuste desejado do pesquisador. Todas as funções do pacote podem ser encontradas em <a href="https://www.rdocumentation.org/packages/tmap/versions/2.2" class="uri">https://www.rdocumentation.org/packages/tmap/versions/2.2</a> ou no endereço <a href="https://www.jstatsoft.org/article/view/v084i06" class="uri">https://www.jstatsoft.org/article/view/v084i06</a> como exemplos.</p>
+<p>Inicialmente utiliza-se a função <code>tm_shape</code> para carregar a base, <code>tm_fill</code> para plotar o fundo e <code>tm_borders</code> cria as bordas entre os municípios. A função <code>tmap_mode</code> não é obrigatória, e varia da apresentação tradicional do mapa (“plot”) e da apresentação para web (“view”).</p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" title="1"><span class="kw">library</span>(tmap)</a>
+<a class="sourceLine" id="cb289-2" title="2"><span class="kw">tmap_mode</span>(<span class="st">&quot;plot&quot;</span>)</a>
+<a class="sourceLine" id="cb289-3" title="3"><span class="kw">tm_shape</span>(MAPARS)<span class="op">+</span></a>
+<a class="sourceLine" id="cb289-4" title="4"><span class="st">  </span><span class="kw">tm_fill</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb289-5" title="5"><span class="st">  </span><span class="kw">tm_borders</span>()</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-143-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div id="adicionando-dados-ao-mapa" class="section level3">
+<h3><span class="header-section-number">9.2.1</span> Adicionando dados ao mapa</h3>
+<p>Para enriquecer a análise, serão incluídos novos dados relativos aos municípios do Rio Grande do Sul provenientes da <span class="citation">FEE (<a href="#ref-FEE2016">2016</a>)</span>, como o indicador de IDESE (Índice de Desenvolvimento Socioeconômico), PIB (Produto Interno Bruto), população, etc.</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" title="1"><span class="co">#Carrega a planilha com as informações</span></a>
+<a class="sourceLine" id="cb290-2" title="2"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb290-3" title="3">RS2013 &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;mapas/RS2013.csv&quot;</span>, </a>
+<a class="sourceLine" id="cb290-4" title="4">    <span class="st">&quot;;&quot;</span>, <span class="dt">escape_double =</span> <span class="ot">FALSE</span>, <span class="dt">trim_ws =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb290-5" title="5"></a>
+<a class="sourceLine" id="cb290-6" title="6"><span class="co"># Corrigindo o campo com o código do IBGE</span></a>
+<a class="sourceLine" id="cb290-7" title="7"><span class="kw">names</span>(RS2013)[<span class="dv">3</span>]=<span class="st">&quot;CD_GEOCMU&quot;</span> </a>
+<a class="sourceLine" id="cb290-8" title="8"><span class="co"># Corrigindo os dados do código IBGE dos municípios</span></a>
+<a class="sourceLine" id="cb290-9" title="9">RS2013<span class="op">$</span>CD_GEOCMU=<span class="kw">substr</span>(RS2013<span class="op">$</span>CD_GEOCMU,<span class="dv">1</span>,<span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb290-10" title="10"></a>
+<a class="sourceLine" id="cb290-11" title="11"><span class="kw">head</span>(RS2013)</a></code></pre></div>
+<pre><code># A tibble: 6 x 20
+  Label_N COREDE CD_GEOCMU IDESE_2013 POUPANCA OP_CREDITO `OBRIGACOES _RE~
+  &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
+1 Alto A~ &quot;Alto~ 430055    0,7973015~       NA         NA               NA
+2 Barros~ &quot;Alto~ 430200    0,6103697~  7647609   27295139             5931
+3 Campos~ &quot;Alto~ 430410    0,7352054~       NA         NA               NA
+4 Espumo~ &quot;Alto~ 430750    0,79296863 45673907  230697134            66237
+5 Fontou~ &quot;Alto~ 430830    0,6336514~ 13985159   54390691             4177
+6 Gramad~ &quot;Alto~ 430915    0,6578415~  1119359    2073680                0
+# ... with 13 more variables: DEP_A_VISTA_PRIV &lt;dbl&gt;, DEP_A_VISTA_GOV &lt;dbl&gt;,
+#   DEP_PRAZO &lt;dbl&gt;, COOP_CRED &lt;dbl&gt;, CEF &lt;dbl&gt;, BANCO_COM &lt;dbl&gt;,
+#   N_VINCULOS_EMP &lt;dbl&gt;, DENS_DEM_HABKM2 &lt;dbl&gt;, IMPOSTOS &lt;dbl&gt;,
+#   AREA_KM2 &lt;dbl&gt;, PIB_PERC &lt;dbl&gt;, PIB &lt;dbl&gt;, POPULACAO &lt;dbl&gt;</code></pre>
+<p>Para agregar estas informações aos dados das malhas, é preciso em primeiro lugar que se tenha um campo em comum único dos arquivos. Neste caso, o código do IBGE dos municípios (“CD_GEOCMU”) será utilizado, sendo que precisa ser exatamente igual nos dois objetos que se quer unir, para que as informações de determinado município sejam corretamente unidas às informações geográficas da malha para o mapa.</p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" title="1"><span class="co">#Une a base de dados da planilha com o mapa pelo nome do município</span></a>
+<a class="sourceLine" id="cb292-2" title="2">RS2013MAPA=<span class="kw">merge</span>(MAPARS,RS2013,<span class="dt">by=</span><span class="st">&quot;CD_GEOCMU&quot;</span>, <span class="dt">all.x=</span>T) </a>
+<a class="sourceLine" id="cb292-3" title="3"><span class="kw">names</span>(RS2013MAPA)</a></code></pre></div>
+<pre><code> [1] &quot;CD_GEOCMU&quot;               &quot;NM_MUNICIP&quot;             
+ [3] &quot;Label_N&quot;                 &quot;COREDE&quot;                 
+ [5] &quot;IDESE_2013&quot;              &quot;POUPANCA&quot;               
+ [7] &quot;OP_CREDITO&quot;              &quot;OBRIGACOES _RECEBIMENTO&quot;
+ [9] &quot;DEP_A_VISTA_PRIV&quot;        &quot;DEP_A_VISTA_GOV&quot;        
+[11] &quot;DEP_PRAZO&quot;               &quot;COOP_CRED&quot;              
+[13] &quot;CEF&quot;                     &quot;BANCO_COM&quot;              
+[15] &quot;N_VINCULOS_EMP&quot;          &quot;DENS_DEM_HABKM2&quot;        
+[17] &quot;IMPOSTOS&quot;                &quot;AREA_KM2&quot;               
+[19] &quot;PIB_PERC&quot;                &quot;PIB&quot;                    
+[21] &quot;POPULACAO&quot;              </code></pre>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" title="1"><span class="kw">head</span>(RS2013MAPA<span class="op">@</span>data)</a></code></pre></div>
+<pre><code>  CD_GEOCMU  NM_MUNICIP       Label_N             COREDE  IDESE_2013  POUPANCA
+1    430003     ACEGUÃ\201     Acegu&lt;e1&gt;           Campanha 0,718832327    654998
+2    430005 Ã\201GUA SANTA &lt;c1&gt;gua Santa           Nordeste 0,867600828   5771664
+3    430010       AGUDO         Agudo            Central 0,702817421  60413751
+4    430020   AJURICABA     Ajuricaba  Noroeste Colonial 0,785470135  10097428
+5    430030     ALECRIM       Alecrim Fronteira Noroeste 0,677111834  11317058
+6    430040    ALEGRETE      Alegrete    Fronteira Oeste 0,726877131 143979215
+  OP_CREDITO OBRIGACOES _RECEBIMENTO DEP_A_VISTA_PRIV DEP_A_VISTA_GOV DEP_PRAZO
+1    2123323                     990           436095          211613         0
+2   58309611                   40094          1814681           89008   3205509
+3  129527759                   28351          7005194          593901   5826631
+4   89098650                   35621          4739225         1116209   2322985
+5   14649086                     265          1754832          150166    740890
+6  747409945                  232866         42122392         1138492  63194800
+  COOP_CRED CEF BANCO_COM N_VINCULOS_EMP DENS_DEM_HABKM2 IMPOSTOS AREA_KM2
+1        NA  NA         1           1075       2.922e+09  7712922  1549383
+2        NA  NA         1            743       1.293e+08  2339861   291792
+3         1   1         3           3374       3.105e+09 26733502   536114
+4        NA  NA         2           1610       2.223e+08 12668813   323239
+5        NA  NA         2            690       2.163e+09  3193931   314743
+6        NA   1         6          20091       9.794e+09 96877929  7803954
+  PIB_PERC       PIB POPULACAO
+1   383451 1.778e+08      4623
+2  6343962 2.435e+08      3825
+3   206121 3.537e+08     17044
+4  2715728 2.015e+08      7568
+5  1202022 8.426e+07      6905
+6  1902703 1.504e+09     78056</code></pre>
+</div>
+<div id="plotando-o-mapa-e-melhorando-a-visualizacao" class="section level3">
+<h3><span class="header-section-number">9.2.2</span> Plotando o mapa e melhorando a visualização</h3>
+<p>Após unidas as informações da malha e dos índices para todos os municípios, é possível criar o mapa temático. Além de utilizar a função <code>tm_shape</code> para carregar os novos dados e <code>tm_fill</code> inclui a área de cada município (KM<span class="math inline">\(^2\)</span>). Ainda é possível definir opções de formato (<code>tm_format_Europe2</code>), de estilo (<code>tm_style_classic</code>), ajustar a legenda (<code>tm_legend</code>), incluir o compasso (<code>tm_compass</code>), a escala (<code>tm_scale_bar</code>).</p>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" title="1">    <span class="kw">tm_shape</span>(RS2013MAPA)<span class="op">+</span></a>
+<a class="sourceLine" id="cb296-2" title="2"><span class="st">      </span><span class="kw">tm_fill</span>(<span class="st">&quot;AREA_KM2&quot;</span>, <span class="dt">auto.palette.mapping=</span><span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb296-3" title="3">              <span class="dt">title=</span><span class="st">&quot;Área por município&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb296-4" title="4"><span class="st">      </span><span class="kw">tm_format_Europe2</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb296-5" title="5"><span class="st">      </span><span class="kw">tm_style_classic</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb296-6" title="6"><span class="st">      </span><span class="kw">tm_legend</span>(<span class="dt">position=</span><span class="kw">c</span>(<span class="st">&quot;left&quot;</span>,<span class="st">&quot;bottom&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb296-7" title="7"><span class="st">      </span><span class="kw">tm_compass</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb296-8" title="8"><span class="st">      </span><span class="kw">tm_scale_bar</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb296-9" title="9"><span class="st">      </span><span class="kw">tm_borders</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb296-10" title="10"><span class="st">  </span><span class="kw">tm_bubbles</span>(<span class="dt">size =</span> <span class="st">&#39;PIB&#39;</span>,<span class="dt">col =</span> <span class="st">&#39;#b3de69&#39;</span>, <span class="dt">title.size=</span><span class="st">&#39;PIB&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb296-11" title="11"><span class="st">  </span><span class="kw">tm_legend</span>(<span class="dt">legend.format =</span> <span class="kw">list</span>(<span class="dt">text.separator=</span> <span class="st">&quot;a&quot;</span>))</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-146-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Algumas opções de layout podem ser escolhidas pelo pesquisador com as funções:<code>tm_format_World</code>,<code>tm_format_World_wide</code>, <code>tm_format_Europe</code>, <code>tm_format_Europe2</code>, <code>tm_format_Europe_wide</code>, <code>tm_format_NLD</code>, <code>tm_format_NLD_wide</code>, <code>tm_format_NLD_wide</code>. Seguem as opções de estilo do gráfico:<code>tm_style_white</code>, <code>tm_style_gray</code>, <code>tm_style_natural</code>, <code>tm_style_grey</code>, <code>tm_style_cobalt</code>, <code>tm_style_col_blind</code>, <code>tm_style_albatross</code>, <code>tm_style_beaver</code>, <code>tm_style_bw</code>, <code>tm_style_classic</code>.</p>
+<p>Abaixo segue um exemplo de criação e plotagem de múltiplos mapas na mesma imagem. A função <code>style</code> determinda como serão determinadas as cores do mapa, juntamente com a função <code>palette</code>. Já a função <code>breaks</code> ajuda a determinar os pontos de corte para a plotagem das cores, no primeiro mapa utilizando a função <code>quantile</code> e no segundo determinando intervalos de valores pré-determinados pelo autor.</p>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" title="1"><span class="kw">tm_shape</span>(RS2013MAPA) <span class="op">+</span></a>
+<a class="sourceLine" id="cb297-2" title="2"><span class="st">    </span><span class="kw">tm_polygons</span>(<span class="kw">c</span>(<span class="st">&quot;PIB&quot;</span>, <span class="st">&quot;POPULACAO&quot;</span>), </a>
+<a class="sourceLine" id="cb297-3" title="3">        <span class="dt">style=</span><span class="kw">c</span>(<span class="st">&quot;kmeans&quot;</span>,<span class="st">&quot;fixed&quot;</span>),</a>
+<a class="sourceLine" id="cb297-4" title="4">        <span class="dt">palette=</span><span class="kw">list</span>(<span class="st">&quot;Reds&quot;</span>, <span class="st">&quot;Blues&quot;</span>),</a>
+<a class="sourceLine" id="cb297-5" title="5">        <span class="dt">auto.palette.mapping=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb297-6" title="6">        <span class="dt">breaks=</span><span class="kw">list</span>(<span class="kw">quantile</span>(RS2013MAPA<span class="op">$</span>POPULACAO),</a>
+<a class="sourceLine" id="cb297-7" title="7">                    <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>,<span class="dv">100000</span>,<span class="dv">200000</span>,<span class="ot">Inf</span>)),</a>
+<a class="sourceLine" id="cb297-8" title="8">        <span class="dt">title=</span><span class="kw">c</span>(<span class="st">&quot;PIB&quot;</span>, <span class="st">&quot;População&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb297-9" title="9"><span class="kw">tm_format_World</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb297-10" title="10"><span class="kw">tm_style_grey</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb297-11" title="11"><span class="kw">tm_compass</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb297-12" title="12"><span class="kw">tm_scale_bar</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb297-13" title="13"><span class="kw">tm_legend</span>(<span class="dt">legend.format =</span> <span class="kw">list</span>(<span class="dt">text.separator=</span> <span class="st">&quot;a&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb297-14" title="14"><span class="kw">tm_layout</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="st">&quot;LEFT&quot;</span>,<span class="st">&quot;BOTTOM&quot;</span>),</a>
+<a class="sourceLine" id="cb297-15" title="15">            <span class="dt">legend.frame =</span> <span class="ot">FALSE</span>, <span class="dt">title =</span> <span class="kw">c</span>(<span class="st">&quot;Mapa 1&quot;</span>,<span class="st">&quot;Mapa 2&quot;</span>))</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-147-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>É possível ainda efetuar a filtragem de uma determinada característica para a criação do mapa. No exemplo, são filtrados os municípios do Corede Sul:</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" title="1"><span class="kw">tm_shape</span>(RS2013MAPA[RS2013MAPA<span class="op">$</span>COREDE <span class="op">==</span><span class="st">&#39;Sul&#39;</span>,]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb298-2" title="2"><span class="st">    </span><span class="kw">tm_polygons</span>(<span class="st">&quot;POPULACAO&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Pop&quot;</span>, </a>
+<a class="sourceLine" id="cb298-3" title="3">                <span class="dt">style=</span><span class="st">&quot;kmeans&quot;</span>, <span class="dt">text=</span><span class="st">&quot;Label_N&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb298-4" title="4"><span class="st">    </span><span class="kw">tm_facets</span>(<span class="st">&quot;COREDE&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb298-5" title="5"><span class="st">    </span><span class="kw">tm_text</span>(<span class="st">&quot;NM_MUNICIP&quot;</span>, <span class="dt">scale=</span><span class="fl">0.45</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb298-6" title="6"><span class="kw">tm_style_grey</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb298-7" title="7"><span class="kw">tm_layout</span>(<span class="dt">inner.margins =</span> <span class="kw">c</span>(.<span class="dv">03</span>,.<span class="dv">03</span>,.<span class="dv">03</span>,.<span class="dv">03</span>),</a>
+<a class="sourceLine" id="cb298-8" title="8">            <span class="dt">main.title =</span> <span class="st">&quot;Municípios do Corede Sul&quot;</span>,</a>
+<a class="sourceLine" id="cb298-9" title="9">            <span class="dt">main.title.position =</span> <span class="st">&#39;center&#39;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb298-10" title="10"><span class="kw">tm_legend</span>(<span class="dt">legend.format =</span> <span class="kw">list</span>(<span class="dt">text.separator=</span> <span class="st">&quot;a&quot;</span>))  </a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-148-1.png" width="80%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="utilizando-dados-de-fontes-externas-pacote-datasus" class="section level3">
+<h3><span class="header-section-number">9.2.3</span> Utilizando dados de fontes externas: pacote datasus</h3>
+<p>Encontrar informações de bases de dados que podem ser diretamente utilizadas no R é de extrama importância aos pesquisadores. Neste exemplo são demonstrados alguns comandos para utilizar o pacote datasus <span class="citation">(Prado Siqueira <a href="#ref-datasus">2018</a>)</span>, que agiliza a utilização de alguns dados do Ministério da Saúde (<a href="http://www2.datasus.gov.br/DATASUS/index.php?area=02" class="uri">http://www2.datasus.gov.br/DATASUS/index.php?area=02</a>).</p>
+<p>Utilizando o pacote <code>devtools</code> (<code>library(devtools)</code>) é feita ainstalação do pacote <code>datasus</code> diretamente do repositório Github pelo comando <code>install_github("rpradosiqueira/datasus")</code>.</p>
+<p>Após instalado o pacote <code>datasus</code>, utiliza-se a função <code>sinasc_nv_uf</code> para carregar a quantidade de nascimentos por município:</p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" title="1"><span class="kw">library</span>(datasus)</a>
+<a class="sourceLine" id="cb299-2" title="2">nascimentos=<span class="kw">sinasc_nv_uf</span>(<span class="dt">uf =</span> <span class="st">&quot;rs&quot;</span>,</a>
+<a class="sourceLine" id="cb299-3" title="3">             <span class="dt">periodo =</span> <span class="kw">c</span>(<span class="dv">2014</span><span class="op">:</span><span class="dv">2016</span>),</a>
+<a class="sourceLine" id="cb299-4" title="4">             <span class="dt">coluna =</span> <span class="st">&quot;Ano do nascimento&quot;</span>)</a>
+<a class="sourceLine" id="cb299-5" title="5"><span class="kw">head</span>(nascimentos)</a></code></pre></div>
+<pre><code>          Município   2014   2015   2016  Total
+1             TOTAL 143315 148359 141411 433085
+2     430003 Aceguá     73     55     49    177
+3 430005 Água Santa     48     36     43    127
+4      430010 Agudo    162    161    165    488
+5  430020 Ajuricaba     61     68     78    207
+6    430030 Alecrim     59     48     57    164</code></pre>
+<p>Efetua-se uma limpeza da linha de total, bem como a criação de uma coluna com o código do IBGE (“CD_GEOCMU”):</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" title="1">nascimentos=nascimentos[<span class="op">-</span><span class="dv">1</span>,]</a>
+<a class="sourceLine" id="cb301-2" title="2"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb301-3" title="3">nascimentos &lt;-<span class="st"> </span><span class="kw">separate</span>(nascimentos, <span class="st">`</span><span class="dt">Município</span><span class="st">`</span>, <span class="kw">c</span>(<span class="st">&quot;CD_GEOCMU&quot;</span>, <span class="st">&quot;NM_MUNICIP&quot;</span>), <span class="dt">sep =</span> <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb301-4" title="4"><span class="kw">head</span>(nascimentos)</a></code></pre></div>
+<pre><code>  CD_GEOCMU  NM_MUNICIP 2014 2015 2016 Total
+2    430003      Aceguá   73   55   49   177
+3    430005  Água Santa   48   36   43   127
+4    430010       Agudo  162  161  165   488
+5    430020   Ajuricaba   61   68   78   207
+6    430030     Alecrim   59   48   57   164
+7    430040    Alegrete  925  954  858  2737</code></pre>
+<p>Após é possível criar novo mapa (“RS2013MAPAN”), unindo as informações novas com o mapa anterior:</p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" title="1">RS2013MAPAN=<span class="kw">merge</span>(RS2013MAPA,nascimentos,<span class="dt">by=</span><span class="st">&quot;CD_GEOCMU&quot;</span>, <span class="dt">all.x=</span>T) </a>
+<a class="sourceLine" id="cb303-2" title="2"><span class="kw">names</span>(RS2013MAPAN)</a></code></pre></div>
+<pre><code> [1] &quot;CD_GEOCMU&quot;               &quot;NM_MUNICIP.x&quot;           
+ [3] &quot;Label_N&quot;                 &quot;COREDE&quot;                 
+ [5] &quot;IDESE_2013&quot;              &quot;POUPANCA&quot;               
+ [7] &quot;OP_CREDITO&quot;              &quot;OBRIGACOES _RECEBIMENTO&quot;
+ [9] &quot;DEP_A_VISTA_PRIV&quot;        &quot;DEP_A_VISTA_GOV&quot;        
+[11] &quot;DEP_PRAZO&quot;               &quot;COOP_CRED&quot;              
+[13] &quot;CEF&quot;                     &quot;BANCO_COM&quot;              
+[15] &quot;N_VINCULOS_EMP&quot;          &quot;DENS_DEM_HABKM2&quot;        
+[17] &quot;IMPOSTOS&quot;                &quot;AREA_KM2&quot;               
+[19] &quot;PIB_PERC&quot;                &quot;PIB&quot;                    
+[21] &quot;POPULACAO&quot;               &quot;NM_MUNICIP.y&quot;           
+[23] &quot;2014&quot;                    &quot;2015&quot;                   
+[25] &quot;2016&quot;                    &quot;Total&quot;                  </code></pre>
+<p>Então pode ser criado o mapa com as informações de nascimentos por município. Neste caso, foi utilizado o <code>style</code> denomnado <code>kmeans</code>, pois utilizamos os quartis para determinar as faixas de cores das quantidades de nascimentos:
+<!--
+
+```r
+   tm_shape(RS2013MAPAN)+
+      tm_fill("2016", auto.palette.mapping=FALSE, title="Nascimentos por município",textNA="NA")+
+      tm_legend(position=c("left","bottom"))+
+      tm_compass()+
+      tm_scale_bar()+
+      tm_borders(alpha=.5)+
+     tm_legend(legend.format = list(text.separator= "a"))  +
+     tm_layout(legend.position = c("LEFT","BOTTOM"),
+            legend.frame = FALSE)
+```
+
+<img src="index_files/figure-html/unnamed-chunk-152-1.png" width="80%" style="display: block; margin: auto;" />
+--></p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1"><span class="kw">quantile</span>(RS2013MAPAN<span class="op">$</span><span class="st">`</span><span class="dt">2016</span><span class="st">`</span>)</a></code></pre></div>
+<pre><code>   0%   25%   50%   75%  100% 
+    4    28    55   175 18635 </code></pre>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" title="1">   <span class="kw">tm_shape</span>(RS2013MAPAN)<span class="op">+</span></a>
+<a class="sourceLine" id="cb307-2" title="2"><span class="st">      </span><span class="kw">tm_fill</span>(<span class="st">&quot;2016&quot;</span>, <span class="dt">auto.palette.mapping=</span><span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb307-3" title="3">              <span class="dt">title=</span><span class="st">&quot;Nascimentos por município (2016)&quot;</span>,</a>
+<a class="sourceLine" id="cb307-4" title="4">              <span class="dt">textNA=</span><span class="st">&quot;NA&quot;</span>,</a>
+<a class="sourceLine" id="cb307-5" title="5">              <span class="dt">palette=</span><span class="st">&quot;Greens&quot;</span>,</a>
+<a class="sourceLine" id="cb307-6" title="6">              <span class="dt">style =</span> <span class="st">&quot;kmeans&quot;</span>,</a>
+<a class="sourceLine" id="cb307-7" title="7">              <span class="dt">breaks =</span> <span class="kw">quantile</span>(RS2013MAPAN<span class="op">$</span><span class="st">`</span><span class="dt">2016</span><span class="st">`</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb307-8" title="8"><span class="st">      </span><span class="kw">tm_legend</span>(<span class="dt">position=</span><span class="kw">c</span>(<span class="st">&quot;left&quot;</span>,<span class="st">&quot;bottom&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb307-9" title="9"><span class="st">      </span><span class="kw">tm_compass</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb307-10" title="10"><span class="st">      </span><span class="kw">tm_scale_bar</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb307-11" title="11"><span class="st">      </span><span class="kw">tm_borders</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb307-12" title="12"><span class="st">     </span><span class="kw">tm_legend</span>(<span class="dt">legend.format =</span> <span class="kw">list</span>(<span class="dt">text.separator=</span> <span class="st">&quot;a&quot;</span>))  <span class="op">+</span></a>
+<a class="sourceLine" id="cb307-13" title="13"><span class="st">     </span><span class="kw">tm_layout</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="st">&quot;LEFT&quot;</span>,<span class="st">&quot;BOTTOM&quot;</span>),</a>
+<a class="sourceLine" id="cb307-14" title="14">            <span class="dt">legend.frame =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>Warning: The argument auto.palette.mapping is deprecated. Please use midpoint
+for numeric data and stretch.palette for categorical data to control the palette
+mapping.</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-154-1.png" width="80%" style="display: block; margin: auto;" /></p>
+
+
+
+</div>
+</div>
+</div>
+<h3>Referências</h3>
+<div id="refs" class="references">
+<div id="ref-FEE2016">
+<p>FEE. 2016. «Fundação de Economia e Estatística Siegfried Emanuel Heuser - FEEDADOS». <a href="http://feedados.fee.tche.br/feedados/">http://feedados.fee.tche.br/feedados/</a>.</p>
+</div>
+<div id="ref-datasus">
+<p>Prado Siqueira, Renato. 2018. «datasus: An Interface to DATASUS System». <a href="https://cran.r-project.org/package=datasus">https://cran.r-project.org/package=datasus</a>.</p>
+</div>
+<div id="ref-Semace2018">
+<p>Semace. 2018. «Shape – Definições e Conversão». <a href="http://www.semace.ce.gov.br/2011/06/shape-definicoes-e-conversao/">http://www.semace.ce.gov.br/2011/06/shape-definicoes-e-conversao/</a>.</p>
+</div>
+<div id="ref-tmap">
+<p>Tennekes, Martijn. 2018. «{tmap}: Thematic Maps in {R}». <em>Journal of Statistical Software</em> 84 (6): 1–39. <a href="https://doi.org/10.18637/jss.v084.i06">https://doi.org/10.18637/jss.v084.i06</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regressao-de-poisson.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
+"instapper": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

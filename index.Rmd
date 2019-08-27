@@ -1,21 +1,21 @@
 --- 
-title: "Software R: curso avançado"
-author: 
+title: 'Software R: curso avançado'
+author:
 - Iara Denise Endruweit Battisti
 - Felipe Micail da Silva Smolski
 date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-documentclass: book
-bibliography: [book.bib, packages.bib]
-biblio-style: authoryear
-link-citations: yes
-github-repo: rstub/bookdown-chapterbib
-url: 'http\://rstub.github.io/bookdown-chapterbib/'
-description: "Curso avançado de análise estatística com R da UFFS Cerro Largo - RS"
-fontsize: 12pt
-lang: pt-Br
-always_allow_html: yes
+bibliography: library.bib
 classoption: oneside
+biblio-style: authoryear
+description: Curso avançado de análise estatística com R da UFFS Cerro Largo - RS
+documentclass: book
+fontsize: 12pt
+github-repo: rstub/bookdown-chapterbib
+lang: pt-Br
+link-citations: yes
+site: bookdown::bookdown_site
+always_allow_html: yes
+url: http\://rstub.github.io/bookdown-chapterbib/
 ---
 
 ```{r echo=FALSE}
@@ -35,22 +35,26 @@ knitr::opts_chunk$set(
 ```
 
 
-
+<!--
 # Apresentação {-}
 \frenchspacing 
 
-Esta é a estrutura provisória de capítulos do **Curso Avançado em Estatística com R da UFFS**:
+Esta é a estrutura provisória de capítulos do **Curso Avançado em Estatística com R da UFFS**
+
 
 - Delineamentos Experimentais
 - Análise Fatorial
 - Análise de Cluster
+- Análise de Componentes Principais (em construção...)
 - Regressão Múltipla
 - Regressão com Dados em Painel
 - Regressão Logística
 - Regressão de Poisson
-- Manipulação de bases de dados
+- Classificação (em construção...)
+- Séries Temporais (em construção...)
+- Produção de Mapas 
 
-<!--
+
 Algumas sugestões a incluir:
 
 - Produção de Mapas
@@ -65,7 +69,218 @@ Algumas sugestões a incluir:
 
 # Introdução {-}
 
-# Delineamentos Experimentais
+Esta é a estrutura dos capítulos do **Curso Avançado em Estatística com R da UFFS**:
+
+- [Delineamentos Experimentais](#delin)
+
+- [Regressão Logística](#reglog)
+
+- [Ajuste de Parâmetros em Funções não Lineares]()
+
+- [RMarkdown](https://smolski.github.io/livror/rmark.html)
+
+- [Metodologia de Superfície Resposta]()
+
+- [Análise Fatorial](#analisf)
+
+<!--
+# Amostragem
+
+*Iara Denise Endruweit Battisti*
+
+*Felipe Micail da Silva Smolski*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
+
+As amostras são utilizadas diariamente, por exemplo, quando se prova uma comida para ver se o tempero está bom ou quando assiste-se uma parte de um programa da televisão para ver se interessa.
+
+Quando e porque amostragem?
+
+- Menor tempo
+- Menor custo
+- Maior precisão dos dados
+- Material experimental é raro
+- Teste destrói o material experimental
+
+Sempre que se optar por uma amostra é necessário fazer um plano de amostragem (ou delineamento amostral), para isto, deve estar bem definido o(s) objetivo(s) da pesquisa, a população de interesse, os parâmetros a serem estimados. O plano de amostragem engloba:
+
+
+- Definição da unidade amostral
+- Fforma de seleção das unidades amostrais
+- Cálculo do tamanho da amostra
+- Sorteio da amostra
+
+Exemplos:
+
+- 1. Verificar a prevalência de obesidade em escolares no município de Cerro Largo em 2016.
+- 2. Verificar a opinião dos consumidores de chocolate referente a um novo produto, com edição limitada.
+- 3. Pesquisa para verificar os impactos sócio-ambientais da instalação de uma usina hidrelétrica numa região.
+- 4. Verificar a contaminação dos rios de uma sub-bacia hidrográfica.
+
+
+## Amostragem Probabilística
+
+A amostragem probabilística permite a estimação do erro amostral (diferença entre o valor da estimativa e do parâmetro), possibilitando a utilização das técnicas de inferência estatística, as quais permitem a generalização dos resultados para a população.
+
+Como as técnicas de inferência estatística não controlam o erro não-amostral (erro de coleta de dados), o pesquisador deve tentar minimizá-los, por exemplo: utilizar amostra não-tendenciosa, calibrar o instrumento de mensuração, questões bem formuladas, correta digitação, treinamento dos entrevistadores, etc.
+
+### Amostra Aleatória (probabilística)
+
+Amostra aleatória é aquela que sofreu algum mecanismo de sorteio no processo de coleta. A
+amostra deve ser representativa, ou seja, deve reproduzir as mesmas propriedades da população. Os tipos
+de amostras aleatórias são apresentadas a seguir.
+
+
+#### Amostragem Aleatória Simples (AAS)
+
+É a mais simples, nesta todos os elementos da população tem a mesma probabilidade de ser
+sorteados. Assim, se a população for finita com N elementos, cada elemento terá a probabilidade de 1/N de
+ser sorteado. A amostragem pode ser feita com ou sem reposição do elemento sorteado.
+
+- Se a AAS for feita com reposição em uma população finita com N elementos, então o
+número total de amostras possíveis é dado por $N^n$;
+
+- Se for feita sem reposição, então o número de amostras possíveis é dadopor $C_{N,n}$.
+
+Quando a população for infinita, não é possível identificar seus infinitos elementos com um número.
+Nesse caso, pode-se fazer o sorteio com aqueles que estejam disponíveis.
+
+Existem diferentes maneiras para fazer o sorteio de uma amostra aleatória simples. Primeiramente
+deve-se atribuir um número a cada elemento da população, após faz-se o sorteio.
+
+*Exemplo no R:* utilizando o comando `sample()` pode ser efetuada a amostragem, sendo que o comando `set.seed()` serve para repetir o exercício da forma com que ele foi concebido e com os mesmos resultados. No exemplo abaixo, busca-se o retorno de um valor entre 0 e 1 (`c(0,1)`), para uma população de 32 itens, com reposição (`replace=TRUE`, sendo que o padrão é `FALSE`) e com a probabilidade de 50\% para cada item (`prob=c(0.5,0.5)`):
+
+```{r}
+set.seed(123)
+amostra = sample(c(0,1),32, replace=TRUE, prob=c(0.5,0.5))
+amostra
+table(amostra)
+```
+
+Abaixo um exemplo de amostragem, retomando uma amostra de 10 números entre os números 1 a 32, com e sem reposição:
+
+```{r}
+set.seed(123)
+sample(1:32, 10, replace=TRUE) # Com reposição
+sample(1:32, 10, replace=FALSE) # Sem reposição
+```
+
+Utilizando o índice de uma base de dados, como exemplo a base `mtcars`, buscamos uma amostra aleatória com reposição de 10 itens (observa-se que o modelo Ford Pantera L foi repetido nas amostragens):
+
+```{r}
+set.seed(123)
+indice=sample(1:nrow(mtcars),10, replace=TRUE)
+mtcars[indice,]
+```
+
+E agora o mesmo exemplo para a amostra aleatória simples sem reposição:
+
+```{r}
+set.seed(123)
+indice=sample(1:nrow(mtcars),10, replace=FALSE)
+mtcars[indice,]
+```
+
+#### Amostragem Aleatória Estratificada (AAE)
+
+É utilizada quando a população se caracteriza por subdivisões com características distintas, as
+quais podem interferir na característica em estudo, gerando maior variabilidade. Primeiramente, divide-se a
+população em subgrupos (estratos), sendo estes mais homogêneos dentro de si.
+
+
+```{r}
+head(InsectSprays)
+summary(as.factor(InsectSprays$spray))
+```
+
+
+
+
+```{r}
+library(sampling)
+a=strata(InsectSprays, c("spray"), size=c(3,3,3,3,3,3), method="srswor")
+summary(a)
+```
+
+
+```{r}
+a
+```
+
+
+#### Amostragem Sistemática (AS)
+
+Utiliza-se quando os elementos da população estão dispostos em uma lista, como por exemplo, um
+fichário, uma fila de espera. Inicialmente, determina-se o passo de amostragem, ou seja, o número k de
+elementos entre cada coleta. O processo inicia pelo sorteio do primeiro elemento entre os k primeiros, em
+seguida, salta-se k elementos para então coletar o segundo elemento e assim sucessivamente até a coleta
+do último elemento da amostra. Determina-se k da seguinte forma:
+
+$$ 
+k=\frac{N}{n}
+$$
+
+É importante o sorteio do primeiro elemento para que todos tenham a mesma probabilidade de
+serem sorteados.
+
+Neste tipo de amostra deve-se ter cuidado para que os elementos sorteados não tenham alguma
+relação entre si, devido ao fato de serem coletados sistematicamente.
+
+
+Amostragem Aleatória por Conglomerados (AAC)
+
+Na amostra aleatória por conglomerados divide-se a população em grupos (conglomerados) de mesmas características, com o objetivo de facilitar o processo de coleta dos elementos da amostra. É utilizada quando a pesquisa envolve uma grande área geográfica.
+
+*Exemplo*: suponha o estudo das despesas familiares na cidade de Cerro Largo. Opta-se por fazer uma amostragem por conglomerados, dividindo-se a área total em diversas áreas menores (quarteirões). Então, selecionam-se aleatoriamente alguns quarteirões, com a amostra final englobando todas as famílias desses quarteirões ou uma amostra delas.
+
+
+
+## Amostragem Não-Probabilística
+
+A amostra não probabilística é utilizada por simplicidade ou pela impossibilidade de obter uma amostra probabilística, neste caso não é possível estimar o erro amostral. Os tipos mais utilizados de amostra não-probabilística são:
+
+- Amostragem por Julgamento: escolhem-se casos julgados como típicos da população de interesse.
+- Amostragem por Quotas: procura-se obter uma amostra que seja similar à população, sob alguns aspectos.
+Exemplo: controlar as características sexo e faixa etária na amostra de acordo com sua proporção na população.
+- Amostragem por Conveniência: é o tipo de amostragem menos confiável. São utilizadas para pesquisas exploratórias e não são recomendadas para pesquisas conclusivas. Exemplo: durante um programa de televisão ao vivo, solicitar aos telespectadores que liguem para opinarem sobre algum assunto.
+
+
+*Estudo de Caso*: o estudo de caso é caracterizado pelo estudo profundo e exaustivo de um ou poucos objetos, de maneira que permita o seu amplo e detalhado conhecimento, tarefa praticamente impossível mediante os outros delineamentos considerados.
+
+## Tamanho da Amostra
+
+Quando deseja-se dimensionar o tamanho da amostra, o procedimento desenvolve-se em três etapas distintas:
+
+- 1. Avaliar o instrumento de coleta de dados e julgar a variável mais importante do questionário ou o grupo de variáveis mais significativas;
+- 2. Analisar se é qualitativa ou quantitativa;
+- 3. Verificar se a população é finita ou infinita.
+
+No cálculo do tamanho da amostra é necessário considerar:
+
+- variabilidade
+-  precisão
+- confiabilidade
+
+Ainda, na definição do tamanho da amostra deve-se considerar o *tipo de amostragem*.
+
+
+### Cálculo do tamanho da amostra para estimar a média, considerandno uma população infinita, com $\mu$ 
+
+-->
+
+
+
+
+
+
+
+
+
+
+# Delineamentos Experimentais{#delin}
 
 *Tatiane Chassot*
 
@@ -85,7 +300,7 @@ E alguns experimentos, utiliza-se a testemunha (nas ciências agrárias e ambien
 
 A unidade experimental é a unidade que recebe o tratamento uma vez e, normalmente são chamadas de parcelas. A escolha da unidade experimental depende dos tipos de tratamentos que serão avaliados. Podem ser: uma área de campo, um vaso com solo, um animal, uma placa de Petri, uma planta. Em áreas de campo, normalmente utiliza-se a bordadura. Num experimento, recomenda-se, no mínimo, a utilização de 20 UEs. 
 
-Em um experimento, a variável a ser avaliada chamamos de variável resposta. Por exemplo, núumero de grãos por planta, número de folhas por planta, altura das plantas.
+Em um experimento, a variável a ser avaliada chamamos de variável resposta. Por exemplo, número de grãos por planta, número de folhas por planta, altura das plantas.
 
 ## Princípios básicos da Experimentação
 
@@ -322,7 +537,7 @@ qqline(residuo)
 
 
 
-# Análise Fatorial
+# Análise Fatorial{#analisf}
 
 *Denize Ivete Reis*
 
@@ -345,7 +560,7 @@ Diferentemente da análise de variância, regressão e análise discriminante, o
 
 A análise fatorial aborda o problema de analisar a estrutura das inter-relações (correlações) entre um grande número de variáveis (escores de testes, itens de testes, respostas de questionários), definindo um conjunto de dimensões latentes comuns, chamados fatores. Então, a análise fatorial, permite primeiro identificar as dimensões separadas da estrutura e então determinar o grau em que cada variável é explicada por cada dimensão. Uma vez que essas dimensões e a explicação da cada variável estejam determinadas, os dois principais usos da análise fatorial podem ser conseguidos:
 
-- **Resumo**: ao resumir os dados, a análise fatorial obtém dimensões latentes que, quando interpretadas e compreendidas, descrevem os dados em um núumero muito menor de conceitos do que as variáveis individuais originais.
+- **Resumo**: ao resumir os dados, a análise fatorial obtém dimensões latentes que, quando interpretadas e compreendidas, descrevem os dados em um número muito menor de conceitos do que as variáveis individuais originais.
 
 - **Redução de dados**: pode ser obtida calculando escores para cada dimensão latente e substituindo as variáveis originais pelos mesmos.
 
@@ -530,9 +745,9 @@ summary(fit)
 A função `summary(fit)` mostra a aplicação da análise de componentes principais. O fator 1
 responde por 45,52\% da variância total. Da mesma forma, o segundo fator responde por 36,97\% da
 variância total, sendo que os dois primeiros fatores respondem por 82,49\% da variância total. Várias
-considerações devem integrar a análise do núumero de fatores que devem ser usados na análise.
+considerações devem integrar a análise do número de fatores que devem ser usados na análise.
 
-### Determinação do núumero de fatores 
+### Determinação do número de fatores 
 
 
 A fim de reduzir as informações presentes nas variáveis originais, deve-se reduzir o número de fatores. Na literatura, diversos processos são sugeridos: determinação a priori, observação dos autovalores, representação gráfica (**scree plot**), testes de significância entre outros.
@@ -696,6 +911,70 @@ knitr::include_graphics("anfat2.png")
 \printbibliography[segment=\therefsegment,heading=subbibliography]
 -->
 
+
+# Análise de Componentes Principais
+
+*Felipe Micail da Silva Smolski*
+
+\begin{flushright}
+\emph{}
+\end{flushright}
+
+
+A técnica de Componentes Principais retoma informações de uma base de dados multivariada, transformando estes dados em variáveis de número igual ou inferior à amostra inicial e denominados "componentes principais". Estes por sua vez, correspondem à combinação dos dados originais, sendo que representam uma redução de dimensionalidade dos dados originais em dois ou três componentes, identificando as direções pelas quais a variação dos dados são máximas, apresentando graficamente os resultados conforme @Kassambara2017b. Ainda segundo este autor, são propósitos resumidos da anáise dae componentes principais:
+
+- Identificação de padrões ocultos dos dados;
+- Redução de dimensionalidade, pela diminuição da redundância nos dados;
+- Identificar variáveis correlacionadas.
+
+
+## Preparação dos dados
+```{r}
+library(factoextra)
+
+data("decathlon2", package = "factoextra")
+head(decathlon2)
+decathlon2.active=decathlon2[1:23,1:10]
+
+```
+
+## Criação dos componentes 
+
+
+```{r}
+library(FactoMineR)
+pca=PCA(decathlon2.active, graph=TRUE)
+
+pca
+```
+
+A variância retida em cada um dos compomentes é medida pelos "autovalores" (*eigenvalues*), que podem ser extraídos utilizando a função `get_eigenvalue()`:
+
+
+```{r}
+library(factoextra)
+autovalores=get_eigenvalue(pca)
+autovalores
+
+```
+
+
+Autovaloes superiores a 1 indicam que a variância do componente é superior ao que representaria a variância dos dados originais, sendo possível utilizar inclusive como ponto de corte para decidir quantos componentes utilizar. Observa-se que no exemplo acima, foram criados 10 componentes principais, dos quais os três primeiros explicam 72,02\% da variação.
+
+```{r}
+fviz_eig(pca, addlabels=TRUE, ylim = c(0,50))
+```
+
+
+
+```{r}
+variaveis=get_pca_var(pca)
+head(variaveis$coord)
+```
+
+
+
+
 # Análise de Clusters
 
 *Felipe Micail da Silva Smolski*
@@ -710,10 +989,10 @@ A ideia central da Análise de Cluster é a possibilidade de efetuar a classific
 A medida de distância utilizada de maneira mais comum utililizada é a Distância Euclidiana como mostra a Figura abaixo (embora existam outras métricas como a Distância de Manhattan, a Distância de Correlação de Pearson, a Distância de Correlação de  Eisen, a Distância de Correlação de  Spearman e a Distância de Correlação de  Kendal). 
 
 ```{r, echo=FALSE, fig.cap='Cálculo da distância entre A e B no espaço X Y', warning=FALSE}
-knitr::include_graphics("distecludiana.png")
+knitr::include_graphics("distecludiana.jpg")
 ```
 
-Fonte: @Pereira2004.
+Fonte: @Pereira2004a.
 
 Em outro sentido, existem vários métodos de clusterização, dentre eles: a) Clusterização Particionada, que faz parte as técnicas K-Means, K-Medoids e CLARA; b) Clusterização Hierárquica, de que faz parte a Clusterização Aglomerativa [@Kassambara2017]. Neste capítulo serão apresentadas as técnicas denominadas K-Means e a Clusterização Aglomerativa.
 
@@ -820,6 +1099,100 @@ fviz_cluster(km.res, data=mtcars2,
 ```
 
 
+*Efetuando predições com o modelo de cluster*
+
+```{r}
+head(iris)
+table(iris$Species)
+```
+
+
+```{r}
+library("gridExtra")
+library(ggplot2)
+
+a=ggplot(data = iris) +
+  aes(x = Petal.Width, y = Petal.Length, color = Species) +
+  geom_point() +
+  theme_minimal()
+
+b=ggplot(data = iris) +
+  aes(x = Sepal.Width, y = Sepal.Length, color = Species) +
+  geom_point() +
+  theme_minimal()
+
+grid.arrange(a, b, ncol=2)
+```
+
+
+
+```{r}
+set.seed(123)
+
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+amostra
+iristreino = iris[amostra==1,]
+iristeste = iris[amostra==2,]
+```
+
+
+```{r}
+set.seed(123)
+km.res=kmeans(iristreino[1:4], 3, nstart=25)
+print(km.res)
+```
+
+```{r}
+
+iristreino=cbind(iristreino, cluster=km.res$cluster)
+head(iristreino)
+
+confusao = table(iristreino$Species, km.res$cluster)
+confusao
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+taxaerro
+```
+
+
+
+
+
+```{r}
+set.seed(123)
+library(flexclust)
+km = kcca(iristreino[ , 1:4], k=3, kccaFamily("kmeans"))
+km
+predteste=predict(km, newdata=iristeste[ , 1:4], k=3, kccaFamily("kmeans"))
+head(predteste)
+```
+
+
+
+```{r}
+
+iristeste=cbind(iristeste, predteste)
+head(iristreino)
+
+
+confusao = table(iristeste$Species, iristeste$predteste)
+confusao
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+taxaerro
+```
 
 
 
@@ -1440,8 +1813,8 @@ O teste de Hausmann [@hausman1978] efetua a especificação dos modelos de Efeit
 
 $$
  \begin{matrix}
-H_0: \alpha_{i} \text{não são correlacionados com } X_{it} \\
-H_1: \alpha_{i} \text{são correlacionados com } X_{it}
+H_0: \alpha_{i} \text{ não são correlacionados com } X_{it} \\
+H_1: \alpha_{i} \text{ são correlacionados com } X_{it}
  \end{matrix}
 $$
 A função a ser utilizada para este teste é `phtest`:
@@ -1517,7 +1890,7 @@ adf.test(Grunfeld$invest, k=2)
 
 
 
-# Regressão Logística
+# Regressão Logística{#reglog}
 
 *Felipe Micail da Silva Smolski*
 
@@ -2453,7 +2826,182 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 - Análise de super-dispersão do modelo (quando Var(Y) > E(Y)). Neste caso, pode ocorrer por três motivos: a) função de ligação inadequada: talvez outras funções além da logarítimica se ajustem melhor; b) não inclusão de variáveis relevantes ao modelo; c) excessos de zeros. 
 
 
-# Manipulando bases de dados
+<!--
+# Classificação
+
+
+## Árvores de Decisão
+
+```{r}
+library(rpart)
+library(rpart.plot)
+
+set.seed(123)
+data(iris)
+head(iris)
+dim(iris)
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+amostra
+iristreino = iris[amostra==1,]
+iristeste = iris[amostra==2,]
+
+dim(iristreino)
+dim(iristeste)
+
+arvore = rpart(Species ~ ., data=iris,  method="class")
+
+print(arvore)
+
+#plot(arvore)
+#text(arvore, use.n=TRUE, all=TRUE, cex=.8)
+
+rpart.plot(arvore)
+
+teste = predict(arvore,newdata=iristeste)
+
+teste
+
+iris1 = cbind(iristeste,teste)
+
+head(iris1)
+
+iris1['Result'] = ifelse(iris1$setosa>=0.5,"setosa",
+                         ifelse(iris1$versicolor>=0.5, "versicolor",
+                         "virginica"))
+head(iris1)
+
+confusao = table(iris1$Species,iris1$Result)
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+taxaerro
+```
+
+
+
+## Naive Bayes
+
+
+
+```{r}
+library(e1071)
+data(iris)
+head(iris)
+dim(iris)
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+amostra
+iristreino = iris[amostra==1,]
+iristeste = iris[amostra==2,]
+
+dim(iristreino)
+dim(iristeste)
+
+modelo <- naiveBayes(Species ~., iris)
+
+modelo
+
+predicao <- predict(modelo, iristreino)
+
+predicao
+
+confusao = table(iristreino$Species,predicao)
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+
+class(modelo)
+
+
+#Prevendo com novos dados
+predict(modelo,iristeste)
+```
+
+
+
+
+
+## Redes Neurais
+
+
+
+## Máquina de Vetor de  Suporte
+
+
+```{r}
+data(iris)
+head(iris)
+dim(iris)
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+amostra
+iristreino = iris[amostra==1,]
+iristeste = iris[amostra==2,]
+```
+
+
+```{r}
+library(e1071)
+modelo <- svm(Species ~., iristreino)
+predicao <- predict(modelo,iristeste)
+confusao = table(iristeste$Species,predicao)
+confusao
+taxaacerto = (confusao[1] + confusao[5] + confusao[9]) / sum(confusao)
+taxaacerto
+taxaerro = (confusao[2]+ 
+            confusao[3]+
+            confusao[4]+
+            confusao[6]+
+            confusao[7]+
+            confusao[8]) / sum(confusao)
+taxaerro
+```
+
+
+## Vizinho mais próximo
+
+
+```{r}
+# ALTERAR OS DADOS!!!
+#install.packages("class", dependencies=T)
+library(class)
+
+head(iris)
+summary(iris)
+
+amostra = sample(2,150,replace=T, prob=c(0.7,0.3))
+iristreino = iris[amostra==1,]
+classificar = iris[amostra==2,]
+
+dim(iristreino)
+dim(classificar)
+
+previsao = knn(iristreino[,1:4],classificar[,1:4],iristreino[,5],k=3)
+# knn(vizinhomaisproximo, dadosaclassificar, classeaclassificar)
+tabela=table(classificar[,5],previsao)
+tabela
+(tabela[1] + tabela[5] + tabela[9]) / sum(tabela) 
+```
+
+
+## Random Forest
+
+
+
+## Seleção de Variáveis
+
+-->
+
+
+# Produção de Mapas
 
 *Felipe Micail da Silva Smolski*
 
@@ -2462,105 +3010,264 @@ Alguns procedimentos usuais para avaliar a qualidade do modelo e ajuste dos dado
 \end{flushright}
 
 
-O objetivo deste capítulo é retomar alguns pacotes importantes no RStudio para a
-manipulação e transformação de grandes bases de dados que o pesquisador terá que manejar ao longo dos processos de análise.
+Este capítulo almeja levantar o ferra  mental básico para a construção de mapas simples no RStudio. Ainda, interessa demonstrar os comandos para a manipulação destes tipos de bases de dados, inclusive possibilitando a junção de indicadores de municípios, regiões e países. Estes dados podem ser advindos de institutos de pesquisas ou mesmo dados criados pelo estudante em suas análises.
+
+Os pacotes utilizados neste capítulo são: `tmap`, `maptools`,
+`tmap` e `rgdal`.
+
+## Introdução aos *shapes*
+
+Existem vários *softwares* específicos para a produção de mapas, sejam produtos comerciais ou no formato *software* livre. A grande vantagem da utilização do R para criação de mapas é a utilização dos *shapes* disponibilizadas para vários programas. 
+
+Denominam-se *shapes* os arquivos que contém os elementos gráficos, em formato de ponto, linhas ou polígonos, contendo coordenadas geográficas para um elemento para que possa ser transformado em mapa. O *shape* é formado por três arquivos principais individuais que armazenam os dados: o arquivo ".shp", ".shx" e ".dbf". Além disto, podem ser acompanhados de arquivos ".prj", o ".sbn" e o ".sbx" [@Semace2018].
+
+Os *shapefiles* podem ser obtidos de várias fontes oficiais, como institutos de pesquisa e universidades. A seguir alguns links para *download*:
+
+- IBGE: ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2017/
+<!--
+ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2016/Brasil/BR/
+https://mapas.ibge.gov.br/bases-e-referenciais/bases-cartograficas/malhas-digitais.html
+
+http://dados.gov.br/dataset/malha-geometrica-dos-municipios-brasileiros
+-->
+
+- IPEAGEO: http://www.ipea.gov.br/ipeageo/malhas.html
+
+- Forest Gis: http://forest-gis.com/2009/04/base-de-dados-shapefile-do-brasil-todo.html/
+
+- FEPAM: http://www.fepam.rs.gov.br/biblioteca/geo/bases_geo.asp
 
 
+No exemplo abaixo, é utilizado um *shape* proveniente do IBGE representando os municípios do Estado do Rio Grande do Sul (ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2017/UFs/RS/rs_municipios.zip). Ao *shape* denominado `municipios_IBGE` será dado o nome de "MAPARS", com a utilização do pacote `raster` para carregar a malha:
 
-## Pacote tidyr
+```{r, message=FALSE, warning=FALSE}
+library(raster)
+# Carregando o arquivo
+MAPARS=shapefile("D:/Github/livroavancado/mapas/rs_municipios/43MUE250GC_SIR.shp")
 
-Nesta seção será utilizado o pacote `tidyr` para demonstrar algumas funções no tocante da manipulação das bases de dados, tão importante no processo de preperação das informações para posterior análise. Serão utilizadas para demonstração as bases de dados existentes no próprio pacote.
-
-Abaixo segue uma demonstração das convenções a respeito das bases de dados. Desta forma verifica-se que cada variável é apresentada em sua respectiva coluna, bem como as observações são apresentadas em sua própria linha e portanto os valores constam em sua própria célula.
-
-```{r dados, echo=FALSE, fig.cap='Convenção sobre variáveis, observações e valores'}
-knitr::include_graphics("tidy-1.png")
+# Excluindo dados inconvenientes
+MAPARS=MAPARS[MAPARS$CD_GEOCMU !="4300001" & MAPARS$CD_GEOCMU !="4300002",]
 ```
 
-### Função *spread*
+<!--
+#library(tmaptools)
+#library(tmap)
+#library(rgdal)
+#MAPARS=readShapePoly("D:/Github/livroavancado/mapas/RS_Mun97_region/RS_Mun97_region.shp")
+#MAPA_RS=readShapeSpatial('D:/Github/livroavancado/mapas/RS_Mun97_region/RS_Mun97_region.shp')
+#MAPA=readShapePoly(file.choose())
+-->
 
-A função *spread* é utilizada para transformar os valores constantes em uma coluna em nova configuração de colunas. Ainda, é possível determinar a transformação dos valores com o comando `convert = TRUE` informando o tipo de valores (doubles (numerics), integers, logicals, complexes, ou factors) nas colunas a serem criadas (comando `type.convert()`).
+O arquivo MAPARS se constitui em um *SpatialPolygonsDataFrame*, objeto complexo que carrega informações dos dados (`MAPARS@data`) e demais informações com as coordenadas  para criarem-se os mapas no R. Utilizando a função `summary` podem ser observados alguns dos os itens que compõe este objeto,  o nome do municípios (NM\_MUNICIP) o seu código IBGE (CD\_GEOCMU), lembrando que cada município terá um código de IBGE diferente, informação extremamente útil como será visto posteriormente ao efetuar a manipulação da base de dados e a inclusão de informações provenientes de outras bases. Abaixo efetua-se também a padronização do código IBGE (comando `substr`), mantendo os 6 primeiros dígitos, sendo necessária para que posteriormente sejam agregados outros dados.
 
+```{r, message=FALSE, warning=FALSE}
+class(MAPARS)
+summary(MAPARS)
+
+# Corrigindo os dados do código IBGE dos municípios
+MAPARS$CD_GEOCMU=substr(MAPARS$CD_GEOCMU,1,6)
+# Vizualização dos dados principais
+head(MAPARS@data)
+```
+
+Note novamente que este objeto pertence a uma classe diferente (*SpatialPolygonsDataFrame*), indicando que é constituída especialmente de um conjunto de polígonos para a construção de mapas conjuntamente com o carregamento de dados.
+
+A seguir, a função `plot()` pode ser utilizada para a plotagem da malha carregada:
+
+```{r, message=FALSE, warning=FALSE}
+plot(MAPARS)
+```
+
+Um exercício simples é a filtragem dos dados do *shape* pelo nome do município, obtendo assim apenas o mapa da(s) unidade(s) escolhida(s):
+
+
+```{r, message=FALSE, warning=FALSE}
+plot(MAPARS[MAPARS$NM_MUNICIP=='SANTA ROSA',], 
+    axes="TRUE",  
+    main="Mapa do município de Santa Rosa - RS",
+    border=gray(0.5), 
+    lwd=.5)
+```
+
+## Pacote tmap
+
+O pacote `tmap` [@tmap] é utilizado para gerar mapas temáticos com relativa facilidade, sendo possível ajustar todos os itens de visualização (legendas, cores, bordas, alinhamento, etc.) para um ajuste desejado do pesquisador. Todas as funções do pacote podem ser encontradas em <https://www.rdocumentation.org/packages/tmap/versions/2.2> ou no endereço <https://www.jstatsoft.org/article/view/v084i06> como exemplos.
+
+Inicialmente utiliza-se a função `tm_shape` para carregar a base, `tm_fill` para plotar o fundo e `tm_borders` cria as bordas entre os municípios. A função `tmap_mode` não é obrigatória, e varia da apresentação tradicional do mapa ("plot") e da apresentação para web ("view").
+
+
+```{r, message=FALSE, warning=FALSE}
+library(tmap)
+tmap_mode("plot")
+tm_shape(MAPARS)+
+  tm_fill()+
+  tm_borders()
+```
+
+
+### Adicionando dados ao mapa
+
+Para enriquecer a análise, serão incluídos novos dados relativos aos municípios do Rio Grande do Sul provenientes da @FEE2016, como o indicador de IDESE (Índice de Desenvolvimento Socioeconômico), PIB (Produto Interno Bruto), população, etc.
+
+
+```{r, message=FALSE, warning=FALSE}
+#Carrega a planilha com as informações
+library(readr)
+RS2013 <- read_delim("mapas/RS2013.csv", 
+    ";", escape_double = FALSE, trim_ws = TRUE)
+
+# Corrigindo o campo com o código do IBGE
+names(RS2013)[3]="CD_GEOCMU" 
+# Corrigindo os dados do código IBGE dos municípios
+RS2013$CD_GEOCMU=substr(RS2013$CD_GEOCMU,1,6)
+
+head(RS2013)
+```
+
+Para agregar estas informações aos dados das malhas, é preciso em primeiro lugar que se tenha um campo em comum único dos arquivos. Neste caso, o código do IBGE dos municípios ("CD\_GEOCMU") será utilizado, sendo  que precisa ser exatamente igual nos dois objetos que se quer unir, para que as informações de determinado município sejam corretamente unidas às informações geográficas da malha para o mapa.
+
+
+```{r, message=FALSE, warning=FALSE}
+#Une a base de dados da planilha com o mapa pelo nome do município
+RS2013MAPA=merge(MAPARS,RS2013,by="CD_GEOCMU", all.x=T) 
+names(RS2013MAPA)
+head(RS2013MAPA@data)
+```
+
+
+### Plotando o mapa e melhorando a visualização
+
+Após unidas as informações da malha e dos índices para todos os municípios, é possível criar o mapa temático. Além de utilizar a função `tm_shape` para carregar os novos dados e `tm_fill` inclui a área de cada município (KM$^2$). Ainda é possível definir opções de formato (`tm_format_Europe2`), de estilo (`tm_style_classic`), ajustar a legenda (`tm_legend`), incluir o compasso (`tm_compass`), a escala (`tm_scale_bar`). 
+
+
+```{r, message=FALSE, warning=FALSE}
+    tm_shape(RS2013MAPA)+
+      tm_fill("AREA_KM2", auto.palette.mapping=FALSE, 
+              title="Área por município")+
+      tm_format_Europe2()+
+      tm_style_classic()+
+      tm_legend(position=c("left","bottom"))+
+      tm_compass()+
+      tm_scale_bar()+
+      tm_borders(alpha=.5)+
+  tm_bubbles(size = 'PIB',col = '#b3de69', title.size='PIB') +
+  tm_legend(legend.format = list(text.separator= "a"))
+```
+
+Algumas opções de layout podem ser escolhidas pelo pesquisador com as funções:`tm_format_World`,`tm_format_World_wide`, `tm_format_Europe`, `tm_format_Europe2`, `tm_format_Europe_wide`, `tm_format_NLD`, `tm_format_NLD_wide`, `tm_format_NLD_wide`. Seguem as opções de estilo do gráfico:`tm_style_white`, `tm_style_gray`, `tm_style_natural`, `tm_style_grey`, `tm_style_cobalt`, `tm_style_col_blind`, `tm_style_albatross`, `tm_style_beaver`, `tm_style_bw`, `tm_style_classic`.
+
+
+Abaixo segue um exemplo de criação e plotagem de múltiplos mapas na mesma imagem. A função `style` determinda como serão determinadas as cores do mapa, juntamente com a função `palette`. Já a função `breaks` ajuda a determinar os pontos de corte para a plotagem das cores, no primeiro mapa utilizando a função `quantile` e no segundo determinando intervalos de valores pré-determinados pelo autor.
+
+```{r, message=FALSE, warning=FALSE}
+tm_shape(RS2013MAPA) +
+    tm_polygons(c("PIB", "POPULACAO"), 
+        style=c("kmeans","fixed"),
+        palette=list("Reds", "Blues"),
+        auto.palette.mapping=FALSE,
+        breaks=list(quantile(RS2013MAPA$POPULACAO),
+                    c(-Inf,100000,200000,Inf)),
+        title=c("PIB", "População")) +
+tm_format_World() + 
+tm_style_grey()+
+tm_compass()+
+tm_scale_bar()+
+tm_legend(legend.format = list(text.separator= "a"))+
+tm_layout(legend.position = c("LEFT","BOTTOM"),
+            legend.frame = FALSE, title = c("Mapa 1","Mapa 2"))
+
+
+```
+
+
+É possível ainda efetuar a filtragem de uma determinada característica para a criação do mapa. No exemplo, são filtrados os municípios do Corede Sul:
+
+
+```{r message=FALSE, warning=FALSE}
+tm_shape(RS2013MAPA[RS2013MAPA$COREDE =='Sul',]) +
+    tm_polygons("POPULACAO", title="Pop", 
+                style="kmeans", text="Label_N") +
+    tm_facets("COREDE") +
+    tm_text("NM_MUNICIP", scale=0.45)+
+tm_style_grey()+
+tm_layout(inner.margins = c(.03,.03,.03,.03),
+            main.title = "Municípios do Corede Sul",
+            main.title.position = 'center')+
+tm_legend(legend.format = list(text.separator= "a"))  
+```
+
+
+### Utilizando dados de fontes externas: pacote datasus
+
+Encontrar informações de bases de dados que podem ser diretamente utilizadas no R é de extrama importância aos pesquisadores. Neste exemplo são demonstrados alguns comandos para utilizar o pacote datasus [@datasus], que agiliza a utilização de alguns dados do Ministério da Saúde (<http://www2.datasus.gov.br/DATASUS/index.php?area=02>).
+
+Utilizando o pacote `devtools` (`library(devtools)`) é feita ainstalação do pacote `datasus` diretamente do repositório Github pelo comando `install_github("rpradosiqueira/datasus")`.
+
+Após instalado o pacote `datasus`, utiliza-se a função `sinasc_nv_uf` para carregar a quantidade de nascimentos por município:
+
+
+```{r, message=FALSE}
+library(datasus)
+nascimentos=sinasc_nv_uf(uf = "rs",
+             periodo = c(2014:2016),
+             coluna = "Ano do nascimento")
+head(nascimentos)
+```
+
+Efetua-se uma limpeza da linha de total, bem como a criação de uma coluna com o código do IBGE ("CD\_GEOCMU"):
+
+```{r, message=FALSE}
+nascimentos=nascimentos[-1,]
+library(tidyr)
+nascimentos <- separate(nascimentos, `Município`, c("CD_GEOCMU", "NM_MUNICIP"), sep = 6)
+head(nascimentos)
+```
+
+Após é possível criar novo mapa ("RS2013MAPAN"), unindo as informações novas com o mapa anterior:
+
+```{r, message=FALSE}
+RS2013MAPAN=merge(RS2013MAPA,nascimentos,by="CD_GEOCMU", all.x=T) 
+names(RS2013MAPAN)
+```
+
+
+Então pode ser criado o mapa com as informações de nascimentos por município. Neste caso, foi utilizado o `style` denomnado `kmeans`, pois utilizamos os quartis para determinar as faixas de cores das quantidades de nascimentos:
+<!--
+```{r, message=FALSE, warning=FALSE}
+   tm_shape(RS2013MAPAN)+
+      tm_fill("2016", auto.palette.mapping=FALSE, title="Nascimentos por município",textNA="NA")+
+      tm_legend(position=c("left","bottom"))+
+      tm_compass()+
+      tm_scale_bar()+
+      tm_borders(alpha=.5)+
+     tm_legend(legend.format = list(text.separator= "a"))  +
+     tm_layout(legend.position = c("LEFT","BOTTOM"),
+            legend.frame = FALSE)
+  
+```
+-->
 
 ```{r}
-require(tidyr)
-table1
-```
-
-Neste exemplo, a coluna `type` abriga os valores `cases` e `population`, as quais terão suas próprias colunas com seus respectivos valores:
-
-```{r}
-spread(table2, type, count)
-
+quantile(RS2013MAPAN$`2016`)
 ```
 
 
-### Função *gather*
-
-Já a função *gather* realiza o processo oposto do comando *spread*, pois agrupa o valor de determinadas variável em uma chave comum.
-
-```{r}
-table4a
+```{r, message=FALSE}
+   tm_shape(RS2013MAPAN)+
+      tm_fill("2016", auto.palette.mapping=FALSE, 
+              title="Nascimentos por município (2016)",
+              textNA="NA",
+              palette="Greens",
+              style = "kmeans",
+              breaks = quantile(RS2013MAPAN$`2016`))+
+      tm_legend(position=c("left","bottom"))+
+      tm_compass()+
+      tm_scale_bar()+
+      tm_borders(alpha=.5)+
+     tm_legend(legend.format = list(text.separator= "a"))  +
+     tm_layout(legend.position = c("LEFT","BOTTOM"),
+            legend.frame = FALSE)
 ```
-
-Abaixo a transformação das variáveis `1999` e `2000` em uma única variável `year`, mantendo os valores inseridos na variável `cases`:
-
-```{r}
-gather(table4a, "year", "cases", 2:3)
-
-```
-
-
-
-### Função *separate*
-
-A função *separate* é utilizada para partir uma determinada variável em novas variáveis da base de dados.
-
-```{r}
-table3
-```
-
-Neste exemplo, a variável `rate`, que está composta de duas informações separadas pelo caractere "$/$", será separada nas novas variáveis `cases` e `population`:
-
-
-```{r}
-separate(table3, rate, into = c("cases", "population"),sep = "/")
-```
-
-Da mesma forma é possível criar duas novas variáveis a partir do segundo caractere do valor que consta nas células utilizando o comando `sep=2`:
-
-```{r}
-separate(table3, year, into = c("century", "year"), sep = 2)
-```
-
-### Função *unite*
-
-A função `unite` é oposta à função *separate*:
-
-```{r}
-table5
-```
-
-Neste exemplo, recria a variável `new` a partir dos dados de `century` e `year`:
-
-```{r}
-unite(table5, "new", century, year, sep = "")
-```
-
-## Pacote dplyr
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 \setlength{\parindent}{0.0cm}

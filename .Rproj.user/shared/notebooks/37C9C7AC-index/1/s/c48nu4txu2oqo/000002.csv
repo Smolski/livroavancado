@@ -1,1 +1,0 @@
-"0","aggregate(mtcars, by=list(cluster=km.res$cluster), mean)"
