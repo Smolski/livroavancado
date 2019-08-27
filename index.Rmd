@@ -535,6 +535,67 @@ qqnorm(residuo)
 qqline(residuo)
 ```
 
+## Exercícios
+
+**1.**	Com o objetivo de avaliar 5 rações (A, B, C, D e E) no ganho de peso animal, um pesquisador instalou um experimento, no delineamento inteiramente casualizado, pois os animais apresentavam características uniformes, utilizando 4 animais (repetições) por tratamento. Os resultados obtidos estão apresentados abaixo.
+
+```{r, echo=FALSE}
+knitr::include_graphics("exerc_deli01.png")
+```
+
+**1.1** Foi observada diferença significativa entre as rações avaliadas?
+
+**1.2** Por meio do teste de Tukey, qual foi a ração que resultou no maior ganho de peso? De qual não diferiu? Qual foi a ração que resultou no menor ganho de peso? De qual não diferiu? 
+
+**1.3** Faça a análise descritiva dos resultados obtidos.
+
+**1.4** Faça o gráfico de resíduos da anova.
+
+**2.**	Um experimento foi conduzido no delineamento em blocos casualizados, com cinco blocos, para estudar diferentes métodos de controle de plantas daninhas sobre a produção de grãos de milho, cujo plantio foi realizado em lavoura com diferentes declividades do solo. Os tratamentos e valores de produção de grãos (t/ha) estão apresentados abaixo.
+
+```{r, echo=FALSE}
+knitr::include_graphics("exerc_deli02.png")
+```
+
+**2.1** Foi observada diferença significativa entre os métodos de controle avaliados?
+
+
+**2.2** Por meio do teste de Tukey, qual foi o método de controle que resultou na maior produção? De qual não diferiu? Qual foi o método de controle que resultou na menor produção? De qual não diferiu? 
+
+**2.3** Faça a análise descritiva dos resultados obtidos.
+
+**2.4** Faça o gráfico de resíduos da anova.
+
+**3.**	Objetivando avaliar o rendimento de 4 variedades de macieira (A, B, C e D), instalou-se um experimento sob o delineamento experimental inteiramente casualizado, sendo as parcelas de 8x7m e a lavoura de macieira com 12 anos de idade na época de instalação do experimento. Os dados experimentais a seguir se referem ao peso médio em gramas, de 250 frutos por parcela.
+
+```{r, echo=FALSE}
+knitr::include_graphics("exerc_deli03.png")
+```
+
+**3.1** Foi observada diferença significativa entre as variedades de macieira?
+
+
+**3.2** Por meio do teste de Tukey, qual foi a variedade de macieira que apresentou a maior produção? De qual não diferiu? Qual foi a variedade de macieira que apresentou a menor produção? De qual não diferiu? 
+
+**3.3** Faça a análise descritiva dos resultados obtidos.
+
+**3.4** Faça o gráfico de resíduos da anova.
+
+**4.** Sejam os resultados do rendimento de grãos (sacos/ha) de um experimento conduzido no delineamento blocos ao acaso com a cultura da soja. Os tratamentos foram 5 (formas) formas de preparo do solo organizados em 5 (cinco) blocos, em função da declividade do terreno.
+
+```{r, echo=FALSE}
+knitr::include_graphics("exerc_deli04.png")
+```
+
+**4.1** Foi observada diferença significativa entre as formas de preparo de solo?
+
+
+**4.2** Por meio do teste de Tukey, qual forma de preparo de solo apresentou o maior rendimento? De qual não diferiu? Qual forma de preparo de solo apresentou o menor rendimento? De qual não diferiu? 
+
+**4.3** Faça a análise descritiva dos resultados obtidos.
+
+**4.4** Faça o gráfico de resíduos da anova.
+
 
 
 # Análise Fatorial{#analisf}

@@ -3,7 +3,7 @@ title: 'Software R: curso avançado'
 author:
 - Iara Denise Endruweit Battisti
 - Felipe Micail da Silva Smolski
-date: "2019-08-26"
+date: "2019-08-27"
 bibliography: library.bib
 classoption: oneside
 biblio-style: authoryear
@@ -809,6 +809,59 @@ qqline(residuo)
 
 <img src="index_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" />
 
+## Exercícios
+
+**1.**	Com o objetivo de avaliar 5 rações (A, B, C, D e E) no ganho de peso animal, um pesquisador instalou um experimento, no delineamento inteiramente casualizado, pois os animais apresentavam características uniformes, utilizando 4 animais (repetições) por tratamento. Os resultados obtidos estão apresentados abaixo.
+
+<img src="exerc_deli01.png" width="80%" style="display: block; margin: auto;" />
+
+**1.1** Foi observada diferença significativa entre as rações avaliadas?
+
+**1.2** Por meio do teste de Tukey, qual foi a ração que resultou no maior ganho de peso? De qual não diferiu? Qual foi a ração que resultou no menor ganho de peso? De qual não diferiu? 
+
+**1.3** Faça a análise descritiva dos resultados obtidos.
+
+**1.4** Faça o gráfico de resíduos da anova.
+
+**2.**	Um experimento foi conduzido no delineamento em blocos casualizados, com cinco blocos, para estudar diferentes métodos de controle de plantas daninhas sobre a produção de grãos de milho, cujo plantio foi realizado em lavoura com diferentes declividades do solo. Os tratamentos e valores de produção de grãos (t/ha) estão apresentados abaixo.
+
+<img src="exerc_deli02.png" width="80%" style="display: block; margin: auto;" />
+
+**2.1** Foi observada diferença significativa entre os métodos de controle avaliados?
+
+
+**2.2** Por meio do teste de Tukey, qual foi o método de controle que resultou na maior produção? De qual não diferiu? Qual foi o método de controle que resultou na menor produção? De qual não diferiu? 
+
+**2.3** Faça a análise descritiva dos resultados obtidos.
+
+**2.4** Faça o gráfico de resíduos da anova.
+
+**3.**	Objetivando avaliar o rendimento de 4 variedades de macieira (A, B, C e D), instalou-se um experimento sob o delineamento experimental inteiramente casualizado, sendo as parcelas de 8x7m e a lavoura de macieira com 12 anos de idade na época de instalação do experimento. Os dados experimentais a seguir se referem ao peso médio em gramas, de 250 frutos por parcela.
+
+<img src="exerc_deli03.png" width="80%" style="display: block; margin: auto;" />
+
+**3.1** Foi observada diferença significativa entre as variedades de macieira?
+
+
+**3.2** Por meio do teste de Tukey, qual foi a variedade de macieira que apresentou a maior produção? De qual não diferiu? Qual foi a variedade de macieira que apresentou a menor produção? De qual não diferiu? 
+
+**3.3** Faça a análise descritiva dos resultados obtidos.
+
+**3.4** Faça o gráfico de resíduos da anova.
+
+**4.** Sejam os resultados do rendimento de grãos (sacos/ha) de um experimento conduzido no delineamento blocos ao acaso com a cultura da soja. Os tratamentos foram 5 (formas) formas de preparo do solo organizados em 5 (cinco) blocos, em função da declividade do terreno.
+
+<img src="exerc_deli04.png" width="80%" style="display: block; margin: auto;" />
+
+**4.1** Foi observada diferença significativa entre as formas de preparo de solo?
+
+
+**4.2** Por meio do teste de Tukey, qual forma de preparo de solo apresentou o maior rendimento? De qual não diferiu? Qual forma de preparo de solo apresentou o menor rendimento? De qual não diferiu? 
+
+**4.3** Faça a análise descritiva dos resultados obtidos.
+
+**4.4** Faça o gráfico de resíduos da anova.
+
 
 
 # Análise Fatorial{#analisf}
@@ -826,7 +879,7 @@ A análise fatorial é um método estatístico utilizado para descrever a variab
 
 <div class="figure" style="text-align: center">
 <img src="anfat1.png" alt="Processo de análise de variáveis" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-26)Processo de análise de variáveis</p>
+<p class="caption">(\#fig:unnamed-chunk-30)Processo de análise de variáveis</p>
 </div>
 
 Assim, é possível que as variações de três ou quatro variáveis observadas possam ser explicadas por somente um fator, o que evidencia a utilidade da análise fatorial para descrever um conjunto de dados utilizando para isso apenas alguns fatores.
@@ -983,7 +1036,7 @@ corrplot 0.84 loaded
 corrplot(matcor, method="circle")
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-29-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-33-1.png" width="80%" style="display: block; margin: auto;" />
 
 Na figura acima, as correlações estão em cor azul porque são positivas, com tons mais fortes para as correlações mais altas. 
 <!--
@@ -1174,7 +1227,7 @@ Abaixo vamos apresentar o `scree-plot`, em formato do gráfico de barras para o 
 screeplot(fit)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-33-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma ligeira suavização das alturas nas demais colunas.
@@ -1186,7 +1239,7 @@ Note que as duas primeiras componentes, aparecem em destaque, ocorrendo uma lige
 plot(fit,type="lines")
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 ### Análise de Componentes Principais
@@ -1344,7 +1397,7 @@ os fatores.
 biplot(PCAdentevarimax)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-43-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 Os valores dos fatores obtidos para os 30 entrevistados encontram-se na matriz de coeficiente de escore do componente mostrada abaixo. Esta ajuda a entender como cada variável se relaciona aos escores dos componentes calculados para cada participante. Para melhor compreensão da análise dos escores dos entrevistados é importante especificar e comentar o significado de cada fator:
@@ -1435,7 +1488,7 @@ Destacando-se os entrevistados de interesse, verifica-se:
 
 <div class="figure" style="text-align: center">
 <img src="anfat2.png" alt="Principais resultados" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-41)Principais resultados</p>
+<p class="caption">(\#fig:unnamed-chunk-45)Principais resultados</p>
 </div>
 
 
@@ -1532,7 +1585,7 @@ library(FactoMineR)
 pca=PCA(decathlon2.active, graph=TRUE)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-43-1.png" width="80%" style="display: block; margin: auto;" /><img src="index_files/figure-html/unnamed-chunk-43-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-47-1.png" width="80%" style="display: block; margin: auto;" /><img src="index_files/figure-html/unnamed-chunk-47-2.png" width="80%" style="display: block; margin: auto;" />
 
 ```r
 pca
@@ -1593,7 +1646,7 @@ Autovaloes superiores a 1 indicam que a variância do componente é superior ao 
 fviz_eig(pca, addlabels=TRUE, ylim = c(0,50))
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -1631,7 +1684,7 @@ A medida de distância utilizada de maneira mais comum utililizada é a Distânc
 
 <div class="figure" style="text-align: center">
 <img src="distecludiana.jpg" alt="Cálculo da distância entre A e B no espaço X Y" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-47)Cálculo da distância entre A e B no espaço X Y</p>
+<p class="caption">(\#fig:unnamed-chunk-51)Cálculo da distância entre A e B no espaço X Y</p>
 </div>
 
 Fonte: @Pereira2004a.
@@ -1706,7 +1759,7 @@ fviz_nbclust(df, kmeans, method = "wss")+
   geom_vline(xintercept = 4, linetype = 2)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-53-1.png" width="80%" style="display: block; margin: auto;" />
 
 Em seguida utilizamos o número determinado de clusters (neste caso 4) com o comando `kmeans`. Como resultado temos a média dos centros por clusters e a classificação de cada modelo de veículo da amostra dentro do respectivo cluster. Observa-se que o cluste 1 tem 12 modelos de veículos, o cluster 2 tem 8 modelos, o cluster 3 possui 7 modelos e no cluster 4 foram enquadrados 5 modelos.
 
@@ -1834,7 +1887,7 @@ fviz_cluster(km.res, data=mtcars2,
              )
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-53-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-57-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 *Efetuando predições com o modelo de cluster*
@@ -1883,7 +1936,7 @@ b=ggplot(data = iris) +
 grid.arrange(a, b, ncol=2)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-55-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-59-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -2174,7 +2227,7 @@ library("factoextra")
 fviz_dend(dista.hc, cex=0.5)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-65-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-69-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -2399,7 +2452,7 @@ Por fim, acrescentamos as retas de regressão para cada resposta a variável ind
 plot(diametro_cm,altura_m)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-69-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-73-1.png" width="80%" style="display: block; margin: auto;" />
 
 ```r
 # Gera o gráfico sem pontos
@@ -2412,7 +2465,7 @@ abline(coef(modelom)[1], coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3], coef(modelom)[2], col='red')
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-69-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-73-2.png" width="80%" style="display: block; margin: auto;" />
 
 
 ## Interação entre variáveis preditoras
@@ -2486,7 +2539,7 @@ abline(coef(modelom)[1],coef(modelom)[2], col='blue')
 abline(coef(modelom)[1]+coef(modelom)[3],coef(modelom)[2]+coef(modelom)[4], col='red')
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-72-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-76-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -2580,7 +2633,7 @@ reduzido com (k-1) variáveis.
 
 <div class="figure" style="text-align: center">
 <img src="regress1.png" alt="Modelagem estatística" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-73)Modelagem estatística</p>
+<p class="caption">(\#fig:unnamed-chunk-77)Modelagem estatística</p>
 </div>
 
 Fonte: @Riboldi2005
@@ -2723,7 +2776,7 @@ Abaixo é demonstrada a evolução do investimento de acordo com cada empresa es
 coplot(invest ~ year|firm, type="b", data=Grunfeld)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-76-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-80-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -4227,7 +4280,7 @@ ggplot(novosdados, aes(x=rank,y=prob))+
   labs(title="Probabilidades preditas", x="Ranking",y="Pr(y=1)")
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-118-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-122-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -4396,7 +4449,7 @@ Abaixo o histograma da distribuição do número de satélites (variável depend
 hist(caranguejo$Sa)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-121-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-125-1.png" width="80%" style="display: block; margin: auto;" />
 
 Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 
@@ -4405,7 +4458,7 @@ Relacionando a quantidade de satélites (Sa) com a largura da carapaça:
 plot(caranguejo$W,caranguejo$Sa)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-122-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-126-1.png" width="80%" style="display: block; margin: auto;" />
 
 Para criação da regressão de Poisson utiliza-se a função já conhecida `glm()`, sendo que em `family` é determinado o tipo de análise desejada ("poisson"):
 
@@ -4536,8 +4589,8 @@ points(regpoisson$fitted.values,col='red', type = "l")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-html/unnamed-chunk-127-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-127)Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)</p>
+<img src="index_files/figure-html/unnamed-chunk-131-1.png" alt="Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-131)Valores ajustados e preditos do número de satélites (Sa) em função do tamanho da carapaça (W)</p>
 </div>
 
 
@@ -4710,8 +4763,8 @@ legend(6,30,c("obs","pred"), pch=c("o","p"), col=c("blue","red"))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-html/unnamed-chunk-132-1.png" alt="Valores observados e preditos" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-132)Valores observados e preditos</p>
+<img src="index_files/figure-html/unnamed-chunk-136-1.png" alt="Valores observados e preditos" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-136)Valores observados e preditos</p>
 </div>
 Fonte: Adaptado de @penn2018.
 
@@ -4847,7 +4900,7 @@ node), split, n, loss, yval, (yprob)
 rpart.plot(arvore)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-134-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-138-1.png" width="80%" style="display: block; margin: auto;" />
 
 ```r
 teste = predict(arvore,newdata=iristeste)
@@ -5477,7 +5530,7 @@ A seguir, a função `plot()` pode ser utilizada para a plotagem da malha carreg
 plot(MAPARS)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-141-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-145-1.png" width="80%" style="display: block; margin: auto;" />
 
 Um exercício simples é a filtragem dos dados do *shape* pelo nome do município, obtendo assim apenas o mapa da(s) unidade(s) escolhida(s):
 
@@ -5491,7 +5544,7 @@ plot(MAPARS[MAPARS$NM_MUNICIP=='SANTA ROSA',],
     lwd=.5)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-142-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-146-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Pacote tmap
 
@@ -5509,7 +5562,7 @@ tm_shape(MAPARS)+
   tm_borders()
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-143-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-147-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 ### Adicionando dados ao mapa
@@ -5628,7 +5681,7 @@ Após unidas as informações da malha e dos índices para todos os municípios,
   tm_legend(legend.format = list(text.separator= "a"))
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-146-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-150-1.png" width="80%" style="display: block; margin: auto;" />
 
 Algumas opções de layout podem ser escolhidas pelo pesquisador com as funções:`tm_format_World`,`tm_format_World_wide`, `tm_format_Europe`, `tm_format_Europe2`, `tm_format_Europe_wide`, `tm_format_NLD`, `tm_format_NLD_wide`, `tm_format_NLD_wide`. Seguem as opções de estilo do gráfico:`tm_style_white`, `tm_style_gray`, `tm_style_natural`, `tm_style_grey`, `tm_style_cobalt`, `tm_style_col_blind`, `tm_style_albatross`, `tm_style_beaver`, `tm_style_bw`, `tm_style_classic`.
 
@@ -5654,7 +5707,7 @@ tm_layout(legend.position = c("LEFT","BOTTOM"),
             legend.frame = FALSE, title = c("Mapa 1","Mapa 2"))
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-147-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-151-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 É possível ainda efetuar a filtragem de uma determinada característica para a criação do mapa. No exemplo, são filtrados os municípios do Corede Sul:
@@ -5674,7 +5727,7 @@ tm_layout(inner.margins = c(.03,.03,.03,.03),
 tm_legend(legend.format = list(text.separator= "a"))  
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-148-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-152-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 ### Utilizando dados de fontes externas: pacote datasus
@@ -5765,7 +5818,7 @@ Então pode ser criado o mapa com as informações de nascimentos por município
             legend.frame = FALSE)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-152-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-156-1.png" width="80%" style="display: block; margin: auto;" />
 -->
 
 
@@ -5803,7 +5856,7 @@ for numeric data and stretch.palette for categorical data to control the palette
 mapping.
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-154-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-158-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 \setlength{\parindent}{0.0cm}
